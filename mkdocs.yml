@@ -1,0 +1,45 @@
+# To build the documentation use `build.py`
+
+site_name: t2linux wiki
+site_author: the t2linux.org contributors
+site_url: https://t2linux.org/
+copyright: "© 2021 t2linux.org CC-BY-SA-4.0"
+
+theme:
+    palette:
+        scheme: slate
+    name: material
+    font: false
+    features:
+        - tabs
+    favicon: https://avatars.githubusercontent.com/t2linux
+
+docs_dir: docs
+site_dir: build
+
+repo_name: t2linux/wiki
+repo_url: https://github.com/t2linux/wiki
+edit_uri: https://github.com/t2linux/wiki/edit/master/docs/
+
+markdown_extensions:
+    - pymdownx.highlight
+    - pymdownx.inlinehilite
+    - pymdownx.superfences
+    - pymdownx.tasklist:
+          custom_checkbox: true
+
+nav:
+    - Home:
+          - Home: index.md
+          - Devices Support and State of Features: state.md
+    - Guides:
+          - Wifi: guides/wifi.md
+
+extra_css:
+    - stylesheets\colors.css
+    - stylesheets\fonts.css
+
+extra:
+    social:
+        - icon: fontawesome/brands/discord
+          link: https://discord.com/invite/68MRhQu

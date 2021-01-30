@@ -1,0 +1,8 @@
+:root {
+    --md-primary-fg-color: #7663E8;
+    --md-accent-fg-color: #9081e4;
+}
+
+.md-typeset .task-list-control [type="checkbox"]:checked + .task-list-indicator::before {
+    background: var(--md-primary-fg-color) !important;
+}

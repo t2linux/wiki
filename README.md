@@ -1,1 +1,3 @@
-# [Click here](https://github.com/t2linux/wiki/wiki)
+# Respository for wiki.t2linux.org
+
+Click [here](https://wiki.t2linux.org) to get to the wiki
