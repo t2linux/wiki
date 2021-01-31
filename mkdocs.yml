@@ -29,7 +29,7 @@ markdown_extensions:
           custom_checkbox: true
 
 nav:
-    - Home:
+    - General:
           - Home: index.md
           - Device Support and State of Features: state.md
     - Guides:
