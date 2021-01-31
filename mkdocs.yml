@@ -31,7 +31,7 @@ markdown_extensions:
 nav:
     - Home:
           - Home: index.md
-          - Devices Support and State of Features: state.md
+          - Device Support and State of Features: state.md
     - Guides:
           - Wifi: guides/wifi.md
 
