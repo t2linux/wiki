@@ -35,7 +35,8 @@ nav:
     - Guides:
           - Wifi: guides/wifi.md
     - Distributions:
-          - Manjaro: distributions/manjaro.md
+          - Manjaro:
+                - Home: distributions/manjaro/home.md
 
 extra_css:
     - stylesheets\colors.css
