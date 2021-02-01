@@ -5,7 +5,7 @@
 # Hardware Requirements
 
 * USB-C to ethernet cable adapter.
-  * Whilst you can install this over WiFi, it would make it alot easier to use an Adapter. If you would like to use the WiFi to set up Manjaro then refer to the "In order to get WiFi working" Section after you have booted Manjaro
+    * Whilst you can install this over WiFi, it would make it alot easier to use an Adapter. If you would like to use the WiFi to set up Manjaro then refer to the "In order to get WiFi working" Section after you have booted Manjaro
 * USB-C to USB Adapter
 
 # Install Procedure
@@ -29,12 +29,12 @@
 6. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
 7. After booting into Manjaro, open a terminal window and run the following commands:
 
-```
-systemctl start systemd-timesyncd.service
-sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
-sudo pacman -R calamares
-sudo pacman -S calamares-mbp
-```
+    ```
+    systemctl start systemd-timesyncd.service
+    sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
+    sudo pacman -R calamares
+    sudo pacman -S calamares-mbp
+    ```
 
 8. Open the installer and proceed normally until you hit the partitioning stage
 9. Click Manual Partitioning
@@ -43,10 +43,10 @@ sudo pacman -S calamares-mbp
 12. Delete the partition you created before, this is usually mounted to `/dev/nvme0n1p3`.
 13. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem, if you know what you are doing feel free to skip to the next step (15).
 
-  - Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click okay.
-  - Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click okay.
-  - Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
+    * Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click okay.
+    * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click okay.
+    * Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
     
-15. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off
-16. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot
-17. Welcome to Manjaro :)
+14. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off
+15. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot
+16. Welcome to Manjaro :)

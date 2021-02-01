@@ -25,15 +25,15 @@ docker run --privileged \
 
 ## Command Breakdown
 
- - `--privileged`
-   - This is required for allowing the filesystems to be created. (This is a security risk! Read for yourself the documentation on this flag)
- - `-v`
-   - Create a folder on your host filesystem to retrieve the compiled files from the container
-   - Ensure that `{PATH-TO-REPO}` is replaced by the absolute path to this repo's files.
- - `--env`
-   - There are two environment variables:
-     - `KERNEL`: This is used for defining which kernel version to use. All packages will follow the `-mbp` naming scheme.
-     - `EDITION`: This is used for defining which edition of manjaro you would like to install.
+- `--privileged`
+    - This is required for allowing the filesystems to be created. (This is a security risk! Read for yourself the documentation on this flag)
+- `-v`
+    - Create a folder on your host filesystem to retrieve the compiled files from the container
+    - Ensure that `{PATH-TO-REPO}` is replaced by the absolute path to this repo's files.
+- `--env`
+    - There are two environment variables:
+        - `KERNEL`: This is used for defining which kernel version to use. All packages will follow the `-mbp` naming scheme.
+        - `EDITION`: This is used for defining which edition of manjaro you would like to install.
 
 
 # Option 2: Manually on an existing Manjaro Install
