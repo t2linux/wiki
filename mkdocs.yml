@@ -37,6 +37,10 @@ nav:
     - Distributions:
           - Manjaro:
                 - Home: distributions/manjaro/home.md
+                - Building: distributions/manjaro/building.md
+                - FAQ: distributions/manjaro/faq.md
+                - Installation: distributions/manjaro/installation.md
+                - Wifi Installation: distributions/manjaro/wifi-installation.md
 
 extra_css:
     - stylesheets\colors.css
