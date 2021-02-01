@@ -46,5 +46,3 @@ sudo pacman -S calamares-mbp
 15. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off
 16. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot
 17. Welcome to Manjaro :)
-
-*Note: For WiFi installation steps see: https://github.com/JPyke3/mbp-manjaro/wiki/WiFi-Installation*
