@@ -27,6 +27,8 @@ markdown_extensions:
     - pymdownx.superfences
     - pymdownx.tasklist:
           custom_checkbox: true
+    - toc:
+          permalink: true
 
 nav:
     - General:
