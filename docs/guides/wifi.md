@@ -25,7 +25,7 @@ This page is a step by step guide to get wifi working on supported models.
 
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
     - Do the same for the `.clmb` file and rename it to `brcmfmac4364-pcie.clm_blob`.
-    - In the end, download the `.txt` file and rename it to `brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt` but change the `15,1` in this string to model identifier was the output of the second command described [here](https://github.com/t2linux/wiki/wiki/wifi#on-macos).
+    - In the end, download the `.txt` file and rename it to `brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt` but change the `15,1` in this string to model identifier was the output of the second command described [here](https://wiki.t2linux.org/guides/wifi/#on-macos).
 
 2. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
 3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
