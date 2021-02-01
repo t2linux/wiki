@@ -3,11 +3,13 @@
 1. Boot into OSX and run the following in terminal: `ioreg -l | grep C-4364`
 
 It will show something like:
+
 ```
 "RequestedFiles" = ({"Firmware"="C-4364__s-B2/kauai.trx","TxCap"="C-4364__s-B2/kauai-X3.txcb","Regulatory"="C-4364__s-B2/kauai-X3.clmb","NVRAM"="C-4364__s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"})
 
     | |   |         |       "images" = {"C-4364__s-B2/kauai-X3.txcb"={"imagetype"="TxCap","required"=No,"imagename"="C-4364__s-B2/kauai-X3.txcb"},"C-4364__s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"={"imagetype"="NVRAM","required"=Yes,"imagename"="C-4364__s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"},"C-4364__s-B2/kauai-X3.clmb"={"imagetype"="Regulatory","required"=Yes,"imagename"="C-4364__s-B2/kauai-X3.clmb"},"C-4364__s-B2/kauai.trx"={"imagetype"="Firmware","required"=Yes,"imagename"="C-4364__s-B2/kauai.trx"}}
 ```
+
 It'll be different depending on your exact model.
 
 2. There are three files to note down. A `.trx` (for me: `C-4364__s-B2/kauai.trx`), a `.clmb` (for me: `C-4364__s-B2/kauai-X3.clmb` and a `.txt` (for me: `C-4364__s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt`
@@ -29,14 +31,19 @@ systemctl stop wpa_supplicant
 systemctl mask wpa_supplicant
 sudo nano /etc/NetworkManager/NetworkManager.conf
 ```
+
 paste in this at the end:
+
 ```
 [device]
 wifi.backend=iwd
 ```
+
 Run:
+
 ```
 systemctl enable iwd
 systemctl enable wifi-fix.service
 ```
+
 then reboot.
