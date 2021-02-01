@@ -17,7 +17,9 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 - Wifi: Only works on Models that shipped with macOS Mojave installed as that was the last version to ship with a standard format for firmware binaries
 
 ## Not working
+
 - TouchID
 
 ## Other
+
 - File Systems: Linux can't mount APFS partitions nor can macOS mount ext4.
