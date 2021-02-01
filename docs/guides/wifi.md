@@ -29,6 +29,9 @@ This page is a step by step guide to get wifi working on supported models.
 
 2. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
 3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
+
+    > Note: From this point on the instructions might be different for a distribution that you are trying to install.
+
 4. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 5. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
