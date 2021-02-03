@@ -5,6 +5,11 @@ Welcome to the t2linux wiki!
 This wiki contains knowledge about running Linux on Macs with the T2 chip.
 A list of those devices can be found [on Apple's website](https://support.apple.com/en-us/HT208862).
 
+# Warnings
+
+- Kernel versions newer than `5.7.19` are considered in-development builds and should not be used due to issues from within the kernel and the init system.
+- It is highly recommended that you use the stock Apple boot manager for all distributions, other boot managers like rEFInd have been known to cause issues.
+
 # Notable Resources
 
 In general you can find most of the people involved on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), making it probably the most helpful and important resource of all.
