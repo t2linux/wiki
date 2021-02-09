@@ -8,17 +8,17 @@ Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With th
 
 This issue has occured for anyone on the 16,1 and maybe the 16,4.
 
-(Credits to Redecorating#0350 for this fix)
+(Credits to Redecorating for this fix)
 
 # Making the GRUB Menu appear
 
 The GRUB bootloader by default turns off the GRUB Menu. This means you can't boot into Bootcamp Windows if it's installed. This can be easily fixed after Ubuntu is fully installed.
 
-In a Terminal in Ubuntu, type in ``sudo nano /etc/default/grub``. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. Save the file by doing CTRL+X, Y, then enter.
+In a Terminal in Ubuntu, edit file ``/etc/default/grub`` with any preferred editior (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. Save the file by doing CTRL+X, Y, then enter.
 
 We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 
-(Also credits to Redecorating#0350 for telling me about this fix, marcosfad for documenting the fix)
+(Also credits to Redecorating for telling me about this fix, marcosfad for documenting the fix [here](https://github.com/marcosfad/mbp-ubuntu#activate-grub-menu))
 
 # Installing alongside Windows
 
@@ -41,7 +41,7 @@ It should work now. Reboot into the GRUB Menu and try booting into Windows.
 
 # Why isn't sound working?
 
-For some reason, the creator of the mbp-ubuntu iso can't get the sound working after the install. You'll have to do this manually.
+Due to issues in the mbp-ubuntu install process, there is no sound working after install. You'll have to set it up manually.
 
 For the 16,1 and higher, you can use the files from [here.](https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba)
 

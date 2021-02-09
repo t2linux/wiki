@@ -1,10 +1,10 @@
 # Download the latest safe release
 
-For mbp-ubuntu, we recommend using the 5.7.19 kernel because 5.8 and newer kernels can have problems.
+Warning: Versions newer than 5.7.19 are considered in-development builds and **should not** be used due to issues from within the kernel and the init system.
 
 [Download here](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1)
 
-The iso you should download depends ony your machine, but usually the normal mbp iso works fine.
+The iso you should download depends on your machine, but usually the normal mbp iso works fine.
 
 # Hardware Requirements
 
