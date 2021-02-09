@@ -43,6 +43,10 @@ nav:
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
                 - Wifi Installation: distributions/manjaro/wifi-installation.md
+          - Ubuntu:
+                - Home: distributions/ubuntu/home.md
+                - FAQ: distributions/ubuntu/faq.md
+                - Installation: distributions/ubuntu/installation.md
 
 extra_css:
     - stylesheets\colors.css
