@@ -21,7 +21,7 @@ This page is a step by step guide to get wifi working on supported models.
     })
     ```
 
-    Navigate to [https://dl.t2linux.org/apple/wifi-fw/18G2022/](https://dl.t2linux.org/apple/wifi-fw/18G2022/). 
+    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). 
 
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
     - Do the same for the `.clmb` file and rename it to `brcmfmac4364-pcie.clm_blob`.
