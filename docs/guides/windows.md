@@ -30,12 +30,7 @@ If you are doing it manually:
 1. Format the main Linux partition(s) as ext4, btrfs, or whatever you intend to use.
 2. Mount your partitions, put the `EFI2` one at `/boot/efi` within your chroot.
 3. Install normally up until you install your bootloader, but don't forget to get a patched kernel and the correct dkms modules
-4. Within your chroot, do:
-
-```
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable
-```
-
+4. Within your chroot, do `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 5. There will now be an `EFI Boot` option in the MacOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
 
 ## Installing Windows when Linux is installed
