@@ -10,9 +10,9 @@
 
 # Install Procedure
 
-1. Partition your drive in MacOS ready for a linux install. You can either use Disk Utility or use Bootcamp, important thing is, is that you have two partitions (Your MacOS partition and your new linux one) (It isn't recommended that you totally delete MacOS as firmware updates are applied through it).
+1. Partition your drive in macOS ready for a linux install. You can either use Disk Utility or use Bootcamp, important thing is, is that you have two partitions (Your macOS partition and your new linux one) (It isn't recommended that you totally delete macOS as firmware updates are applied through it).
 2. Flash your iso to a USB Stick, If you want a easy way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). For a more command line way of doing this, use dd.
-3. Disable MacOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
+3. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
 
    a. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.  
   
@@ -39,7 +39,7 @@
 8. Open the installer and proceed normally until you hit the partitioning stage
 9. Click Manual Partitioning
 10. Click on `/dev/nvme0n1p1` then press edit at the bottom of the install window, change the Change the Mount Point: `/boot/efi`, after that click okay.
-11. Usually, the MacOS partition is mounted to `/dev/nvme0n1p2` (Double check this, the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the MacOS partition.
+11. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (Double check this, the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the macOS partition.
 12. Delete the partition you created before, this is usually mounted to `/dev/nvme0n1p3`.
 13. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem, if you know what you are doing feel free to skip to the next step (15).
 
