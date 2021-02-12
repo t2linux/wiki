@@ -21,17 +21,17 @@ You will need:
 	2. Boot while holding the option key, this will put you in macOS Startup Manager.
 	3. Select the orange EFI option with arrow keys and press return/enter on it.
 6. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) up to "Format the partitions".
-	1. The note on the Arch Wiki mentions the EFI system partition, there will be on at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows/already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
+	1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows/already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
 	2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`.
 7. Continue following the Arch Wiki's guide until "Install essential packages".
-	1. Install the following packages with `pacstrap`: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr`.
+	1. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr`.
 	2. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
 9. Add Aunali1's repository to `/etc/pacman.conf`, with `echo [mbp]\nServer = http://dl.t2linux.org/archlinux/\$repo/\$arch >> /etc/pacman.conf`.
 10. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
 	1. On the line with `GRUB_CMDLINE_LINUX=`, add the following items: `efi=noruntime intel_iommu=on pcie_ports=compact`
 11. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`.
-12. If your mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting.
+12. If your mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
 13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
 
 If you have issues, feel free to ask on our [Discord Server](https://discord.gg/Jayz5f5).
