@@ -40,6 +40,9 @@ nav:
           - Windows Triple Boot: guides/windows.md
           - Audio: guides/audio-config.md
     - Distributions:
+          - Arch:
+                - Installation: distributions/arch/installation.md
+                - Bulilding: distributions/arch/building.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
                 - Building: distributions/manjaro/building.md
