@@ -20,7 +20,8 @@ KERNEL!="card*", GOTO="pulseaudio_end"
 -SUBSYSTEMS=="pci", ATTRS{vendor}=="0x106b", ATTRS{device}=="0x1803", ENV{PULSE_PROFILE_SET}="apple-t2.conf"
 +SUBSYSTEMS=="pci", ATTRS{vendor}=="0x106b", ATTRS{device}=="0x1803", ENV{PULSE_PROFILE_SET}="apple-t2.conf", ENV{ACP_PROFILE_SET}="apple-t2.conf"
 
-LABEL="pulseaudio_end"```
+LABEL="pulseaudio_end"
+```
 
 # Issues
 
