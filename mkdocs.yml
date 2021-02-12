@@ -37,7 +37,8 @@ nav:
     - Guides:
           - Wifi: guides/wifi.md
           - DKMS: guides/dkms.md
-          - Windows Tripple Boot: guides/windows.md
+          - Windows Triple Boot: guides/windows.md
+          - Audio: guides/audio-config.md
     - Distributions:
           - Manjaro:
                 - Home: distributions/manjaro/home.md

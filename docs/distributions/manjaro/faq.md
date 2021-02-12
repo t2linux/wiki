@@ -1,8 +1,6 @@
 # Installing alongside Windows
 
-If you install Manjaro whilst Windows is also installed on your system, Manjaro will use the same Boot entry as the Windows Boot Manager on the macOS Boot Loader.
-
-After clicking on the Windows entry on the macOS bootloader, you will be taken to systemd-boot, from there you can choose if you would like to boot into Manjaro or use the Windows Boot Manager.
+If you want both Manjaro and Windows installed on your system, refer to this guide on [triple booting](https://wiki.t2linux.org/guides/windows/) as you install.
 
 # Issues Updating Because of the MBP Repository
 
