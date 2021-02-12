@@ -6,6 +6,8 @@ You will need:
 - A way to plug it into your Mac (USB-C isn't USB-A)
 - A wired internet connection (i.e. USB-C to Ethernet dongle), although if your Mac came with macOS Mojave, you can follow the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) and put the firmware files and any `pacman` packages you'll need to get WiFi working on the live environment in the partition you make in step 2.2.
 
+---
+
 1. If you are on a Mac that came with macOS Mojave, do the first step of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now. Make sure you will have the output of the command for later.
 2. Making a partition for Linux.
 	1. Open the Bootcamp installer and follow it until it asks for a windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
