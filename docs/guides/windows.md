@@ -85,7 +85,7 @@ If you are doing it manually:
 
 # Quality of life things
 
-### Giving Options in macOS Startup Manager Custom Icons
+## Giving Options in macOS Startup Manager Custom Icons
 
 Put an `icns` file with your desired icon in the top directory of the disk that the bootloader of the menu entry is on, and call it `.VolumeIcon.icns`.
 
