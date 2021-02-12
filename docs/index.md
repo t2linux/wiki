@@ -38,9 +38,7 @@ Note that if you are using one of the distributions listed above you should foll
 
 - State of Linux on the MacBook Pro [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - List of Mac Model Identifiers on [everymac.com](https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html)
-- Pulseaudio config files for 16,1 Models [https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba](https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba)
 - Using Luks with the intergrated keyboard [https://github.com/DimitriDokuchaev/GrubLuksUnlock](https://github.com/DimitriDokuchaev/GrubLuksUnlock)
-- Fan control deamon setup [https://github.com/networkException/mbpfan](https://github.com/networkException/mbpfan)
 
 *Outdated*
 
