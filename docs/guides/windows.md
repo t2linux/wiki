@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macos recovery. If you want to be able to choose from macos, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'. 
+This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'. 
 
 The simplist way to triple boot is to install windows first, and install linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
 
@@ -26,7 +26,7 @@ The simplist way to triple boot is to install windows first, and install linux o
 
 1. Make sure that your linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your linux partitions to `Linux Filesystem`.
 2. Install Windows normaly with Bootcamp. Windows will replace your Linux boot option.
-3. Boot into macos.
+3. Boot into macOS.
 4. `sudo diskutil mount disk0s1`
 5. Go to `/Volumes/EFI/efi`
 6. In this folder there will be a `Microsoft` folder, an `Apple` folder, one with your distro's name or just `GRUB`, and one called `Boot`. The `Boot` folder will have a file named `bootx64.efi`, rename this to `windows_bootx64.efi`
@@ -43,7 +43,7 @@ The simplist way to triple boot is to install windows first, and install linux o
 	3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 10. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
-It may be possible to skip steps 5-8 by doing the following command in macos: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
+It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
 
 # Using seperate EFI partitions
 

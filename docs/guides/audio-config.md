@@ -25,4 +25,4 @@ LABEL="pulseaudio_end"```
 # Issues
 
 - Some people are unable to get audio input to work. You may have to use a seperate microphone.
-- All of apple's fancy tuning of the speakers is done in macos, we don't have anything like that at the moment.
+- All of apple's fancy tuning of the speakers is done in macOS, we don't have anything like that at the moment.
