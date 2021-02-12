@@ -22,31 +22,9 @@ We've now changed the GRUB Bootloader settings, but we now need to update GRUB t
 
 # Installing alongside Windows
 
-If you already have Bootcamp installed, you might notice that the boot option for Bootcamp instead boots you into Ubuntu. This is because GRUB automatically shares with a Windows installation.
-
-Unlike other Linux distros, if you try to boot into it, it won't work and will stay at a black screen (confirmed with the 16,1 and might not be true with other models).
-There is a fix for this.
-
-While booted into Ubuntu, do the following:
-
-1. Open a terminal and type in ``sudo gdisk /dev/nvme0n1``.
-2. Press `x` for expert mode
-3. Press `n` to create a protective MBR
-4. Press `w` to write the partition and `y` to confirm
-5. If gdisk doesn't quit, press `q` to exit the command
-
-It should work now. Reboot into the GRUB Menu and try booting into Windows.
-
-(Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows))
+If you already have Bootcamp installed, you might notice that the boot option for Bootcamp instead boots you into Ubuntu. This is because GRUB automatically shares with a Windows installation. Follow [this guide on triple booting](https://wiki.t2linux.org/guides/windows/#if-windows-is-installed-first) to get windows working again.
 
 # Why isn't sound working?
 
 Due to issues in the mbp-ubuntu install process, there is no sound working after install. You'll have to set it up manually.
-
-For the 16,1 and higher, you can use the files from [here.](https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba)
-
-For anything lower than the 16,1, you can use the files from [here.](https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb)
-
-The READMEs in the Gist should be clear on where to put the files. You can download them by clicking on Raw, right clicking, and press Save Page. Place them in an easy to access folder like your Downloads folder.
-
-Once that's done, reboot and sound should be working.
+Refer to this guide on [audio configuration](https://wiki.t2linux.org/guides/audio-config).

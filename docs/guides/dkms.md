@@ -2,6 +2,11 @@
 
 This page explains how to install the kernel modules for the Keyboard, Audio, Touchbar and the Ambient Light sensor with DKMS. You will need a patched kernel.
 
+# Do you need to do this?
+
+Is your keyboard working? If no, then you'll need the BCE module.
+If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
+
 # Installing modules
 
 1. Install the `dkms` package
@@ -20,17 +25,13 @@ sudo modprobe apple_ib_tb
 sudo modprobe apple_ib_als
 ```
 
-# Audio Configuration Files
-
-The Touchbar and keyboard should work.
-
-For audio, there are config files required, these can be found [here](https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb)
-
-If you are using a 2019 16 inch MBP, use [this](https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba) set of files, as that laptop has 6 speakers.
+The Touchbar and keyboard should work, for audio, you'll need some config files, refer to the [Audio Config guide](https://wiki.t2linux.org/guides/audio-config).
 
 # Fixing Suspend
 
 Copy [this script](https://github.com/marcosfad/mbp-ubuntu/blob/master/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
+
+It unloads the Touchbar modules as they can cause issues for suspend.
 
 # Issues
 
