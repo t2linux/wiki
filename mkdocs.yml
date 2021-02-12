@@ -39,6 +39,7 @@ nav:
           - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
           - Audio: guides/audio-config.md
+          - Fan: guides/fan.md
     - Distributions:
           - Arch:
                 - Installation: distributions/arch/installation.md
