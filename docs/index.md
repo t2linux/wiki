@@ -39,7 +39,7 @@ Note that if you are using one of the distributions listed above you should foll
 - State of Linux on the MacBook Pro [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - List of Mac Model Identifiers on [everymac.com](https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html)
 - Using Luks with the intergrated keyboard [https://github.com/DimitriDokuchaev/GrubLuksUnlock](https://github.com/DimitriDokuchaev/GrubLuksUnlock)
-- Patching and compiling a Kernel for T2 Devices [DimitriDokuchaev/PatchingAndBuildingLinuxKernel](https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel)
+- Patching and compiling a Kernel for T2 Devices [https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel](https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel)
 
 *Outdated*
 
