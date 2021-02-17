@@ -14,7 +14,7 @@ This page is a step by step guide to get wifi working on supported models.
 
     ```json
     "RequestedFiles" = ({
-       "Firmware"="C-4364s-B2/kauai.trx",
+        "Firmware"="C-4364s-B2/kauai.trx",
         "TxCap"="C-4364s-B2/kauai-X3.txcb",
         "Regulatory"="C-4364s-B2/kauai-X3.clmb",
         "NVRAM"="C-4364s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"
