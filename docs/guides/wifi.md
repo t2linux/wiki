@@ -25,6 +25,8 @@ This page is a step by step guide to get wifi working on supported models.
 
     > Note: Firmware that came with your macOS installation only works when using macOS Mojave, its recommended to use the web hosted version to ensure compatibility
 
+    > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names
+
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
     - Do the same for the `.clmb` file and rename it to `brcmfmac4364-pcie.clm_blob`.
     - In the end, download the `.txt` file and rename it to `brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt` but change the `15,1` in this string to model identifier was the output of the second command described [here](https://wiki.t2linux.org/guides/wifi/#on-macos).
