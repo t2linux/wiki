@@ -43,7 +43,7 @@ nav:
     - Distributions:
           - Arch:
                 - Installation: distributions/arch/installation.md
-                - Bulilding: distributions/arch/building.md
+                - Building: distributions/arch/building.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
                 - Building: distributions/manjaro/building.md

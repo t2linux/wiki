@@ -10,7 +10,7 @@ You will need:
 
 1. If you are on a Mac that came with macOS Mojave, do the first step of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now. Make sure you will have the output of the command for later.
 2. Making a partition for Linux.
-	1. Open the Bootcamp installer and follow it until it asks for a windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
+	1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
 	2. In macOS Disk Utility, make a partition, format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from the installer, so you must make space now.
 3. Creating bootable media
 	1. Download an installer ISO from [here](https://dl.t2linux.org/archlinux/iso/index.html).
