@@ -54,6 +54,7 @@ nav:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
+                - Building: distributions/ubuntu/building.md
 
 extra_css:
     - stylesheets\colors.css
