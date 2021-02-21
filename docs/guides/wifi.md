@@ -23,7 +23,7 @@ This page is a step by step guide to get wifi working on supported models.
 
     Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). 
 
-    > Note: Firmware that came with your macOS installation only works when using macOS Mojave, its recommended to use the web hosted version to ensure compatibility
+    > Note: Firmware that came with your macOS installation only works when using macOS Mojave, its recommended to use the web hosted version to ensure compatibility. Should you still need to get firmware from your macOS installation, you will find it in `/usr/share/firmware/wifi`
 
     > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names
 
