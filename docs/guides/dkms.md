@@ -40,7 +40,7 @@ If you don't want (for example) the touch bar modules, you can ommit them from t
 
 # Module configuration
 
-The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` to one of the following options:
+The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` (`options apple-ib-tb fnmode=x`) to one of the following options:
 
 - 0: Only show F1-F12
 - 1: Show media and brightness controls, use the `fn` key to switch to F1-12
