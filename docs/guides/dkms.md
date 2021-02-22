@@ -38,6 +38,16 @@ brcmfmac" >> /etc/modules-load.d/t2.conf
 
 If you don't want (for example) the touch bar modules, you can ommit them from this command. `brcmfmac` is needed to use the internal wifi chip, refer to the [wifi guide](https://wiki.t2linux.org/guides/wifi/) for details on how to set that up.
 
+# Module configuration
+
+The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` to one of the following options:
+
+- 0: Only show F1-F12
+- 1: Show media and brightness controls, use the `fn` key to switch to F1-12
+- 2: Show F1-F12, use the `fn` key to switch to media and brightness controls
+- 3: Only show media and brightness controls
+- 4: Only show the escape key
+
 # Fixing Suspend
 
 Copy [this script](https://github.com/marcosfad/mbp-ubuntu/blob/master/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
