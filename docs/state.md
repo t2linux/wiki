@@ -20,7 +20,7 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 
 ## Not working
 
-- TouchID
+- Touch ID
 
 ## Other
 
