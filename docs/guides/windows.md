@@ -43,7 +43,7 @@ The simplist way to triple boot is to install Windows first, and install linux o
 	3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 10. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
-It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
+It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls /Volumes/EFI/efi|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
 
 # Using seperate EFI partitions
 
