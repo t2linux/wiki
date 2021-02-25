@@ -10,11 +10,14 @@ This page is a step by step guide to get fan control working on t2 macs.
     git clone https://github.com/networkException/mbpfan
     ```
 
-2. Change directory into the repository and run `./configurePath.sh`. This will update hard coded fan paths to match your machine
-3. Compile the daemon using `make`
-4. Run the tests to confirm that everything is working `sudo make tests`
-5. If the tests ran successfully, install using `sudo make install`
-6. Now enable starting at boot
+2. Compile the daemon using `make`
+
+    > Note: This will run a patch script that finds a fan device on your system. 
+    You can use its output for debug purposes
+
+3. Run the tests to confirm that everything is working `sudo make tests`
+4. If the tests ran successfully, install using `sudo make install`
+5. Now enable starting at boot
 
     ```sh
     sudo cp mbpfan.service /etc/systemd/system/
