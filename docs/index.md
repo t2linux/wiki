@@ -42,6 +42,7 @@ Note that if you are using one of the distributions listed above you should foll
 - Patching and compiling a Kernel for T2 Devices [https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel](https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel)
 - Adding macOS like screenshot shortcuts to KDE Plasma [https://gist.github.com/networkException/5a68299accc1872749c86301c1449690](https://gist.github.com/networkException/5a68299accc1872749c86301c1449690)
 - Disable thermal throttling (better performance but higher temperatures) [https://github.com/yyearth/turnoff-BD-PROCHOT](https://github.com/yyearth/turnoff-BD-PROCHOT)
+- Experimental wifi support for mbp 16,1 [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi) 
 
 *Outdated*
 
