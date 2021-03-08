@@ -21,6 +21,7 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
     this is still in development.
 
 - Suspend
+- GPU: In case the device has a deticated AMD GPU it will only be able to use that, there is currently no way of switching to the Intel GPU
 
 ## Not working
 
