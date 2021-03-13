@@ -1,11 +1,20 @@
-name: Publish docs via GitHub Pages
+name: Lint and Publish to wiki.t2linux.org
 on:
     push:
         branches:
             - master
 
 jobs:
-    build:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: xt0rted/markdownlint-problem-matcher@v1
+            - name: "Run Markdown linter"
+              uses: docker://avtodev/markdown-lint:v1
+              with:
+                  args: docs/**/*.md
+    deploy:
         name: Deploy docs
         runs-on: ubuntu-latest
         steps:
