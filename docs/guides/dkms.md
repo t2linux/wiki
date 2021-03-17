@@ -11,6 +11,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
 1. Install the `dkms` package
 2. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
+
 	- If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
 	- Otherwise, `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
     
@@ -27,16 +28,19 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
     ```
 
 	- Use `sudo dkms install -m apple-bce -v r183.c884d9c`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
+
 3. Installing the Touchbar and Ambient Light sensor modules
-	- `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
-	- Use `sudo dkms install -m apple-ibridge -v 0.1`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
+	
+    - `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
+    - Use `sudo dkms install -m apple-ibridge -v 0.1`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
+
 4. Load the modules into the kernel
 
-```
-sudo modprobe apple_bce
-sudo modprobe apple_ib_tb
-sudo modprobe apple_ib_als
-```
+    ```
+    sudo modprobe apple_bce
+    sudo modprobe apple_ib_tb
+    sudo modprobe apple_ib_als
+    ```
 
 The Touchbar and keyboard should work, for audio, you'll need some config files, refer to the [Audio Config guide](https://wiki.t2linux.org/guides/audio-config).
 
