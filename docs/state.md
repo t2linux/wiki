@@ -15,12 +15,7 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 - Trackpad: While technically working, it is far from the experience on macOS
 - Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either kunction keys from 1 to 12 or basic media / brightness control are shown. 
 - Audio: With proper configuration audio can work, however it is not stable in some situations and switching speakers and the headphone jack only works manually
-- Wifi: Only works on Models that shipped with macOS Mojave installed as that was the last version to ship with a standard format for firmware binaries
-
-    > Note: There has been success in getting newer firmware to work with specific custom kernel patches on the 16,1 model,
-    which can be found [here](https://github.com/jamlam/mbp-16.1-linux-wifi). Make sure to use firmware from your macOS installation
-    rather then from a web repository
-
+- Wifi: Only works on Models that shipped with macOS Mojave installed as that was the last version to ship with a standard format for firmware binaries as well as the MacBook Pro 16,1
 - Suspend
 - GPU: In case the device has a dedicated AMD GPU it will only be able to use that, there is currently no way of switching to the Intel GPU
 
