@@ -12,7 +12,7 @@ theme:
     font: false
     features:
         - tabs
-    favicon: ../assets/images/icon.png
+    favicon: assets/images/icon.png
 
 docs_dir: docs
 site_dir: build
@@ -57,9 +57,9 @@ nav:
                 - Building: distributions/ubuntu/building.md
 
 extra_css:
-    - ../assets/stylesheets/colors.css
-    - ../assets/stylesheets/fonts.css
-    - ../assets/stylesheets/layout.css
+    - assets/stylesheets/colors.css
+    - assets/stylesheets/fonts.css
+    - assets/stylesheets/layout.css
 
 extra:
     social:
