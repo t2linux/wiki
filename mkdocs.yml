@@ -12,7 +12,7 @@ theme:
     font: false
     features:
         - tabs
-    favicon: https://avatars.githubusercontent.com/t2linux
+    favicon: ../assets/images/icon.png
 
 docs_dir: docs
 site_dir: build
