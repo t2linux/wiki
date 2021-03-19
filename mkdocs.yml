@@ -57,9 +57,9 @@ nav:
                 - Building: distributions/ubuntu/building.md
 
 extra_css:
-    - stylesheets\colors.css
-    - stylesheets\fonts.css
-    - stylesheets\layout.css
+    - ../assets/stylesheets/colors.css
+    - ../assets/stylesheets/fonts.css
+    - ../assets/stylesheets/layout.css
 
 extra:
     social:
