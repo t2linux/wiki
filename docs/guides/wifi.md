@@ -12,7 +12,7 @@ This page is a step by step guide to get wifi working on supported models.
         - If no, there is support
 - If no, is it a 16,1?
     - If yes, there is support using a self compiled kernel
-        - If no, there is currently no support
+    - If no, there is currently no support
 
 ## On macOS
 
