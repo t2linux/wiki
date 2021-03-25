@@ -70,7 +70,7 @@ If you wifi disconnects or has issues otherwise its advises to restart iwd: `sud
 
 ## Custom Kernel for 16,1
 
-As mentioned in [Device Support and State of Features](https://wiki.t2linux.org/state/) there is wifi support for the
+As mentioned in [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) there is wifi support for the
 MacBook Pro 16,1. This is achived through a patchset for a custom kernel.
 
 -   If you are on an arch based distribution use the following commands to compile the kernel:
