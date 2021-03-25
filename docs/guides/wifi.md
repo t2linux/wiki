@@ -2,7 +2,17 @@
 
 This page is a step by step guide to get wifi working on supported models.
 
-**Note that currently only Macs that came with macOS Mojave preinstalled (except the 15,4) and 16,1 models are supported, see [Device Support and State of Features](https://wiki.t2linux.org/state/).**
+**Note that currently not all models have support, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported).**
+
+## Is my model supported?
+
+- Did your device release with macOS Mojave or earlier initially?
+    - If yes, is it a 15,4?
+        - If yes, there is currently no support
+        - If no, there is support
+- If no, is it a 16,1?
+    - If yes, there is support using a self compiled kernel
+        - If no, there is currently no support
 
 ## On macOS
 
