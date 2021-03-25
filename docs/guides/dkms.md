@@ -24,7 +24,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
             CLEAN="make clean"
             BUILT_MODULE_NAME[0]="apple-bce"
             DEST_MODULE_LOCATION[0]="/kernel/drivers/misc"
-             AUTOINSTALL="yes"
+            AUTOINSTALL="yes"
             ```
 
 	        - Use `sudo dkms install -m apple-bce -v r183.c884d9c`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
