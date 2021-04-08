@@ -34,7 +34,7 @@ You will need:
 8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
 9. Add Aunali1's repository to `/etc/pacman.conf`, with `echo [mbp]\nServer = https://dl.t2linux.org/archlinux/\$repo/\$arch >> /etc/pacman.conf`.
 10. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
-	1. On the line with `GRUB_CMDLINE_LINUX=`, add the following items: `efi=noruntime intel_iommu=on pcie_ports=compact`
+	1. On the line with `GRUB_CMDLINE_LINUX=`, add the following items: `efi=noruntime intel_iommu=on pcie_ports=compat`
 11. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`.
 12. `grub-mkconfig -o /boot/grub/grub.cfg`
 13. If your mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
