@@ -6,6 +6,8 @@ This page is a step by step guide to get wifi working on supported models.
 
 ## Is my model supported?
 
+You can get your model using `system_profiler SPHardwareDataType | grep "Model Identifier"` on macOS or using `cat /sys/devices/virtual/dmi/id/product_name` on Linux
+
 - Did your device release with macOS Mojave or earlier initially?
     - If yes, is it a 15,4?
         - If yes, there is currently no support
