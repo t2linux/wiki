@@ -18,7 +18,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 ## On macOS
 
-1. Run both `ioreg -l | grep RequestedFiles` and `system_profiler SPHardwareDataType | grep "Model Identifier"` in a terminal and note down the output.
+1. Run both `ioreg -l | grep RequestedFiles` (the names of the firmware files required by your model) and `system_profiler SPHardwareDataType | grep "Model Identifier"` (your model identifier) in a terminal and note down the output, you will need both values in the next steps.
 
 ## On Linux
 
