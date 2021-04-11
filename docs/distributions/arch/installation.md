@@ -4,7 +4,7 @@ You will need:
 
 - USB drive with at least 1GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Ethernet dongle) or wifi (not all models support wifi, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) and follow the [WiFi guide on macOS](https://wiki.t2linux.org/guides/wifi/#on-macos) part accordingly. Put the firmware files and any packages you'll need to get WiFi working on the live environment in the partition you make in step 2b. If you don't know how to get these packages, you might want to do [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) from an Arch virtual machine).
+- A wired internet connection (i.e. USB-C to Ethernet dongle) or wifi (not all models support wifi, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) and follow the [WiFi guide on macOS](https://wiki.t2linux.org/guides/wifi/#on-macos) part accordingly. Put the firmware files and any packages you'll need to get WiFi working on the live environment in the partition you make in step 2b. If you don't know how to get these packages, you might want to do [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) from an Arch virtual machine or Docker container).
 
 ---
 
