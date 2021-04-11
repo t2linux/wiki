@@ -45,7 +45,7 @@ You will need:
 		3. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for both `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`.
 		4. Add `intel_iommu=on pcie_ports=compat` to the `options` line to add those kernel parameters.
 11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader.
-15. If your Mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
-16. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+12. If your Mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
+13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
 
 If you have issues, feel free to ask on our [Discord Server](https://discord.gg/Jayz5f5).
