@@ -1,5 +1,7 @@
 # Installing Arch Linux on a Mac with the T2 Chip
 
+> Note: If you wish to use archinstall, there is a profile based on this guide which can be found on [https://github.com/Redecorating/archinstall-mbp](https://github.com/Redecorating/archinstall-mbp)
+
 You will need:
 
 - USB drive with at least 1GB
