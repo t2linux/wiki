@@ -38,6 +38,7 @@ nav:
           - Wifi: guides/wifi.md
           - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
+          - Hybrid Graphics: guides/hybrid-graphics.md
           - Audio: guides/audio-config.md
           - Uninstall: guides/uninstall.md
           - Fan: guides/fan.md

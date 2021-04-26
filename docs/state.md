@@ -17,7 +17,7 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 - Audio: With proper configuration audio can work, however it is not stable in some situations and switching speakers and the headphone jack only works manually
 - Wifi: Only works on certain models due to incompatible firmware, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported)
 - Suspend
-- GPU: In case the device has a dedicated AMD GPU it will only be able to use that, there is currently no way of switching to the Intel GPU
+- Hybrid Graphics: In case the device has a dedicated AMD GPU (15 and 16 inch models) as well as an Intel iGPU, the iGPU can be used, but this breaks resume, and may be unstable when running games, see the [Hybrid Graphics](https://wiki.t2linux.org/guides/hybridGraphics.md) page.
 
 ## Not working
 
