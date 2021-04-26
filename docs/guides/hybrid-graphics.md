@@ -2,7 +2,7 @@
 
 This page describes how to use the iGPU on MacBook Pros with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by turning off the more powerful AMD dGPU when you don't need it.
 
-This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,4 and 16,4 models are very similar and should work.
+This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work.
 
 ## Issues
 
@@ -38,9 +38,9 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,4 and 
     8086 3E9B INTEL - UHD Graphics 630 (Mobile)
     ```
 
-    Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your brightness control should stop working, *for now*. `lspci` should have an Intel Graphics card at address `00:02.0`, which won't be initialised currently.
-4.  In macOS Recovery, run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`. If you boot macOS, this will be reset and you'll have to redo this step. You display should be now connected to your Intel iGPU when booting Linux and brightness should work again (probably with `/sys/class/backlight/acpi_video0`).
-5.  Try `DRI_PRIME=1 glxinfo | grep "OpenGL renderer"&&glxinfo | grep "OpenGL renderer"`, you should get both AMD and Intel. Running things with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now, as your AMD gpu can be turned off when not needed.
+4.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your brightness control should stop working, *for now*. `lspci` should have an Intel Graphics card at address `00:02.0`, which won't be initialised currently.
+5.  In macOS Recovery, run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`. If you boot macOS, this will be reset and you'll have to redo this step. You display should be now connected to your Intel iGPU when booting Linux and brightness should work again (probably with `/sys/class/backlight/acpi_video0`).
+6.  Try `DRI_PRIME=1 glxinfo | grep "OpenGL renderer"&&glxinfo | grep "OpenGL renderer"`, you should get both AMD and Intel. Running things with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now, as your AMD gpu can be turned off when not needed.
 
 # Use on / with Windows
 
