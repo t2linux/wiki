@@ -13,7 +13,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
         - If yes, there is currently no support
         - If no, there is support
 - If no, is it a 16,1 or 16,2?
-    - If yes, there is support using a self compiled kernel
+    - If yes, there is support using a [self compiled kernel](https://wiki.t2linux.org/guides/wifi/#custom-kernel-for-161-162)
     - If no, there is currently no support
 
 ## On macOS
