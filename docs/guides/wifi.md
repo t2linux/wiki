@@ -12,7 +12,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     - If yes, is it a 15,4?
         - If yes, there is currently no support
         - If no, there is support
-- If no, is it a 16,1?
+- If no, is it a 16,1 or 16,2?
     - If yes, there is support using a self compiled kernel
     - If no, there is currently no support
 
@@ -72,10 +72,10 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 If you wifi disconnects or has issues otherwise its advises to restart iwd: `sudo systemctl restart iwd`
 
-## Custom Kernel for 16,1
+## Custom Kernel for 16,1 / 16,2
 
 As mentioned in [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) there is wifi support for the
-MacBook Pro 16,1. This is achived through a patchset for a custom kernel.
+MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kernel.
 
 -   If you are on an arch based distribution use the following commands to compile the kernel:
 
