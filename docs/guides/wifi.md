@@ -46,7 +46,15 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 ## On Linux
 
 1. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
-2. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
+2. Check that the files are in place with `ls -l /lib/firmware/brcm | grep 4364`. The output should look something like this
+
+    ```
+    -rw-r--r--. 1 root root   12860 Mar  1 12:44 brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt
+    -rw-r--r--. 1 root root  922647 Mar  1 12:44 brcmfmac4364-pcie.bin
+    -rw-r--r--. 1 root root   33226 Mar  1 12:44 brcmfmac4364-pcie.clm_blob
+    ```
+
+3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
 
     > Note: From this point on the instructions might be different for a distribution that you are trying to install.
     
@@ -54,15 +62,15 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     Running the command from step 3 would work for connecting to wpa2 networks as well but it would have to be
     run every time before connecting to a network.
 
-3. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
-4. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
+4. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
+5. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
     ```ini
     [device]
     wifi.backend=iwd
     ```
 
-5. Set iwd to run on boot with the following commands (assuming that you are using systemd)
+6. Set iwd to run on boot with the following commands (assuming that you are using systemd)
 
     ```bash
     sudo systemctl enable iwd
