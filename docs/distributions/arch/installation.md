@@ -10,7 +10,7 @@ You will need:
 
 ---
 
-1. If you are on a Mac that came with macOS Mojave, do the first step of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now. Make sure you will have the output of the command for later.
+1. If you are on a Mac that supports wifi, do the first step of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now. Make sure you will have the output of the command for later.
 2. Making a partition for Linux.
 	1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
 	2. In macOS Disk Utility, make a partition, format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from the installer, so you must make space now.
@@ -47,7 +47,7 @@ You will need:
 		3. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for both `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`.
 		4. Add `intel_iommu=on pcie_ports=compat` to the `options` line to add those kernel parameters.
 11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader.
-12. If your Mac came with macOS Mojave, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
+12. If your Mac supports wifi, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
 13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
 
 If you have issues, feel free to ask on our [Discord Server](https://discord.gg/Jayz5f5).
