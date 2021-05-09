@@ -56,5 +56,6 @@ Note that if you are using one of the distributions listed above you should foll
 - mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
 - marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
 - JPyke3 (Manjaro) [https://github.com/JPyke3](https://github.com/JPyke3)
+- Redecorating (Wiki maintainence) [https://github.com/Redecorating](https://github.com/Redecorating)
 
 ... and many more
