@@ -1,6 +1,7 @@
 # Introduction
 
 This page is a step by step guide to get wifi working on supported models.
+If you need help with the instructions, visit the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu)
 
 **Note that currently not all models have support, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported).**
 
@@ -57,7 +58,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
 
     > Note: From this point on the instructions might be different for a distribution that you are trying to install.
-    
+
     > Note: Using iwd is technically not needed for using wifi, however wpa2 is unstable without it. 
     Running the command from step 3 would work for connecting to wpa2 networks as well but it would have to be
     run every time before connecting to a network.
