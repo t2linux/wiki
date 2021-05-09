@@ -108,4 +108,4 @@ MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kerne
     instead of [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset in step 3 however.
 
 Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
-use the firmware files from macOS (as stated in a Note on the page) and not from a fileserver.
+**use the firmware files from macOS** (as stated in a Note on the page) and not from a fileserver.
