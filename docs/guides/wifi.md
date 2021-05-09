@@ -95,7 +95,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     sudo systemctl restart NetworkManager
     ```
 
-If you wifi disconnects or has issues otherwise its advises to restart iwd: `sudo systemctl restart iwd`
+If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`
 
 ## Custom Kernel for 16,1 / 16,2
 
