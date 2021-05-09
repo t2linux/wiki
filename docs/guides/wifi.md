@@ -62,15 +62,25 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     Running the command from step 3 would work for connecting to wpa2 networks as well but it would have to be
     run every time before connecting to a network.
 
-4. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
-5. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
+4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output shoud look similar to this
+
+    ```
+    May 09 11:55:54 hostname kernel: usbcore: registered new interface driver brcmfmac
+    May 09 11:55:54 hostname kernel: brcmfmac 0000:03:00.0: enabling device (0000 -> 0002)
+    May 09 11:55:54 hostname kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac4364-pcie for chip BCM4364/3
+    May 09 11:55:55 hostname kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac4364-pcie for chip BCM4364/3
+    May 09 11:55:55 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4364/3 wl0: Oct 23 2019 08:32:36 version 9.137.11.0.32.6.36 FWID 01-671ec60c
+    ```
+
+5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
+6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
     ```ini
     [device]
     wifi.backend=iwd
     ```
 
-6. Set iwd to run on boot with the following commands (assuming that you are using systemd)
+7. Set iwd to run on boot with the following commands (assuming that you are using systemd)
 
     ```bash
     sudo systemctl enable iwd
