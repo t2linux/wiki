@@ -21,6 +21,8 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 1. Run both `ioreg -l | grep RequestedFiles` (the names of the firmware files required by your model) and `system_profiler SPHardwareDataType | grep "Model Identifier"` (your model identifier) in a terminal and note down the output, you will need both values in the next steps.
 
+> Note: If explicitly stated, like in the 16,1 / 16,2 instructions, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os), especially the first note there.
+
 ## On any OS
 
 1. Look at the ouput of the first command listed above, it will probably look something like this
