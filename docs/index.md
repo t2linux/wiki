@@ -55,6 +55,7 @@ Note that if you are using one of the distributions listed above you should foll
 - marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
 - MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
 - mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
+- networkException (Wiki maintainence and `mbpfan` fork for T2) [https://github.com/networkException](https://github.com/networkException)
 - Redecorating (Wiki maintainence) [https://github.com/Redecorating](https://github.com/Redecorating)
 - roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
 
