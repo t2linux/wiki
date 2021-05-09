@@ -51,11 +51,11 @@ Note that if you are using one of the distributions listed above you should foll
 # Notable Contributors
 
 - aunali1 (Arch Linux and Kernel Module work) [https://github.com/aunali1](https://github.com/aunali1)
-- MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
-- roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
-- mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
-- marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
 - JPyke3 (Manjaro) [https://github.com/JPyke3](https://github.com/JPyke3)
+- marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
+- MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
+- mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
 - Redecorating (Wiki maintainence) [https://github.com/Redecorating](https://github.com/Redecorating)
+- roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
 
 ... and many more
