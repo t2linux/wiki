@@ -7,7 +7,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 
 # Warnings
 
-- Kernel versions `5.8.x` and `5.9.x` are considered in-development builds and should not be used due to issues from within the kernel and the init system. Currently well tested are the older `5.7.19` as well as the currently stable `5.10.x`.
+- Kernel versions `5.8.x` and `5.9.x` are considered in-development builds and should not be used due to issues from within the kernel and the init system. Currently only well tested are versions `5.7.19`, which reached end of life in August 2020, and the stable `5.10.x`, which will be supported by the Linux maintainers until December 2026.
 - It is highly recommended that you use the stock Apple boot manager for all distributions, other boot managers like rEFInd have been known to cause issues.
 
 # Getting started
