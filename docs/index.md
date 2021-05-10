@@ -10,6 +10,10 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 - Kernel versions `5.8.x` and `5.9.x` are considered in-development builds and should not be used due to issues from within the kernel and the init system. Currently well tested are the older `5.7.19` as well as the currently stable `5.10.x`.
 - It is highly recommended that you use the stock Apple boot manager for all distributions, other boot managers like rEFInd have been known to cause issues.
 
+# Getting started
+
+To get started with an installation, refer to the [roadmap](https://wiki.t2linux.org/roadmap)
+
 # Notable Resources
 
 In general you can find most of the people involved on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), making it probably the most helpful and important resource of all.
