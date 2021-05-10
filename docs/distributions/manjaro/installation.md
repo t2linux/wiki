@@ -46,7 +46,7 @@
     * Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click okay.
     * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click okay.
     * Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
-    
+
 14. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off
 15. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot
 16. Welcome to Manjaro :)

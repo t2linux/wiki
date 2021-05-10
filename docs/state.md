@@ -13,7 +13,7 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 ## Partially Working
 
 - Trackpad: While technically working, it is far from the experience on macOS
-- Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either kunction keys from 1 to 12 or basic media / brightness control are shown. 
+- Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either kunction keys from 1 to 12 or basic media / brightness control are shown.
 - Audio: With proper configuration audio can work, however it is not stable in some situations and switching speakers and the headphone jack only works manually
 - Wifi: Only works on certain models due to incompatible firmware, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported)
 - Suspend

@@ -36,10 +36,9 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     })
     ```
 
-    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). 
+    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
 
     > Note: In some cases, like when using the custom kernel for 16,1 models, you might need to use the firmware that came with your macOS installation. You will find it in `/usr/share/firmware/wifi`
-
     > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names
 
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
@@ -61,7 +60,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
     > Note: From this point on the instructions might be different for a distribution that you are trying to install.
 
-    > Note: Using iwd is technically not needed for using wifi, however wpa2 is unstable without it. 
+    > Note: Using iwd is technically not needed for using wifi, however wpa2 is unstable without it.
     Running the command from step 3 would work for connecting to wpa2 networks as well but it would have to be
     run every time before connecting to a network.
 

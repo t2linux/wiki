@@ -20,15 +20,15 @@ The iso you should download depends on your machine, but usually the normal mbp 
 2. Flash the downloaded iso to a USB Flash Drive, or even an SD Card. Use [Balena Etcher](https://www.balena.io/etcher/) for a gui option, command line option is dd.
 3. Disable Secure Boot. This is required to even boot into the Live USB. Instructions are below (taken from [here](https://support.apple.com/en-au/HT208330))
 
-    a. Shut down your Mac. Then turn it on. If you hear a startup sound or just see the Apple logo, hold down Command (⌘)-R.
+    1. Shut down your Mac. Then turn it on. If you hear a startup sound or just see the Apple logo, hold down Command (⌘)-R.
 
-    b. Once you are in Recovery Mode, click on Utilites -> Startup Security Utility
+    2. Once you are in Recovery Mode, click on Utilites -> Startup Security Utility
 
-    c. If it asks for your password, type in the administrator's password and press OK.
+    3. If it asks for your password, type in the administrator's password and press OK.
 
-    d. Set the first option to "No Security", and the second to "Allow booting from External Media".
+    4. Set the first option to "No Security", and the second to "Allow booting from External Media".
 
-    e. You should be done. Close the window and reboot your Mac.
+    5. You should be done. Close the window and reboot your Mac.
 
 4. After disabling Secure Boot, hold down Option (⌥) while the Mac is rebooting.
 5. Plug in your USB Flash Drive/SD Card. If two Yellow EFI Boot options appear, select the one towards the very right and hit enter.
@@ -36,15 +36,15 @@ The iso you should download depends on your machine, but usually the normal mbp 
 7. Once booted into Ubuntu, you can install it like normal until you get to the partition option.
 8. Find the partition you made before. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
-    a. a 1GB ext4 partiton mounted at /boot
+    1. a 1GB ext4 partiton mounted at /boot
 
-    b. (optional) 8GB swap partition (this can be larger depending on what you are using Ubuntu for) 
+    2. (optional) 8GB swap partition (this can be larger depending on what you are using Ubuntu for)
 
-    c. rest of the free partition space or around 30GB to an ext4 partition mounted at /
+    3. rest of the free partition space or around 30GB to an ext4 partition mounted at /
 
-    d. (Optional) rest of the free partition space to an ext4 partition mounted at /home
+    4. (Optional) rest of the free partition space to an ext4 partition mounted at /home
 
-    e. Leave efi boot alone. Should work just fine.
+    5. Leave efi boot alone. Should work just fine.
 
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to FAQ. If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.

@@ -12,9 +12,9 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 1. Install the `dkms` package
 2. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-	- If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
-	- Otherwise, `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
-    
+    - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
+    - Otherwise, `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
+
         -   Create a `dkms.conf` file in `/usr/src/apple-bce-r183.c884d9c` and put in the following:
 
             ```
@@ -27,10 +27,10 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
             AUTOINSTALL="yes"
             ```
 
-	        - Use `sudo dkms install -m apple-bce -v r183.c884d9c`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
+    - Use `sudo dkms install -m apple-bce -v r183.c884d9c`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
 
 3. Installing the Touchbar and Ambient Light sensor modules
-	
+
     - `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
     - Use `sudo dkms install -m apple-ibridge -v 0.1`. Add `-k x.x.x-mbp` if you need to install for a specific kernel version.
 

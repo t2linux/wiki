@@ -12,7 +12,7 @@ This page is a step by step guide to get fan control working on t2 macs.
 
 2. Compile the daemon using `make`
 
-    > Note: This will run a patch script that finds a fan device on your system. 
+    > Note: This will run a patch script that finds a fan device on your system.
     You can use its output for debug purposes
 
 3. Run the tests to confirm that everything is working `sudo make tests`

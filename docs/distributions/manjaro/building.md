@@ -35,7 +35,6 @@ docker run --privileged \
         - `KERNEL`: This is used for defining which kernel version to use. All packages will follow the `-mbp` naming scheme.
         - `EDITION`: This is used for defining which edition of manjaro you would like to install.
 
-
 # Option 2: Manually on an existing Manjaro Install
 
 First Install Manjaro Tools:
@@ -62,7 +61,7 @@ buildiso -f -p {edition} -k linux57-mbp
 architect  gnome  kde nxd  xfce awesome  bspwm-mate  cinnamon  i3    lxqt  openbox  webdad bspwm    budgie      deepin    lxde  mate  ukui
 ```
 
-## File Locations 
+## File Locations
 
 Navigate to the directory for your iso file. If Using a official edition go to:
 
