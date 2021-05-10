@@ -15,7 +15,7 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 Note that while its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux to have
 a backup in case something goes wrong.
 
-Now, take a look at the [stage page](https://wiki.t2linux.org/state/). It gives an lists roughly what works on Linux and what not.
+Now, take a look at the [state article](https://wiki.t2linux.org/state/). It gives an lists roughly what works on Linux and what not.
 If a specific feature is not listed at all, there is a chance it actually works. For a more technical list you might want to refer to
 [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux).
 
