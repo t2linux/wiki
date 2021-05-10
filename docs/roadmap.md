@@ -35,7 +35,10 @@ installed automatically.
 
 Fedora also has a prebuild iso.
 
-If you wish to use another distribution, you can install it normally, follow the steps to [compile your own kernel](https://wiki.t2linux.org/distributions/ubuntu/building/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation)
+Note that with the expection of Arch, all distributions currently only have 5.7.19 as the latest kernel version that is considered stable. The support period for 5.7.x ended in August 2020.
+You could upgrade the kernel yourself by [compiling it manually](https://wiki.t2linux.org/distributions/ubuntu/building/)
+
+If you wish to use another distribution, you can install it normally, also follow the steps to [compile your own kernel](https://wiki.t2linux.org/distributions/ubuntu/building/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation)
 
 ## Preparing the Installation
 
