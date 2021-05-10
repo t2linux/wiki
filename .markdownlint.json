@@ -14,5 +14,7 @@
     "MD046": { "style": "fenced" },
     "MD047": false,
     "no-hard-tabs": true,
-    "whitespace": false
+    "whitespace": true,
+    "list-marker-space": false,
+    "no-blanks-blockquote": false
 }
