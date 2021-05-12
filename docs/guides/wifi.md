@@ -1,7 +1,6 @@
 # Introduction
 
 This page is a step by step guide to get wifi working on supported models.
-If you need help with the instructions, visit the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu)
 
 **Note that currently not all models have support, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported).**
 

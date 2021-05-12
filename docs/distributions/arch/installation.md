@@ -65,5 +65,3 @@ You will need:
 11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader.
 12. If your Mac supports wifi, you can follow the rest of the [WiFi guide](https://wiki.t2linux.org/guides/wifi/#on-macos) now or after rebooting into your install.
 13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
-
-If you have issues, feel free to ask on our [Discord Server](https://discord.gg/Jayz5f5).
