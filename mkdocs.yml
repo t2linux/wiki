@@ -9,6 +9,7 @@ theme:
     palette:
         scheme: slate
     name: material
+    custom_dir: theme
     font: false
     features:
         - tabs
