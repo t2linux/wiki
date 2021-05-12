@@ -27,6 +27,7 @@ Still more detailed or just different documentation about certain distributions 
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
+- NixOS [https://github.com/t2linux/nixos-overlay][https://github.com/t2linux/nixos-overlay]
 
 ## Kernel Modules
 
@@ -57,6 +58,7 @@ Note that if you are using one of the distributions listed above you should foll
 - aunali1 (Arch Linux and Kernel Module work) [https://github.com/aunali1](https://github.com/aunali1)
 - JPyke3 (Manjaro) [https://github.com/JPyke3](https://github.com/JPyke3)
 - marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
+- mikrosoeem (NixOS, Discord) [https://github.com/mikroskeem](https://github.com/mikroskeem)
 - MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
 - mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
 - networkException (Wiki maintainence and `mbpfan` fork for T2) [https://github.com/networkException](https://github.com/networkException)
