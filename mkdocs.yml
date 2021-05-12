@@ -68,3 +68,5 @@ extra:
     social:
         - icon: fontawesome/brands/discord
           link: https://discord.com/invite/68MRhQu
+        - icon: fontawesome/brands/github
+          link: https://github.com/t2linux
