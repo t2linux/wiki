@@ -38,11 +38,10 @@ You will need:
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`, and your other partitions on `/`, etc.
 7. Continue following the Arch Wiki's guide until "Install essential packages".
 
-    1. Use `pacman -S wget` to install `wget`
-    2. Run `wget https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
-    3. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
-    4. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
-    5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
+    1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
+    2. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
+    3. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+    4. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
 8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
 9. Add Aunali1's repository to `/etc/pacman.conf`, with `echo [mbp]\nServer = https://dl.t2linux.org/archlinux/\$repo/\$arch >> /etc/pacman.conf`.
