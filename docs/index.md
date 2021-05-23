@@ -44,7 +44,6 @@ Note that if you are using one of the distributions listed above you should foll
 - State of Linux on the MacBook Pro (technical documentation) [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - List of Mac Model Identifiers on [everymac.com](https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html)
 - Using Luks with the intergrated keyboard [https://github.com/DimitriDokuchaev/GrubLuksUnlock](https://github.com/DimitriDokuchaev/GrubLuksUnlock)
-- Patching and compiling a Kernel for T2 Devices [https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel](https://github.com/DimitriDokuchaev/PatchingAndBuildingLinuxKernel)
 - Adding macOS like screenshot shortcuts to KDE Plasma [https://gist.github.com/networkException/5a68299accc1872749c86301c1449690](https://gist.github.com/networkException/5a68299accc1872749c86301c1449690)
 - Disable thermal throttling (better performance but higher temperatures) [https://github.com/yyearth/turnoff-BD-PROCHOT](https://github.com/yyearth/turnoff-BD-PROCHOT)
 
