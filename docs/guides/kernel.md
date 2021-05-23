@@ -13,7 +13,7 @@ source PKGBUILD
 wget https://www.kernel.org/pub/linux/kernel/v${pkgver//.*}.x/linux-${pkgver}.tar.xz
 tar -xf $_srcname.tar.xz
 prepare
-make all
+make all -jX # change "X" to the number of cpu threads you have.
 cd ..
 sudo _package
 cd ..
