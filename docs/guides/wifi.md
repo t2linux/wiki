@@ -100,17 +100,9 @@ If you wifi disconnects or has issues otherwise its advised to restart iwd: `sud
 As mentioned in [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) there is wifi support for the
 MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kernel.
 
--   If you are on an arch based distribution use the following commands to compile the kernel:
-
-    ```bash
-    git clone https://github.com/jamlam/mbp-16.1-linux-wifi.git
-    cd mbp-16.1-linux-wifi.git
-    makepkg -si
-    ```
-
--   For non arch distributions follow the [Ubuntu Building Guide](https://wiki.t2linux.org/distributions/ubuntu/building/). Make
-    sure to use [mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
-    instead of [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset in step 3 however.
+Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile). Make
+sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
+instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset repository however.
 
 Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
 **use the firmware files from macOS** (as stated in a Note on the page) and not from a fileserver.
