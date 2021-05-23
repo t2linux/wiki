@@ -23,10 +23,11 @@ In general you can find most of the people involved on the [Linux on T2 Macs (20
 Different distributions are maintained by different people in their own repositories.
 Still more detailed or just different documentation about certain distributions might also be found [here](https://wiki.t2linux.org/distributions/manjaro/home/)
 
-- Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
-- Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
+- Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
+- Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
+- Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
 
 ## Kernel Modules
 
