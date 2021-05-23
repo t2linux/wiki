@@ -5,6 +5,7 @@ This page explains how to compile the linux-mbp-arch kernel on any distro, and a
 ## Compile
 
 To compile a kernel with the patches in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), run the following commands. You will need your distro's equivalent of these arch packages: `bc kmod libelf pahole cpio perl tar xz`
+
 ```bash
 git clone https://github.com/aunali1/linux-mbp-arch
 cd linux-mbp-arch
@@ -22,6 +23,7 @@ sudo _package-headers
 ## Install linux-mbp-arch binary on other distros without compiling
 
 You may need to change the version on the first line, if linux-mbp-arch has been updated.
+
 ```bash
 VER=5.11.22-1
 cd /
@@ -39,20 +41,24 @@ You probably want to be able to install and uninstall linux-mbp with your packag
 ### Building the kernel a custom directory
 
 Before running the commands in [Compile](#compile), set the `pkgdir` environment variable:
+
 ```bash
 pkgdir=$PWD/pkg
 mkdir pkg
 ```
+
 You can then run the commands in [Compile](#compile) and it will be installed to that folder.
 
 ### Extracting the linux-mbp-arch package to a custom directory
 
 Follow [the commands here](#install-linux-mbp-arch-binary-on-other-distros-without-compiling), **but** skip `cd /`, and instead create and enter the `pkg` directory:
+
 ```
 mkdir pkg
 cd pkg
 pkgdir=$PWD
 ```
+
 Then run the rest of the commands in that section.
 
 ### Creating a package
@@ -60,6 +66,7 @@ Then run the rest of the commands in that section.
 The process for this will depend on which package manager your distro uses.
 
 Debian based systems:
+
 ```
 cd $pkgdir
 mkdir DEBIAN
@@ -70,4 +77,5 @@ Architecture: amd64
 EOF
 dpkg -b . linux-mbp.deb
 ```
+
 You can then install `linux-mbp.deb`.
