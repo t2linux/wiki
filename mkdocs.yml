@@ -44,6 +44,7 @@ nav:
           - Audio: guides/audio-config.md
           - Uninstall: guides/uninstall.md
           - Fan: guides/fan.md
+          - Kernel: guides/kernel.md
     - Distributions:
           - Arch:
                 - Installation: distributions/arch/installation.md
