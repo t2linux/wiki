@@ -48,7 +48,6 @@ nav:
     - Distributions:
           - Arch:
                 - Installation: distributions/arch/installation.md
-                - Building: distributions/arch/building.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
                 - Building: distributions/manjaro/building.md
@@ -59,7 +58,6 @@ nav:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
-                - Building: distributions/ubuntu/building.md
 
 extra_css:
     - assets/stylesheets/colors.css
