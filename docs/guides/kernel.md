@@ -19,7 +19,7 @@ pkgdir=/
 
 ## Compile
 
-To compile a kernel with the patches in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), run the following commands. You will need your distro's equivalent of these arch packages: `bc kmod libelf pahole cpio perl tar xz`
+To compile a kernel with the patches in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), run the following commands. You will need your distro's equivalent of these arch packages `bc kmod libelf pahole cpio perl tar xz` respectively `build-essential libncurses-dev libssl-dev flex bison` on ubuntu.
 
 ```bash
 git clone https://github.com/aunali1/linux-mbp-arch
