@@ -2,7 +2,7 @@
 
 This page explains how to compile or install linux-mbp-arch kernel and headers on non arch based distros. If you you are on an arch based distro, refer to [this section](#arch-based-systems-pacman). You may want to put this files into a package, so that you can manage the kernel files with your package manager. There is [some guidance](#packaging-the-kernel) about this, but the process is differs between package managers. If you have issues, make sure you are running the commands here with `bash`.
 
-Before begining, set the directory that you want to install to. 
+Before begining, set the directory that you want to install to.
 
 If you want to install the kernel with a package manager:
 
@@ -66,7 +66,6 @@ EOF
 dpkg -b . linux-mbp.deb
 sudo apt install linux-mbp.deb
 ```
-
 
 ### Arch based systems (pacman)
 
