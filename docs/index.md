@@ -7,7 +7,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 
 # Warnings
 
-- Kernel versions `5.8.x` and `5.9.x` are considered in-development builds and should not be used due to issues from within the kernel and the init system. Currently only well tested are versions `5.7.19` and `5.11.x`, which reached end of life as well as the stable `5.10.x`, which will be supported by the Linux maintainers until December 2026.
+- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. For a list of stable releases, see the releases (those not marked as a pre-release) in [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases). Keep in mind that those releases might very well be end of life, refer to [the kernel version history](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y)
 - It is highly recommended that you use the stock Apple boot manager for all distributions, other boot managers like rEFInd have been known to cause issues.
 
 # Getting started
