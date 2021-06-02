@@ -46,6 +46,7 @@ nav:
           - Fan: guides/fan.md
           - Kernel: guides/kernel.md
     - Distributions:
+          - Overview: distributions/overview.md
           - Arch:
                 - Installation: distributions/arch/installation.md
           - Manjaro:
