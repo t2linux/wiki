@@ -50,6 +50,8 @@ Make sure to keep the wifi files, as well as any other files you might want to a
 
 You also need to make some space on your harddrive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40 GB should be fine for a base installation.
 
+To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
+
 If you distribution needs a connection to the internet while installing, make sure to prepare an ethernet cable, wifi adapter or
 phone for tethering. If non of those are an option but your model has wifi support, you can also follow the On Linux steps of the wifi
 guide on your live environment. Keep in mind that in that case you will also still follow the guide on your actual install after exiting
