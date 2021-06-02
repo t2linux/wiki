@@ -26,7 +26,7 @@ ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
 t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress archinstall script.
-Keep in mind however that the whole process is text based.
+Keep in mind however that the whole process is done in the command line.
 
 Manjaro has a more guided install experience, with a graphical installer and multiple prebuild isos for different desktop environments.
 
