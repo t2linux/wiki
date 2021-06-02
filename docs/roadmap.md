@@ -63,6 +63,8 @@ If you want to triple boot with Windows, read the instructions on in the [triple
 
 Now follow the installation guide of your specific distribution.
 
+This wiki provides a set of such guides for different distributions, which can be found [here](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use has such a guide, its recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor.
+
 ## Configuring the Installation
 
 After successfully booting into your new installation, you will need to configure a few things.

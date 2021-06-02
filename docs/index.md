@@ -21,7 +21,7 @@ In general you can find most of the people involved on the [Linux on T2 Macs (20
 ## Distributions
 
 Different distributions are maintained by different people in their own repositories.
-Still more detailed or just different documentation about certain distributions might also be found [here](https://wiki.t2linux.org/distributions/manjaro/home/)
+If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), its recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor.
 
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
