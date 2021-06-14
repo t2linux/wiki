@@ -75,8 +75,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
-    > Note: `iwd` version 1.14 is known to cause issues, although until now only on arch based distributions. If you have this version,
-    please refer to your distribution's documentation for installing 1.13
+    > Note: `iwd` versions 1.14 and 1.15 are known to cause issues, although until now only on arch based distributions. If you have one of those versions, please refer to your distribution's documentation for installing 1.13
 
 6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
