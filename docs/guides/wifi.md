@@ -101,7 +101,10 @@ MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kerne
 
 Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile). Make
 sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
-instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset repository however.
+instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset repository however. If you don't want to compile the kernel yourself (it takes a few hours to
+compile), there are precompiled kernels for [ubuntu/debian](https://github.com/Redecorating/mbp-ubuntu-kernel/releases)
+and [arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases). mbp-fedora and
+mbp-nixos currently use this patch.
 
 Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
 **use the firmware files from macOS** (as stated in a Note on the page) and not from a fileserver.
