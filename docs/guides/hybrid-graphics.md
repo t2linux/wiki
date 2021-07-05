@@ -6,8 +6,8 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 ## Issues
 
-1. Resume after suspend is broken, as the GMUX (graphics multiplexer chip) doesn't connect the iGPU to the display after resuming. For this to be fixed, the method that the t2 chip uses to control GMUX needs to be determined (likely through SMC keys). The extra battery life may make this a worthwhile tradeoff (about 3 hours to almost 6 hours on a 16,1)
-2. Sometimes when playing games (i.e. tabletop simulator, genshin impact login screen), system crashes occur, the error report macOS shows calls it a [CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941). Switching back to the dGPU fixes this.
+1. Resume after suspend is broken, as the GMUX (graphics multiplexer chip) doesn't connect the iGPU to the display after resuming. For this to be fixed, the method that macOS uses to make the t2 chip control GMUX needs to be determined (likely through SMC keys or ACPI). The extra battery life may make this a worthwhile tradeoff (about 3 hours to almost 6 hours on a 16,1)
+2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" probem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument.
 
 # Enabling the iGPU
 
