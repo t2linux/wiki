@@ -28,15 +28,13 @@ Arch Linux probably has the most documentation, both officially for the whole pr
 t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress archinstall script.
 Keep in mind however that the whole process is done in the command line.
 
-Manjaro has a more guided install experience, with a graphical installer and multiple prebuild isos for different desktop environments.
+Manjaro has a more guided install experience, with a graphical installer and multiple prebuild isos for different desktop environments. Note that Manjaro currently only has 5.7.19 as the latest kernel version. The support period for 5.7.x ended in August 2020.
+You could install the linux-mbp-arch kernel, which is updated, by following step 8 of the [arch install guide](https://wiki.t2linux.org/distributions/arch/installation/), and `sudo pacman -S linux-mbp linux-mbp-headers`.
 
 Ubuntu also has a grahical installer. Additionally, less post configuration work is required as some kernel modules are getting
 installed automatically.
 
 Fedora also has a prebuild iso.
-
-Note that with the expection of Arch, all distributions currently only have 5.7.19 as the latest kernel version that is considered stable. The support period for 5.7.x ended in August 2020.
-You could [upgrade the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/)
 
 If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation)
 
