@@ -68,7 +68,7 @@ Create partitions with Disk Utility:
 
 If you are using an interactive installer:
 
-1. Set the `EFI2` partition to be mounted at `/boot/efi`, don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set to be mounted at `/boot/efi` by default, if it was then set it to not be used.
+1. Set the `EFI2` partition to be mounted at `/boot/efi` and set it as "ESP"/"Boot"/"EFI System Partition". Don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set by default to be used as the "EFI System Partition". On Ubuntu you may need to right click on nvme0n1p1, click edit/change, and unset it as "EFI System Partition".
 2. Your main partition that were formatted as macOS Extended/HFS+ can be mounted at `/`.
 3.  If it fails to install the bootloader, open a terminal:
 
@@ -77,7 +77,7 @@ If you are using an interactive installer:
     3. `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 
 4. There will now be an `EFI Boot` option in the macOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
-5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted by checking the output of `lsblk`. If it is, then edit `/etc/fstab` and remove it.
+5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted.
 
 If you are doing it manually:
 
