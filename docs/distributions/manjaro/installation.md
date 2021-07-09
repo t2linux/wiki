@@ -14,15 +14,11 @@
 2. Flash your iso to a USB Stick, If you want a easy way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). For a more command line way of doing this, use dd.
 3. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
 
-   a. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.  
-
-   b. When you see the macOS Utilities window, choose Utilities > Startup Security Utility from the menu bar.
-
-   c. When you're asked to authenticate, click Enter macOS Password, then choose an administrator account and enter its password.
-
-   d. Set the first option to "No Security", and the second to "Allow booting from External Media".
-
-   e. Reboot your Mac.
+    1. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.
+    2. When you see the macOS Utilities window, choose Utilities > Startup Security Utility from the menu bar.
+    3. When you're asked to authenticate, click Enter macOS Password, then choose an administrator account and enter its password.
+    4. Set the first option to "No Security", and the second to "Allow booting from External Media".
+    5. Reboot your Mac.
 
 4. Once Secure boot is diabled, fully shutdown your Computer and Power it on again whilst holding the Option (⌥) key.
 5. Select the yellow EFI System using the arrow keys and hit enter.
