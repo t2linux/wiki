@@ -6,14 +6,14 @@ Before begining, set the directory that you want to install to.
 
 If you want to install the kernel with a package manager:
 
-```bash
+```sh
 pkgdir=$PWD/pkg
 mkdir pkg
 ```
 
 If you want to install to your current system directly (the kernel will not be managed by your package manager):
 
-```bash
+```sh
 pkgdir=/
 ```
 
@@ -21,7 +21,7 @@ pkgdir=/
 
 To compile a kernel with the patches in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), run the following commands. You will need your distro's equivalent of these arch packages `bc kmod libelf pahole cpio perl tar xz` respectively `build-essential libncurses-dev libssl-dev flex bison` on ubuntu.
 
-```bash
+```sh
 git clone https://github.com/aunali1/linux-mbp-arch
 cd linux-mbp-arch
 source PKGBUILD
@@ -39,7 +39,7 @@ _package-headers # use sudo if installing directly
 
 You may need to change the version on the first line if linux-mbp-arch has been updated. This all needs to be run with `sudo` if you are installing directly.
 
-```bash
+```sh
 VER=5.11.22-1
 cd $pkgdir
 wget https://dl.t2linux.org/archlinux/mbp/x86_64/linux-mbp-$VER-x86_64.pkg.tar.zst
@@ -55,7 +55,7 @@ The process for this will depend on which package manager your distro uses. If y
 
 ### Debian based systems (apt)
 
-```
+```sh
 cd $pkgdir
 mkdir DEBIAN
 cat << EOF > DEBIAN/control
@@ -73,7 +73,7 @@ You do not need to follow the other instructions on this page.
 
 To compile:
 
-```bash
+```sh
 git clone https://github.com/aunali1/linux-mbp-arch
 cd linux-mbp-arch
 makepkg -si

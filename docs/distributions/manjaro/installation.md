@@ -25,7 +25,7 @@
 6. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
 7. After booting into Manjaro, open a terminal window and run the following commands:
 
-    ```bash
+    ```sh
     systemctl start systemd-timesyncd.service
     sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
     sudo pacman -R calamares
@@ -34,7 +34,7 @@
 
     In case you face error stating 'Calamares initialisation failed', turn off your Mac and follow step 5 and 6 again. Then open a terminal window and run these commands instead of the one given above :-
 
-    ```bash
+    ```sh
     systemctl start systemd-timesyncd.service
     sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
     sudo pacman -R calamares

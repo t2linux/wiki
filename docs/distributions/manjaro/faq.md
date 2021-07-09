@@ -6,7 +6,7 @@ If you want both Manjaro and Windows installed on your system, refer to this gui
 
 When you update the system, you may recieve errors about my key being corrupted, if that occurs open a terminal and run this
 
-```
+```sh
 sudo pacman-key --recv-key 2BA2DFA128BBD111034F7626C7833DB15753380A --keyserver keyserver.ubuntu.com
 ```
 
@@ -14,6 +14,6 @@ sudo pacman-key --recv-key 2BA2DFA128BBD111034F7626C7833DB15753380A --keyserver 
 
 Run this in your terminal:
 
-```
+```sh
 sudo bash -c "echo 2 > /sys/class/input/*/device/fnmode"
 ```

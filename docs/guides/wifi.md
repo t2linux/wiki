@@ -49,7 +49,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 1. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
 2. Check that the files are in place with `ls -l /lib/firmware/brcm | grep 4364`. The output should look something like this
 
-    ```
+    ```plain
     -rw-r--r--. 1 root root   12860 Mar  1 12:44 brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt
     -rw-r--r--. 1 root root  922647 Mar  1 12:44 brcmfmac4364-pcie.bin
     -rw-r--r--. 1 root root   33226 Mar  1 12:44 brcmfmac4364-pcie.clm_blob
@@ -65,7 +65,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output shoud look similar to this
 
-    ```
+    ```log
     May 09 11:55:54 hostname kernel: usbcore: registered new interface driver brcmfmac
     May 09 11:55:54 hostname kernel: brcmfmac 0000:03:00.0: enabling device (0000 -> 0002)
     May 09 11:55:54 hostname kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac4364-pcie for chip BCM4364/3
@@ -86,7 +86,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
 7. Set iwd to run on boot with the following commands (assuming that you are using systemd)
 
-    ```bash
+    ```sh
     sudo systemctl enable iwd
     sudo systemctl start iwd
     sudo systemctl restart NetworkManager

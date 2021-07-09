@@ -24,7 +24,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 3.  Reboot to Linux, you should see this at boot (the GPUs listed might be different):
 
-    ```
+    ```plain
     ================== apple_set_os loader v0.5 ==================
     SetOsProtocol Handle Count: 1
     AppleSetOs will be loaded, press Z to disable.
@@ -52,7 +52,7 @@ If you want to use the iGPU on Linux but not on Windows, you can reset the nvram
 
 1. If you have it, remove `efi=noruntime` from `/etc/default/grub`, regenerate your grub config (`sudo grub-mkconfig -o /boot/grub/grub.cfg`), and reboot. Put this line in `/etc/fstab` to make efivars/nvram read only instead of deactivated:
 
-   ```
+   ```plain
    efivarfs                     /sys/firmware/efi/efivars efivarfs ro,remount 0 0
    ```
 

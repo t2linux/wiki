@@ -8,13 +8,13 @@ In the event that you are running `overlay`, [Look at this docker documentation]
 
 **Quick Docker Install Script - For Linux**
 
-```
+```sh
 sh -c "$(curl -fsSL "https://raw.githubusercontent.com/JPyke3/mbp-manjaro/master/build-in-docker.sh")"
 ```
 
 **Docker Command**
 
-```
+```sh
 docker run --privileged \
           -v ~/manjaro-mbp-iso:/root/out \
           -v {PATH-TO-REPO}:/root/iso-profiles\
@@ -39,38 +39,38 @@ docker run --privileged \
 
 First Install Manjaro Tools:
 
-```
+```sh
 pamac install manjaro-tools-iso git
 ```
 
 Clone the repository to your home directory
 
-```
+```sh
 git clone https://github.com/JPyke3/mbp-manjaro ~/iso-profiles
 ```
 
 run a command corrisponding to your preferred version of Manjaro:
 
-```
+```sh
 buildiso -f -p {edition} -k linux57-mbp
 ```
 
 *Available Options are:*
 
-```
-architect  gnome  kde nxd  xfce awesome  bspwm-mate  cinnamon  i3    lxqt  openbox  webdad bspwm    budgie      deepin    lxde  mate  ukui
+```plain
+architect gnome kde nxd xfce awesome bspwm-mate cinnamon i3 lxqt openbox webdad bspwm budgie deepin lxde mate ukui
 ```
 
 ## File Locations
 
 Navigate to the directory for your iso file. If Using a official edition go to:
 
-```
+```sh
 cd /var/cache/manjaro-tools/iso/manjaro/{NAME_OF_EDITION}/20.0.3/
 ```
 
 If using a community edition to:
 
-```
+```sh
 cd /var/cache/manjaro-tools/iso/community/{NAME_OF_EDITION}/20.0.3/
 ```

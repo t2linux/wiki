@@ -17,7 +17,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
         -   Create a `dkms.conf` file in `/usr/src/apple-bce-r183.c884d9c` and put in the following:
 
-            ```
+            ```conf
             PACKAGE_NAME="apple-bce"
             PACKAGE_VERSION="r183.c884d9c"
             MAKE[0]="make KVERSION=$kernelver"
@@ -36,7 +36,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
 4. Load the modules into the kernel
 
-    ```
+    ```sh
     sudo modprobe apple_bce
     sudo modprobe apple_ib_tb
     sudo modprobe apple_ib_als
@@ -46,7 +46,7 @@ The Touchbar and keyboard should work, for audio, you'll need some config files,
 
 # Make modules load on boot
 
-```
+```sh
 echo "apple-bce
 apple-ib_tb
 apple-ib-als
