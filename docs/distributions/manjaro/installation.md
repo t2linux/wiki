@@ -15,28 +15,47 @@
 3. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
 
    a. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.  
-  
+
    b. When you see the macOS Utilities window, choose Utilities > Startup Security Utility from the menu bar.
-  
+
    c. When you're asked to authenticate, click Enter macOS Password, then choose an administrator account and enter its password.
-  
+
    d. Set the first option to "No Security", and the second to "Allow booting from External Media".
-  
+
    e. Reboot your Mac.
-  
+
 4. Once Secure boot is diabled, fully shutdown your Computer and Power it on again whilst holding the Option (⌥) key.
 5. Select the yellow EFI System using the arrow keys and hit enter.
 6. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
 7. After booting into Manjaro, open a terminal window and run the following commands:
 
-    ```
+    ```bash
     systemctl start systemd-timesyncd.service
     sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
     sudo pacman -R calamares
     sudo pacman -S calamares-mbp
     ```
 
-8. Open the installer and proceed normally until you hit the partitioning stage
+    In case you face error stating 'Calamares initialisation failed', turn off your Mac and follow step 5 and 6 again. Then open a terminal window and run these commands instead of the one given above :-
+
+    ```bash
+    systemctl start systemd-timesyncd.service
+    sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
+    sudo pacman -R calamares
+    sudo pacman -Sy cmake extra-cmake-modules pkgconfig
+    sudo pacman -Sy lib32-glibc gcc
+    wget https://github.com/KDE/kpmcore/archive/v4.2.0.tar.gz
+    tar -xvf v4.2.0.tar.gz
+    cd kpmcore-4.2.0
+    mkdir build
+    cd build
+    cmake ..
+    sudo make install
+    sudo pacman -Sy calamares-mbp
+    sudo calamares
+    ```
+
+8. Open the installer and proceed normally until you hit the partitioning stage. (Installer will automatically start if you have used the second set of commands given above)
 9. Click Manual Partitioning
 10. Click on `/dev/nvme0n1p1` then press edit at the bottom of the install window, change the Change the Mount Point: `/boot/efi`, after that click okay.
 11. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (Double check this, the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the macOS partition.
