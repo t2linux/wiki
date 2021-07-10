@@ -23,13 +23,13 @@
 4. Once Secure boot is diabled, fully shutdown your Computer and Power it on again whilst holding the Option (⌥) key.
 5. Select the yellow EFI System using the arrow keys and hit enter.
 6. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
-7. After booting into Manjaro, open a terminal window and run the following commands:
+7. After booting into Manjaro, open a terminal window and run the following commands. If asked to enter a password, use `manjaro` as the password.
 
     ```sh
     systemctl start systemd-timesyncd.service
     sudo sed -i 's/https:\/\/jacobpyke.xyz/https:\/\/mbp-repo.jacobpyke.xyz/' /etc/pacman.conf
     sudo pacman -R calamares
-    sudo pacman -S calamares-mbp
+    sudo pacman -Sy calamares-mbp
     ```
 
     In case you face error stating 'Calamares initialisation failed', turn off your Mac and follow step 5 and 6 again. Then open a terminal window and run these commands instead of the one given above :-
@@ -51,8 +51,8 @@
     sudo calamares
     ```
 
-8. Open the installer and proceed normally until you hit the partitioning stage. (Installer will automatically start if you have used the second set of commands given above)
-9. Click Manual Partitioning
+8. Open the installer and proceed normally until you hit the partitioning stage. (Installer will automatically start if you have used the second set of commands given above).
+9. Click Manual Partitioning.
 10. Click on `/dev/nvme0n1p1` then press edit at the bottom of the install window, change the Change the Mount Point: `/boot/efi`, after that click okay.
 11. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (Double check this, the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the macOS partition.
 12. Delete the partition you created before, this is usually mounted to `/dev/nvme0n1p3`.
@@ -62,6 +62,6 @@
     * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click okay.
     * Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
 
-14. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off
-15. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot
+14. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off.
+15. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot.
 16. Welcome to Manjaro :)
