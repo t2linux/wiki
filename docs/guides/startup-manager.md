@@ -10,9 +10,10 @@ The steps to perform the above tasks vary as per the way you have installed linu
 
 In this case, boot into macOS, open a terminal window and run :-
 
-  `bless --folder /Volumes/EFI/EFI/BOOT --label <YOUR DISTRO'S NAME>`. 
+`bless --folder /Volumes/EFI/EFI/BOOT --label <YOUR DISTRO'S NAME>`.
 
-  Replace `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu, run 
+Replace `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu, run :-
+
 `bless --folder /Volumes/EFI/EFI/BOOT --label Ubuntu`
 
 ## Setting label in case you are using the same EFI partition for Windows and Linux.
@@ -29,7 +30,8 @@ In this case, boot into macOS, open a terminal window and run :-
 
 `bless --folder /Volumes/<NAME OF SEPERATE EFI PARTITION>/EFI/BOOT --label <YOUR DISTRO'S NAME>`.
 
-  Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu and you set the label to `EFI2`, run 
+Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu and you set the label to `EFI2`, run :-
+
 `bless --folder /Volumes/EFI2/EFI/BOOT --label Ubuntu`
 
 # Setting Linux startup disk as the default startup disk
