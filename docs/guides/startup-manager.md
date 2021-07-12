@@ -10,9 +10,7 @@ The steps to perform the above tasks vary as per the way you have installed linu
 
 In this case, boot into macOS, open a terminal window and run :-
 
-
 `bless --folder /Volumes/EFI/EFI/BOOT --label <YOUR DISTRO'S NAME>`. 
-
 
 Replace `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu, run 
 `bless --folder /Volumes/EFI/EFI/BOOT --label Ubuntu`
@@ -29,9 +27,7 @@ More details about this can be found on the [triple boot guide](https://wiki.t2l
 
 In this case, boot into macOS, open a terminal window and run :-
 
-
 `bless --folder /Volumes/<NAME OF SEPERATE EFI PARTITION>/EFI/BOOT --label <YOUR DISTRO'S NAME>`.
-
 
 Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu and you set the label to `EFI2`, run 
 `bless --folder /Volumes/EFI2/EFI/BOOT --label Ubuntu`
