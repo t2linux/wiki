@@ -40,9 +40,9 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you are using a compiled kernel, then navigate to [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
     > Note: In some cases, like when you are unable to get the firmware from above repos, you might need to use the firmware that came with your macOS installation. You will         find it in `/usr/share/firmware/wifi`.
-    
+
     > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the     alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
-    
+
     > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names.
 
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
