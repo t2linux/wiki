@@ -21,6 +21,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 1. Run both `ioreg -l | grep RequestedFiles` (the names of the firmware files required by your model) and `system_profiler SPHardwareDataType | grep "Model Identifier"` (your model identifier) in a terminal and note down the output, you will need both values in the next steps.
 2. If your model identifier is 16,1 you may get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. On getting the correct files navigate to [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section. If you unable to get working firmware files from here then follow the instructions given for other models.
 3. For other models goto [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
+
 > Note: If you are unable to get the firmware even after following guide for other models, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os), especially the first note there.
 
 ## On any OS
@@ -38,9 +39,9 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
     Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you are using a compiled kernel, then navigate to [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
-    > Note: In some cases, like when you are unable to get the firmware from above repos, you might need to use the firmware that came with your macOS installation. You will find it in `/usr/share/firmware/wifi`.
+    > Note: In some cases, like when you are unable to get the firmware from above repos, you might need to use the firmware that came with your macOS installation. You will         find it in `/usr/share/firmware/wifi`.
     
-    > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
+    > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the     alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
     
     > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names.
 
