@@ -19,8 +19,10 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 ## On macOS
 
 1. Run both `ioreg -l | grep RequestedFiles` (the names of the firmware files required by your model) and `system_profiler SPHardwareDataType | grep "Model Identifier"` (your model identifier) in a terminal and note down the output, you will need both values in the next steps.
+2. If your model identifier is 16,1 you may get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. On getting the correct files navigate to [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section. If you unable to get working firmware files from here then follow the instructions given for other models.
+3. For other models goto [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
 
-> Note: If explicitly stated, like in the 16,1 / 16,2 instructions, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os), especially the first note there.
+> Note: If you are unable to get the firmware even after following guide for other models, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os), especially the first note there.
 
 ## On any OS
 
@@ -35,10 +37,13 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     })
     ```
 
-    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
+    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you are using a compiled kernel, then navigate to [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
-    > Note: In some cases, like when using the custom kernel for 16,1 models, you might need to use the firmware that came with your macOS installation. You will find it in `/usr/share/firmware/wifi`
-    > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names
+    > Note: In some cases, like when you are unable to get the firmware from above repos, you might need to use the firmware that came with your macOS installation. You will         find it in `/usr/share/firmware/wifi`.
+
+    > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the     alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
+
+    > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names.
 
     - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
     - Do the same for the `.clmb` file and rename it to `brcmfmac4364-pcie.clm_blob`.
@@ -47,7 +52,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 ## On Linux
 
 1. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
-2. Check that the files are in place with `ls -l /lib/firmware/brcm | grep 4364`. The output should look something like this
+2. Check that the files are in place with `ls -l /lib/firmware/brcm | grep 4364`. Replace 4364 with you chipset's identifier. The output should look something like this
 
     ```plain
     -rw-r--r--. 1 root root   12860 Mar  1 12:44 brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt
@@ -59,8 +64,8 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 
     > Note: From this point on the instructions might be different for a distribution that you are trying to install.
 
-    > Note: Using iwd is technically not needed for using wifi, however wpa2 is unstable without it.
-    Running the command from step 3 would work for connecting to wpa2 networks as well but it would have to be
+    > Note: Using iwd is technically not needed for using wifi, however WPA2 is unstable without it.
+    Running the command from step 3 would work for connecting to WPA2 networks as well but it would have to be
     run every time before connecting to a network.
 
 4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output shoud look similar to this
@@ -84,7 +89,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     wifi.backend=iwd
     ```
 
-7. Set iwd to run on boot with the following commands (assuming that you are using systemd)
+7. Set iwd to run on boot with the following commands (assuming that you are using systemd).
 
     ```sh
     sudo systemctl enable iwd
@@ -92,7 +97,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     sudo systemctl restart NetworkManager
     ```
 
-If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`
+If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`.
 
 ## Custom Kernel for 16,1 / 16,2
 
@@ -102,8 +107,8 @@ MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kerne
 Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile). Make
 sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
 instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch) as the patchset repository however. If you don't want to compile the kernel yourself (it takes a few hours to
-compile), there are precompiled kernels for [ubuntu/debian](https://github.com/Redecorating/mbp-ubuntu-kernel/releases)
-and [arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases). mbp-fedora and
+compile), there are precompiled kernels for [Ubuntu/Debian](https://github.com/Redecorating/mbp-ubuntu-kernel/releases)
+and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases). mbp-fedora and
 mbp-nixos currently use this patch.
 
 Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
