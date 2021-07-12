@@ -61,7 +61,7 @@ It may be possible to skip steps 5-8 by doing the following command in macOS: `s
 
 Create partitions with Disk Utility:
 
-- Make a 200Mb FAT32 partition, call it something like `EFI2`
+- Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure there is no space in the label else you may face issues with the Startup Manager guide. Eg:- Do not use `EFI 2`.
 - Create your main partition(s) for Linux, make them macOS Extended/HFS+ to stop Bootcamp Installer from thinking they are Windows. These will be erased and reformatted by your installer.
 
 ### In your distro's installer
