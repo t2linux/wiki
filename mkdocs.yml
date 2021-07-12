@@ -45,6 +45,7 @@ nav:
           - Uninstall: guides/uninstall.md
           - Fan: guides/fan.md
           - Kernel: guides/kernel.md
+          - Startup Manager: guides/startup-manager.md
     - Distributions:
           - Overview: distributions/overview.md
           - Arch:
