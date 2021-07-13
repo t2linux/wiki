@@ -8,6 +8,25 @@ This page is a step by step guide to get wifi working on supported models.
 
 You can get your model using `system_profiler SPHardwareDataType | grep "Model Identifier"` on macOS or using `cat /sys/devices/virtual/dmi/id/product_name` on Linux
 
+| Model      | Chip | Revision | Islands  | Mojave FW | BigSurFW |
+|----------------|---------|---|----------|-----------|----------|
+| MacBookPro16,1 | BCM4364 | 4 | Bali     | No        | Yes      |
+| MacBookPro16,2 | BCM4364 | 4 | Trinidad | No        | Yes      |
+| MacBookPro16,3 | BCM4377 | ? | | | |
+| MacBookPro16,4 | BCM4364 | 4 | Bali?    | No        | Yes      |
+| MacBookPro15,1 | BCM4364 | 3 | Kauai    | Yes       | Yes      |
+| MacBookPro15,2 | BCM4364 | 3 | Maui, Kauai | Yes    | Yes      |
+| MacBookPro15,3 | BCM4364 | 3 | Kauai    | Yes       | Yes      |
+| MacBookPro15,4 | BCM4377 | ? | Formosa  | Yes       | Yes      |
+| MacBookAir9,1  | BCM4377 | 4 | Fiji     | No        | Yes      |
+| MacBookAir8,1  | BCM4355 | ? | Hawaii   | Yes       | Yes      |
+| MacBookAir8,2  | BCM43?? | ? | | | |
+| MacMini8,1     | BCM4364 | ? | | | |
+| MacPro7,1      | BCM43?? | ? | | | |
+| iMac20,1       | BCM43?? | ? | | | |
+| iMac20,2       | BCM43?? | ? | | | |
+| iMacPro1,1     | BCM43?? | ? | | | |
+
 - Did your device release with macOS Mojave or earlier initially?
     - If yes, is it a 15,4?
         - If yes, there is currently no support
