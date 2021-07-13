@@ -1,6 +1,6 @@
 # Introduction
 
-This guide shall help you perform 2 tasks. Firstly you shall be able to set the correct label for your Linux startup disk on Mac startup manager and replace the EFI Boot label. Secondly you shall be able to make Linux startup disk as the default startup disk in case you wish to do so.
+This guide shall help you perform 2 tasks. Firstly you shall be able to set the correct label for your Linux startup disk on Mac startup manager and replace the `EFI Boot label`. Secondly you shall be able to make Linux startup disk as the default startup disk in case you wish to do so.
 
 The steps to perform the above tasks vary as per the way you have installed Linux, and thus check out the guide under the heading that applies to your case.
 
@@ -40,8 +40,8 @@ Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the a
 
 In this case you will have to set the Windows startup disk as the default startup disk. It is recommended to follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the 'Change your startup disk for every startup' section.
 
-If this method is not working for you, then follow the instructions given in 'Case of seperate EFI partition for Linux as well as case of using the EFI partition available by default in Mac and are on a dual boot system' section, where you have to consider the Windows startup disk as the Linux startup disk.
+If this method is not working for you, then follow the instructions given in [Case of seperate EFI partition for Linux as well as case of using the EFI partition available by default in Mac and are on a dual boot system](https://wiki.t2linux.org/guides/startup-manager/#case-of-seperate-efi-partition-for-linux-as-well-as-case-of-using-the-efi-partition-available-by-default-in-mac-and-are-on-a-dual-boot-system) section, where you have to consider the Windows startup disk as the Linux startup disk.
 
-## Case of seperate EFI partition for Linux as well as case of using the EFI partition available by default in Mac and are on a dual boot system.
+## Case of seperate EFI partition for Linux as well as case of using the EFI partition available by default in Mac and are on a dual boot system
 
 In these cases, start your Mac and press and hold down the Option key. When the startup manager gets displayed, release the option key. Now press and hold the Control key and without releasing the Control key, boot into the Linux startup disk as you usually do. This will make it the default startup disk.
