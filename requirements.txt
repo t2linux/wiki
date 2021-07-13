@@ -2,4 +2,4 @@
 # To install them all run 'pip install -r requirements.txt' in the same directory
 
 mkdocs == 1.2.1
-mkdocs-material == 7.1.9
+mkdocs-material == 7.1.10
