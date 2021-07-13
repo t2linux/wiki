@@ -6,13 +6,13 @@ This page is a step by step guide to get wifi working on supported models.
 
 ## Is my model supported?
 
-You can get your model using `system_profiler SPHardwareDataType | grep "Model Identifier"` on macOS or using `cat /sys/devices/virtual/dmi/id/product_name` on Linux
+You can get your model using `system_profiler SPHardwareDataType | grep "Model Identifier"` on macOS or using `cat /sys/devices/virtual/dmi/id/product_name` on Linux. If unknown, the chip name can be found on macOS within the [folder name of your firmware files](https://wiki.t2linux.org/guides/wifi/#on-macos) (i.e. C-**4364**\_\_s-B3), or with `lspci -d '14e4:*'` on Linux.
 
 | Model      | Chip | Revision | Islands  | Mojave FW | BigSurFW |
 |----------------|---------|---|----------|-----------|----------|
 | MacBookPro16,1 | BCM4364 | 4 | Bali     | No        | Yes      |
 | MacBookPro16,2 | BCM4364 | 4 | Trinidad | No        | Yes      |
-| MacBookPro16,3 | BCM4377 | ? | | | |
+| MacBookPro16,3 | BCM4377 | ? | ?        | No?       | Yes?     |
 | MacBookPro16,4 | BCM4364 | 4 | Bali?    | No        | Yes      |
 | MacBookPro15,1 | BCM4364 | 3 | Kauai    | Yes       | Yes      |
 | MacBookPro15,2 | BCM4364 | 3 | Maui, Kauai | Yes    | Yes      |
@@ -20,20 +20,26 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 | MacBookPro15,4 | BCM4377 | ? | Formosa  | Yes       | Yes      |
 | MacBookAir9,1  | BCM4377 | 4 | Fiji     | No        | Yes      |
 | MacBookAir8,1  | BCM4355 | ? | Hawaii   | Yes       | Yes      |
-| MacBookAir8,2  | BCM43?? | ? | | | |
-| MacMini8,1     | BCM4364 | ? | | | |
-| MacPro7,1      | BCM43?? | ? | | | |
-| iMac20,1       | BCM43?? | ? | | | |
-| iMac20,2       | BCM43?? | ? | | | |
-| iMacPro1,1     | BCM43?? | ? | | | |
+| MacBookAir8,2  | BCM43?? | ? | ?        | Yes?      | Yes?     |
+| MacMini8,1     | BCM4364 | ? | ?        | Yes?      | Yes?     |
+| MacPro7,1      | BCM43?? | ? | ?        | ?         | Yes?     |
+| iMac20,1       | BCM43?? | ? | ?        | No?       | Yes?     |
+| iMac20,2       | BCM43?? | ? | ?        | No?       | Yes?     |
+| iMacPro1,1     | BCM43?? | ? | ?        | No?       | Yes?     |
 
-- Did your device release with macOS Mojave or earlier initially?
-    - If yes, is it a 15,4?
-        - If yes, there is currently no support
-        - If no, there is support
-- If no, is it a 16,1 or 16,2?
-    - If yes, there is support using a [self compiled kernel](https://wiki.t2linux.org/guides/wifi/#custom-kernel-for-161-162)
-    - If no, there is currently no support
+*if there is missing information for your model, please make a pr/issue to add it or mention this on the discord*
+
+Does my model have support?
+
+- BCM4355:
+    - Has Mojave FW, works with normal mbp wifi patches.
+    - Untested with Big Sur firmware and alternate wifi patches.
+- BCM4364
+    - If there is Mojave FW, it works with normal mbp wifi patches
+    - If there's only BigSur FW, you will need a kernel with [alternate wifi patches](https://wiki.t2linux.org/guides/wifi/#custom-kernel-for-161-162)
+- BCM4377:
+    - If there is Mojave FW, [this kernel patch](https://gist.github.com/FelixFrog/5d83fb96d97fbcc012a76ab109d170e9) may work, but it is not yet tested with a model that has Mojave FW.
+    - If there is only Catalina firmware, the aforementioned patch can scan for networks but not connect. There is currently no wifi support.
 
 ## On macOS
 
@@ -41,7 +47,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 2. If your model identifier is 16,1 you may get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. On getting the correct files navigate to [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section. If you unable to get working firmware files from there then follow the instructions given for other models.
 3. For other models go to [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
 
-> Note: If you are unable to get the firmware even after following guide for other models, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section, especially the first note there.
+> Note: If you are unable to get the firmware even after following guide for other models, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
 
 ## On any OS
 
@@ -56,9 +62,7 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
     })
     ```
 
-    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you are using a compiled kernel, then navigate to [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
-
-    > Note: In some cases, like when you are unable to get the firmware from above repos, you might need to use the firmware that came with your macOS installation. You will         find it in `/usr/share/firmware/wifi`.
+    Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you need Big Sur Firmware, then it is avaliable in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
     > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the     alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
 
@@ -111,17 +115,16 @@ You can get your model using `system_profiler SPHardwareDataType | grep "Model I
 7. Set iwd to run on boot with the following commands (assuming that you are using systemd).
 
     ```sh
-    sudo systemctl enable iwd
-    sudo systemctl start iwd
+    sudo systemctl enable --now iwd
     sudo systemctl restart NetworkManager
     ```
 
-If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`.
+If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
 
 ## Custom Kernel for 16,1 / 16,2
 
 As mentioned in [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) there is wifi support for the
-MacBook Pro 16,1 and 16,2. This is achived through a patchset for a custom kernel.
+MacBook Pro 16,1, 16,2 and 16,4, with the BCM4364 chip and only Big Sur Firmware available. This is achived through using different kernel patches by Corellium for [wifi support on M1 Macs](https://github.com/corellium/linux-m1/commit/02ad06fbf2b35916ee329a9bb80d73840d6e2973), which also works on these intel models.
 
 Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile). Make
 sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
@@ -131,4 +134,4 @@ and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/rel
 mbp-nixos currently use this patch.
 
 Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
-**use the firmware files from macOS** (as stated in a Note on the page) and not from a fileserver.
+**use the firmware files from macOS / Big Sur** (as stated in a Note on the page), as this patch makes the driver require Big Sur firmware.
