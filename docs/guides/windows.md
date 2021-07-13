@@ -92,13 +92,3 @@ If you are doing it manually:
 1. If there are partitions labeled as `Microsoft Basic Data`, Bootcamp Assistant will think you have Windows installed. Use `sudo cfdisk /dev/nvme0n1` to change your Linux partitions to `Linux Filesystem` or whatever is appropriate.
 2. If your second EFI partition is labeled as `EFI System`, you'll need to use `cfdisk` again to make it not that, as the Windows installer fails if there are two.
 3. Bootcamp should install Windows normally. If you put your Linux bootloader on `/dev/nvme0n1p1`, Windows will replace it, and that's why a second EFI partition is ideal.
-
-# Quality of life things
-
-## Giving Options in macOS Startup Manager Custom Icons
-
-Put an `icns` file with your desired icon in the top directory of the disk that the bootloader of the menu entry is on, and call it `.VolumeIcon.icns`.
-
-## Setting your Linux Partitions as `Linux Filesystem` type
-
-Use `sudo cfdisk /dev/nvme0n1` and change the type of your Linux partitions. This will show up when you do `diskutil list` in macOS.
