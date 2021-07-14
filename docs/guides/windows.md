@@ -77,7 +77,7 @@ If you are using an interactive installer:
     3. `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 
 4. There will now be an `EFI Boot` option in the macOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
-5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted.
+5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted. If you want a more descriptive guide regarding this, go [here](https://github.com/AdityaGarg8/efi-mount-bug-fix).
 
 If you are doing it manually:
 
