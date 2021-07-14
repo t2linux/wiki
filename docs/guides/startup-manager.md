@@ -36,7 +36,9 @@ Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the a
 
 # Setting the boot option icons in macOS Startup Manager
 
-Put an `icns` image file with your desired icon in the top directory of the disk that the bootloader of the menu entry is on, and call it `.VolumeIcon.icns`. It will now appear as that disk's boot option's icon.
+In case you are using the same EFI partition for Windows and Linux, then your Windows startup disk already has an icon. Thus you needn't set any boot icon.
+
+In other cases, put an `icns` image file with your desired icon in the top directory of the disk that the bootloader of the menu entry is on, and call it `.VolumeIcon.icns`. It will now appear as that disk's boot option's icon.
 
 # Setting Linux startup disk as the default startup disk
 
