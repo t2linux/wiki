@@ -4,7 +4,7 @@ This page is a step by step guide to get wifi working on supported models.
 
 **Note that currently not all models have support, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported).**
 
-## Is my model supported?
+## something
 
 - You can check what model you have like this:
     - On macOS: `system_profiler SPHardwareDataType | grep "Model Identifier"`
@@ -13,37 +13,45 @@ This page is a step by step guide to get wifi working on supported models.
     - On macOS: `ioreg -l | grep RequestedFiles`, the number will be within the folder names, i.e. "C-`4364`\_\_s-B3" (Your model's island will also be in this command's output).
     - On Linux: `lspci -d '14e4:*'`, this will also tell you the "Rev"/Revision.
 
-| Model      | Chip | Revision | Islands  | Mojave FW | BigSurFW |
-|----------------|---------|---|----------|-----------|----------|
-| MacBookPro16,1 | BCM4364 | 4 | Bali     | No        | Yes      |
-| MacBookPro16,2 | BCM4364 | 4 | Trinidad | No        | Yes      |
-| MacBookPro16,3 | BCM4377 | ? | ?        | No?       | Yes?     |
-| MacBookPro16,4 | BCM4364 | 4 | Bali?    | No        | Yes      |
-| MacBookPro15,1 | BCM4364 | 3 | Kauai    | Yes       | Yes      |
-| MacBookPro15,2 | BCM4364 | 3 | Maui, Kauai | Yes    | Yes      |
-| MacBookPro15,3 | BCM4364 | 3 | Kauai    | Yes       | Yes      |
-| MacBookPro15,4 | BCM4377 | ? | Formosa  | Yes       | Yes      |
-| MacBookAir9,1  | BCM4377 | 4 | Fiji     | No        | Yes      |
-| MacBookAir8,1  | BCM4355 | ? | Hawaii   | Yes       | Yes      |
-| MacBookAir8,2  | BCM43?? | ? | ?        | Yes?      | Yes?     |
-| MacMini8,1     | BCM4364 | ? | ?        | Yes?      | Yes?     |
-| MacPro7,1      | BCM43?? | ? | ?        | ?         | Yes?     |
-| iMac20,1       | BCM43?? | ? | ?        | No?       | Yes?     |
-| iMac20,2       | BCM43?? | ? | ?        | No?       | Yes?     |
-| iMacPro1,1     | BCM43?? | ? | ?        | No?       | Yes?     |
+| Model      | Chip | Revision | Islands  | Patchset    |
+|----------------|---------|---|----------|-------------|
+| MacBookPro16,1 | BCM4364 | 4 | Bali     | Corellium   |
+| MacBookPro16,2 | BCM4364 | 4 | Trinidad | Corellium   |
+| MacBookPro16,3 | BCM4377 | 4?| Tahiti?  | Corellium?[\*](#bcm4377)|
+| MacBookPro16,4 | BCM4364 | 4 | Bali?    | Corellium   |
+| MacBookPro15,1 | BCM4364 | 3 | Kauai    | Aunali1     |
+| MacBookPro15,2 | BCM4364 | 3 | Maui     | Aunali1     |
+| MacBookPro15,3 | BCM4364 | 3 | Kauai    | Aunali1     |
+| MacBookPro15,4 | BCM4377 | 4?| Formosa  | Corellium?[\*](#bcm4377)|
+| MacBookAir9,1  | BCM4377 | 4 | Fiji     | Corellium?[\*](#bcm4377)|
+| MacBookAir8,1  | BCM4355 | ? | Hawaii   | Aunali1     |
+| MacBookAir8,2  | BCM43?? | ? | ?        | ?           |
+| MacMini8,1     | BCM4364 | 3?| Lanai    | Aunali1     |
+| MacPro7,1      | BCM43?? | ? | ?        | ?           |
+| iMac20,1       | BCM43?? | ? | ?        | ?           |
+| iMac20,2       | BCM43?? | ? | ?        | ?           |
+| iMacPro1,1     | BCM43?? | ? | ?        | ?           |
 
-*if there is missing information for your model, please make a pr/issue to add it or mention this on the discord*
+*if there is missing/uncertain information for your model, please make a pr/issue to add it, or mention it on the discord*
 
-Does my model have support?
+## Is my model supported?
 
-- BCM4355:
-    - Has Mojave FW, works with normal mbp wifi patches.
-    - Untested with Big Sur firmware and alternate wifi patches.
-- BCM4364:
-    - If there is Mojave FW, it works with normal mbp wifi patches
-    - If there's only BigSur FW, you will need a kernel with [alternate wifi patches](https://wiki.t2linux.org/guides/wifi/#custom-kernel-for-161-162)
-- BCM4377:
-    - Not working.
+Please find which wifi chip you have with the above table. Also check if there is Mojave Firmware available.
+
+### Aunali1's Patchset
+
+Mojave FW
+4355, 4364
+- The first is included in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), and requires wifi firmware in the format that macOS Mojave uses. Mac models that shipped with Catalina never had Mojave firmware made, so this patchset does not support wifi on those models (for now).
+
+### Corellium's Patchset
+- The second one was made by Corellium, for M1 Macs, and uses firmware in Big Sur's format.
+Big Sur FW
+4364
+
+### BCM4377
+
+The BCM4377 chip is Broadcom's "2.0" hardware, and requires changes to the driver. The artifact from [this CI run](https://github.com/Redecorating/mbp-16.1-linux-wifi/actions/runs/1037316726) has an untested Arch kernel, with additional patches in addition to the Corellium patch, which may support the BCM4377. If you test this, you will need Big Sur wifi firmware.
 
 ## On macOS
 
