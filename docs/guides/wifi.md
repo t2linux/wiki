@@ -6,7 +6,12 @@ This page is a step by step guide to get wifi working on supported models.
 
 ## Is my model supported?
 
-You can get your model using `system_profiler SPHardwareDataType | grep "Model Identifier"` on macOS or using `cat /sys/devices/virtual/dmi/id/product_name` on Linux. If unknown, the chip name can be found on macOS within the [folder name of your firmware files](https://wiki.t2linux.org/guides/wifi/#on-macos) (i.e. C-**4364**\_\_s-B3), or with `lspci -d '14e4:*'` on Linux.
+- You can check what model you have like this:
+    - On macOS: `system_profiler SPHardwareDataType | grep "Model Identifier"`
+    - On Linux: `cat /sys/devices/virtual/dmi/id/product_name`
+- If unknown, your Mac's wifi chip number can be found like this:
+    - On macOS: `ioreg -l | grep RequestedFiles`, the number will be within the folder names, i.e. "C-`4364`\_\_s-B3" (Your model's island will also be in this command's output).
+    - On Linux: `lspci -d '14e4:*'`, this will also tell you the "Rev"/Revision.
 
 | Model      | Chip | Revision | Islands  | Mojave FW | BigSurFW |
 |----------------|---------|---|----------|-----------|----------|
@@ -34,12 +39,11 @@ Does my model have support?
 - BCM4355:
     - Has Mojave FW, works with normal mbp wifi patches.
     - Untested with Big Sur firmware and alternate wifi patches.
-- BCM4364
+- BCM4364:
     - If there is Mojave FW, it works with normal mbp wifi patches
     - If there's only BigSur FW, you will need a kernel with [alternate wifi patches](https://wiki.t2linux.org/guides/wifi/#custom-kernel-for-161-162)
 - BCM4377:
-    - If there is Mojave FW, [this kernel patch](https://gist.github.com/FelixFrog/5d83fb96d97fbcc012a76ab109d170e9) may work, but it is not yet tested with a model that has Mojave FW.
-    - If there is only Catalina firmware, the aforementioned patch can scan for networks but not connect. There is currently no wifi support.
+    - Not working.
 
 ## On macOS
 
@@ -64,7 +68,7 @@ Does my model have support?
 
     Navigate to [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/). If you need Big Sur Firmware, then it is avaliable in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
-    > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the     alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
+    > Note: In some Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
 
     > Note: If you do not have the 4364 chipset, make sure to use your chipset's identifier in the firmware names.
 
@@ -103,7 +107,7 @@ Does my model have support?
 
 5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
-    > Note: `iwd` versions 1.14 and 1.15 are known to cause issues, although until now only on arch based distributions. If you have one of those versions, please refer to your distribution's documentation for installing 1.13
+    > Note: `iwd` versions 1.14 and 1.15 do not work (unless you are using the corellium wifi patch). If you have one of those versions, please refer to your distribution's documentation for installing 1.13
 
 6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
@@ -133,5 +137,5 @@ compile), there are precompiled kernels for [Ubuntu/Debian](https://github.com/R
 and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases). mbp-fedora and
 mbp-nixos currently use this patch.
 
-Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
-**use the firmware files from macOS / Big Sur** (as stated in a Note on the page), as this patch makes the driver require Big Sur firmware.
+Once you have verified that you booted into the correct kernel (with `uname -r`), follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
+**use the firmware files from macOS / Big Sur** (as stated in a Note on the page), as this patch makes the driver require Big Sur's firmware format.
