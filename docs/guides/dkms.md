@@ -69,6 +69,13 @@ The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`
 
 Copy [this script](https://github.com/marcosfad/mbp-ubuntu/blob/master/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 
+Now run :-
+
+```sh
+sudo chmod a=rwx /lib/systemd/system-sleep/rmmod_tb.sh
+sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
+```
+
 It unloads the Touchbar modules as they can cause issues for suspend.
 
 # Issues
