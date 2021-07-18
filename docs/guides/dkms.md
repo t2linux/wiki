@@ -72,7 +72,7 @@ Copy [this script](https://github.com/marcosfad/mbp-ubuntu/blob/master/files/sus
 Now run :-
 
 ```sh
-sudo chmod a=rwx /lib/systemd/system-sleep/rmmod_tb.sh
+sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
 sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 ```
 
