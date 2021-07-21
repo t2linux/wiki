@@ -7,6 +7,15 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 Is your keyboard working? If no, then you'll need the BCE module.
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
 
+In some distros like Ubuntu you might need to uninstall the pre-installed BCE module and apple-ibridge module and install the ones given here as the pre-installed ones are not compatible with newer kernels (5.10+) but the ones given here are.
+
+To uninstall, run :-
+
+```sh
+sudo dkms uninstall -m apple-bce -v 0.1
+sudo dkms uninstall -m apple-ibridge -v 0.1
+```
+
 # Installing modules
 
 1. Install the `dkms` package
