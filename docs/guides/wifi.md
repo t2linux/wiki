@@ -159,5 +159,4 @@ will need Big Sur wifi firmware.
     sudo systemctl restart NetworkManager
     ```
 
-
 If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
