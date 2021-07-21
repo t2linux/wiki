@@ -40,7 +40,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 4.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your brightness control should stop working, *for now*. `lspci` should have an Intel Graphics card at address `00:02.0`.
 5.  Setup this tool to allow changing the boot gpu from grub:
-    
+
     ```sh
     git clone https://github.com/Redecorating/efi-gpu-power-prefs
     make
