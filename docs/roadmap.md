@@ -1,7 +1,7 @@
 # Introduction
 
 This article is meant to guide users through the wiki by giving an overview over the required steps to
-get to a working installation
+get to a working installation.
 
 ## Deciding on the Installation
 
@@ -36,7 +36,7 @@ installed automatically.
 
 Fedora also has a prebuild iso.
 
-If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation)
+If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
 ## Preparing the Installation
 
@@ -67,10 +67,11 @@ This wiki provides a set of such guides for different distributions, which can b
 
 After successfully booting into your new installation, you will need to configure a few things.
 
-- Install drivers for the internal keyboard, trackpad and touchbar (if not working already): [here](https://wiki.t2linux.org/guides/dkms/)
+- Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
 - Install drivers for wifi: [here](https://wiki.t2linux.org/guides/wifi/#on-linux)
 - Install drivers for the fan: [here](https://wiki.t2linux.org/guides/fan/)
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
+- Configure startup manager: [here](https://wiki.t2linux.org/guides/startup-manager/)
 
 You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if you Mac has two
 graphics cards. However if you don't need it specifically, its probably best to stick with the deticated gpu. If your Mac only has

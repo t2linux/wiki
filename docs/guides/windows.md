@@ -61,7 +61,7 @@ It may be possible to skip steps 5-8 by doing the following command in macOS: `s
 
 Create partitions with Disk Utility:
 
-- Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure there is no space in the label else you may face issues with the Startup Manager guide. Eg:- Do not use `EFI 2`.
+- Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure there is no space in the label else you may face issues with the [Startup Manager guide](https://wiki.t2linux.org/guides/startup-manager/). Eg:- Do not use `EFI 2`. Also do not use `EFI` as the label.
 - Create your main partition(s) for Linux, make them macOS Extended/HFS+ to stop Bootcamp Installer from thinking they are Windows. These will be erased and reformatted by your installer.
 
 ### In your distro's installer
@@ -77,7 +77,7 @@ If you are using an interactive installer:
     3. `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 
 4. There will now be an `EFI Boot` option in the macOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
-5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted.
+5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted. If you want a more descriptive guide regarding this, go [here](https://github.com/AdityaGarg8/efi-mount-bug-fix).
 
 If you are doing it manually:
 
@@ -92,13 +92,3 @@ If you are doing it manually:
 1. If there are partitions labeled as `Microsoft Basic Data`, Bootcamp Assistant will think you have Windows installed. Use `sudo cfdisk /dev/nvme0n1` to change your Linux partitions to `Linux Filesystem` or whatever is appropriate.
 2. If your second EFI partition is labeled as `EFI System`, you'll need to use `cfdisk` again to make it not that, as the Windows installer fails if there are two.
 3. Bootcamp should install Windows normally. If you put your Linux bootloader on `/dev/nvme0n1p1`, Windows will replace it, and that's why a second EFI partition is ideal.
-
-# Quality of life things
-
-## Giving Options in macOS Startup Manager Custom Icons
-
-Put an `icns` file with your desired icon in the top directory of the disk that the bootloader of the menu entry is on, and call it `.VolumeIcon.icns`.
-
-## Setting your Linux Partitions as `Linux Filesystem` type
-
-Use `sudo cfdisk /dev/nvme0n1` and change the type of your Linux partitions. This will show up when you do `diskutil list` in macOS.

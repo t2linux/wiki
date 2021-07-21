@@ -7,6 +7,19 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 Is your keyboard working? If no, then you'll need the BCE module.
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
 
+In some distros like Ubuntu you might need to uninstall the pre-installed BCE module and apple-ibridge module and install the ones given here as the pre-installed ones are not compatible with newer kernels (5.10+) but the ones given here are.
+
+To uninstall, run :-
+
+```sh
+sudo dkms uninstall -m apple-bce -v 0.1
+sudo dkms uninstall -m apple-ibridge -v 0.1
+sudo rm -r /usr/src/apple-bce-0.1
+sudo rm -r /usr/src/apple-ibridge-0.1
+sudo rm -r /var/lib/dkms/apple-bce
+sudo rm -r /var/lib/dkms/apple-ibridge
+```
+
 # Installing modules
 
 1. Install the `dkms` package
@@ -68,6 +81,13 @@ The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`
 # Fixing Suspend
 
 Copy [this script](https://github.com/marcosfad/mbp-ubuntu/blob/master/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
+
+Now run :-
+
+```sh
+sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
+sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
+```
 
 It unloads the Touchbar modules as they can cause issues for suspend.
 
