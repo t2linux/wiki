@@ -111,5 +111,4 @@ compile), there are precompiled kernels for [Ubuntu/Debian](https://github.com/R
 and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases). mbp-fedora and
 mbp-nixos currently use this patch.
 
-Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/) but
-**use the firmware files from macOS** (as stated in a Note on the page) and not from a fileserver.
+Once you have verified that you booted into the correct kernel, follow the [Wifi Guide](https://wiki.t2linux.org/guides/wifi/).
