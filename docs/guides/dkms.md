@@ -14,6 +14,10 @@ To uninstall, run :-
 ```sh
 sudo dkms uninstall -m apple-bce -v 0.1
 sudo dkms uninstall -m apple-ibridge -v 0.1
+sudo rm -r /usr/src/apple-bce-0.1
+sudo rm -r /usr/src/apple-ibridge-0.1
+sudo rm -r /var/lib/dkms/apple-bce
+sudo rm -r /var/lib/dkms/apple-ibridge
 ```
 
 # Installing modules
