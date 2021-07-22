@@ -42,9 +42,11 @@ In other cases, put an `icns` image file with your desired icon in the top direc
 
 # Setting Linux startup disk as the default startup disk
 
+**Note :-** In case you upgrade macOS to a newer version, the default startup disk gets changed to the macOS startup disk. Thus you will have to follow the instructions to make the Linux startup disk as default every time after you upgrade macOS.
+
 ## Case of common EFI partition for Windows and Linux
 
-In this case you will have to set the Windows startup disk as the default startup disk. It is recommended to follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the 'Change your startup disk for every startup' section.
+In this case you will have to set the Windows startup disk as the default startup disk. It is recommended to follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the **Change your startup disk for every startup** section.
 
 If this method is not working for you, then follow the instructions given in [Case of seperate EFI partition for Linux as well as case of using the EFI partition available by default in Mac and are on a dual boot system](https://wiki.t2linux.org/guides/startup-manager/#case-of-seperate-efi-partition-for-linux-as-well-as-case-of-using-the-efi-partition-available-by-default-in-mac-and-are-on-a-dual-boot-system) section, where you have to consider the Windows startup disk as the Linux startup disk.
 
