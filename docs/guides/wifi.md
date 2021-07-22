@@ -7,7 +7,7 @@ This page is a step by step guide to get wifi working on supported models.
 
 ## Is my model supported?
 
-Please check which Patchset is reccomended for your model by refering to
+Please check which patchset is reccomended for your model by refering to
 the table below, and take note of which firmware version you will need.
 Be aware that mbp-nixos and mbp-fedora use the Corellium patchset, and
 will need Big Sur firmware.
@@ -16,7 +16,7 @@ will need Big Sur firmware.
     - On macOS:
       `system_profiler SPHardwareDataType | grep "Model Identifier"`
     - On Linux: `cat /sys/devices/virtual/dmi/id/product_name`
-- If unknown, your Mac's wifi chip number can be found like this:
+- If unknown, your Mac's wifi chipset number can be found like this:
     - On macOS: `ioreg -l | grep RequestedFiles`, the number will be
       within the folder names, i.e. "C-`4364`\_\_s-B3" (Your model's
       island will also be in this command's output).
@@ -51,7 +51,7 @@ These patches are the default for mbp-ubuntu, mbp-manjaro and mbp-arch.
 They requires wifi firmware in that macOS Mojave's format. Mac models
 that shipped with Catalina never had Mojave firmware made, so this
 patchset does not support wifi on those models (for now). It currently
-supports the BCM4364 and BCM4355 chips.
+supports the BCM4364 and BCM4355 chipsets.
 
 ### Corellium's Patchset
 
@@ -61,8 +61,8 @@ format. It is the default for mbp-fedora and mbp-nixos. Kernels with
 this patch are available for [Ubuntu/Debian](https://github.com/Redecorating/mbp-ubuntu-kernel/releases)
 and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases),
 but you can [compile it yourself](#compiling-with-corelliums-patchset)
-if you need/want to. This supports the BCM4364 Chip, and with
-additional patches [should support the BCM4377 Chip](#BCM4377).
+if you need/want to. This supports the BCM4364 Chipset, and with
+additional patches [should support the BCM4377 Chipset](#BCM4377).
 
 #### Compiling with Corellium's Patchset
 
@@ -73,9 +73,9 @@ as the patchset repository.
 
 #### BCM4377
 
-The BCM4377 chip is Broadcom's "2.0" hardware, and requires changes to
+The BCM4377 chipset is Broadcom's "2.0" hardware, and requires changes to
 the `brcmfmac` driver. The artifact from [this CI run](https://github.com/Redecorating/mbp-16.1-linux-wifi/actions/runs/1037316726)
-has an Arch kernel with additional patches in addition to the
+has an Arch kernel with extra patches in addition to the
 Corellium patch that should support the BCM4377. If you test this, you
 will need Big Sur wifi firmware.
 
@@ -100,9 +100,9 @@ will need Big Sur wifi firmware.
     })
     ```
 
-    - If you need Mojave Firmware, it is available at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
+    - If you need Mojave firmware, it is available at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
 
-    - If you need Big Sur Firmware, then it is avaliable in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
+    - If you need Big Sur firmware, then it is avaliable in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
 
     > Note: For many Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
 
