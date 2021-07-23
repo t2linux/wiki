@@ -16,11 +16,17 @@ You may want to do this from macOS Recovery as you will be resizing (expanding) 
 
 # Removing the Linux boot-loader
 
+## If using a separate EFI partition
+
+Follow the same steps to remove the seperate EFI partition as you followed to remove the Linux partition.
+
+## If using the EFI partition already available in your Mac.
+
 1. In macOS run `sudo diskutil mount disk0s1`, which mounts your EFI System Partition.
-2. There will now be an "EFI" disk visible in Finder, open it and go into the "EFI" folder (within the "EFI" disk).
-3. Remove any folders other than "Apple", "Boot", or "Microsoft".
-4. Enter the "Boot" folder
-5. If you don't have Windows installed with Bootcamp, remove `bootx64.efi`. If you have Windows installed with Bootcamp, you may want to replace `bootx64.efi` with `Microsoft/Boot/bootmgfw.efi`, but be careful not to delete the Windows bootloader.
+2. There will now be an **EFI** disk visible in Finder, open it and go into the **EFI** folder (within the **EFI** disk).
+3. Remove any folders other than **Apple**, **Boot**, or **Microsoft**.
+4. Enter the **Boot** folder and remove `bootx64.efi`.
+5. If you have Windows installed with Bootcamp, Enter **Microsoft** folder and then the **Boot** folder inside the **Microsoft** folder and copy `bootmgfw.efi`. Paste it in that **Boot** folder in the **EFI** folder of the **EFI** disk from where you had deleted `bootx64.efi`. Now rename the newly copied `bootmgfw.efi` to `bootx64.efi`. Be careful not to delete the Windows bootloader.
 
 # Enable Secure Boot (Optional)
 
