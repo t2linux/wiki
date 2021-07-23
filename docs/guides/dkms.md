@@ -9,7 +9,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
 In some distros like Ubuntu you might need to uninstall the pre-installed BCE module and apple-ibridge module and install the ones given here as the pre-installed ones are not compatible with newer kernels (5.10+) but the ones given here are.
 
-To uninstall, run :-
+To uninstall, you must have the `dkms` package installed. On Ubuntu, you may run `sudo apt install dkms` to install it. Once you have the package installed, run :-
 
 ```sh
 sudo dkms uninstall -m apple-bce -v 0.1
