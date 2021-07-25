@@ -118,7 +118,7 @@ will need Big Sur wifi firmware.
     Running the command from step 3 would work for connecting to WPA2 networks as well but it would have to be
     run every time before connecting to a network.
 
-4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output shoud look similar to this
+4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
 
     ```log
     May 09 11:55:54 hostname kernel: usbcore: registered new interface driver brcmfmac
@@ -130,7 +130,7 @@ will need Big Sur wifi firmware.
 
 5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
-    > Note: `iwd` versions 1.14 and 1.15 do not work (unless you are using the corellium wifi patch). If you have one of those versions, please refer to your distribution's documentation for installing 1.13
+    > Note: `iwd` versions 1.14 and 1.15 do not work (unless you are using Big Sur Firmware patch). If you have one of those versions, please refer to your distribution's documentation for installing 1.13
 
 6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
