@@ -69,7 +69,7 @@ After successfully booting into your new installation, you will need to configur
 
 - Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
 - Install drivers for wifi: [here](https://wiki.t2linux.org/guides/wifi/#on-linux)
-- Install drivers for the fan: [here](https://wiki.t2linux.org/guides/fan/)
+- Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
 - Configure startup manager: [here](https://wiki.t2linux.org/guides/startup-manager/)
 
