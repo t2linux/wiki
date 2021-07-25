@@ -5,16 +5,16 @@ This page is a step by step guide to get wifi working on supported models.
 **Note that currently some models may not have support
 ([testing wanted](#BCM4377)), see the table below**
 
-## Is my model supported?
+## Getting the right firmware
 
-Please check which patchset is reccomended for your model by refering to
-the table below, and take note of which firmware version you will need.
-Be aware that mbp-nixos and mbp-fedora use the Corellium patchset, and
-will need Big Sur firmware.
+There are two patchsets for the linux kernel that add wifi support, but they
+each use wifi chipset firmware from different versions of macOS, and
+support different wifi chipsets.
 
-- You can check what model you have like this:
-    - On macOS:
-      `system_profiler SPHardwareDataType | grep "Model Identifier"`
+Please use the table below to check which patchsets will work for your model.
+
+- You can check your Model Identifier like this:
+    - On macOS: `system_profiler SPHardwareDataType | grep "Model Identifier"`
     - On Linux: `cat /sys/devices/virtual/dmi/id/product_name`
 - If unknown, your Mac's wifi chipset number can be found like this:
     - On macOS: `ioreg -l | grep RequestedFiles`, the number will be
@@ -23,55 +23,69 @@ will need Big Sur firmware.
     - On Linux: `lspci -d '14e4:*'`, this will also tell you the
       "Rev"/Revision.
 
-| Model        |Chipset|Revision| Island  | Patchset    |
-|----------------|---------|---|----------|-------------|
-| MacBookPro16,1 | BCM4364 | 4 | Bali     | Corellium   |
-| MacBookPro16,2 | BCM4364 | 4 | Trinidad | Corellium   |
-| MacBookPro16,3 | BCM4377 | 4?| Tahiti?  | Corellium[?](#bcm4377)|
-| MacBookPro16,4 | BCM4364 | 4 | Bali?    | Corellium   |
-| MacBookPro15,1 | BCM4364 | 3 | Kauai    | Aunali1     |
-| MacBookPro15,2 | BCM4364 | 3 | Maui     | Aunali1     |
-| MacBookPro15,3 | BCM4364 | 3 | Kauai    | Aunali1     |
-| MacBookPro15,4 | BCM4377 | 4?| Formosa  | Corellium[?](#bcm4377)|
-| MacBookAir9,1  | BCM4377 | 4 | Fiji     | Corellium[?](#bcm4377)|
-| MacBookAir8,1  | BCM4355 | ? | Hawaii   | Aunali1     |
-| MacBookAir8,2  | BCM43?? | ? | ?        | ?           |
-| MacMini8,1     | BCM4364 | 3?| Lanai    | Aunali1     |
-| MacPro7,1      | BCM43?? | ? | ?        | ?           |
-| iMac20,1       | BCM43?? | ? | ?        | ?           |
-| iMac20,2       | BCM43?? | ? | ?        | ?           |
-| iMacPro1,1     | BCM43?? | ? | ?        | ?           |
+| Model Identifier | Chipset | Revision | Island   | Firmware Options     |
+|------------------|---------|----------|----------|----------------------|
+| MacBookPro16,1   | BCM4364 | 4        | Bali     | Big Sur              |
+| MacBookPro16,2   | BCM4364 | 4        | Trinidad | Big Sur              |
+| MacBookPro16,3   | BCM4377 | 4?       | Tahiti?  | Big Sur[?](#bcm4377) |
+| MacBookPro16,4   | BCM4364 | 4        | Bali?    | Big Sur              |
+| MacBookPro15,1   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
+| MacBookPro15,2   | BCM4364 | 3        | Maui     | Mojave / Big Sur     |
+| MacBookPro15,3   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
+| MacBookPro15,4   | BCM4377 | 4?       | Formosa  | Big Sur[?](#bcm4377) |
+| MacBookAir9,1    | BCM4377 | 4        | Fiji     | Big Sur[?](#bcm4377) |
+| MacBookAir8,1    | BCM4355 | ?        | Hawaii   | Mojave               |
+| MacBookAir8,2    | BCM43?? | ?        | ?        | ?                    |
+| MacMini8,1       | BCM4364 | 3?       | Lanai    | Mojave / Big Sur     |
+| MacPro7,1        | BCM43?? | ?        | ?        | ?                    |
+| iMac20,1         | BCM43?? | ?        | ?        | ?                    |
+| iMac20,2         | BCM43?? | ?        | ?        | ?                    |
+| iMacPro1,1       | BCM43?? | ?        | ?        | ?                    |
 
 *if there is missing/uncertain information for your model, please make a
 pr/issue to add it, or mention it on the discord*
 
-### Aunali1's Patchset
+### Retrieving Firmware
 
-These patches are the default for mbp-ubuntu, mbp-manjaro and mbp-arch.
-They requires wifi firmware in that macOS Mojave's format. Mac models
-that shipped with Catalina never had Mojave firmware made, so this
-patchset does not support wifi on those models (for now). It currently
-supports the BCM4364 and BCM4355 chipsets.
+Run `ioreg -l | grep RequestedFiles` in macOS Terminal. Note down the output, and make sure you also know your Model Identifier. The output will be similar to this:
 
-### Corellium's Patchset
+```json
+"RequestedFiles" = ({
+    "Firmware"="C-4364s-B2/kauai.trx",
+    "TxCap"="C-4364s-B2/kauai-X3.txcb",
+    "Regulatory"="C-4364s-B2/kauai-X3.clmb",
+    "NVRAM"="C-4364s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"
+})
+```
 
-[This patch](https://github.com/corellium/linux-m1/commit/02ad06fbf2b35916ee329a9bb80d73840d6e2973)
-was made by Corellium for M1 Macs and uses wifi firmware in Big Sur's
-format. It is the default for mbp-fedora and mbp-nixos. Kernels with
-this patch are available for [Ubuntu/Debian](https://github.com/Redecorating/mbp-ubuntu-kernel/releases)
-and [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases),
-but you can [compile it yourself](#compiling-with-corelliums-patchset)
-if you need/want to. This supports the BCM4364 Chipset, and with
-additional patches [should support the BCM4377 Chipset](#BCM4377).
+You will next need to retrieve three of the four files listed by that command (the `.trx` "Firmware" file, the `.txcb` "Regulatory" file, and the `.txt` "NVRAM" file). The source of these files depends on which firmware type you will use. Copy them to somewhere that you can access them.
 
-#### Compiling with Corellium's Patchset
+#### Mojave Firmware
+
+The default kernels for mbp-ubuntu, mbp-manjaro and mbp-arch use Mojave Firmware.
+
+This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
+
+#### Big Sur Firmware
+
+The default kernels for mbp-fedora and mbp-nixos use Big Sur firmware. For
+Ubuntu, the "mbp-16x-wifi" variant uses Big Sur firmware too. There are also
+kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
+but you can [compile it yourself](#compiling-with-corelliums-patchset) if you need/want to.
+With additional patches [the BCM4377 Chipset](#BCM4377) should work too.
+
+This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
+
+If your model identifier is 16,1 you can also get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. If you unable to get working firmware files from there then follow the instructions given for other models.
+
+##### Compiling a kernel for using Big Sur firmware
 
 Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile),
 But make sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
 instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 as the patchset repository.
 
-#### BCM4377
+##### BCM4377
 
 The BCM4377 chipset is Broadcom's "2.0" hardware, and requires changes to
 the `brcmfmac` driver. The artifact from [this CI run](https://github.com/Redecorating/mbp-16.1-linux-wifi/actions/runs/1037316726)
@@ -79,43 +93,16 @@ has an Arch kernel with extra patches in addition to the
 Corellium patch that should support the BCM4377. If you test this, you
 will need Big Sur wifi firmware.
 
-## On macOS
+### Renaming Firmware
 
-1. Run both `ioreg -l | grep RequestedFiles` (the names of the firmware files required by your model) and `system_profiler SPHardwareDataType | grep "Model Identifier"` (your model identifier) in a terminal and note down the output, you will need both values in the next steps.
-2. If your model identifier is 16,1 you may get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. On getting the correct files navigate to [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section. If you unable to get working firmware files from there then follow the instructions given for other models.
-3. For other models go to [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
+- Rename the `.trx` "Firmware" file to `brcmfmac4364-pcie.bin`, but change `4364` to your wifi chipset number.
+- Do the same for the `.clmb` "Regulatory" file and rename it to `brcmfmac4364-pcie.clm_blob`. Again, change `4364` to your chipset number.
+- Lastly, rename the `.txt` "NVRAM" file to `brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt` but in addition to changing `4364` to your chipset number, change `MacBookPro15,1` to your Model Identifier.
 
-> Note: If you are unable to get the firmware even after following guide for other models, you might need to extract firmware from macOS at this point. See the instructions in [On any OS](https://wiki.t2linux.org/guides/wifi/#on-any-os) section.
-
-## On any OS
-
-1. Look at the ouput of the first command listed above, it will probably look something like this
-
-    ```json
-    "RequestedFiles" = ({
-        "Firmware"="C-4364s-B2/kauai.trx",
-        "TxCap"="C-4364s-B2/kauai-X3.txcb",
-        "Regulatory"="C-4364s-B2/kauai-X3.clmb",
-        "NVRAM"="C-4364s-B2/P-kauai-X3_M-HRPN_V-u__m-7.5.txt"
-    })
-    ```
-
-    - If you need Mojave firmware, it is available at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
-
-    - If you need Big Sur firmware, then it is avaliable in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW).
-
-    > Note: For many Mac models, the paths of firmware files shown in terminal (step 1) lead to aliases (shortcuts). In such cases while extracting from macOS, right click on the alias and choose show original. This will select the correct firmware file which you have to use and thus extract the selected file instead.
-
-    > Note: If you do not have the 4364 chipset, make sure to use your wifi chipset's identifier in the firmware names (i.e. replace 4364 with 4355).
-
-    - Look at the path of the file in the command output that ends in `.trx`. On the website, download that file and rename it to `brcmfmac4364-pcie.bin`.
-    - Do the same for the `.clmb` file and rename it to `brcmfmac4364-pcie.clm_blob`.
-    - In the end, download the `.txt` file and rename it to `brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt` but change the `15,1` in this string to model identifier was the output of the second command described [here](https://wiki.t2linux.org/guides/wifi/#on-macos).
-
-## On Linux
+### Installing Firmware
 
 1. Now that you got those 3 files, move them to `/lib/firmware/brcm/`.
-2. Check that the files are in place with `ls -l /lib/firmware/brcm | grep 4364`. Replace 4364 with you wifi chipset's identifier. The output should look something like this
+2. Check that the files are in place with `ls -l /lib/firmware/brcm|grep -E "43(64|55|77)"`. The output should look something like this
 
     ```plain
     -rw-r--r--. 1 root root   12860 Mar  1 12:44 brcmfmac4364-pcie.Apple Inc.-MacBookPro15,1.txt
