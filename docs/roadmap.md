@@ -69,9 +69,9 @@ After successfully booting into your new installation, you will need to configur
 
 - Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
 - Install drivers for wifi: [here](https://wiki.t2linux.org/guides/wifi/#on-linux)
-- Install drivers for the fan: [here](https://wiki.t2linux.org/guides/fan/)
+- Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
-- Configure startup manager: [here](https://wiki.t2linux.org/guides/startup-manager/)
+- Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
 
 You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if you Mac has two
 graphics cards. However if you don't need it specifically, its probably best to stick with the deticated gpu. If your Mac only has
