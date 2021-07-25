@@ -41,7 +41,6 @@ The following repos contain kernel modules for said support.
 
 Note that if you are using one of the distributions listed above you should follow their install guides rather than the ones listed under this section. However they might still be important to gain a better general picture or to help with specific issues.
 
-- State of Linux on the MacBook Pro (technical documentation) [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - List of Mac Model Identifiers on [everymac.com](https://everymac.com/systems/by_capability/mac-specs-by-machine-model-machine-id.html)
 - Using Luks with the intergrated keyboard [https://github.com/DimitriDokuchaev/GrubLuksUnlock](https://github.com/DimitriDokuchaev/GrubLuksUnlock)
 - Adding macOS like screenshot shortcuts to KDE Plasma [https://gist.github.com/networkException/5a68299accc1872749c86301c1449690](https://gist.github.com/networkException/5a68299accc1872749c86301c1449690)
@@ -49,6 +48,7 @@ Note that if you are using one of the distributions listed above you should foll
 
 *Outdated*
 
+- State of Linux on the MacBook Pro (technical documentation) [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - Arch on 2018 MacBook Pro [https://gist.github.com/TRPB/437f663b545d23cc8a2073253c774be3](https://gist.github.com/TRPB/437f663b545d23cc8a2073253c774be3)
 - Ubuntu on 2016 MacBook Pro [https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4)
 
