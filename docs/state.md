@@ -9,13 +9,13 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 - USB
 - Keyboard
 - Camera
+- Wifi
 
 ## Partially Working
 
-- Trackpad: While technically working, it is far from the experience on macOS
-- Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either kunction keys from 1 to 12 or basic media / brightness control are shown.
-- Audio: With proper configuration audio can work, however it is not stable in some situations and switching speakers and the headphone jack only works manually
-- Wifi: Only works on certain models due to incompatible firmware, see [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported)
+- Trackpad: Though it is technically working, it is far from the experience on macOS.
+- Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either function keys from 1 to 12 or basic media / brightness control are shown.
+- Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and the headphone jack only works manually.
 - Suspend
 - Hybrid Graphics: In case the device has a dedicated AMD GPU (15 and 16 inch models) as well as an Intel iGPU, the iGPU can be used, but this breaks resume, and may be unstable when running games, see the [Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/) page.
 
