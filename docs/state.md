@@ -9,10 +9,10 @@ While Linux is usable on all T2 models, some features are limited by lack of dri
 - USB
 - Keyboard
 - Camera
-- Wifi
 
 ## Partially Working
 
+- Wifi: Models with the BCM4377 chip do not have complete support. Rest models are supported. For more details, refer to the [wifi guide](http://wiki.t2linux.org/guides/wifi/).
 - Trackpad: Though it is technically working, it is far from the experience on macOS.
 - Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either function keys from 1 to 12 or basic media / brightness control are shown.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and the headphone jack only works manually.
