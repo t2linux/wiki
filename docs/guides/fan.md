@@ -1,6 +1,8 @@
 # Introduction
 
-This page is a step by step guide to get fan control working on t2 macs.
+This page is a step by step guide to get fan control working on t2 Macs.
+
+In some Macs, the fan has been found to work out of the box. In such a case the driver is not required until you want to force a certain speed or do some other configuration which can be done by the help of this driver.
 
 ## Steps
 
