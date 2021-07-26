@@ -3,7 +3,7 @@
 This page is a step by step guide to get wifi working on supported models.
 
 **Note that currently some models may not have support
-([testing wanted](https://wiki.t2linux.org/guides/wifi/#BCM4377)), see the table below**
+([testing wanted](https://wiki.t2linux.org/guides/wifi/#bcm4377)), see the table below**
 
 ## Getting the right firmware
 
