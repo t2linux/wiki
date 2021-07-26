@@ -6,7 +6,7 @@ get to a working installation.
 ## Deciding on the Installation
 
 Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need
-to decide for yourself it its worth it.
+to decide for yourself if it its worth it.
 
 Your first consideration should be the risk you are taking. Don't worry, nobody has broken their machine so far by installing
 Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
@@ -20,7 +20,7 @@ If a specific feature is not listed at all, there is a chance it actually works.
 
 ## Choosing a Distribution
 
-While technically it is not a limitation when installting Linux, different distributions do provide different levels of documentation,
+While technically it is not a limitation when installing Linux, different distributions do provide different levels of documentation,
 ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
