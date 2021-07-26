@@ -39,7 +39,9 @@ If you wish to use another distribution, you can install it normally, also follo
 
 ## Preparing the Installation
 
-It is recommended follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) until any steps you need to run on linux. This includes finding out your model identifier, the firmware files needed for your device and downloading or extracting those firmware files. In case you need to get another kernel as mentioned in the guide, get that too. It is also recommended to go through the [DKMS](https://wiki.t2linux.org/guides/dkms/) guide if using a new kernel for wifi as you may have to uninstall old drivers.
+You will want to look at [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) in the wifi guide before starting an installation.
+Based on that information, follow the wifi guide until any steps you need to run on linux. This includes finding
+out your model identifier, the firmware files needed for your device and downloading or extracting those firmware files.
 
 Make sure to keep the wifi files, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux can not read APFS, the file system macOS uses by default.
 
