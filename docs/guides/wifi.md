@@ -74,7 +74,7 @@ For **Ubuntu**, the "mbp-16x-wifi" variant kernels (use `sudo apt install linux-
 
 There are also kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
 but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
-With additional patches [the BCM4377 Chipset](https://wiki.t2linux.org/guides/wifi/#BCM4377) should work too.
+With additional patches [the BCM4377 Chipset](https://wiki.t2linux.org/guides/wifi/#bcm4377) should work too.
 
 This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
 
