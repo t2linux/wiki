@@ -3,7 +3,7 @@
 This page is a step by step guide to get wifi working on supported models.
 
 **Note that currently some models may not have support
-([testing wanted](#BCM4377)), see the table below**
+([testing wanted](https://wiki.t2linux.org/guides/wifi/#BCM4377)), see the table below**
 
 ## Getting the right firmware
 
@@ -27,13 +27,13 @@ Please use the table below to check which patchsets will work for your model.
 |------------------|---------|----------|----------|----------------------|
 | MacBookPro16,1   | BCM4364 | 4        | Bali     | Big Sur              |
 | MacBookPro16,2   | BCM4364 | 4        | Trinidad | Big Sur              |
-| MacBookPro16,3   | BCM4377 | 4?       | Tahiti?  | Big Sur[?](#bcm4377) |
+| MacBookPro16,3   | BCM4377 | 4?       | Tahiti?  | Big Sur[?](https://wiki.t2linux.org/guides/wifi/#bcm4377) |
 | MacBookPro16,4   | BCM4364 | 4        | Bali?    | Big Sur              |
 | MacBookPro15,1   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
 | MacBookPro15,2   | BCM4364 | 3        | Maui     | Mojave / Big Sur     |
 | MacBookPro15,3   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
-| MacBookPro15,4   | BCM4377 | 4?       | Formosa  | Big Sur[?](#bcm4377) |
-| MacBookAir9,1    | BCM4377 | 4        | Fiji     | Big Sur[?](#bcm4377) |
+| MacBookPro15,4   | BCM4377 | 4?       | Formosa  | Big Sur[?](https://wiki.t2linux.org/guides/wifi/#bcm4377) |
+| MacBookAir9,1    | BCM4377 | 4        | Fiji     | Big Sur[?](https://wiki.t2linux.org/guides/wifi/#bcm4377) |
 | MacBookAir8,1    | BCM4355 | ?        | Hawaii   | Mojave               |
 | MacBookAir8,2    | BCM43?? | ?        | ?        | ?                    |
 | MacMini8,1       | BCM4364 | 3?       | Lanai    | Mojave / Big Sur     |
@@ -73,8 +73,8 @@ The default kernels for **mbp-fedora** and **mbp-nixos** use Big Sur firmware.
 For **Ubuntu**, the "mbp-16x-wifi" variant kernels (use `sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi` to install, but change 5.10.52 to the latest version) uses Big Sur firmware too. You can also get a Debian kernel (used by Ubuntu, Pop!_OS, Linux Mint etc.), from [here](https://github.com/AdityaGarg8/mbp-16.x-ubuntu-kernel/releases), which may be updated faster.
 
 There are also kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
-but you can [compile it yourself](#compiling-with-corelliums-patchset) if you need/want to.
-With additional patches [the BCM4377 Chipset](#BCM4377) should work too.
+but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
+With additional patches [the BCM4377 Chipset](https://wiki.t2linux.org/guides/wifi/#BCM4377) should work too.
 
 This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
 
