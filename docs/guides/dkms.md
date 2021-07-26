@@ -9,6 +9,8 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
 In some distros like Ubuntu (if using ISO with a kernel version `5.8.x` or below in case of Ubuntu as newer ISOs have got the updated drivers) you might need to uninstall the pre-installed BCE module and apple-ibridge module and install the ones given here as the pre-installed ones are not compatible with newer kernels (5.10+) but the ones given here are.
 
+In case you are installing a new kernel to get wifi working as described in the [wifi guide](https://wiki.t2linux.org/guides/wifi/) and also need to uninstall old drivers to get new ones, then you will have to follow this guide before installing the new kernel as new kernels need new drivers. In such a case you will have to use an ethernet cable, wifi adapter or phone tethering as this guide requires internet.
+
 To uninstall, you must have the `dkms` package installed. On Ubuntu, you may run `sudo apt install dkms` to install it. Once you have the package installed, run :-
 
 ```sh
