@@ -6,7 +6,7 @@ get to a working installation.
 ## Deciding on the Installation
 
 Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need
-to decide for yourself it its worth it.
+to decide for yourself if it its worth it.
 
 Your first consideration should be the risk you are taking. Don't worry, nobody has broken their machine so far by installing
 Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
@@ -20,7 +20,7 @@ If a specific feature is not listed at all, there is a chance it actually works.
 
 ## Choosing a Distribution
 
-While technically it is not a limitation when installting Linux, different distributions do provide different levels of documentation,
+While technically it is not a limitation when installing Linux, different distributions do provide different levels of documentation,
 ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
@@ -39,9 +39,7 @@ If you wish to use another distribution, you can install it normally, also follo
 
 ## Preparing the Installation
 
-You will want to look at [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) in the wifi guide before starting an installation.
-Based on that information, follow the wifi guide until any steps you need to run on linux. This includes finding
-out your model identifier, the firmware files needed for your device and downloading or extracting those firmware files.
+It is recommended follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) until any steps you need to run on linux. This includes finding out your model identifier, the firmware files needed for your device and downloading or extracting those firmware files. In case you need to get another kernel as mentioned in the guide, get that too. It is also recommended to go through the [DKMS](https://wiki.t2linux.org/guides/dkms/) guide if using a new kernel as you may have to uninstall old drivers.
 
 Make sure to keep the wifi files, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux can not read APFS, the file system macOS uses by default.
 
