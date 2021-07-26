@@ -69,7 +69,7 @@ This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/1
 #### Big Sur Firmware
 
 The default kernels for **mbp-fedora** and **mbp-nixos** use Big Sur firmware. For
-Ubuntu, the "mbp-16x-wifi" variant (`sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi`) uses Big Sur firmware too. There are also
+Ubuntu, the "mbp-16x-wifi" variant (`sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi`, but change 5.10.52 to the latest version) uses Big Sur firmware too. You can also get a Debian kernel from [here](https://github.com/AdityaGarg8/mbp-16.x-ubuntu-kernel/releases), which may be updated faster. There are also
 kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
 but you can [compile it yourself](#compiling-with-corelliums-patchset) if you need/want to.
 With additional patches [the BCM4377 Chipset](#BCM4377) should work too.
