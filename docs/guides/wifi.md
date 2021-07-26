@@ -62,21 +62,21 @@ You will next need to retrieve three of the four files listed by that command (t
 
 #### Mojave Firmware
 
-The default kernels for mbp-ubuntu, mbp-manjaro and mbp-arch use Mojave Firmware.
+The default kernels for **mbp-ubuntu**, **mbp-manjaro** and **mbp-arch** use Mojave Firmware.
 
 This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
 
 #### Big Sur Firmware
 
-The default kernels for mbp-fedora and mbp-nixos use Big Sur firmware. For
-Ubuntu, the "mbp-16x-wifi" variant uses Big Sur firmware too. There are also
+The default kernels for **mbp-fedora** and **mbp-nixos** use Big Sur firmware. For
+Ubuntu, the "mbp-16x-wifi" variant (`sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi`) uses Big Sur firmware too. There are also
 kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
 but you can [compile it yourself](#compiling-with-corelliums-patchset) if you need/want to.
 With additional patches [the BCM4377 Chipset](#BCM4377) should work too.
 
 This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
 
-If your model identifier is 16,1 you can also get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. If you unable to get working firmware files from there then follow the instructions given for other models.
+If your model identifier is 16,1 you can take a shortcut and get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. If you unable to get working firmware files from there then follow the instructions given for other models.
 
 ##### Compiling a kernel for using Big Sur firmware
 
