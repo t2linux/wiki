@@ -39,19 +39,17 @@ If you wish to use another distribution, you can install it normally, also follo
 
 ## Preparing the Installation
 
-You will want to look at [Is my model supported?](https://wiki.t2linux.org/guides/wifi/#is-my-model-supported) in the wifi guide before starting an installation.
-Based on that information, follow the wifi guide until any steps you need to run on linux. This includes finding
-out your model identifier, the firmware files needed for your device and downloading or extracting those firmware files.
+You will want to look at [the wifi guide](https://wiki.t2linux.org/guides/wifi/) to check if your model is supported before starting an installation.
+Based on that information, prepare anything that is needed for installing on Linux.
 
-Make sure to keep the wifi files, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux can not read APFS, the file system macOS uses by default.
+Make sure to keep the wifi firmware, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux can not read APFS, the file system macOS uses by default.
 
 You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40 GB should be fine for a base installation.
 
 To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
 
 If you distribution needs a connection to the internet while installing, make sure to prepare an ethernet cable, wifi adapter or
-phone for tethering. If none of these options are available but your model has wifi support, you can also follow the On Linux steps of the wifi
-guide on your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
+phone for tethering. If none of these options are available but your model has wifi support, you can also follow the steps to install firmware in your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
 the live environment.
 
 If you want to triple boot with Windows, read the instructions in the [triple boot guide](https://wiki.t2linux.org/guides/windows/) before proceeding.
@@ -67,7 +65,7 @@ This wiki provides a set of such guides for different distributions, which can b
 After successfully booting into your new installation, you will need to configure a few things.
 
 - Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
-- Install drivers for wifi: [here](https://wiki.t2linux.org/guides/wifi/#on-linux)
+- Getting wifi to work: [here](https://wiki.t2linux.org/guides/wifi)
 - Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
 - Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
