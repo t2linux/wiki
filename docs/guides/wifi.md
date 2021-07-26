@@ -42,8 +42,8 @@ Please use the table below to check which patchsets will work for your model.
 | iMac20,2         | BCM43?? | ?        | ?        | ?                    |
 | iMacPro1,1       | BCM43?? | ?        | ?        | ?                    |
 
-*if there is missing/uncertain information for your model, please make a
-pr/issue to add it, or mention it on the discord*
+*If there is missing/uncertain information for your model, please make a
+[pr](https://github.com/t2linux/wiki/edit/master/docs/guides/wifi.md)/issue to add it, or mention it on the [discord](https://discord.com/invite/68MRhQu).*
 
 ### Retrieving Firmware
 
