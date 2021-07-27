@@ -7,6 +7,8 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 Is your keyboard working? If no, then you'll need the BCE module.
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
 
+To get started with this guide, first install the `dkms` package.
+
 You may have been using an outdated kernel or your distribution may have been using kernel modules that do not match the ones listed below (check using `dkms status`). If the version of `apple-bce` in the output is `0.1`, you have to uninstall the old modules first to avoid any compatibility issues by running:
 
 ```sh
@@ -20,8 +22,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 # Installing modules
 
-1. Install the `dkms` package
-2. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
+1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
     - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
     - Otherwise, `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
@@ -40,12 +41,12 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
     - Use `sudo dkms install -m apple-bce -v r183.c884d9c -k x.x.x-mbp`, change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older. If you are not on a live iso, then you can omit this bit.
 
-3. Installing the Touchbar and Ambient Light sensor modules
+2. Installing the Touchbar and Ambient Light sensor modules
 
     - `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
     - Use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp`, change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older. If you are not on a live iso, then you can omit this bit.
 
-4. Load the modules into the kernel
+3. Load the modules into the kernel
 
     ```sh
     sudo modprobe apple_bce
