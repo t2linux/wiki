@@ -7,7 +7,7 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 Is your keyboard working? If no, then you'll need the BCE module.
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
 
-If you have been using an outdated kernel or your distribution uses kernel modules that do not match the ones listed below (check using `dkms status`), uninstall them first to avoid any compatibility issues:
+You may have been using an outdated kernel or your distribution may have been using kernel modules that do not match the ones listed below (check using `dkms status`). If the version of `apple-bce` in the output is `0.1`, uninstall them first to avoid any compatibility issues by running:
 
 ```sh
 sudo dkms uninstall -m apple-bce -v 0.1
