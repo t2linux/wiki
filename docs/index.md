@@ -7,8 +7,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 
 # Warnings
 
-- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y)
-- It is highly recommended that you use the stock Apple boot manager for all distributions, other boot managers like rEFInd have been known to cause issues.
+- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
 
 # Getting started
 
