@@ -4,7 +4,7 @@ This guide shall help you install the rEFInd Boot Manager in your T2 Mac in the 
 
 # Installation
 
-All steps given here have to be performed on **macOS**.
+All steps given here have to be performed on **macOS**. You will also need to have [secure boot disabled](https://support.apple.com/en-us/HT208198).
 
 1. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
 2. With the help of disk utility, create a 100-200MB `MS-DOS FAT` partition and label it as `REFIND`.
