@@ -70,10 +70,9 @@ This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/1
 
 The default kernels for **mbp-fedora** and **mbp-nixos** use Big Sur firmware.
 
-For **Ubuntu**, the "mbp-16x-wifi" variant kernels (use `sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi` to install, but change 5.10.52 to the latest version) uses Big Sur firmware too. Alternatively you can also get a Debian kernel (used by Ubuntu, Pop!_OS, Linux Mint etc.), from [this repo](https://github.com/AdityaGarg8/mbp-16.x-ubuntu-kernel/releases), as the repo may be updated faster with newer kernels.
+For **Ubuntu**, the "mbp-16x-wifi" variant kernels (use `sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi` to install, but change 5.10.52 to the kernel version you wish to install) uses Big Sur firmware too. Alternatively you can also get a Debian kernel (used by Ubuntu, Pop!_OS, Linux Mint etc.), from [this repo](https://github.com/AdityaGarg8/mbp-16.x-ubuntu-kernel/releases), as the repo may be updated faster with newer kernels.
 
-There are also kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases)
-but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
+There are also kernels available for [Arch based distros](https://github.com/Redecorating/mbp-16.1-linux-wifi/releases) (like Arch Linux and Manjaro) but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
 With additional patches [the BCM4377 Chipset](https://wiki.t2linux.org/guides/wifi/#bcm4377) should work too.
 
 This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
