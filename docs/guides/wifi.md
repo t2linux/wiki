@@ -58,7 +58,7 @@ Run `ioreg -l | grep RequestedFiles` in macOS Terminal. Note down the output, an
 })
 ```
 
-You will next need to retrieve three of the four files listed by that command (the `.trx` "Firmware" file, the `.txcb` "Regulatory" file, and the `.txt` "NVRAM" file). The source of these files depends on which firmware type you will use. Copy them to somewhere that you can access them.
+You will next need to retrieve three of the four files listed by that command (the `.trx` "Firmware" file, the `.clmb` "Regulatory" file, and the `.txt` "NVRAM" file). The source of these files depends on which firmware type you will use. Copy them to somewhere that you can access them.
 
 #### Mojave Firmware
 
