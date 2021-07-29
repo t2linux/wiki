@@ -75,3 +75,7 @@ In case you boot an OS other than macOS using rEFInd, it shows some debug text w
 ```plain
 use_graphics_for osx,linux,windows,grub
 ```
+
+## Preventing use of NVRAM (Likely to have been enabled already)
+
+Preventing use of NVRAM is must as T2 doesn’t like someone to touch the NVRAM. In latest editions of rEFInd, the `refind.conf` file (the one mentioned in above instructions)
