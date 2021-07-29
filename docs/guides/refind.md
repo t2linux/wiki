@@ -61,3 +61,17 @@ Though rEFInd has many configuration options, some basic configuration is requir
 ## Removing BIOS entries
 
 Macs with T2 chip cannot BIOS boot. So it is advised to remove the BIOS entries. For that, open finder, and then open the `REFIND` volume. Add the line given below at the end of `EFI/BOOT/refind.conf` file by editing it with a text editor.
+
+```plain
+scanfor internal,external,optical,manual
+```
+
+In case you face the error saying **The document “refind.conf” could not be saved.**, copy the `refind.conf` file to any place in your home directory (Downloads folder for example) and do the editing over there. After editing replace the `refind.conf` file in the `REFIND` volume with the newly edited file.
+
+## Hiding text on booting an OS using rEFInd (Optional)
+
+In case you boot an OS other than macOS using rEFInd, it shows some debug text while booting it. In order to get a smooth boot experience simiar to the Mac Startup Manager, add the following line to `EFI/BOOT/refind.conf`, just as you did to remove BIOS entries.
+
+```plain
+use_graphics_for osx,linux,windows,grub
+```
