@@ -57,3 +57,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 # Configuration
 
 Though rEFInd has many configuration options, some basic configuration is required for a smoother experience on T2 Macs.
+
+## Removing BIOS entries
+
+Macs with T2 chip cannot BIOS boot. So it is advised to remove the BIOS entries. For that, open finder, and then open the `REFIND` volume. Add the line given below at the end of `EFI/BOOT/refind.conf` file by editing it with a text editor.
