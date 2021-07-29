@@ -12,7 +12,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 4. Extract the zip file (can be done by double clicking on it). The contents shall be extracted in a folder named `refind-bin-<VERSION>`. Here `<VERSION>` means the same as described in step 3.
 5. Open the terminal and run `diskutil list` to get the disk identifier of the `REFIND` volume created in step 1. A sample output is given below:-
 
-   ```sh
+   ```plain
    /dev/disk0 (internal, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      GUID_partition_scheme                        *500.3 GB   disk0
@@ -36,7 +36,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
    Here, the disk indentifier of `REFIND` volume is `disk0s4`.
 6. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of below command) with the disk identifier you got in the output as described in step 5 and `refind-bin-0.13.2` (found in 1st line of below command) with the name of folder which was created in step 4.
 
-   ```sh
+   ```plain
    cd ~/Downloads/refind-bin-0.13.2
    xattr -rd com.apple.quarantine .
    sed -i '' "s/sed -i 's/sed -i '' 's/g" refind-install
@@ -45,3 +45,15 @@ All steps given here have to be performed on **macOS**. You will also need to ha
    diskutil unmount disk0s4
    diskutil mount disk0s4
    sudo rmdir /tmp/refind_install
+
+7. Now run:-
+  
+   ```plain
+   bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
+   ```
+  
+   This will changed the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
+  
+# Configuration
+
+Though rEFInd has many configuration options, some basic configuration is required for a smoother experience on T2 Macs.
