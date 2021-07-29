@@ -71,5 +71,5 @@ After successfully booting into your new installation, you will need to configur
 - Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
 
 You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
-graphics cards. However if you don't need it specifically, its probably best to stick with the deticated gpu. If your Mac only has
+graphics cards. However if you don't need it specifically, its probably best to stick with the dedicated gpu. If your Mac only has
 a single GPU, you can ignore this anyways.
