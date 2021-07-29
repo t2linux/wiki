@@ -48,7 +48,7 @@ You will also need to make some space on your hard drive. While its technically 
 
 To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
 
-If you distribution needs a connection to the internet while installing, make sure to prepare an ethernet cable, wifi adapter or
+If your distribution needs a connection to the internet while installing, make sure to prepare an ethernet cable, wifi adapter or
 phone for tethering. If none of these options are available but your model has wifi support, you can also follow the steps to install firmware in your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
 the live environment.
 
@@ -70,6 +70,6 @@ After successfully booting into your new installation, you will need to configur
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
 - Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
 
-You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if you Mac has two
-graphics cards. However if you don't need it specifically, its probably best to stick with the deticated gpu. If your Mac only has
+You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
+graphics cards. However if you don't need it specifically, its probably best to stick with the dedicated gpu. If your Mac only has
 a single GPU, you can ignore this anyways.
