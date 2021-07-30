@@ -80,10 +80,39 @@ use_graphics_for osx,linux,windows,grub
 
 Preventing use of NVRAM is must as T2 doesn’t like someone to touch the NVRAM. In latest editions of rEFInd, preventing use of NVRAM is enabled by default. You may confirm this by checking presence of `use_nvram false` line somewhere in the middle of the `refind.conf` file (the one mentioned in above instructions). Make sure it is not commented (doesn’t have a `#` before the line). If it is then remove the `#`.
 
-In case the line is missing, add it at the end if `refind.conf` file.
+In case the line is missing, add it at the end of `refind.conf` file.
 
 In case the line `use_nvram true` is present instead, change `true` to `false`.
 
 # Making rEFInd default at startup
 
 After correctly installing and configuring rEFInd, we need to make it boot by default on every startup. In order to do so, restart your Mac and press and hold down the **Option** key. When the startup manager gets displayed, release the Option key. Now press and hold the **Control** key and without releasing the Control key, boot into the **rEFInd startup disk**. Now on every startup, rEFInd will get displayed by default.
+
+Note :- This step has to be performed every time you update macOS to a newer version, as this makes the macOS startup disk as the default startup disk.
+
+# Fixing blank screen on booting macOS using rEFInd
+
+Sometimes, while booting into macOS using rEFInd, users get stuck at a blank screen. This bug is observed only if you have performed a force/unsafe shutdown by pressing and holding the power button in the previous boot. Some users have also faced it in the first macOS boot using rEFInd on new rEFInd installations. In order to fix it, turn off your Mac and restart while holding down the **Option** key. Release the Option key when the Mac Startup Manager gets displayed. Boot into macOS using the Mac Startup Manager. This shall fix the bug for subsequent boots.
+
+# Uninstalling rEFInd
+
+In case you wish to uninstall rEFInd, boot into **macOS** and follow the steps below :-
+
+1. Open the Disk Utility
+2. Select the partition on which macOS is installed (it generally has the label Macintosh HD until you have renamed it manually).
+3. Click on **Partition**.
+4. Select the `REFIND` partition and click `-` to remove it. Your macOS partition should expand to fill the space that rEFInd was in.
+5. Click on **Apply**. Disk Utility will remove the `REFIND` partition and expand your macOS partition. This may take a while, but **do not interrupt this process**.
+6. Change the default startup disk to the OS you wish to be boot by default. 
+  
+   If the OS you wish is **macOS** or **Windows**, follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the **Change your startup disk for every startup** section.
+  
+   If the OS you wish is **Linux**, follow the [Startup Manager Guide](https://wiki.t2linux.org/guides/startup-manager/#setting-linux-startup-disk-as-the-default-startup-disk).
+   
+# References and External links
+
+[Reference](https://apple.stackexchange.com/questions/402289/refind-installation-wont-boot-due-to-t2-security-despite-t2-security-being-dis) - This guide has been inspired from here.
+
+[rEFInd](https://www.rodsbooks.com/refind/) - Official website of rEFInd.
+
+[Theming rEFInd](https://www.rodsbooks.com/refind/themes.html) - Useful guide to set custom themes for rEFInd.
