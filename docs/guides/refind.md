@@ -78,4 +78,12 @@ use_graphics_for osx,linux,windows,grub
 
 ## Preventing use of NVRAM (Likely to have been enabled already)
 
-Preventing use of NVRAM is must as T2 doesn’t like someone to touch the NVRAM. In latest editions of rEFInd, the `refind.conf` file (the one mentioned in above instructions)
+Preventing use of NVRAM is must as T2 doesn’t like someone to touch the NVRAM. In latest editions of rEFInd, preventing use of NVRAM is enabled by default. You may confirm this by checking presence of `use_nvram false` line somewhere in the middle of the `refind.conf` file (the one mentioned in above instructions). Make sure it is not commented (doesn’t have a `#` before the line). If it is then remove the `#`.
+
+In case the line is missing, add it at the end if `refind.conf` file.
+
+In case the line `use_nvram true` is present instead, change `true` to `false`.
+
+# Making rEFInd default at startup
+
+After correctly installing and configuring rEFInd, we need to make it boot by default on every startup. In order to do so, restart your Mac and press and hold down the **Option** key. When the startup manager gets displayed, release the Option key. Now press and hold the **Control** key and without releasing the Control key, boot into the **rEFInd startup disk**. Now on every startup, rEFInd will get displayed by default.
