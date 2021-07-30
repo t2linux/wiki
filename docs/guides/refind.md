@@ -103,12 +103,12 @@ In case you wish to uninstall rEFInd, boot into **macOS** and follow the steps b
 3. Click on **Partition**.
 4. Select the `REFIND` partition and click `-` to remove it. Your macOS partition should expand to fill the space that rEFInd was in.
 5. Click on **Apply**. Disk Utility will remove the `REFIND` partition and expand your macOS partition. This may take a while, but **do not interrupt this process**.
-6. Change the default startup disk to the OS you wish to be boot by default. 
+6. Change the default startup disk to the OS you wish to be boot by default.
   
    If the OS you wish is **macOS** or **Windows**, follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the **Change your startup disk for every startup** section.
   
    If the OS you wish is **Linux**, follow the [Startup Manager Guide](https://wiki.t2linux.org/guides/startup-manager/#setting-linux-startup-disk-as-the-default-startup-disk).
-   
+  
 # References and External links
 
 [Reference](https://apple.stackexchange.com/questions/402289/refind-installation-wont-boot-due-to-t2-security-despite-t2-security-being-dis) - This guide has been inspired from here.
