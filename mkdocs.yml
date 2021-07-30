@@ -46,6 +46,7 @@ nav:
           - Fan: guides/fan.md
           - Kernel: guides/kernel.md
           - Startup Manager: guides/startup-manager.md
+          - rEFInd: guides/refind.md
     - Distributions:
           - Overview: distributions/overview.md
           - Arch:
