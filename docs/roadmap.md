@@ -69,6 +69,7 @@ After successfully booting into your new installation, you will need to configur
 - Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
 - Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
 - Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
+- Install rEFInd (optional): [here](https://wiki.t2linux.org/guides/refind/)
 
 You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
 graphics cards. However if you don't need it specifically, its probably best to stick with the dedicated gpu. If your Mac only has
