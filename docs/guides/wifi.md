@@ -131,7 +131,7 @@ will need Big Sur wifi firmware.
 
 5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
-    > Note: `iwd` versions 1.14 and 1.15 do not work (unless you are using Big Sur Firmware patch). If you have one of those versions, please refer to your distribution's documentation for installing 1.13
+    > Note: Refer to [warnings](https://wiki.t2linux.org/#warnings) for iwd version incompatibilities
 
 6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
