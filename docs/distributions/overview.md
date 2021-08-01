@@ -5,3 +5,4 @@ This is a landing page for the distribution specific guides contained in this wi
 - [Arch Linux](https://wiki.t2linux.org/distributions/arch/installation/)
 - [Manjaro](https://wiki.t2linux.org/distributions/manjaro/home/)
 - [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/home/)
+- [Gentoo](https://wiki.t2linux.org/distributions/gentoo/installation/)
