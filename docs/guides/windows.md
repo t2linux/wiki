@@ -68,7 +68,9 @@ Create partitions with Disk Utility:
 
 If you are using an interactive installer:
 
-1. Set the `EFI2` partition to be mounted at `/boot/efi` and set it as "ESP"/"Boot"/"EFI System Partition". Don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set by default to be used as the "EFI System Partition". On Ubuntu you may need to right click on nvme0n1p1, click edit/change, and unset it as "EFI System Partition".
+1. Set the `EFI2` partition to be mounted at `/boot/efi` and set it as "ESP"/"Boot"/"EFI System Partition". Don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set by default to be used as the "EFI System Partition". 
+
+   On Ubuntu you will need to right click on `nvme0n1p1`, click edit/change, and set it as "Do not use this partition". Then you have to set `/boot/efi` as the mount point for the `EFI2` partition.
 2. Your main partition that were formatted as macOS Extended/HFS+ can be mounted at `/`.
 3.  If it fails to install the bootloader, open a terminal:
 
