@@ -5,7 +5,7 @@
 # Hardware Requirements
 
 * USB-C to ethernet cable adapter.
-    * Whilst you can install this over WiFi, it would make it alot easier to use an Adapter. If you would like to use the WiFi to set up Manjaro then refer to the "In order to get WiFi working" Section after you have booted Manjaro
+    * Whilst you can install this over WiFi, it would make it alot easier to use an Adapter.
 * USB-C to USB Adapter
 
 # Install Procedure
