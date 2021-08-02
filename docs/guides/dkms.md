@@ -48,6 +48,8 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 3. Load the modules into the kernel
 
+    > Note: This is only necessary if you wish to use the modules right away. If you are installing modules from a live iso the commands will fail as the modules have only been installed for the kernel you specified.
+
     ```sh
     sudo modprobe apple_bce
     sudo modprobe apple_ib_tb
