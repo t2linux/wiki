@@ -45,6 +45,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
    diskutil unmount disk0s4
    diskutil mount disk0s4
    sudo rmdir /tmp/refind_install
+   ```
 
 7. Now run:-
   
