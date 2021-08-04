@@ -38,7 +38,7 @@ Please use the table below to check which patchsets will work for your model.
 | MacBookAir8,2    | BCM43?? | ?        | ?        | ?                    |
 | MacMini8,1       | BCM4364 | 3?       | Lanai    | Mojave / Big Sur     |
 | MacPro7,1        | BCM43?? | ?        | ?        | ?                    |
-| iMac20,1         | BCM43?? | ?        | ?        | ?                    |
+| iMac20,1         | BCM4364 | 4        | Hanauma  | Big Sur              |
 | iMac20,2         | BCM43?? | ?        | ?        | ?                    |
 | iMacPro1,1       | BCM43?? | ?        | ?        | ?                    |
 
