@@ -81,7 +81,7 @@ If your model identifier is 16,1 you can take a shortcut and get the firmware fi
 ##### Compiling a kernel for using Big Sur firmware
 
 Follow the [kernel compiling guide](https://wiki.t2linux.org/guides/kernel/#compile),
-But make sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
+but make sure to use [https://github.com/jamlam/mbp-16.1-linux-wifi](https://github.com/jamlam/mbp-16.1-linux-wifi)
 instead of [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 as the patchset repository.
 
@@ -112,12 +112,6 @@ will need Big Sur wifi firmware.
 
 3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
 
-    > Note: From this point on the instructions might be different for a distribution that you are trying to install.
-
-    > Note: Using iwd is technically not needed for using wifi, however WPA2 is unstable without it.
-    Running the command from step 3 would work for connecting to WPA2 networks as well but it would have to be
-    run every time before connecting to a network.
-
 4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
 
     ```log
@@ -128,18 +122,24 @@ will need Big Sur wifi firmware.
     May 09 11:55:55 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4364/3 wl0: Oct 23 2019 08:32:36 version 9.137.11.0.32.6.36 FWID 01-671ec60c
     ```
 
-5. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
+### Fixing unstable WPA2 using iwd
+
+Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 3 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+
+Instructions in this section might be different for the distribution that you are trying to install.
+
+1. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
     > Note: Refer to [warnings](https://wiki.t2linux.org/#warnings) for iwd version incompatibilities
 
-6. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
+2. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
     ```ini
     [device]
     wifi.backend=iwd
     ```
 
-7. Set iwd to run on boot with the following commands (assuming that you are using systemd).
+3. Set iwd to run on boot with the following commands (assuming that you are using systemd).
 
     ```sh
     sudo systemctl enable --now iwd
