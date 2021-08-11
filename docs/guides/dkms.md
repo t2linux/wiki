@@ -9,7 +9,7 @@ If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge
 
 To get started with this guide, first install the `dkms` package.
 
-You may have been using an outdated kernel or your distribution may have been using kernel modules that do not match the ones listed below (check using `dkms status`). If the version of `apple-bce` in the output is `0.1`, you have to uninstall the old modules first to avoid any compatibility issues by running:
+You may have been using an outdated kernel or your distribution may have been using kernel modules that do not match the ones listed below (check using `dkms status` or `ls -l /usr/src`). If the version of `apple-bce` in the output is `0.1`, you have to uninstall the old modules first to avoid any compatibility issues by running:
 
 ```sh
 sudo dkms uninstall -m apple-bce -v 0.1
