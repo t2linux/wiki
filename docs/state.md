@@ -26,7 +26,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - The T2's onboard Audio Video Encoder (used for Sidecar on macOS)
 - Keyboard Backlight on 16,X models
 - Automatically changing between speakers and headphones when headphones are plugged and unplugged
-- Volume controls on headphones connected to the 3.5mm jack
+- Volume buttons on headphones connected to the 3.5mm jack
 - Graphics switching without rebooting (gmux)
 
 ## Other
