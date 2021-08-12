@@ -2,9 +2,6 @@
 
 This page is a step by step guide to get wifi working on supported models.
 
-**Note that currently some models may not have support
-([testing wanted](https://wiki.t2linux.org/guides/wifi/#bcm4377)), see the table below**
-
 ## Getting the right firmware
 
 There are two patchsets for the linux kernel that add wifi support, but they
@@ -88,10 +85,8 @@ as the patchset repository.
 ##### BCM4377
 
 The BCM4377 chipset is Broadcom's "2.0" hardware, and requires changes to
-the `brcmfmac` driver. The artifact from [this CI run](https://github.com/Redecorating/mbp-16.1-linux-wifi/actions/runs/1037316726)
-has an Arch kernel with extra patches in addition to the
-Corellium patch that should support the BCM4377. If you test this, you
-will need Big Sur wifi firmware.
+the `brcmfmac` driver. The kernel [here](https://github.com/Jemoka/mbp-16.1-linux-wifi) 
+has extra patches that add support for this chip.
 
 ### Renaming Firmware
 
