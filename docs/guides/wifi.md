@@ -85,7 +85,7 @@ as the patchset repository.
 ##### BCM4377
 
 The BCM4377 chipset is Broadcom's "2.0" hardware, and requires changes to
-the `brcmfmac` driver. The kernel [here](https://github.com/Jemoka/mbp-16.1-linux-wifi) 
+the `brcmfmac` driver. The kernel [here](https://github.com/Jemoka/mbp-16.1-linux-wifi)
 has extra patches that add support for this chip.
 
 ### Renaming Firmware
