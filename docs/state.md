@@ -12,7 +12,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Partially Working
 
-- Wifi: Works for all models except for those with the BCM4377 chip. For more details, refer to the [wifi guide](http://wiki.t2linux.org/guides/wifi/).
+- Wifi: Works for all models.
 - Bluetooth: Not working on MBP16,2. When running a kernel above 5.10, it is also not working on MBP16,1
 - Trackpad: Though it is technically working, it is far from the experience on macOS. No force touch. Some models have deadzones on the edges of their trackpads.
 - Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either function keys from 1 to 12 or basic media / brightness control are shown. Sometimes it is unable to change between function keys and media / brightness keys.
