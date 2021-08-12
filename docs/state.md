@@ -9,7 +9,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - USB
 - Keyboard
 - Camera
-- Wifi
+- Wifi (For now its working for all the devices we have data about. There are still some devices of whom we don't have data. Refer to the [wifi guide](https://wiki.t2linux.org/guides/wifi/) for more details)
 
 ## Partially Working
 
