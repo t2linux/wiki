@@ -49,6 +49,7 @@ Note that if you are using one of the distributions listed above you should foll
 - Disable thermal throttling (better performance but higher temperatures) [https://github.com/yyearth/turnoff-BD-PROCHOT](https://github.com/yyearth/turnoff-BD-PROCHOT)
 - Install a distribution in a virtual machine and copy it to bare metal afterwards [https://gist.github.com/Redecorating/c876a4c3b24e47d79c1f921495f62213](https://gist.github.com/Redecorating/c876a4c3b24e47d79c1f921495f62213) (using Pop!_OS as an example)
 - Get SMART information of your Apple Internal SSD using Linux [https://gist.github.com/AdityaGarg8/b03e57826213019fbffa747e1c724cac](https://gist.github.com/AdityaGarg8/b03e57826213019fbffa747e1c724cac)
+- Keyboard related issues [https://wiki.archlinux.org/title/Apple_Keyboard](https://wiki.archlinux.org/title/Apple_Keyboard)
 
 *Outdated*
 
