@@ -14,7 +14,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 
 To get started with an installation, refer to the [roadmap](https://wiki.t2linux.org/roadmap)
 
-# Contact Us
+# Contact us
 
 You may contact us on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
