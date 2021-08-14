@@ -50,6 +50,7 @@ Note that if you are using one of the distributions listed above you should foll
 - Install a distribution in a virtual machine and copy it to bare metal afterwards [https://gist.github.com/Redecorating/c876a4c3b24e47d79c1f921495f62213](https://gist.github.com/Redecorating/c876a4c3b24e47d79c1f921495f62213) (using Pop!_OS as an example)
 - Get SMART information of your Apple Internal SSD using Linux [https://gist.github.com/AdityaGarg8/b03e57826213019fbffa747e1c724cac](https://gist.github.com/AdityaGarg8/b03e57826213019fbffa747e1c724cac)
 - Keyboard related issues [https://wiki.archlinux.org/title/Apple_Keyboard](https://wiki.archlinux.org/title/Apple_Keyboard)
+- Get silent boot experience similar to macOS and Windows on [Ubuntu](https://gist.github.com/AdityaGarg8/a39063f0d8c39572f03f55cbe02f9beb) and [Arch Linux](https://wiki.archlinux.org/title/silent_boot).
 
 *Outdated*
 
