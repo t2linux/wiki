@@ -33,7 +33,7 @@ Please use the table below to check which patchsets will work for your model.
 | MacBookAir9,1    | BCM4377 | 4        | Fiji     | Big Sur              |
 | MacBookAir8,1    | BCM4355 | ?        | Hawaii   | Mojave               |
 | MacBookAir8,2    | BCM4355 | 0c       | Hawaii   | Mojave               |
-| MacMini8,1       | BCM4364 | 3?       | Lanai    | Mojave / Big Sur     |
+| MacMini8,1       | BCM4364 | 3        | Lanai    | Mojave / Big Sur     |
 | MacPro7,1        | BCM43?? | ?        | ?        | ?                    |
 | iMac20,1         | BCM4364 | 4        | Hanauma  | Big Sur              |
 | iMac20,2         | BCM43?? | ?        | ?        | ?                    |
