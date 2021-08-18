@@ -36,7 +36,7 @@ Please use the table below to check which patchsets will work for your model.
 | MacMini8,1       | BCM4364 | 3        | Lanai    | Mojave / Big Sur     |
 | MacPro7,1        | BCM43?? | ?        | ?        | ?                    |
 | iMac20,1         | BCM4364 | 4        | Hanauma  | Big Sur              |
-| iMac20,2         | BCM4364 | ?        | Kure     | Big Sur              |
+| iMac20,2         | BCM4364 | 4        | Kure     | Big Sur              |
 | iMacPro1,1       | BCM43?? | ?        | ?        | ?                    |
 
 *If there is missing/uncertain information for your model, please open a [pull request](https://github.com/t2linux/wiki/edit/master/docs/guides/wifi.md) or [issue](https://github.com/t2linux/wiki/issues/new) or mention it on the [discord](https://discord.com/invite/68MRhQu).*
