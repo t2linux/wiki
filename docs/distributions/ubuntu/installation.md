@@ -36,7 +36,7 @@ The iso you should download depends on your machine, but usually the normal mbp 
 7. Once booted into Ubuntu, you can install it like normal until you get to the partition option.
 8. Find the partition you made before. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
-    1. a 1GB ext4 partiton mounted at /boot
+    1. (optional) a 1GB ext4 partiton mounted at /boot
 
     2. (optional) 8GB swap partition (this can be larger depending on what you are using Ubuntu for)
 
@@ -44,7 +44,7 @@ The iso you should download depends on your machine, but usually the normal mbp 
 
     4. (Optional) rest of the free partition space to an ext4 partition mounted at /home
 
-    5. Leave efi boot alone. Should work just fine.
+    5. Leave efi boot alone until using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
 
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to FAQ. If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
