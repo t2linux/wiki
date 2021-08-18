@@ -17,7 +17,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     ```sh
     git clone https://github.com/aa15032261/apple_set_os-loader
     cd apple_set_os-loader
-    make #you might need a package like gnu-efi to compile this
+    make #you will need efi.h to compile this, which is installed in the gnu-efi package in most distros
     sudo mv /boot/efi/efi/boot/bootx64.efi /boot/efi/efi/boot/bootx64_original.efi
     sudo cp ./bootx64.efi /boot/efi/efi/boot/bootx64.efi
     ```
@@ -43,7 +43,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     ```sh
     git clone https://github.com/Redecorating/efi-gpu-power-prefs
-    make
+    make #you will need efi.h to compile this, which is installed in the gnu-efi package in most distros
     make install
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ```
