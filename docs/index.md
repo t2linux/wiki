@@ -9,6 +9,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 
 - Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
 - Newer versions of `iwd` currently have issues with non Big Sur patched kernels due to certain [p2p related checks missing](https://github.com/aunali1/linux-mbp-arch/blob/master/9001-brcmfmac-p2p-Ensure-virtual-interface-is-initialized.patch). If you are experiencing connection issues after following the [wifi guide](https://wiki.t2linux.org/guides/wifi/) you might want to downgrade to version `1.13` and hold updates for the package.
+- Ubuntu is not working on Mac Mini.
 
 # Getting started
 
