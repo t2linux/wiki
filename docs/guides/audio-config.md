@@ -8,6 +8,14 @@ These files can be found [here](https://gist.github.com/MCMrARM/c357291e4e5c1889
 
 If you are using a 2019 16 inch MBP, use [this](https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba) set of files, as that laptop has 6 speakers and needs slightly different config.
 
+# Fixing low mic volume
+
+Edit `/etc/pulse/default.pa` and add the following at the end :-
+
+```plain
+set-source-volume 1 300000
+```
+
 # Using Pipewire instead of Pulseaudio
 
 You'll need to modify the `/lib/udev/rules.d/91-pulseaudio-custom.rules` file from the links above.
