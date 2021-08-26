@@ -58,13 +58,13 @@ You will next need to retrieve three of the four files listed by that command (t
 
 #### Mojave Firmware
 
-The default kernels for **mbp-ubuntu**, **mbp-manjaro** and **mbp-arch** use Mojave Firmware.
+The default kernels for **mbp-ubuntu**, **mbp-manjaro**, **mbp-arch** and **mbp15-fedora** use Mojave Firmware.
 
 This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/18G2022/](https://packages.aunali1.com/apple/wifi-fw/18G2022/).
 
 #### Big Sur Firmware
 
-The default kernels for **mbp-fedora** and **mbp-nixos** use Big Sur firmware.
+The default kernels for **mbp16-fedora** and **mbp-nixos** use Big Sur firmware.
 
 For **Ubuntu**, the "mbp-16x-wifi" variant kernels (use `sudo apt install linux-headers-5.10.52-mbp-16x-wifi linux-image-5.10.52-mbp-16x-wifi` to install, but change 5.10.52 to the kernel version you wish to install) uses Big Sur firmware too. Alternatively you can also get a Debian kernel (used by Ubuntu, Pop!_OS, Linux Mint etc.), from [this repo](https://github.com/AdityaGarg8/mbp-16.x-ubuntu-kernel#pre-installation-steps), as the repo may be updated faster with newer kernels. For **BCM4377** users the above repo is the only option for now.
 
