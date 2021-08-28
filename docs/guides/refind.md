@@ -34,6 +34,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
    ```
   
    Here, the disk indentifier of `REFIND` volume is `disk0s4`.
+
 6. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 5 and `refind-bin-0.13.2` (found in 1st line of the command given below) with the name of folder which was created in step 4.
 
    ```plain
@@ -53,7 +54,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
    bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
    ```
   
-   This will changed the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
+   This will change the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
   
 # Configuration
 
