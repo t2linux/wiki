@@ -54,11 +54,11 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 7. Now run:-
   
-   ```plain
-   bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
-   ```
+    ```plain
+    bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
+    ```
   
-   This will change the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
+    This will change the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
   
 # Configuration
 
