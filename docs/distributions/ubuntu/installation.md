@@ -1,6 +1,6 @@
 # Download the latest safe release
 
-Warning: Versions newer than 5.7.19 are considered in-development builds and **should not** be used due to issues from within the kernel and the init system.
+Warning: Mac Mini users will need to [install rEFInd](https://wiki.t2linux.org/guides/refind/) to boot GRUB as the Mac Startup Manager on Mac Mini is not booting Ubuntu's GRUB directly.
 
 [Download here](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1)
 
