@@ -1,6 +1,6 @@
 # Download the latest safe release
 
-Warning: Mac Mini users will need to [install rEFInd](https://wiki.t2linux.org/guides/refind/) as the Mac Startup Manager on Mac Mini is not booting Ubuntu.
+Warning: Mac Mini users will need to [install rEFInd](https://wiki.t2linux.org/guides/refind/) to boot GRUB as the Mac Startup Manager on Mac Mini is not booting Ubuntu's GRUB directly.
 
 [Download here](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1)
 
