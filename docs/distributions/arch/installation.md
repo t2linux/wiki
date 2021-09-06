@@ -2,15 +2,18 @@
 
 > Note: If you wish to use archinstall, there is a profile based on this guide which can be found on [https://github.com/Redecorating/archinstall-mbp](https://github.com/Redecorating/archinstall-mbp)
 
+> Note: As the MacBookPro16,1/4's bluetooth support was broken by 5.11, you may want to use a [patched 5.10.x kernel](https://github.com/AdityaGarg8/5.10-patches/releases)
+
 You will need:
 
 - USB drive with at least 1GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi (not all models support it currently), check [the guide](https://wiki.t2linux.org/guides/wifi/) for compatibility and instructions. Its also technically possible to perform an offline installation, see [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) (retrieve the packages from an Arch virtual machine or Docker container)
+- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. If you need to install via wifi, you may use [this iso](https://github.com/Redecorating/archiso-mbp/releases), which has everything needed to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi) and use wifi in the live environment.
+  It's also possible to perform an offline installation, see [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) (retrieve the packages from an Arch virtual machine or Docker container)
 
 ---
 
-1. If your Mac supports wifi, you can [gather all nessearry information about the hardware](https://wiki.t2linux.org/guides/wifi/#getting-the-right-firmware) or [firmware files directly](https://wiki.t2linux.org/guides/wifi/#retrieving-firmware) now
+1. You can [gather all nessearry information about the hardware](https://wiki.t2linux.org/guides/wifi/#getting-the-right-firmware) or [firmware files directly](https://wiki.t2linux.org/guides/wifi/#retrieving-firmware) now
 2. Making a partition for Linux.
 
     1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
@@ -66,5 +69,5 @@ You will need:
         4. Add `intel_iommu=on pcie_ports=compat` to the `options` line to add those kernel parameters.
 
 11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader.
-12. If your Mac supports wifi, you can follow (if you have already retrieved the correct firmware files only the rest of) the [wifi guide](https://wiki.t2linux.org/guides/wifi/) now or after rebooting into your install.
+12. You can follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) (if you have already retrieved the correct firmware files, you only need to follow the rest of it) now, or after rebooting into your install.
 13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
