@@ -57,7 +57,7 @@ Note that if you are using one of the distributions listed above you should foll
 
 - State of Linux on the MacBook Pro (technical documentation) [https://github.com/Dunedan/mbp-2016-linux](https://github.com/Dunedan/mbp-2016-linux)
 - Arch on 2018 MacBook Pro [https://gist.github.com/TRPB/437f663b545d23cc8a2073253c774be3](https://gist.github.com/TRPB/437f663b545d23cc8a2073253c774be3)
-- Ubuntu on 2016 MacBook Pro [https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4)
+- Ubuntu on 16 inch, 2019 MacBook Pro [https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4)
 
 # Notable Contributors
 
