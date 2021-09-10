@@ -94,7 +94,7 @@ sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 
 It unloads the Touchbar modules as they can cause issues for suspend.
 
-# Use ambient light sensor to automatically change brightness
+# Use ambient light sensor to automatically change brightness (if not working already)
 
 You can use [this script](https://gist.github.com/jbredall/52179d1fc2c91917d2fde118d2cb04aa). Make sure you have the `apple-ib-als` module loaded.
 
