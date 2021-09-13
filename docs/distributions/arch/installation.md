@@ -13,7 +13,7 @@ You will need:
 
 ---
 
-1. You can [gather all nessearry information about the hardware](https://wiki.t2linux.org/guides/wifi/#getting-the-right-firmware) or [firmware files directly](https://wiki.t2linux.org/guides/wifi/#retrieving-firmware) now
+1. You can [gather all the necessary information about your hardware](https://wiki.t2linux.org/guides/wifi/#getting-the-right-firmware) or [firmware files directly](https://wiki.t2linux.org/guides/wifi/#retrieving-firmware) now
 2. Making a partition for Linux.
 
     1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
