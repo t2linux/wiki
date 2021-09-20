@@ -70,7 +70,7 @@ For **Ubuntu**, the "t2-j-bigsur", "t2-hwe-bigsur" and "t2-big-sur" variant kern
 
 There are also kernels available for [Arch based distros](https://github.com/jamlam/mbp-16.1-linux-wifi/releases) (like Arch Linux and Manjaro) but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
 
-This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW](https://github.com/Redecorating/archinstall-mbp/tree/packages/apple-t2-wifi-firmware/bigSurFW). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
+This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/AdityaGarg8/macOS-Big-Sur-WiFi-Firmware](https://github.com/AdityaGarg8/macOS-Big-Sur-WiFi-Firmware). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
 
 If your model identifier is 16,1 you can take a shortcut and get the firmware files from [https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware](https://github.com/AdityaGarg8/mbp-16.1-wifi-firmware) by following the instructions given there. If you unable to get working firmware files from there then follow the instructions given for other models.
 
