@@ -81,6 +81,8 @@ The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`
 - 3: Only show media and brightness controls
 - 4: Only show the escape key
 
+> Note :- Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before editing.
+
 # Fixing Suspend
 
 Copy [this script](https://github.com/mikeeq/mbp-fedora/blob/f34/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
