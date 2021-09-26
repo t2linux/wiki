@@ -6,7 +6,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 ## Steps
 
-1. Close the repository into a directory of your choice
+1. Clone the repository into a directory of your choice
 
     ```sh
     git clone https://github.com/networkException/mbpfan
