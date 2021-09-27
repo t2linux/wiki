@@ -2,8 +2,6 @@
 
 > Note: If you wish to use archinstall, there is a profile based on this guide which can be found on [https://github.com/Redecorating/archinstall-mbp](https://github.com/Redecorating/archinstall-mbp)
 
-> Note: As the MacBookPro16,1/4's bluetooth support was broken by 5.11, you may want to use a [patched 5.10.x kernel](https://github.com/AdityaGarg8/5.10-patches/releases)
-
 You will need:
 
 - USB drive with at least 1GB
