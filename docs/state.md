@@ -13,7 +13,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Partially Working
 
-- Bluetooth: Not working on MBP16,2.
+- Bluetooth: Not working on models with the BRCM4377 WiFi chip (MacBookPro15,4, MacBookPro16,3, MacBookAir9,1), and models with the BRCM4355 WiFi chip (MacBookAir8,1, MacBookAir8,2).
 - Trackpad: Though it is technically working, it is far from the experience on macOS. No force touch or palm rejection. Some models have deadzones on the edges of their trackpads.
 - Touchbar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows for example. Either function keys from 1 to 12 or basic media / brightness control are shown. Sometimes it is unable to change between function keys and media / brightness keys.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
