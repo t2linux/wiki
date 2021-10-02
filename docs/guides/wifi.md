@@ -34,10 +34,14 @@ Please use the table below to check which patchsets will work for your model.
 | MacBookAir8,1    | BCM4355 | ?        | Hawaii   | Mojave               |
 | MacBookAir8,2    | BCM4355 | 0c       | Hawaii   | Mojave               |
 | MacMini8,1       | BCM4364 | 3        | Lanai    | Mojave / Big Sur     |
-| MacPro7,1        | BCM4364 | ?        | ?        | ?                    |
+| MacPro7,1        | BCM4364 | ?        | Borneo?  | Big Sur?             |
 | iMac20,1         | BCM4364 | 4        | Hanauma  | Big Sur              |
 | iMac20,2         | BCM4364 | 4        | Kure     | Big Sur              |
-| iMacPro1,1       | BCM4364 | ?        | Ekans?   | ?                    |
+| iMac19,1*        | BCM4364 | 3?       | Nihau    | Mojave / Big Sur     |
+| iMac19,2*        | BCM4364?| 3?       | Midway?  | Mojave / Big Sur?    |
+| iMacPro1,1       | BCM4364 | ?        | Ekans?   | Mojave / Big Sur?    |
+
+\*iMac19,x don't have the T2 chip, but they have the same type of wifi chip as T2 Macs.
 
 *If there is missing/uncertain information for your model, please open a [pull request](https://github.com/t2linux/wiki/edit/master/docs/guides/wifi.md) or [issue](https://github.com/t2linux/wiki/issues/new) or mention it on the [discord](https://discord.com/invite/68MRhQu).*
 
