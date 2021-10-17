@@ -96,10 +96,6 @@ sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 
 It unloads the Touchbar modules as they can cause issues for suspend.
 
-# Fixing broken Keyboard Backight controls
-
-If the Keyboard Backlight is not getting adjusted using the keyboard keys, then pass the `acpi_osi=linux` kernel parameter. An example of passing a kernel paramter using GRUB on Ubuntu is given [here](https://wiki.ubuntu.com/Kernel/KernelBootParameters).
-
 # Use ambient light sensor to automatically change brightness (if not working already)
 
 You can use [this script](https://gist.github.com/jbredall/52179d1fc2c91917d2fde118d2cb04aa). Make sure you have the `apple-ib-als` module loaded.
