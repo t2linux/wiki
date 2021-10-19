@@ -72,7 +72,7 @@ The default kernels for **mbp16-fedora** and **mbp-nixos** use Big Sur firmware.
 
 For **Ubuntu**, the "t2-j-bigsur", "t2-hwe-bigsur" and "t2-big-sur" variant kernels use Big Sur firmware too. You can get them from [here](https://github.com/marcosfad/mbp-ubuntu-kernel/releases) or this [alternative link](https://github.com/AdityaGarg8/T2-Big-Sur-Ubuntu-Kernel#pre-installation-steps). If you are a 16,1 or 16,2 user and want support for both bluetooth and wifi, then you will have to install a kernel available on the **alternative link** given above. Make sure that your [DKMS Modules](https://wiki.t2linux.org/guides/dkms) are updated and you install **linux-headers** before **linux-image**.
 
-There are also kernels available for [Arch based distros](https://github.com/jamlam/mbp-16.1-linux-wifi/releases) (like Arch Linux and Manjaro) but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-with-corelliums-patchset) if you need/want to.
+There are also kernels available for [Arch based distros](https://github.com/jamlam/mbp-16.1-linux-wifi/releases) (like Arch Linux and Manjaro) but you can [compile it yourself](https://wiki.t2linux.org/guides/wifi/#compiling-a-kernel-for-using-big-sur-firmware) if you need/want to.
 
 This firmware is available in `/usr/share/firmware/wifi` in macOS Big Sur installations, or online at [https://github.com/AdityaGarg8/macOS-Big-Sur-WiFi-Firmware](https://github.com/AdityaGarg8/macOS-Big-Sur-WiFi-Firmware). If you get firmware from macOS, make sure that if the files are aliases, that you right click on them, and select "Show Original" to get the actual files.
 
