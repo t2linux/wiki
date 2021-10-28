@@ -64,7 +64,7 @@ The Touchbar and keyboard should work, for audio, you'll need some config files,
 
 ```sh
 echo "apple-bce
-apple-ib_tb
+apple-ib-tb
 apple-ib-als
 brcmfmac" >> /etc/modules-load.d/t2.conf
 ```
