@@ -11,7 +11,8 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 # Enabling the iGPU
 
-> Note: Aside from step 1, these instructions should be followed in Linux.
+!!! note
+    Aside from step 1, these instructions should be followed in Linux.
 
 1.  Update macOS. BigSur can boot when the iGPU is set as the boot GPU, but this has not been tested on Catalina, and [on older MacBooks](https://github.com/Dunedan/mbp-2016-linux/issues/6#issuecomment-286200226), setting the iGPU as the boot GPU has stopped macOS from booting properly with graphics, and it is unknown when this was fixed (you might want to turn ssh on in macOS if you are worried about this).
 2.  Compile apple-set-os loader, which spoofs macOS so that the iGPU gets enabled:

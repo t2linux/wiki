@@ -14,8 +14,9 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 2. Compile the daemon using `make`
 
-    > Note: This will run a patch script that finds a fan device on your system.
-    You can use its output for debug purposes
+    !!! note
+        This will run a patch script that finds a fan device on your system.
+        You can use its output for debug purposes
 
 3. Run the tests to confirm that everything is working `sudo make tests`
 4. If the tests ran successfully, install using `sudo make install`

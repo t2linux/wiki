@@ -48,7 +48,8 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 3. Load the modules into the kernel
 
-    > Note: This is only necessary if you wish to use the modules right away. If you are installing modules from a live iso the commands will fail as the modules have only been installed for the kernel you specified.
+    !!! note
+        This is only necessary if you wish to use the modules right away. If you are installing modules from a live iso the commands will fail as the modules have only been installed for the kernel you specified.
 
     ```sh
     sudo modprobe apple_bce
@@ -60,7 +61,8 @@ The Touchbar and keyboard should work, for audio, you'll need some config files,
 
 # Make modules load on boot
 
-> Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
+!!! info "Ubuntu"
+    Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
 
 ```sh
 echo "apple-bce
@@ -81,7 +83,8 @@ The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`
 - 3: Only show media and brightness controls
 - 4: Only show the escape key
 
-> Note :- Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before editing.
+!!! info "Ubuntu"
+    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before editing.
 
 # Fixing Suspend
 

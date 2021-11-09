@@ -42,7 +42,8 @@ In other cases, put an `icns` image file with your desired icon in the top direc
 
 # Setting Linux startup disk as the default startup disk
 
-**Note :-** In case you upgrade macOS to a newer version, the default startup disk gets changed to the macOS startup disk. Thus you will have to follow the instructions to make the Linux startup disk as default every time after you upgrade macOS.
+!!! warning
+    In case you upgrade macOS to a newer version, the default startup disk gets changed to the macOS startup disk. Thus you will have to follow the instructions to make the Linux startup disk as default every time after you upgrade macOS.
 
 ## Case of common EFI partition for Windows and Linux
 

@@ -94,7 +94,8 @@ In case the line `use_nvram true` is present instead, change `true` to `false`.
 
 After correctly installing and configuring rEFInd, we need to make it boot by default on every startup. In order to do so, restart your Mac and press and hold down the **Option** key. When the startup manager gets displayed, release the Option key. Now press and hold the **Control** key and without releasing the Control key, boot into the **rEFInd startup disk**. Now on every startup, rEFInd will get displayed by default.
 
-Note :- This step has to be performed every time you update macOS to a newer version, as this makes the macOS startup disk as the default startup disk.
+!!! warning
+    This step has to be performed every time you update macOS to a newer version, as this makes the macOS startup disk as the default startup disk.
 
 # Fixing blank screen on booting macOS using rEFInd
 

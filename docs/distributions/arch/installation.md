@@ -1,6 +1,7 @@
 # Installing Arch Linux on a Mac with the T2 Chip
 
-> Note: If you wish to use archinstall, there is a profile based on this guide which can be found on [https://github.com/Redecorating/archinstall-mbp](https://github.com/Redecorating/archinstall-mbp)
+!!! hint
+    If you wish to use archinstall, there is a profile based on this guide which can be found on [https://github.com/Redecorating/archinstall-mbp](https://github.com/Redecorating/archinstall-mbp)
 
 You will need:
 
@@ -43,7 +44,8 @@ You will need:
     2. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
     3. Update your pacman repositories with `pacman -Syy`
 
-        > Note: If this command errors you are either not using the correct iso (see step 3) or don't have internet (see "You will need" at the top of this document)
+        !!! note
+            If this command errors you are either not using the correct iso (see step 3) or don't have internet (see "You will need" at the top of this document)
 
     4. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.

@@ -122,7 +122,8 @@ Instructions in this section might be different for the distribution that you ar
 
 1. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
 
-    > Note: Refer to [warnings](https://wiki.t2linux.org/#warnings) for iwd version incompatibilities
+    !!! warning "Some users have experienced issues with `iwd`"
+        Refer to [warnings](https://wiki.t2linux.org/#warnings) for iwd version incompatibilities
 
 2. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
 
