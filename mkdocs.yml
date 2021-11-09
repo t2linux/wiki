@@ -30,6 +30,9 @@ markdown_extensions:
           custom_checkbox: true
     - toc:
           permalink: true
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
 
 nav:
     - General:
