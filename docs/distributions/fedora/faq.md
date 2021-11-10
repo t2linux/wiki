@@ -5,4 +5,4 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 # Why isn't sound / WiFi working?
 
 Due to issues in the Fedora install process, there is no sound or WiFi working after install. You'll have to set them up manually.
-Refer to these guides on [audio configuration](https://wiki.t2linux.org/guides/audio-config) and [WiFi configuration](https://wiki.t2linux.org/guides/wifi/).
+Refer to these guides on [audio configuration](https://wiki.t2linux.org/guides/audio-config) (note to follow the PipeWire instructions as Fedora uses PipeWire now) and [WiFi configuration](https://wiki.t2linux.org/guides/wifi/).
