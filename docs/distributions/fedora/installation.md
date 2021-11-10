@@ -42,6 +42,6 @@ Thanks so Mike for building. Download here. [https://github.com/mikeeq/mbp-fedor
 
     5. Leave efi boot alone until using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
 
-9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to Manjaro FAQ. If not, you should be fine.
+9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to the various FAQs. If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Fedora! :)
