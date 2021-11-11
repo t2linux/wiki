@@ -4,14 +4,15 @@
 
 # Hardware Requirements
 
-* USB-C to ethernet cable adapter.
-    * Whilst you can install this over WiFi, it would make it alot easier to use an Adapter.
+* USB-C to Ethernet cable adapter.
+    * While you can install Manjaro over WiFi, it would be a lot easier to use an Adapter during the installation process.
 * USB-C to USB Adapter
+* USB drive
 
 # Install Procedure
 
-1. Partition your drive in macOS ready for a linux install. You can either use Disk Utility or use Bootcamp, important thing is, is that you have two partitions (Your macOS partition and your new linux one) (It isn't recommended that you totally delete macOS as firmware updates are applied through it).
-2. Flash your iso to a USB Stick, If you want a easy way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). For a more command line way of doing this, use dd.
+1. Partition your drive in macOS ready for a linux install. You can either use Disk Utility or use Bootcamp, but the important thing is that you have two partitions (your macOS partition and your new linux one). It isn't recommended that you completely delete macOS as firmware updates are applied through it.
+2. Flash your Manjaro ISO to a USB Stick. If you want an easier way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). For Terminal users, use dd.
 3. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
 
     1. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.
@@ -32,7 +33,7 @@
     sudo pacman -Sy calamares-mbp
     ```
 
-    In case you face error stating 'Calamares initialisation failed', turn off your Mac and follow step 5 and 6 again. Then open a terminal window and run these commands instead of the one given above :-
+    In case you get the error 'Calamares initialisation failed', turn off your Mac and follow steps 5 and 6 again. Then open a terminal window and run these commands instead:
 
     ```sh
     systemctl start systemd-timesyncd.service
@@ -51,17 +52,17 @@
     sudo calamares
     ```
 
-8. Open the installer and proceed normally until you hit the partitioning stage. (Installer will automatically start if you have used the second set of commands given above).
+8. Open the installer and proceed normally until you arrive at the partitioning stage (the Installer will automatically start if you have used the second set of commands given above).
 9. Click Manual Partitioning.
-10. Click on `/dev/nvme0n1p1` then press edit at the bottom of the install window, change the Change the Mount Point: `/boot/efi`, after that click okay.
-11. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (Double check this, the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the macOS partition.
+10. Click on `/dev/nvme0n1p1`, then press edit at the bottom of the install window, change the mount point to `/boot/efi`, and then click ok.
+11. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (however, double check this - the Installer should recognize this partition as an `Apple APFS` Partition). Ignore the macOS partition.
 12. Delete the partition you created before, this is usually mounted to `/dev/nvme0n1p3`.
-13. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem, if you know what you are doing feel free to skip to the next step (15).
+13. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem. If you know what you're doing, feel free to skip to step 15.
 
-    * Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click okay.
-    * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click okay.
+    * Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click ok.
+    * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click ok.
     * Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
 
 14. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer remembering to remove the install medium once powered off.
-15. Once again, Power on your computer whilst holding the Option (⌥) key. Then select EFI Boot.
+15. Once again, power on your computer whilst holding the Option (⌥) key. Then select (the non-yellow) EFI Boot.
 16. Welcome to Manjaro :)
