@@ -33,7 +33,7 @@ You could install the linux-mbp-arch kernel, which is updated, by following step
 Ubuntu also has a grahical installer. Additionally, less post configuration work is required as some kernel modules are getting
 installed automatically.
 
-Fedora also has a prebuild iso.
+Fedora also has a prebuilt ISO. Note that due to Fedora using PipeWire, getting audio to work can be more finnicky. See [state](https://wiki.t2linux.org/state/).
 
 If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
@@ -64,12 +64,12 @@ This wiki provides a set of such guides for different distributions, which can b
 
 After successfully booting into your new installation, you will need to configure a few things.
 
-- Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
-- Getting wifi to work: [here](https://wiki.t2linux.org/guides/wifi)
-- Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
-- Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
-- Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
-- Install rEFInd (optional): [here](https://wiki.t2linux.org/guides/refind/)
+-   Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
+-   Getting wifi to work: [here](https://wiki.t2linux.org/guides/wifi)
+-   Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
+-   Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
+-   Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
+-   Install rEFInd (optional): [here](https://wiki.t2linux.org/guides/refind/)
 
 You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
 graphics cards. However if you don't need it specifically, its probably best to stick with the dedicated gpu. If your Mac only has
