@@ -1,16 +1,16 @@
 # Download the latest safe release
 
-Thanks so Mike for building. Download here. [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
+Thanks so Mike for building. You can download a live iso [here](https://github.com/mikeeq/mbp-fedora)
 
 # Hardware Requirements
 
 -   USB-C to Ethernet adapter
     -   This isn't required, and you can use a USB WiFi Adapter instead.
--   USB-C to USB adapter
+-   USB-C to USB adapter. Important: different USB-C to USB adapters work differently - if you're stuck before getting to the graphical UI during boot this may be the problem.
 
 # Install Procedure
 
-(These instructions are reused from the Manjaro installation guide)
+(These instructions are re-used from the Manjaro installation guide)
 
 1. In order to install Fedora, you'll need to partition your SSD. You can use Disk Utility and a recommended amount is over 64 GB. If you have a Bootcamp install, you don't have to uninstall it. Make sure to have two partitions when you're done (Linux partition and macOS partition).
 2. Flash the downloaded iso to a USB Flash Drive, or even an SD Card. Use [Balena Etcher](https://www.balena.io/etcher/) for a gui option, command line option is dd.
@@ -34,14 +34,15 @@ Thanks so Mike for building. Download here. [https://github.com/mikeeq/mbp-fedor
 
     1. (optional) a 1GB ext4 partiton mounted at /boot
 
-    2. (optional) 8GB swap partition (this can be larger depending on what you are using Ubuntu for)
+    2. (optional) 8GB swap partition (this can be larger depending on what you are using Fedora for)
 
     3. rest of the free partition space or around 30GB to an ext4 partition mounted at /
 
     4. (Optional) rest of the free partition space to an ext4 partition mounted at /home
 
-    5. Leave efi boot alone until using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
+    5. Leave efi boot alone unless using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
 
-9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to the various FAQs. If not, you should be fine.
+9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to the FAQs for [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/) and [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/). If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Fedora! :)
+12. Once you're booted and in your desktop, set up [Wifi](https://wiki.t2linux.org/guides/wifi/) and [audio](https://wiki.t2linux.org/guides/audio-config/) (note: Fedora uses PipeWire!) to finalize.
