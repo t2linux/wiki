@@ -140,3 +140,30 @@ Instructions in this section might be different for the distribution that you ar
     ```
 
 If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
+
+### Fixing suspend on models with BCM4377
+
+Create `/lib/systemd/system-sleep/bcm4377-suspend.sh` with the following contents:
+
+```sh
+#!/bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+case "$1" in
+	pre)
+		echo "Prevent D3cold on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do echo 0 > "/sys/bus/pci/devices/$dev/d3cold_allowed"; done
+		echo "RF block on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 1 > "$rfkillsoft"; done
+	;;
+	post)
+		echo "RF unblock on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 0 > "$rfkillsoft"; done
+	;;
+esac
+
+exit 0
+```
+
+Make it executable with `sudo chmod +x /lib/systemd/system-sleep/bcm4377-suspend.sh`.
