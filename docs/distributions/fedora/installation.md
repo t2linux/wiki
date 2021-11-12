@@ -1,4 +1,4 @@
-Note before you begin: Due to Fedora having switched to using PipeWire, getting audio to work can be more difficult than on other distributions. See also https://wiki.t2linux.org/state/. Confirmed working with headphones according to the [audio](https://wiki.t2linux.org/guides/audio-config/) guide, but speakers TBD. WiFi works as expected after following the [Wifi](https://wiki.t2linux.org/guides/wifi/) guide. Generally very usable and quick.
+Note before you begin: Due to Fedora having switched to using PipeWire, getting audio to work may be more difficult than on other distributions. See also [state](https://wiki.t2linux.org/state/). Confirmed working with headphones according to the [audio](https://wiki.t2linux.org/guides/audio-config/) guide, but speakers TBD. WiFi works as expected after following the [Wifi](https://wiki.t2linux.org/guides/wifi/) guide. Generally very usable and quick.
 
 # Download the latest safe release
 
