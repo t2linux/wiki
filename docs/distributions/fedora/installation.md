@@ -2,7 +2,7 @@ Note before you begin: Due to Fedora having switched to using PipeWire, getting 
 
 # Download the latest safe release
 
-Thanks so Mike for building. You can download a live iso [here](https://github.com/mikeeq/mbp-fedora)
+Many thanks to Mike for building. You can download a live iso [here](https://github.com/mikeeq/mbp-fedora)
 
 # Hardware Requirements
 
