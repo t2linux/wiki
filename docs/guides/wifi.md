@@ -143,13 +143,18 @@ If you wifi disconnects or has issues otherwise its advised to restart iwd: `sud
 
 ### Fixing suspend on models with BCM4377
 
-Create `/lib/systemd/system-sleep/bcm4377-suspend.sh` with the following contents:
+Models with BCM4377 may have WiFi stop working after suspending. It can be fixed but only when using the `s2idle` sleep state, which doen't save as much power as normal suspend. To use the `s2idle` sleep state, add this to `/etc/rc.local`:
+
+```sh
+#!/bin/bash
+echo s2idle > /sys/power/mem_sleep
+```
+
+Then to make wifi work after resuming from `s2idle`, create `/lib/systemd/system-sleep/bcm4377-suspend.sh` with the following contents:
 
 ```sh
 #!/bin/sh
-
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-
 case "$1" in
 	pre)
 		echo "Prevent D3cold on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
@@ -162,7 +167,6 @@ case "$1" in
 		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 0 > "$rfkillsoft"; done
 	;;
 esac
-
 exit 0
 ```
 
