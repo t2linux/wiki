@@ -54,6 +54,10 @@ nav:
           - Overview: distributions/overview.md
           - Arch:
                 - Installation: distributions/arch/installation.md
+          - Fedora:
+                - Home: distributions/fedora/home.md
+                - FAQ: distributions/fedora/faq.md
+                - Installation: distributions/fedora/installation.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
                 - Building: distributions/manjaro/building.md
