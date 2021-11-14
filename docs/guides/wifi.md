@@ -156,16 +156,16 @@ Then to make wifi work after resuming from `s2idle`, create `/lib/systemd/system
 #!/bin/sh
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 case "$1" in
-	pre)
-		echo "Prevent D3cold on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
-		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do echo 0 > "/sys/bus/pci/devices/$dev/d3cold_allowed"; done
-		echo "RF block on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
-		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 1 > "$rfkillsoft"; done
-	;;
-	post)
-		echo "RF unblock on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
-		find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 0 > "$rfkillsoft"; done
-	;;
+    pre)
+        echo "Prevent D3cold on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+        find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do echo 0 > "/sys/bus/pci/devices/$dev/d3cold_allowed"; done
+        echo "RF block on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+        find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 1 > "$rfkillsoft"; done
+    ;;
+    post)
+        echo "RF unblock on 'brcmfmac' devices for $2..." | tee -a /var/log/suspend-brcm.log
+        find /sys/bus/pci/drivers/brcmfmac/ | awk -F/ '{print $NF}' | grep -P '^[0-9a-f:.]+$' | while read dev; do find "/sys/bus/pci/devices/$dev/ieee80211/" | grep -P '/phy\d+/rfkill\d+/soft$'; done | while read rfkillsoft; do echo 0 > "$rfkillsoft"; done
+    ;;
 esac
 exit 0
 ```
