@@ -65,13 +65,8 @@ The Touchbar and keyboard should work, for audio, you'll need some config files,
     Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
 
 ```sh
-echo "apple-bce
-apple-ib-tb
-apple-ib-als
-brcmfmac" >> /etc/modules-load.d/t2.conf
+echo apple-bce >> /etc/modules-load.d/t2.conf
 ```
-
-If you don't want (for example) the touch bar modules, you can ommit them from this command. `brcmfmac` is needed to use the internal wifi chip, refer to the [wifi guide](https://wiki.t2linux.org/guides/wifi/) for details on how to set that up.
 
 # Module configuration
 
