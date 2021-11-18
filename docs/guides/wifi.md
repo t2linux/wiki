@@ -143,11 +143,12 @@ If you wifi disconnects or has issues otherwise its advised to restart iwd: `sud
 
 ### Fixing suspend on models with BCM4377
 
-Models with BCM4377 may have WiFi stop working after suspending. It can be fixed but only when using the `s2idle` sleep state, which doen't save as much power as normal suspend. To use the `s2idle` sleep state, add this to `/etc/rc.local`:
+Models with BCM4377 may have WiFi stop working after suspending. It can be fixed but only when using the `s2idle` sleep state, which doen't save as much power as normal suspend. To use the `s2idle` sleep state, add this to `/etc/systemd/sleep.conf`:
 
-```sh
-#!/bin/bash
-echo s2idle > /sys/power/mem_sleep
+```ini
+[Sleep]
+SuspendState=freeze
+AllowHibernation=no
 ```
 
 Then to make wifi work after resuming from `s2idle`, create `/lib/systemd/system-sleep/bcm4377-suspend.sh` with the following contents:
