@@ -25,6 +25,15 @@ KERNEL!="card*", GOTO="pulseaudio_end"
 LABEL="pulseaudio_end"
 ```
 
+Note: The updated locations for the files in the links above for Pipewire distributions will be:
+
+
+* /usr/share/alsa/cards/AppleT2.conf
+* **/usr/share/alsa-card-profile/mixer/profile-sets/apple-t2.conf**
+* /usr/lib/udev/rules.d/91-pulseaudio-custom.rules
+
+
+
 # Issues
 
 - Some people are unable to get audio input to work. You may have to use a seperate microphone.
