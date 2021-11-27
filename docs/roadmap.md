@@ -30,10 +30,10 @@ Keep in mind however that the whole process is done in the command line.
 Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt isos for different desktop environments. Note that Manjaro currently only has 5.7.19 as the latest kernel version. The support period for 5.7.x ended in August 2020.
 You could install the linux-mbp-arch kernel, which is updated, by following step 8 of the [arch install guide](https://wiki.t2linux.org/distributions/arch/installation/), and `sudo pacman -S linux-mbp linux-mbp-headers`.
 
-Ubuntu also has a grahical installer. Additionally, less post configuration work is required as some kernel modules are getting
+Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting
 installed automatically.
 
-Fedora also has a prebuilt ISO. Note that due to Fedora using PipeWire, getting audio to work can be more finnicky. See [state](https://wiki.t2linux.org/state/).
+Fedora also has a prebuilt ISO. The experience is smooth with the built-in installer, and the OS runs snappily. Audio and WiFi will need to be set up separately. See [state](https://wiki.t2linux.org/state/).
 
 If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
