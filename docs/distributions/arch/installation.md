@@ -53,7 +53,8 @@ You will need:
 
 8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
 9. Add Aunali1's repository to `/etc/pacman.conf`, by adding this:
-   ```
+
+   ```ini
    [mbp]
    Server = https://dl.t2linux.org/archlinux/\$repo/\$arch
    ```
