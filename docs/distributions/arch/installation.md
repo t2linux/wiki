@@ -56,7 +56,7 @@ You will need:
 
    ```ini
    [mbp]
-   Server = https://dl.t2linux.org/archlinux/\$repo/\$arch
+   Server = https://dl.t2linux.org/archlinux/$repo/$arch
    ```
 
 10. Install a bootloader, probably Grub, but you can also use systemd-boot. Don't do both.
