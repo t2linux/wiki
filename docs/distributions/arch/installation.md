@@ -36,7 +36,7 @@ You will need:
 
 6. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) up to "Format the partitions".
 
-    1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows/already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
+    1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows or already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`, and your other partitions on `/mnt`, etc.
 
 7. Continue following the Arch Wiki's guide until "Install essential packages".
@@ -52,13 +52,18 @@ You will need:
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
 8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
-9. Add Aunali1's repository to `/etc/pacman.conf`, with `echo [mbp]\nServer = https://dl.t2linux.org/archlinux/\$repo/\$arch >> /etc/pacman.conf`.
+9. Add Aunali1's repository to `/etc/pacman.conf`, by adding this:
+   ```
+   [mbp]
+   Server = https://dl.t2linux.org/archlinux/\$repo/\$arch
+   ```
+
 10. Install a bootloader, probably Grub, but you can also use systemd-boot. Don't do both.
 
     1. Installing Grub:
 
         1. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
-        2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on pcie_ports=compat`
+        2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
         3. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`.
         4. `grub-mkconfig -o /boot/grub/grub.cfg`
 
@@ -67,7 +72,7 @@ You will need:
         1. `bootctl --path=/boot/efi --no-variables install`
         2. You may need to mask the `systemd-boot-system-token` service, as it writes to nvram and can cause panics at boot: `systemctl mask systemd-boot-system-token`.
         3. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for both `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`.
-        4. Add `intel_iommu=on pcie_ports=compat` to the `options` line to add those kernel parameters.
+        4. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
 11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader.
 12. You can follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) (if you have already retrieved the correct firmware files, you only need to follow the rest of it) now, or after rebooting into your install.
