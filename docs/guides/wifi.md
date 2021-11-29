@@ -68,7 +68,7 @@ This older firmware is archived at [https://packages.aunali1.com/apple/wifi-fw/1
 
 #### Big Sur Firmware
 
-The default kernels for **mbp16-fedora** and **mbp-nixos** use Big Sur firmware.
+The default kernels for **mbp16-fedora** and **mbp-nixos** use Big Sur firmware. Also, starting from **fedora 35**, all releases use Big Sur firmware.
 
 For **Ubuntu**, the "t2-j-bigsur", "t2-hwe-bigsur" and "t2-big-sur" variant kernels use Big Sur firmware too. You can get them from [here](https://github.com/marcosfad/mbp-ubuntu-kernel/releases) or this [alternative link](https://github.com/AdityaGarg8/T2-Big-Sur-Ubuntu-Kernel#pre-installation-steps). If you are a 16,1 or 16,2 user and want support for both bluetooth and wifi, then you will have to install a kernel available on the **alternative link** given above. Make sure that your [DKMS Modules](https://wiki.t2linux.org/guides/dkms) are updated and you install **linux-headers** before **linux-image**.
 
