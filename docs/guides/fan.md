@@ -31,5 +31,5 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 ## Configuration
 
-The daemons config file can be found at `/etc/mpbfan.conf`. Uncommenting and setting `min_fan1_speed` for example will let you
+The daemons config file can be found at `/etc/mbpfan.conf`. Uncommenting and setting `min_fan1_speed` for example will let you
 force a certain speed.
