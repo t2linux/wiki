@@ -37,8 +37,8 @@ Please use the table below to check which patchsets will work for your model.
 | MacPro7,1        | BCM4364 | 4        | Kahana   | Big Sur              |
 | iMac20,1         | BCM4364 | 4        | Hanauma  | Big Sur              |
 | iMac20,2         | BCM4364 | 4        | Kure     | Big Sur              |
-| iMac19,1*        | BCM4364 | 3?       | Nihau    | Mojave / Big Sur     |
-| iMac19,2*        | BCM4364?| 3?       | Midway?  | Mojave / Big Sur?    |
+| iMac19,1*        | BCM4364 | 3        | Nihau    | Mojave / Big Sur     |
+| iMac19,2*        | BCM4364 | 3        | Nihau    | Mojave / Big Sur     |
 | iMacPro1,1       | BCM4364 | ?        | Ekans?   | Mojave / Big Sur?    |
 
 \*iMac19,x don't have the T2 chip, but they have the same type of wifi chip as T2 Macs.
