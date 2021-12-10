@@ -25,7 +25,7 @@ Please use the table below to check which patchsets will work for your model.
 | MacBookPro16,1   | BCM4364 | 4        | Bali     | Big Sur              |
 | MacBookPro16,2   | BCM4364 | 4        | Trinidad | Big Sur              |
 | MacBookPro16,3   | BCM4377 | 4        | Tahiti   | Big Sur              |
-| MacBookPro16,4   | BCM4364 | 4        | Bali?    | Big Sur              |
+| MacBookPro16,4   | BCM4364 | 4        | Borneo   | Big Sur              |
 | MacBookPro15,1   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
 | MacBookPro15,2   | BCM4364 | 3        | Maui     | Mojave / Big Sur     |
 | MacBookPro15,3   | BCM4364 | 3        | Kauai    | Mojave / Big Sur     |
