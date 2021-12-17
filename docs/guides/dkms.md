@@ -44,11 +44,11 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 2. Installing the Touchbar and Ambient Light sensor modules
 
     - If you are on a MacBook Pro (16 inch, 2019), MacBook Pro (13 inch, 2020), or MacBook Air (Retina, 13-inch, 2020), run :
-      
+
       `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
-      
+
       Else run :
-      
+
       `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
     - Now run `sudo dkms install -m apple-ibridge -v 0.1`. If on a live ISO, use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
