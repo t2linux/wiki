@@ -7,7 +7,7 @@ You will need:
 
 - USB drive with at least 1GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. If you need to install via wifi, you may use [this iso](https://github.com/Redecorating/archiso-mbp/releases), which has everything needed to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi) and use wifi in the live environment.
+- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. If you need to install via wifi, you may use [this iso](https://mirror.funami.tech/archiso-mact2/), which has everything needed to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi) and use wifi in the live environment.
   It's also possible to perform an offline installation, see [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) (retrieve the packages from an Arch virtual machine or Docker container)
 
 ---
