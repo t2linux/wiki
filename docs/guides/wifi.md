@@ -10,7 +10,7 @@ In order to get wifi running on Linux, we need to get the firmware from macOS an
 
 2. Open the terminal and run `cp -r /usr/share/firmware/wifi ~/Desktop`. This shall make a folder named **wifi** on the macOS Desktop.
 
-3. Copy the **wifi** folder to an external drive or a partition which is formatted by a file system readable by Linux.
+3. Copy the **wifi** folder to an external drive or a partition which is formatted to a file system readable by Linux.
 
 4. Boot into Linux.
 
