@@ -2,19 +2,35 @@
 
 This page is a step by step guide to get wifi working on T2 Macs.
 
-## Getting the right firmware
+## Getting the firmware
 
-You may download the firmware from [here](https://github.com/AdityaGarg8/Apple-WiFi-Firmware/releases/download/Montery/firmware.tar.xz).
+In order to get wifi running on Linux, we need to get the firmware from macOS and copy it to Linux with appropriate changes. Thanks to Asahi Linux, who has made the process much simpler. You may follow the steps below to get the firmware and copy it to Linux properly.
 
-### Installing Firmware
+1. Boot into macOS.
 
-1. Extract the firmware files from the .tar.xz and move them to `/lib/firmware/brcm/`.
+2. Open the terminal and run `cp -r /usr/share/firmware/wifi ~/Desktop`. This shall make a folder named **wifi** on the macOS Desktop.
 
-2. Check that the files are in place with `ls -l /lib/firmware/brcm|grep -E "43(64|55|77)"`.
+3. Copy the **wifi** folder to an external drive or a partition which is formatted my a file system readable by Linux.
 
-3. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
+4. Boot into Linux.
 
-4. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
+5. Copy the **wifi** folder to the **Home** folder using your file manager.
+
+6. Open the terminal and run
+
+   ```sh
+   git clone https://github.com/AsahiLinux/asahi-installer --depth=1
+   cd asahi-installer/src
+   python3 -m firmware.wifi ~/wifi firmware.tar
+   cd /lib/firmware
+   sudo tar xvf ~/asahi-installer/src/firmware.tar
+   ```
+
+## Testing Firmware
+
+1. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
+
+2. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
 
     ```log
     Dec 24 22:34:19 hostname kernel: usbcore: registered new interface driver brcmfmac
@@ -29,7 +45,7 @@ You may download the firmware from [here](https://github.com/AdityaGarg8/Apple-W
     Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
     ```
 
-### Fixing unstable WPA2 using iwd
+## Fixing unstable WPA2 using iwd
 
 Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 3 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
 
