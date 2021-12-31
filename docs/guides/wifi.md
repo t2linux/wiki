@@ -24,6 +24,7 @@ In order to get wifi running on Linux, we need to get the firmware from macOS an
    python3 -m firmware.wifi ~/wifi firmware.tar
    cd /lib/firmware
    sudo tar xvf ~/asahi-installer/src/firmware.tar
+   sudo rm -r ~/asahi-installer ~/wifi
    ```
 
 ## Testing Firmware
