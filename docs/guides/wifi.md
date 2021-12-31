@@ -10,13 +10,13 @@ In order to get wifi running on Linux, we need to get the firmware from macOS an
 
 2. Open the terminal and run `cp -r /usr/share/firmware/wifi ~/Desktop`. This shall make a folder named **wifi** on the macOS Desktop.
 
-3. Copy the **wifi** folder to an external drive or a partition which is formatted my a file system readable by Linux.
+3. Copy the **wifi** folder to an external drive or a partition which is formatted by a file system readable by Linux.
 
 4. Boot into Linux.
 
 5. Copy the **wifi** folder to the **Home** folder using your file manager.
 
-6. Open the terminal and run
+6. Open the terminal and run :-
 
    ```sh
    git clone https://github.com/AsahiLinux/asahi-installer --depth=1
