@@ -41,16 +41,18 @@ You will need:
 
 7. Continue following the Arch Wiki's guide until "Install essential packages".
 
-    1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
-        1-1. If you're using wifi-enabled iso, don't do 1. and jump straight to 4-1.
+    1. 
+        1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
+        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d.
     2. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
     3. Update your pacman repositories with `pacman -Syy`
 
         !!! note
             If this command errors you are either not using the correct iso (see step 3) or don't have internet (see "You will need" at the top of this document)
 
-    4. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
-        4-1. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware iwd grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). 
+    4. 
+        1. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+        2. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). 
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
 
