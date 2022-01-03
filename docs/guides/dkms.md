@@ -68,6 +68,32 @@ The Touchbar and keyboard should work, for audio, you'll need some config files,
 echo apple-bce >> /etc/modules-load.d/t2.conf
 ```
 
+# Make modules load on early boot
+
+Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
+It also is useful when boot doesn't work, and the keyboard is required for debugging.
+To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
+If your distro uses `initramfs-tools` (all debian-based distros), then `/etc/initramfs-tools/modules` stores a list of extra modules to be included and loaded at early boot time:
+
+```sh
+cat <<EOF >> /etc/initramfs-tools/modules
+# Required modules for getting the built-in apple keyboard to work:
+snd
+snd_pcm
+apple-bce
+EOF
+```
+
+Other distros use a different initramfs module loading mechanism.
+For example in Arch ensure that the `/etc/mkinitcpio.conf` file has:
+
+```sh
+MODULES="apple-bce"
+```
+
+And then run `sudo mkinitcpio -P`.
+See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
+
 # Module configuration
 
 The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` (`options apple-ib-tb fnmode=x`) to one of the following options:
