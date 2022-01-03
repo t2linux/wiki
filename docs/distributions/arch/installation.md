@@ -41,8 +41,8 @@ You will need:
 
 7. Continue following the Arch Wiki's guide until "Install essential packages".
 
-    1.
-        
+    1. Getting the signing key:
+
         1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
         2. If you're using wifi-enabled iso, don't run the above command and jump straight to d.
 
@@ -52,8 +52,8 @@ You will need:
         !!! note
             If this command errors you are either not using the correct iso (see step 3) or don't have internet (see "You will need" at the top of this document)
 
-    4.
-        
+    4. Getting the required packages:
+
         1. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
         2. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
 
