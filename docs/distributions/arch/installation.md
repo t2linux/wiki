@@ -7,7 +7,7 @@ You will need:
 
 - USB drive with at least 1GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. If you need to install via wifi, you may use [this iso](https://github.com/Redecorating/archiso-mbp/releases), which has everything needed to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi) and use wifi in the live environment.
+- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. If you need to install via wifi, you may use [this iso](https://github.com/NoaHimesaka1873/archiso-t2/releases), which has everything needed to follow this guide and use wifi in the live environment. (There's some difference in installation process with this iso which will be described later on)
   It's also possible to perform an offline installation, see [this](https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Installing_packages_from_a_CD/DVD_or_USB_stick) (retrieve the packages from an Arch virtual machine or Docker container)
 
 ---
@@ -41,17 +41,21 @@ You will need:
 
 7. Continue following the Arch Wiki's guide until "Install essential packages".
 
-    1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
+    1.
+        1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
+        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d.
     2. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
     3. Update your pacman repositories with `pacman -Syy`
 
         !!! note
             If this command errors you are either not using the correct iso (see step 3) or don't have internet (see "You will need" at the top of this document)
 
-    4. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (ommit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+    4.
+        1. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+        2. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
-8. In your `chroot`, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too.
+8. In your `chroot`, unless you're using aforementioned wifi-enabled iso, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too. If you're using wifi-enabled iso, only follow [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) and jump straight to 10 and skip step 12.
 9. Add Aunali1's repository to `/etc/pacman.conf`, by adding this:
 
    ```ini
