@@ -43,7 +43,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - If you are on a MacBook Pro (16 inch, 2019), MacBook Pro (13 inch, 2020), or MacBook Air (Retina, 13-inch, 2020), and want keyboard backlight to work, run :
+    - If you are on a MacBook Pro (16 inch, 2019) or MacBook Pro (13 inch, 2020), and want keyboard backlight to work, run :
 
       `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
