@@ -8,7 +8,7 @@ In order to get wifi running on Linux, we need to get the firmware from macOS an
 
 1. Boot into macOS.
 
-2. Open the terminal and run :- 
+2. Open the terminal and run :-
 
    ```sh
    cp -r /usr/share/firmware/wifi ~/Desktop
