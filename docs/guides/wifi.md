@@ -14,6 +14,7 @@ In order to get wifi running on Linux, we need to get the firmware from macOS an
    cp -r /usr/share/firmware/wifi ~/Desktop
    curl -L https://github.com/AsahiLinux/asahi-installer/archive/refs/heads/main.zip > ~/Desktop/asahi-installer-main.zip
    ```
+
    This shall make a folder named **wifi** and a zip archive named **asahi-installer-main.zip** on the macOS Desktop.
 
 3. Copy the **wifi** folder and the **asahi-installer-main.zip** archive to an external drive or a partition which is formatted to a file system readable by Linux. You can also use your EFI partition by mounting it using `sudo diskutil mount disk0s1`.
