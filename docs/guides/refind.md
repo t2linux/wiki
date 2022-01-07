@@ -92,14 +92,14 @@ In case the line `use_nvram true` is present instead, change `true` to `false`.
 
 # Making rEFInd default at startup
 
-After correctly installing and configuring rEFInd, we need to make it boot by default on every startup. In order to do so, restart your Mac and press and hold down the **Option** key. When the startup manager gets displayed, release the Option key. Now press and hold the **Control** key and without releasing the Control key, boot into the **rEFInd startup disk**. Now on every startup, rEFInd will get displayed by default.
+After correctly installing and configuring rEFInd, we need to make it boot by default on every startup. In order to do so, restart your Mac and press and hold down the **Option (Alt)** key. When the startup manager gets displayed, release the Option key. Now press and hold the **Control** key and without releasing the Control key, boot into the **rEFInd startup disk**. Now on every startup, rEFInd will get displayed by default.
 
 !!! warning
     This step has to be performed every time you update macOS to a newer version, as this makes the macOS startup disk as the default startup disk.
 
 # Fixing blank screen on booting macOS using rEFInd
 
-Sometimes, while booting into macOS using rEFInd, users get stuck at a blank screen. This bug is observed only if you have performed a force/unsafe shutdown by pressing and holding the power button in the previous boot. Some users have also faced it in the first macOS boot using rEFInd on new rEFInd installations. In order to fix it, turn off your Mac and restart while holding down the **Option** key. Release the Option key when the Mac Startup Manager gets displayed. Boot into macOS using the Mac Startup Manager. This shall fix the bug for subsequent boots.
+Sometimes, while booting into macOS using rEFInd, users get stuck at a blank screen. This bug is observed only if you have performed a force/unsafe shutdown by pressing and holding the power button in the previous boot. Some users have also faced it in the first macOS boot using rEFInd on new rEFInd installations. In order to fix it, turn off your Mac and restart while holding down the **Option (Alt)** key. Release the Option key when the Mac Startup Manager gets displayed. Boot into macOS using the Mac Startup Manager. This shall fix the bug for subsequent boots.
 
 # Uninstalling rEFInd
 
