@@ -24,10 +24,10 @@ While technically it is not a limitation when installing Linux, different distri
 ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
-t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress archinstall script.
+t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress `archinstall` script.
 Keep in mind however that the whole process is done in the command line.
 
-Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt isos for different desktop environments. Note that Manjaro currently only has 5.7.19 as the latest kernel version. The support period for 5.7.x ended in August 2020.
+Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. Note that Manjaro currently only has 5.7.19 as the latest kernel version. The support period for 5.7.x ended in August 2020.
 You could install the linux-mbp-arch kernel, which is updated, by following step 8 of the [arch install guide](https://wiki.t2linux.org/distributions/arch/installation/), and `sudo pacman -S linux-mbp linux-mbp-headers`.
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
@@ -41,13 +41,13 @@ If you wish to use another distribution, you can install it normally, also follo
 You will want to look at [the wifi guide](https://wiki.t2linux.org/guides/wifi/) to check if your model is supported before starting an installation.
 Based on that information, prepare anything that is needed for installing on Linux.
 
-Make sure to keep the wifi firmware, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux can not read APFS, the file system macOS uses by default.
+Make sure to keep the wifi firmware, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux cannot read APFS, the file system macOS uses by default.
 
-You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40 GB should be fine for a base installation.
+You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40GB should be fine for a base installation.
 
 To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
 
-If your distribution needs a connection to the internet while installing, make sure to prepare an ethernet cable, wifi adapter or
+If your distribution needs a connection to the Internet while installing, make sure to prepare an Ethernet cable, wifi adapter or
 phone for tethering. If none of these options are available but your model has wifi support, you can also follow the steps to install firmware in your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
 the live environment.
 
@@ -57,19 +57,19 @@ If you want to triple boot with Windows, read the instructions in the [triple bo
 
 Now follow the installation guide of your specific distribution.
 
-This wiki provides a set of such guides for different distributions, which can be found [here](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use has such a guide, its recommended to follow it instead of the official documentation by distribution vendor, as it considers t2 support.
+This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.
 
 ## Configuring the Installation
 
-After successfully booting into your new installation, you will need to configure a few things.
+After successfully booting into your new installation, you will need to configure a few things:
 
--   Install/upgrade drivers for the internal keyboard, trackpad and touchbar: [here](https://wiki.t2linux.org/guides/dkms/)
--   Getting wifi to work: [here](https://wiki.t2linux.org/guides/wifi)
--   Install drivers for the fan (if not working automatically or want to force a certain speed): [here](https://wiki.t2linux.org/guides/fan/)
--   Configure audio: [here](https://wiki.t2linux.org/guides/audio-config/)
--   Configure startup manager (optional): [here](https://wiki.t2linux.org/guides/startup-manager/)
--   Install rEFInd (optional): [here](https://wiki.t2linux.org/guides/refind/)
+-   [Install/upgrade drivers for the soundcard, internal keyboard, trackpad and touchbar](https://wiki.t2linux.org/guides/dkms/)
+-   [Getting wifi to work](https://wiki.t2linux.org/guides/wifi)
+-   [Install drivers for the fan (if not working automatically or want to force a certain speed)](https://wiki.t2linux.org/guides/fan/)
+-   [Configure audio](https://wiki.t2linux.org/guides/audio-config/)
+-   [Configure startup manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
+-   [Install rEFInd (optional)](https://wiki.t2linux.org/guides/refind/)
 
-You might also want to look into [getting the interal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
-graphics cards. However if you don't need it specifically, its probably best to stick with the dedicated gpu. If your Mac only has
-a single GPU, you can ignore this anyways.
+You might also want to look into [getting the internal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
+graphics cards. However, if you don't need it specifically, it's probably best to stick with the dedicated one. If your Mac only has
+a single graphics unit, you can ignore this.
