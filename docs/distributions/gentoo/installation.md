@@ -18,7 +18,7 @@
 4. Boot into the Live USB enviornment
 	1. Plug in the USB Flash Drive into your computer
 	2. Startup while holding the Option key, this will put you in the macOS Startup Manager
-	3. Select the orange EFI Boot option and press enter to boot into it. (If you're using a Ubuntu Live enviornment, then make sure to select the orange EFI Boot option to the far right)
+	3. Select the orange EFI Boot option and press enter to boot into it. (If you're using a Ubuntu Live enviornment, then make sure to select the orange EFI Boot option all the way to the right)
 5. Follow the [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks)
 	1. Instead of making a new EFI partition for Gentoo, you should instead mount `/dev/nvme0n1p1` to `/mnt/gentoo/boot/efi`
 	2. Make sure that you have deleted the partition you made ahead of time, or else you'll lose important data
@@ -37,7 +37,9 @@
 	```bash
 	git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce
 	git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge
-	for i in apple-bce apple-ibridge; do; mkdir /usr/src/linux/drivers/staging/$i; cp -r /usr/src/$i/* /usr/src/linux/drivers/staging/$i/
+	for i in apple-bce apple-ibridge; do
+	mkdir /usr/src/linux/drivers/staging/$i 
+	cp -r /usr/src/$i/* /usr/src/linux/drivers/staging/$i/
 	```
 	6. Apply all patches from `/linux-patches` to `/usr/src/linux`.
 	7. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module
