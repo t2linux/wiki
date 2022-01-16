@@ -45,28 +45,32 @@
     ```
 
     1. Git clone [these patches](https://github.com/Redecorating/mbp-16.1-linux-wifi) to `/linux-patches`
+        * Make sure you clone the repo to folder `/linux-patches`, not to a subfolder like `/linux-patches/mbp-16.1-linux-wifi`. If you do do that by accident, then move all of the patches with `mv /linux-patches/mbp-16.1-linux-wifi/*.patch /linux-patches`
         * If you're using a kernel that is older than 5.16, then you'll need to additionally download [this patch](https://raw.githubusercontent.com/Redecorating/mbp-16.1-linux-wifi/main/0101-efi-runtime-avoid-EFIv2-runtime-services-on-Apple-x8.patch)
-    2. If needed, git checkout to an older tag with the current gentoo-sources kernel version
-    3. Run these commands to grab apple-bce and apple-ibridge:
+        * If needed, git checkout to an older tag with the current gentoo-sources kernel version
+    2. Run these commands to grab apple-bce and apple-ibridge:
 
     ```bash
     git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce
     git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge
-    for i in apple-bce apple-ibridge; do
+    for i in apple-bce apple-ibridge; do 
     mkdir /usr/src/linux/drivers/staging/$i 
     cp -r /usr/src/$i/* /usr/src/linux/drivers/staging/$i/
+    done
     ```
 
     1. Apply all patches from `/linux-patches` to `/usr/src/linux` with this:
 
     ```bash
     cd /usr/src/linux
-    for i in /linux-patches/*.patch; do; echo $i; patch -Np1 < /linux-patches/$i; done
+    for i in /linux-patches/*.patch; do 
+    echo $i 
+    patch -Np1 < $i 
+    done
     ```
 
-    1. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module
-    2. If you're using kernel version 5.15 or older, than you
-    3. Build with `make all`. If you want to speed up the build process, add `-j$(nproc)`
+    1. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module with `make menuconfig`
+    2. Build with `make all`. If you want to speed up the build process, add `-j$(nproc)`
 
 7. Before finishing, if you want to connect to the internet later, now is a good time to install `NetworkManager` and optionally `iwd`.
 8. Continue through the Handbook until chapter "Configuring the bootloader"
