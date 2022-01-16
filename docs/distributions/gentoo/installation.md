@@ -21,7 +21,7 @@
 4. Boot into the Live USB enviornment
     1. Plug in the USB Flash Drive into your computer
     2. Startup while holding the Option key, this will put you in the macOS Startup Manager
-    3. Select the orange EFI Boot option and press enter to boot into it. (If you're using a Ubuntu Live enviornment, then make sure to select the orange EFI Boot option all the way to the right)
+    3. Select the orange EFI Boot option and press enter to boot into it. (If you're using a Ubuntu Live environment, then make sure to select the orange EFI Boot option all the way to the right)
 5. Follow the [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks)
     1. Instead of making a new EFI partition for Gentoo, you should instead mount `/dev/nvme0n1p1` to `/mnt/gentoo/boot/efi`
     2. Make sure that you have deleted the partition you made ahead of time, or else you'll lose important data
@@ -48,9 +48,16 @@
     cp -r /usr/src/$i/* /usr/src/linux/drivers/staging/$i/
     ```
 
-    1. Apply all patches from `/linux-patches` to `/usr/src/linux`.
-    2. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module
-    3. Build with `make all`. If you want to speed up the build process, you might want to set `-j` to something like 2.
+    1. Apply all patches from `/linux-patches` to `/usr/src/linux` with this:
+
+    ```bash
+    cd /usr/src/linux
+    for i in /linux-patches/*.patch; do; echo $i; patch -Np1 < /linux-patches/$i; done
+    ```
+
+    1. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module
+    2. If you're using kernel version 5.15 or older, than you
+    3. Build with `make all`. If you want to speed up the build process, add `-j$(nproc)`
 7. Before finishing, if you want to connect to the internet later, now is a good time to install `NetworkManager` and optionally `iwd`.
 8. Continue through the Handbook until chapter "Configuring the bootloader"
     1. Install grub by using `emerge --ask --verbose sys-boot/grub`
