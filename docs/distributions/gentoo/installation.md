@@ -37,7 +37,7 @@
     ```
 
     1. Git clone [these patches](https://github.com/Redecorating/mbp-16.1-linux-wifi) to `/linux-patches`
-        * If you're using a kernel that is newer than 5.15, then you should remove the 0101 patch by using `rm /linux-patches/0101-*.patch`
+        * If you're using a kernel that is older than 5.16, then you'll need to additionally download [this patch](https://raw.githubusercontent.com/Redecorating/mbp-16.1-linux-wifi/main/0101-efi-runtime-avoid-EFIv2-runtime-services-on-Apple-x8.patch)
     2. If needed, git checkout to an older tag with the current gentoo-sources kernel version
     3. Run these commands to grab apple-bce and apple-ibridge:
 
