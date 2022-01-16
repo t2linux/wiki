@@ -49,10 +49,10 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
-5.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
+3.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
 
     If you do have that line in journalctl, then you can set NVRAM and the boot GPU from Linux:
-    
+
     ```sh
     curl https://raw.githubusercontent.com/0xbb/gpu-switch/master/gpu-switch > gpu-switch
     chmod +x gpu-switch
@@ -60,7 +60,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     sudo mv gpu-switch /usr/local/bin/
     sudo gpu-switch -i
     ```
-    
+
     Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 # Use on Windows
@@ -69,7 +69,7 @@ In one case (has anyone else tried this?), the iGPU only works on Windows if the
 
 If you want to use the iGPU on Linux but not on Windows, you can switch back to the dGPU with `sudo gpu-switch -d` before booting to Windows.
 
-3. If you want to switch GPU from Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
+If you want to switch GPU from Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
 
 # VFIO GPU passthrough
 
