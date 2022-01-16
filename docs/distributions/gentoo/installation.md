@@ -37,6 +37,7 @@
     ```
 
     1. Git clone [these patches](https://github.com/Redecorating/mbp-16.1-linux-wifi) to `/linux-patches`
+        * If you're using a kernel that is newer than 5.15, then you should remove the 0101 patch by using `rm /linux-patches/0101-*.patch`
     2. If needed, git checkout to an older tag with the current gentoo-sources kernel version
     3. Run these commands to grab apple-bce and apple-ibridge:
 
@@ -65,6 +66,5 @@
     3. On the line with `GRUB_CMDLINE_LINUX`, append the following parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
     4. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable` to insall Grub.
     5. Run `grub-mkconfig -o /boot/grub/grub.cfg` to make the config files for Grub
-    6. Make nvram/efivars automatically remount as readonly, since writing to them causes a kernel panic: `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0 >> /etc/fstab`. If this for some reason does not work, then add `efi=noruntime` to the kernel paramters in `/etc/default/grub`
 9. You're done! You should now be able to boot into Gentoo via the macOS Startup Manager
 10. If you confirmed that Gentoo does bootup no problem, then you can boot into macOS and follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi/)
