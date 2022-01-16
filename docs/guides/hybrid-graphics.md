@@ -7,7 +7,8 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 ## Issues
 
 1. Resume after suspend is broken, as the GMUX (graphics multiplexer) doesn't connect the iGPU to the display after resuming. For this to be fixed, a Linux driver for `acpi:APP000B:GPUC:` needs to be written (macOS uses AppleMuxControl2.kext). The extra battery life may make this a worthwhile trade-off (about 3 hours to almost 6 hours on a MacBookPro16,1)
-2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" probem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
+2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" problem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
+3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
 
 # Enabling the iGPU
 
@@ -44,9 +45,9 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         8086 3E9B INTEL - UHD Graphics 630 (Mobile)
         ```
 
-    3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your display brightness control may stop working, this is temporary.
+    3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your display brightness controls may stop working, this is temporary.
 
-    4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then don't proceed, apple_set_os hasn't loaded.
+    4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
 5.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
 
