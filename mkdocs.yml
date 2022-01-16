@@ -58,6 +58,8 @@ nav:
                 - Home: distributions/fedora/home.md
                 - FAQ: distributions/fedora/faq.md
                 - Installation: distributions/fedora/installation.md
+          - Gentoo:
+                - Installation: distributions/gentoo/installation.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
                 - Building: distributions/manjaro/building.md
