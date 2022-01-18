@@ -78,7 +78,7 @@
     1. Install grub by using `emerge --ask --verbose sys-boot/grub`
     2. Edit the config file `/etc/default/grub` with your favorite text editor of choice (i.e. vim or nano)
     3. On the line with `GRUB_CMDLINE_LINUX`, append the following parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
-    4. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable` to insall Grub.
+    4. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable` to install Grub.
     5. Run `grub-mkconfig -o /boot/grub/grub.cfg` to make the config files for Grub
 
 9. You're done! You should now be able to boot into Gentoo via the macOS Startup Manager
