@@ -12,34 +12,33 @@ You will need:
 
 ---
 
-1. You can [gather all the necessary information about your hardware](https://wiki.t2linux.org/guides/wifi/#getting-the-right-firmware) or [firmware files directly](https://wiki.t2linux.org/guides/wifi/#retrieving-firmware) now
-2. Making a partition for Linux.
+1. Making a partition for Linux.
 
     1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
     2. In macOS Disk Utility, make a partition, format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from the installer, so you must make space now.
 
-3. Creating bootable media
+2. Creating bootable media
 
     1. Download an installer ISO from [here](https://dl.t2linux.org/archlinux/iso/index.html).
     2. Put this image onto a USB stick, follow these instructions on the [Arch Wiki](https://wiki.archlinux.org/index.php/USB_flash_installation_medium#In_macOS).
 
-4. Disabling secure boot
+3. Disabling secure boot
 
     1. Follow [this article's](https://support.apple.com/en-us/HT208198) instructions.
     2. Once in startup security utility, turn secure boot to no security and enable external boot.
 
-5. Booting the live environment.
+4. Booting the live environment.
 
     1. Plug the USB in to your computer.
     2. Boot while holding the option key, this will put you in macOS Startup Manager.
     3. Select the orange EFI option with arrow keys and press return/enter on it.
 
-6. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) up to "Format the partitions".
+5. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) up to "Format the partitions".
 
     1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows or already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`, and your other partitions on `/mnt`, etc.
 
-7. Continue following the Arch Wiki's guide until "Install essential packages".
+6. Continue following the Arch Wiki's guide until "Install essential packages".
 
     1. Getting the signing key:
 
@@ -59,15 +58,15 @@ You will need:
 
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
-8. In your `chroot`, unless you're using aforementioned wifi-enabled iso, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too. If you're using wifi-enabled iso, only follow [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) and jump straight to 10 and skip step 12.
-9. Add Aunali1's repository to `/etc/pacman.conf`, by adding this:
+7. In your `chroot`, unless you're using aforementioned wifi-enabled iso, install the DKMS modules for Keyboard, Trackpad, Audio and the Touchbar with [this guide](https://wiki.t2linux.org/guides/dkms/#installing-modules). Follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) too. If you're using wifi-enabled iso, only follow [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/) and jump straight to 10 and skip step 12.
+8. Add Aunali1's repository to `/etc/pacman.conf`, by adding this:
 
    ```ini
    [mbp]
    Server = https://dl.t2linux.org/archlinux/$repo/$arch
    ```
 
-10. Install a bootloader, probably Grub, but you can also use systemd-boot. Don't do both.
+9. Install a bootloader, probably Grub, but you can also use systemd-boot. Don't do both.
 
     1. Installing Grub:
 
@@ -83,6 +82,6 @@ You will need:
         3. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for both `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`.
         4. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-11. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader (but don't use both of these fixes at the same time).
-12. You can follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) (if you have already retrieved the correct firmware files, you only need to follow the rest of it) now, or after rebooting into your install.
-13. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+10. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader (but don't use both of these fixes at the same time).
+11. You can follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/) (if you have already retrieved the correct firmware files, you only need to follow the rest of it) now, or after rebooting into your install.
+12. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
