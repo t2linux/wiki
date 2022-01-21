@@ -8,9 +8,7 @@ This page is a step by step guide to get WiFi working on T2 Macs.
 !!! Info "Ubuntu"
     If you have used the [old but stable](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1) ISO, then you will have to upgrade your [kernel](https://github.com/AdityaGarg8/T2-Ubuntu-Kernel#pre-installation-steps) before following this guide.
 
-
 Ubuntu users can skip these steps. They can simply download and install [this DEB file](https://cdn.discordapp.com/attachments/706581810745966653/926729551558639646/iso-firmware.deb) to get it working.
-
 
 ## Getting the firmware
 
