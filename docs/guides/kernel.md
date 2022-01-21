@@ -1,82 +1,116 @@
 # Kernel
 
-This page explains how to compile or install linux-mbp-arch kernel and headers on non arch based distros. If you you are on an arch based distro, refer to [this section](#arch-based-systems-pacman). You may want to put this files into a package, so that you can manage the kernel files with your package manager. There is [some guidance](#packaging-the-kernel) about this, but the process is differs between package managers. If you have issues, make sure you are running the commands here with `bash`.
+This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included (so no need to follow the [DKMS guide](https://wiki.t2linux.org/guides/dkms/) for this kernel). If you have issues, make sure you are running the commands here with `bash`.
 
-Before begining, set the directory that you want to install to.
+If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use the same kernel as described in the Ubuntu section, Arch based systems can use the same kernel as described in the Arch section, etc.
 
-If you want to install the kernel with a package manager:
+## Requirements
 
-```sh
-pkgdir=$PWD/pkg
-mkdir pkg
-```
+- You will need some packages to build the kernel:
 
-If you want to install to your current system directly (the kernel will not be managed by your package manager):
+    - Arch based systems: `sudo pacman --needed -S bc kmod libelf pahole cpio perl tar xz git`
+    - Debian based systems: `sudo apt install build-essential libncurses-dev libssl-dev flex bison libelf-dev bc dwarves openssl`
+    - For other distros you will need the equivalent of these, but if you miss something you'll most likely get an error saying what's missing, and you can then install it and re-run `make` to continue where you left off.
 
-```sh
-pkgdir=/
-```
+- You will need about 20GB of disk space to compile the kernel. If you have a large amount of ram, you could use tmpfs to store build files in ram.
 
-## Compile
+## Building kernel
 
-To compile a kernel with the patches in [linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch), run the following commands. You will need your distro's equivalent of these arch packages `bc kmod libelf pahole cpio perl tar xz` respectively `build-essential libncurses-dev libssl-dev flex bison` on ubuntu.
+### Getting kernel source and applying patches
 
-```sh
-git clone https://github.com/aunali1/linux-mbp-arch
-cd linux-mbp-arch
-source PKGBUILD
+!!! Hint
+    The kernel source will be downloaded with HTTP**S**, but if you would like to be extra careful and verify the kernel source code with `gpg`, please refer to [this page](https://kernel.org/signature.html#using-gnupg-to-verify-kernel-signature).
+
+```bash
+mkdir build && cd build
+git clone --depth=1 https://github.com/Redecorating/mbp-16.1-linux-wifi patches
+source patches/PKGBUILD
+
 wget https://www.kernel.org/pub/linux/kernel/v${pkgver//.*}.x/linux-${pkgver}.tar.xz
-tar -xf $_srcname.tar.xz
-prepare
-make all -jX # change "X" to the number of cpu threads you have.
-cd ..
-_package # use sudo if installing directly
-cd ..
-_package-headers # use sudo if installing directly
+tar xf $_srcname.tar.xz
+cd $_srcname
+
+git clone --depth=1 https://github.com/t2linux/apple-bce-drv drivers/staging/apple-bce
+git clone --depth=1 https://github.com/t2linux/apple-ib-drv drivers/staging/apple-ibridge
+
+for patch in ../patches/*.patch; do
+    patch -Np1 < $patch
+done
 ```
 
-## Extract linux-mbp-arch binary without compiling
+### Setting kernel configuration
 
-You may need to change the version on the first line if linux-mbp-arch has been updated. This all needs to be run with `sudo` if you are installing directly.
+!!! Info "Using config from lower kernel versions"
+    We will use the config of the kernel that is currently running. If your running kernel is an older longterm/stable kernel, it's possible that some of the default choices for new options added to the kernel might not be what you want. You can replace `make olddefconfig` in the code block below with `make oldconfig` if you want to manually set new options. You can always later use `make menuconfig` to change kernel config options if you have issues.
 
-```sh
-VER=5.11.22-1
-cd $pkgdir
-wget https://dl.t2linux.org/archlinux/mbp/x86_64/linux-mbp-$VER-x86_64.pkg.tar.zst
-wget https://dl.t2linux.org/archlinux/mbp/x86_64/linux-mbp-headers-$VER-x86_64.pkg.tar.zst
-tar -xf linux-mbp-headers-$VER-x86_64.pkg.tar.zst
-tar -xf linux-mbp-$VER-x86_64.pkg.tar.zst
-rm .MTREE .PKGINFO .BUILDINFO linux-mbp-$VER-x86_64.pkg.tar.zst linux-mbp-headers-$VER-x86_64.pkg.tar.zst
+```bash
+zcat /proc/config.gz > .config
+make olddefconfig
+scripts/config --module apple-ibridge
+scripts/config --module apple-bce
 ```
 
-## Packaging the kernel
+### Building
 
-The process for this will depend on which package manager your distro uses. If you installed directly to your filesystem, don't do this.
+This may take 2-3 hours to build depending on your CPU and the kernel config.
 
-### Debian based systems (apt)
+!!! Info "Incremental builds"
+    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realise you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
 
-```sh
-cd $pkgdir
-mkdir DEBIAN
-cat << EOF > DEBIAN/control
-Package: linux-mbp
-Version: $pkgver
-Architecture: amd64
-EOF
-dpkg -b . linux-mbp.deb
-sudo apt install linux-mbp.deb
+```bash
+make -j$(nproc)
 ```
 
-### Arch based systems (pacman)
+## Installing
 
-You do not need to follow the other instructions on this page.
+```bash
+export MAKEFLAGS=-j$(nproc)
 
-To compile:
-
-```sh
-git clone https://github.com/aunali1/linux-mbp-arch
-cd linux-mbp-arch
-makepkg -si
+sudo make modules_install
+sudo make install
 ```
 
-To install the binary, first make sure you have added aunali1's repo to `/etc/pacman.conf`. To do this, follow steps 6d-e and 8 from the [arch install guide](https://wiki.t2linux.org/distributions/arch/installation/). Then `sudo pacman -S linux-mbp linux-mbp-headers`
+If `sudo make install` said "Cannot find LILO.", that's fine.
+
+Look at the output from `sudo make install`. If it mentioned creating an initramfs or an initrd, a script provided by your distro has done the next step for you. The same goes for if it mentions updating grub or systemd-boot or bootloader config. This distro script would be at `/sbin/updatekernel`.
+
+### Initramfs/Initrd
+
+Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). As mentioned in the previous step, this may have been automatically done for you.
+
+For most arch based systems:
+
+```bash
+sudo mkinitcpio -k /boot/vmlinuz -c /etc/mkinitcpio.conf -g /boot/initramfs.img
+```
+
+For other distros, refer to your distro's documentation if this wasn't done by `make install` earlier.
+
+### Adding new kernel to bootloader config
+
+Again, `sudo make install` may have done this for you.
+
+#### Grub
+
+1. Edit `/etc/default/grub` and set `GRUB_TIMEOUT=3` (You can pick a different amount of seconds), and `GRUB_TIMEOUT_STYLE=menu`
+2. `sudo grub-mkconfig -o /boot/grub/grub.cfg`
+
+#### Systemd-boot
+
+1. Make a copy of any `.conf` file in `/boot/loader/entries/` and name it something like `linux.conf`
+2. Edit the file you just created and change the `linux` and `initrd` lines like this, but leave any `initrd` lines with `ucode`. Also change the title to something different.
+
+    ```plain
+    title   Linux Custom
+    linux   /vmlinuz
+    initrd  /initramfs.img
+    ```
+
+3. Edit `/boot/loader/loader.conf` and make sure the timeout is 1 or higher, and if you want you can change the default to the name of the file you created in step 1.
+
+## Rebooting
+
+When you reboot, you should either now have the new kernel as the default, or be able to select it with up and down arrow keys and enter. You can check `uname -r` to see the kernel version that you are currently running.
+
+!!! Hint
+    You also can use `kexec` to start the new kernel without a full reboot which is quicker if you are rebuilding the kernel repeatedly. `sudo kexec -l /boot/vmlinuz --initrd=/boot/initramfs.img --reuse-cmdline && systemctl kexec`
