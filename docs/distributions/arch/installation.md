@@ -43,7 +43,7 @@ You will need:
     1. Getting the signing key:
 
         1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
-        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d. <- wtf is D
+        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d.
 
     2. Run `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to add the key to pacman.
     3. Update your pacman repositories with `pacman -Syy`
