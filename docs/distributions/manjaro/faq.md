@@ -15,5 +15,5 @@ sudo pacman-key --recv-key 2BA2DFA128BBD111034F7626C7833DB15753380A --keyserver 
 Run this in your terminal:
 
 ```sh
-sudo bash -c "echo 2 > /sys/class/input/*/device/fnmode"
+echo 2 | sudo tee /sys/class/input/*/device/fnmode
 ```

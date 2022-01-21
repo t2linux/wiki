@@ -73,3 +73,5 @@ After successfully booting into your new installation, you will need to configur
 You might also want to look into [getting the internal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
 graphics cards. However, if you don't need it specifically, it's probably best to stick with the dedicated one. If your Mac only has
 a single graphics unit, you can ignore this.
+
+If you're having trouble, check [the faq](https://wiki.t2linux.org/faq)

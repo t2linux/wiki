@@ -2,7 +2,7 @@
 
 This page explains how to get the config files for using the T2 audio device, which allows use of the 3.5mm headphone port, the built in speakers, the built in mic and the headphones' mic.
 
-Before you proceed, make sure you already have `apple_bce` loaded, by running `lsmod | grep apple_bce`. If it is not loaded, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
+Before you proceed, make sure you already have `apple_bce` loaded, by running `lsmod | grep apple_bce`. If it is not loaded, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
 
 # Audio Configuration Files
 
@@ -36,5 +36,5 @@ Note: The updated locations for the files in the links above for Pipewire distri
 
 # Issues
 
-- Some people are unable to get audio input to work, or the microphone volume may be too. You may have to use a separate microphone.
+- Some people are unable to get audio input to work, or the microphone volume may be too low. You may have to use a separate microphone.
 - All of Apple's fancy tuning of the speakers is done in macOS, we don't have anything like that at the moment.

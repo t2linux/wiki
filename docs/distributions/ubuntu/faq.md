@@ -4,11 +4,13 @@ This seems to happen with certain MacBooks because the GRUB bootloader installer
 
 There is a way to stop this. Boot into the installation media with an External USB Keyboard plugged in. Press e when you selected the "Try Ubuntu without installing" option.
 
-Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With the External keyboard, then press CTRL+X or F10 to boot into the Live Media. The installation should work fine now.
+Scroll to the bottom with the arrow keys, and type ``efi=noruntime``. With the External keyboard, then press CTRL+X or F10 to boot into the Live Media. The installation should work fine now.
+
+You could also choose the GRUB boot option "Try Ubuntu without installing (efi=noruntime)" if you have that option.
 
 This issue has occured for anyone on the 16,1 and maybe the 16,4.
 
-(Credits to Redecorating for this fix)
+(Credits to Redecorating for this fix.)
 
 # Making the GRUB Menu appear
 
@@ -18,7 +20,7 @@ In a Terminal in Ubuntu, edit file ``/etc/default/grub`` with any preferred edit
 
 We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 
-(Also credits to Redecorating for telling me about this fix, marcosfad for documenting the fix [here](https://github.com/marcosfad/mbp-ubuntu#activate-grub-menu))
+(Also credits to Redecorating for telling me about this fix, marcosfad for documenting the fix [here](https://github.com/marcosfad/mbp-ubuntu#activate-grub-menu).)
 
 # Installing alongside Windows
 
