@@ -40,8 +40,16 @@ done
 
 ### Setting kernel configuration
 
+There are a few places you could get your kernel config.
+
+- Use the config of the kernel that is currently running (if your running kernel is an older longterm kernel, there could be issues caused by updating its kernel config with the defaults for new options): `zcat /proc/config.gz > .config`
+- Use the Arch Linux kernel config (may have differences to the normal config of your distro, but is up to date): `cp ../patches/config .config`
+
+You can always use `make menuconfig` to change kernel config options later if you have issues.
+
+Then run:
+
 ```bash
-zcat /proc/config.gz > .config
 make olddefconfig
 scripts/config --module apple-ibridge
 scripts/config --module apple-bce
@@ -52,11 +60,10 @@ scripts/config --module apple-bce
 This may take 2-3 hours to build depending on your CPU and the kernel config.
 
 !!! Info "Incremental builds"
-    If you `control-c` to stop the build process, you may continue where you left off by running it again. If you build the kernel, and realise you want to make more changes, re-running `make` will only rebuild bits that you changed.
+    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realise you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
 
 ```bash
-export MAKEFLAGS=-j$(nproc)
-make
+make -j$(nproc)
 ```
 
 ## Installing
