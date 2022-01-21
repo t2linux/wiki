@@ -8,6 +8,7 @@ get to a working installation.
 Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need to decide for yourself if it its worth it.
 
 Your first consideration should be the risk you are taking. Nobody has broken their machine so far by installing Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
+
 In case something goes wrong, however, we are not responsible for it, although we will try our best to help out.
 
 Note that while its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux to have a backup, in case something goes wrong.

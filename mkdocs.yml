@@ -39,17 +39,7 @@ nav:
           - Home: index.md
           - Device Support and State of Features: state.md
           - Installation Roadmap: roadmap.md
-    - Guides:
-          - Wifi: guides/wifi.md
-          - DKMS: guides/dkms.md
-          - Windows Triple Boot: guides/windows.md
-          - Hybrid Graphics: guides/hybrid-graphics.md
-          - Audio: guides/audio-config.md
-          - Uninstall: guides/uninstall.md
-          - Fan: guides/fan.md
-          - Kernel: guides/kernel.md
-          - Startup Manager: guides/startup-manager.md
-          - rEFInd: guides/refind.md
+          - General FAQ: faq.md
     - Distributions:
           - Overview: distributions/overview.md
           - Arch:
@@ -69,6 +59,18 @@ nav:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
+    - Guides:
+          - WiFi: guides/wifi.md
+          - DKMS: guides/dkms.md
+          - Windows Triple Boot: guides/windows.md
+          - Hybrid Graphics: guides/hybrid-graphics.md
+          - Audio: guides/audio-config.md
+          - Uninstall: guides/uninstall.md
+          - Fan: guides/fan.md
+          - Kernel: guides/kernel.md
+          - Startup Manager: guides/startup-manager.md
+          - rEFInd: guides/refind.md
+
 
 extra_css:
     - assets/stylesheets/colors.css

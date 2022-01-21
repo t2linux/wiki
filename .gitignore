@@ -1,2 +1,4 @@
 # mkdocs
 build/
+# My Mac
+.DS_Store
