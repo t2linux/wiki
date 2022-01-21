@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a step by step guide to get wifi working on T2 Macs.
+This page is a step by step guide to get WiFi working on T2 Macs.
 
 !!! Info "Fedora"
     Fedora users are requested to follow the older version of this guide [here](https://github.com/t2linux/wiki/blob/a4b46a7cfbe7efcbb6a0b6111e22172b0f5c4a77/docs/guides/wifi.md).
@@ -8,9 +8,13 @@ This page is a step by step guide to get wifi working on T2 Macs.
 !!! Info "Ubuntu"
     If you have used the [old but stable](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1) ISO, then you will have to upgrade your [kernel](https://github.com/AdityaGarg8/T2-Ubuntu-Kernel#pre-installation-steps) before following this guide.
 
+
+Ubuntu users can skip these steps. They can simply download and install [this DEB file](https://cdn.discordapp.com/attachments/706581810745966653/926729551558639646/iso-firmware.deb) to get it working.
+
+
 ## Getting the firmware
 
-In order to get wifi running on Linux, we need to get the firmware from macOS and copy it to Linux with appropriate changes. Thanks to Asahi Linux, who has made the process much simpler. You may follow the steps below to get the firmware and copy it to Linux properly.
+In order to get WiFi running on Linux, we need to get the firmware from macOS and copy it to Linux with appropriate changes. Thanks to Asahi Linux, who has made the process much simpler. You may follow the steps below to get the firmware and copy it to Linux properly.
 
 1. Boot into macOS.
 

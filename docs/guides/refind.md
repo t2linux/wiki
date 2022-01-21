@@ -1,16 +1,16 @@
 # Introduction
 
-This guide shall help you install the rEFInd Boot Manager in your T2 Mac in the safest possible way. Though there are various options to get rEFInd on your Mac, it is recommended to follow the instructions given below unless you know what you are doing.
+This guide shall help you install the rEFInd Boot Manager in your T2 Mac. Although there are various options to get rEFInd on your Mac, it is recommended to follow the instructions given below unless you know what you are doing.
 
 # Installation
 
 All steps given here have to be performed on **macOS**. You will also need to have [secure boot disabled](https://support.apple.com/en-us/HT208198).
 
-1. With the help of disk utility, create a 100-200MB `MS-DOS FAT` partition and label it as `REFIND`.
+1. With the help of Disk Utility, create a 100-200MB `MS-DOS FAT` partition and label it as `REFIND`.
 
 2. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
 
-3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
+3. The binary zip file of rEFInd will be available in the Downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For example:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
 
 4. Extract the zip file (can be done by double clicking on it). The contents shall be extracted in a folder named `refind-bin-<VERSION>`. Here `<VERSION>` means the same as described in step 3.
 
@@ -24,7 +24,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     2:                 Apple_APFS ⁨Container disk1⁩         284.0 GB   disk0s2
     3:       Microsoft Basic Data ⁨Windows⁩                 215.9 GB   disk0s3
     4:       Microsoft Basic Data ⁨REFIND⁩                  103.8 MB   disk0s4
-    
+
     /dev/disk1 (synthesized):
     #:                       TYPE NAME                    SIZE       IDENTIFIER
     0:      APFS Container Scheme -                      +284.0 GB   disk1
@@ -36,7 +36,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     5:                APFS Volume ⁨Recovery⁩                626.1 MB   disk1s4
     6:                APFS Volume ⁨VM⁩                      20.5 KB    disk1s5
     ```
-  
+
     Here, the disk indentifier of `REFIND` volume is `disk0s4`.
 
 6. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 5 and `refind-bin-0.13.2` (found in 1st line of the command given below) with the name of folder which was created in step 4.
@@ -53,13 +53,13 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     ```
 
 7. Now run:-
-  
+
     ```plain
     bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
     ```
-  
+
     This will change the label in the Mac Startup Manager for rEFInd from `EFI Boot` to `rEFInd`.
-  
+
 # Configuration
 
 Though rEFInd has many configuration options, some basic configuration is required for a smoother experience on T2 Macs.
@@ -82,7 +82,7 @@ In case you boot an OS other than macOS using rEFInd, it shows some debug text w
 use_graphics_for osx,linux,windows,grub
 ```
 
-## Preventing use of NVRAM (Likely to have been enabled already)
+## Preventing use of NVRAM (likely to not be in use already)
 
 Preventing use of NVRAM is must as T2 doesn’t like someone to touch the NVRAM. In latest editions of rEFInd, preventing use of NVRAM is enabled by default. You may confirm this by checking presence of `use_nvram false` line somewhere in the middle of the `refind.conf` file (the one mentioned in above instructions). Make sure it is not commented (doesn’t have a `#` before the line). If it is then remove the `#`.
 
@@ -111,11 +111,11 @@ In case you wish to uninstall rEFInd, boot into **macOS** and follow the steps b
 4. Select the `REFIND` partition and click `-` to remove it. Your macOS partition should expand to fill the space that rEFInd was in.
 5. Click on **Apply**. Disk Utility will remove the `REFIND` partition and expand your macOS partition. This may take a while, but **do not interrupt this process**.
 6. Change the default startup disk to the OS you wish to be boot by default.
-  
+
    If the OS you wish is **macOS** or **Windows**, follow [Apple's documentation](https://support.apple.com/en-in/guide/mac-help/mchlp1034/mac) where you have to follow the **Change your startup disk for every startup** section.
-  
+
    If the OS you wish is **Linux**, follow the [Startup Manager Guide](https://wiki.t2linux.org/guides/startup-manager/#setting-linux-startup-disk-as-the-default-startup-disk).
-  
+
 # References and External links
 
 [Reference](https://apple.stackexchange.com/questions/402289/refind-installation-wont-boot-due-to-t2-security-despite-t2-security-being-dis) - This guide has been inspired from here.

@@ -16,8 +16,6 @@ The iso you should download depends on your machine, but usually the normal mbp 
 
 # Install Procedure
 
-(These instructions are reused from the Manjaro installation guide)
-
 1. In order to install Ubuntu, you'll need to partition your SSD. You can use Disk Utility and a recommended amount is over 64 GB. If you have a Bootcamp install, you don't have to uninstall it. Make sure to have two partitions when your done (Linux partition and macOS partition).
 2. Flash the downloaded iso to a USB Flash Drive, or even an SD Card. Use [Balena Etcher](https://www.balena.io/etcher/) for a gui option, command line option is dd.
 3. Disable Secure Boot. This is required to even boot into the Live USB. Instructions are below (taken from [here](https://support.apple.com/en-au/HT208330))

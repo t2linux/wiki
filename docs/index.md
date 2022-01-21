@@ -5,32 +5,33 @@ Welcome to the t2linux wiki!
 This wiki contains knowledge about running Linux on Macs with the T2 chip.
 A list of those devices can be found [on Apple's website](https://support.apple.com/en-us/HT208862).
 
-# Warnings
-
-- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
-- Newer versions of `iwd` currently have issues with non Big Sur patched kernels due to certain [p2p related checks missing](https://github.com/aunali1/linux-mbp-arch/blob/master/9001-brcmfmac-p2p-Ensure-virtual-interface-is-initialized.patch). If you are experiencing connection issues after following the [wifi guide](https://wiki.t2linux.org/guides/wifi/) you might want to downgrade to version `1.13` and hold updates for the package.
-- **Ubuntu's GRUB** is not booting using the Mac Startup Manager on **Mac Mini**. Thus Mac Mini users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot GRUB using it instead of the Startup Manager.
-
 # Getting started
 
 To get started with an installation, refer to the [roadmap](https://wiki.t2linux.org/roadmap).
 
+# Warnings
+
+- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. Those that aren't pre-releases (of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases)) are the ones that have been tested. Keep in mind that some might have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
+- Newer versions of `iwd` currently have issues with non Big Sur patched kernels due to certain [p2p related checks missing](https://github.com/aunali1/linux-mbp-arch/blob/master/9001-brcmfmac-p2p-Ensure-virtual-interface-is-initialized.patch). If you are experiencing connection issues after following the [wifi guide](https://wiki.t2linux.org/guides/wifi/) you might want to downgrade to version `1.13` and hold updates for the package, or switch to a Big Sur kernel.
+- **Ubuntu's GRUB** is not booting using the Mac Startup Manager on **Mac Mini**. Thus Mac Mini users are advised to [follow the rEFInd guide](https://wiki.t2linux.org/guides/refind/) and boot GRUB using it instead.
+
 # Contact us
 
-You may contact us on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
+You may contact us or ask for help on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
 # Notable Resources
 
 ## Distributions
 
 Different distributions are maintained by different people in their own repositories.
-If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as it considers T2 support.
+If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as these guides make it easier (or even just possible) to install Linux.
 
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
 - Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
+- Gentoo [https://github.com/EmreTech/T2-Gentoo-Kernel](https://github.com/EmreTech/T2-Gentoo-Kernel)
 
 ## Kernel Modules
 

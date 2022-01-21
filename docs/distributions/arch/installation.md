@@ -43,9 +43,9 @@ You will need:
     1. Getting the signing key:
 
         1. Run `curl -o key.asc https://dl.t2linux.org/archlinux/key.asc` to obtain the signing key for t2 linux specific packages.
-        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d.
+        2. If you're using wifi-enabled iso, don't run the above command and jump straight to d. <- wtf is D
 
-    2. Add the key to pacman using `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to allow the key
+    2. Run `pacman-key --add key.asc` and `pacman-key --lsign 7F9B8FC29F78B339` to add the key to pacman.
     3. Update your pacman repositories with `pacman -Syy`
 
         !!! note
@@ -82,6 +82,6 @@ You will need:
         3. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for both `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`.
         4. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-10. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0 >> /etc/fstab`. If this doesn't work, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader (but don't use both of these fixes at the same time).
-11. You can follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi/) after rebooting into your install, if Wi-Fi isn't working after the install.
+10. Make nvram/efivars automatically remount as readonly, as writing to them causes a panic (deleting and reading variables, however, does not): `echo efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0 | sudo tee /etc/fstab`. If this doesn't work for you, you can instead add the `efi=noruntime` kernel parameter as described when installing your bootloader (but don't use both at the same time).
+11. You can follow the [WiFi guide](https://wiki.t2linux.org/guides/wifi/) after rebooting into your install, if WiFi isn't working after the install.
 12. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.

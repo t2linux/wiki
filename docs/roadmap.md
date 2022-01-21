@@ -5,15 +5,12 @@ get to a working installation.
 
 ## Deciding on the Installation
 
-Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need
-to decide for yourself if it its worth it.
+Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need to decide for yourself if it its worth it.
 
-Your first consideration should be the risk you are taking. Don't worry, nobody has broken their machine so far by installing
-Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
-Still in case something goes wrong we are not responsible for it, we will try our best to help out however.
+Your first consideration should be the risk you are taking. Nobody has broken their machine so far by installing Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
+In case something goes wrong, however, we are not responsible for it, although we will try our best to help out.
 
-Note that while its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux to have
-a backup in case something goes wrong.
+Note that while its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux to have a backup, in case something goes wrong.
 
 Now, take a look at the [state article](https://wiki.t2linux.org/state/). It gives a list of roughly what works on Linux and what not.
 If a specific feature is not listed at all, there is a chance it actually works.
@@ -32,9 +29,11 @@ You could install the linux-mbp-arch kernel, which is updated, by following step
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
-Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, though audio and WiFi generally need to be set up as in the guides below. Then they should work flawlessly.
+Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, though audio and WiFi generally need to be set up as in the guides below. Then, it should work flawlessly.
 
-If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
+Gentoo has some support: there is a [GitHub repository for a Gentoo Kernel](https://github.com/EmreTech/T2-Gentoo-Kernel). There is still some post-installation work to be done.
+
+If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation). In the case that the distribution does not boot, follow the instructions [here](https://gist.github.com/Redecorating/c876a4c3b24e47d79c1f921495f62213)
 
 ## Preparing the Installation
 

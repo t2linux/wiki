@@ -26,5 +26,5 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 # Why isn't sound working?
 
-Due to issues in the mbp-ubuntu install process, there is no sound working after install. You'll have to set it up manually.
-Refer to this guide on [audio configuration](https://wiki.t2linux.org/guides/audio-config).
+Due to issues in the mbp-ubuntu install process, there may be no sound working after install. You'll have to set it up manually.
+Refer to the guide on [audio configuration](https://wiki.t2linux.org/guides/audio-config).

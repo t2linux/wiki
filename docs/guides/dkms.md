@@ -1,10 +1,10 @@
 # Introduction
 
-This page explains how to install the kernel modules for the Keyboard, Audio, Touchbar and the Ambient Light sensor with DKMS. You will need a patched kernel.
+This page explains how to install the kernel modules for the Keyboard, Audio, Touchbar, and the Ambient Light sensor with DKMS. You will need a patched kernel.
 
 # Do you need to do this?
 
-Are your keyboard and audio working? If no, then you'll need the BCE module.  
+Are your keyboard and audio working? If no, then you'll need the BCE module.
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
 
 To get started with this guide, first install the `dkms` package.
@@ -24,10 +24,10 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-    - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
+    - If you are on Arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
     - Otherwise, run `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
 
-        -   Create a `dkms.conf` file in `/usr/src/apple-bce-r183.c884d9c` and put in the following:
+        -   Create a `dkms.conf` file in `/usr/src/apple-bce-r183.c884d9c` and write the following:
 
             ```conf
             PACKAGE_NAME="apple-bce"
@@ -43,11 +43,11 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - If you are on a MacBook Pro (16 inch, 2019) or MacBook Pro (13 inch, 2020), and want keyboard backlight to work, run :
+    - If you are on a MacBook Pro (16 inch, 2019) or MacBook Pro (13 inch, 2020), and want keyboard backlight to work, run:
 
       `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
-      Else run :
+      Otherwise, run:
 
       `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
@@ -72,7 +72,7 @@ The Touchbar and keyboard should be working. For audio, you'll also need some co
     Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
 
 ```sh
-echo apple-bce >> /etc/modules-load.d/t2.conf
+echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 ```
 
 # Make modules load on early boot
@@ -118,7 +118,7 @@ The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`
 
 Copy [this script](https://github.com/mikeeq/mbp-fedora/blob/f34/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 
-Now run :-
+Now run:-
 
 ```sh
 sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
@@ -129,8 +129,8 @@ It unloads the Touchbar modules as they can cause issues for suspend.
 
 # Kernel panic when loading apple-ib-als
 
-This was fixed in [this commit](https://github.com/t2linux/apple-ib-drv/commit/fc9aefa5a564e6f2f2bb0326bffb0cef0446dc05), please follow the [dkms guide](https://wiki.t2linux.org/guides/dkms/) to update.
+This was fixed in [this commit](https://github.com/t2linux/apple-ib-drv/commit/fc9aefa5a564e6f2f2bb0326bffb0cef0446dc05), please follow this guide to update.
 
-# Use ambient light sensor to automatically change brightness (if not working already)
+# Use ambient light sensor to automatically change brightness (if it's not working already)
 
 You can use [this script](https://gist.github.com/jbredall/52179d1fc2c91917d2fde118d2cb04aa). Make sure you have the `apple-ib-als` module loaded.

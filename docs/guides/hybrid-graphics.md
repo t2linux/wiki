@@ -35,11 +35,11 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         ================== apple_set_os loader v0.5 ==================
         SetOsProtocol Handle Count: 1
         AppleSetOs will be loaded, press Z to disable.
-        
+
         ----------------------- Ready to boot ------------------------
         Plug in your eGPU then press any key.
         Booting bootx64_original.efi in 6 second(s)
-        
+
         Connected Graphics Cards:
         1002 7340 AMD - Navi 14 [Radeon RX 5500/5500M]
         8086 3E9B INTEL - UHD Graphics 630 (Mobile)

@@ -1,16 +1,16 @@
 # Introduction
 
-This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
+This page is a guide on getting Windows and Linux both installed. Secure Boot must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), go to ['Using seperate EFI partitions'](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions). If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
 
-The simplist way to triple boot is to install Windows first, and install linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
+The easiest way to triple boot is to install Windows first, and then install Linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
 
 # Using the same EFI partition
 
 ## If Windows is installed first
 
-1. Install linux normally, with a patched kernel and dkms modules (this is probably done for you if you are using an installer specific to t2 macs).
-2. Put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot linux.
-3. Fix blank screen issue that may occur when booting Windows (Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)).
+1. Install Linux normally, with a patched kernel and DKMS modules (this is probably already done for you if you are using an installer specific to T2 Macs).
+2. Put your bootloader on `/dev/nvme0n1p1` (mount at `/boot/efi`). Once it installs the bootloader, the Windows entry in startup manager will boot Linux.
+3. Fix blank screen issue that may occur when booting Windows (credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)).
 
     1. Open a terminal and type in ``sudo gdisk /dev/nvme0n1``.
     2. Press `x` for expert mode
@@ -31,8 +31,8 @@ The simplist way to triple boot is to install Windows first, and install linux o
 1. Make sure that your linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your linux partitions to `Linux Filesystem`.
 2. Install Windows normaly with Bootcamp. Windows will replace your Linux boot option.
 3. Boot into macOS.
-4. `sudo diskutil mount disk0s1`
-5. Go to `/Volumes/EFI/efi`
+4. Type `sudo diskutil mount disk0s1` into the Terminal.
+5. Go to `/Volumes/EFI/efi`.
 6. In this folder there will be a `Microsoft` folder, an `Apple` folder, one with your distro's name or just `GRUB`, and one called `Boot`. The `Boot` folder will have a file named `bootx64.efi`, rename this to `windows_bootx64.efi`
 7. Copy the `grubx64.efi` file in your distro's folder to `/Volumes/EFI/efi/Boot/bootx64.efi`. The the Windows option in Startup Manager will now boot Linux.
 8. Fix blank screen issue that may occur when booting Windows (Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)).

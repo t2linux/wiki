@@ -63,13 +63,13 @@ architect gnome kde nxd xfce awesome bspwm-mate cinnamon i3 lxqt openbox webdad 
 
 ## File Locations
 
-Navigate to the directory for your iso file. If Using a official edition go to:
+Navigate to the directory for your iso file. If you are using the official edition, go to:
 
 ```sh
 cd /var/cache/manjaro-tools/iso/manjaro/{NAME_OF_EDITION}/20.0.3/
 ```
 
-If using a community edition to:
+If you are using the community edition:
 
 ```sh
 cd /var/cache/manjaro-tools/iso/community/{NAME_OF_EDITION}/20.0.3/
