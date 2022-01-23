@@ -5,7 +5,7 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 # Do you need to do this?
 
 Are your keyboard and audio working? If no, then you'll need the BCE module.
-If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
+If you have a Touchbar, is it working? Is your Ambient Light Sensor working? If no, then you'll need the apple-ibridge module.
 
 To get started with this guide, first install the `dkms` package.
 
