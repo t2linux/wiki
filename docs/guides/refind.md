@@ -12,9 +12,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
 
-4. Extract the zip file (can be done by double clicking on it). The contents shall be extracted in a folder named `refind-bin-<VERSION>`. Here `<VERSION>` means the same as described in step 3.
-
-5. Open the terminal and run `diskutil list` to get the disk identifier of the `REFIND` volume created in step 1. A sample output is given below:-
+4. Open the terminal and run `diskutil list` to get the disk identifier of the `REFIND` volume created in step 1. A sample output is given below:-
 
     ```plain
     /dev/disk0 (internal, physical):
@@ -39,10 +37,13 @@ All steps given here have to be performed on **macOS**. You will also need to ha
   
     Here, the disk indentifier of `REFIND` volume is `disk0s4`.
 
-6. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 5 and `refind-bin-0.13.2` (found in 1st line of the command given below) with the name of folder which was created in step 4.
+5. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 4.
 
     ```plain
-    cd ~/Downloads/refind-bin-0.13.2
+    cd ~/Downloads
+    unzip refind-bin*
+    rm refind-bin*.zip
+    cd refind-bin*
     xattr -rd com.apple.quarantine .
     sed -i '' "s/sed -i 's/sed -i '' 's/g" refind-install
     diskutil unmount disk0s4
@@ -52,7 +53,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     sudo rmdir /tmp/refind_install
     ```
 
-7. Now run:-
+6. Now run:-
   
     ```plain
     bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
