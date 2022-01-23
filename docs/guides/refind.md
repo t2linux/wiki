@@ -107,7 +107,7 @@ Sometimes, while booting into macOS using rEFInd, users get stuck at a blank scr
 
 By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But we can also boot linux directly by using rEFInd. This can be useful in situations where other bootloaders are causing issues. In order to do so, follow the following steps :-
 
-1. Boot into Linux using the bootloader you have been using before. If the bootloader is facing issues, you may also chroot into the installation using your distro's ISO and run the commands within the chroot.
+1. Boot into Linux using the bootloader currently in use. If the bootloader is facing issues, you may also chroot into the installation using your distro's ISO and run the commands within the chroot.
 
 2. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
 
