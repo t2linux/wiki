@@ -2,10 +2,11 @@
 
 ## Hardware Requirements
 
+* Gentoo Minimal Installation ISO
+    * If you don't have the requirements to use this (see below), then you are required to use another distro's ISO. A recommended distro to use is Ubuntu.
 * USB-C to USB-A adapter
-* USB Ethernet Adapter/USB Wi-Fi Adapter
-    * This is not required, but if you're using a normal Gentoo Minimal Installation ISO, then it is required.
-    * If you end up not using this, then you are required to use another distro's ISO in order to connect to the internet via Wi-Fi.
+* USB Keyboard, Mouse & Ethernet Adapter/Wi-Fi Adapter
+    * If you're using the Gentoo Minimal Installation ISO, then this is required
 * USB Flash Drive
 
 ## Install Procedure
