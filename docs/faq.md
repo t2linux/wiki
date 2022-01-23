@@ -8,9 +8,9 @@ Changing resolution, using DRI_PRIME and doing various other things can cause cr
 
 A broken runtime call crashed Linux; try a patched kernel (or updating if you're already using it), or boot macOS and check the crashlog. If you have `apple-bce`, try updating it to 0.2. You may need a custom live ISO. You can also try adding the ``efi=noruntime`` option to GRUB's command line paramaters, or adding ``efivarfs /sys/firmware/efi/efivars efivarfs ro,remount,nofail 0 0`` to the end of your /etc/fstab file (although don't use both at the same time).
 
-## The WiFi GUI is not working
+## WiFi is not working
 
-Follow the [wifi guide](https://wiki.t2linux.org/guides/wifi). If you followed that, try updating, or using a different ISO. Some users reported that patched kernel `5.15.12` worked better. You could also try reloading brcmfmac: ``sudo modprobe -r brcmfmac && sudo modprobe brcmfmac``.
+Follow the [wifi guide](https://wiki.t2linux.org/guides/wifi). If you followed that, try updating, or using a different ISO. You could also try reloading brcmfmac: ``sudo modprobe -r brcmfmac && sudo modprobe brcmfmac``.
 
 ## How do I get backlight working?
 

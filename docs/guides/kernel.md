@@ -2,7 +2,7 @@
 
 This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included (so no need to follow the [DKMS guide](https://wiki.t2linux.org/guides/dkms/) for this kernel). If you have issues, make sure you are running the commands here with `bash`.
 
-If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use [this kernel](https://github.com/marcosfad/mbp-ubuntu-kernel), Arch based systems can use [this kernel](https://github.com/aunali1/linux-mbp-arch) or [this one with support for 16,x](https://github.com/jamlam/mbp-16.1-linux-wifi), [https://github.com/mikeeq/mbp-fedora-kernel](this fedora kernel), or [this gentoo kernel](https://github.com/EmreTech/T2-Gentoo-Kernel).
+If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use [this kernel](https://github.com/marcosfad/mbp-ubuntu-kernel), Arch based systems can use [this kernel](https://github.com/jamlam/mbp-16.1-linux-wifi) or [this (less updated) kernel](https://github.com/aunali1/linux-mbp-arch), [https://github.com/mikeeq/mbp-fedora-kernel](this fedora kernel), or [this gentoo kernel](https://github.com/EmreTech/T2-Gentoo-Kernel).
 
 Before beginning, `cd` into the directory that you want to build in (tmpfs, build folder, etc).
 
