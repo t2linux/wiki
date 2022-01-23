@@ -149,13 +149,22 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
 8. Now, when you shall be in rEFInd, it should show an entry with the path of the image of your kernel and shall most probably have the icon of the Linux Penguin. That entry shall be the one which shall boot Linux directly using rEFInd.
 
-9. If you want to use your distro's icon instead of Linux Penguin one, you may label the volume containing your kernel with the name of your distro. For example if the distro is **Ubuntu** and kernel is in `/dev/nvme0n1p3` partition, run:-
+9. If you want to use your distro's icon instead of Linux Penguin one, you may label the volume containing your kernel with the name of your distro. Following are some examples of commands for various filesystems, taking the distro as **Ubuntu** and partition in which kernel is in as `/dev/nvme0n1p3`.
 
-    ```plain
-    sudo tune2fs -L Ubuntu /dev/nvme0n1p3
-    ```
+    1. ext2, ext3 or ext4 :-
+    
+        ```plain
+        sudo tune2fs -L "Ubuntu" /dev/nvme0n1p3
+        ```
+    
+    2. btrfs :-
+    
+        ```plain
+        MOUNTPOINT=$(findmnt -n -o TARGET /dev/nvme0n1p3)
+        sudo btrfs filesystem label $MOUNTPOINT "Ubuntu"
+        ```
   
-    More ways to set custom icons are described [here](https://www.rodsbooks.com/refind/configfile.html#icons).
+More ways to set custom icons are described [here](https://www.rodsbooks.com/refind/configfile.html#icons).
 
 # Uninstalling rEFInd
 
