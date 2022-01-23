@@ -151,7 +151,7 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
 9. If you want to use your distro's icon instead of Linux Penguin one, you may label the volume containing your kernel with the name of your distro. For example if the distro is **Ubuntu** and kernel is in `/dev/nvme0n1p3` partition, run:-
 
-    ```
+    ```plain
     sudo tune2fs -L Ubuntu /dev/nvme0n1p3
     ```
   
