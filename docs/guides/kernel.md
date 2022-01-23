@@ -4,7 +4,7 @@ This page explains how to compile a Linux kernel with patches for T2 hardware su
 
 If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use the same kernel as described in the Ubuntu section, Arch based systems can use the same kernel as described in the Arch section, etc.
 
-Before beginning, set the directory that you want to install to.
+Before beginning, `cd` into the directory that you want to build in (tmpfs, build folder, etc).
 
 ## Requirements
 
@@ -54,7 +54,7 @@ scripts/config --module apple-bce
 
 ### Building
 
-This may take 2-3 hours to build depending on your CPU and the kernel config.
+This may take up to 3 hours to build, depending on your CPU and the kernel config.
 
 !!! Info "Incremental builds"
     If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realise you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
