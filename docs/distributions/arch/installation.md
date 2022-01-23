@@ -66,9 +66,9 @@ You will need:
    Server = https://dl.t2linux.org/archlinux/$repo/$arch
    ```
 
-9. Install a bootloader, probably Grub, but you can also use systemd-boot. Don't do both.
+9. Install a bootloader, probably GRUB, but you can also use systemd-boot. Don't do both.
 
-    1. Installing Grub:
+    1. Installing GRUB:
 
         1. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
         2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`

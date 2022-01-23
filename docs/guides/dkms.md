@@ -5,7 +5,7 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 # Do you need to do this?
 
 Are your keyboard and audio working? If no, then you'll need the BCE module.
-If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
+If you have a Touchbar, is it working? Is your Ambient Light Sensor working? If no, then you'll need the apple-ibridge module.
 
 To get started with this guide, first install the `dkms` package.
 
@@ -24,10 +24,10 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-    - If you are on Arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
-    - Otherwise, run `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-r183.c884d9c`
+    - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
+    - Otherwise, run `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-0.2`
 
-        -   Create a `dkms.conf` file in `/usr/src/apple-bce-r183.c884d9c` and write the following:
+        -   Create a `dkms.conf` file in `/usr/src/apple-bce-0.2` and put in the following:
 
             ```conf
             PACKAGE_NAME="apple-bce"

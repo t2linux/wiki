@@ -1,8 +1,8 @@
 # Introduction
 
-This page explains how to get the config files for using the T2 audio device, which allows use of the 3.5mm headphone port, the built in speakers, the built in mic and the headphones' mic.
+This page explains how to setup the T2 audio device, which allows use of the 3.5mm headphone port, the built-in speakers, the built-in microphone and the headphones' mic.
 
-Before you proceed, make sure you already have `apple_bce` loaded, by running `lsmod | grep apple_bce`. If it is not loaded, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
+Before you proceed, make sure you already have `apple_bce` loaded, by running `lsmod | grep apple_bce`. If it is not loaded (i.e., there is no output), follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
 
 # Audio Configuration Files
 
@@ -14,6 +14,8 @@ Special scenarios are:
 - [2020 13" MacBook Air audio files](https://gist.github.com/bigbadmonster17/8b670ae29e0b7be2b73887f3f37a057b)
 
 # Using Pipewire instead of Pulseaudio
+
+Some distributions (like Fedora) use PipeWire instead of PulseAudio.
 
 You'll need to modify the `/lib/udev/rules.d/91-pulseaudio-custom.rules` file from the links above.
 
@@ -28,7 +30,7 @@ KERNEL!="card*", GOTO="pulseaudio_end"
 LABEL="pulseaudio_end"
 ```
 
-Note: The updated locations for the files in the links above for Pipewire distributions will be:
+Note: the file ``apple-t2.conf`` will be in a slightly different place for PipeWire distributions:
 
 - /usr/share/alsa/cards/AppleT2.conf
 - **/usr/share/alsa-card-profile/mixer/profile-sets/apple-t2.conf**
