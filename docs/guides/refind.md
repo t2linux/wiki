@@ -12,9 +12,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
 
-4. Extract the zip file (can be done by double clicking on it). The contents shall be extracted in a folder named `refind-bin-<VERSION>`. Here `<VERSION>` means the same as described in step 3.
-
-5. Open the terminal and run `diskutil list` to get the disk identifier of the `REFIND` volume created in step 1. A sample output is given below:-
+4. Open the terminal and run `diskutil list` to get the disk identifier of the `REFIND` volume created in step 1. A sample output is given below:-
 
     ```plain
     /dev/disk0 (internal, physical):
@@ -39,10 +37,13 @@ All steps given here have to be performed on **macOS**. You will also need to ha
   
     Here, the disk indentifier of `REFIND` volume is `disk0s4`.
 
-6. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 5 and `refind-bin-0.13.2` (found in 1st line of the command given below) with the name of folder which was created in step 4.
+5. Now run the following in the terminal. Make sure you replace `disk0s4` (found in 4th, 5th, 6th and 7th line of the command given below) with the disk identifier you got in the output as described in step 4.
 
     ```plain
-    cd ~/Downloads/refind-bin-0.13.2
+    cd ~/Downloads
+    unzip refind-bin*
+    rm refind-bin*.zip
+    cd refind-bin*
     xattr -rd com.apple.quarantine .
     sed -i '' "s/sed -i 's/sed -i '' 's/g" refind-install
     diskutil unmount disk0s4
@@ -50,9 +51,10 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     diskutil unmount disk0s4
     diskutil mount disk0s4
     sudo rmdir /tmp/refind_install
+    rm -r ~/Downloads/refind-bin*
     ```
 
-7. Now run:-
+6. Now run:-
   
     ```plain
     bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
@@ -100,6 +102,52 @@ After correctly installing and configuring rEFInd, we need to make it boot by de
 # Fixing blank screen on booting macOS using rEFInd
 
 Sometimes, while booting into macOS using rEFInd, users get stuck at a blank screen. This bug is observed only if you have performed a force/unsafe shutdown by pressing and holding the power button in the previous boot. Some users have also faced it in the first macOS boot using rEFInd on new rEFInd installations. In order to fix it, turn off your Mac and restart while holding down the **Option (Alt)** key. Release the Option key when the Mac Startup Manager gets displayed. Boot into macOS using the Mac Startup Manager. This shall fix the bug for subsequent boots.
+
+# Using rEFInd as a replacement for GRUB, systemd-boot etc.
+
+By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But we can also boot linux directly by using rEFInd. This can be useful in situations where other bootloaders are causing issues. In order to do so, follow the following steps :-
+
+1. Boot into Linux using the bootloader currently in use. If the bootloader is facing issues, you may also chroot into the installation using your distro's ISO and run the commands within the chroot.
+
+2. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
+
+3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
+
+4. Move the zip into the `/boot` folder. If you are chrooting, the move the zip into the `/boot` folder of the **chroot**.
+
+5. Now run :-
+
+    ```plain
+    cd /boot
+    sudo unzip refind-bin*
+    sudo rm refind-bin*.zip
+    cd refind-bin*
+    sudo ./mkrlconf
+    sudo sed -i 's/"Boot to single-user mode"/#"Boot to single-user mode"/g' /boot/refind_linux.conf
+    sudo sed -i 's/"Boot with minimal options"/#"Boot with minimal options"/g' /boot/refind_linux.conf
+    sudo rm -r /boot/refind-bin*
+    ```
+
+6. A file named `refind_linux.conf` shall be made in your **/boot** folder of your installation. A sample of this is given below.
+
+    ```conf
+    "Boot with standard options"  "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e"
+    #"Boot to single-user mode"    "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e single"
+    #"Boot with minimal options"   "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e"
+    ```
+  
+    !!! note "Chroot"
+        If you have run the in step 5 commands within a chroot, the `ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e` shall likely to be missing. In this case, manually edit the `refind_linux.conf` file in the `/boot` folder of your **chroot** to look like the sample and replace the **UUID** (`631c326a-fb48-46ba-b4aa-6dd2033fbb5e` in the sample) with the one of the partition in which your Linux is installed. You can get the UUID from `/etc/fstab` file of your **chroot** or using a disk utility software.
+
+7. On the line with `"Boot with standard options"`, add the `intel_iommu=on iommu=pt pcie_ports=compat efi=noruntime quiet splash` parameters. It is possible that some parameters are already added. In such case, add only the missing parameters. If you don't want a silent boot, you may omit out the `quiet splash` parameter. Finally, the `refind_linux.conf` file should look something like this.
+
+    ```conf
+    "Boot with standard options"  "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e intel_iommu=on iommu=pt pcie_ports=compat efi=noruntime quiet splash"
+    #"Boot to single-user mode"    "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e single"
+    #"Boot with minimal options"   "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e"
+    ```
+
+8. Now, when you shall be in rEFInd, it should show an entry with the path of the image of your kernel and shall most probably have the icon of the Linux Penguin. That entry shall be the one which shall boot Linux directly using rEFInd.
 
 # Uninstalling rEFInd
 
