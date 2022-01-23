@@ -2,10 +2,11 @@
 
 ## Hardware Requirements
 
+* Gentoo Minimal Installation ISO
+    * Requirements for this ISO: USB keyboard, mouse, ethernet adapter/Wi-Fi adapter
+    * If you don't meet the requirements, then you are required to use another distro's ISO. A recommended distro to use is Ubuntu, more specifically, [mbp-ubuntu](https://wiki.t2linux.org/distributions/ubuntu/installation/#download-the-latest-safe-release).
+        * Make sure to follow [this guide](https://wiki.gentoo.org/wiki/Installation_alternatives#Installation_from_non-Gentoo_LiveCDs) along with this guide and the Gentoo Handbook starting at step 5
 * USB-C to USB-A adapter
-* USB Ethernet Adapter/USB Wi-Fi Adapter
-    * This is not required, but if you're using a normal Gentoo Minimal Installation ISO, then it is required.
-    * If you end up not using this, then you are required to use another distro's ISO in order to connect to the internet via Wi-Fi.
 * USB Flash Drive
 
 ## Install Procedure
