@@ -14,7 +14,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 4. Now run the following in the terminal :-
 
-    ```plain
+    ```bash
     IDENTIFIER=$(diskutil info REFIND | grep "Device Identifier" | cut -d: -f2 | xargs)
     cd ~/Downloads
     unzip refind-bin*
@@ -32,7 +32,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 5. Now run:-
   
-    ```plain
+    ```bash
     bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
     ```
   
@@ -93,7 +93,7 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
 5. Now run :-
 
-    ```plain
+    ```bash
     cd /boot
     sudo unzip refind-bin*
     sudo rm refind-bin*.zip
@@ -129,13 +129,13 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
     1. ext2, ext3 or ext4 :-
   
-        ```plain
+        ```bash
         sudo tune2fs -L "Ubuntu" /dev/nvme0n1p3
         ```
   
     2. btrfs :-
   
-        ```plain
+        ```bash
         MOUNTPOINT=$(findmnt -n -o TARGET /dev/nvme0n1p3)
         sudo btrfs filesystem label $MOUNTPOINT "Ubuntu"
         ```
