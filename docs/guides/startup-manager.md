@@ -10,11 +10,17 @@ The steps to perform the above tasks vary as per the way you have installed Linu
 
 In this case, boot into macOS, open a terminal window and run :-
 
-`bless --folder /Volumes/EFI/EFI/BOOT --label <YOUR DISTRO'S NAME>`
+```bash
+sudo diskutil mount disk0s1
+bless --folder /Volumes/EFI/EFI/BOOT --label "<YOUR DISTRO'S NAME>"
+```
 
 Replace `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu, run :-
 
-`bless --folder /Volumes/EFI/EFI/BOOT --label Ubuntu`
+```bash
+sudo diskutil mount disk0s1
+bless --folder /Volumes/EFI/EFI/BOOT --label "Ubuntu"
+```
 
 ## Setting label in case you are using the same EFI partition for Windows and Linux
 
@@ -28,11 +34,19 @@ More details about this can be found in the [triple boot guide](https://wiki.t2l
 
 In this case, boot into macOS, open a terminal window and run :-
 
-`bless --folder /Volumes/<NAME OF SEPERATE EFI PARTITION>/EFI/BOOT --label <YOUR DISTRO'S NAME>`
+```bash
+IDENTIFIER=$(diskutil info <NAME OF SEPERATE EFI PARTITION> | grep "Device Identifier" | cut -d: -f2 | xargs)
+sudo diskutil mount $IDENTIFIER
+bless --folder /Volumes/<NAME OF SEPERATE EFI PARTITION>/EFI/BOOT --label "<YOUR DISTRO'S NAME>"
+```
 
 Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu and you set the label to `EFI2`, run :-
 
-`bless --folder /Volumes/EFI2/EFI/BOOT --label Ubuntu`
+```bash
+IDENTIFIER=$(diskutil info EFI2 | grep "Device Identifier" | cut -d: -f2 | xargs)
+sudo diskutil mount $IDENTIFIER
+bless --folder /Volumes/EFI2/EFI/BOOT --label "Ubuntu"
+```
 
 # Setting the boot option icons in macOS Startup Manager
 
