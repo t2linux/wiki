@@ -15,7 +15,44 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 ## Setting up
 
-[This gist](https://gist.github.com/AdityaGarg8/94c6a3291455d5f8b7567ed9fb0b651e) has a script which can help you set up Wi-Fi. Checkout the instructions given there to use the script.
+[This gist](https://gist.github.com/AdityaGarg8/94c6a3291455d5f8b7567ed9fb0b651e) has a script which can help you set up Wi-Fi. Follow the instructions below to use this script :-
+
+### On macOS
+
+1. Click [here](https://gist.githubusercontent.com/AdityaGarg8/94c6a3291455d5f8b7567ed9fb0b651e/raw/wifi.sh) to download the script.
+2. Boot into macOS.
+3. Run this script there.
+4. The script will ask you to run some commands or the script itself in Linux after it gets executed successfully.
+5. Boot into Linux.
+
+### On Linux
+
+You have two options here:
+
+- The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi.
+
+- The second method is to run the commands which the script asked you to run on macOS. The commands in most cases should be the following, though you have to stick to the commands asked by the script, in case they turn out to be different.
+
+  ```sh
+  sudo umount /dev/nvme0n1p1
+  sudo mkdir /tmp/apple-wifi-efi
+  sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+  bash /tmp/apple-wifi-efi/wifi.sh
+  ```
+
+#### For those who don’t know how to run a script
+
+If you don’t know how to run a script, follow these instructions.
+
+1. Boot into macOS, and download the script. Make sure the script is there in your **Downloads** folder.
+2. Open the terminal and run :-
+
+  ``` bash
+  bash ~/Downloads/wifi.sh
+  ```
+  
+3. Then boot into Linux and place the same script in the **Downloads** folder over there or simply run the commands the script asked you to run in Linux when you executed it in macOS.
+4. If you placed the script in the **Downloads** folder instead of running the commands told by the script in macOS, run step 2 command on the terminal, this time in Linux. Else you needn't follow this step.
 
 ## Testing Firmware
 
