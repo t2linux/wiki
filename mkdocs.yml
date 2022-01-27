@@ -54,6 +54,7 @@ nav:
           - Overview: distributions/overview.md
           - Arch:
                 - Installation: distributions/arch/installation.md
+                - FAQ: distributions/arch/faq.md
           - Fedora:
                 - Home: distributions/fedora/home.md
                 - FAQ: distributions/fedora/faq.md

@@ -17,3 +17,11 @@ Run this in your terminal:
 ```sh
 sudo bash -c "echo 2 > /sys/class/input/*/device/fnmode"
 ```
+
+# "unable to satisfy dependency 'zfs-utils=0.8.5' required by linux57-mbp-zfs" error when updating
+
+See Updating Kernel below, and then remove the older linux57-mbp kernel's packages once the new kernel is working.
+
+# Updating Kernel
+
+The `mbp-manjaro` Kernel is currently not being updated. For now, you can use an [Arch Linux kernel instead](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel).
