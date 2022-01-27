@@ -28,3 +28,7 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 Due to issues in the mbp-ubuntu install process, there is no sound working after install. You'll have to set it up manually.
 Refer to this guide on [audio configuration](https://wiki.t2linux.org/guides/audio-config).
+
+# Updating Kernel
+
+Ubuntu and Debian based distro users can upgrade their kernel with [these](https://github.com/AdityaGarg8/T2-Ubuntu-Kernel#pre-installation-steps) instructions.

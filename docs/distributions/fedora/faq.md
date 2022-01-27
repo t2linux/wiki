@@ -10,3 +10,7 @@ Refer to these guides on [audio configuration](https://wiki.t2linux.org/guides/a
 # My boot hangs before getting to the installer
 
 This may be due to differences between USB-C to USB-A adapters. Try a different one if it is not working.
+
+# Updating Kernel
+
+Please refer to [this section](https://github.com/mikeeq/mbp-fedora-kernel#how-to-update-kernel-mbp).
