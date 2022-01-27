@@ -46,11 +46,11 @@ If you don’t know how to run a script, follow these instructions.
 
 1. Boot into macOS, and download the script. Make sure the script is there in your **Downloads** folder.
 2. Open the terminal and run :-
-
+  
   ``` bash
   bash ~/Downloads/wifi.sh
   ```
-
+  
 3. Then boot into Linux and place the same script in the **Downloads** folder over there or simply run the commands the script asked you to run in Linux when you executed it in macOS.
 4. If you placed the script in the **Downloads** folder instead of running the commands told by the script in macOS, run step 2 command on the terminal, this time in Linux. Else you needn't follow this step.
 
