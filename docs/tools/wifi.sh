@@ -3,7 +3,7 @@
 # Copyright (C) 2022 Aditya Garg <gargaditya08@live.com>
 #
 
-set -euo pipefail 
+set -euo pipefail
 
 os=$(uname -s);
 script_name=$(echo $0 | rev | cut -d'/' -f 1 | rev)
