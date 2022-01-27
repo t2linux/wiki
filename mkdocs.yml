@@ -40,7 +40,7 @@ nav:
           - Device Support and State of Features: state.md
           - Installation Roadmap: roadmap.md
     - Guides:
-          - Wifi: guides/wifi.md
+          - Wi-Fi: guides/wifi.md
           - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
           - Hybrid Graphics: guides/hybrid-graphics.md
