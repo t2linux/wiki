@@ -13,57 +13,66 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 - [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/#updating-kernel)
 - [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/#updating-kernel)
 
-## Getting the firmware
+## Setting up
 
-In order to get wifi running on Linux, we need to get the firmware from macOS and copy it to Linux with appropriate changes. Thanks to Asahi Linux, who has made the process much simpler. You may follow the steps below to get the firmware and copy it to Linux properly.
+We now use a script which can help you set up Wi-Fi. Follow the instructions below to use this script :-
 
-1. Boot into macOS.
+### On macOS
+
+1. Click [here](../../tools/wifi.sh) to download the script.
+2. Boot into macOS.
+3. Run this script there.
+4. The script will ask you to run some commands or the script itself in Linux after it gets executed successfully.
+5. Boot into Linux.
+
+### On Linux
+
+You have two options here:
+
+- The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi.
+
+- The second method is to run the commands which the script asked you to run on macOS. The commands in most cases should be the following, though the last line may change if you rename the script. Its better to verify the last line with the commands asked by the script and stick to the script, in case it turns out to be different.
+
+  ```sh
+  sudo umount /dev/nvme0n1p1
+  sudo mkdir /tmp/apple-wifi-efi
+  sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+  bash /tmp/apple-wifi-efi/wifi.sh
+  ```
+
+#### For those who don’t know how to run a script
+
+If you don’t know how to run a script, follow these instructions.
+
+1. Boot into macOS, and download the script. Make sure the script is there in your **Downloads** folder.
 
 2. Open the terminal and run :-
+  
+    ``` bash
+    bash ~/Downloads/wifi.sh
+    ```
+  
+3. Then boot into Linux and place the same script in the **Downloads** folder over there or simply run the commands the script asked you to run in Linux when you executed it in macOS.
 
-   ```sh
-   cp -r /usr/share/firmware/wifi ~/Desktop
-   curl -L https://github.com/AsahiLinux/asahi-installer/archive/refs/heads/main.tar.gz > ~/Desktop/asahi-installer-main.tar.gz
-   ```
-
-   This shall make a folder named **wifi** and a zip archive named **asahi-installer-main.tar.gz** on the macOS Desktop.
-
-3. Copy the **wifi** folder and the **asahi-installer-main.tar.gz** archive to an external drive or a partition which is formatted to a file system readable by Linux. You can also use your EFI partition by mounting it using `sudo diskutil mount disk0s1`.
-
-4. Boot into Linux.
-
-5. Copy the **wifi** folder and the **asahi-installer-main.tar.gz** archive to the **Home** folder using your file manager.
-
-6. Open the terminal and run :-
-
-   ```sh
-   tar xvf asahi-installer-main.tar.gz
-   cd asahi-installer-main/src
-   python3 -m firmware.wifi ~/wifi firmware.tar
-   cd /lib/firmware
-   sudo tar xvf ~/asahi-installer-main/src/firmware.tar
-   sudo rm -r ~/asahi-installer-main* ~/wifi
-   ```
+4. If you placed the script in the **Downloads** folder instead of running the commands told by the script in macOS, run step 2 command on the terminal, this time in Linux. Else you needn't follow this step.
 
 ## Testing Firmware
 
-1. You can now test out if the files work by running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` and looking at the list of wifi access points nearby.
+You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
 
-2. You can optionally check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
-
-    ```log
-    Dec 24 22:34:19 hostname kernel: usbcore: registered new interface driver brcmfmac
-    Dec 24 22:34:19 hostname kernel: brcmfmac 0000:01:00.0: enabling device (0000 -> 0002)
-    Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac4377b3-pcie for chip BCM4377/4
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m-3.1-X0.bin failed with error -2
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m-3.1.bin failed with error -2
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m.bin failed with error -2
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR.bin failed with error -2
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-X0.bin failed with error -2
-    Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blob found, loading
-    Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
-    Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
-    ```
+```log
+Dec 24 22:34:19 hostname kernel: usbcore: registered new interface driver brcmfmac
+Dec 24 22:34:19 hostname kernel: brcmfmac 0000:01:00.0: enabling device (0000 -> 0002)
+Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_fw_alloc_request: using brcm/brcmfmac4377b3-pcie for chip BCM4377/4
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m-3.1-X0.bin failed with error -2
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m-3.1.bin failed with error -2
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR-m.bin failed with error -2
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-SPPR.bin failed with error -2
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0: Direct firmware load for brcm/brcmfmac4377b3-pcie.apple,tahiti-X0.bin failed with error -2
+Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blob found, loading
+Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
+Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
+```
 
 ## Fixing unstable WPA2 using iwd
 
