@@ -2,11 +2,16 @@
 
 This page is a step by step guide to get wifi working on T2 Macs.
 
-!!! Info "Fedora"
-    Fedora users are requested to follow the older version of this guide [here](https://github.com/t2linux/wiki/blob/a4b46a7cfbe7efcbb6a0b6111e22172b0f5c4a77/docs/guides/wifi.md).
+## Ensure Kernel Supports OTP Firmware Selection
 
-!!! Info "Ubuntu"
-    If you have used the [old but stable](https://github.com/marcosfad/mbp-ubuntu/releases/tag/v20.04-5.7.19-1) ISO, then you will have to upgrade your [kernel](https://github.com/AdityaGarg8/T2-Ubuntu-Kernel#pre-installation-steps) before following this guide.
+Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it doesn't output anything, then upgrade your kernel (better option), or follow this [older Wi-Fi guide](https://github.com/t2linux/wiki/blob/a4b46a7cfbe7efcbb6a0b6111e22172b0f5c4a77/docs/guides/wifi.md).
+
+Refer to the "Updating Kernel" section on your distro's FAQ for instructions if you need to update your kernel:
+
+- [Arch](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel)
+- [Fedora](https://wiki.t2linux.org/distributions/fedora/faq/#updating-kernel)
+- [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/#updating-kernel)
+- [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/#updating-kernel)
 
 ## Getting the firmware
 
