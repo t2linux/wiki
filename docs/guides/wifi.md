@@ -15,11 +15,11 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 ## Setting up
 
-[This gist](https://gist.github.com/AdityaGarg8/94c6a3291455d5f8b7567ed9fb0b651e) has a script which can help you set up Wi-Fi. Follow the instructions below to use this script :-
+We now use a script which can help you set up Wi-Fi. Follow the instructions below to use this script :-
 
 ### On macOS
 
-1. Click [here](https://gist.githubusercontent.com/AdityaGarg8/94c6a3291455d5f8b7567ed9fb0b651e/raw/wifi.sh) to download the script.
+1. Click [here](https://github.com/t2linux/wiki/tree/gh-pages/tools/wifi.sh) to download the script.
 2. Boot into macOS.
 3. Run this script there.
 4. The script will ask you to run some commands or the script itself in Linux after it gets executed successfully.
