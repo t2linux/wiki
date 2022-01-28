@@ -22,12 +22,12 @@ We now use a script which can help you set up Wi-Fi. Follow the instructions bel
 1. Click [here](../tools/wifi.sh) to download the script.
 2. Boot into macOS.
 3. Run this script there.
-4. The script will ask you to run some commands, or the script itself, in Linux after it gets executed successfully.
+4. When the script shall run successfully, it shall ask you to follow either of the two options mentioned in the [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section, on Linux.
 5. Boot into Linux.
 
 ### On Linux
 
-You have two options here. You can follow any one of the two:
+You have two options here. You can follow either of the two, its purely based on your choice:
 
 - The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi.
 
