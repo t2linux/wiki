@@ -52,7 +52,8 @@ case "$os" in
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
-			sudo rm $mountpoint/wifi.tar.gz $mountpoint/asahi-installer-main.tar.gz $mountpoint/"$script_name"
+			sudo rm $mountpoint/wifi.tar.gz $mountpoint/asahi-installer-main.tar.gz
+			sudo rm $mountpoint/"$script_name" || (sudo rm $mountpoint/*.sh || (echo "Warning! Couldn't remove the copy of the script from the EFI partition. Please remove manually." && sleep 5))
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
