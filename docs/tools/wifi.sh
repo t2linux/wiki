@@ -17,7 +17,7 @@ case "$os" in
 		tar czf /Volumes/EFI/wifi.tar.gz wifi/*
 		echo "Getting Asahi's script"
 		curl -L https://github.com/AsahiLinux/asahi-installer/archive/refs/heads/main.tar.gz > /Volumes/EFI/asahi-installer-main.tar.gz
-		echo "Copying the script to EFI"
+		echo "Copying this script to EFI"
 		cd -
 		cp "$0" "/Volumes/EFI"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\n" && echo && read -p "Press enter after you have copied" && echo)
 		echo "Unmounting the EFI partition"
