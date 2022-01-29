@@ -19,11 +19,11 @@ case "$os" in
 		curl -L https://github.com/AsahiLinux/asahi-installer/archive/refs/heads/main.tar.gz > /Volumes/EFI/asahi-installer-main.tar.gz
 		echo "Copying this script to EFI"
 		cd -
-		cp "$0" "/Volumes/EFI"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\n" && echo && read -p "Press enter after you have copied" && echo)
+		cp "$0" "/Volumes/EFI/wifi.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is wifi.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/'$script_name'\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/wifi.sh\n"
 		;;
 	(Linux)
 		echo "Detected Linux"
@@ -52,8 +52,7 @@ case "$os" in
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
-			sudo rm $mountpoint/wifi.tar.gz $mountpoint/asahi-installer-main.tar.gz
-			sudo rm $mountpoint/"$script_name" || (echo "Warning! Couldn't remove the copy of the script from the EFI partition. Please remove manually from $mountpoint." && echo && read -p "Press enter after you have removed" && echo)
+			sudo rm $mountpoint/wifi.tar.gz $mountpoint/asahi-installer-main.tar.gz $mountpoint/wifi.sh
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
