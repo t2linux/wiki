@@ -31,7 +31,8 @@ You have two options here. You can follow either of the two, its purely based on
 
 - The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi.
 
-- The second method is to simply run the following commands on Linux
+- The second method is to simply run the following commands on Linux :-
+
   ```sh
   sudo umount /dev/nvme0n1p1
   sudo mkdir /tmp/apple-wifi-efi
