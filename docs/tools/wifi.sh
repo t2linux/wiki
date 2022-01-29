@@ -53,7 +53,7 @@ case "$os" in
 		then
 			echo "Removing the copy from the EFI partition"
 			sudo rm $mountpoint/wifi.tar.gz $mountpoint/asahi-installer-main.tar.gz
-			sudo rm $mountpoint/"$script_name" || (sudo rm $mountpoint/*.sh || (echo "Warning! Couldn't remove the copy of the script from the EFI partition. Please remove manually." && sleep 5))
+			sudo rm $mountpoint/"$script_name" || (echo "Warning! Couldn't remove the copy of the script from the EFI partition. Please remove manually from $mountpoint." && echo && read -p "Press enter after you have removed" && echo)
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
