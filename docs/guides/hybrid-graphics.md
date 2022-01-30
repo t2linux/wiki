@@ -49,19 +49,23 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
-3.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
+3.  Set the `gpu-power-prefs` NVRAM variable to make the iGPU the Boot GPU.
 
-    If you do have that line in journalctl, then you can set NVRAM and the boot GPU from Linux:
+    1.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
 
-    ```sh
-    curl https://raw.githubusercontent.com/0xbb/gpu-switch/master/gpu-switch > gpu-switch
-    chmod +x gpu-switch
-    sudo chown root:root gpu-switch
-    sudo mv gpu-switch /usr/local/bin/
-    sudo gpu-switch -i
-    ```
+    2.  If `cat /proc/cmdline` has `efi=noruntime`, remove it from the kernel command line by editing your bootloader config (the issue it was avoiding is fixed by the line we checked for in the previous step).
 
-    Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
+    3.  Install the `gpu-switch` script, and then you can set NVRAM and the boot GPU from Linux.
+
+        ```sh
+        curl https://raw.githubusercontent.com/0xbb/gpu-switch/master/gpu-switch > gpu-switch
+        chmod +x gpu-switch
+        sudo chown root:root gpu-switch
+        sudo mv gpu-switch /usr/local/bin/
+        sudo gpu-switch -i
+        ```
+
+    4.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 # Use on Windows
 
