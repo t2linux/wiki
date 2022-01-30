@@ -22,6 +22,13 @@ sudo bash -c "echo 2 > /sys/class/input/*/device/fnmode"
 
 See Updating Kernel below, and then remove the older linux57-mbp kernel's packages once the new kernel is working.
 
+You can also use `pacman -Syu --ignore zfs-utils` to update while skipping the offending package. This is a partial upgrade and is not a reccomended practice. If you are not using zfs-utils then it is unlikely to cause issues.
+
 # Updating Kernel
 
+!!! Warning
+    These instructions are currently broken as the new kernel fails to find modules on the initramfs to mount the root filesystem.
+
 The `mbp-manjaro` Kernel is currently not being updated. For now, you can use an [Arch Linux kernel instead](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel).
+
+Then you may have to update the dkms modules, refer to [this page](https://wiki.t2linux.org/guides/dkms/).
