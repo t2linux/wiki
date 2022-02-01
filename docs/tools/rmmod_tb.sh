@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 if [ "${1}" = "pre" ]; then
         modprobe -r apple_ib_tb
 elif [ "${1}" = "post" ]; then
