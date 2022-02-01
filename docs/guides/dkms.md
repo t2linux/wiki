@@ -101,18 +101,19 @@ MODULES="apple-bce"
 And then run `sudo mkinitcpio -P`.
 See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
 
-# Setting up the touchbar
+# Setting up the Touch Bar
 
-The touchbar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your macOS is updated to the latest version before running this script.
+The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your macOS is updated to the latest version before running this script.
 
-After running this script, restart your Mac. The touchbar should be able to change modes by pressing the fn key.
+After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key.
 
-If you wish to change the default mode of the touchbar, run `sudo touchbar` and choose the mode you wish.
+If you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
 
-In case your touchbar is unable to change modes even after running the script and restarting, you could try the following :-
+In case your Touch Bar is unable to change modes even after running the script and restarting, you could try the following :-
 
 1. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
 2. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
+3. Add `modprobe.blacklist=apple_ib_tb` kernel parameter using your bootloader.
 
 Still if you face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
