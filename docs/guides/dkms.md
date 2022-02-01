@@ -101,22 +101,27 @@ MODULES="apple-bce"
 And then run `sudo mkinitcpio -P`.
 See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
 
-# Module configuration
+# Setting up the touchbar
 
-The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` (`options apple-ib-tb fnmode=x`) to one of the following options:
+The touchbar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your macOS is updated to the latest version before running this script.
 
-- 0: Only show F1-F12
-- 1: Show media and brightness controls, use the `fn` key to switch to F1-12
-- 2: Show F1-F12, use the `fn` key to switch to media and brightness controls
-- 3: Only show media and brightness controls
-- 4: Only show the escape key
+After running this script, restart your Mac. The touchbar should be able to change modes by pressing the fn key.
+
+If you wish to change the default mode of the touchbar, run `sudo touchbar` and choose the mode you wish.
+
+In case your touchbar is unable to change modes even after running the script and restarting, you could try the following :-
+
+1. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
+2. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
+
+Still if you face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the [discord](https://discord.com/invite/68MRhQu).
 
 !!! info "Ubuntu"
-    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before editing.
+    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`, used by the script. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before running the script.
 
 # Fixing Suspend
 
-Copy [this script](https://github.com/mikeeq/mbp-fedora/blob/f34/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
+Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 
 Now run :-
 
