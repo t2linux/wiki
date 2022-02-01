@@ -114,7 +114,7 @@ In case your touchbar is unable to change modes even after running the script an
 1. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
 2. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
-Still if you face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the [discord](https://discord.com/invite/68MRhQu).
+Still if you face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
 !!! info "Ubuntu"
     Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`, used by the script. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before running the script.
