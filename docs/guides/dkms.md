@@ -116,7 +116,6 @@ In case your Touch Bar is unable to change modes even after running the script a
 
 1. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
 2. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
-3. Add `modprobe.blacklist=apple_ib_tb` kernel parameter using your bootloader.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
