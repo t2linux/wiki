@@ -103,7 +103,7 @@ See your distro-specific instructions for configuring `apple-bce` to added to yo
 
 # Setting up the Touch Bar
 
-The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your macOS is updated to the latest version before running this script.
+The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
 After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key after a restart.
 
