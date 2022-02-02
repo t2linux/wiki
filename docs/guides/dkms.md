@@ -101,22 +101,27 @@ MODULES="apple-bce"
 And then run `sudo mkinitcpio -P`.
 See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
 
-# Module configuration
+# Setting up the Touch Bar
 
-The Touchbar module offers some modes to set. In `/etc/modprobe.d/apple-tb.conf`, set `fnmode` (`options apple-ib-tb fnmode=x`) to one of the following options:
+The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
-- 0: Only show F1-F12
-- 1: Show media and brightness controls, use the `fn` key to switch to F1-12
-- 2: Show F1-F12, use the `fn` key to switch to media and brightness controls
-- 3: Only show media and brightness controls
-- 4: Only show the escape key
+After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key after a restart.
+
+If you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
+
+In case your Touch Bar is unable to change modes even after running the script and restarting, you could try the following :-
+
+1. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
+2. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
+
+If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
 !!! info "Ubuntu"
-    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before editing.
+    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`, used by the script. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before running the script.
 
 # Fixing Suspend
 
-Copy [this script](https://github.com/mikeeq/mbp-fedora/blob/f34/files/suspend/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
+Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 
 Now run :-
 
@@ -126,6 +131,8 @@ sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 ```
 
 It unloads the Touchbar modules as they can cause issues for suspend.
+
+Your keyboard backlight may remain switched off on resuming and backlight controls may stop working. A restart fixes the backlight controls. You may also run `echo 60 > /sys/class/leds/apple::kbd_backlight/brightness` to turn on the backlight to the maximum level if you do not want to boot. Replace 60 with a lower number for lower brightness.
 
 # Kernel panic when loading apple-ib-als
 
