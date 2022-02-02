@@ -19,13 +19,7 @@ read tb
 echo "Changing default mode ..."
 echo "# display f* key in touchbar" > /etc/modprobe.d/apple-tb.conf
 echo "options apple-ib-tb fnmode=$tb" >> /etc/modprobe.d/apple-tb.conf
-rm /etc/modprobe.d/delay-tb.conf
-brightness=$(cat /sys/class/leds/apple::kbd_backlight/brightness)
-modprobe -r apple-ib-tb
-modprobe apple-ib-tb
-echo "# delay loading of the touchbar driver" > /etc/modprobe.d/delay-tb.conf
-echo "install apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" >> /etc/modprobe.d/delay-tb.conf
-echo $brightness > /sys/class/leds/apple::kbd_backlight/brightness
+bash -c "echo $tb > /sys/class/input/*/device/fnmode"
 echo "Done!"' | sudo tee /usr/local/bin/touchbar >/dev/null
 
 sudo chmod a+x /usr/local/bin/touchbar

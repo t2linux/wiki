@@ -105,12 +105,9 @@ See your distro-specific instructions for configuring `apple-bce` to added to yo
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your macOS is updated to the latest version before running this script.
 
-After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key.
+After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key after a restart.
 
 If you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
-
-!!! info "Keyboard Backlight"
-    The Keyboard Backlight controls on some models may break on changing the default mode of the touchbar. You may fix them by simply rebooting your Mac.
 
 In case your Touch Bar is unable to change modes even after running the script and restarting, you could try the following :-
 
