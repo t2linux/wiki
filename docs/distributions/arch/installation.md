@@ -33,7 +33,7 @@ You will need:
     2. Boot while holding the option key, this will put you in macOS Startup Manager.
     3. Select the orange EFI option with arrow keys and press return/enter on it.
 
-5. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_keyboard_layout) up to "Format the partitions".
+5. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_console_keyboard_layout) up to "Format the partitions".
 
     1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows or already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`, and your other partitions on `/mnt`, etc.
