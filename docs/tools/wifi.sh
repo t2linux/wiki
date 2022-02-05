@@ -47,7 +47,7 @@ case "$os" in
 		sudo modprobe brcmfmac
 		echo "Cleaning up"
 		sudo rm -r /tmp/apple-wifi-fw
-		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/n)"
+		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
 		read input
 		if [[ ($input != y) && ($input != Y) ]]
 		then
