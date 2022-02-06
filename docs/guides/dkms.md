@@ -119,6 +119,7 @@ After running this script, if you wish to change the default mode of the Touch B
 In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
 
 1. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
+
 2. Try running the following and rebooting.
   
    ```sh
@@ -126,6 +127,7 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
    ```
   
 3. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
+
 4. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
