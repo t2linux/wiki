@@ -111,9 +111,10 @@ If you wish to change the default mode of the Touch Bar, run `sudo touchbar` and
 
 In case your Touch Bar is unable to change modes even after running the script and restarting, you could try the following :-
 
-1. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
-2. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
-3. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
+1. Try running `echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null` and rebooting.
+2. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
+3. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
+4. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
