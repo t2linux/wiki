@@ -105,6 +105,15 @@ See your distro-specific instructions for configuring `apple-bce` to added to yo
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
+If you are running **Ubuntu**, its recommended to run the following as well and rebooting:-
+
+```sh
+sudo rm /etc/modprobe.d/apple-touchbar.conf
+sudo rm /etc/modules-load.d/apple-bce.conf
+sudo rm /etc/modules-load.d/applespi.conf
+echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
+```
+
 After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
 
 In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
@@ -120,16 +129,6 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
 4. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
-
-!!! info "Ubuntu"
-    Its recommended to run the following on Ubuntu before running this script :-
-   
-    ```sh
-    sudo rm /etc/modprobe.d/apple-touchbar.conf
-    sudo rm /etc/modules-load.d/apple-bce.conf
-    sudo rm /etc/modules-load.d/applespi.conf
-    echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
-    ```
    
 # Fixing Suspend
 
