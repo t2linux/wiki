@@ -1,6 +1,6 @@
 # Contribute
 
-We at T2 Linux, currently do not accept financial donations. Though, some of our contributors/maintainers do accept donations at their own level. You may refer to the [Support our maintainers](https://wiki.t2linux.org/donations/#support-our-maintainers) section of this page to get the links of the same.
+The T2 project itself currently does not accept financial donations. However, some of the contributors and maintainers of the project do accept donations on their own. You may refer to the [Support our maintainers](https://wiki.t2linux.org/contribute/#support-our-maintainers) section of this page to get the links of the same.
 
 The best way of donation which we believe is in the form of skill. If you think you have the potential to help us in pushing the project further like fixing bugs, adding new features etc., you are free to do so. For this, you may contact our discord server, where other members of this organization are present.
 

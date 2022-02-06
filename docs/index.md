@@ -21,7 +21,7 @@ You may contact us on the [Linux on T2 Macs (2018+) Discord Server](https://disc
 
 # Contribute
 
-Visit [this page](https://wiki.t2linux.org/donations/) for more details.
+Visit the [Contribute page](https://wiki.t2linux.org/contribute/) for more details.
 
 # Notable Resources
 
