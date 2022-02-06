@@ -49,7 +49,7 @@ case "$os" in
 		cd /tmp/apple-wifi-fw
 		if [[ ${1-default} = -v ]]
 		then
-			sudo tar xf $mountpoint/wifi.tar.gz
+			sudo tar xvf $mountpoint/wifi.tar.gz
 		else
 			sudo tar xf $mountpoint/wifi.tar.gz 2>/dev/null
 		fi
