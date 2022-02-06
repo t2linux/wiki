@@ -19,6 +19,10 @@ To get started with an installation, refer to the [roadmap](https://wiki.t2linux
 
 You may contact us on the [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
+# Contribute
+
+Visit the [Contribute page](https://wiki.t2linux.org/contribute/) for more details.
+
 # Notable Resources
 
 ## Distributions

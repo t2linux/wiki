@@ -39,6 +39,7 @@ nav:
           - Home: index.md
           - Device Support and State of Features: state.md
           - Installation Roadmap: roadmap.md
+          - Contribute: contribute.md
     - Guides:
           - Wi-Fi: guides/wifi.md
           - DKMS: guides/dkms.md
