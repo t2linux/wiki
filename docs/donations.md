@@ -1,4 +1,4 @@
-# Donations
+# Contribute
 
 We at T2 Linux, currently do not accept financial donations. Though, some of our contributors/maintainers do accept donations at their own level. You may refer to the [Support our maintainers](https://wiki.t2linux.org/donations/#support-our-maintainers) section of this page to get the links of the same.
 
