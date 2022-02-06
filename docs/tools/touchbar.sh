@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Copyright (c) 2022 Aditya Garg
 
+set -euo pipefail
+
 echo "Setting up the Touch Bar"
 echo -e "# display f* key in touchbar\noptions apple-ib-tb fnmode=1" | sudo tee /etc/modprobe.d/apple-tb.conf >/dev/null
 echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
