@@ -26,5 +26,4 @@ echo "Done!"' | sudo tee /usr/local/bin/touchbar >/dev/null
 sudo chmod a+x /usr/local/bin/touchbar
 sudo chown root:root /usr/local/bin/touchbar
 
-echo "Run sudo touchbar to change default Touch Bar mode in subsequent boots"
-echo "Reboot to finish setting up Touch Bar"
+echo "Run sudo touchbar to change default Touch Bar mode"
