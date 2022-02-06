@@ -105,13 +105,16 @@ See your distro-specific instructions for configuring `apple-bce` to added to yo
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
-After running this script, restart your Mac. The Touch Bar should be able to change modes by pressing the fn key after a restart.
+After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
 
-If you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
+In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
 
-In case your Touch Bar is unable to change modes even after running the script and restarting, you could try the following :-
+1. Try running the following and rebooting.
 
-1. Try running `echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null` and rebooting.
+   ```sh
+   echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
+   ```
+ 
 2. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
 3. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
 4. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
@@ -119,7 +122,13 @@ In case your Touch Bar is unable to change modes even after running the script a
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
 !!! info "Ubuntu"
-    Ubuntu has `/etc/modprobe.d/apple-touchbar.conf` added by default instead of `/etc/modprobe.d/apple-tb.conf`, used by the script. Thus, its advised to rename `apple-touchbar.conf` to `apple-tb.conf` before running the script.
+    Its recommended to run the following on Ubuntu before running this script :-
+    ```sh
+    sudo rm /etc/modprobe.d/apple-touchbar.conf
+    sudo rm /etc/modules-load.d/apple-bce.conf
+    sudo rm /etc/modules-load.d/applespi.conf
+    echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
+    ```
 
 # Fixing Suspend
 
