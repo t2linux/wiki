@@ -105,7 +105,7 @@ See your distro-specific instructions for configuring `apple-bce` to added to yo
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
-If you are running **Ubuntu**, its recommended to run the following as well and rebooting:-
+If you are running **Ubuntu**, its recommended to run the following as well and rebooting :-
 
 ```sh
 sudo rm /etc/modprobe.d/apple-touchbar.conf
@@ -118,18 +118,18 @@ After running this script, if you wish to change the default mode of the Touch B
 
 In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
 
-1. Try running the following and rebooting.
+1. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
+2. Try running the following and rebooting.
   
    ```sh
    echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
    ```
   
-2. Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
 3. Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
 4. Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
-   
+
 # Fixing Suspend
 
 Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
