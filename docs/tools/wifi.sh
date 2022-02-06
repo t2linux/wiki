@@ -35,9 +35,9 @@ case "$os" in
 		echo "Re-mounting the EFI partition"
 		if [[ ${1-default} = -v ]]
 		then
-			sudo umount /dev/nvme0n1p1 || true
-			sudo mkdir /tmp/apple-wifi-efi || true
-			sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi || true
+			sudo umount -v /dev/nvme0n1p1 || true
+			sudo mkdir -v /tmp/apple-wifi-efi || true
+			sudo mount -v /dev/nvme0n1p1 /tmp/apple-wifi-efi || true
 		else
 			sudo umount /dev/nvme0n1p1 2>/dev/null || true
 			sudo mkdir /tmp/apple-wifi-efi 2>/dev/null || true
