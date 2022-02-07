@@ -72,7 +72,7 @@ The Touchbar and keyboard should be working. For audio, you'll also need some co
     Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
 
 ```sh
-echo apple-bce >> /etc/modules-load.d/t2.conf
+echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 ```
 
 # Make modules load on early boot
