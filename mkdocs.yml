@@ -40,6 +40,7 @@ nav:
           - Device Support and State of Features: state.md
           - Installation Roadmap: roadmap.md
           - Contribute: contribute.md
+          - Notable Contributors: notable-contributors.md
     - Guides:
           - Wi-Fi: guides/wifi.md
           - DKMS: guides/dkms.md
