@@ -3,6 +3,11 @@
 
 set -euo pipefail
 
+if [[ `uname -s` != "Linux" ]] ; then
+    echo "This script is intended to be run from Linux. Aborting!"
+    exit 1
+fi
+
 echo "Setting up the Touch Bar"
 echo -e "# display f* key in touchbar\noptions apple-ib-tb fnmode=1" | sudo tee /etc/modprobe.d/apple-tb.conf >/dev/null
 
@@ -26,4 +31,4 @@ echo "Done!"' | sudo tee /usr/local/bin/touchbar >/dev/null
 sudo chmod a+x /usr/local/bin/touchbar
 sudo chown root:root /usr/local/bin/touchbar
 
-echo "Run sudo touchbar to change default Touch Bar mode"
+echo "Run sudo touchbar to change the default Touch Bar mode"
