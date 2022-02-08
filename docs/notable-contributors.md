@@ -1,6 +1,6 @@
 # All Notable Contributors
 
-This page contains all Notable Contributors for the Linux on T2 project. \
+This page contains all Notable Contributors for the Linux on T2 project.
 If there is someone missing that you think should be on this list, send a PR on the [wiki repository.](https://github.com/t2linux/wiki)
 
 - aunali1 (Arch Linux and Kernel Module work) [https://github.com/aunali1](https://github.com/aunali1)
