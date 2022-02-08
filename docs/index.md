@@ -32,6 +32,7 @@ If the distribution you want to use has a guide [here](https://wiki.t2linux.org/
 
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
+- Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
 - Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
@@ -71,7 +72,7 @@ Note that, if you are using one of the distributions listed above, you should fo
 - MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
 - mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
 - networkException (Wiki maintenance and `mbpfan` fork for T2) [https://github.com/networkException](https://github.com/networkException)
-- Redecorating (Wiki maintenance and providing compiled kernels with Corellium patch for wifi) [https://github.com/Redecorating](https://github.com/Redecorating)
+- Redecorating (Wiki maintenance and providing compiled kernels with patch for wifi) [https://github.com/Redecorating](https://github.com/Redecorating)
 - roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
 
-... and many more
+... and many more which you can see [here](https://wiki.t2linux.org/notable-contributors)
