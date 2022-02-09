@@ -31,6 +31,7 @@ Different distributions are maintained by different people in their own reposito
 If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as it considers T2 support.
 
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
+- EndeavourOS [https://github.com/NoaHimesaka1873/EndeavourOS-ISO-t2mac](https://github.com/NoaHimesaka1873/EndeavourOS-ISO-t2mac)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
@@ -66,13 +67,4 @@ Note that, if you are using one of the distributions listed above, you should fo
 
 # Notable Contributors
 
-- aunali1 (Arch Linux and Kernel Module work) [https://github.com/aunali1](https://github.com/aunali1)
-- JPyke3 (Manjaro) [https://github.com/JPyke3](https://github.com/JPyke3)
-- marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
-- MCMrARM (MacBook Bridge / T2 Linux Driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
-- mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
-- networkException (Wiki maintenance and `mbpfan` fork for T2) [https://github.com/networkException](https://github.com/networkException)
-- Redecorating (Wiki maintenance and providing compiled kernels with patch for wifi) [https://github.com/Redecorating](https://github.com/Redecorating)
-- roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
-
-... and many more which you can see [here](https://wiki.t2linux.org/notable-contributors)
+Check out the list of all Notable Contributors [here](https://wiki.t2linux.org/notable-contributors).
