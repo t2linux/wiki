@@ -51,8 +51,8 @@ You will need:
     1. Open "Extras for Apple T2-based devices"
     2. Select proper package for your device.
 
-        1. If your device is not MacBookPro16,1, choose "apple-t2-audio-config"
-        2. If your device is MacBookPro16,1, choose "apple-t2-audio-config-alt"
+        1. If your device is not MacBookPro16,1 nor MacBookPro16,4, choose "apple-t2-audio-config"
+        2. If your device is MacBookPro16,1 or MacBookPro16,4, choose "apple-t2-audio-config-alt"
 
     3. Just continue.
 
