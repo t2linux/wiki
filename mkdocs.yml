@@ -57,6 +57,8 @@ nav:
           - Arch:
                 - Installation: distributions/arch/installation.md
                 - FAQ: distributions/arch/faq.md
+          - EndeavourOS:
+                - Installation: distributions/endeavouros/installation.md
           - Fedora:
                 - Home: distributions/fedora/home.md
                 - FAQ: distributions/fedora/faq.md
