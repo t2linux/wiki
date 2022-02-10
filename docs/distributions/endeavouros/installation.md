@@ -10,8 +10,7 @@ You will need:
 
 1. Making a partition for Linux.
 
-    1. Open the Bootcamp installer and follow it until it asks for a Windows ISO, this will clear space for a Linux partition (by removing APFS snapshots).
-    2. In macOS Disk Utility, make a partition, format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from the installer, so you must make space now.
+    1. In macOS Disk Utility, make a partition, format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from the installer, so you must make space now.
 
 2. Creating bootable media
 
@@ -43,7 +42,7 @@ You will need:
 6. Follow the installer until Partitions.
 
     1. Select "Manual partitioning."
-    2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi"
+    2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi" If you want to use separate EFI partition, check out [this guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
     3. Use remaining partition space to your convenience.
 
 7. When you see Desktop, you ***MUST NOT*** uncheck "Apple T2-based devices." This package group contains important packages to support your device. Follow the instruction below to set it properly for your device.
@@ -58,6 +57,6 @@ You will need:
 
 8. Follow the rest of the installer and reboot.
 
-9. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install to make your fan work.
+9. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install if your fan isn't working or if you want to customize how/when your fan will run.
 
 10. You now will be able to select your EndeavourOS install in the macOS Startup Manager by holding option at boot.
