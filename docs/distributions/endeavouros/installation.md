@@ -4,7 +4,7 @@ You will need:
 
 - USB drive with at least 4GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi. 
+- A wired internet connection (i.e. USB-C to Enternet dongle) or wifi.
 
 ---
 
@@ -29,18 +29,19 @@ You will need:
     2. Boot while holding the option key, this will put you in macOS Startup Manager.
     3. Select the orange EFI option with arrow keys and press return/enter on it.
 
-!!! warning
-    NEVER use the option "Install community editions" or choose "Offline" installation method. They certainly don't work.
-    Community edition support is planned, but never expect support for offline install.
-
 5. Starting Calamares installer
 
     1. If you're not connected to the internet, connect to it now. Use included GUI config tool to connect to Wi-Fi.
     2. Click "Start the Installer" on the "Welcome" window.
+
+        !!! warning
+            NEVER use the option "Install community editions" or choose "Offline" installation method. They certainly don't work.
+            Community edition support is planned, but never expect support for offline install.
+    
     3. Click "Online."
 
 6. Follow the installer until Partitions.
-    
+
     1. Select "Manual partitioning."
     2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi"
     3. Use remaining partition space to your convenience.
@@ -52,6 +53,7 @@ You will need:
 
         1. If your device is not MacBookPro16,1, choose "apple-t2-audio-config."
         2. If your device is MacBookPro16,1, choose "apple-t2-audio-config-alt."
+
     3. Just continue.
 
 8. Follow the rest of the installer and reboot.
@@ -59,4 +61,3 @@ You will need:
 9. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install to make your fan work.
 
 10. You now will be able to select your EndeavourOS install in the macOS Startup Manager by holding option at boot.
- 
