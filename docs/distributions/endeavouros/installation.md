@@ -37,7 +37,7 @@ You will need:
         !!! warning
             NEVER use the option "Install community editions" or choose "Offline" installation method. They certainly don't work.
             Community edition support is planned, but never expect support for offline install.
-    
+
     3. Click "Online."
 
 6. Follow the installer until Partitions.
@@ -48,11 +48,11 @@ You will need:
 
 7. When you see Desktop, you ***MUST NOT*** uncheck "Apple T2-based devices." This package group contains important packages to support your device. Follow the instruction below to set it properly for your device.
 
-    1. Open "Extras for Apple T2-based devices."
-    2.
+    1. Open "Extras for Apple T2-based devices"
+    2. Select proper package for your device.
 
-        1. If your device is not MacBookPro16,1, choose "apple-t2-audio-config."
-        2. If your device is MacBookPro16,1, choose "apple-t2-audio-config-alt."
+        1. If your device is not MacBookPro16,1, choose "apple-t2-audio-config"
+        2. If your device is MacBookPro16,1, choose "apple-t2-audio-config-alt"
 
     3. Just continue.
 
