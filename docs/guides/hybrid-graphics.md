@@ -19,7 +19,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 2.  Set up apple-set-os-loader to make Apple's firmware show the iGPU
 
-    1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else, you will need to modify the last two commands. If you are using rEFInd, then you need to replace `/boot/efi` with the mount point of the partition in which rEFInd is installed.
+    1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
 
         ```sh
         git clone https://github.com/aa15032261/apple_set_os-loader
