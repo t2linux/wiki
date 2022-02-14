@@ -53,7 +53,7 @@ You will need:
     1. Open "Extras for Apple T2-based devices"
     2. Select proper package for your device.
 
-        1. Ensure you're not using MacBookAir9,1. If you're using it, don't choose anything here.
+        1. Ensure you're not using MacBookAir9,1. If you're using it, don't choose anything here and follow [this guide](https://wiki.t2linux.org/guides/audio-config/) after the installation.
         2. If your device is not MacBook Pro 16-inch (2019), choose "apple-t2-audio-config"
         3. If your device is MacBook Pro 16-inch (2019), choose "apple-t2-audio-config-alt"
 
