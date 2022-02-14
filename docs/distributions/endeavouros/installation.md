@@ -31,13 +31,16 @@ You will need:
 5. Starting Calamares installer
 
     1. If you're not connected to the internet, connect to it now. Use included GUI config tool to connect to Wi-Fi.
-    2. Click "Start the Installer" on the "Welcome" window.
+    2. On the "Welcome" window, choose...
+
+        1. "Install community editions if you want to install community edition.
+        2. "Start the Installer" if you want to install normal edition.
+
+    3. Click "Online" if you chose to install normal edition.
 
         !!! warning
-            NEVER use the option "Install community editions" or choose "Offline" installation method. They certainly don't work.
-            Community edition support is planned, but never expect support for offline install.
-
-    3. Click "Online."
+            NEVER choose "Offline" installation method. They certainly won't work.
+            Never expect support for offline install.
 
 6. Follow the installer until Partitions.
 
@@ -50,8 +53,9 @@ You will need:
     1. Open "Extras for Apple T2-based devices"
     2. Select proper package for your device.
 
-        1. If your device is not MacBook Pro 16-inch (2019), choose "apple-t2-audio-config"
-        2. If your device is MacBook Pro 16-inch (2019), choose "apple-t2-audio-config-alt"
+        1. Ensure you're not using MacBookAir9,1. If you're using it, don't choose anything here.
+        2. If your device is not MacBook Pro 16-inch (2019), choose "apple-t2-audio-config"
+        3. If your device is MacBook Pro 16-inch (2019), choose "apple-t2-audio-config-alt"
 
     3. Just continue.
 
