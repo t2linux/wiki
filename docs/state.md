@@ -14,7 +14,8 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Partially Working
 
-- Bluetooth: Not working on models with the BRCM4377 WiFi chip (MacBookPro15,4, MacBookPro16,3, MacBookAir9,1), and models with the BRCM4355 WiFi chip (MacBookAir8,1, MacBookAir8,2).
+- Bluetooth: Not working on models with the BRCM4377 WiFi chip (MacBookPro15,4, MacBookPro16,3, MacBookAir9,1).
+- Keyboard Backlight: Not working on MacBookAir9,1.
 - Trackpad: Though it is technically working, it is far from the experience on macOS. No force touch or palm rejection. Some models have deadzones on the edges of their trackpads.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
 - Suspend (It works if [this guide](https://wiki.t2linux.org/guides/dkms/#fixing-suspend) is followed. Sometimes, its slow to resume (takes 5-15 sec).
@@ -25,7 +26,6 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 - Touch ID, storing encryption keys on the T2
 - The T2's onboard Audio Video Encoder (used for Sidecar on macOS)
-- Keyboard Backlight on MacBook Air 9,1
 - Automatically changing between speakers and headphones when headphones are plugged and unplugged
 - Volume buttons on headphones connected to the 3.5mm jack
 - Graphics switching without rebooting (gmux)
