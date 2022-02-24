@@ -10,26 +10,28 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - Keyboard
 - Camera
 - Wi-Fi
-- Touch Bar: There is support for the so called simple mode, the same that you would see on Bootcamp Windows. Either function keys from 1 to 12 or basic media / brightness control are shown.
+- Touch Bar: There is support for the "Touch Bar Keyboard" device configuration, where only the Function Keys or the Media/Brightness Control Keys can be shown. No other graphics can be shown on the Touchbar (this is what Windows with Bootcamp drivers uses).
 
 ## Partially Working
 
 - Bluetooth: Not working on models with the BRCM4377 WiFi chip (MacBookPro15,4, MacBookPro16,3, MacBookAir9,1).
 - Keyboard Backlight: Not working on MacBookAir9,1.
-- Trackpad: Though it is technically working, it is far from the experience on macOS. No force touch or palm rejection. Some models have deadzones on the edges of their trackpads.
+- Trackpad: Functions, but it is far from the experience on macOS (No force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
 - Suspend (It works if [this guide](https://wiki.t2linux.org/guides/dkms/#fixing-suspend) is followed. Sometimes, its slow to resume (takes 5-15 sec).
-- Hybrid Graphics: In case the device has a dedicated AMD GPU (15 and 16 inch models) as well as an Intel iGPU, the iGPU can be used, but this breaks resume, see the [Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/) page.
-- AMD GPUs: Changing resolution, using DRI_PRIME and doing various other things can cause crashes, but `echo high| sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level` or adding the `amdgpu.dpm=0` to the kernel commandline stops these crashes.
+- Hybrid Graphics: If the device has a dedicated AMD GPU (15 and 16 inch MacBookPro's) as well as an Intel iGPU, the iGPU can be used, but this breaks resume, see the [Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/) page.
+- AMD GPUs: Changing resolution, using DRI_PRIME and doing various other things can cause crashes, but `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level` or adding `amdgpu.dpm=0` to the kernel commandline stops these crashes.
+- MacPro7,1: Users have encountered PCIE Address Space issues, with auto remap breaking.
 
 ## Not working
 
-- Touch ID, storing encryption keys on the T2
+- Custom graphics on Touchbar: There is currently no Linux driver for the Touchbar's "Touch Bar Display" device configuration, which is what macOS uses, and gives full control over the display to the Operating System.
+- T2 Secure Enclave Processor (Touch ID, storing encryption keys on the T2)
 - The T2's onboard Audio Video Encoder (used for Sidecar on macOS)
 - Automatically changing between speakers and headphones when headphones are plugged and unplugged
-- Volume buttons on headphones connected to the 3.5mm jack
 - Graphics switching without rebooting (gmux)
 
 ## Other
 
-- File Systems: Linux can't mount APFS partitions nor can macOS mount ext4.
+- Linux using APFS filesystems: Linux cannot read the internal SSD's macOS APFS parition's Data and System volume (for other APFS volumes, [linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw) can be used for reading data, but attempting to write is risky.
+- macOS using Linux filesystems: There are FUSE implementations of some Linux Filesystems that can be used on macOS (but again, most only have experemental write support).
