@@ -49,6 +49,7 @@ nav:
           - Contribute: contribute.md
           - Notable Contributors: notable-contributors.md
     - Guides:
+          - Pre-Install: guides/preinstall.md
           - Wi-Fi and Bluetooth: guides/wifi-bluetooth.md
           - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
