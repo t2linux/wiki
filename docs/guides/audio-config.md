@@ -4,6 +4,16 @@ This page explains how to get the config files for using the T2 audio device, wh
 
 Before you proceed, make sure you already have `apple_bce` loaded by running `lsmod | grep apple_bce`. If not, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
 
+# Enable Pass-Through Kernel Parameters
+
+Cat `cat /proc/cmdline` and ensure that your kernel parameters contain `intel_iommu=on iommu=pt`.
+
+If not present:
+
+- edit `/etc/default/grub` and update `GRUB_CMDLINE_LINUX` to include them
+- Apply your edits by running `sudo update-grub` on ubuntu or `grub-mkconfig -o /boot/grub/grub.cfg` for other distros
+- Reboot and ensure `cat /proc/cmdline` contains those params
+
 # Audio Configuration Files
 
 In most scenarios, you should use [these files](https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb), following the instructions in that gist's `README.md`.
