@@ -17,7 +17,7 @@ echo '
 echo "Select Touch Bar mode"
 echo
 echo "0: Only show F1-F12"
-echo "1: Show media and brightness controls, use the fn key to switch to F1-12"
+echo "1: Show media and brightness controls, use the fn key to switch to F1-F12"
 echo "2: Show F1-F12, use the fn key to switch to media and brightness controls"
 echo "3: Only show media and brightness controls"
 echo "4: Only show the escape key"
