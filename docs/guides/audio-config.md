@@ -15,13 +15,8 @@ If not present, you'll have to update your bootup kernel params:
 - Reboot and ensure `cat /proc/cmdline` contains those params
 
 
----
-
-**Note for systemd-boot users**
-
-You'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pcie_ports=compat` to the options line.
-
-The files to edit will have the ".conf" extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
+!!!note "systemd-boot"
+    If you use systemd-boot you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pcie_ports=compat` to the options line. The files to edit will have the `.conf` extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
 
 ---
 
