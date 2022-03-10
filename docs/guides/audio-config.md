@@ -14,8 +14,16 @@ If not present, you'll have to update your bootup kernel params:
 - Apply your edits by running `sudo update-grub` on ubuntu or `grub-mkconfig -o /boot/grub/grub.cfg` for other distros
 - Reboot and ensure `cat /proc/cmdline` contains those params
 
-NOTE: if you use systemd-boot, you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pcie_ports=compat` to the options line.
-- The location of these conf files can vary by distro. Arch stores them in `/boot/efi/loader/entries/arch.conf` and `/boot/efi/loader/entries/arch-fallback.conf`
+
+---
+
+**Note for systemd-boot users**
+
+You'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pcie_ports=compat` to the options line.
+
+The files to edit will have the ".conf" extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
+
+---
 
 # Audio Configuration Files
 
