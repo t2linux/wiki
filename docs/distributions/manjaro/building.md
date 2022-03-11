@@ -1,6 +1,6 @@
 !!! Warning
     These instructions are outdated! Do not follow them unless you specifically need them.
-    
+
 # Option 1: Docker - All Linux Distros
 
 First, you need to ensure that docker isn't using `overlay` or `overlay2` filesystems. This can be verified by running `docker info`. And will be shown next to `Storage Driver`.
