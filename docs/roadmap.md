@@ -19,9 +19,9 @@ While its technically possible to remove macOS entirely, its strongly encouraged
 1. It acts as a backup in case something goes wrong.
 2. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
 
-Still if you wish to remove macOS completely, It is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
+Still if you wish to remove macOS completely, it is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
 
-You can also use the [internet recovery](https://support.apple.com/en-in/HT204904) to reinstall macOS, but this has been quite unreliable and slow for considerable amount of users, thus making the bootable installer method a better one.
+You can also use the [Internet Recovery](https://support.apple.com/en-in/HT204904) to reinstall macOS, but this has been quite unreliable and slow for a considerable amount of users, thus making the bootable installer method a better one.
 
 ## What all shall work on Linux?
 
