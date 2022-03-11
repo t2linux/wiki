@@ -27,7 +27,7 @@
 7. Open the installer and proceed normally until you arrive at the partitioning stage (the Installer will automatically start if you have used the second set of commands given above).
 8. Click Manual Partitioning.
 9. Click on `/dev/nvme0n1p1`, then press edit at the bottom of the install window, change the mount point to `/boot/efi`, and then click ok.
-10. Usually, the macOS partition is mounted to `/dev/nvme0n1p2` (the `Apple APFS` Partition). Ignore this partition.
+10. Usually, the macOS partition is `/dev/nvme0n1p2` (the `Apple APFS` Partition). Ignore this partition.
 11. Delete the partition you created before - this is usually mounted to `/dev/nvme0n1p3`.
 12. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem. If you know what you're doing, feel free to skip to step 15.
 
