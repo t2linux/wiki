@@ -14,7 +14,7 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 
 ## Can I completely remove macOS?
 
-While its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux because :- 
+While its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux because :-
 
 1. It acts as a backup in case something goes wrong.
 2. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
