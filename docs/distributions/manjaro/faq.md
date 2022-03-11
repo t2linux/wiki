@@ -17,8 +17,6 @@ sudo mkdir -p /etc/modules-load.d
 sudo touch /etc/modules-load.d/t2.conf
 cat << EOF | sudo tee /etc/modules-load.d/t2.conf
 apple-bce
-apple-ib_tb
-apple-ib_als
 brcmfmac
 EOF
 ```
