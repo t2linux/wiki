@@ -23,9 +23,9 @@ Still if you wish to remove macOS completely, it is recommended to [create a boo
 
 You can also use the [Internet Recovery](https://support.apple.com/en-in/HT204904) to reinstall macOS, but this has been quite unreliable and slow for a considerable amount of users, thus making the bootable installer method a better one.
 
-## What all shall work on Linux?
+## What works on Linux?
 
-Take a look at the [state article](https://wiki.t2linux.org/state/). It gives a list of roughly what works on Linux and what not.
+Take a look at the [state article](https://wiki.t2linux.org/state/). It gives a list of roughly what works on Linux and what doesn't.
 If a specific feature is not listed at all, there is a chance it actually works.
 
 ## Choosing a Distribution
