@@ -1,6 +1,6 @@
 # Download a latest release
 
-[See releases](https://github.com/JPyke3/mbp-manjaro/releases)
+[See releases](https://github.com/NoaHimesaka1873/manjaroiso-t2/releases)
 
 # Hardware Requirements
 
