@@ -67,7 +67,6 @@ nav:
                 - Installation: distributions/gentoo/installation.md
           - Manjaro:
                 - Home: distributions/manjaro/home.md
-                - Building: distributions/manjaro/building.md
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
           - Ubuntu:
