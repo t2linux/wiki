@@ -33,4 +33,3 @@ Run this in your terminal:
 ```sh
 sudo bash -c "echo 2 > /sys/class/input/*/device/fnmode"
 ```
-
