@@ -26,7 +26,7 @@ After running this, remove old repository and reboot.
 
 If you want both Manjaro and Windows installed on your system, refer to this guide on [triple booting](https://wiki.t2linux.org/guides/windows/) as you install.
 
-## Switch Touchbar to Function Keys
+# Switch Touchbar to Function Keys
 
 Run this in your terminal:
 
