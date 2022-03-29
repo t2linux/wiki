@@ -11,7 +11,7 @@ Cat `cat /proc/cmdline` and ensure that your kernel parameters contain `intel_io
 If not present, you'll have to update your bootup kernel params:
 
 - edit `/etc/default/grub` and update `GRUB_CMDLINE_LINUX` to include `intel_iommu=on iommu=pt pcie_ports=compat`
-- Apply your edits by running `sudo update-grub` on ubuntu or `grub-mkconfig -o /boot/grub/grub.cfg` for other distros
+- Apply your edits by running `sudo update-grub` on ubuntu or `sudo grub-mkconfig -o /boot/grub/grub.cfg` for other distros
 - Reboot and ensure `cat /proc/cmdline` contains those params
 
 !!!note "systemd-boot"
