@@ -18,17 +18,15 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 
 ### Getting kernel source and applying patches
 
-!!! Hint
-    The kernel source will be downloaded with HTTP**S**, but if you would like to be extra careful and verify the kernel source code with `gpg`, please refer to [this page](https://kernel.org/signature.html#using-gnupg-to-verify-kernel-signature).
-
 ```bash
 mkdir build && cd build
 git clone --depth=1 https://github.com/Redecorating/mbp-16.1-linux-wifi patches
 source patches/PKGBUILD
 
+wget https://github.com/t2linux/kernel/archive/refs/tags/t2-v${pkgver}.tar.gz
 wget https://www.kernel.org/pub/linux/kernel/v${pkgver//.*}.x/linux-${pkgver}.tar.xz
-tar xf $_srcname.tar.xz
-cd $_srcname
+tar xf t2-v${pkgver}.tar.gz
+cd kernel-t2-v${pkgver}
 
 git clone --depth=1 https://github.com/t2linux/apple-bce-drv drivers/staging/apple-bce
 git clone --depth=1 https://github.com/t2linux/apple-ib-drv drivers/staging/apple-ibridge

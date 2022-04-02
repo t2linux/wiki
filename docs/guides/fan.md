@@ -10,6 +10,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
     ```sh
     git clone https://github.com/networkException/mbpfan
+    cd mbpfan
     ```
 
 2. Compile the daemon using `make`

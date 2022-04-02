@@ -12,10 +12,20 @@ Your first consideration should be the risk you are taking. Don't worry, nobody 
 Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.
 Still in case something goes wrong we are not responsible for it, we will try our best to help out however.
 
-Note that while its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux to have
-a backup in case something goes wrong.
+## Can I completely remove macOS?
 
-Now, take a look at the [state article](https://wiki.t2linux.org/state/). It gives a list of roughly what works on Linux and what not.
+While its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux because :-
+
+1. It acts as a backup in case something goes wrong.
+2. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
+
+Still if you wish to remove macOS completely, it is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
+
+You can also use the [Internet Recovery](https://support.apple.com/en-in/HT204904) to reinstall macOS, but this has been quite unreliable and slow for a considerable amount of users, thus making the bootable installer method a better one.
+
+## What works on Linux?
+
+Take a look at the [state article](https://wiki.t2linux.org/state/). It gives a list of roughly what works on Linux and what doesn't.
 If a specific feature is not listed at all, there is a chance it actually works.
 
 ## Choosing a Distribution
