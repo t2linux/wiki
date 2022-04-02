@@ -35,21 +35,18 @@
 
 6. Continue through the Handbook until chapter "Configuring the kernel"
 
-    1. In order to have the Linux Kernel support your device the most, you'll have to manually apply patches to the Linux Kernel.
-    2. Run these commands in the Terminal:
+    1. In order to have the Linux Kernel support your device the most, you'll have to build from a modified Linux Kernel source tree.
+    2. Git clone [the t2linux kernel source tree](https://github.com/t2linux/kernel) to `/usr/src`
+        * Make sure to git checkout the version you want. For example, if you want kernel version v5.16.17, you would checkout tag `t2-v5.16.17`.
+    3. Run these commands to symlink the kernel to `/usr/src/linux`:
 
     ```bash
-    emerge sys-kernel/gentoo-sources
-    eselect kernel list # there should be only one option that shows up
+    eselect kernel list # there should be one option that shows up
     eselect kernel set 1
-    ls -l /usr/src/linux # to check if the symlink succeded
+    ls -l /usr/src/linux # check if the symlink succeded
     ```
 
-    1. Git clone [these patches](https://github.com/Redecorating/mbp-16.1-linux-wifi) to `/linux-patches`
-        * Make sure you clone the repo to folder `/linux-patches`, not to a subfolder like `/linux-patches/mbp-16.1-linux-wifi`. If you do do that by accident, then move all of the patches with `mv /linux-patches/mbp-16.1-linux-wifi/*.patch /linux-patches`
-        * If you're using a kernel that is older than 5.16, then you'll need to additionally download [this patch](https://raw.githubusercontent.com/Redecorating/mbp-16.1-linux-wifi/main/0101-efi-runtime-avoid-EFIv2-runtime-services-on-Apple-x8.patch)
-        * If needed, git checkout to an older tag with the current gentoo-sources kernel version
-    2. Run these commands to grab apple-bce and apple-ibridge:
+    1. Run these commands to grab apple-bce and apple-ibridge:
 
     ```bash
     git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce
@@ -60,18 +57,21 @@
     done
     ```
 
-    1. Apply all patches from `/linux-patches` to `/usr/src/linux` with this:
+    1. Run these commands in order to include apple-bce and apple-ibridge into the kernel source tree:
 
     ```bash
+    git clone https://github.com/Redecorating/mbp-16.1-linux-wifi /linux-patches
     cd /usr/src/linux
-    for i in /linux-patches/*.patch; do 
-    echo $i 
-    patch -Np1 < $i 
+    for i in /linux-patches/*.patch; do
+    echo $i
+    patch -Np1 < $i
     done
     ```
 
-    1. It's recommended to use the config from the patches repo instead of the default config from `gentoo-sources`. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module with `make menuconfig`
-    2. Build with `make all`. If you want to speed up the build process, add `-j$(nproc)`
+    1. Git clone the `https://anongit.gentoo.org/git/proj/linux-patches.git` repo to a folder called `/gentoo-patches`. This repo includes Gentoo patches for the kernel source tree usually included with the `gentoo-sources` Portage package.
+    2. Apply them with a modified version of the commands used above.
+    3. Copy the default config from the patches repo to the kernel source tree. If you do this, please make sure to set any filesystem drivers you want to use (like for ext4) to be built-in instead of being a module with `make menuconfig`
+    4. Build with `make all`. If you want to speed up the build process, add `-j$(nproc)`
 
 7. Before finishing, if you want to connect to the internet later, now is a good time to install `NetworkManager` and optionally `iwd`.
 8. Continue through the Handbook until chapter "Configuring the bootloader"
