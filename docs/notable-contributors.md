@@ -16,3 +16,4 @@ If there is someone missing that you think should be on this list, send a PR on 
 - EmreTech (Gentoo) [https://github.com/EmreTech](https://github.com/EmreTech)
 - T2minator (Tails) [https://github.com/T2minator](https://github.com/T2minator)
 - NoaHimesaka1873 (Arch, Manjaro and EndeavourOS) [https://github.com/NoaHimesaka1873](https://github.com/NoaHimesaka1873)
+- The Asahi Linux Contributors (Wi-Fi) [https://asahilinux.org/](https://asahilinux.org/)

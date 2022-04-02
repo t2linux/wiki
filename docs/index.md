@@ -8,8 +8,7 @@ A list of those devices can be found [on Apple's website](https://support.apple.
 # Warnings
 
 - Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
-- Newer versions of `iwd` currently have issues with non Big Sur patched kernels due to certain [p2p related checks missing](https://github.com/aunali1/linux-mbp-arch/blob/master/9001-brcmfmac-p2p-Ensure-virtual-interface-is-initialized.patch). If you are experiencing connection issues after following the [wifi guide](https://wiki.t2linux.org/guides/wifi/) you might want to downgrade to version `1.13` and hold updates for the package.
-- **Ubuntu's GRUB** is not booting using the Mac Startup Manager on **Mac Mini**. Thus Mac Mini users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot GRUB using it instead of the Startup Manager.
+- **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
 
 # Getting started
 
@@ -31,7 +30,11 @@ Different distributions are maintained by different people in their own reposito
 If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as it considers T2 support.
 
 - Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
+<<<<<<< HEAD
 - EndeavourOS [https://github.com/NoaHimesaka1873/EndeavourOS-ISO-t2mac](https://github.com/NoaHimesaka1873/EndeavourOS-ISO-t2mac)
+=======
+- EndeavourOS [https://github.com/t2linux/EndeavourOS-ISO-t2](https://github.com/t2linux/EndeavourOS-ISO-t2)
+>>>>>>> 548bac4e7cbae567ded76575716ff18eca1aba43
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
