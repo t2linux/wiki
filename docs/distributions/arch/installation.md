@@ -35,6 +35,8 @@ You will need:
 
 5. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/index.php/Installation_guide#Set_the_console_keyboard_layout) up to "Format the partitions".
 
+    !!! warning
+        Unlike the official Arch ISO, the Wi-Fi ISO contains NetworkManager instead of iwd because of iwd's instability. Use ArchWiki's NetworkManager guide to connect to Wi-Fi.
     1. The note on the Arch Wiki mentions the EFI system partition, there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows or already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot/efi`, and your other partitions on `/mnt`, etc.
 
@@ -54,7 +56,7 @@ You will need:
     4. Getting the required packages:
 
         1. Install the required packages into your new system with: `pacstrap /mnt base linux-mbp linux-mbp-headers apple-bce-dkms-git dkms linux-firmware grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
-        2. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+        2. If you're using wifi-enabled iso, install the required packages into your new system with: `pacstrap /mnt base linux-t2 linux-t2-headers linux-t2-docs apple-bcm-wifi-firmware dkms linux-firmware networkmanager grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
 
     5. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
