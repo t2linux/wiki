@@ -80,7 +80,7 @@ Using iwd is technically not needed for using wifi. But if your are facing unsta
 
 Instructions in this section might be different for the distribution that you are trying to install.
 
-!!! Warning
+!!! warning
     iwd does not work on Arch Linux. Always use NetworkManager (without iwd backend of course)
 
 1. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
