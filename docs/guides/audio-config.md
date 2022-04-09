@@ -51,3 +51,16 @@ Note: The updated locations for the files in the links above for Pipewire distri
 
 - Some people are unable to get audio input to work. You may have to use a separate microphone.
 - All of apple's fancy tuning of the speakers is done in macOS, we don't have anything like that at the moment.
+
+# Approaches to fixing low microphone volume
+
+## KDE
+
+The "Audio Volume" dialog / Audio in System Settings allow users to "Raise maximum volume", allowing to go past 100%. This
+does not offer a great deal of flexibility, it might work for getting acceptable recordings however.
+
+## EasyEffects with Pipewire
+
+[EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using pipewire. Compared
+to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
+boosts.
