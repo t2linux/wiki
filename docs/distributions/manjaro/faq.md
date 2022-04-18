@@ -1,4 +1,4 @@
-# Migrating from Pykee's old kernel to new stable kernel
+# Migrating from Pykee's old kernel to new LTS kernel
 
 Run this in your terminal:
 
