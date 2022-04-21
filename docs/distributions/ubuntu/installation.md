@@ -52,3 +52,5 @@ The iso you should download depends on your machine, but usually the normal mbp 
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to FAQ. If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Ubuntu! :)
+
+If you find that you cannot login after installing check [the FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq.md#i-am-unable-to-login-after-a-fresh-install)
