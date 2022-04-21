@@ -10,7 +10,7 @@ This issue has occured for anyone on the 16,1 and maybe the 16,4.
 
 (Credits to Redecorating for this fix)
 
-# I am unable to login after a fresh install
+# I am unable to login after a fresh install
 
 If the display manager in not appearing, and login from a tty is failing, it could be related to a permission problem. Here is how to check and fix the issue :
 
