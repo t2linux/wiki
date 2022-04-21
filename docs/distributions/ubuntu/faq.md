@@ -10,6 +10,23 @@ This issue has occured for anyone on the 16,1 and maybe the 16,4.
 
 (Credits to Redecorating for this fix)
 
+# I am unable to login after a fresh install
+
+If the display manager in not appearing, and login from a tty is failing, it could be related to a permission problem. Here is how to check and fix the issue :
+
+1. Reboot Ubuntu in Recovery Mode
+  - Press Esc during boot, after the Startup Manager (step where you select EFI instead of Macintosh HD).
+  - If you press Esc twice or hold it, you end up in GRUB's cli. Reboot and try again!
+  - In the GRUB menu, select the line containing `Advanced Options`
+  - Now select the line containing `recovery mode`
+2. Use the `root` option to obtain root access to the system
+3. Check the permissions on the root directory: `ls -lad /`
+  - You should see something like: `drwxr-xr-x`.
+  - If you see something different, like `drwx------`, then your user has no permission to read the file system.
+4. Give users read access to the file system:
+  - `chmod 755 /`
+  - `chmod 755 /home/`
+
 # Making the GRUB Menu appear
 
 The GRUB bootloader by default turns off the GRUB Menu. This means you can't boot into Bootcamp Windows if it's installed. This can be easily fixed after Ubuntu is fully installed.
