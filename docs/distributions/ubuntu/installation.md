@@ -5,8 +5,6 @@
 
 [Download here](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
 
-[Download here (Wi-Fi enabled ISO)](https://github.com/AdityaGarg8/mbp-ubuntu/releases/latest)
-
 # Hardware Requirements
 
 * USB-C to Ethernet adapter
