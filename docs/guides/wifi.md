@@ -82,7 +82,7 @@ To fix this :-
 
 1. Edit `/etc/NetworkManager/NetworkManager.conf` to look like this :-
 
-    ```
+    ```conf
     [main]
     plugins=ifupdown,keyfile
 
@@ -95,7 +95,7 @@ To fix this :-
 
 2. Now edit `/etc/NetworkManager/conf.d/wifi_backend.conf` to look like this
 
-    ```
+    ```conf
     #[device]
     #wifi.backend=iwd
     ```
