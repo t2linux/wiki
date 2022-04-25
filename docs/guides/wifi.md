@@ -76,7 +76,7 @@ Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wl
 
 ## Fixing no Wi-Fi networks in scan list on Ubuntu
 
-We have been receiving a lot of complains where users are not getting even a single Wi-Fi network listed when attempting to connect to a network, inspite of having followed the Wi-Fi guide completely and correctly.
+We have been receiving a lot of complains where users are not getting even a single Wi-Fi network listed when attempting to connect to a network, inspite of having followed the Wi-Fi guide completely and correctly on **Ubuntu**.
 
 To fix this :-
 
