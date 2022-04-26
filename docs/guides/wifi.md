@@ -74,6 +74,34 @@ Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4
 Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
 ```
 
+## Fixing no Wi-Fi networks in scan list on Ubuntu
+
+We have been receiving a lot of complains where users are not getting even a single Wi-Fi network listed when attempting to connect to a network, inspite of having followed the Wi-Fi guide completely and correctly on **Ubuntu**.
+
+To fix this :-
+
+1. Edit `/etc/NetworkManager/NetworkManager.conf` to look like this :-
+
+    ```conf
+    [main]
+    plugins=ifupdown,keyfile
+
+    [ifupdown]
+    managed=false
+
+    [device]
+    wifi.scan-rand-mac-address=no
+    ```
+
+2. Now edit `/etc/NetworkManager/conf.d/wifi_backend.conf` to look like this
+
+    ```conf
+    #[device]
+    #wifi.backend=iwd
+    ```
+
+3. Finally run `sudo systemctl restart NetworkManager`.
+
 ## Fixing unstable WPA2 using iwd
 
 Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.

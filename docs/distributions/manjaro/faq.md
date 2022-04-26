@@ -1,4 +1,4 @@
-# Migrating to new kernel
+# Migrating from Pykee's old kernel to new LTS kernel
 
 Run this in your terminal:
 
@@ -8,19 +8,22 @@ cat << EOF | sudo tee -a /etc/pacman.conf
 SigLevel = Never
 Server = https://mirror.funami.tech/manjaro-mact2/os/x86_64
 EOF
-sudo pacman --ignore zfs-utils -Syu linux516-t2 linux516-t2-headers dkms apple-bce-dkms-git apple-ibridge-dkms-git apple-bcm-wifi-firmware
-sudo pacman -R linux57-mbp 
-sudo pacman -R linux56-mbp
-sudo pacman -R linux57-mbp-headers
-sudo pacman -R linux56-mbp-headers
-sudo mkdir -p /etc/modules-load.d
-sudo touch /etc/modules-load.d/t2.conf
-cat << EOF | sudo tee /etc/modules-load.d/t2.conf
-apple-bce
-EOF
+sudo pacman --ignore zfs-utils -Syu linux515-t2 linux515-t2-headers apple-bcm-wifi-firmware
 ```
 
 After running this, remove old repository and reboot.
+
+# Migrating from mainline 5.16 kernel to LTS kernel (recommended)
+
+Users using 5.16 kernel are advised to migrate to LTS kernel since it now integrates necessary modules into kernel. Even if you want to update to 5.17 it's still advised to first jump to LTS kernel and wait here.
+
+Run this in your terminal:
+
+```sh
+# Say yes to removing conflicting packages. apple-ibridge-dkms-git and apple-bce-dkms-git is now integrated to kernel thus those DKMS modules are not necessary.
+sudo pacman -Syu linux515-t2 linux515-t2-headers
+sudo pacman -R linux516-t2 linux516-t2-headers
+```
 
 # Installing alongside Windows
 
