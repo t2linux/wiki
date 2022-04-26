@@ -21,8 +21,8 @@ Check the latest official Ubuntu release and find its kernel version. You need t
 
 # Install Procedure
 
-Most probably you are using a LTS version of the Ubuntu right now. If a newer LTS Ubuntu is released in April, you will not be notified until Canonical 
-release the first point release (e.g. 22.04.1) which normally out around August. However, you can still upgrade to the final version before August.
+Most probably you are using a LTS version of the Ubuntu right now. If a newer LTS Ubuntu is released in April, you will not be notified until Canonical release the first point release (e.g. 22.04.1) which normally out around August. However, you can still upgrade to the final version before August.
+
 1. Open a terminal and:
 
     1. If it's after first point release, do `sudo do-release-upgrade`.
@@ -36,7 +36,7 @@ release the first point release (e.g. 22.04.1) which normally out around August.
 # Troubleshooting
 
 1. In case the upgrade process gives error about broken packets, do not reboot. Try to resolve the problem first, and resume the process.
-2. If your Mac is crashed and you must press and hold power button, then **probably** you will boot to a black screen with minimal console because gnome-shell (default desktop) package is not installed yet. Here you need to deal with all the errors. 
+2. If your Mac is crashed and you must press and hold power button, then **probably** you will boot to a black screen with minimal console because gnome-shell (default desktop) package is not installed yet. Here you need to deal with all the errors.
 The goal is to install at least a GUI at first place so that you can get rid of the black screen with tiny text, then try to resolve other problems using GUI.
 
     1. Login with your user and password.
@@ -52,4 +52,4 @@ The goal is to install at least a GUI at first place so that you can get rid of 
         * Try to read the errors and find out the solution. For example if there is conflict between package version, try to remove the installed one by `$ sudo apt autoremove <PACKAGE_NAME>` and the try install gnome desktop again.
         * If you really stuck with installing gnome desktop, try other desktops like: `sudo apt install ubuntu-mate-desktop`
 
-    4. Boot to newly installed desktop and do `sudo apt upgrade` and hope it would end up with success, otherwise try to understand the error and resolve them. Always google your errors.
+    5. Boot to newly installed desktop and do `sudo apt upgrade` and hope it would end up with success, otherwise try to understand the error and resolve them. Always google your errors.
