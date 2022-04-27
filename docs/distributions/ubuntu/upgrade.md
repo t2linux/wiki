@@ -25,12 +25,12 @@ Most probably you are using a LTS version of the Ubuntu right now. If a newer LT
 
 1. Open a terminal and:
 
-    1. If it's after first point release, do `sudo do-release-upgrade`.
+    1. If it's after first point release, do `sudo do-release-upgrade` or use "Software Updater" tool.
 
     2. If it's before and the upgrade tool says there is no newer version, try `sudo do-release-upgrade -d`.
   
-2. Follow the instruction given by the tool and answer if it asks question about some of the packages that you want to be upgraded, etc.
-3. Let the tool download finish and begin the process. Have an eye in the screen to see how it is going. In the middle it might ask you to chose some options.
+2. Follow the instructions given by the tool and answer if it asks question about some of the packages that you want to be upgraded, etc.
+3. Let the tool finish the download and begin the process. Have an eye in the screen to see how it is going. In the middle it might ask you to chose some options.
 4. If the installation finish successfully, do a reboot and boot your Mac using the current custom kernel you installed before using the instructions available in the wiki. Otherwise, see the next section.
 
 # Troubleshooting
