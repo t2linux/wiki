@@ -12,14 +12,16 @@ Warnings:
 
 # Hardware Requirements
 
+In general, for troubleshooting you may need Internet access. If Wifi would work after a failure in upgrade process you **DO NOT** need the following requirements.
+
 * USB-C to Ethernet adapter **OR** Smartphone capable of USB tethering to provide internet in case of emergency
 * A cable that can connect one of the above objects to your Mac
 
 # Kernel Requirements
 
-Check the latest official Ubuntu release and find its kernel version. You need to install the same or higher custom kernel version for your current Ubuntu.
+Before upgrade, check the latest official Ubuntu release and find its kernel version. You need to install the same or higher custom kernel version for your current Ubuntu to make sure that it will work properly without problems related to the kernel version.
 
-# Install Procedure
+# Upgrade Procedure
 
 Most probably you are using a LTS version of the Ubuntu right now. If a newer LTS Ubuntu is released in April, you will not be notified until Canonical release the first point release (e.g. 22.04.1) which normally out around August. However, you can still upgrade to the final version before August.
 
@@ -41,7 +43,13 @@ The goal is to install at least a GUI at first place so that you can get rid of 
 
     1. Login with your user and password.
 
-    2. Connect your Mac to the internet using USB-C to Ethernet adapter or use your smart phone's USB tethering.
+    2. Connect your Mac to the internet:
+    
+        A. Using Wifi:
+        * Check if Wifi module is loaded with `$ lsmod | grep brcmfmac`, if not load it with `$ sudo modprobe brcmfmac`.
+        * Use Wifi cli tools to connect to your Wifi network. Further instruction could be found on: https://wiki.archlinux.org/title/Network_configuration/Wireless#Authentication
+    
+        B. Using USB-C to Ethernet adapter or use your smart phone's USB tethering:
         * `$ ifconfig -a`, it will show all the available network interfaces. remember the one appears when you connect the USB.
         * bring up the USB interface `$ sudo ifconfig <USB_INTERFACE> up`
         * Ask for an IP using `$ dhclient`
