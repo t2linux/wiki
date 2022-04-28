@@ -125,3 +125,45 @@ Instructions in this section might be different for the distribution that you ar
     ```
 
 If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
+
+### Fixing unusable WPA2
+
+Sometimes the wireless adapter will load correctly, but you'll
+still be unable to connect to a network. This may happen because
+the wifi is set up to use `WPA2` for authentication. You could
+try to resolve this issue by changing your wifi security settings.
+
+> Warning: this method makes your wireless network less secure.
+Proceed at your own risk.
+
+Requirements:
+
+- You're able to load `brcmfmac` driver and scan your networks.
+
+> In order to check if your wireless adapter is detected, run
+`iwctl station list`. If no devices show up, then the driver
+is not correctly loaded. Go to the beginning of this guide and
+double-check if you followed all the steps correctly.
+
+- You have admin access to your wifi network settings.
+
+> If you're trying to connect to a home wifi network, the wifi
+router settings are usually accessible at `192.168.1.1` or
+`192.168.0.1`. Check your router manufacturer/ISP documentation
+to learn how to access them.
+
+If those requirements are met you can try changing your wifi
+security settings and see if that resolves the issue:
+
+1. Connect to your network from macOS or another working device.
+
+2. Find your wifi authentication setting and change it from
+`WPA2-PSK` to `WPA-PSK` or `WPA2-PSK + WPA-PSK`.
+
+3. Save the router settings. You may need to reboot your router.
+
+4. Try to connect to your network again.
+
+If `WPA2` authentication was preventing you from connecting
+to your wireless network, then you should be able to connect to
+wifi now. Otherwise, something else is causing the issue.
