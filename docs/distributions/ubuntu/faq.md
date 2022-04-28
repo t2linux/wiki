@@ -8,8 +8,6 @@ Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With th
 
 This issue has occured for anyone on the 16,1 and maybe the 16,4.
 
-(Credits to Redecorating for this fix)
-
 # Making the GRUB Menu appear
 
 The GRUB bootloader by default turns off the GRUB Menu. This means you can't boot into Bootcamp Windows if it's installed. This can be easily fixed after Ubuntu is fully installed.
@@ -17,8 +15,6 @@ The GRUB bootloader by default turns off the GRUB Menu. This means you can't boo
 In a Terminal in Ubuntu, edit file ``/etc/default/grub`` with any preferred editior (nano/vim) and with root permissions. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. Save the file once you're done.
 
 We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
-
-(Also credits to Redecorating for telling me about this fix, marcosfad for documenting the fix [here](https://github.com/marcosfad/mbp-ubuntu#activate-grub-menu))
 
 # Installing alongside Windows
 
