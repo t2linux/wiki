@@ -12,7 +12,7 @@ Warnings:
 
 # Hardware Requirements
 
-In general, for troubleshooting you may need Internet access. If Wifi would work after a failure in upgrade process you **DO NOT** need the following requirements.
+For troubleshooting you need internet access. It is possible that Wi-Fi may also not work for some users during troubleshooting. In that case, you shall also require:
 
 * USB-C to Ethernet adapter **OR** Smartphone capable of USB tethering to provide internet in case of emergency
 * A cable that can connect one of the above objects to your Mac
@@ -33,7 +33,7 @@ Most probably you are using a LTS version of the Ubuntu right now. If a newer LT
   
 2. Follow the instructions given by the tool and answer if it asks question about some of the packages that you want to be upgraded, etc.
 3. Let the tool finish the download and begin the process. Have an eye in the screen to see how it is going. In the middle it might ask you to chose some options.
-4. If the installation finish successfully, do a reboot and boot your Mac using the current custom kernel you installed before using the instructions available in the wiki. Otherwise, see the next section.
+4. If the installation finish successfully, do a reboot and boot your Mac. Otherwise, see the Troubleshooting section.
 
 # Troubleshooting
 
