@@ -44,11 +44,11 @@ The goal is to install at least a GUI at first place so that you can get rid of 
     1. Login with your user and password.
 
     2. Connect your Mac to the internet:
-    
+
         A. Using Wifi:
         * Check if Wifi module is loaded with `$ lsmod | grep brcmfmac`, if not load it with `$ sudo modprobe brcmfmac`.
         * Use Wifi cli tools to connect to your Wifi network. Further instruction could be found on: https://wiki.archlinux.org/title/Network_configuration/Wireless#Authentication
-    
+
         B. Using USB-C to Ethernet adapter or use your smart phone's USB tethering:
         * `$ ifconfig -a`, it will show all the available network interfaces. remember the one appears when you connect the USB.
         * bring up the USB interface `$ sudo ifconfig <USB_INTERFACE> up`
