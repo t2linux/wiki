@@ -33,14 +33,10 @@ You will need:
     1. If you're not connected to the internet, connect to it now. Use included GUI config tool to connect to Wi-Fi.
     2. On the "Welcome" window, choose...
 
-        1. "Install community editions if you want to install community edition.
+        1. "Install community editions" if you want to install community edition.
         2. "Start the Installer" if you want to install normal edition.
 
-    3. Click "Online" if you chose to install normal edition.
-
-        !!! warning
-            NEVER choose "Offline" installation method. They certainly won't work.
-            Never expect support for offline install.
+    3. If you chose to install normal edition, choose "Online" or "Offline" depending on your needs.
 
 6. Follow the installer until Partitions.
 
@@ -48,7 +44,7 @@ You will need:
     2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi" If you want to use separate EFI partition, check out [this guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
     3. Use remaining partition space to your convenience.
 
-7. When you see Desktop, you ***MUST NOT*** uncheck "Apple T2-based devices." This package group contains important packages to support your device. Follow the instruction below to set it properly for your device.
+7. Follow the installer until Packages and follow the instruction to install proper package for your device. Offline users should skip to step 8.
 
     1. Open "Extras for Apple T2-based devices"
     2. Select proper package for your device.
@@ -57,7 +53,7 @@ You will need:
         2. If your device is not MacBook Pro 16-inch (2019), choose "apple-t2-audio-config"
         3. If your device is MacBook Pro 16-inch (2019), choose "apple-t2-audio-config-alt"
 
-    3. Just continue.
+    3. Continue.
 
 8. Follow the rest of the installer and reboot.
 
