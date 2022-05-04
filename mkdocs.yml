@@ -73,6 +73,7 @@ nav:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
+                - Upgrade: distributions/ubuntu/upgrade.md
 
 extra_css:
     - assets/stylesheets/colors.css
