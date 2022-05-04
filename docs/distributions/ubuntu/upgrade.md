@@ -19,7 +19,7 @@ For troubleshooting you need internet access. It is possible that Wi-Fi may also
 
 # Kernel Requirements
 
-Before upgrade, check the latest official Ubuntu release and find its kernel version. You need to install the same or higher custom kernel version for your current Ubuntu to make sure that it will work properly without problems related to the kernel version.
+Before upgrade, check the latest official Ubuntu release and find its kernel version. You need to [install](https://github.com/t2linux/T2-Ubuntu-Kernel) the same or higher custom kernel version for your current Ubuntu to make sure that it will work properly without problems related to the kernel version.
 
 # Upgrade Procedure
 
@@ -32,8 +32,8 @@ Most probably you are using a LTS version of the Ubuntu right now. If a newer LT
     2. If it's before and the upgrade tool says there is no newer version, try `sudo do-release-upgrade -d`.
   
 2. Follow the instructions given by the tool and answer if it asks question about some of the packages that you want to be upgraded, etc.
-3. Let the tool finish the download and begin the process. Have an eye in the screen to see how it is going. In the middle it might ask you to chose some options.
-4. If the installation finish successfully, do a reboot and boot your Mac. Otherwise, see the Troubleshooting section.
+3. Let the tool finish the download and begin the process. Keep an eye on the screen to see how it is going. In the middle it might ask you to choose some options.
+4. If the installation finishes successfully, do a reboot and boot your Mac. Otherwise, see the [Troubleshooting](#troubleshooting) section.
 
 # Troubleshooting
 
@@ -45,19 +45,19 @@ The goal is to install at least a GUI at first place so that you can get rid of 
 
     2. Connect your Mac to the internet:
 
-        A. Using Wifi:
-        * Check if Wifi module is loaded with `$ lsmod | grep brcmfmac`, if not load it with `$ sudo modprobe brcmfmac`.
-        * Use Wifi cli tools to connect to your Wifi network. Further instruction could be found on: https://wiki.archlinux.org/title/Network_configuration/Wireless#Authentication
+        A. Using Wi-Fi:
+        * Check if Wi-Fi module is loaded with `lsmod | grep brcmfmac`, if not load it with `sudo modprobe brcmfmac`.
+        * Use Wi-Fi cli tools to connect to your Wi-Fi network. Further instruction could be found [here](https://wiki.archlinux.org/title/Network_configuration/Wireless#Authentication).
 
         B. Using USB-C to Ethernet adapter or use your smart phone's USB tethering:
-        * `$ ifconfig -a`, it will show all the available network interfaces. remember the one appears when you connect the USB.
-        * bring up the USB interface `$ sudo ifconfig <USB_INTERFACE> up`
-        * Ask for an IP using `$ dhclient`
-        * Ping `$ ping google.com` to make sure you have access to internet
+        * `ifconfig -a`, it will show all the available network interfaces. remember the one appears when you connect the USB.
+        * bring up the USB interface `sudo ifconfig <USB_INTERFACE> up`
+        * Ask for an IP using `dhclient`
+        * Ping `ping google.com` to make sure you have access to internet
 
-    3. Try `$ sudo apt install --fix-broken`. If it succeeds, resume upgrade and `$ reboot`. If not, go to 4.
-    4. Try `$ sudo apt install gnome-shell` if it succeeds, do `$ reboot`. If not:
-        * Try to read the errors and find out the solution. For example if there is conflict between package version, try to remove the installed one by `$ sudo apt autoremove <PACKAGE_NAME>` and the try install gnome desktop again.
+    3. Try `sudo apt install --fix-broken`. If it succeeds, resume upgrade and `reboot`. If not, go to 4.
+    4. Try `sudo apt install gnome-shell` if it succeeds, do `reboot`. If not:
+        * Try to read the errors and find out the solution. For example if there is conflict between package version, try to remove the installed one by `sudo apt autoremove <PACKAGE_NAME>` and the try install gnome desktop again.
         * If you really stuck with installing gnome desktop, try other desktops like: `sudo apt install ubuntu-mate-desktop`
 
     5. Boot to newly installed desktop and do `sudo apt upgrade` and hope it would end up with success, otherwise try to understand the error and resolve them. Always google your errors.
