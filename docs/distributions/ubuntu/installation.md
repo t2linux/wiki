@@ -3,7 +3,9 @@
 !!! Warning "Mac Mini"
     **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
 
-[Download here](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
+[Download here (20.04)](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
+
+[Download here (22.04)](https://github.com/AdityaGarg8/mbp-ubuntu/releases/tag/v22.04-5.17.9)
 
 # Hardware Requirements
 
