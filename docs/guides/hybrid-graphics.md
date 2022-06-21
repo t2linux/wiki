@@ -53,7 +53,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     1.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
 
-    2.  If `cat /proc/cmdline` has `efi=noruntime`, remove it from the kernel command line by editing your bootloader config (the issue it was avoiding is fixed by the line we checked for in the previous step).
+    2.  If `cat /proc/cmdline` has `efi=noruntime`, remove it from the kernel command line by editing and regenerating your bootloader config (the issue it was avoiding is fixed by newer kernels).
 
     3.  Install the `gpu-switch` script, and then you can set NVRAM and the boot GPU from Linux.
 
