@@ -12,3 +12,4 @@ Here is the list and links to donate some of our maintainers.
 - [JPyke3](https://github.com/JPyke3) - Played major role in getting Manjaro working on T2 Macs. Donate via [Patreon](https://patreon.com/pykee) or [On Chain](https://github.com/JPyke3/mbp-manjaro#donations).
 - [marcosfad](https://github.com/marcosfad) - Played major role in getting Ubuntu working on T2 Macs. Donate via [Paypal](https://paypal.me/marcosfad) or [GitHub Sponsors](https://github.com/sponsors/marcosfad).
 - [NoaHimesaka1873](https://github.com/NoaHimesaka1873) - Currently maintains boot images for Arch, EndeavourOS, and Manjaro. Also maintains kernel for manjaro too. Donate via [Toss (South Korea residents only)](https://toss.me/yuifmirror).
+- [Redecorating](https://github.com/Redecorating) - Currently maintains Arch kernel package, has written T2 related kernel patches and worked on T2 related kernel regressions. Donate via [Paypal](https://paypal.me/redecorating).
