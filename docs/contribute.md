@@ -8,7 +8,7 @@ The best way of donation which we believe is in the form of skill. If you think 
 
 Here is the list and links to donate some of our maintainers.
 
-1. [MCMrARM](https://github.com/MCMrARM) - Author of the [apple-bce driver](https://github.com/t2linux/apple-bce-drv). Donate via [Paypal](https://paypal.me/mcmrarm).
-2. [JPyke3](https://github.com/JPyke3) - Played major role in getting Manjaro working on T2 Macs. Donate via [Patreon](https://patreon.com/pykee) or [On Chain](https://github.com/JPyke3/mbp-manjaro#donations).
-3. [marcosfad](https://github.com/marcosfad) - Played major role in getting Ubuntu working on T2 Macs. Donate via [Paypal](https://paypal.me/marcosfad) or [GitHub Sponsors](https://github.com/sponsors/marcosfad).
-4. [NoaHimesaka1873](https://github.com/NoaHimesaka1873) - Currently maintains boot images for Arch, EndeavourOS, and Manjaro. Also maintains kernel for manjaro too. Donate via [Toss (South Korea residents only)](https://toss.me/yuifmirror).
+- [MCMrARM](https://github.com/MCMrARM) - Author of the [apple-bce driver](https://github.com/t2linux/apple-bce-drv). Donate via [Paypal](https://paypal.me/mcmrarm).
+- [JPyke3](https://github.com/JPyke3) - Played major role in getting Manjaro working on T2 Macs. Donate via [Patreon](https://patreon.com/pykee) or [On Chain](https://github.com/JPyke3/mbp-manjaro#donations).
+- [marcosfad](https://github.com/marcosfad) - Played major role in getting Ubuntu working on T2 Macs. Donate via [Paypal](https://paypal.me/marcosfad) or [GitHub Sponsors](https://github.com/sponsors/marcosfad).
+- [NoaHimesaka1873](https://github.com/NoaHimesaka1873) - Currently maintains boot images for Arch, EndeavourOS, and Manjaro. Also maintains kernel for manjaro too. Donate via [Toss (South Korea residents only)](https://toss.me/yuifmirror).
