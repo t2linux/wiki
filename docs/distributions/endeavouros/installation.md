@@ -44,19 +44,8 @@ You will need:
     2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi" If you want to use separate EFI partition, check out [this guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
     3. Use remaining partition space to your convenience.
 
-7. Follow the installer until Packages and follow the instruction to install proper package for your device. Offline users should skip to step 8.
+7. Follow the rest of the installer and reboot.
 
-    1. Open "Extras for Apple T2-based devices"
-    2. Select proper package for your device.
+8. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install if your fan isn't working or if you want to customize how/when your fan will run.
 
-        1. Ensure you're not using MacBookAir9,1. If you're using it, don't choose anything here and follow [this guide](https://wiki.t2linux.org/guides/audio-config/) after the installation.
-        2. If your device is not MacBook Pro 16-inch (2019), choose "apple-t2-audio-config"
-        3. If your device is MacBook Pro 16-inch (2019), choose "apple-t2-audio-config-alt"
-
-    3. Continue.
-
-8. Follow the rest of the installer and reboot.
-
-9. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install if your fan isn't working or if you want to customize how/when your fan will run.
-
-10. You now will be able to select your EndeavourOS install in the macOS Startup Manager by holding option at boot.
+9. You now will be able to select your EndeavourOS install in the macOS Startup Manager by holding option at boot.
