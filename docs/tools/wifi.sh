@@ -144,6 +144,17 @@ case "$os" in
 			done
 		done
 
+		#4377 Bluetooth
+		cd /usr/share/firmware/bluetooth
+		if [[ ${1-default} = -v ]]
+		then
+		cp -v BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-formosa.ptb
+		cp -v BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-formosa.bin
+		else
+		cp BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-formosa.ptb
+		cp BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-formosa.bin
+		fi
+
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
@@ -163,7 +174,7 @@ case "$os" in
 			sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi 2>/dev/null || true
 		fi
 		mountpoint=$(findmnt -n -o TARGET /dev/nvme0n1p1)
-		echo "Getting WiFi firmware"
+		echo "Getting WiFi and Bluetooth firmware"
 		if [[ ${1-default} = -v ]]
 		then
 			sudo cp -v $mountpoint/firmware/* /lib/firmware/brcm
@@ -172,8 +183,10 @@ case "$os" in
 		fi
 		sudo modprobe -r brcmfmac
 		sudo modprobe brcmfmac
+		sudo modprobe -r hci_bcm4377
+		sudo modprobe hci_bcm4377
 		echo "Cleaning up"
-		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
+		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi and Bluetooth again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
 		read input
 		if [[ ($input != y) && ($input != Y) ]]
 		then
