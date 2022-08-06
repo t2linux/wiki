@@ -15,7 +15,7 @@ case "$os" in
 		echo "Copying this script to EFI"
 		cp "$0" "/Volumes/EFI/wifi.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is wifi.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 
-		echo "Getting Wi-Fi firmware"
+		echo "Getting Wi-Fi and Bluetooth firmware"
 
 		mkdir /Volumes/EFI/firmware
 
