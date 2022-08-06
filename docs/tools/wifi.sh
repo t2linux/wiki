@@ -151,8 +151,8 @@ case "$os" in
 		cp -v BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-formosa.ptb
 		cp -v BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-formosa.bin
 		else
-		cp BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-formosa.ptb
-		cp BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-formosa.bin
+		cp BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.ptb
+		cp BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.bin
 		fi
 
 		echo "Unmounting the EFI partition"
