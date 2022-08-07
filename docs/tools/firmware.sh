@@ -13,7 +13,7 @@ case "$os" in
 		sudo diskutil mount disk0s1
 
 		echo "Copying this script to EFI"
-		cp "$0" "/Volumes/EFI/wifi.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is wifi.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
+		cp "$0" "/Volumes/EFI/firmware.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 
 		echo "Getting Wi-Fi and Bluetooth firmware"
 
@@ -158,7 +158,7 @@ case "$os" in
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/wifi.sh\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
 		;;
 	(Linux)
 		echo "Detected Linux"
@@ -191,7 +191,7 @@ case "$os" in
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
-			sudo rm -r $mountpoint/firmware $mountpoint/wifi.sh
+			sudo rm -r $mountpoint/firmware $mountpoint/firmware.sh
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
