@@ -48,10 +48,9 @@ If you wish to use another distribution, you can install it normally, also follo
 
 ## Preparing the Installation
 
-You will want to look at [the wifi guide](https://wiki.t2linux.org/guides/wifi/) to check if your model is supported before starting an installation.
-Based on that information, prepare anything that is needed for installing on Linux.
+Look at the [the wifi and bluetooth guide](https://wiki.t2linux.org/guides/wifi/) and follow any steps that are required to run on macOS.
 
-Make sure to keep the wifi firmware, as well as any other files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux cannot read APFS, the file system macOS uses by default.
+Make sure to keep any files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux cannot read APFS, the file system macOS uses by default.
 
 You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40GB should be fine for a base installation.
 
