@@ -9,8 +9,8 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - USB
 - Keyboard
 - Camera
-- Wi-Fi
-- Bluetooth
+- Wi-Fi (requires macOS firmware)
+- Bluetooth (requires macOS firmware only for devices with BCM4377 chip)
 - Touch Bar: There is support for the "Touch Bar Keyboard" device configuration, where only the Function Keys or the Media/Brightness Control Keys can be shown. No other graphics can be shown on the Touchbar (this is what Windows with Bootcamp drivers uses).
 
 ## Partially Working
