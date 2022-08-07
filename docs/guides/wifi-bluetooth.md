@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a step by step guide to get wifi working on T2 Macs.
+This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
@@ -15,21 +15,21 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 ## Setting up
 
-We now use a script which can help you set up Wi-Fi. Follow the instructions below to use this script :-
+We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the instructions below to use this script :-
 
 ### On macOS
 
-1. Click [here](../tools/wifi.sh) to download the script.
+1. Click [here](../tools/firmware.sh) to download the script.
 2. Boot into macOS.
 3. Run this script there.
-4. When the script shall run successfully, it shall ask you to follow either of the two options mentioned in the [On Linux](https://wiki.t2linux.org/guides/wifi/#on-linux) section, on Linux.
+4. When the script shall run successfully, it shall ask you to follow either of the two options mentioned in the [On Linux](#on-linux) section, on Linux.
 5. Boot into Linux.
 
 ### On Linux
 
 You have two options here. You can follow either of the two, its purely based on your choice:
 
-- The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi.
+- The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi and Bluetooth.
 
 - The second method is to simply run the following commands on Linux :-
 
@@ -37,7 +37,7 @@ You have two options here. You can follow either of the two, its purely based on
   sudo umount /dev/nvme0n1p1
   sudo mkdir /tmp/apple-wifi-efi
   sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
-  bash /tmp/apple-wifi-efi/wifi.sh
+  bash /tmp/apple-wifi-efi/firmware.sh
   ```
 
 #### For those who don’t know how to run a script
@@ -49,7 +49,7 @@ If you don’t know how to run a script, follow these instructions.
 2. Open the terminal and run :-
   
     ``` bash
-    bash ~/Downloads/wifi.sh
+    bash ~/Downloads/firmware.sh
     ```
   
 3. Then boot into Linux and place the same script in the **Downloads** folder over there or simply run the commands the script asked you to run in Linux when you executed it in macOS.

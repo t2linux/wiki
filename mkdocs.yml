@@ -42,7 +42,7 @@ nav:
           - Contribute: contribute.md
           - Notable Contributors: notable-contributors.md
     - Guides:
-          - Wi-Fi: guides/wifi.md
+          - Wi-Fi and Bluetooth: guides/wifi-bluetooth.md
           - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
           - Hybrid Graphics: guides/hybrid-graphics.md
