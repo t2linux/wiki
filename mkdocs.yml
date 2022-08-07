@@ -34,6 +34,11 @@ markdown_extensions:
     - pymdownx.details
     - pymdownx.superfences
 
+plugins:
+    -   redirects:
+            redirect_maps:
+                'guides/wifi.md': 'guides/wifi-bluetooth.md'
+
 nav:
     - General:
           - Home: index.md
