@@ -37,8 +37,7 @@ Arch Linux probably has the most documentation, both officially for the whole pr
 t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress `archinstall` script.
 Keep in mind however that the whole process is done in the command line.
 
-Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. Note that Manjaro currently only has 5.7.19 as the latest kernel version. The support period for 5.7.x ended in August 2020.
-You could install the linux-mbp-arch kernel, which is updated, by following step 8 of the [arch install guide](https://wiki.t2linux.org/distributions/arch/installation/), and `sudo pacman -S linux-mbp linux-mbp-headers`.
+Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is more outdated and requires more configuration, and NoaHimesaka1873's which is newer and reccomended. 
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
