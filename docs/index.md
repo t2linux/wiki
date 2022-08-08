@@ -33,7 +33,7 @@ If the distribution you want to use has a guide [here](https://wiki.t2linux.org/
 - EndeavourOS [https://github.com/t2linux/EndeavourOS-ISO-t2](https://github.com/t2linux/EndeavourOS-ISO-t2)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
-- Manjaro (Jpyke3) [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
+- Manjaro (Jpyke3 - Outdated) [https://github.com/JPyke3/mbp-manjaro](https://github.com/JPyke3/mbp-manjaro)
 - Manjaro (NoaHimesaka - Reccomended) [https://github.com/NoaHimesaka1873/manjaroiso-t2](https://github.com/NoaHimesaka1873/manjaroiso-t2)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
 - Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
