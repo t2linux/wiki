@@ -37,7 +37,7 @@ Arch Linux probably has the most documentation, both officially for the whole pr
 t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress `archinstall` script.
 Keep in mind however that the whole process is done in the command line.
 
-Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is more outdated and requires more configuration, and NoaHimesaka1873's which is newer and reccomended. 
+Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is not reccomended, and NoaHimesaka1873's which is newer and reccomended. 
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
