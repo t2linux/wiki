@@ -39,7 +39,7 @@ Keep in mind however that the whole process is done in the command line.
 
 Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is not recommended, and NoaHimesaka1873's which is newer and recommended.
 
-EndeavourOS is an Arch based Linux distribution with a graphical installer. This distribution requires little to no configuration after install. 
+EndeavourOS is an Arch based Linux distribution with a graphical installer. This distribution requires little to no configuration after install.
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
