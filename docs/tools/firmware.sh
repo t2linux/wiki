@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-os=$(uname -s);
-script_name=$(echo $0 | rev | cut -d'/' -f 1 | rev)
+os=$(uname -s)
+
 case "$os" in
 	(Darwin)
 		echo "Detected macOS"
@@ -13,9 +13,9 @@ case "$os" in
 		sudo diskutil mount disk0s1
 
 		echo "Copying this script to EFI"
-		cp "$0" "/Volumes/EFI/wifi.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is wifi.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
+		cp "$0" "/Volumes/EFI/firmware.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 
-		echo "Getting Wi-Fi firmware"
+		echo "Getting Wi-Fi and Bluetooth firmware"
 
 		mkdir /Volumes/EFI/firmware
 
@@ -144,10 +144,21 @@ case "$os" in
 			done
 		done
 
+		#4377 Bluetooth
+		cd /usr/share/firmware/bluetooth
+		if [[ ${1-default} = -v ]]
+		then
+		cp -v BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.ptb
+		cp -v BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.bin
+		else
+		cp BCM4377B3__PCIE_Formosa_MFG_GEN__PRODK_R_.ptb /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.ptb
+		cp BCM4377B3*_PROD.signed.bin /Volumes/EFI/firmware/brcmbt4377b3-apple,formosa.bin
+		fi
+
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/wifi.sh\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
 		;;
 	(Linux)
 		echo "Detected Linux"
@@ -163,7 +174,7 @@ case "$os" in
 			sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi 2>/dev/null || true
 		fi
 		mountpoint=$(findmnt -n -o TARGET /dev/nvme0n1p1)
-		echo "Getting WiFi firmware"
+		echo "Getting WiFi and Bluetooth firmware"
 		if [[ ${1-default} = -v ]]
 		then
 			sudo cp -v $mountpoint/firmware/* /lib/firmware/brcm
@@ -172,13 +183,15 @@ case "$os" in
 		fi
 		sudo modprobe -r brcmfmac
 		sudo modprobe brcmfmac
+		sudo modprobe -r hci_bcm4377
+		sudo modprobe hci_bcm4377
 		echo "Cleaning up"
-		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
+		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi and Bluetooth again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
 		read input
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
-			sudo rm -r $mountpoint/firmware $mountpoint/wifi.sh
+			sudo rm -r $mountpoint/firmware $mountpoint/firmware.sh
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"

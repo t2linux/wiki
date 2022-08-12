@@ -9,12 +9,12 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - USB
 - Keyboard
 - Camera
-- Wi-Fi
+- Wi-Fi (requires macOS firmware)
+- Bluetooth (requires macOS firmware only for devices with BCM4377 chip. Also, Bluetooth glitches on devices with BCM4377 Chip if connected to a 2.4 Ghz Wi-Fi connection. This, in order to use Bluetooth either turn off your Wi-Fi or use a 5Ghz Wi-Fi connection.)
 - Touch Bar: There is support for the "Touch Bar Keyboard" device configuration, where only the Function Keys or the Media/Brightness Control Keys can be shown. No other graphics can be shown on the Touchbar (this is what Windows with Bootcamp drivers uses).
 
 ## Partially Working
 
-- Bluetooth: Not working on models with the BRCM4377 WiFi chip (MacBookPro15,4, MacBookPro16,3, MacBookAir9,1).
 - Keyboard Backlight: Not working on MacBookAir9,1.
 - Trackpad: Functions, but it is far from the experience on macOS (No force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
