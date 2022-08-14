@@ -12,7 +12,9 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
     git clone https://github.com/networkException/mbpfan
     cd mbpfan
     ```
+
 2. Compile the daemon using `make`
+
     !!! note
         This will run a patch script that finds a fan device on your system.
         You can use its output for debug purposes
