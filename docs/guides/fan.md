@@ -18,7 +18,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
     !!! note
         This will run a patch script that finds a fan device on your system.
         You can use its output for debug purposes
-       
+
 3. Edit mbpfan.conf if needed
 4. Copy mbpfan.conf to /etc with `sudo cp mbpfan.conf /etc`
 5. Run the tests to confirm that everything is working `sudo make tests`
