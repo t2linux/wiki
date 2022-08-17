@@ -38,6 +38,8 @@ plugins:
     -   redirects:
             redirect_maps:
                 'guides/wifi.md': 'guides/wifi-bluetooth.md'
+    -   search:
+            lang: en
 
 nav:
     - General:
