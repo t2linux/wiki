@@ -70,7 +70,6 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 !!! note
     To prevent problems, switch to the dedicated gpu using `sudo gpu-switch -d` before booting into MacOS. If you want to use Linux with intergrated iGPU afterwards, you'll need to boot into it, run `sudo gpu-switch -i` and **reboot**.
 
-
 # Use on Windows
 
 In one case (has anyone else tried this?), the iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers. There might be special iGPU drivers in the Bootcamp support software for single GPU MacBooks, which might help resolve this.
