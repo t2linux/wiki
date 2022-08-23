@@ -68,8 +68,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     4.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 !!! note
-    As macOS expects the dedicated GPU to be activated at startup, to avoid various display and GPU related problems (like not outputting anything to the display after sleep), switch to the dedicated GPU using `sudo gpu-switch -d` before booting into MacOS. 
-    
+    As macOS expects the dedicated GPU to be activated at startup, to avoid various display and GPU related problems (like not outputting anything to the display after sleep), switch to the dedicated GPU using `sudo gpu-switch -d` before booting into MacOS.
     Because of this, if you want to use Linux with the iGPU again, you'll need to re run `sudo gpu-switch -i` on your Linux install and **reboot**.
 
 # Use on Windows
