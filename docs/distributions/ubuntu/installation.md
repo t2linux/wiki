@@ -5,7 +5,7 @@
 
 [Download here (20.04)](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
 
-[Download here (22.04)](https://github.com/AdityaGarg8/mbp-ubuntu/releases/latest)
+[Download here (22.04)](https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest)
 
 # Hardware Requirements
 
