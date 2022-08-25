@@ -76,6 +76,8 @@ nav:
                 - Home: distributions/manjaro/home.md
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
+          - NixOS:
+                - Installation: distributions/nixos/installation.md
           - Ubuntu:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md

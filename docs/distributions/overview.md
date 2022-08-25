@@ -7,4 +7,5 @@ This is a landing page for the distribution specific guides contained in this wi
 -   [Fedora](https://wiki.t2linux.org/distributions/fedora/home/)
 -   [Gentoo](https://wiki.t2linux.org/distributions/gentoo/installation/)
 -   [Manjaro](https://wiki.t2linux.org/distributions/manjaro/home/)
+-   [NixOS](https://wiki.t2linux.org/distributions/nixos/installation/)
 -   [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/home/)
