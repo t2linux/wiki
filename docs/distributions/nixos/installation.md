@@ -6,7 +6,7 @@
 
 ## Installation Steps
 
-1. Get a NixOS iso from the releases page of [this repo](https://github.com/kekrby/nixos-t2-iso) and write it to your USB using `dd` or another tool.
+1. Get a NixOS iso from the releases page of [this repo](https://github.com/kekrby/nixos-t2-iso) and write it to your USB using `cp` or another tool.
 2. Partition your disk using Disk Utility by splitting the main APFS partition into two partitions where one of them is a FAT32 partition with the amount of space you want to allocate for your Linux installation.
 3. [Open the Startup Security Utility](https://support.apple.com/en-us/HT208198) and set the security level to "no security".
 4. Reboot while pressing the `Option` key and select the orange `EFI Boot` option.
