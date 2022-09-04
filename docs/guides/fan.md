@@ -33,4 +33,4 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 ## Configuration
 
 The daemons config file can be found at `/etc/mbpfan.conf`. Uncommenting and setting `min_fan1_speed` for example will let you
-force a certain speed.
+force a certain speed. Note that for laptops with second fan, you need to add `min_fan2_speed` and `max_fan2_speed`.
