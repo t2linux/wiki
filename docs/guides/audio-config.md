@@ -12,7 +12,7 @@ If not present, you'll have to update your bootup kernel params:
 
 - edit `/etc/default/grub` and update `GRUB_CMDLINE_LINUX` to include `intel_iommu=on iommu=pt pcie_ports=compat`
 - Apply your edits by running `sudo update-grub` on ubuntu or `sudo grub-mkconfig -o /boot/grub/grub.cfg` for other distros
-  - *Note* that, on the platforms where `grub`'s version is 2.x, these commands should be instead `sudo update-grub2` or `sudo grub2-mkconfig -o /boot/grub2/grub.cfg`. Check `grub`'s version with `sudo grub-install --version` or `sudo grub2-install --version`
+    - Note that, `grub`'s command line interface names might differ on different distros, if the commands like `grub-xxx` are not found, try `grub2-xxx` alternatives instead. For example, it should be `sudo grub2-mkconfig ...` instead of `sudo grub-mkconfig ...` on Fedora 36.
 - Reboot and ensure `cat /proc/cmdline` contains those params
 
 !!!note "systemd-boot"
