@@ -1,6 +1,6 @@
 # Deprecation Notice
 
-Manjaro support will be deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
+Manjaro support is deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 
 # Download a latest release
 
