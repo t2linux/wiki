@@ -73,6 +73,7 @@ nav:
           - Gentoo:
                 - Installation: distributions/gentoo/installation.md
           - Manjaro:
+                - Deprecation Notice: distributions/manjaro/deprecation.md
                 - Home: distributions/manjaro/home.md
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
