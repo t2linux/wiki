@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+Manjaro support will be deprecated. See [Deprecation Plan] for more information.
+
 # Download a latest release
 
 [See releases](https://github.com/NoaHimesaka1873/manjaroiso-t2/releases)
