@@ -1,12 +1,11 @@
-# Why is Manjaro deprecated?
+# Why is Manjaro getting deprecated?
 
-Read [This.](https://github.com/arindas/manjarno)
-
-TL;DR: It's poorly maintained and dangerous.
+Due to [concerns](https://github.com/arindas/manjarno), Manjaro will be deprecated.
+If you want to maintain it yourself, come to our Discord and we will help.
 
 # What distro should I use instead?
 
-[EndeavourOS.](https://wiki.t2linux.org/distributions/endeavouros/installation/)
+We recommend [EndeavourOS.](https://wiki.t2linux.org/distributions/endeavouros/installation/)
 
 # When will Manjaro be deprecated?
 
