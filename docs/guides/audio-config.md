@@ -31,7 +31,7 @@ bash ./install.sh
 sudo rm -r $HOME/t2-better-audio
 ```
 
-# Using Pipewire instead of Pulseaudio
+# Using PulseAudio instead of PipeWire
 
 Due a bug in PulseAudio, the current configuration does not work with it. A fix has been [already merged](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) but a new version containing the changes hasn't been released yet, so you should use PipeWire instead of PulseAudio unless your distro builds PulseAudio from the main branch or applies the patch before building.
 
