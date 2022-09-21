@@ -20,6 +20,8 @@ If not present, you'll have to update your bootup kernel params:
 
 # Audio Configuration Files
 
+Firstly, check whether you are using an updated apple-bce version by running `sed -n "s/.*\(AppleT2.*\) -.*/\1/p" /proc/asound/cards`. If the output is `AppleT2xN` (where `N` is a number), then this guide can be followed. If its just `AppleT2`, then either update the driver first or follow the [older version](https://github.com/t2linux/wiki/blob/00e882d0d5afb3102aedd02872426dc5fba789a5/docs/guides/audio-config.md) of this guide.
+
 Simply run the following to set up audio :-
 
 ```bash
@@ -41,6 +43,10 @@ Different distros have different ways to set up Pipewire. An example to get Pipe
 - All of apple's fancy tuning of the speakers is done in macOS, we don't have anything like that at the moment.
 
 # Approaches to fixing low microphone volume
+
+## Pulseaudio (2019 16" MacBook Pro)
+
+[Monitor](https://github.com/mahboobkarimian/mbp-2019-Ubuntu-audio) the volume of the microphone and set it back to 400% when a sudden drop in the volume of the microphone occurs (something sets in to 100%. This will help to have consistent microphone volume during video/audio calls.
 
 ## KDE
 
