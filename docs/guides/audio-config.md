@@ -31,7 +31,7 @@ sudo rm -r $HOME/t2-better-audio
 
 # Using Pipewire instead of Pulseaudio
 
-Due to [this bug](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) in Pulseaudio, you may not be able to get the internal speaker working with these audio configuration files. Although most distributions use Pipewire by default, you can check whether you are on Pipewire or Pulseaudio by running `pactl info`.
+Due a bug in PulseAudio, the current configuration does not work with it. A fix has been [already merged](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) but a new version containing the changes hasn't been released yet, so you should use PipeWire instead of PulseAudio unless your distro builds PulseAudio from the main branch or applies the patch before building.
 
 Different distros have different ways to set up Pipewire. An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
 
