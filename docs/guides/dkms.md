@@ -24,8 +24,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-    - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
-    - Otherwise, run `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-0.2`
+    - Run `sudo git clone https://github.com/kekrby/apple-bce /usr/src/apple-bce-0.2`
 
         -   Create a `dkms.conf` file in `/usr/src/apple-bce-0.2` and put in the following:
 
@@ -43,13 +42,9 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - If you are on a MacBook Pro (16 inch, 2019) or MacBook Pro (13 inch, 2020), and want keyboard backlight to work, run :
+    - Run :
 
       `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
-
-      Else run :
-
-      `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
     - Now run `sudo dkms install -m apple-ibridge -v 0.1`. If on a live ISO, use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
