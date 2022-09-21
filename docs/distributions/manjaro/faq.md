@@ -1,7 +1,6 @@
-
 # Deprecation Notice
 
-Manjaro support is deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
+Manjaro support will be deprecated soon. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 
 # Migrating from Pykee's old kernel to new kernel
 
@@ -22,7 +21,7 @@ After running this, remove old repository and reboot.
 
 Users using older kernel are advised to migrate to newest kernel since newer kernel has more support.
 
-Join our Discord to get pings for new kernel.
+Join our Discord or enable notifications for [this repository](https://github.com/NoaHimesaka1873/manjaro-kernel-t2) to get pings for new kernel.
 
 # Installing alongside Windows
 
