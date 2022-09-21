@@ -26,25 +26,11 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
     - Run `sudo git clone https://github.com/kekrby/apple-bce /usr/src/apple-bce-0.2`
 
-        -   Create a `dkms.conf` file in `/usr/src/apple-bce-0.2` and put in the following:
-
-            ```conf
-            PACKAGE_NAME="apple-bce"
-            PACKAGE_VERSION="0.2"
-            MAKE[0]="make KVERSION=$kernelver"
-            CLEAN="make clean"
-            BUILT_MODULE_NAME[0]="apple-bce"
-            DEST_MODULE_LOCATION[0]="/kernel/drivers/misc"
-            AUTOINSTALL="yes"
-            ```
-
     - Now run `sudo dkms install -m apple-bce -v 0.2`. If on a live ISO, use `sudo dkms install -m apple-bce -v 0.2 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - Run :
-
-      `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
+    - Run `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
     - Now run `sudo dkms install -m apple-ibridge -v 0.1`. If on a live ISO, use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
