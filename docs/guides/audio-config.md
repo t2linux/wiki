@@ -2,7 +2,9 @@
 
 This page explains how to get the config files for using the T2 audio device, which allows use of the 3.5mm headphone port, the built in speakers, the built in mic and the headphones' mic.
 
-Before you proceed, make sure you already have `apple_bce` loaded by running `lsmod | grep apple_bce`. If not, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
+Firstly, check whether you are using an updated `apple-bce` version by running `sed -n "s/.*\(AppleT2.*\) -.*/\1/p" /proc/asound/cards`. If the output is `AppleT2xN` (where `N` is a number), then this guide can be followed. If it's just `AppleT2`, then either update the driver first or follow the [older version](https://github.com/t2linux/wiki/blob/00e882d0d5afb3102aedd02872426dc5fba789a5/docs/guides/audio-config.md) of this guide.
+
+If there is no output at all, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
 
 # Enable Pass-Through Kernel Parameters
 
@@ -20,8 +22,6 @@ If not present, you'll have to update your bootup kernel params:
 
 # Audio Configuration Files
 
-Firstly, check whether you are using an updated apple-bce version by running `sed -n "s/.*\(AppleT2.*\) -.*/\1/p" /proc/asound/cards`. If the output is `AppleT2xN` (where `N` is a number), then this guide can be followed. If its just `AppleT2`, then either update the driver first or follow the [older version](https://github.com/t2linux/wiki/blob/00e882d0d5afb3102aedd02872426dc5fba789a5/docs/guides/audio-config.md) of this guide.
-
 Simply run the following to set up audio :-
 
 ```bash
@@ -31,11 +31,9 @@ bash ./install.sh
 sudo rm -r $HOME/t2-better-audio
 ```
 
-# Using PulseAudio instead of PipeWire
+If your distro uses PulseAudio by default, consider switching to PipeWire as the latest stable release of PulseAudio has a bug which prevents audio from working properly. A fix for the bug has been [already merged](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) but a new version containing the changes hasn't been released yet, so you should use PipeWire instead of PulseAudio unless your distro builds PulseAudio from the main branch or applies the patch before building.
 
-Due a bug in PulseAudio, the current configuration does not work with it. A fix has been [already merged](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) but a new version containing the changes hasn't been released yet, so you should use PipeWire instead of PulseAudio unless your distro builds PulseAudio from the main branch or applies the patch before building.
-
-Different distros have different ways to set up Pipewire. An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
+An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
 
 # Issues
 
