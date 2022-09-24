@@ -1,6 +1,6 @@
 # Deprecation Notice
 
-Manjaro support will be deprecated soon. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
+Manjaro T2 support will be deprecated soon. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 
 # Download a latest release
 
@@ -16,8 +16,10 @@ Manjaro support will be deprecated soon. See [Deprecation Plan](https://wiki.t2l
 # Install Procedure
 
 1. Partition your drive in macOS so you can install Linux. You can either use Disk Utility or use Bootcamp, but the important thing is that you have two partitions (your macOS partition and your new linux one). It isn't recommended that you completely delete macOS as firmware updates are applied through it.
-2. Flash your Manjaro ISO to a USB Stick. If you want an easier way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). Terminal users can also use dd.
-3. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
+2. Download BOTH .ZIP AND .Z01 files. You need to join those archives if you use Linux `unzip` utility.  
+3. Unzip the .zip file.
+4. Flash your Manjaro ISO to a USB Stick. If you want an easier way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). Terminal users can also use dd.
+5. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
 
     1. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.
     2. When you see the macOS Utilities window, choose Utilities > Startup Security Utility from the menu bar.
