@@ -27,7 +27,7 @@ Simply run the following to set up audio :-
 ```bash
 git clone https://github.com/kekrby/t2-better-audio.git
 cd t2-better-audio
-bash ./install.sh
+./install.sh
 sudo rm -r $HOME/t2-better-audio
 ```
 
