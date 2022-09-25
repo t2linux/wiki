@@ -33,7 +33,7 @@ sudo rm -r $HOME/t2-better-audio
 
 If your distro uses PulseAudio by default, consider switching to PipeWire as the latest stable release of PulseAudio has a bug which prevents audio from working properly. A fix for the bug has been [already merged](https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596) but a new version containing the changes hasn't been released yet, so you should use PipeWire instead of PulseAudio unless your distro builds PulseAudio from the main branch or applies the patch before building.
 
-An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
+An example to get PipeWire working on Ubuntu, which uses PulseAudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
 
 # Issues
 
@@ -42,7 +42,7 @@ An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default i
 
 # Approaches to fixing low microphone volume
 
-## Pulseaudio (2019 16" MacBook Pro)
+## PulseAudio (2019 16" MacBook Pro)
 
 [Monitor](https://github.com/mahboobkarimian/mbp-2019-Ubuntu-audio) the volume of the microphone and set it back to 400% when a sudden drop in the volume of the microphone occurs (something sets in to 100%. This will help to have consistent microphone volume during video/audio calls.
 
@@ -51,8 +51,8 @@ An example to get Pipewire working on Ubuntu, which uses Pulseaudio by default i
 The "Audio Volume" dialog / Audio in System Settings allow users to "Raise maximum volume", allowing to go past 100%. This
 does not offer a great deal of flexibility, it might work for getting acceptable recordings however.
 
-## EasyEffects with Pipewire
+## EasyEffects with PipeWire
 
-[EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using Pipewire. Compared
+[EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using PipeWire. Compared
 to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
 boosts.
