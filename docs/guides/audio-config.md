@@ -25,10 +25,10 @@ If not present, you'll have to update your bootup kernel params:
 Simply run the following to set up audio :-
 
 ```bash
-git clone https://github.com/kekrby/t2-better-audio.git
-cd t2-better-audio
+sudo git clone https://github.com/kekrby/t2-better-audio.git /tmp/t2-better-audio
+cd /tmp/t2-better-audio
 ./install.sh
-sudo rm -r $HOME/t2-better-audio
+sudo rm -r /tmp/t2-better-audio
 ```
 
 If your distro uses PulseAudio by default, consider switching to PipeWire for the best possible experience. You can still use PulseAudio but the experience will not be as smooth as PipeWire, for example you might not be able to select the speakers as the output device when headphones are plugged in.
