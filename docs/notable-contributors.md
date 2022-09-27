@@ -17,3 +17,4 @@ If there is someone missing that you think should be on this list, send a PR on 
 - T2minator (Tails) [https://github.com/T2minator](https://github.com/T2minator)
 - NoaHimesaka1873 (Arch, Manjaro and EndeavourOS) [https://github.com/NoaHimesaka1873](https://github.com/NoaHimesaka1873)
 - The Asahi Linux Contributors (Wi-Fi and Bluetooth) [https://asahilinux.org/](https://asahilinux.org/)
+- kekrby (Audio and NixOS) [https://github.com/kekrby](https://github.com/kekrby)

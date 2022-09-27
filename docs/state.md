@@ -28,7 +28,6 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - Custom graphics on Touchbar: There is currently no Linux driver for the Touchbar's "Touch Bar Display" device configuration, which is what macOS uses, and gives full control over the display to the Operating System.
 - T2 Secure Enclave Processor (Touch ID, storing encryption keys on the T2)
 - The T2's onboard Audio Video Encoder (used for Sidecar on macOS)
-- Automatically changing between speakers and headphones when headphones are plugged and unplugged
 - Graphics switching without rebooting (gmux)
 
 ## Other
