@@ -35,7 +35,7 @@ You will need:
 
 6. Continue following the Arch Wiki's guide until "Install essential packages".
 
-7. Install the required packages into your new system with: `t2strap /mnt base linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+7. Install the required packages into your new system with: `t2strap /mnt base linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). If you want to install another kernel, use `t2strap -h` to see the list of available kernel and add `-k (kernel)` to the end of `t2strap` command.
 
 8. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
