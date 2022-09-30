@@ -2,7 +2,7 @@
 
 You will need:
 
-- USB drive with at least 1GB
+- USB drive with at least 2GB
 - A way to plug it into your Mac (USB-C isn't USB-A)
 
 ---
@@ -35,22 +35,11 @@ You will need:
 
 6. Continue following the Arch Wiki's guide until "Install essential packages".
 
-7. Install the required packages into your new system with: `pacstrap /mnt base linux-t2 apple-bcm-wifi-firmware linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+7. Install the required packages into your new system with: `t2strap /mnt base linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
 
 8. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
-9. Now in your `chroot`, follow the [Audio Config Guide](https://wiki.t2linux.org/guides/audio-config/).
-
-10. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
-
-11. Add Redecorating's repository to `/etc/pacman.conf`, by adding this:
-
-    ```ini
-    [Redecorating-t2]
-    Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
-    ```
-
-12. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
+9. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
     -   Installing Grub:
 
@@ -65,4 +54,4 @@ You will need:
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
         3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-13. Exit the `chroot` and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+10. Exit the `chroot` and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
