@@ -63,6 +63,7 @@ nav:
           - Overview: distributions/overview.md
           - Arch:
                 - Installation: distributions/arch/installation.md
+                - FAQ: distributions/arch/faq.md
           - EndeavourOS:
                 - Installation: distributions/endeavouros/installation.md
           - Fedora:
