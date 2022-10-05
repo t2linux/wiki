@@ -4,7 +4,7 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 
 ## Do you need to do this?
 
-Since many T2 distro maintainers embed these drivers into the kernel itself, you probabaly wouldn't need to install the modules manually. Although it can be used if you are using a kernel other than a T2 kernel provided by the maintainers here.
+Since many T2 distro maintainers package these modules with the kernel itself, you probabaly wouldn't need to install the modules manually. Although it can be used if you are using a kernel other than a T2 kernel provided by the maintainers here.
 
 Are your keyboard and audio working? If no, then you'll need the BCE module.  
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
