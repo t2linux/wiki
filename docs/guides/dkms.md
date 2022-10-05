@@ -26,7 +26,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-ibridge`
+    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-bce`
 
     - For other distros run `sudo git clone https://github.com/kekrby/apple-bce /usr/src/apple-bce-0.2`
 
@@ -36,7 +36,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
     - If you are on an Arch based distro, you can install it from [Redecorating's pacman repo](https://github.com/Redecorating/archlinux-t2-packages) by running `sudo pacman -S apple-ibridge-dkms-git`
 
-    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-bce`
+    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-ibridge`
 
     - For other distros run `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
