@@ -34,7 +34,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - If you are on an Arch based distro, you can install it from [Redecorating's APT repo](https://github.com/Redecorating/archlinux-t2-packages) by running `sudo pacman -S apple-ibridge-dkms-git`
+    - If you are on an Arch based distro, you can install it from [Redecorating's pacman repo](https://github.com/Redecorating/archlinux-t2-packages) by running `sudo pacman -S apple-ibridge-dkms-git`
 
     - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-bce`
 
