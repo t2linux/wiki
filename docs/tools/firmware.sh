@@ -8,8 +8,7 @@
 """:"
 set -euo pipefail
 
-os=$(uname -s);
-script_name=$(echo $0 | rev | cut -d'/' -f 1 | rev)
+os=$(uname -s)
 case "$os" in
 	(Darwin)
 		echo "Detected macOS"
