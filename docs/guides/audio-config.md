@@ -35,6 +35,9 @@ If your distro uses PulseAudio by default, consider switching to PipeWire for th
 
 An example to get PipeWire working on Ubuntu, which uses PulseAudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
 
+!!!note "Switching to headphones automatically"
+    If you want headphones to be switched to automatically when they are plugged in, you should set them as the default audio sink using the settings app of your DE, `pavucontrol`, `pactl` or `wpctl`.
+
 # Issues
 
 - Some people are unable to get audio input to work. You may have to use a separate microphone.
