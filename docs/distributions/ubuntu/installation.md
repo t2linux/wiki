@@ -1,6 +1,6 @@
 # Download the latest safe release
 
-!!! Warning "Mac Mini"
+!!! Warning "Blank screen on boot"
     **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
 
 [Download here (20.04)](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
