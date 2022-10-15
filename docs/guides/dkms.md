@@ -136,7 +136,7 @@ Your keyboard backlight may remain switched off on resuming and backlight contro
 
 A possible workaround is to bind the backlight controls directly to the kbd_backlight by using `acpilight`.
 
-First add your user to the `video` group by running `sudo useradd -aG $USER video`
+First add your user to the `video` group by running `sudo usermod -aG $USER video`
 Then create the following file `/etc/udev/rules.d/90-kbdbacklight.rules` with the following content:
 
 ```conf
