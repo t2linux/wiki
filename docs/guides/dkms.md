@@ -134,20 +134,23 @@ It unloads the Touchbar modules as they can cause issues for suspend.
 
 Your keyboard backlight may remain switched off on resuming and backlight controls may stop working. A restart fixes the backlight controls. You may also run `echo 60 > /sys/class/leds/apple::kbd_backlight/brightness` to turn on the backlight to the maximum level if you do not want to boot. Replace 60 with a lower number for lower brightness.
 
-A possible workaround is to bind the backlight controls directly to the kbd_backlight by using `acpilight`.
+You can also control the backlight manually by binding the backlight controls directly to the kbd_backlight by using `acpilight`.
 
-First add your user to the `video` group by running `sudo usermod -aG $USER video`
-Then create the following file `/etc/udev/rules.d/90-kbdbacklight.rules` with the following content:
+First add your user to the `video` group by running `sudo usermod -aG video $USER`
+
+A file `/etc/udev/rules.d/90-backlight.rules` should already exist after installing the acpilight package. 
+You can check this by calling `cat /etc/udev/rules.d/90-backlight.rules`
+If you get the following error `No such file or directory`, create the file `/etc/udev/rules.d/90-backlight.rules` with the following content:
 
 ```conf
-SUBSYSTEM=="backlight", ACTION=="add",
-RUN+="/bin/chgrp video /sys/class/leds/%k/brightness",
-RUN+="/bin/chmod g+w /sys/class/leds/%k/brightness"
+SUBSYSTEM=="leds", ACTION=="add", KERNEL=="*::kbd_backlight", \
+  RUN+="/bin/chgrp video /sys/class/leds/%k/brightness", \
+  RUN+="/bin/chmod g+w /sys/class/leds/%k/brightness"
 ```
 
 Then either reboot your system or run the following command `sudo udevadm control --reload-rules && sudo udevadm trigger` to reload the udev rules.
 
-i3wm users can then add the following into the config file.
+i3wm and Sway users can then add the following into the config file.
 
 ```conf
 # Amount to increase/decrease brightness
