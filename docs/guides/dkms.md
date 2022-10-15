@@ -136,12 +136,12 @@ Your keyboard backlight may remain switched off on resuming and backlight contro
 
 You can also control the backlight manually by binding the backlight controls directly to the kbd_backlight by using `acpilight`.
 
-This package is available on Arch Linux by installing `sudo pacman -S acpilight`. 
+This package is available on Arch Linux by installing `sudo pacman -S acpilight`.
 On other distributions, you are required to run `git clone https://gitlab.com/wavexx/acpilight && cd acpilight && sudo make install` Make sure that you have the packages `git` and `make` installed.
 
 First add your user to the `video` group by running `sudo usermod -aG video $USER`
 
-A file `/etc/udev/rules.d/90-backlight.rules` should already exist after installing the acpilight package. 
+A file `/etc/udev/rules.d/90-backlight.rules` should already exist after installing the **acpilight** package.
 You can check this by calling `cat /etc/udev/rules.d/90-backlight.rules`
 If you get the following error `No such file or directory`, create the file `/etc/udev/rules.d/90-backlight.rules` with the following content:
 
