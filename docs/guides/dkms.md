@@ -134,6 +134,27 @@ It unloads the Touchbar modules as they can cause issues for suspend.
 
 Your keyboard backlight may remain switched off on resuming and backlight controls may stop working. A restart fixes the backlight controls. You may also run `echo 60 > /sys/class/leds/apple::kbd_backlight/brightness` to turn on the backlight to the maximum level if you do not want to boot. Replace 60 with a lower number for lower brightness.
 
+A possible workaround is to bind the backlight controls directly to the kbd_backlight by using `acpilight`.
+
+First add your user to the `video` group by running `sudo useradd -aG $USER video`
+Then create the following file `/etc/udev/rules.d/90-kbdbacklight.rules` with the following content:
+```
+SUBSYSTEM=="backlight", ACTION=="add",
+RUN+="/bin/chgrp video /sys/class/leds/%k/brightness",
+RUN+="/bin/chmod g+w /sys/class/leds/%k/brightness"
+```
+Then either reboot your system or run the following command `sudo udevadm control --reload-rules && sudo udevadm trigger` to reload the udev rules.
+
+i3wm users can then add the following into the config file.
+```
+# Amount to increase/decrease brightness
+set $brightness_step 1
+
+bindsym XF86KbdBrightnessUp exec xbacklight -inc $brightness_step -ctrl apple::kbd_backlight
+
+bindsym XF86KbdBrightnessDown exec xbacklight -dec $brightness_step -ctrl apple::kbd_backlight
+```
+
 # Kernel panic when loading apple-ib-als
 
 This was fixed in [this commit](https://github.com/t2linux/apple-ib-drv/commit/fc9aefa5a564e6f2f2bb0326bffb0cef0446dc05), please follow the [dkms guide](https://wiki.t2linux.org/guides/dkms/) to update.
