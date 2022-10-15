@@ -138,15 +138,18 @@ A possible workaround is to bind the backlight controls directly to the kbd_back
 
 First add your user to the `video` group by running `sudo useradd -aG $USER video`
 Then create the following file `/etc/udev/rules.d/90-kbdbacklight.rules` with the following content:
-```
+
+```conf
 SUBSYSTEM=="backlight", ACTION=="add",
 RUN+="/bin/chgrp video /sys/class/leds/%k/brightness",
 RUN+="/bin/chmod g+w /sys/class/leds/%k/brightness"
 ```
+
 Then either reboot your system or run the following command `sudo udevadm control --reload-rules && sudo udevadm trigger` to reload the udev rules.
 
 i3wm users can then add the following into the config file.
-```
+
+```conf
 # Amount to increase/decrease brightness
 set $brightness_step 1
 
