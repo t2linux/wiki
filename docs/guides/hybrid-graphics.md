@@ -75,7 +75,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 ## MacBookPro16,4
 
-The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
+The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround :-
 
 ### If you are able to edit your kernel command line :-
 
