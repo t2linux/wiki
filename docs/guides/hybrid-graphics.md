@@ -10,7 +10,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" problem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
 3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
 
-# Enabling the iGPU
+## Enabling the iGPU
 
 !!! note
     Aside from step 1, these instructions should be followed in Linux.
@@ -65,13 +65,15 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         sudo gpu-switch -i
         ```
 
-    4.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
+    4.  Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2)
+
+    5.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 !!! note
     As macOS expects the dedicated GPU to be activated at startup, to avoid various display and GPU related problems (like not outputting anything to the display after sleep), switch to the dedicated GPU using `sudo gpu-switch -d` before booting into MacOS.
     Because of this, if you want to use Linux with the iGPU again, you'll need to re run `sudo gpu-switch -i` on your Linux install and **reboot**.
 
-# MacBookPro16,4
+## MacBookPro16,4
 
 The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
 
@@ -81,9 +83,9 @@ The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
 
 2. Edit the command line of your boot and add the `nomodeset` kernel parameter the the command line. This will enable you to access your Linux system in safe graphics.
 
-3. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader).
+3. Boot into Linux and install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader).
 
-4. Setup this tool to allow changing the boot gpu from grub:
+4. Setup this tool to allow changing the boot GPU from GRUB:
 
     ```sh
     git clone https://github.com/Redecorating/efi-gpu-power-prefs
@@ -93,9 +95,11 @@ The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ```
 
-5. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
+5. Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2)
 
-6. You can now remove the `nomodeset` parameter from your command line.
+6. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
+
+7. You can now remove the `nomodeset` parameter from your command line.
 
 ### If you are unable to edit your kernel command line :-
 
@@ -109,9 +113,9 @@ The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
 
 5. If your distro doesn't use GRUB, install it since further steps need GRUB.
 
-6. Follow step 4 and 5 of the [If you are able to edit your kernel command line](https://wiki.t2linux.org/guides/hybrid-graphics/#if-you-are-able-to-edit-your-kernel-command-line) section.
+6. Follow steps 4, 5 and 6 of the [If you are able to edit your kernel command line](https://wiki.t2linux.org/guides/hybrid-graphics/#if-you-are-able-to-edit-your-kernel-command-line) section.
 
-# Use on Windows
+## Use on Windows
 
 In one case (has anyone else tried this?), the iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers. There might be special iGPU drivers in the Bootcamp support software for single GPU MacBooks, which might help resolve this.
 
@@ -119,6 +123,6 @@ If you want to use the iGPU on Linux but not on Windows, you can switch back to 
 
 If you want to switch GPU from Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
 
-# VFIO GPU passthrough
+## VFIO GPU passthrough
 
 Refer to [this gist](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e) for quirks required to pass through the dGPU to a Windows Virtual Machine, while having Linux use the iGPU.
