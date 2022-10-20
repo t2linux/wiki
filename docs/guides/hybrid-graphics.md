@@ -71,6 +71,46 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     As macOS expects the dedicated GPU to be activated at startup, to avoid various display and GPU related problems (like not outputting anything to the display after sleep), switch to the dedicated GPU using `sudo gpu-switch -d` before booting into MacOS.
     Because of this, if you want to use Linux with the iGPU again, you'll need to re run `sudo gpu-switch -i` on your Linux install and **reboot**.
 
+# MacBookPro16,4
+
+The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
+
+### If you are able to edit your kernel command line :-
+
+1. This workaround requires GRUB as the bootloader. So make sure you install GRUB.
+
+2. Edit the command line of your boot and add the `nomodeset` kernel parameter the the command line. This will enable you to access your Linux system in safe graphics.
+
+3. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader).
+
+4. Setup this tool to allow changing the boot gpu from grub:
+
+    ```sh
+    git clone https://github.com/Redecorating/efi-gpu-power-prefs
+    cd efi-gpu-power-prefs
+    make #you will need efi.h to compile this, which is installed in the gnu-efi package in most distros
+    make install
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+    ```
+
+5. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
+
+6. You can now remove the `nomodeset` parameter from your command line.
+
+### If you are unable to edit your kernel command line :-
+
+1. Boot into macOS and mount your Linux EFI partition over there. In most cases it should be `disk0s1` and can be mounted by running `sudo diskutil mount disk0s1` in the terminal. If you are using a separate EFI partition, the you can run `diskutil list` and find your partition in the output, and mount it accordingly.
+
+2. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader) using macOS in your Linux EFI partition.
+
+3. Restart into macOS Recovery by immediately pressing and holding Command+R on startup. Open the terminal there and run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`.
+
+4. Restart into Linux. You should now be able to access your Linux installation.
+
+5. If your distro doesn't use GRUB, install it since further steps need GRUB.
+
+6. Follow step 4 and 5 of the [If you are able to edit your kernel command line](https://wiki.t2linux.org/guides/hybrid-graphics/#if-you-are-able-to-edit-your-kernel-command-line) section.
+
 # Use on Windows
 
 In one case (has anyone else tried this?), the iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers. There might be special iGPU drivers in the Bootcamp support software for single GPU MacBooks, which might help resolve this.
