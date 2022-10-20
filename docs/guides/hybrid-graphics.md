@@ -49,7 +49,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
-3.  Set the `gpu-power-prefs` NVRAM variable to make the iGPU the Boot GPU.
+3.  Set the `gpu-power-prefs` NVRAM variable to make the iGPU the Boot GPU and install the apple-gmux driver.
 
     1.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
 
@@ -65,7 +65,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         sudo gpu-switch -i
         ```
 
-    4.  Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2)
+    4.  Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2).
 
     5.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
@@ -95,7 +95,7 @@ The AMD GPU on MacBookPro16,4 is not compatible with Linux. As a workaround :-
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ```
 
-5. Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2)
+5. Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2).
 
 6. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
 
