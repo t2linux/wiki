@@ -79,7 +79,7 @@ The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround 
 
 ### If you are able to edit your kernel command line :-
 
-1. This workaround requires GRUB as the bootloader. So make sure you install GRUB.
+1. This workaround recommends GRUB as the bootloader. If you want to use some other bootloader, you need to figure out how to get an equivalent of step 4 and 6 working with your bootloader.
 
 2. Edit the command line of your boot and add the `nomodeset` kernel parameter the the command line. This will enable you to access your Linux system in safe graphics.
 
@@ -111,7 +111,7 @@ The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround 
 
 4. Restart into Linux. You should now be able to access your Linux installation.
 
-5. If your distro doesn't use GRUB, install it since further steps need GRUB.
+5. Its recommended to use GRUB as a bootloader. If you wish to use some other bootloader, you need to figure out how to get the steps requiring GRUB given further working with your bootloader.
 
 6. Follow steps 4, 5 and 6 of the [If you are able to edit your kernel command line](https://wiki.t2linux.org/guides/hybrid-graphics/#if-you-are-able-to-edit-your-kernel-command-line) section.
 
