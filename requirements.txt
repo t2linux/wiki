@@ -1,6 +1,6 @@
 # This file contains the direct dependencies required for building the docs
 # To install them all run 'pip install -r requirements.txt' in the same directory
 
-mkdocs == 1.4.0
+mkdocs == 1.4.1
 mkdocs-material == 8.5.7
 mkdocs-redirects == 1.2.0
