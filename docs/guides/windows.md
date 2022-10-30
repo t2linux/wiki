@@ -61,7 +61,7 @@ It may be possible to skip steps 5-8 by doing the following command in macOS: `s
 
 Create partitions with Disk Utility:
 
-- Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure there is no space in the label else you may face issues with the [Startup Manager guide](https://wiki.t2linux.org/guides/startup-manager/). Eg:- Do not use `EFI 2`. Also do not use `EFI` as the label.
+- Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure you do not use `EFI` as the label.
 - Create your main partition(s) for Linux, make them macOS Extended/HFS+ to stop Bootcamp Installer from thinking they are Windows. These will be erased and reformatted by your installer.
 
 ### In your distro's installer
@@ -71,7 +71,7 @@ If you are using an interactive installer:
 1. Set the `EFI2` partition to be mounted at `/boot/efi` and set it as "ESP"/"Boot"/"EFI System Partition". Don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set by default to be used as the "EFI System Partition".
 
     !!! info "Ubuntu"
-        On Ubuntu you will need to right click on `nvme0n1p1`, click edit/change, and set it as "Do not use this partition". Then you can set `/boot/efi` as the mount point for the `EFI2` partition.
+        On Ubuntu since the installer doesn't support seperate EFI partitions, install normally to the Windows EFI partition and follow [this section](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed) to seperate out the partition.
 
 2. Your main partition that were formatted as macOS Extended/HFS+ can be mounted at `/`.
 
@@ -82,8 +82,6 @@ If you are using an interactive installer:
     3. `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 
 4. There will now be an `EFI Boot` option in the macOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
-
-5. Once you've booted into linux, ensure that `/dev/nvme0n1p1` is not mounted. (i.e. by checking the output of `lsblk` or using a disk utility program.) If it is, then edit `/etc/fstab` and remove it. Restart and it should no longer be mounted. If you want a more descriptive guide regarding this, go [here](https://github.com/AdityaGarg8/efi-mount-bug-fix).
 
 If you are doing it manually:
 
@@ -98,3 +96,11 @@ If you are doing it manually:
 1. If there are partitions labeled as `Microsoft Basic Data`, Bootcamp Assistant will think you have Windows installed. Use `sudo cfdisk /dev/nvme0n1` to change your Linux partitions to `Linux Filesystem` or whatever is appropriate.
 2. If your second EFI partition is labeled as `EFI System`, you'll need to use `cfdisk` again to make it not that, as the Windows installer fails if there are two.
 3. Bootcamp should install Windows normally. If you put your Linux bootloader on `/dev/nvme0n1p1`, Windows will replace it, and that's why a second EFI partition is ideal.
+
+## Seperate the EFI partition after Linux is installed
+
+In case you have installed Linux to the same EFI partition as used by Windows, and now want to seperate it out, then :-
+
+1. Using any disk utility software, make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure you do not use `EFI` as the label.
+2. Download [this script](https://wiki.t2linux.org/tools/efi.sh).
+3. Run this script using `bash /path/to/script <Name of seperate partition>` in Linux. Eg :- If your seperate partition has the name `EFI2`, and script is in your Downloads folder, run `bash $HOME/Downloads/efi.sh EFI2`.
