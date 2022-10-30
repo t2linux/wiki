@@ -5,11 +5,6 @@ Welcome to the t2linux wiki!
 This wiki contains knowledge about running Linux on Macs with the T2 chip.
 A list of those devices can be found [on Apple's website](https://support.apple.com/en-us/HT208862).
 
-# Warnings
-
-- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
-- **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
-
 # Getting started
 
 To get started with an installation, refer to the [roadmap](https://wiki.t2linux.org/roadmap).
