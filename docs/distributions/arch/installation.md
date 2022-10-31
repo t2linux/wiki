@@ -40,7 +40,8 @@ You will need:
     -    Using pacstrap (more vanilla Arch experience)
 
          1. Run `pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-edge-t2`.
-	 2. Add repositories to `/mnt/etc/pacman.conf`, by adding this: 
+
+         2. Add repositories to `/mnt/etc/pacman.conf`, by adding this:
 
          ```ini
          [Redecorating-t2]
