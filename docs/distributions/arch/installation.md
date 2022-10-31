@@ -38,11 +38,11 @@ You will need:
 7. Install the required packages into your new system.
 
     -    Using pacstrap (more vanilla Arch experience)
- 
+
          1. Run `pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-edge-t2`.
 
     -    Using t2strap (easier)
-        
+
          1. Run `t2strap /mnt base linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, append `-k xanmod` to `t2strap` command.
 
 8. Continue following the Arch Wiki's guide until you get to installing a bootloader.
