@@ -2,7 +2,7 @@
 
 `linux-mbp` is abandoned. Switch to `linux-t2` or `linux-xanmod-edge-t2` now if you're still using `linux-mbp`.
 
-Add new repositories by adding this: 
+Add new repositories to `/etc/pacman.conf`, by adding this: 
 ```ini
 [Redecorating-t2]
 Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
