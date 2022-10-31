@@ -34,8 +34,15 @@ echo "Changing the EFI partition."
 # Mount the new partition to /tmp/newefi
 
 mkdir /tmp/newefi
-MOUNTPOINT=/$(lsblk -o label,mountpoints | grep -w "$1" | cut -d "/" -f 2-)
+MOUNTPOINT=$(lsblk -o label,mountpoints | grep -w "$1" | cut -d "/" -f 2-)
+OLDUUID=$(lsblk -o mountpoints,uuid | grep -w "/boot/efi" | xargs | cut -d " " -f 2)
 NEWUUID=$(lsblk -o uuid,label | grep -w "$1" | xargs | cut -d " " -f 1)
+FSTABUUID=$(cat /etc/fstab | grep "${OLDUUID}" | cut -d "=" -f 2 | cut -c 1-9)
+if [[ ${OLDUUID} != ${FSTABUUID} ]]
+then
+	echo "Old EFI partition not found in /etc/fstab. Abort!"
+	exit 1
+fi
 umount "${MOUNTPOINT}" 2>/dev/null || true
 mount UUID="${NEWUUID}" /tmp/newefi
 
@@ -69,7 +76,6 @@ fi
 # Update fstab
 
 echo "Updating /etc/fstab."
-OLDUUID=$(lsblk -o mountpoints,uuid | grep -w "/boot/efi" | xargs | cut -d " " -f 2)
 sed -i "s/${OLDUUID}/${NEWUUID}/g" /etc/fstab
 
 # Mount new EFI
