@@ -40,6 +40,16 @@ You will need:
     -    Using pacstrap (more vanilla Arch experience)
 
          1. Run `pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-edge-t2`.
+	 2. Add repositories to `/mnt/etc/pacman.conf`, by adding this: 
+
+         ```ini
+         [Redecorating-t2]
+         Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
+
+         [arch-mact2]
+         Server = https://mirror.funami.tech/arch-mact2/os/x86_64
+         SigLevel = Never
+         ```
 
     -    Using t2strap (easier)
 
@@ -49,18 +59,7 @@ You will need:
 
 9. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
 
-10. Add repositories to `/etc/pacman.conf`, by adding this: (You can skip this if you used `t2strap`)
-
-    ```ini
-    [Redecorating-t2]
-    Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
-    
-    [arch-mact2]
-    Server = https://mirror.funami.tech/arch-mact2/os/x86_64
-    SigLevel = Never
-    ```
-
-11. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
+10. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
     -   Installing Grub:
 
@@ -75,4 +74,4 @@ You will need:
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
         3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-12. Exit the `chroot` and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+11. Exit the `chroot` and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
