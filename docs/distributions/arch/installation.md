@@ -49,7 +49,7 @@ You will need:
 
 9. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
 
-10. Add Redecorating's repository to `/etc/pacman.conf`, by adding this: (You can skip this if you used `t2strap`)
+10. Add repositories to `/etc/pacman.conf`, by adding this: (You can skip this if you used `t2strap`)
 
     ```ini
     [Redecorating-t2]
