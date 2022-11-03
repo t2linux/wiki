@@ -12,7 +12,7 @@ os=$(uname -s)
 case "$os" in
 	(Darwin)
 		echo "Detected macOS"
-		ver=$(sw_vers -productversion | cut -d "." -f 1)
+		ver=$(sw_vers -productVersion | cut -d "." -f 1)
 		if [[ ${ver} < 12 ]]
 		then
 			echo -e "\nThis script is compatible only with macOS Monterey or later. Please upgrade your macOS."
