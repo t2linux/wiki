@@ -18,7 +18,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     2. The AMD gpu causes system crashes with varied causes including: Shutting down(sudden fan noise and getting T2 chip reset), changing display resolution, having gpu busy when screen is off.
 
-    Posible workarounds are:
+       Posible workarounds are:
 
         1. Set iGPU as main gpu.
 
