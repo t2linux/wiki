@@ -1,4 +1,8 @@
-# Migrating from Pykee's old kernel to new LTS kernel
+# Deprecation Notice
+
+Manjaro T2 support will be deprecated soon. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
+
+# Migrating from Pykee's old kernel to new kernel
 
 Run this in your terminal:
 
@@ -8,22 +12,16 @@ cat << EOF | sudo tee -a /etc/pacman.conf
 SigLevel = Never
 Server = https://mirror.funami.tech/manjaro-mact2/os/x86_64
 EOF
-sudo pacman --ignore zfs-utils -Syu linux515-t2 linux515-t2-headers apple-bcm-wifi-firmware
+sudo pacman --ignore zfs-utils -Syu linux519-t2 linux519-t2-headers apple-bcm-wifi-firmware
 ```
 
 After running this, remove old repository and reboot.
 
-# Migrating from mainline 5.16 kernel to LTS kernel (recommended)
+# Upgrading to newer kernel (recommended)
 
-Users using 5.16 kernel are advised to migrate to LTS kernel since it now integrates necessary modules into kernel. Even if you want to update to 5.17 it's still advised to first jump to LTS kernel and wait here.
+Users using older kernel are advised to migrate to newest kernel since newer kernel has more support.
 
-Run this in your terminal:
-
-```sh
-# Say yes to removing conflicting packages. apple-ibridge-dkms-git and apple-bce-dkms-git is now integrated to kernel thus those DKMS modules are not necessary.
-sudo pacman -Syu linux515-t2 linux515-t2-headers
-sudo pacman -R linux516-t2 linux516-t2-headers
-```
+Join our Discord or enable notifications for [this repository](https://github.com/NoaHimesaka1873/manjaro-kernel-t2) to get pings for new kernel.
 
 # Installing alongside Windows
 

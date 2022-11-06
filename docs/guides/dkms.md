@@ -2,7 +2,9 @@
 
 This page explains how to install the kernel modules for the Keyboard, Audio, Touchbar and the Ambient Light sensor with DKMS. You will need a patched kernel.
 
-# Do you need to do this?
+## Do you need to do this?
+
+Since many T2 distro maintainers package these modules with the kernel itself, you probabaly wouldn't need to install the modules manually. Although it can be used if you are using a kernel other than a T2 kernel provided by the maintainers here.
 
 Are your keyboard and audio working? If no, then you'll need the BCE module.  
 If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
@@ -20,36 +22,23 @@ sudo rm -r /var/lib/dkms/apple-bce
 sudo rm -r /var/lib/dkms/apple-ibridge
 ```
 
-# Installing modules
+## Installing modules
 
 1. Installing the BCE (Buffer Copy Engine) module for Keyboard and Audio
 
-    - If you are on arch, you can use Aunali1's [apple-bce-dkms-git package](https://github.com/aunali1/apple-bce-arch/releases)
-    - Otherwise, run `sudo git clone https://github.com/t2linux/apple-bce-drv /usr/src/apple-bce-0.2`
+    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-bce`
 
-        -   Create a `dkms.conf` file in `/usr/src/apple-bce-0.2` and put in the following:
-
-            ```conf
-            PACKAGE_NAME="apple-bce"
-            PACKAGE_VERSION="0.2"
-            MAKE[0]="make KVERSION=$kernelver"
-            CLEAN="make clean"
-            BUILT_MODULE_NAME[0]="apple-bce"
-            DEST_MODULE_LOCATION[0]="/kernel/drivers/misc"
-            AUTOINSTALL="yes"
-            ```
+    - For other distros run `sudo git clone https://github.com/kekrby/apple-bce /usr/src/apple-bce-0.2`
 
     - Now run `sudo dkms install -m apple-bce -v 0.2`. If on a live ISO, use `sudo dkms install -m apple-bce -v 0.2 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
 2. Installing the Touchbar and Ambient Light sensor modules
 
-    - If you are on a MacBook Pro (16 inch, 2019) or MacBook Pro (13 inch, 2020), and want keyboard backlight to work, run :
+    - If you are on an Arch based distro, you can install it from [Redecorating's pacman repo](https://github.com/Redecorating/archlinux-t2-packages) by running `sudo pacman -S apple-ibridge-dkms-git`
 
-      `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
+    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-ibridge`
 
-      Else run :
-
-      `sudo git clone https://github.com/t2linux/apple-ib-drv /usr/src/apple-ibridge-0.1`
+    - For other distros run `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
 
     - Now run `sudo dkms install -m apple-ibridge -v 0.1`. If on a live ISO, use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
@@ -66,7 +55,7 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
 The Touchbar and keyboard should be working. For audio, you'll also need some config files, refer to the [Audio Config guide](https://wiki.t2linux.org/guides/audio-config).
 
-# Make modules load on boot
+## Make modules load on boot
 
 !!! info "Ubuntu"
     Ubuntu users may skip this step as it's already set up in their distro. If the modules are still not loading on boot, then you may follow this section.
@@ -75,12 +64,13 @@ The Touchbar and keyboard should be working. For audio, you'll also need some co
 echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 ```
 
-# Make modules load on early boot
+## Make modules load on early boot
 
 Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
 It also is useful when boot doesn't work, and the keyboard is required for debugging.
 To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
-If your distro uses `initramfs-tools` (all debian-based distros), then `/etc/initramfs-tools/modules` stores a list of extra modules to be included and loaded at early boot time:
+If your distro uses `initramfs-tools` (all debian-based distros), then `/etc/initramfs-tools/modules` stores a list of extra modules to be included and loaded at early boot time.
+Run `sudo su` to open a shell as root and run the following over there:
 
 ```sh
 cat <<EOF >> /etc/initramfs-tools/modules
@@ -89,6 +79,7 @@ snd
 snd_pcm
 apple-bce
 EOF
+update-initramfs -u
 ```
 
 Other distros use a different initramfs module loading mechanism.
@@ -101,7 +92,7 @@ MODULES="apple-bce"
 And then run `sudo mkinitcpio -P`.
 See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
 
-# Setting up the Touch Bar
+## Setting up the Touch Bar
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
@@ -130,7 +121,7 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
-# Fixing Suspend
+## Fixing Suspend
 
 Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 

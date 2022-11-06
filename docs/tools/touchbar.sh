@@ -39,4 +39,4 @@ EOF
 sudo chmod a+x /usr/local/bin/touchbar
 sudo chown root:root /usr/local/bin/touchbar
 
-echo "Run sudo touchbar to change the default Touch Bar mode"
+echo "Run \"sudo touchbar\" to change the default Touch Bar mode"
