@@ -24,7 +24,6 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         ```plain
         KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
         ```
-
     You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile).
 
 ## Enabling the iGPU
