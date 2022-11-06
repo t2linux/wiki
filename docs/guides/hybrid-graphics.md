@@ -10,17 +10,21 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" problem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
 3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
 4. Some users with MacBookPro16,1 and AMD gpu have reported issues:
+
     1. The AMD gpu uses too much power with excessive high temperatures under normal conditions.
     2. The AMD gpu causes system crashes with varied causes including: Shutting down(sudden fan noise and getting T2 chip reset), changing display resolution, having gpu busy when screen is off.
+
     Posible workarounds are:
         1. Set iGPU as main gpu.
         2. Set AMD gpu Dynamic Power Management from auto to low.
         3. To play games, set the DPM to high.
     You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`
+
     To apply the low level permanently, create </etc/udev/rules.d/30-amdgpu-pm.rules> with the following contents:
         ```plain
         KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
         ```
+
     You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile).
 
 ## Enabling the iGPU
