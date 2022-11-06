@@ -9,6 +9,17 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 1. Resume after suspend is broken, as the GMUX (graphics multiplexer) doesn't connect the iGPU to the display after resuming. For this to be fixed, a Linux driver for `acpi:APP000B:GPUC:` needs to be written (macOS uses AppleMuxControl2.kext). The extra battery life may make this a worthwhile trade-off (about 3 hours to almost 6 hours on a MacBookPro16,1)
 2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" problem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
 3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
+4. Some users with  MacBookPro16.1 and amdgpu 5500m models have reported problems. Unable to shutdown normally(sudden fan noise), getting T2 chip reset and excessive high temperatures under normal conditions. Posible workarounds are:
+    1. Set amd dynamic power management from auto to low. `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`
+
+        To apply the low level permanently:
+   
+        ```plain
+            create /etc/udev/rules.d/30-amdgpu-pm.rules
+            KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="high"
+        ```
+    
+   2. To control power_dpm_force_performance_level interactively we can use `https://github.com/emerge-e-world/radeon-profile`
 
 ## Enabling the iGPU
 
