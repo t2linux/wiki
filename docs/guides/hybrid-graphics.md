@@ -12,7 +12,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 4. Some users with MacBookPro16,1 and AMD gpu have reported issues:
     1. The AMD gpu uses too much power with excessive high temperatures under normal conditions.
     2. The AMD gpu causes system crashes with varied causes including: Shutting down(sudden fan noise and getting T2 chip reset), changing display resolution, having gpu busy when screen is off.
-    
+
     Posible workarounds are:
         1. Set iGPU as main gpu.
         2. Set AMD gpu Dynamic Power Management from auto to low.
@@ -25,7 +25,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         ```plain
            KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
         ```
-    
+
     You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile).
     
 ## Enabling the iGPU
