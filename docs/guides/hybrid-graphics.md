@@ -16,7 +16,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
         1. Set iGPU as main gpu.
         2. Set AMD gpu Dynamic Power Management from auto to low.
         3. To play games, set the DPM to high.
-    You test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`
+    You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`
     To apply the low level permanently, create </etc/udev/rules.d/30-amdgpu-pm.rules> with the following contents:
         ```plain
         KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
