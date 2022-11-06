@@ -16,7 +16,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     Posible workarounds are:
         1. Set iGPU as main gpu.
         2. Set AMD gpu Dynamic Power Management from auto to low.
-        3. To play games to you can set the DPM to high.
+        3. To play games, set the DPM to high.
     
     You test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`
 
