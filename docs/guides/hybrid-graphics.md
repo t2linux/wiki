@@ -19,7 +19,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
             KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
         ```
     
-   2. To control power_dpm_force_performance_level interactively we can use `https://github.com/emerge-e-world/radeon-profile`
+    2. To control power_dpm_force_performance_level interactively we can use `https://github.com/emerge-e-world/radeon-profile`
 
 ## Enabling the iGPU
 
