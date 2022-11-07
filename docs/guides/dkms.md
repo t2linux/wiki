@@ -124,6 +124,7 @@ If you still face an issue, mention it [here](https://github.com/t2linux/wiki/is
 ## Fixing Suspend
 
 Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
+
 If you are using Gentoo with openrc, instead copy the script to `/lib64/elogind/system-sleep/rmmod_tb.sh`
 
 Now run :-
