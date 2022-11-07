@@ -125,7 +125,7 @@ If you still face an issue, mention it [here](https://github.com/t2linux/wiki/is
 
 Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
 
-If you are using Gentoo with openrc, instead copy the script to `/lib64/elogind/system-sleep/rmmod_tb.sh`
+If you are using Gentoo with OpenRC, instead copy the script to `/lib64/elogind/system-sleep/rmmod_tb.sh`
 
 Now run :-
 
@@ -134,7 +134,7 @@ sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
 sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 ```
 
-Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using openrc on Gentoo as mentioned previously.
+Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using OpenRC on Gentoo as mentioned previously.
 
 It unloads the Touchbar modules as they can cause issues for suspend.
 
