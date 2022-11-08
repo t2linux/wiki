@@ -46,3 +46,7 @@
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/). If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Ubuntu! :)
+
+# Receiving kernel updates
+
+In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the kernel update script as described [here](https://github.com/t2linux/T2-Ubuntu-Kernel#using-the-kernel-upgrade-script).
