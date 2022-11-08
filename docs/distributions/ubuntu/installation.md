@@ -3,9 +3,7 @@
 !!! Warning "Blank screen on boot"
     **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd Boot Manager](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
 
-[Download here (20.04)](https://github.com/marcosfad/mbp-ubuntu/releases/latest)
-
-[Download here (22.04)](https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest)
+[Download here](https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest)
 
 # Hardware Requirements
 
