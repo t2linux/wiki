@@ -2,5 +2,5 @@
 # To install them all run 'pip install -r requirements.txt' in the same directory
 
 mkdocs == 1.4.2
-mkdocs-material == 8.5.7
+mkdocs-material == 8.5.9
 mkdocs-redirects == 1.2.0
