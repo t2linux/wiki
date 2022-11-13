@@ -26,7 +26,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
         3. To play games, set the DPM to high.
 
-    You can test it quickly with: `echo "low" | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
+    You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
     To apply the low level permanently, create `etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
 
