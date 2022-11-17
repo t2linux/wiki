@@ -138,8 +138,6 @@ Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using OpenRC on 
 
 It unloads the Touchbar modules as they can cause issues for suspend.
 
-Your keyboard backlight may remain switched off on resuming and backlight controls may stop working. A restart fixes the backlight controls. You may also run `echo 60 > /sys/class/leds/apple::kbd_backlight/brightness` to turn on the backlight to the maximum level if you do not want to boot. Replace 60 with a lower number for lower brightness.
-
 # Kernel panic when loading apple-ib-als
 
 This was fixed in [this commit](https://github.com/t2linux/apple-ib-drv/commit/fc9aefa5a564e6f2f2bb0326bffb0cef0446dc05), please follow the [dkms guide](https://wiki.t2linux.org/guides/dkms/) to update.
