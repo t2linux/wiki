@@ -16,15 +16,21 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     1. The AMD gpu uses too much power with excessive high temperatures under normal conditions.
 
-    2. The AMD gpu causes system crashes with varied causes including: Shutting down(sudden fan noise and getting T2 chip reset), changing display resolution, having gpu busy when screen is off.
+    2. The AMD gpu can causes system crashes with varied causes including:
 
-        Posible workarounds are:
+        1. Sudden high speed fan noise then instant system shut down, getting the T2 chip reset.
+
+        2. Changing display resolution.
+
+        3. Having gpu busy when the screen is off.
+
+    Posible workarounds:
 
         1. Set iGPU as main gpu.
 
         2. Set AMD gpu Dynamic Power Management from auto to low.
 
-        3. To play games, set the DPM to high.
+        3. For GPU intensive tasks like play Games, Machine Learning or Rendering, you can try setting the DPM to high.
 
     You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
