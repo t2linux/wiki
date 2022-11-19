@@ -22,7 +22,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
-    To apply the low level permanently, create `etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
+    To apply the low level permanently, create `/etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
 
     ```plain
     KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
