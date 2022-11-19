@@ -12,25 +12,13 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
 
-4. Some users with MacBookPro16,1 and AMD gpu have reported issues:
+4. Some users with MacBookPro16,1 and AMD gpu have reported issues like AMD gpu uses too much power with excessive high temperatures under normal conditions or sudden high speed fan noise then instant system shut down, getting the T2 chip reset.
 
-    1. The AMD gpu uses too much power with excessive high temperatures under normal conditions.
-
-    2. The AMD gpu can causes system crashes with varied causes including:
-
-        1. Sudden high speed fan noise then instant system shut down, getting the T2 chip reset.
-
-        2. Changing display resolution.
-
-        3. Having gpu busy when the screen is off.
-
-       Posible workarounds:
+    Posible workarounds:
 
        1. Set iGPU as main gpu.
 
        2. Set AMD gpu Dynamic Power Management from auto to low.
-
-       3. For GPU intensive tasks like play Games, Machine Learning or Rendering, you can try setting the DPM to high.
 
     You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
@@ -47,7 +35,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     result: DRIVERS=="amdgpu"
     ```
 
-    You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile).
+    You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile). For GPU intensive tasks like play Games, Machine Learning or Rendering, you can try setting the DPM to high.
 
 ## Enabling the iGPU
 
