@@ -18,7 +18,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     1. Set iGPU as main gpu.
 
-    2. Set AMD gpu Dynamic Power Management from auto to low.
+    2. Set AMD gpu Dynamic Power Management from auto to low or high. Low can be safer option to void thermal issues or safe battery.
 
     You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
