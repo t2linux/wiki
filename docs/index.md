@@ -24,13 +24,13 @@ Visit the [Contribute page](https://wiki.t2linux.org/contribute/) for more detai
 Different distributions are maintained by different people in their own repositories.
 If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as it considers T2 support.
 
-- Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
+- Arch [https://github.com/t2linux/archiso-t2](https://github.com/t2linux/archiso-t2)
 - EndeavourOS [https://github.com/t2linux/EndeavourOS-ISO-t2](https://github.com/t2linux/EndeavourOS-ISO-t2)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/NoaHimesaka1873/manjaroiso-t2](https://github.com/NoaHimesaka1873/manjaroiso-t2)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
-- Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
+- Ubuntu [https://github.com/AdityaGarg8/T2-Ubuntu](https://github.com/AdityaGarg8/T2-Ubuntu)
 
 ## Kernel Modules
 
