@@ -124,11 +124,3 @@ sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using OpenRC on Gentoo as mentioned previously.
 
 It unloads the Touchbar modules as they can cause issues for suspend.
-
-# Kernel panic when loading apple-ib-als
-
-This was fixed in [this commit](https://github.com/t2linux/apple-ib-drv/commit/fc9aefa5a564e6f2f2bb0326bffb0cef0446dc05), please follow the [dkms guide](https://wiki.t2linux.org/guides/dkms/) to update.
-
-# Use ambient light sensor to automatically change brightness (if not working already)
-
-You can use [this script](https://gist.github.com/jbredall/52179d1fc2c91917d2fde118d2cb04aa). Make sure you have the `apple-ib-als` module loaded.
