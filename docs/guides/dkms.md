@@ -6,8 +6,7 @@ This page explains how to install the kernel modules for the Keyboard, Audio, To
 
 Since many T2 distro maintainers package these modules with the kernel itself, you probabaly wouldn't need to install the modules manually. Although it can be used if you are using a kernel other than a T2 kernel provided by the maintainers here.
 
-Are your keyboard and audio working? If no, then you'll need the BCE module.  
-If you have a Touchbar, is it working? If no, then you'll need the apple-ibridge module.
+Are your keyboard and audio working? If no, then you'll need the BCE module.
 
 To get started with this guide, first install the `dkms` package.
 
@@ -32,25 +31,13 @@ sudo rm -r /var/lib/dkms/apple-ibridge
 
     - Now run `sudo dkms install -m apple-bce -v 0.2`. If on a live ISO, use `sudo dkms install -m apple-bce -v 0.2 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
 
-2. Installing the Touchbar and Ambient Light sensor modules
-
-    - If you are on an Arch based distro, you can install it from [Redecorating's pacman repo](https://github.com/Redecorating/archlinux-t2-packages) by running `sudo pacman -S apple-ibridge-dkms-git`
-
-    - If you are on a Debian or Ubuntu based distro, you can install it from [AdityaGarg8's APT repo](https://github.com/AdityaGarg8/t2-ubuntu-repo) by running `sudo apt install apple-ibridge`
-
-    - For other distros run `sudo git clone https://github.com/Redecorating/apple-ib-drv /usr/src/apple-ibridge-0.1`
-
-    - Now run `sudo dkms install -m apple-ibridge -v 0.1`. If on a live ISO, use `sudo dkms install -m apple-ibridge -v 0.1 -k x.x.x-mbp` instead and change `x.x.x-mbp` to the kernel that you have installed, as by default `dkms` will try to build the module for the kernel that the live iso is using, which will most likely be older.
-
-3. Load the modules into the kernel
+2. Load the modules into the kernel
 
     !!! note
         This is only necessary if you wish to use the modules right away. If you are installing modules from a live iso the commands will fail as the modules have only been installed for the kernel you specified.
 
     ```sh
     sudo modprobe apple_bce
-    sudo modprobe apple_ib_tb
-    sudo modprobe apple_ib_als
     ```
 
 The Touchbar and keyboard should be working. For audio, you'll also need some config files, refer to the [Audio Config guide](https://wiki.t2linux.org/guides/audio-config).
