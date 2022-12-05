@@ -50,27 +50,9 @@ Importing the module is the only thing you have to do to get your configuration 
 
 If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
-## Preparing the Installation
-
-Look at the [the wifi and bluetooth guide](https://wiki.t2linux.org/guides/wifi/) and follow any steps that are required to run on macOS.
-
-Make sure to keep any files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux cannot read APFS, the file system macOS uses by default.
-
-You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40GB should be fine for a base installation.
-
-To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
-
-If your distribution needs a connection to the Internet while installing, make sure to prepare an Ethernet cable, wifi adapter or
-phone for tethering. If none of these options are available but your model has wifi support, you can also follow the steps to install firmware in your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
-the live environment.
-
-If you want to triple boot with Windows, read the instructions in the [triple boot guide](https://wiki.t2linux.org/guides/windows/) before proceeding.
-
 ## Installing
 
-Now follow the installation guide of your specific distribution.
-
-This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.
+Follow the [Pre-installation steps](https://wiki.t2linux.org/guides/preinstall) to prepare your Mac to install Linux and head over to the appropriate guide of the distro of your choice as mentioned in that guide.
 
 ## Configuring the Installation
 
