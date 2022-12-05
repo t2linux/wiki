@@ -34,7 +34,7 @@ If there is an ISO with T2 support for your distro, you can download it here:
 | NixOS              | https://github.com/kekrby/nixos-t2-iso/releases/latest TODO: Instructions for combining iso parts |
 | Ubuntu             | https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest |
 
-For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection.
+For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader, try the `efi=noruntime` kernel parameter.
 
 ### Copying the ISO to the USB
 
@@ -49,7 +49,7 @@ While the installation image is being written to the USB, you can copy Wi-Fi fir
 
 Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we copy these files from macOS to the EFI partition where Linux can access these files and then install them.
 
-Follow the instructions in this section for on macOS [here](https://wiki.t2linux.org/guides/wifi/#on-macos). Don't boot into Linux and follow the subsequent instructions yet.
+Follow the instructions in this section for on macOS [here](https://wiki.t2linux.org/guides/wifi/#on-macos). The sections of that page for on Linux can be followed later, once you've successfully installed Linux.
 
 ## Disable Secure Boot
 
