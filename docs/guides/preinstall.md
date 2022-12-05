@@ -49,7 +49,7 @@ While the installation image is being written to the USB, you can copy Wi-Fi fir
 
 Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we copy these files from macOS to the EFI partition where Linux can access these files and then install them.
 
-Follow the instructions in this section for on macOS [here](https://wiki.t2linux.org/guides/wifi/#on-macos). The sections of that page to be followed on Linux can be followed later, once you've successfully installed Linux.
+Follow the instructions in this section to be followed on macOS [here](https://wiki.t2linux.org/guides/wifi/#on-macos). The sections of that page to be followed on Linux can be followed later, once you've successfully installed Linux.
 
 ## Disable Secure Boot
 
