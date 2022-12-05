@@ -34,7 +34,7 @@ If there is an ISO with T2 support for your distro, you can download it here:
 | NixOS              | https://github.com/kekrby/nixos-t2-iso/releases/latest TODO: Instructions for combining iso parts |
 | Ubuntu             | https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest |
 
-For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader, try the `efi=noruntime` kernel parameter.
+For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader (Eg :- GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
 
 ### Copying the ISO to the USB
 
