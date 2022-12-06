@@ -104,7 +104,7 @@ To fix this :-
 
 ## Fixing unstable WPA2 using iwd
 
-Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+Using iwd is technically not needed for using wifi. But if you are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
 
 Instructions in this section might be different for the distribution that you are trying to install.
 
