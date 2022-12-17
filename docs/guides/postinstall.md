@@ -59,15 +59,15 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     2. Run the following over there :-
 
-     ```sh
-     cat <<EOF >> /etc/initramfs-tools/modules
-     # Required modules for getting the built-in apple keyboard to work:
-     snd
-     snd_pcm
-     apple-bce
-     EOF
-     update-initramfs -u
-     ```
+         ```sh
+         cat <<EOF >> /etc/initramfs-tools/modules
+         # Required modules for getting the built-in apple keyboard to work:
+         snd
+         snd_pcm
+         apple-bce
+         EOF
+         update-initramfs -u
+         ```
 
 - On systems with mkinitcpio (Commonly used on Arch) :-
 
@@ -75,9 +75,9 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     2. Ensure that the file has the following :-
 
-     ```sh
-     MODULES="apple-bce"
-     ```
+         ```sh
+         MODULES="apple-bce"
+         ```
 
     3. Run `sudo mkinitcpio -P`.
 
