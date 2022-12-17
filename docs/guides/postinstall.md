@@ -51,6 +51,7 @@ echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
 It also is useful when boot doesn't work, and the keyboard is required for debugging.
 To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
+You can get the list of dependent modules by running `modinfo -F depends apple-bce`
 The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows :-
 
 - On systems with `initramfs-tools` (all debian-based distros) :-
