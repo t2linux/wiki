@@ -71,7 +71,6 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
 - On systems with mkinitcpio (Commonly used on Arch) :-
 
-
     1. Edit the `/etc/mkinitcpio.conf` file.
 
     2. Ensure that the file has the following :-
@@ -82,9 +81,9 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     3. Run `sudo mkinitcpio -P`.
 
-- On systems with other initramfs/initrd generation systems
+- On systems with other initramfs/initrd generation systems :-
 
-    In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early
+    In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early.
 
 ## Setting up the Touch Bar
 
