@@ -51,28 +51,40 @@ echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
 It also is useful when boot doesn't work, and the keyboard is required for debugging.
 To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
-If your distro uses `initramfs-tools` (all debian-based distros), then `/etc/initramfs-tools/modules` stores a list of extra modules to be included and loaded at early boot time.
-Run `sudo su` to open a shell as root and run the following over there:
+The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows :-
 
-```sh
-cat <<EOF >> /etc/initramfs-tools/modules
-# Required modules for getting the built-in apple keyboard to work:
-snd
-snd_pcm
-apple-bce
-EOF
-update-initramfs -u
-```
+- On systems with `initramfs-tools` (all debian-based distros) :-
 
-Other distros use a different initramfs module loading mechanism.
-For example in Arch ensure that the `/etc/mkinitcpio.conf` file has:
+    1. Run `sudo su` to open a shell as root.
 
-```sh
-MODULES="apple-bce"
-```
+    2. Run the following over there :-
 
-And then run `sudo mkinitcpio -P`.
-See your distro-specific instructions for configuring `apple-bce` to added to your initramfs.
+     ```sh
+     cat <<EOF >> /etc/initramfs-tools/modules
+     # Required modules for getting the built-in apple keyboard to work:
+     snd
+     snd_pcm
+     apple-bce
+     EOF
+     update-initramfs -u
+     ```
+
+- On systems with mkinitcpio (Commonly used on Arch) :-
+
+
+    1. Edit the `/etc/mkinitcpio.conf` file.
+
+    2. Ensure that the file has the following :-
+
+     ```sh
+     MODULES="apple-bce"
+     ```
+
+    3. Run `sudo mkinitcpio -P`.
+
+- On systems with other initramfs/initrd generation systems
+
+    In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early
 
 ## Setting up the Touch Bar
 
@@ -109,7 +121,7 @@ sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
 
 Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using OpenRC on Gentoo as mentioned previously.
 
-It unloads the Touchbar modules as they can cause issues for suspend.
+It unloads the Touchbar modules and reloads them on resume as they can cause issues for suspend.
 
 # Wi-Fi and Bluetooth
 
