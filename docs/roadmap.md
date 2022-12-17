@@ -16,8 +16,9 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 
 While its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux because :-
 
-1. It acts as a backup in case something goes wrong.
-2. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
+1. To set up Wi-Fi on Linux, you will need Wi-Fi firmware, which can be obtained only from macOS.
+2. It acts as a backup in case something goes wrong.
+3. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
 
 Still if you wish to remove macOS completely, it is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
 
@@ -58,11 +59,11 @@ Follow the [Pre-installation steps](https://wiki.t2linux.org/guides/preinstall) 
 
 After successfully booting into your new installation, you will need to configure a few things:
 
--   [Install/upgrade drivers for the soundcard, internal keyboard, trackpad and touchbar](https://wiki.t2linux.org/guides/dkms/)
--   [Getting wifi to work](https://wiki.t2linux.org/guides/wifi)
+-   [Performing a basic setup](https://wiki.t2linux.org/guides/setting-up/)
+-   [Getting Wi-Fi and Bluetooth to work](https://wiki.t2linux.org/guides/wifi-bluetooth/)
 -   [Install drivers for the fan (if not working automatically or want to force a certain speed)](https://wiki.t2linux.org/guides/fan/)
 -   [Configure audio](https://wiki.t2linux.org/guides/audio-config/)
--   [Configure startup manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
+-   [Configure the Startup Manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
 -   [Install rEFInd (optional)](https://wiki.t2linux.org/guides/refind/)
 
 You might also want to look into [getting the internal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two

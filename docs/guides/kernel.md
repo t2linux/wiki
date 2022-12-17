@@ -1,6 +1,6 @@
 # Kernel
 
-This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included (so no need to follow the [DKMS guide](https://wiki.t2linux.org/guides/dkms/) for this kernel). If you have issues, make sure you are running the commands here with `bash`.
+This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included. If you have issues, make sure you are running the commands here with `bash`.
 
 If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use the same kernel as described in the Ubuntu section, Arch based systems can use the same kernel as described in the Arch section, etc.
 
