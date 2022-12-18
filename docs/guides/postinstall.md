@@ -98,7 +98,7 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
 - Try running the following and rebooting.
   
    ```sh
-   echo -e "# delay loading of the touchbar driver\ninstall apple-ib-tb /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
+   echo -e "# delay loading of the touchbar driver\ninstall apple-touchbar /bin/sleep 7; /sbin/modprobe --ignore-install apple-ib-tb" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
    ```
   
 - Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
