@@ -2,12 +2,10 @@
 
 Many thanks to Mike for building. You can download a live iso [here](https://github.com/mikeeq/mbp-fedora).
 
-If you need a more updated kernel, audio working out of the box, LUKS, or bluetooth support use the iso fomr [here](https://github.com/sharpenedblade/t2linux-fedora-iso/releases). Follow the instalation instructions below until step 5, then install like a normal Fedora iso. If you do not know how to install Fedora normally, read [this](https://docs.fedoraproject.org/en-US/fedora/latest/install-guide/). Remember to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi/).
+If you need a more updated kernel, use the iso from [here](https://github.com/sharpenedblade/t2linux-fedora-iso/releases). Follow the instalation instructions below until step 5, then install like a normal Fedora iso. If you do not know how to install Fedora normally, read [this](https://docs.fedoraproject.org/en-US/fedora/latest/install-guide/). Remember to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
 
 # Hardware Requirements
 
--   USB-C to Ethernet adapter
-    -   This isn't required, and you can use a USB WiFi Adapter instead.
 -   USB-C to USB adapter. Important: different USB-C to USB adapters work differently - if you're stuck before getting to the graphical UI during boot this may be the problem.
 
 # Install Procedure
@@ -36,15 +34,11 @@ If you need a more updated kernel, audio working out of the box, LUKS, or blueto
 
     1. (optional) a 1GB ext4 partiton mounted at /boot
 
-    2. (optional) 8GB swap partition (this can be larger depending on what you are using Fedora for)
+    2. rest of the free partition space or around 30GB to an btrfs partition mounted at /
 
-    3. rest of the free partition space or around 30GB to an ext4 partition mounted at /
-
-    4. (Optional) rest of the free partition space to an ext4 partition mounted at /home
-
-    5. Leave efi boot alone unless using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
+    3. Leave efi boot alone unless using a [separate efi partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
 
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to the FAQs for [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/) and [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/). If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Fedora! :)
-12. Once you're booted and in your desktop, set up [Wifi](https://wiki.t2linux.org/guides/wifi/) and [audio](https://wiki.t2linux.org/guides/audio-config/) (note: Fedora uses PipeWire!) to finalize.
+12. Once you're booted and in your desktop, set up [Wifi](https://wiki.t2linux.org/guides/wifi-bluetooth/) to finalize.
