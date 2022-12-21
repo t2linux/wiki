@@ -2,7 +2,7 @@
 
 Many thanks to Mike for building. You can download a live iso [here](https://github.com/mikeeq/mbp-fedora).
 
-If you need a more updated kernel, use the iso from [here](https://github.com/sharpenedblade/t2linux-fedora-iso/releases). Follow the instalation instructions below until step 5, then install like a normal Fedora iso. If you do not know how to install Fedora normally, read [this](https://docs.fedoraproject.org/en-US/fedora/latest/install-guide/). Remember to follow the [wifi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
+If you need a more updated kernel, use the iso from [here](https://github.com/sharpenedblade/t2linux-fedora-iso/releases). Follow the instalation instructions below until step 5, then install like a normal Fedora iso. If you do not know how to install Fedora normally, read [this](https://docs.fedoraproject.org/en-US/fedora/latest/install-guide/). Remember to follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
 
 # Hardware Requirements
 
@@ -41,4 +41,4 @@ If you need a more updated kernel, use the iso from [here](https://github.com/sh
 9. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to the FAQs for [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/) and [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/). If not, you should be fine.
 10. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 11. Welcome to Fedora! :)
-12. Once you're booted and in your desktop, set up [Wifi](https://wiki.t2linux.org/guides/wifi-bluetooth/) to finalize.
+12. Once you're booted and in your desktop, set up [Wi-Fi](https://wiki.t2linux.org/guides/wifi-bluetooth/) to finalize.
