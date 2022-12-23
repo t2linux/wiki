@@ -14,6 +14,7 @@ Manjaro T2 support will be deprecated soon. See [Deprecation Plan](https://wiki.
 * USB drive
 
 # Install Procedure
+
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installing Manjaro.
 2. Boot into the ISO.
 3. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
