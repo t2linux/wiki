@@ -51,6 +51,7 @@ scripts/config --module CONFIG_BT_HCIBCM4377
 scripts/config --module CONFIG_HID_APPLE_IBRIDGE
 scripts/config --module CONFIG_HID_APPLE_TOUCHBAR
 scripts/config --module CONFIG_HID_APPLE_MAGIC_BACKLIGHT
+scripts/config --module CONFIG_APPLE_BCE
 ```
 
 ### Building
