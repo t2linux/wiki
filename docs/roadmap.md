@@ -59,7 +59,7 @@ Follow the [Pre-installation steps](https://wiki.t2linux.org/guides/preinstall) 
 
 After successfully booting into your new installation, you will need to configure a few things:
 
--   [Performing a basic setup](https://wiki.t2linux.org/guides/setting-up/)
+-   [Performing a basic setup](https://wiki.t2linux.org/guides/postinstall/)
 -   [Getting Wi-Fi and Bluetooth to work](https://wiki.t2linux.org/guides/wifi-bluetooth/)
 -   [Install drivers for the fan (if not working automatically or want to force a certain speed)](https://wiki.t2linux.org/guides/fan/)
 -   [Configure audio](https://wiki.t2linux.org/guides/audio-config/)
