@@ -15,7 +15,6 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Partially Working
 
-- Keyboard Backlight: Not working on MacBookAir9,1.
 - Trackpad: Functions, but it is far from the experience on macOS (No force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
 - Suspend (It works if [this guide](https://wiki.t2linux.org/guides/dkms/#fixing-suspend) is followed. Sometimes, its slow to resume (takes 5-15 sec).

@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
+This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are non T2 Intel Macs, and the newer **Apple Silicon Macs**. Although, Wi-Fi should have been set up already in case of **Apple Silicon Macs** by Asahi's installer.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
@@ -104,7 +104,7 @@ To fix this :-
 
 ## Fixing unstable WPA2 using iwd
 
-Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+Using iwd is technically not needed for using wifi. But if you are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
 
 Instructions in this section might be different for the distribution that you are trying to install.
 

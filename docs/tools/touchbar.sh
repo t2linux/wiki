@@ -9,7 +9,7 @@ if [[ `uname -s` != "Linux" ]] ; then
 fi
 
 echo "Setting up the Touch Bar"
-echo -e "# display f* key in touchbar\noptions apple-ib-tb fnmode=1" | sudo tee /etc/modprobe.d/apple-tb.conf >/dev/null
+echo -e "# display f* key in touchbar\noptions apple-touchbar fnmode=1" | sudo tee /etc/modprobe.d/apple-tb.conf >/dev/null
 
 cat << EOF | sudo tee /usr/local/bin/touchbar >/dev/null
 #!/usr/bin/env bash
@@ -31,7 +31,7 @@ exit 1
 fi
 echo "Changing default mode ..."
 echo "# display f* key in touchbar" > /etc/modprobe.d/apple-tb.conf
-echo "options apple-ib-tb fnmode=\$tb" >> /etc/modprobe.d/apple-tb.conf
+echo "options apple-touchbar fnmode=\$tb" >> /etc/modprobe.d/apple-tb.conf
 bash -c "echo \$tb > /sys/class/input/*/device/fnmode"
 echo "Done!"
 EOF
