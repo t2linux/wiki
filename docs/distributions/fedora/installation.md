@@ -12,8 +12,8 @@ If you need a more updated kernel, use the iso from [here](https://github.com/sh
 
 (These instructions are re-used from the Manjaro installation guide)
 
-1. Follow the [pre-install](https://wiki.t2linux.org/guides/preinstall) guide.
-2. Once booted into Fedora, follow the [Wi-FI guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
+1. Follow the [Pre-Install](https://wiki.t2linux.org/guides/preinstall) guide.
+2. Once booted into Fedora, follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
 3. Use the installer like normal until you get to the partitioning step.
 4. When you get to partitioning, click on the manual partitioning option. Find the partition you made before by following the pre-install guide. **MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST**. Delete it to make free space.
 5. Click on the automatically create mount points option.
