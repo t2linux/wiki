@@ -100,10 +100,10 @@ case "$os" in
 				fi
 			fi
 		done
-		sudo modprobe -r brcmfmac
-		sudo modprobe brcmfmac
-		sudo modprobe -r hci_bcm4377
-		sudo modprobe hci_bcm4377
+		sudo modprobe -r brcmfmac || true
+		sudo modprobe brcmfmac || true
+		sudo modprobe -r hci_bcm4377 || true
+		sudo modprobe hci_bcm4377 || true
 		echo "Cleaning up"
 		sudo rm -r /tmp/apple-wifi-fw
 		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
