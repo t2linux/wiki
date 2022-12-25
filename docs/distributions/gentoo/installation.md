@@ -1,5 +1,8 @@
 # Installing Gentoo Linux on a T2 Mac
 
+!!! Warning "Unmaintained distro"
+    Gentoo is currently unmaintained. Due to lack of any maintainer, the Gentoo guides shall not be updated unless we get another maintainer. If you want to be a maintainer for Gentoo, contact the [Discord](https://discord.com/invite/68MRhQu).
+
 ## Hardware Requirements
 
 * Gentoo Minimal Installation ISO

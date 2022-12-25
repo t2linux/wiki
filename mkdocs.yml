@@ -38,6 +38,7 @@ plugins:
     -   redirects:
             redirect_maps:
                 'guides/wifi.md': 'guides/wifi-bluetooth.md'
+                'guides/dkms.md': 'guides/postinstall.md'
     -   search:
             lang: en
 
@@ -49,8 +50,9 @@ nav:
           - Contribute: contribute.md
           - Notable Contributors: notable-contributors.md
     - Guides:
+          - Pre-Install: guides/preinstall.md
+          - Basic setup: guides/postinstall.md
           - Wi-Fi and Bluetooth: guides/wifi-bluetooth.md
-          - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
           - Hybrid Graphics: guides/hybrid-graphics.md
           - Audio: guides/audio-config.md
