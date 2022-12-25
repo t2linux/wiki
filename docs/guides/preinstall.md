@@ -2,15 +2,6 @@
 
 These steps are common to most distros. Please refer to both this page and this wiki's install page for your distro.
 
-## Make disk space with Bootcamp Assistant
-
-Your macOS Disk partition may have all it's free space used by APFS Time Machine snapshots. This can lead to the macOS partition not being shrinkable, so we remove these snapshots:
-
-Open the Boot Camp Assistant application and follow it until it asks for a Windows ISO. Then quit Boot Camp Assistant. This will have cleared space to allow resizing your macOS partition, so you can make a Linux partition (it removes APFS snapshots).
-
-!!! note "If Windows has already been installed"
-    If Windows has already been installed with Boot Camp Assistant, you won't be able to do this step, just skip it for now. If in the next section, you are unable to shrink the APFS partition, you might be able to instead use `tmutil` to manually remove snapshots.
-
 ## Partition with Disk Utility
 
 In macOS Disk Utility, [create a partition](https://support.apple.com/guide/disk-utility/dskutl14027/mac). The file system format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from a Linux installer, so you must make space now. **When prompted to, do not create an APFS volume for Linux**, you want a partition.
