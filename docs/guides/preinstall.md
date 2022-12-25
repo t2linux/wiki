@@ -17,13 +17,13 @@ If there is an ISO with T2 support for your distro, you can download it here:
 
 | Linux Distribution | Install ISO with T2 support |
 | ------------------ | --------------------------- |
-| Arch Linux         | https://github.com/t2linux/archiso-t2/releases/latest |
-| EndeavourOS        | https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest |
-| Fedora Linux       | https://github.com/mikeeq/mbp-fedora |
+| Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
+| EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
+| Fedora Linux       | <https://github.com/mikeeq/mbp-fedora> |
 | Gentoo             | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
-| Manjaro            | https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest |
-| NixOS              | https://github.com/t2linux/nixos-t2-iso |
-| Ubuntu             | https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest |
+| Manjaro            | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
+| NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
+| Ubuntu             | <https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest> |
 
 For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader (Eg :- GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
 
@@ -63,7 +63,7 @@ Apple's Secure Boot implementation does not allow booting anything other than ma
 4. You may be put into a Bootloader Menu, it may select a default option if no keys are pressed, but you can use arrow keys to select a different option if you want. They should be labeled, but if you are unsure, check if there is any additional advice on your distro's installation page on this wiki.
 
 !!! Warning "A software update is required to use this startup disk"
-    If you see this message when trying to boot Linux, Apple may be enforcing secure boot. Make sure you have it [turned off](#Disable-Secure-Boot), and if there were two Orange "EFI Boot" entries in Startup Manager, try selecting the other one. This occurs when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+") even when Secure Boot is completely disabled.
+    If you see this message when trying to boot Linux, Apple may be enforcing secure boot. Make sure you have it [turned off](#disable-secure-boot), and if there were two Orange "EFI Boot" entries in Startup Manager, try selecting the other one. This occurs when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+") even when Secure Boot is completely disabled.
 
 ## Follow distro specific steps
 

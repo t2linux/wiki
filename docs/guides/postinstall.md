@@ -20,14 +20,14 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 
 | Linux Distribution                  | Kernel with T2 support |
 | ----------------------------------- | ---------------------- |
-| Arch based distros                  | https://github.com/Redecorating/linux-t2-arch |
-| Arch based distros (Xanmod kernels) | https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2 |
-| Fedora                              | https://github.com/mikeeq/mbp-fedora-kernel |
-| Gentoo                              | https://github.com/t2linux/T2-Gentoo-Kernel |
-| Manjaro                             | https://github.com/NoaHimesaka1873/manjaro-kernel-t2 |
-| NixOS                               | https://github.com/kekrby/nixos-hardware |
-| Ubuntu based distros                | https://github.com/t2linux/T2-Ubuntu-Kernel |
-| Debian based distros                | https://github.com/andersfugmann/T2-Debian-Kernel |
+| Arch based distros                  | <https://github.com/Redecorating/linux-t2-arch> |
+| Arch based distros (Xanmod kernels) | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
+| Fedora                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
+| Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
+| Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
+| NixOS                               | <https://github.com/kekrby/nixos-hardware> |
+| Ubuntu based distros                | <https://github.com/t2linux/T2-Ubuntu-Kernel> |
+| Debian based distros                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
 
 If compiled kernels for your distro are not available, then you shall have to compile a kernel on your own. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
 
