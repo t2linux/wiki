@@ -85,7 +85,8 @@ nav:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
-                - Upgrade: distributions/ubuntu/upgrade.md
+          - Debain, Linux Mint, Kali, Pop!_OS and other similar distros:
+                - Installation: distributions/debian/installation.md
 
 extra_css:
     - assets/stylesheets/colors.css
