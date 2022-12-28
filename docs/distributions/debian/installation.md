@@ -47,42 +47,44 @@ Some popular distros include :-
 After installation, we need to install a kernel having patches to support the T2 Macs for the internal keyboard, trackpad, touchbar, audio, Wi-Fi etc. to work. In order to do so :-
 
 1. Boot into your new installation.
+
 2. Connect to the internet using Ethernet/USB tethering/external Wi-Fi adapter.
+
 3. Add the **t2-ubuntu-repo** apt repo by running :-
   
-   ```bash
-   curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
-   sudo curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
-   sudo apt update
-   ```
+    ```bash
+    curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
+    sudo curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
+    sudo apt update
+    ```
   
 4. Now install the kernel upgrade script.
   
    * If your distro is Ubuntu based, run :-
   
-   ```bash
-   sudo apt install t2-kernel-script
-   ```
+    ```bash
+    sudo apt install t2-kernel-script
+    ```
   
    * If your distro is Debian based, run :-
   
-   ```bash
-   sudo apt install t2-kernel-script-debian
-   ```
+    ```bash
+    sudo apt install t2-kernel-script-debian
+    ```
   
 5. Then upgrade your kernel to a T2 kernel by running :-
   
-   ```bash
-   update_t2_kernel
-   ```
+    ```bash
+    update_t2_kernel
+    ```
   
 6. Install the audio configuration files by running :-
   
-   ```bash
-   sudo apt install apple-t2-audio-config
-   ```
+    ```bash
+    sudo apt install apple-t2-audio-config
+    ```
   
-   **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mention in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files)
+    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mention in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files)
 
 7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
