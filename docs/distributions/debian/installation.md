@@ -84,7 +84,7 @@ After installation, we need to install a kernel having patches to support the T2
     sudo apt install apple-t2-audio-config
     ```
   
-    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mention in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files)
+    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
 7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
