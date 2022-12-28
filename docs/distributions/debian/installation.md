@@ -60,17 +60,17 @@ After installation, we need to install a kernel having patches to support the T2
   
 4. Now install the kernel upgrade script.
   
-   * If your distro is Ubuntu based, run :-
+    * If your distro is Ubuntu based, run :-
   
-    ```bash
-    sudo apt install t2-kernel-script
-    ```
+     ```bash
+     sudo apt install t2-kernel-script
+     ```
   
-   * If your distro is Debian based, run :-
+    * If your distro is Debian based, run :-
   
-    ```bash
-    sudo apt install t2-kernel-script-debian
-    ```
+     ```bash
+     sudo apt install t2-kernel-script-debian
+     ```
   
 5. Then upgrade your kernel to a T2 kernel by running :-
   
