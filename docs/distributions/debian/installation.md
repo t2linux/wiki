@@ -27,6 +27,9 @@ Some popular distros include :-
 3. Start the installer and install it like normal until you get an option to manually specify partitions.
 4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
+!!! Warning "Pop!_OS"
+    Due to a bug in Pop!_OS installer, the partition sizes shown by it are incorrect during manual partitioning step. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620) to fix the installer.
+
     1. If you want, you can make seperate partitions for **swap**, `/home`, `/boot` etc as you do in a normal PC.
 
     2. The partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
@@ -79,6 +82,8 @@ After installation, we need to install a kernel having patches to support the T2
    ```
   
    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mention in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files)
+
+7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
 # Basic set up
 
