@@ -10,7 +10,6 @@ Some popular distros include :-
 4. [Debian](https://www.debian.org/)
 5. [Zorin OS](https://zorin.com/)
 6. [Kali Linux](https://www.kali.org/)
-7. 
 
 # Hardware Requirements
 
@@ -33,7 +32,7 @@ Some popular distros include :-
     2. The partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
 
     3. If the installer used by your distro is `ubiquity`, which is the one used in Ubuntu, Linux Mint etc., then you can leave EFI Boot alone. If you are using a separate EFI partition, then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
-      
+  
        For other installers, you need to mount `nvme0n1p1`, or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever case applies to you) at `/boot/efi`. If the installer supports the "boot￼" flag, set it as well for your EFI partition.
 
 5. Continue the rest of the setup.
@@ -72,9 +71,8 @@ After installation, we need to install a kernel having patches to support the T2
    ```bash
    update_t2_kernel
    ```
- 
+  
 6. Install the audio configuration files by running :-
-
   
    ```bash
    sudo apt install apple-t2-audio-config
