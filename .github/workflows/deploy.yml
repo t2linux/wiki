@@ -26,3 +26,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   CUSTOM_DOMAIN: wiki.t2linux.org
+                  EXTRA_PACKAGES: build-base
