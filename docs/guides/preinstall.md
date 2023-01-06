@@ -34,7 +34,7 @@ You can use [Belana Etcher](https://www.balena.io/etcher/) to copy the Linux ins
 !!! hint "`dd`"
     If you are familiar with the `dd` tool and the command line, you can use that instead. Use `diskutil list` to find the correct disk, then `sudo dd if=path/to/filename.iso of=/dev/rdiskX bs=1m`. Press `control-T` while it is running to make it show its current progress. **Make sure you select the correct disks.**
 
-While the installation image is being written to the USB, you can copy Wi-Fi firmware, but don't follow the steps after that until it has finished writing the image.
+While the installation image is being written to the USB, you can [copy Wi-Fi firmware](#copy-wi-fi-firmware), but don't follow the steps after that until it has finished writing the image.
 
 ## Copy Wi-Fi firmware
 
