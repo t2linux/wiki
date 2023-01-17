@@ -9,7 +9,7 @@ Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it do
 Refer to the "Updating Kernel" section on your distro's FAQ for instructions if you need to update your kernel:
 
 - [Arch](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel)
-- [Fedora](https://wiki.t2linux.org/distributions/fedora/faq/#updating-kernel)
+- [Fedora](https://docs.fedoraproject.org/en-US/quick-docs/securing-the-system-by-keeping-it-up-to-date/#manual-updating-using-gui)
 - [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/#updating-kernel)
 - [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/#updating-kernel)
 
