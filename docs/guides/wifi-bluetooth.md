@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
+This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are non T2 Intel Macs, and the newer **Apple Silicon Macs**. Although, Wi-Fi should have been set up already in case of **Apple Silicon Macs** by Asahi's installer.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
@@ -9,7 +9,7 @@ Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it do
 Refer to the "Updating Kernel" section on your distro's FAQ for instructions if you need to update your kernel:
 
 - [Arch](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel)
-- [Fedora](https://wiki.t2linux.org/distributions/fedora/faq/#updating-kernel)
+- [Fedora](https://github.com/mikeeq/mbp-fedora-kernel#how-to-update-mbp-fedora-kernel)
 - [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/#updating-kernel)
 - [Ubuntu](https://wiki.t2linux.org/distributions/ubuntu/faq/#updating-kernel)
 
@@ -28,6 +28,8 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 ### On Linux
 
 You have two options here. You can follow either of the two, its purely based on your choice:
+
+**Note :- We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. In case you have removed macOS, this script won't be much helpful to you.**
 
 - The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi and Bluetooth.
 
@@ -104,7 +106,7 @@ To fix this :-
 
 ## Fixing unstable WPA2 using iwd
 
-Using iwd is technically not needed for using wifi. But if your are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+Using iwd is technically not needed for using wifi. But if you are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
 
 Instructions in this section might be different for the distribution that you are trying to install.
 

@@ -16,8 +16,9 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 
 While its technically possible to remove macOS entirely, its strongly encouraged to dual boot it with Linux because :-
 
-1. It acts as a backup in case something goes wrong.
-2. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
+1. To set up Wi-Fi on Linux, you will need Wi-Fi firmware, which can be legally obtained only from macOS. It is illegal to host the firmware on any website as it is under a non redistributable license.
+2. It acts as a backup in case something goes wrong.
+3. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
 
 Still if you wish to remove macOS completely, it is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
 
@@ -45,39 +46,24 @@ Ubuntu also has a graphical installer. Additionally, less post configuration wor
 
 Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, though audio and WiFi generally need to be set up as in the guides below. Then they should work flawlessly.
 
+NixOS has both prebuilt graphical and command line installers. Support for T2 devices is provided in the form of a `nixos-hardware` module.
+Importing the module is the only thing you have to do to get your configuration working on your Mac.
+
 If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
-
-## Preparing the Installation
-
-Look at the [the wifi and bluetooth guide](https://wiki.t2linux.org/guides/wifi/) and follow any steps that are required to run on macOS.
-
-Make sure to keep any files you might want to access after the installation (a password manager database for example) on a medium you can access from Linux. Linux cannot read APFS, the file system macOS uses by default.
-
-You will also need to make some space on your hard drive. While its technically possible to install Linux on an external drive, it depends on the install process of the distribution if this is supported. 20 to 40GB should be fine for a base installation.
-
-To boot into a live environment, you need to [disable secure boot and allow booting from an external device](https://support.apple.com/en-us/HT208198).
-
-If your distribution needs a connection to the Internet while installing, make sure to prepare an Ethernet cable, wifi adapter or
-phone for tethering. If none of these options are available but your model has wifi support, you can also follow the steps to install firmware in your live environment. Keep in mind that in that case you will still need to follow the guide on your actual install after exiting
-the live environment.
-
-If you want to triple boot with Windows, read the instructions in the [triple boot guide](https://wiki.t2linux.org/guides/windows/) before proceeding.
 
 ## Installing
 
-Now follow the installation guide of your specific distribution.
-
-This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.
+Follow the [Pre-installation steps](https://wiki.t2linux.org/guides/preinstall) to prepare your Mac to install Linux and head over to the appropriate guide of the distro of your choice as mentioned in that guide.
 
 ## Configuring the Installation
 
 After successfully booting into your new installation, you will need to configure a few things:
 
--   [Install/upgrade drivers for the soundcard, internal keyboard, trackpad and touchbar](https://wiki.t2linux.org/guides/dkms/)
--   [Getting wifi to work](https://wiki.t2linux.org/guides/wifi)
+-   [Performing a basic setup](https://wiki.t2linux.org/guides/postinstall/)
+-   [Getting Wi-Fi and Bluetooth to work](https://wiki.t2linux.org/guides/wifi-bluetooth/)
 -   [Install drivers for the fan (if not working automatically or want to force a certain speed)](https://wiki.t2linux.org/guides/fan/)
 -   [Configure audio](https://wiki.t2linux.org/guides/audio-config/)
--   [Configure startup manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
+-   [Configure the Startup Manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
 -   [Install rEFInd (optional)](https://wiki.t2linux.org/guides/refind/)
 
 You might also want to look into [getting the internal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two

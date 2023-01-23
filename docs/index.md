@@ -5,11 +5,6 @@ Welcome to the t2linux wiki!
 This wiki contains knowledge about running Linux on Macs with the T2 chip.
 A list of those devices can be found [on Apple's website](https://support.apple.com/en-us/HT208862).
 
-# Warnings
-
-- Some kernel versions, notably `5.8.x` and `5.9.x` are known to have issues. See the releases (those not marked as a pre-release) of [aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch/releases) for ones that have been tested. Keep in mind that some might very have reached their [end of life](https://en.wikipedia.org/wiki/Linux_kernel_version_history#Releases_5.x.y).
-- **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd bootloader](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
-
 # Getting started
 
 To get started with an installation, refer to the [roadmap](https://wiki.t2linux.org/roadmap).
@@ -29,13 +24,13 @@ Visit the [Contribute page](https://wiki.t2linux.org/contribute/) for more detai
 Different distributions are maintained by different people in their own repositories.
 If the distribution you want to use has a guide [here](https://wiki.t2linux.org/distributions/overview/), it's recommended to follow it instead of the instructions given in one of the repositories or otherwise official documentation by distribution vendor, as it considers T2 support.
 
-- Arch [https://github.com/aunali1/linux-mbp-arch](https://github.com/aunali1/linux-mbp-arch)
+- Arch [https://github.com/t2linux/archiso-t2](https://github.com/t2linux/archiso-t2)
 - EndeavourOS [https://github.com/t2linux/EndeavourOS-ISO-t2](https://github.com/t2linux/EndeavourOS-ISO-t2)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/NoaHimesaka1873/manjaroiso-t2](https://github.com/NoaHimesaka1873/manjaroiso-t2)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
-- Ubuntu [https://github.com/marcosfad/mbp-ubuntu](https://github.com/marcosfad/mbp-ubuntu)
+- Ubuntu [https://github.com/AdityaGarg8/T2-Ubuntu](https://github.com/AdityaGarg8/T2-Ubuntu)
 
 ## Kernel Modules
 

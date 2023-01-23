@@ -38,6 +38,9 @@ plugins:
     -   redirects:
             redirect_maps:
                 'guides/wifi.md': 'guides/wifi-bluetooth.md'
+                'guides/dkms.md': 'guides/postinstall.md'
+    -   search:
+            lang: en
 
 nav:
     - General:
@@ -47,8 +50,9 @@ nav:
           - Contribute: contribute.md
           - Notable Contributors: notable-contributors.md
     - Guides:
+          - Pre-Install: guides/preinstall.md
+          - Basic setup: guides/postinstall.md
           - Wi-Fi and Bluetooth: guides/wifi-bluetooth.md
-          - DKMS: guides/dkms.md
           - Windows Triple Boot: guides/windows.md
           - Hybrid Graphics: guides/hybrid-graphics.md
           - Audio: guides/audio-config.md
@@ -71,14 +75,18 @@ nav:
           - Gentoo:
                 - Installation: distributions/gentoo/installation.md
           - Manjaro:
+                - Deprecation Notice: distributions/manjaro/deprecation.md
                 - Home: distributions/manjaro/home.md
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
+          - NixOS:
+                - Installation: distributions/nixos/installation.md
           - Ubuntu:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
-                - Upgrade: distributions/ubuntu/upgrade.md
+          - Debain, Linux Mint, Kali, Pop!_OS and other similar distros:
+                - Installation: distributions/debian/installation.md
 
 extra_css:
     - assets/stylesheets/colors.css

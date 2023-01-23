@@ -54,7 +54,7 @@ In case you face the error saying **The document “refind.conf” could not be 
 
 ## Hiding text on booting an OS using rEFInd (Optional)
 
-In case you boot an OS other than macOS using rEFInd, it shows some debug text while booting it. In order to get a smooth boot experience simiar to the Mac Startup Manager, add the following line to `EFI/BOOT/refind.conf`, just as you did to remove BIOS entries.
+In case you boot an OS other than macOS using rEFInd, it shows some debug text while booting it. In order to get a smooth boot experience similar to the Mac Startup Manager, add the following line to `EFI/BOOT/refind.conf`, just as you did to remove BIOS entries.
 
 ```plain
 use_graphics_for osx,linux,windows,grub

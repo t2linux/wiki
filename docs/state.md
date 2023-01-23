@@ -15,7 +15,6 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Partially Working
 
-- Keyboard Backlight: Not working on MacBookAir9,1.
 - Trackpad: Functions, but it is far from the experience on macOS (No force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.
 - Audio: With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.
 - Suspend (It works if [this guide](https://wiki.t2linux.org/guides/dkms/#fixing-suspend) is followed. Sometimes, its slow to resume (takes 5-15 sec).
@@ -28,7 +27,6 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 - Custom graphics on Touchbar: There is currently no Linux driver for the Touchbar's "Touch Bar Display" device configuration, which is what macOS uses, and gives full control over the display to the Operating System.
 - T2 Secure Enclave Processor (Touch ID, storing encryption keys on the T2)
 - The T2's onboard Audio Video Encoder (used for Sidecar on macOS)
-- Automatically changing between speakers and headphones when headphones are plugged and unplugged
 - Graphics switching without rebooting (gmux)
 
 ## Other
