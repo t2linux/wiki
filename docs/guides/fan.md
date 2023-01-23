@@ -21,7 +21,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 3. Copy mbpfan.conf to /etc with `sudo cp mbpfan.conf /etc`
 4. Edit the config if needed
-5. Run the tests to confirm that everything is working `sudo make tests`
+5. Confirm that everything is working by running `sudo make tests`
 6. If the tests ran successfully, install using `sudo make install`
 7. Now enable starting at boot
 
