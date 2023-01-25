@@ -22,10 +22,14 @@
 
     3. Leave EFI boot alone. If you want to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), you can separate it out later after installation as instructed [here](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
 
-5. Continue the rest of the setup. If your Mac somehow turns off with the fans spinning at full speed, go to [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/). If not, you should be fine.
+5. Continue the rest of the setup.
 6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 7. Welcome to Ubuntu! :)
 
 # Receiving kernel updates
 
 In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the kernel update script as described [here](https://github.com/t2linux/T2-Ubuntu-Kernel#using-the-kernel-upgrade-script).
+
+# Troubleshooting
+
+If you are facing issues while installing or have post installation issues (Eg:- Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu-Kernel/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).
