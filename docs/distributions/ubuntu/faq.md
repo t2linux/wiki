@@ -22,8 +22,14 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 # Why isn't sound working?
 
-Due to issues in the ubuntu install process, there is no sound working after install. You'll have to set it up manually.
-Refer to this guide on [audio configuration](https://wiki.t2linux.org/guides/audio-config).
+On **Ubuntu 22.04 or earlier**, PulseAudio is installed by default, which performs really bad with T2 audio configuration files. It is suggested to [switch to PipeWire](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux) for better performance, although its still bad as compared to Ubuntu 22.10, which has native support for PipeWire.
+
+On **Ubuntu 22.10 or later**, PipeWire is support natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version :-
+
+```bash
+sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream
+sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-modules libspa-0.2-{bluetooth,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,tests}}
+```
 
 # Updating Kernel
 

@@ -33,8 +33,6 @@ sudo rm -r /tmp/t2-better-audio
 
 If your distro uses PulseAudio by default, consider switching to PipeWire with rtkit for the best possible experience. You can still use PulseAudio but the experience will not be as smooth as PipeWire, for example you might not be able to select the speakers as the output device when headphones are plugged in.
 
-An example to get PipeWire working on Ubuntu, which uses PulseAudio by default is given [here](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux).
-
 !!!note "Switching to headphones automatically"
     If you want headphones to be switched to automatically when they are plugged in, you should set them as the default audio sink using the settings app of your DE, `pavucontrol`, `pactl` or `wpctl`.
 
