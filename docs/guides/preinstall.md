@@ -69,4 +69,7 @@ Apple's Secure Boot implementation does not allow booting anything other than ma
 
 Once you've selected your USB, it should boot your distro's install image. Now follow the installation guide of your specific distribution.
 
+!!! Warning "Automatic Partitioning"
+    The installers of many distros provide options like "Automatic Partitioning" when installing Linux. You always have to select the option that allows "Manual Partitioning". **Do not** select "Automatic Partitioning" as it shall remove macOS as well.
+
 This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.
