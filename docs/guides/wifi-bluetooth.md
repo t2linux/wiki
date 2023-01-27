@@ -27,7 +27,7 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 
 ### On Linux
 
-You have two options here. You can follow either of the two, its purely based on your choice:
+You have two options here. You can follow either of the two, its purely based on your choice. If your distro installer requires internet to install, you can also follow these steps on a Live ISO environment:
 
 **Note :- We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. In case you have removed macOS, this script won't be much helpful to you.**
 
