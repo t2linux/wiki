@@ -18,7 +18,7 @@ If there is an ISO with T2 support for your distro, you can download it here:
 | Linux Distribution | Install ISO with T2 support |
 | ------------------ | --------------------------- |
 | Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
-| blendOS            | <https://github.com/blend-os/blendiso-t2/releases/latest> |
+| blendOS            | <https://blendos.co/#t2linux> |
 | EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
 | Fedora Linux       | <https://github.com/mikeeq/mbp-fedora> |
 | Gentoo             | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
