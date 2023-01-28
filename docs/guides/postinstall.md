@@ -106,7 +106,6 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
 - Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
-It unloads the Touchbar modules and reloads them on resume as they can cause issues for suspend.
 
 # Wi-Fi and Bluetooth
 
