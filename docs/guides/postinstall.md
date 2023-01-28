@@ -107,23 +107,6 @@ In case your Touch Bar is unable to change modes on pressing the fn key, you cou
 
 If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
 
-## Fixing Suspend
-
-Copy [this script](../tools/rmmod_tb.sh) to `/lib/systemd/system-sleep/rmmod_tb.sh`
-
-If you are using Gentoo with OpenRC, instead copy the script to `/lib64/elogind/system-sleep/rmmod_tb.sh`
-
-Now run :-
-
-```sh
-sudo chmod 755 /lib/systemd/system-sleep/rmmod_tb.sh
-sudo chown root:root /lib/systemd/system-sleep/rmmod_tb.sh
-```
-
-Change the path to `/lib64/elogind/system-sleep/rmmod_tb.sh` if using OpenRC on Gentoo as mentioned previously.
-
-It unloads the Touchbar modules and reloads them on resume as they can cause issues for suspend.
-
 # Wi-Fi and Bluetooth
 
 The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. But, we also need firmware to get them working from macOS.
