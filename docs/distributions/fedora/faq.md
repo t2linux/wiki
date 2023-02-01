@@ -8,20 +8,16 @@ This may be due to differences between USB-C to USB-A adapters. Try a different 
 
 # My touchbar is blank
 
-This is becuase of a firmware bug. Reboot into MacOS recovery (hold `CMD+R` while booting), then boot back into Fedora.
-
-# My touchbar is flickering
-
-Your touchbar is probably broken at the hardware level. Pay apple to fix it.
+Follow the instructions in the [post-install guide](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar). If it still is not working, try updating your macOS instalation.
 
 # My keyboard won't light up (only applies to some hardware)
 
-This sometimes doesn't work on Fedora, we are working on a fix. For now, you can't really do anything about it.
+This sometimes doesn't work on Fedora, we are working on a fix. For now, you can't really do anything about it. This is only affects the internal Apple keyboard, it **will not** affect your external keyboard.
 
 # I get an error about the bootloader when installing
 
-Download the latest ISO, then try again.
+Download the latest ISO, then try again. Make sure you are using the T2 Fedora iso.
 
-# My wifi stops working after suspending
+# My Wi-Fi stops working after suspending
 
-Run `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` in a terminal.
+Try running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` in a terminal.
