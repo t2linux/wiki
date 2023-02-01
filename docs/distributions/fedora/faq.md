@@ -12,7 +12,7 @@ Follow the instructions in the [post-install guide](https://wiki.t2linux.org/gui
 
 # My keyboard won't light up (only applies to some hardware)
 
-This sometimes doesn't work on Fedora, we are working on a fix. For now, you can't really do anything about it. This is only affects the internal Apple keyboard, it **will not** affect your external keyboard.
+This sometimes doesn't work on Fedora, we are working on a fix. For now, you can't really do anything about it. This is only affects the internal Apple keyboard, it **will not** affect your external keyboard. This also only occurs on Fedora, the backlight works on all other ditros.
 
 # I get an error about the bootloader when installing
 
