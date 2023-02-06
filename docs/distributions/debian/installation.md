@@ -1,8 +1,8 @@
 # Introduction
 
-This guide shall help you in installing a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
+This guide shall help you in installing a Debian or Ubuntu-based Linux distro that does not have a modified ISO with T2 support.
 
-Some popular distros include :-
+Some popular distros include:
 
 1. [Linux Mint](https://linuxmint.com/)
 2. [Pop!_OS](https://pop.system76.com/)
@@ -10,30 +10,30 @@ Some popular distros include :-
 4. [Debian](https://www.debian.org/)
 5. [Zorin OS](https://zorin.com/)
 6. [Kali Linux](https://www.kali.org/)
-7. Other Ubuntu flavours like [Kubuntu](https://kubuntu.org/), [Ubuntu unity](https://ubuntuunity.org/) etc.
+7. Other Ubuntu flavours like [Kubuntu](https://kubuntu.org/), [Ubuntu Unity](https://ubuntuunity.org/) etc.
 
 # Hardware Requirements
 
-* USB-C to USB adapter
-* Wired internet connection (Ethernet/USB tethering) or Wi-Fi adapter compatible with Linux
+* USB-C to USB-A adapter
+* Internet connection - either wired (using an USB Ethernet dongle or USB tethering from a phone) or wireless (using a Linux-compatible Wi-Fi adapter)
 * External keyboard and mouse
 
 # Install Procedure
 
-!!! Warning "Installation fails when installing the bootloader (Eg :- GRUB)"
-    It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
+!!! Warning "Installation fails when installing the bootloader (e.g. GRUB)"
+    It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), that the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
 
 !!! Warning "Pop!_OS"
-    Due to a bug in Pop!_OS installer, the partition sizes shown by it are incorrect during manual partitioning step. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1356978490) in the live ISO environment to fix the installer and then start the installation.
+    Due to a bug in the Pop!_OS installer, the partition sizes shown by it are incorrect when using manual partitioning. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1356978490) in the live ISO environment to fix the installer and then start the installation.
 
-1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
+1. Follow the [pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
 2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevent to you.
 3. Start the installer and install it like normal until you get an option to manually specify partitions.
 4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
-    1. If you want, you can make seperate partitions for **swap**, `/home`, `/boot` etc as you do in a normal PC.
+    1. If you want, you can make seperate partitions for **swap**, `/home`, `/boot` etc. as you would normally.
 
-    2. The partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
+    2. The partition you must make is the one mounted at `/` and formatted to **ext4** or **btrfs**.
 
     3. If the installer used by your distro is `ubiquity`, which is the one used in Ubuntu, Linux Mint etc., then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
   
