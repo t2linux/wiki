@@ -35,7 +35,7 @@ Some popular distros include:
 
     2. You may opt to make separate partitions for **`/home`**, **`/boot`**, **swap** etc. as you would normally.
 
-    3. If `ubiquity` is the installer used by your distro (used by *Ubuntu*, *Linux Mint* and others), then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+    3. If `ubiquity` is the installer used by your distro (used by *Ubuntu*, *Linux Mint* and other similar distros), then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
   
         For other installers, you need to mount `nvme0n1p1`, or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever case applies to you) at `/boot/efi`. If the installer supports the `boot` flag, set it as well for your EFI partition.
 
