@@ -3,7 +3,7 @@
 site_name: t2linux wiki
 site_author: the t2linux.org contributors
 site_url: https://t2linux.org/
-copyright: "© 2021 t2linux.org CC-BY-SA-4.0"
+copyright: "© 2021-2023 t2linux.org CC-BY-SA-4.0"
 
 theme:
     palette:
