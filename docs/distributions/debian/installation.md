@@ -85,36 +85,19 @@ Steps:
     sudo apt update
     ```
   
-4. Now install the kernel upgrade script.
+4. Install the kernel upgrade script:
   
-    * If your distro is Ubuntu-based, run:
+    * If your distro is **Ubuntu**-based, run `sudo apt install t2-kernel-script`
+    * If your distro is **Debian**-based, run `sudo apt install t2-kernel-script-debian`
   
-       ```bash
-       sudo apt install t2-kernel-script
-       ```
+5. Then upgrade your kernel to a T2 kernel by running `update_t2_kernel`
   
-    * If your distro is Debian-based, run:
+6. Install the audio configuration files by running `sudo apt install apple-t2-audio-config`
   
-       ```bash
-       sudo apt install t2-kernel-script-debian
-       ```
-  
-5. Then upgrade your kernel to a T2 kernel by running:
-  
-    ```bash
-    update_t2_kernel
-    ```
-  
-6. Install the audio configuration files by running:
-  
-    ```bash
-    sudo apt install apple-t2-audio-config
-    ```
-  
-    **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
+    **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire for a better experience. For this, follow the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
 7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
 # Basic set up
 
-After installing the new kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. The rest has been set up automatically by the kernel upgrade script.
+After installing the T2 kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. The rest has been set up automatically by the kernel upgrade script.
