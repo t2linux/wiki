@@ -20,7 +20,7 @@ Some popular distros include:
 
 * Internet connection - either **wired** (using an USB Ethernet dongle or USB tethering from a phone) or **wireless** (using a Linux-compatible Wi-Fi adapter)
 
-    Note that you will be able to setup internal Wi-Fi after you install and setup the T2 kernel. More on this later in the guide.
+    The internal Wi-Fi does not work without the T2 kernel. Note that you will be able to setup internal Wi-Fi after you install and setup the T2 kernel. More on this later in the guide.
 
 * External keyboard and mouse
 
