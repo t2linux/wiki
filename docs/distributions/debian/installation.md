@@ -34,21 +34,38 @@ Some popular distros include:
 !!! Warning "Pop!_OS incorrect partition sizes"
     Due to a bug in the Pop!_OS installer, the partition sizes shown by it are incorrect when using manual partitioning. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1356978490) in the live ISO environment to fix the installer and then start the installation.
 
-1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
-2. Boot into the Live ISO. In the GRUB boot menu, select the option relevant to you.
-3. Start the installer and go through it like normal. Make sure to select **manual partitioning** instead of letting the installer automatically manage partitions for you!
-4. **WARNING: MAKE SURE TO SELECT THE RIGHT PARTITION OR YOU MAY LOSE YOUR DATA.** Find the partition you made for Linux during the Pre-installation step and delete it to make free space. You'll need to make these partitions:
+## Pre-installation
+
+* Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
+* Flash your chosen Debian or Ubuntu-based distro to a USB drive.
+
+## Installation
+
+1. **First steps**
+    1. Boot into the Live ISO. In the GRUB boot menu, select the option relevant to you.
+    2. Start the installer and go through it like normal. When you get the option to, make sure to select **manual partitioning**! (instead of letting the installer automatically manage partitions for you)
+
+2. **Partitioning**
+
+    Find the partition you made for Linux during the Pre-installation step and delete it to make free space. (**WARNING:** ***MAKE SURE TO SELECT THE RIGHT PARTITION OR YOU MAY LOSE YOUR DATA.*** )
+
+    You will then need to follow these steps:
 
     1. You **must** create a **`/`** ("root") partition formatted as **ext4** or **btrfs**.
 
-    2. You may opt to make separate partitions for **`/home`**, **`/boot`**, **swap** etc. as you would normally.
+    2. You may **optionally** make separate partitions for **`/home`**, **`/boot`**, **swap** etc. as you would normally.
 
-    3. If `ubiquity` is the installer used by your distro (used by *Ubuntu*, *Linux Mint* and other similar distros), then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
-  
-        For other installers, you need to mount `nvme0n1p1`, or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever case applies to you) at `/boot/efi`. If the installer supports the `boot` flag, set it as well for your EFI partition.
+    3. If `ubiquity` is the installer used by your distro (used by *Ubuntu*, *Linux Mint* and other similar distros), then you can leave EFI Boot alone. If you are usiwant to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you have to separate it after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+    
+        For other installers, you need to mount either `nvme0n1p1` **or** your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) at `/boot/efi`. If the installer supports the `boot` flag, set it as well for your EFI partition.
 
-5. Continue with the rest of the installation.
-6. Once it's finished, reboot. You may remove your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
+3. **Continuing the installation**
+
+    Continue with the rest of the installation. Once it successfully finishes, shutdown. You may remove your installation media.
+
+## Post-installation
+
+Hold down Option (⌥) while booting, then select EFI Boot (make sure it has the internal disk icon) and press enter.
 
 # Adding T2 support
 
