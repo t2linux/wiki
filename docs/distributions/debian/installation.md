@@ -4,7 +4,7 @@ This guide will help you in installing a Debian or Ubuntu-based Linux distro tha
 
 Some popular distros include:
 
-* [Linux Mint](https://linuxmint.com/) (Ubuntu-based | Debian-based if using LMDE (Linux Mint Debian Edition))
+* [Linux Mint](https://linuxmint.com/) (Ubuntu-based | Debian-based if using LMDE)
 * [Pop!_OS](https://pop.system76.com/) (Ubuntu-based)
 * [elementary OS](https://elementary.io/) (Ubuntu-based)
 * [Debian](https://www.debian.org/) (Debian)
