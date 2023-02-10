@@ -66,20 +66,20 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
         8086 3E9B INTEL - UHD Graphics 630 (Mobile)
         ```
 
-    3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader). Your display brightness controls may stop working, this is temporary.
+    3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader).
 
     4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
 3.  Configue apple-gmux to switch to the IGPU at boot
 
     1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
-        
+
         ```plain
         # Enable the iGPU by default if present
         options apple-gmux force_igd=y
         ```
 
-    5.  Reboot into Linux.
+    2.  Reboot into Linux.
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
@@ -105,9 +105,9 @@ The AMD GPU on MacBookPro16,4 is [not compatible](https://lore.kernel.org/all/3A
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ```
 
-6. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
+5. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
 
-7. You can now remove the `nomodeset` parameter from your command line.
+6. You can now remove the `nomodeset` parameter from your command line.
 
 ### If you are unable to edit your kernel command line :-
 
