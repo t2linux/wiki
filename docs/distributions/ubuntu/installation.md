@@ -3,7 +3,7 @@
 !!! Warning "Blank screen on boot"
     **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd Boot Manager](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
 
-[Download here](https://github.com/AdityaGarg8/T2-Ubuntu/releases/latest)
+[Download here](https://github.com/t2linux/T2-Ubuntu/releases/latest)
 
 # Hardware Requirements
 
@@ -32,4 +32,4 @@ In order to continue receiving the kernel updates for T2 kernels, it's recommend
 
 # Troubleshooting
 
-If you are facing issues while installing or have post installation issues (Eg:- Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu-Kernel/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).
+If you are facing issues while installing or have post installation issues (Eg:- Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).
