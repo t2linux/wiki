@@ -4,21 +4,15 @@ This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
 
+Make sure you have a t2 kernel of version greater than 6.2 (you can check this with `uname -r`).
+
 ## Issues
 
-1. Resume after suspend is broken, as the GMUX (graphics multiplexer) doesn't connect the iGPU to the display after resuming. For this to be fixed, a Linux driver for `acpi:APP000B:GPUC:` needs to be written (macOS uses AppleMuxControl2.kext). The extra battery life may make this a worthwhile trade-off (about 3 hours to almost 6 hours on a MacBookPro16,1)
+If you experience system freezes, then the laptop's fans becoming loud, before the whole computer shuts off (CPU CATERR), or if the amdgpu is making the computer too hot, consider trying:
 
-2. If using `DRI_PRIME=1` on programs causes system crashes, with "[CPU CATERR](https://gist.github.com/Redecorating/956a672e6922e285de83fdd7d9982e5e#gistcomment-3719941)" problem reports in macOS, disable dynamic power management with the `amdgpu.dpm=0` kernel argument, or `echo high | sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level`.
+1.  Set iGPU as main gpu.
 
-3. If apple-set-os is loaded, the iGPU will control display brightness, and if the iGPU isn't the boot gpu, the i915 Intel graphics driver will not load, and the display brightness cannot be changed (The exception to this is sometimes when rebooting from macOS Recovery etc, i915 loads fine).
-
-4. Some users with MacBookPro16,1 and AMD gpu have reported issues like AMD gpu uses too much power with excessive high temperatures under normal conditions or sudden high speed fan noise then instant system shut down, getting the T2 chip reset.
-
-    Posible workarounds:
-
-    1. Set iGPU as main gpu.
-
-    2. Set AMD gpu Dynamic Power Management from auto to low or high. Low can be safer option to void thermal issues or safe battery.
+2.  Set AMD gpu Dynamic Power Management from auto to low or high. Low can be safer option to void thermal issues or safe battery.
 
     You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
 
@@ -76,33 +70,22 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
     4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
 
-3.  Set the `gpu-power-prefs` NVRAM variable to make the iGPU the Boot GPU and install the apple-gmux driver.
+3.  Configue apple-gmux to switch to the IGPU at boot
 
-    1.  Check `journalctl -k --grep=efi:`, if you don't have "efi: Apple Mac detected, using EFI v1.10 runtime services only" then you will need update your kernel (preferred) or refer this [older version](https://github.com/t2linux/wiki/blob/eb15b19c7e4d5ce79a59ff14a4bf4297a5f65edc/docs/guides/hybrid-graphics.md#enabling-the-igpu) of this page.
-
-    2.  If `cat /proc/cmdline` has `efi=noruntime`, remove it from the kernel command line by editing and regenerating your bootloader config (the issue it was avoiding is fixed by newer kernels).
-
-    3.  Install the `gpu-switch` script, and then you can set NVRAM and the boot GPU from Linux.
-
-        ```sh
-        curl https://raw.githubusercontent.com/0xbb/gpu-switch/master/gpu-switch > gpu-switch
-        chmod +x gpu-switch
-        sudo chown root:root gpu-switch
-        sudo mv gpu-switch /usr/local/bin/
-        sudo gpu-switch -i
+    1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
+        
+        ```plain
+        # Enable the iGPU by default if present
+        options apple-gmux force_igd=y
         ```
 
-    4.  Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2).
+    5.  Reboot into Linux.
 
-    5.  Reboot into Linux. Display brightness should be working again if it wasn't, and `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
-
-!!! note
-    As macOS expects the dedicated GPU to be activated at startup, to avoid various display and GPU related problems (like not outputting anything to the display after sleep), switch to the dedicated GPU using `sudo gpu-switch -d` before booting into MacOS.
-    Because of this, if you want to use Linux with the iGPU again, you'll need to re run `sudo gpu-switch -i` on your Linux install and **reboot**.
+`glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 ## MacBookPro16,4
 
-The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround :-
+The AMD GPU on MacBookPro16,4 is [not compatible](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround :-
 
 ### If you are able to edit your kernel command line :-
 
@@ -121,8 +104,6 @@ The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround 
     make install
     sudo grub-mkconfig -o /boot/grub/grub.cfg
     ```
-
-5. Install the apple-gmux driver from [here](https://github.com/Redecorating/apple-gmux-t2).
 
 6. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
 
@@ -144,11 +125,9 @@ The AMD GPU on MacBookPro16,4 is not yet compatible with Linux. As a workaround 
 
 ## Use on Windows
 
-In one case (has anyone else tried this?), the iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers. There might be special iGPU drivers in the Bootcamp support software for single GPU MacBooks, which might help resolve this.
+The iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers.
 
-If you want to use the iGPU on Linux but not on Windows, you can switch back to the dGPU with `sudo gpu-switch -d` before booting to Windows.
-
-If you want to switch GPU from Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
+If you want to switch GPU for Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
 
 ## VFIO GPU passthrough
 
