@@ -30,7 +30,7 @@ If the distribution you want to use has a guide [here](https://wiki.t2linux.org/
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/NoaHimesaka1873/manjaroiso-t2](https://github.com/NoaHimesaka1873/manjaroiso-t2)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
-- Ubuntu [https://github.com/AdityaGarg8/T2-Ubuntu](https://github.com/AdityaGarg8/T2-Ubuntu)
+- Ubuntu [https://github.com/t2linux/T2-Ubuntu](https://github.com/t2linux/T2-Ubuntu)
 
 ## Kernel Modules
 
