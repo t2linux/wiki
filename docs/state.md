@@ -31,5 +31,5 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 
 ## Other
 
-- Linux using APFS filesystems: Linux cannot read the internal SSD's macOS APFS parition's Data and System volume (for other APFS volumes, [linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw) can be used for reading data, but attempting to write is risky.
+- Linux using APFS filesystems: Linux cannot read the internal SSD's macOS APFS parition's Data and System volume (for other APFS volumes, [linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw) can be used for reading data, but attempting to write is risky).
 - macOS using Linux filesystems: There are FUSE implementations of some Linux Filesystems that can be used on macOS (but again, most only have experemental write support).
