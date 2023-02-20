@@ -93,13 +93,13 @@ Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lo
 
     2. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader) using macOS, and put it in your Linux EFI partition.
 
-3. Restart into macOS Recovery by immediately pressing and holding Command+R on startup.
+2. Restart into macOS Recovery by immediately pressing and holding Command+R on startup.
 
     1. Open the terminal there and run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`.
 
-4. Restart into Linux. You should now be able to access your Linux installation.
+3. Restart into Linux. You should now be able to access your Linux installation.
 
-5. Follow the instructions [above](#enabling-the-igpu).
+4. Follow the instructions [above](#enabling-the-igpu).
 
 ## Use on Windows
 
