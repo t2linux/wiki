@@ -1,44 +1,47 @@
 # Introduction
 
-This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by turning off the more powerful AMD dGPU when you don't need it.
+This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
 
-Make sure you have a t2 kernel of version greater than 6.2 (you can check this with `uname -r`).
+Make sure you have a t2 kernel of version greater than 6.1.12-2 (you can check this with `uname -r`).
 
 ## Issues
 
 If you experience system freezes, then the laptop's fans becoming loud, before the whole computer shuts off (CPU CATERR), or if the amdgpu is making the computer too hot, consider trying:
 
-1.  Set iGPU as main gpu.
+1.  Set iGPU as main gpu (instructions below)
 
-2.  Set AMD gpu Dynamic Power Management from auto to low or high. Low can be safer option to void thermal issues or safe battery.
+2.  Set AMD GPU Dynamic Power Management from auto to low or high. Low can be safer option to avoid thermal issues or save battery.
 
-    You can test it quickly with: `echo low | sudo tee /sys/class/drm/card0/device/power_dpm_force_performance_level`
+    You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/power_dpm_force_performance_level`
 
-    To apply the low level permanently, create `/etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
+    To apply the low level automatically, create `/etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
 
     ```plain
     KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
     ```
 
-    To check card0 is the amdgpu, we can run:
+    To check which card is the amdgpu, we can run:
 
     ```sh
-    udevadm info --attribute-walk /sys/class/drm/card0 | grep "amdgpu"
-    result: DRIVERS=="amdgpu"
+    basename /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/drm/card?
     ```
 
-    You can also control the AMD gpu DMP with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile). For GPU intensive tasks like play Games, Machine Learning or Rendering, you can try setting the DPM to high.
+    You can also control the AMD GPU DPM with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile). For GPU intensive tasks like playing games, machine learning or rendering you can try setting the DPM to high instead.
 
 ## Enabling the iGPU
 
-!!! note
-    Aside from step 1, these instructions should be followed in Linux.
+1.  Configue apple-gmux to switch to the IGPU at boot
 
-1.  Update macOS. Big Sur and above can boot when the iGPU is set as the boot GPU, but this has not been tested on Catalina, and [on older MacBooks](https://github.com/Dunedan/mbp-2016-linux/issues/6#issuecomment-286200226), setting the iGPU as the boot GPU has stopped macOS from booting properly with graphics, and it is unknown when this was fixed (you might want to turn ssh on in macOS if you are worried about this).
+    1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
 
-2.  Set up apple-set-os-loader to make Apple's firmware show the iGPU
+        ```plain
+        # Enable the iGPU by default if present
+        options apple-gmux force_igd=y
+        ```
+
+2.  Set up apple-set-os-loader to make Apple's firmware show the iGPU so apple-gmux will be able to switch to it:
 
     1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
 
@@ -68,60 +71,35 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
     3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader).
 
-    4.  `lspci -s 00:02.0` should list an Intel Graphics card. If it doesn't have the Intel card, then the next step will not work.
-
-3.  Configue apple-gmux to switch to the IGPU at boot
-
-    1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
-
-        ```plain
-        # Enable the iGPU by default if present
-        options apple-gmux force_igd=y
-        ```
-
-    2.  Reboot into Linux.
-
-`glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMDGPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
+`glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
 ## MacBookPro16,4
 
-The AMD GPU on MacBookPro16,4 is [not compatible](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround :-
+Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround :-
 
 ### If you are able to edit your kernel command line :-
 
-1. This workaround recommends GRUB as the bootloader. If you want to use some other bootloader, you need to figure out how to get an equivalent of step 4 and 6 working with your bootloader.
+1. Edit the kernel command line of this boot and add the `nomodeset` kernel parameter. This will enable you to access your Linux system in safe graphics.
 
-2. Edit the command line of your boot and add the `nomodeset` kernel parameter the the command line. This will enable you to access your Linux system in safe graphics.
+2. Follow the instructions [above](#enabling-the-igpu).
 
-3. Boot into Linux and install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader).
-
-4. Setup this tool to allow changing the boot GPU from GRUB:
-
-    ```sh
-    git clone https://github.com/Redecorating/efi-gpu-power-prefs
-    cd efi-gpu-power-prefs
-    make #you will need efi.h to compile this, which is installed in the gnu-efi package in most distros
-    make install
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
-    ```
-
-5. Reboot and in the grub menu, select "Enable iGPU". Your computer will shutdown. Power it back on and boot linux. If you boot macOS, this will be reset and you'll have to redo this step.
-
-6. You can now remove the `nomodeset` parameter from your command line.
+3. You can now remove the `nomodeset` parameter from your kernel command line.
 
 ### If you are unable to edit your kernel command line :-
 
-1. Boot into macOS and mount your Linux EFI partition over there. In most cases it should be `disk0s1` and can be mounted by running `sudo diskutil mount disk0s1` in the terminal. If you are using a separate EFI partition, the you can run `diskutil list` and find your partition in the output, and mount it accordingly.
+1. Boot into macOS
 
-2. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader) using macOS in your Linux EFI partition.
+    1. Mount your Linux EFI partition over there. In most cases it should be `disk0s1` and can be mounted by running `sudo diskutil mount disk0s1` in the terminal. If you are using a separate EFI partition, the you can run `diskutil list` and find your partition in the output, and mount it accordingly.
 
-3. Restart into macOS Recovery by immediately pressing and holding Command+R on startup. Open the terminal there and run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`.
+    2. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader) using macOS, and put it in your Linux EFI partition.
+
+3. Restart into macOS Recovery by immediately pressing and holding Command+R on startup.
+
+    1. Open the terminal there and run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`.
 
 4. Restart into Linux. You should now be able to access your Linux installation.
 
-5. Its recommended to use GRUB as a bootloader. If you wish to use some other bootloader, you need to figure out how to get the steps requiring GRUB given further working with your bootloader.
-
-6. Follow steps 4, 5 and 6 of the [If you are able to edit your kernel command line](https://wiki.t2linux.org/guides/hybrid-graphics/#if-you-are-able-to-edit-your-kernel-command-line-) section.
+5. Follow the instructions [above](#enabling-the-igpu).
 
 ## Use on Windows
 
