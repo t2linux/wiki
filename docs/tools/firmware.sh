@@ -88,11 +88,6 @@ case "$os" in
 			sudo tar xf /tmp/apple-wifi-fw/firmware.tar
 		fi
 
-		for firmware in ./brcm/brcmfmac4355c1*
-		do
-		sudo cp $firmware ${firmware/brcmfmac4355c1/brcmfmac89459}
-		done
-
 		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 		            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
 		do
