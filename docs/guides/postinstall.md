@@ -95,7 +95,6 @@ After running this script, if you wish to change the default mode of the Touch B
 
 In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
 
-- Try adding `usbhid.quirks=0x05ac:0x8302:0x80000` as a Kernel Parameter using your Bootloader.
 - Try running the following and rebooting.
   
    ```sh
