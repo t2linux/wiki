@@ -31,6 +31,7 @@ For other distros, you can download the distro's normal install ISO, but you wil
 ### Copying the ISO to the USB
 
 User friendly applications for copying the Linux install image to your USB include:
+
 - [USBImager](https://gitlab.com/bztsrc/usbimager/)
 - [Belana Etcher](https://www.balena.io/etcher/) (does collect analtyics data).
 
