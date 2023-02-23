@@ -30,7 +30,10 @@ For other distros, you can download the distro's normal install ISO, but you wil
 
 ### Copying the ISO to the USB
 
-You can use [Belana Etcher](https://www.balena.io/etcher/) to copy the Linux install image to your USB.
+User friendly applications for copying the Linux install image to your USB include:
+
+- [USBImager](https://gitlab.com/bztsrc/usbimager/)
+- [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data).
 
 !!! hint "`dd`"
     If you are familiar with the `dd` tool and the command line, you can use that instead. Use `diskutil list` to find the correct disk, then `sudo dd if=path/to/filename.iso of=/dev/rdiskX bs=1m`. Press `control-T` while it is running to make it show its current progress. **Make sure you select the correct disks.**
