@@ -41,7 +41,6 @@ An example to get PipeWire working on Ubuntu, which uses PulseAudio by default i
 # Issues
 
 - Some people are unable to get audio input to work. You may have to use a separate microphone.
-- All of apple's fancy tuning of the speakers is done in macOS, we don't have anything like that at the moment.
 
 # Approaches to fixing low microphone volume
 
@@ -54,8 +53,19 @@ An example to get PipeWire working on Ubuntu, which uses PulseAudio by default i
 The "Audio Volume" dialog / Audio in System Settings allow users to "Raise maximum volume", allowing to go past 100%. This
 does not offer a great deal of flexibility, it might work for getting acceptable recordings however.
 
+## Speakers
+
+Currently we have an experimental DSP config for 16,1 with 6 speakers.
+Note that each model need a special settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in MacOS.
+
+[DSP16,1](https://github.com/lemmyg/asahi-audio/tree/macbookT2_16_1)
+
 ## EasyEffects with PipeWire
 
 [EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using PipeWire. Compared
 to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
 boosts.
+
+
+
+
