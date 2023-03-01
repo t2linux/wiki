@@ -65,7 +65,3 @@ Note that each model need a special settings. Do not use it with other models as
 [EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using PipeWire. Compared
 to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
 boosts.
-
-
-
-
