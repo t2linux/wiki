@@ -55,7 +55,7 @@ does not offer a great deal of flexibility, it might work for getting acceptable
 
 ## Speakers
 
-- All of apple's fancy tuning of the speakers is done in macOS, similar configuration is currently available only for MacBook Pro 16 inch 2019 only.
+All of apple's fancy tuning of the speakers is done in macOS, similar configuration is currently available only for MacBook Pro 16 inch 2019 only.
 
 ### Macbook pro 16,1 2019
 
