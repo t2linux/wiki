@@ -42,7 +42,6 @@ An example to get PipeWire working on Ubuntu, which uses PulseAudio by default i
 
 - Some people are unable to get audio input to work. You may have to use a separate microphone.
 
-
 # Approaches to fixing low microphone volume
 
 ## PulseAudio (2019 16" MacBook Pro)
@@ -62,7 +61,7 @@ does not offer a great deal of flexibility, it might work for getting acceptable
 Currently we have an experimental DSP(Digital Signal Processing) config for Macbook Pro 16,1 2019 with 6 speakers.
 Note that each model need a special settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in MacOS.
 
-[DSP16,1](https://github.com/lemmyg/asahi-audio/tree/macbookT2_16_1)
+[DSP16,1](https://github.com/lemmyg/asahi-audio/blob/macbookT2_16_1/README.md)
 
 ## EasyEffects with PipeWire
 
