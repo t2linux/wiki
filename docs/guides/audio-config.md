@@ -55,7 +55,7 @@ does not offer a great deal of flexibility, it might work for getting acceptable
 
 ## Speakers
 
-Currently we have an experimental DSP config for 16,1 with 6 speakers.
+Currently we have an experimental DSP config for Macbook Pro 16,1 with 6 speakers.
 Note that each model need a special settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in MacOS.
 
 [DSP16,1](https://github.com/lemmyg/asahi-audio/tree/macbookT2_16_1)
