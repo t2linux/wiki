@@ -19,9 +19,11 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
         This will run a patch script that finds a fan device on your system.
         You can use its output for debug purposes
 
-3. Run the tests to confirm that everything is working `sudo make tests`
-4. If the tests ran successfully, install using `sudo make install`
-5. Now enable starting at boot
+3. Copy mbpfan.conf to /etc with `sudo cp mbpfan.conf /etc`
+4. Edit the config if needed
+5. Confirm that everything is working by running `sudo make tests`
+6. If the tests ran successfully, install using `sudo make install`
+7. Now enable starting at boot
 
     ```sh
     sudo cp mbpfan.service /etc/systemd/system/

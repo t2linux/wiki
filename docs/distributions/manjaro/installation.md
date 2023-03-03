@@ -1,6 +1,6 @@
 # Deprecation Notice
 
-Manjaro T2 support will be deprecated soon. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
+Manjaro T2 support is deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 
 # Download a latest release
 
@@ -15,32 +15,20 @@ Manjaro T2 support will be deprecated soon. See [Deprecation Plan](https://wiki.
 
 # Install Procedure
 
-1. Partition your drive in macOS so you can install Linux. You can either use Disk Utility or use Bootcamp, but the important thing is that you have two partitions (your macOS partition and your new linux one). It isn't recommended that you completely delete macOS as firmware updates are applied through it.
-2. Download BOTH .ZIP AND .Z01 files. You need to join those archives if you use Linux `unzip` utility.  
-3. Unzip the .zip file.
-4. Flash your Manjaro ISO to a USB Stick. If you want an easier way to do this. Use [Balena Etcher](https://www.balena.io/etcher/). Terminal users can also use dd.
-5. Disable macOS secure boot. [Apple's Documentation](https://support.apple.com/en-au/HT208330)
-
-    1. Turn on your Mac, then press and hold Command (⌘)-R immediately after you see the Apple logo to start up from macOS Recovery.
-    2. When you see the macOS Utilities window, choose Utilities > Startup Security Utility from the menu bar.
-    3. When you're asked to authenticate, click Enter macOS Password, then choose an administrator account and enter its password.
-    4. Set the first option to "No Security", and the second to "Allow booting from External Media".
-    5. Reboot your Mac.
-
-6. Once Secure boot is diabled, fully shutdown your Computer and Power it on again whilst holding the Option (⌥) key.
-7. Select the yellow EFI System option using the arrow keys and hit enter.
-8. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
-9. Open the installer and proceed normally until you arrive at the partitioning stage (the Installer will automatically start if you have used the second set of commands given above).
-10. Click Manual Partitioning.
-11. Click on `/dev/nvme0n1p1`, then press edit at the bottom of the install window, change the mount point to `/boot/efi`, and then click ok.
-12. Usually, the macOS partition is `/dev/nvme0n1p2` (the `Apple APFS` Partition). Ignore this partition.
-13. Delete the partition you created before - this is usually mounted to `/dev/nvme0n1p3`.
-14. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem. If you know what you're doing, feel free to skip to step 15.
+1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installing Manjaro.
+2. Boot into the ISO.
+3. Scroll down to `Boot x86 64 {Your Edition}` using the arrow keys and press enter.
+4. Open the installer and proceed normally until you arrive at the partitioning stage (the Installer will automatically start if you have used the second set of commands given above).
+5. Click Manual Partitioning.
+6. Click on `/dev/nvme0n1p1`, then press edit at the bottom of the install window, change the mount point to `/boot/efi`, and then click ok.
+7. Usually, the macOS partition is `/dev/nvme0n1p2` (the `Apple APFS` Partition). Ignore this partition.
+8. Delete the partition you created before - this is usually mounted to `/dev/nvme0n1p3`.
+9. These next steps involve partitioning the `/boot`(boot), `/`(Root) and `/home`(Home) partitions of your Linux filesystem. If you know what you're doing, feel free to skip to step 15.
 
     * Create a `2000 MiB` partition with `ext4` as the file system. Change the mount point to `/boot` and click ok.
     * Create a `51200 MiB` partition with `ext4` as the file system. Change the mount point to `/` and click ok.
     * Use the remaining disk space to create an `ext4` file system. Change the mount point to `/home`.
 
-15. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer. Make sure you remove the install medium once powered off.
-16. Once again, power on your computer whilst holding the Option (⌥) key. Then select EFI Boot.
-17. Welcome to Manjaro :)
+10. Continue the rest of the setup as normal. Once the setup process is complete, restart your computer. Make sure you remove the install medium once powered off.
+11. Once again, power on your computer whilst holding the Option (⌥) key. Then select EFI Boot.
+12. Welcome to Manjaro :)

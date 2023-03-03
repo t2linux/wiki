@@ -18,6 +18,7 @@ case "$os" in
 			echo -e "\nThis script is compatible only with macOS Monterey or later. Please upgrade your macOS."
 			exit 1
 		fi
+		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
 		echo "Mounting the EFI partition"
 		sudo diskutil mount disk0s1
 		echo "Getting Wi-Fi and Bluetooth firmware"
@@ -27,6 +28,19 @@ case "$os" in
 			tar czvf /Volumes/EFI/firmware.tar.gz *
 		else
 			tar czf /Volumes/EFI/firmware.tar.gz *
+		fi
+		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) ]]
+		then
+			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+			if [[ ${1-default} = -v ]]
+			then
+				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} /Volumes/EFI/brcmfmac4364b2-pcie.txt
+				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} /Volumes/EFI/brcmfmac4364b2-pcie.txcap_blob
+			else
+				cp /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} /Volumes/EFI/brcmfmac4364b2-pcie.txt
+				cp /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} /Volumes/EFI/brcmfmac4364b2-pcie.txcap_blob
+			fi
 		fi
 		echo "Copying this script to EFI"
 		cd - >/dev/null
@@ -73,10 +87,24 @@ case "$os" in
 		else
 			sudo tar xf /tmp/apple-wifi-fw/firmware.tar
 		fi
-		sudo modprobe -r brcmfmac
-		sudo modprobe brcmfmac
-		sudo modprobe -r hci_bcm4377
-		sudo modprobe hci_bcm4377
+
+		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
+		            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
+		do
+			if [ -f "$file" ]
+			then
+				if [[ ${1-default} = -v ]]
+				then
+					sudo cp -v $file /lib/firmware/brcm
+				else
+					sudo cp $file /lib/firmware/brcm
+				fi
+			fi
+		done
+		sudo modprobe -r brcmfmac || true
+		sudo modprobe brcmfmac || true
+		sudo modprobe -r hci_bcm4377 || true
+		sudo modprobe hci_bcm4377 || true
 		echo "Cleaning up"
 		sudo rm -r /tmp/apple-wifi-fw
 		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
@@ -84,7 +112,16 @@ case "$os" in
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
-			sudo rm $mountpoint/firmware.tar.gz $mountpoint/firmware.sh
+			for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
+			            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
+			            "$mountpoint/firmware.tar.gz" \
+			            "$mountpoint/firmware.sh"
+			do
+				if [ -f "$file" ]
+				then
+					sudo rm $file
+				fi
+			done
 		fi
 		echo "Running post-installation scripts"
 		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
