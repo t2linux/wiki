@@ -57,7 +57,7 @@ All of apple's fancy tuning of the speakers is done in macOS, but a similar conf
 
 ### MacBook Pro 16" 2019
 
-Currently we have an experimental DSP(Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers.
+Currently we have an experimental DSP (Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers.
 Note that each model needs specific settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in macOS.
 
 [DSP config instructions](https://github.com/lemmyg/asahi-audio/blob/macbookT2_16_1/README.md)
