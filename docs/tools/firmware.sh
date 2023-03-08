@@ -20,14 +20,15 @@ case "$os" in
 		fi
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
 		echo "Mounting the EFI partition"
+		EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 		sudo diskutil mount disk0s1
 		echo "Getting Wi-Fi and Bluetooth firmware"
 		cd /usr/share/firmware
 		if [[ ${1-default} = -v ]]
 		then
-			tar czvf /Volumes/EFI/firmware.tar.gz *
+			tar czvf "/Volumes/${EFILABEL}/firmware.tar.gz" *
 		else
-			tar czf /Volumes/EFI/firmware.tar.gz *
+			tar czf "/Volumes/${EFILABEL}/firmware.tar.gz" *
 		fi
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) ]]
 		then
@@ -35,16 +36,16 @@ case "$os" in
 			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
 			if [[ ${1-default} = -v ]]
 			then
-				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} /Volumes/EFI/brcmfmac4364b2-pcie.txt
-				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} /Volumes/EFI/brcmfmac4364b2-pcie.txcap_blob
+				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
+				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
 			else
-				cp /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} /Volumes/EFI/brcmfmac4364b2-pcie.txt
-				cp /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} /Volumes/EFI/brcmfmac4364b2-pcie.txcap_blob
+				cp /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
+				cp /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
 			fi
 		fi
 		echo "Copying this script to EFI"
 		cd - >/dev/null
-		cp "$0" "/Volumes/EFI/firmware.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is wifi.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
+		cp "$0" "/Volumes/${EFILABEL}/firmware.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
