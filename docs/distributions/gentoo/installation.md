@@ -14,6 +14,8 @@
 
 5. Setup the T2 Gentoo overlay:
 
+   1. Install `dev-vcs/git` and `app-eselect/eselect-repository`, then enable and sync the overlay:
+
    ```bash
    emerge -av app-eselect/eselect-repository dev-vcs/git
    eselect repository add t2 git https://codeberg.org/vimproved/t2-overlay.git
@@ -21,7 +23,8 @@
    ```
 
 6. Install the T2 Gentoo kernel:
-   - The T2 overlay provides a [Distribution Kernel](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Distribution_kernels) for T2 Macs. To install it, run:
+
+   1. The T2 overlay provides a [Distribution Kernel](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Distribution_kernels) for T2 Macs. To install it, run:
 
    ```bash
    echo "sys-kernel/t2gentoo-kernel" >> /etc/portage/package.accept_keywords/t2gentoo-kernel
@@ -30,6 +33,8 @@
    ```
 
 7. Install Wi-Fi firmware for T2 Macs:
+
+    1. The T2 overlay provides a package for T2 Wi-Fi firmware. To install it, run:
 
    ```bash
    mkdir -p /etc/portage/package.license
