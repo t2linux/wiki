@@ -9,8 +9,8 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 1. Install `t2fand`.
 
     -   If you're using Arch Linux, EndeavourOS, or Manjaro:
-        
-	1. Simply install it by running `sudo pacman -S t2fand`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
+
+        1. Simply install it by running `sudo pacman -S t2fand`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
 
     -   If you're using other distributions:
 
@@ -18,14 +18,9 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         2. Change directory into the cloned repository.
 
-	3. Install it by running `make install`.
+        3. Install it by running `make install`.
 
-
-2. Enable daemon by running `sudo systemctl enable --now t2fand`. 
-
-    !!! note
-        This will run a patch script that finds a fan device on your system.
-        You can use its output for debug purposes
+2. Enable daemon by running `sudo systemctl enable --now t2fand`.
 
 3. Edit the config and restart the daemon if needed.
 
