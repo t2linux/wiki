@@ -16,7 +16,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
     -   If you're using Debian or Ubuntu based distros:
 
-        1. If you don't have t2-ubuntu-repo, add it first by running:
+        1. If you don't have t2-ubuntu-repo, add it first by running:-
 
         ```sh
         curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
