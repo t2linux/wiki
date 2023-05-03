@@ -91,7 +91,7 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
 The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
-As a secondary option, if you want to try something new and you're using Arch Linux, EndeavourOS, or Manjaro, you could install `touchbard` package and use that instead. For more information, visit [touchbard repository](https://github.com/NoaHimesaka1873/touchbard).
+If you want to try something new and you're using Arch Linux, EndeavourOS, or Manjaro, you could install `touchbard` package and use that instead. For more information, visit [touchbard repository](https://github.com/NoaHimesaka1873/touchbard).
 
 After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
 

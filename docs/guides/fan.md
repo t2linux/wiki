@@ -1,38 +1,38 @@
 # Introduction
 
-This page is a step by step guide to get fan control working on t2 Macs.
+This page is a step by step guide to get fan control working on T2 Macs.
 
 In some Macs, the fan has been found to work out of the box. In such a case the driver is not required until you want to force a certain speed or do some other configuration which can be done by the help of this driver.
 
 ## Steps
 
-1. Clone the repository into a directory of your choice
+1. Install `t2fand`.
 
-    ```sh
-    git clone https://github.com/networkException/mbpfan
-    cd mbpfan
-    ```
+    -   If you're using Arch based distros:
 
-2. Compile the daemon using `make`
+        1. Check if you installed Arch using our guide or added our repositories. If you haven't done that, follow [this guide](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel) first.
 
-    !!! note
-        This will run a patch script that finds a fan device on your system.
-        You can use its output for debug purposes
+        2. Install the package by running `sudo pacman -S t2fand`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
 
-3. Copy mbpfan.conf to /etc with `sudo cp mbpfan.conf /etc`
-4. Edit the config if needed
-5. Confirm that everything is working by running `sudo make tests`
-6. If the tests ran successfully, install using `sudo make install`
-7. Now enable starting at boot
+    -   If you're using Debian or Ubuntu based distros:
 
-    ```sh
-    sudo cp mbpfan.service /etc/systemd/system/
-    sudo systemctl enable mbpfan.service
-    sudo systemctl daemon-reload
-    sudo systemctl start mbpfan.service
-    ```
+        1. If you don't have t2-ubuntu-repo, follow [this](https://github.com/AdityaGarg8/t2-ubuntu-repo#apt-repository-for-t2-macs) first to add the repository.
+
+        2. Install the package by running `sudo apt install t2fand`.
+
+    -   If you're using other distributions:
+
+        1. Clone the repository by running `git clone https://github.com/NoaHimesaka1873/t2fand`
+
+        2. Change directory into the cloned repository.
+
+        3. Install it by running `make install`.
+
+2. Enable daemon by running `sudo systemctl enable --now t2fand`.
+
+3. Edit the config and restart the daemon by running `sudo systemctl restart t2fand` if needed.
 
 ## Configuration
 
-The daemons config file can be found at `/etc/mbpfan.conf`. Uncommenting and setting `min_fan1_speed` for example will let you
-force a certain speed. Note that for laptops with a second fan, you need to add `min_fan2_speed` and `max_fan2_speed`.
+The daemons config file can be found at `/etc/t2fand.conf`. You can change the activating temperature and/or fan curve to suit your needs.
+For more information, like how fan curves look like, check out [the repository](https://github.com/NoaHimesaka1873/t2fand).

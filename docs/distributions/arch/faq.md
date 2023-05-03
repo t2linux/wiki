@@ -16,7 +16,7 @@ SigLevel = Never
 Then install new kernel and supporting packages by running this:
 `sudo pacman -Syu linux-t2 apple-t2-audio-config apple-bcm-firmware`
 
-You can use Xanmod kernel instead by replacing `linux-t2` with `linux-xanmod-edge-t2`. If you need header package, also install `linux-t2-headers` (or `linux-xanmod-edge-t2-headers` if you chose to install Xanmod kernel).
+You can use Xanmod kernel instead by replacing `linux-t2` with `linux-xanmod-t2`. If you need header package, also install `linux-t2-headers` (or `linux-xanmod-t2-headers` if you chose to install Xanmod kernel).
 
 # Building Kernel
 
