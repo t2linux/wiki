@@ -17,13 +17,14 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
     -   If you're using Debian or Ubuntu based distros:
 
         1. If you don't have t2-ubuntu-repo, add it first by running:
-	```
-	curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
+
+        ```sh
+        curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
         sudo curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
         sudo apt update
         ```
 
-	2. Install the package by running `sudo apt install t2fand`.
+        2. Install the package by running `sudo apt install t2fand`.
 
     -   If you're using other distributions:
 
