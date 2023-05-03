@@ -30,7 +30,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 2. Enable daemon by running `sudo systemctl enable --now t2fand`.
 
-3. Edit the config and restart the daemon if needed.
+3. Edit the config and restart the daemon by running `sudo systemctl restart t2fand` if needed.
 
 ## Configuration
 
