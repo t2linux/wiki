@@ -10,9 +10,8 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
     -   If you're using Arch Linux, EndeavourOS, Manjaro, or Ubuntu:
 
-        !!! WARNING
-
-	    If you're using Arch Linux, check if you installed Arch using our guide or added our repositories. If you haven't done that, follow [this guide](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel) first.
+        !!! warning
+            If you're using Arch Linux, check if you installed Arch using our guide or added our repositories. If you haven't done that, follow [this guide](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel) first.
 
         1. Simply install `t2fand` package using your distro's package manager. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
 
