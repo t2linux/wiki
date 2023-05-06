@@ -41,7 +41,7 @@ You will need:
 
 6. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
-7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
+7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`. If you are using encryption and need to enter an encryption key during boot you may also want to add `hid-apple`
 
 8. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
