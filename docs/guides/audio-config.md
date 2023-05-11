@@ -44,7 +44,7 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 
 ## PulseAudio (2019 16" MacBook Pro)
 
-[Monitor](https://github.com/mahboobkarimian/mbp-2019-Ubuntu-audio) the volume of the microphone and set it back to 400% when a sudden drop in the volume of the microphone occurs (something sets in to 100%. This will help to have consistent microphone volume during video/audio calls.
+[Monitor](https://github.com/mahboobkarimian/mbp-2019-Ubuntu-audio) the volume of the microphone and set it back to 400% when a sudden drop in the volume of the microphone occurs (something sets it to 100%). This will help to have consistent microphone volume during video/audio calls.
 
 ## KDE
 
