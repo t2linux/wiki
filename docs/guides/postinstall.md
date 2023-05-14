@@ -117,7 +117,7 @@ Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2
 
 # Network Manager recurrent notifications
 
-Some users has experience recurrent notifications due Apple Ethernet module. To avoid those notifications we can blaklist `cdc_ncm` and `cdc_mbim` modules with the following command:
+Some users has experience recurrent notifications due Apple Ethernet module. To avoid those notifications we can blaklist `cdc_ncm` and `cdc_mbim` modules with the following command.
 
 ```
 sudo sh -c 'echo "# T2 Disable Unused Apple Ethernet
