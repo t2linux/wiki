@@ -79,6 +79,10 @@ After correctly installing and configuring rEFInd, we need to make it boot by de
 
 Sometimes, while booting into macOS using rEFInd, users get stuck at a blank screen. This bug is observed only if you have performed a force/unsafe shutdown by pressing and holding the power button in the previous boot. Some users have also faced it in the first macOS boot using rEFInd on new rEFInd installations. In order to fix it, turn off your Mac and restart while holding down the **Option (Alt)** key. Release the Option key when the Mac Startup Manager gets displayed. Boot into macOS using the Mac Startup Manager. This shall fix the bug for subsequent boots.
 
+# Make the EFI partition readable for any user (Optional)
+
+Some Linux distributions mount the EFI partition only readable for the root user. In order to make it easier to access to the Refind config, you can mount this partition as readable to others as well. In the Linux `/etc/fstab` file, we can set the `/boot/efi` unmask to 0002.
+
 # Using rEFInd as a replacement for GRUB, systemd-boot etc.
 
 By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But we can also boot linux directly by using rEFInd. This can be useful in situations where other bootloaders are causing issues. In order to do so, follow the following steps :-
