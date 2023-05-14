@@ -114,12 +114,11 @@ The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. Bu
 
 Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2linux.org/guides/wifi-bluetooth/) guide.
 
-
 # Network Manager recurrent notifications
 
 Some users has experience recurrent notifications due Apple Ethernet module. To avoid those notifications we can blaklist `cdc_ncm` and `cdc_mbim` modules with the following command.
 
-```
+```sh
 sudo sh -c 'echo "# T2 Disable Unused Apple Ethernet
 blacklist cdc_ncm
 blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf
