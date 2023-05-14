@@ -81,7 +81,7 @@ Sometimes, while booting into macOS using rEFInd, users get stuck at a blank scr
 
 # Make the EFI partition readable for any user (Optional)
 
-Some Linux distributions mount the EFI partition only readable for the root user. In order to make it easier to access to the Refind config, you can mount this partition as readable to others as well. In the Linux `/etc/fstab` file, we can set the `/boot/efi` unmask to 0002.
+Some Linux distributions mount the EFI partition only readable for the root user. In order to make it easier to access to the Refind config, you can mount this partition as readable to others as well. In the Linux `/etc/fstab` file, we can set the `/boot/efi` unmask to 0002. This change will make the file readable by any user but only writable by the root. Similar to Linux system files.
 
 # Using rEFInd as a replacement for GRUB, systemd-boot etc.
 
