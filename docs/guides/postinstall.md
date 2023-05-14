@@ -113,3 +113,14 @@ If you still face an issue, mention it [here](https://github.com/t2linux/wiki/is
 The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. But, we also need firmware to get them working from macOS.
 
 Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2linux.org/guides/wifi-bluetooth/) guide.
+
+
+# Network Manager recurrent notifications
+
+Some users has experience recurrent notifications due Apple Ethernet module. To avoid those notifications we can blaklist `cdc_ncm` and `cdc_mbim` modules with the following command:
+
+```
+sudo sh -c 'echo "# T2 Disable Unused Apple Ethernet
+blacklist cdc_ncm
+blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf
+```
