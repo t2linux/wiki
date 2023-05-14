@@ -124,4 +124,4 @@ blacklist cdc_ncm
 blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf
 ```
 
-Please note that these modules may be required in the future. Therefore, you may have to remove them from the blacklist at somepoint.
+Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
