@@ -123,3 +123,5 @@ sudo sh -c 'echo "# T2 Disable Unused Apple Ethernet
 blacklist cdc_ncm
 blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf
 ```
+
+Please note that these modules may be required in the future. Therefore, you may have to remove them from the blacklist in the future.
