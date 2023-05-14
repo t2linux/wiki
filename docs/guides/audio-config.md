@@ -38,7 +38,7 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 
 # Internal microphones DSP Configuration.
 
-In order adjust the microphones signal automatically, we can use the followin Pipewire filterchain config:-
+In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:-
 
 [Microphones config instructions](https://github.com/lemmyg/t2-apple-mic-dsp)
 
