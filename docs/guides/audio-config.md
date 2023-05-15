@@ -36,15 +36,15 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 !!!note "Switching to headphones automatically"
     If you want headphones to be switched to automatically when they are plugged in, you should set them as the default audio sink using the settings app of your DE, `pavucontrol`, `pactl` or `wpctl`.
 
+# Internal microphones DSP Configuration.
+
+In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:-
+
+[Microphones config instructions](https://github.com/lemmyg/t2-apple-mic-dsp)
+
 # Issues
 
 - Some people are unable to get audio input to work. You may have to use a separate microphone.
-
-# Approaches to fixing low microphone volume
-
-## PulseAudio (2019 16" MacBook Pro)
-
-[Monitor](https://github.com/mahboobkarimian/mbp-2019-Ubuntu-audio) the volume of the microphone and set it back to 400% when a sudden drop in the volume of the microphone occurs (something sets it to 100%). This will help to have consistent microphone volume during video/audio calls.
 
 ## KDE
 

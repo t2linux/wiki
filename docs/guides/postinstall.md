@@ -113,3 +113,15 @@ If you still face an issue, mention it [here](https://github.com/t2linux/wiki/is
 The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. But, we also need firmware to get them working from macOS.
 
 Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2linux.org/guides/wifi-bluetooth/) guide.
+
+# Network Manager recurrent notifications
+
+Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can blacklist `cdc_ncm` and `cdc_mbim` modules with the following command:-
+
+```sh
+sudo sh -c 'echo "# Disable for now T2 chip internal usb ethernet
+blacklist cdc_ncm
+blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
+```
+
+Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
