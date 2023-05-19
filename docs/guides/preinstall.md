@@ -20,7 +20,8 @@ If there is an ISO with T2 support for your distro, you can download it here:
 | Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
 | blendOS            | <https://blendos.co/#t2linux> |
 | EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
-| Fedora Linux       | <https://github.com/mikeeq/mbp-fedora> |
+| Fedora       | <https://github.com/mikeeq/mbp-fedora> |
+| Fedora       | <https://github.com/t2linux/t2linux-fedora-iso/releases latest> |
 | Gentoo             | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
 | Manjaro            | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
 | NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
