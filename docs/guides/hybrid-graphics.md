@@ -43,7 +43,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 2.  Set up apple-set-os-loader to make Apple's firmware show the iGPU so apple-gmux will be able to switch to it:
 
-    1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
+    1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` and `build-essential` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
 
         ```sh
         git clone https://github.com/aa15032261/apple_set_os-loader
