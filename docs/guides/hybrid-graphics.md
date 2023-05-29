@@ -53,7 +53,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
         Arch, EndeavorOS, and Manjaro:
 
-        ``sh
+        ```sh
         sudo pacman -Syu base-devel gnu-efi
         ```
 
