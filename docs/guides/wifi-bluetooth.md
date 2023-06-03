@@ -2,7 +2,8 @@
 
 This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are non T2 Intel Macs, and the newer **Apple Silicon Macs**. Although, Wi-Fi should have been set up already in case of **Apple Silicon Macs** by Asahi's installer.
 
-!!! Warning "Arch/EndeavourOS" If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide.
+!!! Warning "Arch/EndeavourOS"
+    If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
