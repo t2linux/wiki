@@ -40,7 +40,7 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 
 In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:-
 
-[Microphones config instructions](https://github.com/lemmyg/t2-apple-audio-dsp)
+[Microphones config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/mic)
 
 # Issues
 
@@ -66,4 +66,4 @@ All of apple's fancy tuning of the speakers is done in macOS, but a similar conf
 Currently we have an experimental DSP (Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers.
 Note that each model needs specific settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in macOS.
 
-[DSP config instructions](https://github.com/lemmyg/asahi-audio/blob/macbookT2_16_1/README.md)
+[DSP config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/speakers_161)
