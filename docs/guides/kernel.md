@@ -24,15 +24,12 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 ```bash
 mkdir build && cd build
 git clone --depth=1 https://github.com/t2linux/linux-t2-patches patches
-rm ./patches/1001*
 
 pkgver=$(curl -sL https://github.com/t2linux/T2-Ubuntu-Kernel/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' | cut -d "v" -f 2 | cut -d "-" -f 1)
 _srcname=linux-${pkgver}
 wget https://www.kernel.org/pub/linux/kernel/v${pkgver//.*}.x/linux-${pkgver}.tar.xz
 tar xf $_srcname.tar.xz
 cd $_srcname
-
-git clone --depth=1 https://github.com/kekrby/apple-bce drivers/staging/apple-bce
 
 for patch in ../patches/*.patch; do
     patch -Np1 < $patch
