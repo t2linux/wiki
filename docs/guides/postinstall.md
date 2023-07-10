@@ -26,7 +26,7 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 | Fedora                              | <https://github.com/t2linux/t2linux-fedora-kernel> |
 | Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
 | Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
-| NixOS                               | <https://github.com/kekrby/nixos-hardware> |
+| NixOS                               | <https://github.com/NixOS/nixos-hardware> |
 | Ubuntu based distros                | <https://github.com/t2linux/T2-Ubuntu-Kernel> |
 | Debian based distros                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
 
