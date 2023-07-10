@@ -20,7 +20,7 @@
 
 3. Generate your configuration using `sudo nixos-generate-config --root /mnt`.
 4. Edit `/mnt/etc/nixos/configuration.nix`:
-    * Add `"${builtins.fetchGit { url = "https://github.com/kekrby/nixos-hardware.git"; }}/apple/t2"` to `imports`.
+    * Add `"${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/apple/t2"` to `imports`.
     * Copy the WiFi/Bluetooth firmware to `/mnt/etc/nixos/firmware/brcm` and add this snippet to your `configuration.nix`:
 
         ```nix
