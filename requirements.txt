@@ -3,4 +3,4 @@
 
 mkdocs == 1.4.3
 mkdocs-material == 9.1.18
-mkdocs-redirects == 1.2.0
+mkdocs-redirects == 1.2.1
