@@ -45,12 +45,15 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
     1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
 
+        !!! info Binary Releases
+            If you have problems compiling apple_set_os-loader, you can download the pre-compiled binary from the [releases page](https://github.com/Redecorating/apple_set_os-loader/releases/latest)
+
         - Ubuntu and Debian: `sudo apt install gnu-efi build-essential`
         - Arch, EndeavorOS, and Manjaro: `sudo pacman -Syu base-devel gnu-efi`
         - Fedora: `sudo dnf install "@C Development Tools and Libraries" gnu-efi`
 
         ```sh
-        git clone https://github.com/aa15032261/apple_set_os-loader
+        git clone https://github.com/Redecorating/apple_set_os-loader
         cd apple_set_os-loader
         make
         sudo mv /boot/efi/efi/boot/bootx64.efi /boot/efi/efi/boot/bootx64_original.efi
