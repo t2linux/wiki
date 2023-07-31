@@ -39,7 +39,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 !!! Warning
     You should only use the `low` mode if you experience loud fans, excessive heat, or a very short battery life. If you want better performance for gaming and other GPU intensive tasks, then you should use the `high` mode.
-    
+
 To apply the desired power mode, create the file `/etc/udev/rules.d/30-amdgpu-pm.rules` with the following contents (replace `MODE GOES HERE` with `high` or `low`):
 
 ```plain
