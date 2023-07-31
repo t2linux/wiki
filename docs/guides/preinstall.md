@@ -26,6 +26,7 @@ Listed below are the currently available ISO files with T2 support. Choose a dis
 | Manjaro            | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
 | NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
 | Ubuntu             | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
+| Kubuntu            | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 
 For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader (Eg :- GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
 
