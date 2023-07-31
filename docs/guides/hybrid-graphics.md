@@ -32,6 +32,8 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 ## Enabling the iGPU
 
+These are general instructions that applies to most distros. For NixOS, please skip ahead to the separate section further down,
+
 1.  Configue apple-gmux to switch to the IGPU at boot
 
     1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
@@ -76,6 +78,65 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
     3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader).
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
+
+### NixOS
+
+OBS! These instructions assumes a systemd bootloader. If using something else you will need to make some minor tweaks to assure the .efi file ends up in correct dir and gets set as default.
+
+1.  Create a new file in `/etc/nixos/` called `hybrid_graphics.nix`:
+
+    ```plain
+    { config, pkgs, ... }:
+    let
+    my-efi-app = pkgs.stdenv.mkDerivation rec {
+        name = "hybrid-graphics-1.0";
+
+        src = pkgs.fetchFromGitHub {
+        owner = "Redecorating";
+        repo = "apple_set_os-loader";
+        rev = "r33.9856dc4";
+        sha256 = "hvwqfoF989PfDRrwU0BMi69nFjPeOmSaD6vR6jIRK2Y=";
+        };
+
+        buildInputs = [ pkgs.gnu-efi ];
+
+        buildPhase = ''
+        substituteInPlace Makefile --replace "/usr" '$(GNU_EFI)'
+        export GNU_EFI=${pkgs.gnu-efi}
+        make
+        '';
+
+        installPhase = ''
+        install -D bootx64_silent.efi $out/bootx64.efi
+        '';
+    };
+    in
+    {
+    system.activationScripts.my-efi-app = {
+        text = ''
+        mkdir -p /boot/efi/EFI/hybrid_graphics
+        cp ${my-efi-app}/bootx64.efi /boot/efi/EFI/hybrid_graphics/bootx64.efi
+        cp /boot/efi/EFI/BOOT/BOOTX64.EFI /boot/efi/EFI/BOOT/bootx64_original.efi
+        '';
+    };
+
+    environment.etc."modprobe.d/apple-gmux.conf".text = ''
+    # Enable the iGPU by default if present
+    options apple-gmux force_igd=y
+    '';
+
+    environment.systemPackages = with pkgs; [ my-efi-app ];
+    }
+    ```
+
+2.  Add it to the imports in `/etc/nixos/configuration.nix`.
+
+3.  ```sh
+    sudo nixos-rebuild switch
+    ```
+4.  Use `efibootmgr` to create a new default entry point for `/boot/efi/EFI/hybrid_graphics/bootx64.efi` (see https://nixos.wiki/wiki/Bootloader for more details). It will then automatically load `/boot/efi/EFI/BOOT/bootx64_original.efi` so carefully check to make sure that file has been generated correctly. If not then adjust the relevant lines in `hybrid_graphics.nix`.
+
+Please note that this is using the silent version meaning there will be no info + countdown at boot. If you prefer the verbose version simply remove `silent` from the `install -D bootx64_silent.efi $out/bootx64.efi` row.
 
 ## MacBookPro16,4
 
