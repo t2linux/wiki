@@ -1,15 +1,15 @@
 # Pre install steps
 
-These steps are common to most distros. Please refer to both this page and this wiki's install page for your distro.
+While the following steps are common to most distributions, it is recommended to check the [install page for your distro](https://wiki.t2linux.org/distributions/overview/) before following this guide.
 
-## Partition with Disk Utility
+## 1. Partition with Disk Utility
 
 In macOS Disk Utility, [create a partition](https://support.apple.com/guide/disk-utility/dskutl14027/mac). The file system format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from a Linux installer, so you must make space now. **When prompted to, do not create an APFS volume for Linux**, you want a partition. If you want separate partitions for `/home`, `/boot` etc., create them as well.
 
 !!! note "Triple booting with Linux and Windows"
     Refer to [this guide](https://wiki.t2linux.org/guides/windows/) to make sure you will be able to boot both Windows and Linux.
 
-## Create Linux installation USB
+## 2. Create Linux installation USB
 
 ### Selecting an ISO
 
@@ -41,13 +41,13 @@ User friendly applications for copying the Linux install image to your USB inclu
 
 While the installation image is being written to the USB, you can [copy Wi-Fi firmware](#copy-wi-fi-firmware), but don't follow the steps after that until it has finished writing the image.
 
-## Copy Wi-Fi firmware
+## 3. Copy Wi-Fi firmware
 
 Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we copy these files from macOS to the EFI partition where Linux can access these files and then install them.
 
 Follow the instructions in this section to be followed on macOS [here](https://wiki.t2linux.org/guides/wifi-bluetooth/#on-macos). The sections of that page to be followed on Linux can be followed later, once you've successfully installed Linux.
 
-## Disable Secure Boot
+## 4. Disable Secure Boot
 
 !!! note
     Wait until you have finished creating your install USB and you have copied Wi-Fi firmware before proceeding to this section.
@@ -60,7 +60,7 @@ Apple's Secure Boot implementation does not allow booting anything other than ma
 !!! Note "Keeping your Mac secure while Secure Boot is off"
     If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS (Currently that would be macOS). After installing Linux on the internal SSD, you have the option to reselect "Disallow booting from external or removable media" in Startup Security Utility.
 
-## Booting your Linux install USB
+## 5. Booting your Linux install USB
 
 1. Ensure the Linux Installation USB you created is plugged into your Mac.
 2. Reboot while holding down the option (⌥) key, this will put you in macOS Startup Manager.
@@ -70,7 +70,7 @@ Apple's Secure Boot implementation does not allow booting anything other than ma
 !!! Warning "A software update is required to use this startup disk"
     If you see this message when trying to boot Linux, Apple may be enforcing secure boot. Make sure you have it [turned off](#disable-secure-boot), and if there were two Orange "EFI Boot" entries in Startup Manager, try selecting the other one. This occurs when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+") even when Secure Boot is completely disabled.
 
-## Follow distro specific steps
+## 6. Follow distro specific steps
 
 Once you've selected your USB, it should boot your distro's install image. Now follow the installation guide of your specific distribution.
 
