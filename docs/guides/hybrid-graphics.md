@@ -81,7 +81,7 @@ These are general instructions that applies to most distros. For NixOS, please s
 
 ### NixOS
 
-OBS! These instructions assumes a systemd bootloader. If using something else you will need to make some minor tweaks to assure the .efi file ends up in correct dir and gets set as default.
+OBS! These instructions assume that you are using systemd-boot as your bootloader. If you are using something else you will need to make some minor tweaks to assure the .efi file ends up in correct dir and gets set as default boot target.
 
 1.  Create a new file in `/etc/nixos/` called `hybrid_graphics.nix`:
 
