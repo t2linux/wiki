@@ -8,11 +8,11 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 1.  Set up `apple-set-os-loader` to show the iGPU to linux:
 
-    1.  Download apple-set-os-loader from [here](https://github.com/Redecorating/apple_set_os-loader/releases/tag/r33.9856dc4). You need to download the `bootx64.efi` file. 
-    
+    1.  Download apple-set-os-loader from [here](https://github.com/Redecorating/apple_set_os-loader/releases/tag/r33.9856dc4). You need to download the `bootx64.efi` file.
+
         !!! Info "Silent Boot"
             If you want a silent version of this that doesn't wait for input, you can download the `bootx64_silent.efi` file instead.
-        
+
     2. Copy apple-set-os-loader to the ESP. These instructions assume you mount your EFI partition at `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
 
         ```sh
@@ -29,25 +29,22 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
     options apple-gmux force_igd=y
     ```
 
-
 3.  Reboot to Linux
 
     1. Wait or press any key other than `z`
 
-
     2. `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery life now as your AMD GPU can be turned off when not needed.
 
-    
-# Setting AMD GPU Dynamic Power Management manually
+## Setting AMD GPU Dynamic Power Management manually
 
-    !!! Warning
-        You should only use the `low` mode if you experience loud fans, excessive heat, or a very short battery life. If you want better performance for gaming and other GPU intensive tasks, then you should use the `high` mode.
-        
-    To apply the desired power mode, create the file `/etc/udev/rules.d/30-amdgpu-pm.rules` with the following contents (replace `MODE GOES HERE` with `high` or `low`):
+!!! Warning
+    You should only use the `low` mode if you experience loud fans, excessive heat, or a very short battery life. If you want better performance for gaming and other GPU intensive tasks, then you should use the `high` mode.
     
-    ```plain
-    KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="MODE GOES HERE"
-     ```
+To apply the desired power mode, create the file `/etc/udev/rules.d/30-amdgpu-pm.rules` with the following contents (replace `MODE GOES HERE` with `high` or `low`):
+
+```plain
+KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="MODE GOES HERE"
+ ```
 
 ## MacBookPro16,4
 
