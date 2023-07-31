@@ -103,9 +103,13 @@ This may occur when booting Linux from a partition formatted as APFS or "macOS E
 
 ## Follow distro specific steps
 
-Once you've selected your USB, it should boot your distro's install image. Now follow the installation guide of your specific distribution.
+You can now follow the installation guide for your chosen distribution: [Guides for different distributions](https://wiki.t2linux.org/distributions/overview/)
 
-!!! Warning "Automatic Partitioning"
-    The installers of many distros provide options like "Automatic Partitioning" when installing Linux. You always have to select the option that allows "Manual Partitioning". **Do not** select "Automatic Partitioning" as it shall remove macOS as well. During manual partitioning make sure that you mount `/dev/nvme0n1p1` or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever applies to your case) at `/boot/efi` and the partition you created for Linux at `/`. If you want separate partitions for `/home`, `/boot` etc., make sure you have created them before as well and mount them accordingly during manual partitioning.
-
-This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.
+**Before proceeding, a reminder about Partitioning:**
+The installers of many distros will provide options like "Automatic Partitioning" when installing Linux.
+**Do not use** "Automatic Partitioning" as it may remove macOS as well. 
+You **always** must select the option that allows **"Manual Partitioning"**. 
+During manual partitioning make sure that:
+- you mount your EFI `/dev/nvme0n1p1`  at `/boot/efi` (or if you use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), at whatever applies to your case)
+- you mount your before created partition for Linux at `/` 
+- if you created separate partitions for `/home`, `/boot`, etc.. you mount each of them correctly according to their mount points.
