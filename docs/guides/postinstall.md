@@ -23,7 +23,7 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 | Arch based distros                  | <https://github.com/Redecorating/linux-t2-arch> |
 | Arch based distros (Xanmod kernels) | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
 | Fedora                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
-| Fedora                              | <https://github.com/t2linux/t2linux-fedora-kernel> |
+| Fedora                              | <https://github.com/t2linux/fedora-kernel> |
 | Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
 | Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
 | NixOS                               | <https://github.com/NixOS/nixos-hardware> |

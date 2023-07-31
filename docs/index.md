@@ -27,7 +27,7 @@ If the distribution you want to use has a guide [here](https://wiki.t2linux.org/
 - Arch [https://github.com/t2linux/archiso-t2](https://github.com/t2linux/archiso-t2)
 - EndeavourOS [https://github.com/t2linux/EndeavourOS-ISO-t2](https://github.com/t2linux/EndeavourOS-ISO-t2)
 - Fedora [https://github.com/mikeeq/mbp-fedora](https://github.com/mikeeq/mbp-fedora)
-- Fedora [https://github.com/t2linux/t2linux-fedora-iso](https://github.com/t2linux/t2linux-fedora-iso)
+- Fedora [https://github.com/t2linux/fedora-iso](https://github.com/t2linux/fedora-iso)
 - Gentoo [https://github.com/t2linux/T2-Gentoo-Kernel](https://github.com/t2linux/T2-Gentoo-Kernel)
 - Manjaro [https://github.com/NoaHimesaka1873/manjaroiso-t2](https://github.com/NoaHimesaka1873/manjaroiso-t2)
 - Tails [https://github.com/T2minator/mbp-tails](https://github.com/T2minator/mbp-tails)
