@@ -114,9 +114,8 @@ OBS! These instructions assume that you are using systemd-boot as your bootloade
     {
     system.activationScripts.hybrid-graphics = {
         text = ''
-        mkdir -p /boot/efi/EFI/hybrid_graphics
-        cp ${hybrid-graphics}/bootx64.efi /boot/efi/EFI/hybrid_graphics/bootx64.efi
         cp /boot/efi/EFI/BOOT/BOOTX64.EFI /boot/efi/EFI/BOOT/bootx64_original.efi
+        cp ${hybrid-graphics}/bootx64.efi /boot/efi/EFI/BOOT/bootx64.efi
         '';
     };
 
@@ -134,9 +133,11 @@ OBS! These instructions assume that you are using systemd-boot as your bootloade
 3.  ```sh
     sudo nixos-rebuild switch
     ```
-4.  Use `efibootmgr` to create a new default boot entry point: `/boot/efi/EFI/hybrid_graphics/bootx64.efi` (see https://nixos.wiki/wiki/Bootloader for more details). It will then automatically load `/boot/efi/EFI/BOOT/bootx64_original.efi` which is a copy of the main loader (in this case systemd), so carefully check to make sure that file has been generated correctly. If not then adjust the relevant lines in `hybrid_graphics.nix`.
+4.  In case you have 'blessed' the EFI volume to make it auto load then `/boot/efi/EFI/systemd/bootx64.efi` will be used as default entry as opposed to `/boot/efi/EFI/BOOT/bootx64.efi` which is the hook that enables hybrid graphics. In this case use `efibootmgr` to change the boot entry point to `/boot/efi/EFI/BOOT/bootx64.efi` (see https://nixos.wiki/wiki/Bootloader for more details).
 
-Please note that this is using the silent version meaning there will be no info + countdown at boot. If you prefer the verbose version simply remove `silent` from the `install -D bootx64_silent.efi $out/bootx64.efi` row.
+If the EFI is not blessed and you boot into Linux by holding Option down and manually select the volume then this step is not necessay. That's because the Apple firmware will then go by path and always run the standard `/boot/efi/EFI/BOOT/bootx64.efi`.
+
+Please note that this is using the silent version meaning there will be no info + countdown at boot. If you prefer the verbose version simply remove `_silent` from the `install -D bootx64_silent.efi $out/bootx64.efi` row.
 
 ## MacBookPro16,4
 
