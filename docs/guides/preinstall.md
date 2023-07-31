@@ -113,5 +113,5 @@ The installers of many distros will provide options like "Automatic Partitioning
 **During manual partitioning make sure that:**
 
 - you mount your EFI `/dev/nvme0n1p1`  at `/boot/efi` (or if you use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), at whatever applies to your case)
-- you mount your before created partition for Linux at `/` 
+- you mount your partition for Linux at `/` 
 - if you created separate partitions for `/home`, `/boot`, etc.. you mount each of them correctly according to their mount points.
