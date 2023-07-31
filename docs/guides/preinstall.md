@@ -65,16 +65,25 @@ The **second part "On Linux"** must be followed **after** you have completed the
 
 ## Disable Secure Boot
 
-!!! note
-    Wait until you have finished creating your install USB and you have copied Wi-Fi firmware before proceeding to this section.
+Now that you have completed the first part of the Wi-Fi firmware in macOS, you can proceed with the disabling of the secure boot.
+Apple's Secure Boot implementation does not allow booting anything other than macOS or Windows when it is enabled (not even shim signed GRUB).
+We need to disable it:
 
-Apple's Secure Boot implementation does not allow booting anything other than macOS and Windows when Secure Boot is enabled (not even shim signed GRUB).
+1. Turn off your Mac
+2. Turn it on and rapidly press and hold `Command-R` until the black screen flashes
+3. Your Mac will boot in the macOS Recovery
+4. Select your user and enter your password 
+5. Now, from the menu bar choose Utilities > Startup Security Utility
+6. Enter again the password
+7. Once in Startup Security Utility:
+   * set Secure Boot to **No Security**
+   * set Allow Boot  Media to **Allow booting from external or removable media**
 
-1. Follow [this article's](https://support.apple.com/HT208198) instructions to boot into macOS Recovery and open Startup Security Utility.
-2. Once in Startup Security Utility, set Secure Boot to "No Security" and select "Allow booting from external or removable media". This will allow you to boot from a Linux install ISO.
+Now you are able to boot from a Linux install ISO.
 
 !!! Note "Keeping your Mac secure while Secure Boot is off"
-    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS (Currently that would be macOS). After installing Linux on the internal SSD, you have the option to reselect "Disallow booting from external or removable media" in Startup Security Utility.
+    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS.
+   In any case, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security Utility, if you wish to.
 
 ## Booting your Linux install USB
 
