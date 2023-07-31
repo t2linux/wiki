@@ -13,7 +13,7 @@ In macOS Disk Utility, [create a partition](https://support.apple.com/guide/disk
 
 ### Selecting an ISO
 
-Listed below are the currently available ISO files with T2 support. Choose a distribution and follow the download link:
+Listed below are the currently available installer ISOs for download:
 
 | Linux Distribution | Download ISO with T2 support |
 | ------------------ | --------------------------- |
