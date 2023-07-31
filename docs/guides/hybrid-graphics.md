@@ -88,7 +88,7 @@ OBS! These instructions assumes a systemd bootloader. If using something else yo
     ```plain
     { config, pkgs, ... }:
     let
-    my-efi-app = pkgs.stdenv.mkDerivation rec {
+    hybrid-graphics = pkgs.stdenv.mkDerivation rec {
         name = "hybrid-graphics-1.0";
 
         src = pkgs.fetchFromGitHub {
@@ -112,10 +112,10 @@ OBS! These instructions assumes a systemd bootloader. If using something else yo
     };
     in
     {
-    system.activationScripts.my-efi-app = {
+    system.activationScripts.hybrid-graphics = {
         text = ''
         mkdir -p /boot/efi/EFI/hybrid_graphics
-        cp ${my-efi-app}/bootx64.efi /boot/efi/EFI/hybrid_graphics/bootx64.efi
+        cp ${hybrid-graphics}/bootx64.efi /boot/efi/EFI/hybrid_graphics/bootx64.efi
         cp /boot/efi/EFI/BOOT/BOOTX64.EFI /boot/efi/EFI/BOOT/bootx64_original.efi
         '';
     };
@@ -125,7 +125,7 @@ OBS! These instructions assumes a systemd bootloader. If using something else yo
     options apple-gmux force_igd=y
     '';
 
-    environment.systemPackages = with pkgs; [ my-efi-app ];
+    environment.systemPackages = with pkgs; [ hybrid-graphics ];
     }
     ```
 
@@ -134,7 +134,7 @@ OBS! These instructions assumes a systemd bootloader. If using something else yo
 3.  ```sh
     sudo nixos-rebuild switch
     ```
-4.  Use `efibootmgr` to create a new default entry point for `/boot/efi/EFI/hybrid_graphics/bootx64.efi` (see https://nixos.wiki/wiki/Bootloader for more details). It will then automatically load `/boot/efi/EFI/BOOT/bootx64_original.efi` so carefully check to make sure that file has been generated correctly. If not then adjust the relevant lines in `hybrid_graphics.nix`.
+4.  Use `efibootmgr` to create a new default boot entry point: `/boot/efi/EFI/hybrid_graphics/bootx64.efi` (see https://nixos.wiki/wiki/Bootloader for more details). It will then automatically load `/boot/efi/EFI/BOOT/bootx64_original.efi` which is a copy of the main loader (in this case systemd), so carefully check to make sure that file has been generated correctly. If not then adjust the relevant lines in `hybrid_graphics.nix`.
 
 Please note that this is using the silent version meaning there will be no info + countdown at boot. If you prefer the verbose version simply remove `silent` from the `install -D bootx64_silent.efi $out/bootx64.efi` row.
 
