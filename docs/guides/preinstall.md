@@ -4,7 +4,17 @@ These steps are common to most distros. Please refer to both this page and this 
 
 ## Partition with Disk Utility
 
-In macOS Disk Utility, [create a partition](https://support.apple.com/guide/disk-utility/dskutl14027/mac). The file system format doesn't matter, but pick the amount of space that you want for Linux. You won't be able to resize your APFS partitions from a Linux installer, so you must make space now. **When prompted to, do not create an APFS volume for Linux**, you want a partition. If you want separate partitions for `/home`, `/boot` etc., create them as well.
+In macOS Disk Utility you need to create your Linux partition:
+
+1. Open Disk Utility
+2. Choose "Macintosh HD *volumes*" 
+3. Press in the top-right "Partition"
+4. Under the blue pie chart press "+" button
+5. When prompted be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
+6. **Name:** choose a name for the partition, e.g. Linux
+7. **Format:** choose whatever format there is - APFS or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway)
+8. **Size:** pick the **desired amount of space** for Linux, because you will **not be able** to change it.
+9. If you want separate partitions for `/home`, `/boot` etc., create them as well (if you are a beginner and you don't understand this point, you may just skip it).
 
 !!! note "Triple booting with Linux and Windows"
     Refer to [this guide](https://wiki.t2linux.org/guides/windows/) to make sure you will be able to boot both Windows and Linux.
