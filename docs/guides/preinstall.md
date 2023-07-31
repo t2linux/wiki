@@ -31,15 +31,21 @@ For other distros, you can download the distro's normal install ISO, but you wil
 
 ### Copying the ISO to the USB
 
-User friendly applications for copying the Linux install image to your USB include:
+You can download user-friendly applications for copying the ISO to your USB:
 
 - [USBImager](https://gitlab.com/bztsrc/usbimager/)
 - [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data).
 
-!!! hint "`dd`"
-    If you are familiar with the `dd` tool and the command line, you can use that instead. Use `diskutil list` to find the correct disk, then `sudo dd if=path/to/filename.iso of=/dev/rdiskX bs=1m`. Press `control-T` while it is running to make it show its current progress. **Make sure you select the correct disks.**
+Or you can use the macOS terminal:
+1. Insert your USB drive.
+2. Open macOS Terminal.
+3. Run `diskutil list` to list all the drives.
+4. Look up for your USB thumb which appears as an **external, physical** drive labelled `/dev/diskX` where `X` is a single number (e.g. /dev/disk**2**).
+5. Run `sudo diskutil unmountDisk /dev/diskX` to unmount the disk.
+6. Run `sudo dd if=path/to/linux.iso of=/dev/rdiskX bs=1m` to start writing. To fetch the iso path easily you can just drag and drop the .iso into the Terminal.
+7. Now you may press `control-T` to make it show how many KBs it has written so far.
 
-While the installation image is being written to the USB, you can [copy Wi-Fi firmware](#copy-wi-fi-firmware), but don't follow the steps after that until it has finished writing the image.
+While the installation image is being written to the USB, you can skip to [Copy Wi-Fi firmware](#copy-wi-fi-firmware), but don't follow the steps after, wait until writing has finished.
 
 ## Copy Wi-Fi firmware
 
