@@ -1,6 +1,6 @@
 # Introduction
 
-This page describes how to use the iGPU, dGPU, or both. 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
+This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too. Make sure you have a t2 kernel of version greater than 6.1.12-2 (you can check this with `uname -r`).
 
