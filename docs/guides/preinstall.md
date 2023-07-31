@@ -37,7 +37,13 @@ Listed below are the currently available installer ISOs for download:
 | NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
 | Ubuntu & Kubuntu   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 
-For other distros, you can download the distro's normal install ISO, but you will have to use an external USB keyboard and mouse for this install process, and you may need a wired internet connection. Additionally, if you later have issues with installing the bootloader (Eg :- GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
+#### Other distributions
+
+If you are a beginner we **highly recommend** to choose one of the distros above. 
+
+In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, may be required a wired internet connection with a USB adapter. 
+
+You can find a guide for unsupported debian-based distros [here](https://wiki.t2linux.org/distributions/debian/installation/).
 
 ### Copying the ISO to the USB
 
