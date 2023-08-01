@@ -24,7 +24,7 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 On **Ubuntu 22.04 or earlier**, PulseAudio is installed by default, which performs really bad with T2 audio configuration files. It is suggested to [switch to PipeWire](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux) for better performance, although its still bad as compared to Ubuntu 22.10, which has native support for PipeWire.
 
-On **Ubuntu 22.10 or later**, PipeWire is support natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version :-
+On **Ubuntu 22.10 or later**, PipeWire is support natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version:
 
 ```bash
 sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream
@@ -35,9 +35,9 @@ sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-module
 
 In some cases users are not getting even a single Wi-Fi network listed when attempting to connect to a network, inspite of having followed the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) completely and correctly.
 
-To fix this :-
+To fix this:
 
-1. Edit `/etc/NetworkManager/NetworkManager.conf` to look like this :-
+1. Edit `/etc/NetworkManager/NetworkManager.conf` to look like this:
 
     ```conf
     [main]
@@ -50,7 +50,7 @@ To fix this :-
     wifi.scan-rand-mac-address=no
     ```
 
-2. Now edit `/etc/NetworkManager/conf.d/wifi_backend.conf` to look like this :-
+2. Now edit `/etc/NetworkManager/conf.d/wifi_backend.conf` to look like this:
 
     ```conf
     #[device]
