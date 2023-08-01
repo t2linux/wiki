@@ -10,9 +10,9 @@ All steps given here have to be performed on **macOS**. You will also need to ha
 
 2. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
 
-3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
+3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded, e.g.: if you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
 
-4. Now run the following in the terminal :-
+4. Now run the following in the terminal:
 
     ```bash
     IDENTIFIER=$(diskutil info REFIND | grep "Device Identifier" | cut -d: -f2 | xargs)
@@ -30,7 +30,7 @@ All steps given here have to be performed on **macOS**. You will also need to ha
     rm -r ~/Downloads/refind-bin*
     ```
 
-5. Now run:-
+5. Now run:
   
     ```bash
     bless --folder /Volumes/REFIND/EFI/BOOT --label rEFInd
@@ -81,17 +81,17 @@ Sometimes, while booting into macOS using rEFInd, users get stuck at a blank scr
 
 # Using rEFInd as a replacement for GRUB, systemd-boot etc.
 
-By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But we can also boot linux directly by using rEFInd. This can be useful in situations where other bootloaders are causing issues. In order to do so, follow the following steps :-
+By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But we can also boot linux directly by using rEFInd. This can be useful in situations where other bootloaders are causing issues. In order to do so, follow the following steps:
 
 1. Boot into Linux using the bootloader currently in use. If the bootloader is facing issues, you may also chroot into the installation using your distro's ISO and run the commands within the chroot.
 
 2. Get a **binary zip file** of rEFInd from [here](https://www.rodsbooks.com/refind/getting.html).
 
-3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded. For eg:- If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
+3. The binary zip file of rEFInd shall be available in the downloads folder by the name of `refind-bin-<VERSION>.zip`, where `<VERSION>` represents the version of rEFInd you have downloaded, e.g.: If you have downloaded `0.13.2` version, it will be available as `refind-bin-0.13.2.zip`.
 
 4. Move the zip into the `/boot` folder. If you are chrooting, the move the zip into the `/boot` folder of the **chroot**.
 
-5. Now run :-
+5. Now run:
 
     ```bash
     cd /boot
@@ -127,13 +127,13 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
 9. If you want to use your distro's icon instead of Linux Penguin one, you may label the volume containing your kernel with the name of your distro. Following are some examples of commands for various filesystems, taking the distro as **Ubuntu** and partition in which kernel is in as `/dev/nvme0n1p3`.
 
-    1. ext2, ext3 or ext4 :-
+    1. ext2, ext3 or ext4:
   
         ```bash
         sudo tune2fs -L "Ubuntu" /dev/nvme0n1p3
         ```
   
-    2. btrfs :-
+    2. btrfs:
   
         ```bash
         MOUNTPOINT=$(findmnt -n -o TARGET /dev/nvme0n1p3)
@@ -144,7 +144,7 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
 
 # Uninstalling rEFInd
 
-In case you wish to uninstall rEFInd, boot into **macOS** and follow the steps below :-
+In case you wish to uninstall rEFInd, boot into **macOS** and follow the steps below:
 
 1. Open the Disk Utility
 2. Select the partition on which macOS is installed (it generally has the label `Macintosh HD` until you have renamed it manually).
