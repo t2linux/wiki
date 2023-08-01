@@ -42,8 +42,8 @@ Listed below are the currently available installer ISOs for download:
 If you are a beginner we **highly recommend** to choose one of the distros above. 
 
 In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, may be required a wired internet connection with a USB adapter. 
-
-You can find a guide for unsupported debian-based distros [here](https://wiki.t2linux.org/distributions/debian/installation/).
+Please, refer to this guide: [Basic Installation](https://wiki.t2linux.org/guides/postinstall/).
+You can also find detailed info for unsupported debian-based distros [here](https://wiki.t2linux.org/distributions/debian/installation/).
 
 ### Copying the ISO to the USB
 
