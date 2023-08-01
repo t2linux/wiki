@@ -22,7 +22,7 @@ If not present, you'll have to update your bootup kernel params:
 
 # Audio Configuration Files
 
-Simply run the following to set up audio :-
+Simply run the following to set up audio:
 
 ```bash
 sudo git clone https://github.com/kekrby/t2-better-audio.git /tmp/t2-better-audio
@@ -38,7 +38,7 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 
 # Internal microphones DSP Configuration.
 
-In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:-
+In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:
 
 [Microphones config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/mic)
 
