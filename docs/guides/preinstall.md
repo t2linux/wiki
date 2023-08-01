@@ -7,7 +7,7 @@ These steps are common to most distros. Please refer to both this page and this 
 In macOS Disk Utility you need to create your Linux partition:
 
 1. Open Disk Utility
-2. Choose "Macintosh HD *volumes*" 
+2. Choose "Macintosh HD *volumes*"
 3. Press in the top-right "Partition"
 4. Under the blue pie chart press "+" button
 5. When prompted be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
@@ -39,9 +39,9 @@ Listed below are the currently available installer ISOs for download:
 
 #### Other distributions
 
-If you are a beginner we **highly recommend** to choose one of the distros above. 
+If you are a beginner we **highly recommend** to choose one of the distros above.
 
-In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, may be required a wired internet connection with a USB adapter. 
+In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, may be required a wired internet connection with a USB adapter.
 
 Please, refer to this guide: [Basic setup](https://wiki.t2linux.org/guides/postinstall/).
 
@@ -52,9 +52,10 @@ You can also find detailed info for unsupported debian-based distros [here](http
 You can download user-friendly applications for copying the ISO to your USB:
 
 - [USBImager](https://gitlab.com/bztsrc/usbimager/)
-- [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data).
+- [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data)
 
 Or you can use the macOS terminal:
+
 1. Insert your USB drive.
 2. Open macOS Terminal.
 3. Run `diskutil list` to list all the drives.
@@ -67,7 +68,7 @@ While the installation image is being written to the USB, you can skip to [Copy 
 
 ## Copy Wi-Fi firmware
 
-Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, thereby we copy them from macOS to the EFI partition where Linux can access and install them. 
+Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, thereby we copy them from macOS to the EFI partition where Linux can access and install them.
 
 [Follow here](https://wiki.t2linux.org/guides/wifi-bluetooth/#on-macos) the instructions for the **first part done in macOS** and come back to this page.
 
@@ -82,12 +83,12 @@ We need to disable it:
 1. Turn off your Mac
 2. Turn it on and rapidly press and hold `Command-R` until the black screen flashes
 3. Your Mac will boot in the macOS Recovery
-4. Select your user and enter your password 
+4. Select your user and enter your password
 5. Now, from the menu bar choose Utilities > Startup Security Utility
 6. Enter again the password
 7. Once in Startup Security Utility:
-   * set Secure Boot to **No Security**
-   * set Allow Boot  Media to **Allow booting from external or removable media**
+   - set Secure Boot to **No Security**
+   - set Allow Boot  Media to **Allow booting from external or removable media**
 
 Now you are able to boot from a Linux install ISO.
 
@@ -103,9 +104,9 @@ Now you are able to boot from a Linux install ISO.
 4. The installation may start right away or you may be put into a Bootloader Menu where it may select a default option e.g. "Try or Install Ubuntu", but you can use arrow keys to select a different option if you want.
 
 !!! Warning "A software update is required to use this startup disk"
-If you see this message when trying to boot Linux, Apple may be enforcing Secure Boot. 
-- Make sure you have [disabled Secure Boot](#disable-secure-boot)  
-- If there were two orange "EFI Boot" entries in Startup Manager, try selecting the other one. 
+If you see this message when trying to boot Linux, Apple may be enforcing Secure Boot.
+- Make sure you have [disabled Secure Boot](#disable-secure-boot)
+- If there were two orange "EFI Boot" entries in Startup Manager, try selecting the other one.
 
 This may occur when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+"), even when Secure Boot is completely disabled.
 
@@ -116,7 +117,7 @@ You can now follow the installation guide for your chosen distribution: [Guides 
 ### Before proceeding:
 The installers of many distros will provide options like "Automatic Partitioning" when installing Linux:
 - **Do not use** "Automatic Partitioning" as it may remove macOS as well.
-- You **always** must select the option that allows **"Manual Partitioning"**. 
+- You **always** must select the option that allows **"Manual Partitioning"**.
 
 **During manual partitioning make sure that:**
 
