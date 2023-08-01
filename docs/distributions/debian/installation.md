@@ -1,93 +1,103 @@
 # Introduction
 
-This guide shall help you in installing a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
+This guide will help you in installing a Debian or Ubuntu-based Linux distro that does not have a modified ISO with T2 support.
 
-Some popular distros include :-
+Some popular distros include:
 
-1. [Linux Mint](https://linuxmint.com/)
-2. [Pop!_OS](https://pop.system76.com/)
-3. [elementary OS](https://elementary.io/)
-4. [Debian](https://www.debian.org/)
-5. [Zorin OS](https://zorin.com/)
-6. [Kali Linux](https://www.kali.org/)
-7. Other Ubuntu flavours like [Kubuntu](https://kubuntu.org/), [Ubuntu unity](https://ubuntuunity.org/) etc.
+* [Linux Mint](https://linuxmint.com/) (Ubuntu-based | Debian-based if using LMDE)
+* [Pop!_OS](https://pop.system76.com/) (Ubuntu-based)
+* [elementary OS](https://elementary.io/) (Ubuntu-based)
+* [Debian](https://www.debian.org/) (Debian)
+* [Zorin OS](https://zorin.com/) (Ubuntu-based)
+* [Kali Linux](https://www.kali.org/) (Debian-based)
+* Other Ubuntu flavours like [Kubuntu](https://kubuntu.org/), [Ubuntu Unity](https://ubuntuunity.org/) etc. (Ubuntu-based)
 
-# Hardware Requirements
+# Required Hardware
 
-* USB-C to USB adapter
-* Wired internet connection (Ethernet/USB tethering) or Wi-Fi adapter compatible with Linux
+* USB-C to USB-A adapter
+
+    May be required to connect various hardware (e.g. a wire to your phone, wireless Wi-Fi dongle etc.)
+
+* Internet connection - either **wired** (using an USB Ethernet dongle or USB tethering from a phone) or **wireless** (using a Linux-compatible Wi-Fi adapter)
+
+    The internal Wi-Fi does not work without the T2 kernel. Note that you will be able to setup internal Wi-Fi after you install and setup the T2 kernel. More on this later in the guide.
+
 * External keyboard and mouse
+
+    Required as the internal keyboard and trackpad do not work without the T2 kernel.
 
 # Install Procedure
 
-!!! Warning "Installation fails when installing the bootloader (Eg :- GRUB)"
-    It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
+!!! Warning "Installation fails when installing the bootloader (e.g. GRUB)"
+    It is possible that during installation, when the bootloader (GRUB in most cases) is being installed, the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
 
-!!! Warning "Pop!_OS"
-    Due to a bug in Pop!_OS installer, the partition sizes shown by it are incorrect during manual partitioning step. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1356978490) in the live ISO environment to fix the installer and then start the installation.
+!!! Warning "Pop!_OS incorrect partition sizes"
+    Due to a bug in the Pop!_OS installer, the partition sizes shown by it are incorrect when using manual partitioning. As a workaround you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1356978490) in the live ISO environment to fix the installer and then start the installation.
 
-1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
-2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevent to you.
-3. Start the installer and install it like normal until you get an option to manually specify partitions.
-4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
+## Pre-installation
 
-    1. If you want, you can make seperate partitions for **swap**, `/home`, `/boot` etc as you do in a normal PC.
+* Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
+* Flash your chosen Debian or Ubuntu-based distro to a USB drive.
 
-    2. The partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
+## Installation
 
-    3. If the installer used by your distro is `ubiquity`, which is the one used in Ubuntu, Linux Mint etc., then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
-  
-        For other installers, you need to mount `nvme0n1p1`, or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever case applies to you) at `/boot/efi`. If the installer supports the "boot" flag, set it as well for your EFI partition.
+1. **First steps**
+    1. Boot into the Live ISO. In the GRUB boot menu, select the option relevant to you.
+    2. Start the installer and go through it like normal. When you get the option to, make sure to select **manual partitioning**! (instead of letting the installer automatically manage partitions for you)
 
-5. Continue the rest of the setup.
-6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
+2. **Partitioning**
+
+    Find the partition you made for Linux during the Pre-installation step and delete it to make free space. (**WARNING:** ***MAKE SURE TO SELECT THE RIGHT PARTITION OR YOU MAY LOSE YOUR DATA.*** )
+
+    You will then need to follow these steps:
+
+    1. You **must** create a **`/`** ("root") partition formatted as **ext4** or **btrfs**.
+
+    2. You may **optionally** make separate partitions for **`/home`**, **`/boot`**, **swap** etc. as you would normally.
+
+    3. If `ubiquity` is the installer used by your distro (used by *Ubuntu*, *Linux Mint* and other similar distros), then you can leave EFI Boot alone. If you are usiwant to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you have to separate it after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+    
+        For other installers, you need to mount either `nvme0n1p1` **or** your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) at `/boot/efi`. If the installer supports the `boot` flag, set it as well for your EFI partition.
+
+3. **Continuing the installation**
+
+    Continue with the rest of the installation. Once it successfully finishes, shutdown. You may remove your installation media.
+
+## Post-installation
+
+Hold down Option (⌥) while booting, then select EFI Boot (make sure it has the internal disk icon) and press enter.
 
 # Adding T2 support
 
-After installation, we need to install a kernel having patches to support the T2 Macs for the internal keyboard, trackpad, touchbar, audio, Wi-Fi etc. to work. In order to do so :-
+After installation, you need to install a kernel with patches with T2 support (needed for the internal keyboard, trackpad, touchbar, audio, Wi-Fi etc. to work).
+
+Steps:
 
 1. Boot into your new installation.
 
-2. Connect to the internet using Ethernet/USB tethering/external Wi-Fi adapter.
+2. Connect to the internet using Ethernet / USB tethering / an external Wi-Fi adapter.
 
-3. Add the **t2-ubuntu-repo** apt repo by running :-
-  
+3. Add the **t2-ubuntu-repo** apt repo by running:
+
     ```bash
     curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
     sudo curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
     sudo apt update
     ```
   
-4. Now install the kernel upgrade script.
+4. Install the kernel upgrade script:
   
-    * If your distro is Ubuntu based, run :-
+    * If your distro is **Ubuntu**-based, run `sudo apt install t2-kernel-script`
+    * If your distro is **Debian**-based, run `sudo apt install t2-kernel-script-debian`
   
-       ```bash
-       sudo apt install t2-kernel-script
-       ```
+5. Then upgrade your kernel to a T2 kernel by running `update_t2_kernel`
   
-    * If your distro is Debian based, run :-
+6. Install the audio configuration files by running `sudo apt install apple-t2-audio-config`
   
-       ```bash
-       sudo apt install t2-kernel-script-debian
-       ```
-  
-5. Then upgrade your kernel to a T2 kernel by running :-
-  
-    ```bash
-    update_t2_kernel
-    ```
-  
-6. Install the audio configuration files by running :-
-  
-    ```bash
-    sudo apt install apple-t2-audio-config
-    ```
-  
-    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
+    **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire for a better experience. For this, follow the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
 7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
 # Basic set up
 
-After installing the new kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You shall mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. Rest have been set up automatically by the kernel upgrade script.
+After installing the T2 kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. The rest has been set up automatically by the kernel upgrade script.
