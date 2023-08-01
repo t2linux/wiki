@@ -2,7 +2,7 @@
 
 This guide shall help you in installing a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
 
-Some popular distros include :-
+Some popular distros include:
 
 1. [Linux Mint](https://linuxmint.com/)
 2. [Pop!_OS](https://pop.system76.com/)
@@ -20,7 +20,7 @@ Some popular distros include :-
 
 # Install Procedure
 
-!!! Warning "Installation fails when installing the bootloader (Eg :- GRUB)"
+!!! Warning "Installation fails when installing the bootloader (Eg: GRUB)"
     It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
 
 !!! Warning "Pop!_OS"
@@ -44,13 +44,13 @@ Some popular distros include :-
 
 # Adding T2 support
 
-After installation, we need to install a kernel having patches to support the T2 Macs for the internal keyboard, trackpad, touchbar, audio, Wi-Fi etc. to work. In order to do so :-
+After installation, we need to install a kernel having patches to support the T2 Macs for the internal keyboard, trackpad, touchbar, audio, Wi-Fi etc. to work. In order to do so:
 
 1. Boot into your new installation.
 
 2. Connect to the internet using Ethernet/USB tethering/external Wi-Fi adapter.
 
-3. Add the **t2-ubuntu-repo** apt repo by running :-
+3. Add the **t2-ubuntu-repo** apt repo by running:
   
     ```bash
     curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
@@ -60,31 +60,31 @@ After installation, we need to install a kernel having patches to support the T2
   
 4. Now install the kernel upgrade script.
   
-    * If your distro is Ubuntu based, run :-
+    * If your distro is Ubuntu based, run:
   
        ```bash
        sudo apt install t2-kernel-script
        ```
   
-    * If your distro is Debian based, run :-
+    * If your distro is Debian based, run:
   
        ```bash
        sudo apt install t2-kernel-script-debian
        ```
   
-5. Then upgrade your kernel to a T2 kernel by running :-
+5. Then upgrade your kernel to a T2 kernel by running:
   
     ```bash
     update_t2_kernel
     ```
   
-6. Install the audio configuration files by running :-
+6. Install the audio configuration files by running:
   
     ```bash
     sudo apt install apple-t2-audio-config
     ```
   
-    **Note :-** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
+    **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
 7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
