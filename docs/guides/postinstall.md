@@ -4,7 +4,7 @@ This page explains how to perform a basic set up after installing Linux on a T2 
 
 ## Do you need to do this?
 
-This guide is mainly relevent in the following cases :-
+This guide is mainly relevent in the following cases :
 
 1. If you have installed Linux using an official ISO, instead of a T2 ISO.
 2. The [Make modules load on early boot](#make-modules-load-on-early-boot) section is relevant for those who wish to encrypt their disk drives using LUKS or some other similar software.
