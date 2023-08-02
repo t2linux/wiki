@@ -16,7 +16,7 @@ In macOS Disk Utility you need to create your Linux partition:
 8. **Size:** pick the **desired amount of space** for Linux, because you will **not be able** to change it.
 9. If you want separate partitions for `/home`, `/boot` etc., create them as well (if you are a beginner and you don't understand this point, you may just skip it).
 
-!!! note "Triple booting with Linux and Windows"
+!!! Note "Triple booting with Linux and Windows"
     Refer to [this guide](https://wiki.t2linux.org/guides/windows/) to make sure you will be able to boot both Windows and Linux.
 
 ## Create Linux installation USB
@@ -94,9 +94,7 @@ We need to disable it:
 Now you are able to boot from a Linux install ISO.
 
 !!! Note "Keeping your Mac secure while Secure Boot is off"
-    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the
-    default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security
-    Utility.
+    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security Utility.
 
 ## Booting your Linux install USB
 
