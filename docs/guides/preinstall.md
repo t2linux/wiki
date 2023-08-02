@@ -81,7 +81,7 @@ Apple's Secure Boot implementation does not allow booting anything other than ma
 We need to disable it:
 
 1. Turn off your Mac
-2. Turn it on and rapidly press and hold `Command-R` until the black screen flashes
+2. Turn it on and press and hold `Command-R` until the black screen flashes
 3. Your Mac will boot in the macOS Recovery
 4. Select your user and enter your password
 5. Now, from the menu bar choose Utilities > Startup Security Utility
