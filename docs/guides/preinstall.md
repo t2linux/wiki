@@ -54,7 +54,7 @@ User-friendly applications for copying the Linux install image to your USB inclu
 - [USBImager](https://gitlab.com/bztsrc/usbimager/)
 - [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data)
 
-Or you can use the macOS terminal:
+Or you can use `dd` in macOS Terminal:
 
 1. Insert your USB drive.
 2. Open macOS Terminal.
