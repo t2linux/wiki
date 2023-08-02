@@ -68,7 +68,7 @@ While the installation image is being written to the USB, you can skip to [Copy 
 
 ## Copy Wi-Fi firmware
 
-Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, thereby we copy them from macOS to the EFI partition where Linux can access and install them.
+Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we copy these files from macOS to the EFI partition where Linux can access and eventually install them.
 
 [Follow here](https://wiki.t2linux.org/guides/wifi-bluetooth/#on-macos) the instructions for the **first part done in macOS** and come back to this page.
 
