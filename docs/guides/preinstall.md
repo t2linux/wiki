@@ -102,7 +102,7 @@ Now you are able to boot from a Linux install ISO.
 
 1. Ensure the Linux Installation USB you created is plugged into your Mac.
 2. Reboot while holding down the option (⌥) key, this will put you in macOS Startup Manager.
-3. Select the orange EFI option with arrow keys and press return/enter on it. If there are two, select the one to the very right (the last one).
+3. Select the orange EFI option with arrow keys and press return/enter on it. If there are two, try select first the one to the very right (the last one).
 4. The installation may start right away or you may be put into a Bootloader Menu where it may select a default option e.g. "Try or Install Ubuntu", but you can use arrow keys to select a different option if you want.
 
 !!! Warning "A software update is required to use this startup disk"
