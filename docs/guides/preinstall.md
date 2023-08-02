@@ -26,7 +26,7 @@ In macOS Disk Utility you need to create your Linux partition:
 Listed below are the currently available installer ISOs for download:
 
 | Linux Distribution | Download ISO with T2 support |
-| ------------------ | --------------------------- |
+| ------------------ | ---------------------------- |
 | Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
 | blendOS            | <https://docs.blendos.co/guides/installation-guide-for-macs-with-t2-chip> |
 | EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
@@ -87,14 +87,16 @@ We need to disable it:
 5. Now, from the menu bar choose Utilities > Startup Security Utility
 6. Enter again the password
 7. Once in Startup Security Utility:
+
    - set Secure Boot to **No Security**
    - set Allow Boot  Media to **Allow booting from external or removable media**
 
 Now you are able to boot from a Linux install ISO.
 
 !!! Note "Keeping your Mac secure while Secure Boot is off"
-    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS.
-   In any case, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security Utility, if you wish to.
+    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the 
+    default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security 
+    Utility.
 
 ## Booting your Linux install USB
 
