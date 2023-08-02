@@ -41,7 +41,7 @@ Listed below are the currently available installer ISOs for download:
 
 If you are a beginner we **highly recommend** to choose one of the distros above.
 
-In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, may be required a wired internet connection with a USB adapter.
+In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, you may require a wired internet connection with a USB adapter.
 
 Please, refer to this guide: [Basic setup](https://wiki.t2linux.org/guides/postinstall/).
 
