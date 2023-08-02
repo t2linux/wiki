@@ -105,6 +105,7 @@ Now you are able to boot from a Linux install ISO.
 
 !!! Warning "A software update is required to use this startup disk"
 If you see this message when trying to boot Linux, Apple may be enforcing Secure Boot.
+
 - Make sure you have [disabled Secure Boot](#disable-secure-boot)
 - If there were two orange "EFI Boot" entries in Startup Manager, try selecting the other one.
 
@@ -115,12 +116,14 @@ This may occur when booting Linux from a partition formatted as APFS or "macOS E
 You can now follow the installation guide for your chosen distribution: [Guides for different distributions](https://wiki.t2linux.org/distributions/overview/)
 
 ### Before proceeding:
+
 The installers of many distros will provide options like "Automatic Partitioning" when installing Linux:
+
 - **Do not use** "Automatic Partitioning" as it may remove macOS as well.
 - You **always** must select the option that allows **"Manual Partitioning"**.
 
 **During manual partitioning make sure that:**
 
 - you mount your EFI `/dev/nvme0n1p1`  at `/boot/efi` (or if you use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), at whatever applies to your case)
-- you mount your partition for Linux at `/` 
+- you mount your partition for Linux at `/`
 - if you created separate partitions for `/home`, `/boot`, etc.. you mount each of them correctly according to their mount points.
