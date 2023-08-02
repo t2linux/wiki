@@ -49,7 +49,7 @@ You can also find detailed info for unsupported debian-based distros [here](http
 
 ### Copying the ISO to the USB
 
-You can download user-friendly applications for copying the ISO to your USB:
+User-friendly applications for copying the Linux install image to your USB include:
 
 - [USBImager](https://gitlab.com/bztsrc/usbimager/)
 - [balenaEtcher](https://www.balena.io/etcher/) (does collect analytics data)
