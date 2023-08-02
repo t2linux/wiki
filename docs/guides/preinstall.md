@@ -94,8 +94,8 @@ We need to disable it:
 Now you are able to boot from a Linux install ISO.
 
 !!! Note "Keeping your Mac secure while Secure Boot is off"
-    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the 
-    default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security 
+    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the
+    default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security
     Utility.
 
 ## Booting your Linux install USB
