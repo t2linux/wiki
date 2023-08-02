@@ -106,12 +106,7 @@ Now you are able to boot from a Linux install ISO.
 4. The installation may start right away or you may be put into a Bootloader Menu where it may select a default option e.g. "Try or Install Ubuntu", but you can use arrow keys to select a different option. If you are unsure, check if there is any additional advice on your distro's installation page on this wiki.
 
 !!! Warning "A software update is required to use this startup disk"
-If you see this message when trying to boot Linux, Apple may be enforcing Secure Boot.
-
-- Make sure you have [disabled Secure Boot](#disable-secure-boot)
-- If there were two orange "EFI Boot" entries in Startup Manager, try selecting the other one.
-
-This may occur when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+"), even when Secure Boot is completely disabled.
+    If you see this message when trying to boot Linux, Apple may be enforcing Secure Boot. Make sure you have [disabled Secure Boot](#disable-secure-boot). If there were two orange "EFI Boot" entries in Startup Manager, try selecting the other one. This may occur when booting Linux from a partition formatted as APFS or "macOS Extended" (also known as "hfs+"), even when Secure Boot is completely disabled.
 
 ## Follow distro specific steps
 
