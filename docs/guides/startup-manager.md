@@ -8,14 +8,14 @@ The steps to perform the above tasks vary as per the way you have installed Linu
 
 ## Setting label in case you are using the EFI partition available by default in Mac and are on a dual boot system
 
-In this case, boot into macOS, open a terminal window and run :-
+In this case, boot into macOS, open a terminal window and run:
 
 ```bash
 sudo diskutil mount disk0s1
 bless --folder /Volumes/EFI/EFI/BOOT --label "<YOUR DISTRO'S NAME>"
 ```
 
-Replace `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu, run :-
+Replace `<YOUR DISTRO'S NAME>` with your distro's name. E.g.: If you are using Ubuntu, run:
 
 ```bash
 sudo diskutil mount disk0s1
@@ -32,7 +32,7 @@ In this case the Windows startup disk is used to boot both Windows and Linux. Th
 
 More details about this can be found in the [triple boot guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
 
-In this case, boot into macOS, open a terminal window and run :-
+In this case, boot into macOS, open a terminal window and run:
 
 ```bash
 IDENTIFIER=$(diskutil info <NAME OF SEPERATE EFI PARTITION> | grep "Device Identifier" | cut -d: -f2 | xargs)
@@ -40,7 +40,7 @@ sudo diskutil mount $IDENTIFIER
 bless --folder /Volumes/<NAME OF SEPERATE EFI PARTITION>/EFI/BOOT --label "<YOUR DISTRO'S NAME>"
 ```
 
-Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. Eg :- If you are using Ubuntu and you set the label to `EFI2`, run :-
+Replace `<NAME OF SEPERATE EFI PARTITION>` with the label you set using in the above triple boot guide and `<YOUR DISTRO'S NAME>` with your distro's name. E.g.: If you are using Ubuntu and you set the label to `EFI2`, run:
 
 ```bash
 IDENTIFIER=$(diskutil info EFI2 | grep "Device Identifier" | cut -d: -f2 | xargs)

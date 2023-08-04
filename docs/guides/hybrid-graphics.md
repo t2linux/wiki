@@ -79,9 +79,9 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 ## MacBookPro16,4
 
-Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround :-
+Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround:
 
-### If you are able to edit your kernel command line :-
+### If you are able to edit your kernel command line:
 
 1. Edit the kernel command line of this boot and add the `nomodeset` kernel parameter. This will enable you to access your Linux system in safe graphics.
 
@@ -89,7 +89,7 @@ Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lo
 
 3. You can now remove the `nomodeset` parameter from your kernel command line.
 
-### If you are unable to edit your kernel command line :-
+### If you are unable to edit your kernel command line:
 
 1. Boot into macOS
 

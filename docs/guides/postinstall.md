@@ -4,7 +4,7 @@ This page explains how to perform a basic set up after installing Linux on a T2 
 
 ## Do you need to do this?
 
-This guide is mainly relevent in the following cases :-
+This guide is mainly relevent in the following cases :
 
 1. If you have installed Linux using an official ISO, instead of a T2 ISO.
 2. The [Make modules load on early boot](#make-modules-load-on-early-boot) section is relevant for those who wish to encrypt their disk drives using LUKS or some other similar software.
@@ -16,7 +16,7 @@ In rest cases, you probably won't need to follow this guide.
 
 Installing a kernel with support for T2 Macs is required in order to get the Keyboard, Trackpad, Touch Bar, Audio, Fan and Wi-Fi working.
 
-Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels :-
+Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels:
 
 | Linux Distribution                  | Kernel with T2 support |
 | ----------------------------------- | ---------------------- |
@@ -34,7 +34,7 @@ If compiled kernels for your distro are not available, then you shall have to co
 
 ## Add necessary kernel paramaters
 
-Using your bootloader, add the `intel_iommu=on iommu=pt pcie_ports=compat` kernel parameters. For example in GRUB :-
+Using your bootloader, add the `intel_iommu=on iommu=pt pcie_ports=compat` kernel parameters. For example in GRUB:
 
   1. Edit `/etc/default/grub`.
   2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`.
@@ -42,7 +42,7 @@ Using your bootloader, add the `intel_iommu=on iommu=pt pcie_ports=compat` kerne
 
 ## Make modules load on boot
 
-Simply run the following :-
+Simply run the following:
 
 ```sh
 echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
@@ -54,13 +54,13 @@ Having the `apple-bce` module loaded early allows the use of the keyboard for de
 It also is useful when boot doesn't work, and the keyboard is required for debugging.
 To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
 You can get the list of dependent modules by running `modinfo -F depends apple-bce`
-The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows :-
+The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows:
 
-- On systems with `initramfs-tools` (all debian-based distros) :-
+- On systems with `initramfs-tools` (all debian-based distros):
 
     1. Run `sudo su` to open a shell as root.
 
-    2. Run the following over there :-
+    2. Run the following over there:
 
          ```sh
          cat <<EOF >> /etc/initramfs-tools/modules
@@ -72,11 +72,11 @@ The steps to be followed vary depending upon the initramfs module loading mechan
          update-initramfs -u
          ```
 
-- On systems with mkinitcpio (Commonly used on Arch) :-
+- On systems with mkinitcpio (Commonly used on Arch):
 
     1. Edit the `/etc/mkinitcpio.conf` file.
 
-    2. Ensure that the file has the following :-
+    2. Ensure that the file has the following:
 
          ```sh
          MODULES="apple-bce"
@@ -84,7 +84,7 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     3. Run `sudo mkinitcpio -P`.
 
-- On systems with other initramfs/initrd generation systems :-
+- On systems with other initramfs/initrd generation systems:
 
     In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early.
 
@@ -96,7 +96,7 @@ If you want to try something new and you're using Arch Linux, EndeavourOS, or Ma
 
 After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
 
-In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following :-
+In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following:
 
 - Try running the following and rebooting.
   
@@ -117,7 +117,7 @@ Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2
 
 # Network Manager recurrent notifications
 
-Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can blacklist `cdc_ncm` and `cdc_mbim` modules with the following command:-
+Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can blacklist `cdc_ncm` and `cdc_mbim` modules with the following command:
 
 ```sh
 sudo sh -c 'echo "# Disable for now T2 chip internal usb ethernet

@@ -99,8 +99,8 @@ If you are doing it manually:
 
 ## Seperate the EFI partition after Linux is installed
 
-In case you have installed Linux to the same EFI partition as used by Windows, and now want to seperate it out, then :-
+In case you have installed Linux to the same EFI partition as used by Windows, and now want to seperate it out, then:
 
 1. Using any disk utility software, make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure you do not use `EFI` as the label.
 2. Download [this script](https://wiki.t2linux.org/tools/efi.sh).
-3. Run this script using `bash /path/to/script <Name of seperate partition>` in Linux. Eg :- If your seperate partition has the name `EFI2`, and script is in your Downloads folder, run `bash $HOME/Downloads/efi.sh EFI2`.
+3. Run this script using `bash /path/to/script <Name of seperate partition>` in Linux. E.g.: If your seperate partition has the name `EFI2`, and script is in your Downloads folder, run `bash $HOME/Downloads/efi.sh EFI2`.
