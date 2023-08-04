@@ -7,7 +7,7 @@ These steps are common to most distros. Please refer to both this page and this 
 In macOS Disk Utility you need to create your Linux partition:
 
 1. Open Disk Utility
-2. Choose "Macintosh HD *volumes*"
+2. Choose the volume you want to partition for Linux
 3. Press in the top-right "Partition"
 4. Under the blue pie chart press "+" button
 5. When prompted be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
