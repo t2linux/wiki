@@ -38,34 +38,30 @@ Arch Linux probably has the most documentation, both officially for the whole pr
 t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress `archinstall` script.
 Keep in mind however that the whole process is done in the command line.
 
-Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is not recommended, and NoaHimesaka1873's which is newer and recommended.
-
 EndeavourOS is an Arch based Linux distribution with a graphical installer. This distribution requires little to no configuration after install.
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
-Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, though audio and WiFi generally need to be set up as in the guides below. Then they should work flawlessly.
+Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box.
 
 NixOS has both prebuilt graphical and command line installers. Support for T2 devices is provided in the form of a `nixos-hardware` module.
 Importing the module is the only thing you have to do to get your configuration working on your Mac.
 
-If you wish to use another distribution, you can install it normally, also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
+If you wish to use another distribution, you can install it normally, then also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
 ## Installing
 
-Follow the [Pre-installation steps](https://wiki.t2linux.org/guides/preinstall) to prepare your Mac to install Linux and head over to the appropriate guide of the distro of your choice as mentioned in that guide.
+Follow the [pre-installation steps](https://wiki.t2linux.org/guides/preinstall) to prepare your Mac to install Linux and head over to the appropriate guide of the distro of your choice as mentioned in that guide.
 
 ## Configuring the Installation
 
-After successfully booting into your new installation, you will need to configure a few things:
+After successfully booting into your new installation, you will need to follow these steps:
 
--   [Performing a basic setup](https://wiki.t2linux.org/guides/postinstall/)
--   [Getting Wi-Fi and Bluetooth to work](https://wiki.t2linux.org/guides/wifi-bluetooth/)
--   [Install drivers for the fan (if not working automatically or want to force a certain speed)](https://wiki.t2linux.org/guides/fan/)
--   [Configure audio](https://wiki.t2linux.org/guides/audio-config/)
+-   [Install Wi-Fi and Bluetooth firmware](https://wiki.t2linux.org/guides/wifi-bluetooth/)
+-   [Install software for the fan (if it isnt working or you want to configure the fan speed)](https://wiki.t2linux.org/guides/fan/)
 -   [Configure the Startup Manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
 -   [Install rEFInd (optional)](https://wiki.t2linux.org/guides/refind/)
 
 You might also want to look into [getting the internal GPU to work](https://wiki.t2linux.org/guides/hybrid-graphics/) if your Mac has two
 graphics cards. However, if you don't need it specifically, it's probably best to stick with the dedicated one. If your Mac only has
-a single graphics unit, you can ignore this.
+a single graphics card, you can ignore this.
