@@ -59,6 +59,8 @@ After successfully booting into your new installation, you will need to follow t
 
 -   [Install Wi-Fi and Bluetooth firmware](https://wiki.t2linux.org/guides/wifi-bluetooth/)
 -   [Install software for the fan (if it isnt working or you want to configure the fan speed)](https://wiki.t2linux.org/guides/fan/)
+-   [Set up the touchbar](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar)
+-   [Stop NetworkManager notifications (optional)](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar)
 -   [Configure the Startup Manager (optional)](https://wiki.t2linux.org/guides/startup-manager/)
 -   [Install rEFInd (optional)](https://wiki.t2linux.org/guides/refind/)
 
