@@ -47,7 +47,7 @@ Fedora also has a prebuilt ISO and a graphical installer. Most things work out o
 NixOS has both prebuilt graphical and command line installers. Support for T2 devices is provided in the form of a `nixos-hardware` module.
 Importing the module is the only thing you have to do to get your configuration working on your Mac.
 
-If you wish to use another distribution, you can install it normally, then also follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
+If you wish to use another distribution, you can install it normally, then follow the steps to [install the kernel yourself manually](https://wiki.t2linux.org/guides/kernel/) and follow the [post installation steps](https://wiki.t2linux.org/roadmap/#configuring-the-installation).
 
 ## Installing
 
