@@ -27,9 +27,6 @@ You will need:
          2. Add repositories to `/mnt/etc/pacman.conf`, by adding this:
 
          ```ini
-         [Redecorating-t2]
-         Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
-
          [arch-mact2]
          Server = https://mirror.funami.tech/arch-mact2/os/x86_64
          SigLevel = Never
