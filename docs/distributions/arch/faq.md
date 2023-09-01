@@ -5,9 +5,6 @@
 Add new repositories to `/etc/pacman.conf`, by adding this:
 
 ```ini
-[Redecorating-t2]
-Server = https://github.com/Redecorating/archlinux-t2-packages/releases/download/packages
-
 [arch-mact2]
 Server = https://mirror.funami.tech/arch-mact2/os/x86_64
 SigLevel = Never
@@ -21,7 +18,7 @@ You can use Xanmod kernel instead by replacing `linux-t2` with `linux-xanmod-t2`
 # Building Kernel
 
 ```sh
-git clone https://github.com/Redecorating/linux-t2-arch
+git clone https://github.com/NoaHimesaka1873/linux-t2-arch
 cd linux-t2-arch
 makepkg -si
 ```
