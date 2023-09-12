@@ -36,7 +36,7 @@ bash -c "echo \$tb > /sys/class/input/*/device/fnmode"
 echo "Done!"
 EOF
 
-sudo chmod a+x /usr/local/bin/touchbar
-sudo chown root:root /usr/local/bin/touchbar
+sudo chmod a+x /usr/bin/touchbar
+sudo chown root:root /usr/bin/touchbar
 
 echo "Run \"sudo touchbar\" to change the default Touch Bar mode"
