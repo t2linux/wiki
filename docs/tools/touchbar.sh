@@ -11,7 +11,7 @@ fi
 echo "Setting up the Touch Bar"
 echo -e "# display f* key in touchbar\noptions apple-touchbar fnmode=1" | sudo tee /etc/modprobe.d/apple-tb.conf >/dev/null
 
-cat << EOF | sudo tee /usr/local/bin/touchbar >/dev/null
+cat << EOF | sudo tee /usr/bin/touchbar >/dev/null
 #!/usr/bin/env bash
 
 set -euo pipefail
