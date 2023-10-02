@@ -290,7 +290,9 @@ class WiFiFWCollection(object):
         self.prune()
 
     def load(self, source_path):
+    	included_folders = ["C-4355__s-C1", "C-4364__s-B2", "C-4364__s-B3", "C-4377__s-B3"]
         for dirpath, dirnames, filenames in os.walk(source_path):
+            dirnames[:] = [d for d in dirnames if d in included_folders]
             if "perf" in dirnames:
                 dirnames.remove("perf")
             if "assert" in dirnames:
