@@ -49,7 +49,7 @@ case "$os" in
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount disk0s1
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
 		;;
 	(Linux)
 		echo "Detected Linux"
@@ -57,16 +57,16 @@ case "$os" in
 		if [[ ${1-default} = -v ]]
 		then
 			sudo umount -v /dev/nvme0n1p1 || true
-			sudo mkdir -v /tmp/apple-wifi-efi || true
+			sudo mkdir -p -v /tmp/apple-wifi-efi || true
 			sudo mount -v /dev/nvme0n1p1 /tmp/apple-wifi-efi || true
 		else
 			sudo umount /dev/nvme0n1p1 2>/dev/null || true
-			sudo mkdir /tmp/apple-wifi-efi 2>/dev/null || true
+			sudo mkdir -p /tmp/apple-wifi-efi 2>/dev/null || true
 			sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi 2>/dev/null || true
 		fi
 		mountpoint=$(findmnt -n -o TARGET /dev/nvme0n1p1)
 		echo "Getting Wi-Fi and Bluetooth firmware"
-		sudo mkdir /tmp/apple-wifi-fw
+		sudo mkdir -p /tmp/apple-wifi-fw
 		cd /tmp/apple-wifi-fw
 		if [[ ${1-default} = -v ]]
 		then
