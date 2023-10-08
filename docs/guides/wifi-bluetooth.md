@@ -7,7 +7,7 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
-Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it doesn't output anything, then upgrade your kernel (better option), or follow this [older Wi-Fi guide](https://github.com/t2linux/wiki/blob/a4b46a7cfbe7efcbb6a0b6111e22172b0f5c4a77/docs/guides/wifi.md).
+Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it doesn't output anything, then upgrade your kernel.
 
 Refer to the "Updating Kernel" section on your distro's FAQ for instructions if you need to update your kernel:
 
