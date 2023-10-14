@@ -30,6 +30,12 @@
 
 In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the kernel update script as described [here](https://github.com/t2linux/T2-Ubuntu-Kernel#using-the-kernel-upgrade-script).
 
+# Configuring the Touch Bar
+
+If your Mac has a Touch Bar, then you can install the `tiny-dfr` app by running `sudo apt update && sudo apt install tiny-dfr` to set up the Touch Bar. Make sure you restart your Mac after installing the app.
+
+For configuration of the Touch Bar, run `sudo touchbar` and follow the on-screen instructions.
+
 # Troubleshooting
 
 If you are facing issues while installing or have post installation issues (E.g.: Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).

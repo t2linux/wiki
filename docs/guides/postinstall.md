@@ -90,24 +90,22 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
 ## Setting up the Touch Bar
 
-The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
+Setting up the Touch Bar is different for Ubuntu and Debian based distros.
 
-If you want to try something new and you're using Arch Linux, EndeavourOS, or Manjaro, you could install `touchbard` package and use that instead. For more information, visit [touchbard repository](https://github.com/NoaHimesaka1873/touchbard).
+If you are using an Ubuntu or Debian based distro:
 
-After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
+  1. Add the apt repo for T2 Macs from [here](https://github.com/AdityaGarg8/t2-ubuntu-repo.git).
+  2. Install `tiny-dfr` by running `sudo apt install tiny-dfr`.
+  3. Restart your Mac.
+  4. After restarting, you can run `sudo touchbar` to get a list of options that you can configure. Simply follow the on-screen instructions.
 
-In case your Touch Bar is unable to change modes on pressing the fn key, you could try the following:
+For other distros:
 
-- Try running the following and rebooting.
-  
-   ```sh
-   echo -e "# delay loading of the touchbar driver\ninstall apple-touchbar /bin/sleep 7; /sbin/modprobe --ignore-install apple-touchbar" | sudo tee /etc/modprobe.d/delay-tb.conf >/dev/null
-   ```
-  
-- Boot into the [macOS Recovery](https://support.apple.com/en-gb/HT201314) and then restart into Linux.
-- Unplug all the external USB keyboards and mouse and then restart into Linux, keeping them unplugged.
+- The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
 
-If you still face an issue, mention it [here](https://github.com/t2linux/wiki/issues) or on the discord.
+- After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
+
+- If you want to try something new and you're using Arch Linux, EndeavourOS, or Manjaro, you could install `touchbard` package and use that instead. For more information, visit [touchbard repository](https://github.com/NoaHimesaka1873/touchbard).
 
 # Wi-Fi and Bluetooth
 
