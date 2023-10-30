@@ -42,7 +42,7 @@ You will need:
 
 8. Enable `t2fand` and `tiny-dfr` by running:
 
-   ```
+   ```bash
    sudo systemctl enable t2fand
    sudo systemctl enable tiny-dfr
    ```
