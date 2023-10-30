@@ -22,9 +22,9 @@ You will need:
 
     -    Using pacstrap (more vanilla Arch experience)
 
-         1. Run `pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr touchbard t2fand` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-t2`.
+         1. Run `pacstrap /mnt base linux-t2 apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr tiny-dfr t2fand` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-t2`.
 
-         2. Add repositories to `/mnt/etc/pacman.conf`, by adding this:
+         2. Add repository to `/mnt/etc/pacman.conf`, by adding this:
 
          ```ini
          [arch-mact2]
@@ -40,14 +40,21 @@ You will need:
 
 7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
 
-8. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
+8. Enable `t2fand` and `tiny-dfr` by running:
+
+   ```bash
+   sudo systemctl enable t2fand
+   sudo systemctl enable tiny-dfr
+   ```
+
+9. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
     -   Installing Grub:
 
         1. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
         2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
         3. Run `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable`.
-        4. `grub-mkconfig -o /boot/grub/grub.cfg`
+        4. Run `grub-mkconfig -o /boot/grub/grub.cfg` to generate configuration file.
 
     -   Installing systemd-boot:
 
@@ -55,4 +62,4 @@ You will need:
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
         3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-9. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+10. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
