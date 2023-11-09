@@ -20,7 +20,7 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 
 | Linux Distribution                  | Kernel with T2 support |
 | ----------------------------------- | ---------------------- |
-| Arch based distros                  | <https://github.com/Redecorating/linux-t2-arch> |
+| Arch based distros                  | <https://github.com/NoaHimesaka1873/linux-t2-arch> |
 | Arch based distros (Xanmod kernels) | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
 | Fedora                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
 | Fedora                              | <https://github.com/t2linux/fedora-kernel> |
