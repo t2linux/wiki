@@ -57,6 +57,8 @@ does not offer a great deal of flexibility, it might work for getting acceptable
 to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
 boosts.
 
+There is  preconfigured conolver file to give a Dolby Atmos-type sound profile. You can find it [here](https://github.com/JackHack96/EasyEffects-Presets/blob/master/irs/Dolby%20ATMOS%20((128K%20MP3))%201.Default.irs). You simply need to download this file, open EasyEffects, select "Effects" --> Add Effect --> type "Convolver". Afterward select "Impulses" in the rightside menu, select the "Import Impulses" option and then select the file you downloaded earlier. It will usually be in your ~/Downloads folder. As a bonus, go into the preferences of EasyEffects and make sure "Shutdown on window closing" is deselected and "Launch Service at System Startup" is selected. 
+
 # Speakers
 
 All of apple's fancy tuning of the speakers is done in macOS, but a similar configuration is currently available for only the MacBook Pro 16 inch 2019.
