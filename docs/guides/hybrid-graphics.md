@@ -4,7 +4,7 @@ This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
 
-Make sure you have a t2 kernel of version greater than 6.1.12-2 (you can check this with `uname -r`).
+Make sure you have a t2 kernel of version greater than 6.6.2-2 (you can check this with `uname -r`).
 
 ## Issues
 
@@ -41,39 +41,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
         options apple-gmux force_igd=y
         ```
 
-2.  Set up apple-set-os-loader to make Apple's firmware show the iGPU so apple-gmux will be able to switch to it:
-
-    1.  Compile apple-set-os loader. These instructions assume you have `gnu-efi` installed, and mount your EFI partition on `/boot/efi`. If you mount the EFI partition somewhere else or use refind, you will need to replace /boot/efi with the mount point of the partition in which your bootloader is installed.
-
-        - Ubuntu and Debian: `sudo apt install gnu-efi build-essential`
-        - Arch, EndeavorOS, and Manjaro: `sudo pacman -Syu base-devel gnu-efi`
-        - Fedora: `sudo dnf install "@C Development Tools and Libraries" gnu-efi`
-
-        ```sh
-        git clone https://github.com/aa15032261/apple_set_os-loader
-        cd apple_set_os-loader
-        make
-        sudo mv /boot/efi/efi/boot/bootx64.efi /boot/efi/efi/boot/bootx64_original.efi
-        sudo cp ./bootx64.efi /boot/efi/efi/boot/bootx64.efi
-        ```
-
-    2.  Reboot to Linux, you should see this at boot (the GPUs listed might be different):
-
-        ```plain
-        ================== apple_set_os loader v0.5 ==================
-        SetOsProtocol Handle Count: 1
-        AppleSetOs will be loaded, press Z to disable.
-        
-        ----------------------- Ready to boot ------------------------
-        Plug in your eGPU then press any key.
-        Booting bootx64_original.efi in 6 second(s)
-        
-        Connected Graphics Cards:
-        1002 7340 AMD - Navi 14 [Radeon RX 5500/5500M]
-        8086 3E9B INTEL - UHD Graphics 630 (Mobile)
-        ```
-
-    3.  Press any key other than `z` or wait, and it should boot you into Linux. If you want a silent version of this that doesn't wait for input, you can use [this fork](https://github.com/Redecorating/apple_set_os-loader).
+2.  Add `apple-set-os` as a kernel parameter to make Apple's firmware show the iGPU so that apple-gmux will be able to switch to it.
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
@@ -104,6 +72,8 @@ Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lo
 3. Restart into Linux. You should now be able to access your Linux installation.
 
 4. Follow the instructions [above](#enabling-the-igpu).
+
+5. Remove apple-os-set loader.
 
 ## Use on Windows
 
