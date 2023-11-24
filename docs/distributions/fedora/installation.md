@@ -10,14 +10,17 @@ If you need a more updated kernel, use the iso from [sharpenedblade](https://git
 
 # Install Procedure
 
-(These instructions are re-used from the Manjaro installation guide)
-
 1. Follow the [Pre-Install](https://wiki.t2linux.org/guides/preinstall) guide.
-2. Once booted into Fedora, follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
-3. Use the installer like normal until you get to the partitioning step.
-4. When you get to partitioning, click on the manual partitioning option. Find the partition you made before by following the pre-install guide. **MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST**. Delete it to make free space.
-5. Click on the automatically create mount points option.
-6. Continue with the rest of the installation.
-7. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
-8. Welcome to Fedora! :)
-9. Once you're booted and in your desktop, set up [Wi-Fi](https://wiki.t2linux.org/guides/wifi-bluetooth/) to finish the installation.
+2. Use the installer like normal until you get to the partitioning step.
+3. Click on automatic partitioning, then click *create free space*
+4. Delete the partition you created on macos.
+5. Continue with the rest of the installation.
+6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
+7. Welcome to Fedora! :)
+8. Once you're booted and in your desktop, set up [Wi-Fi](https://wiki.t2linux.org/guides/wifi-bluetooth/) to finish the installation.
+
+## Installing unsupported spins
+
+1. Follow the installation instructions above, but use your custom (vanilla) ISO. You need an external keyboard and mouse.
+2. Add our DNF repo: `sudo dnf copr enable sharpenedblade/t2linux`
+3. Install our packages: `sudo dnf install t2linux-config && sudo dnf upgrade kernel`

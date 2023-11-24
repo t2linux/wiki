@@ -44,7 +44,7 @@ EndeavourOS is an Arch based Linux distribution with a graphical installer. This
 
 Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
 
-Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, though audio and WiFi generally need to be set up as in the guides below. Then they should work flawlessly.
+Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, but you need to follow the wifi guide.
 
 NixOS has both prebuilt graphical and command line installers. Support for T2 devices is provided in the form of a `nixos-hardware` module.
 Importing the module is the only thing you have to do to get your configuration working on your Mac.
