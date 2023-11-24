@@ -41,7 +41,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
         options apple-gmux force_igd=y
         ```
 
-2.  Add `apple-set-os` as a kernel parameter to make Apple's firmware show the iGPU so that apple-gmux will be able to switch to it.
+2.  Add `apple_set_os` as a kernel parameter to make Apple's firmware show the iGPU so that apple-gmux will be able to switch to it.
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
