@@ -23,7 +23,7 @@ You will need:
 3. Follow the installer until Partitions.
 
     1. Select "Manual partitioning."
-    2. Select "/dev/nvme0n1p1" partition, set the "boot" flag, and set it to mount under "/boot/efi". If you want to use separate EFI partition, check out [this guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
+    2. Select "/dev/nvme0n1p1" partition, make sure the "boot" flag is set, and set it to mount under "/efi". If you want to use separate EFI partition, check out [this guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
     3. Use remaining partition space to your convenience.
 
 4. Follow the rest of the installer and reboot.
