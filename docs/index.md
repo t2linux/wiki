@@ -54,8 +54,8 @@ Note that, if you are using one of the distributions listed above, you should fo
 - Keyboard related issues [https://wiki.archlinux.org/title/Apple_Keyboard](https://wiki.archlinux.org/title/Apple_Keyboard)
 - Get silent boot experience similar to macOS and Windows on [Ubuntu](https://gist.github.com/AdityaGarg8/a39063f0d8c39572f03f55cbe02f9beb) and [Arch Linux](https://wiki.archlinux.org/title/silent_boot).
 - Implement macOS-like Keyboard and trackpad experience on **Gnome Xorg**. Read the top comments of each file in the links given below to understand requirements, additional tools and usage.
-  - [Synaptics Config](https://gist.github.com/smileBeda/f0452f0d7f1f6d8aa772603411f7876f) (for general trackpad behaviour using Synaptics)
-  - [Fusuma Config](https://gist.github.com/smileBeda/74a52fe7cb0901da9e67ae4e39966982) (for additional gestures commands using Fusuma)
+    - [Synaptics Config](https://gist.github.com/smileBeda/f0452f0d7f1f6d8aa772603411f7876f) (for general trackpad behaviour using Synaptics)
+    - [Fusuma Config](https://gist.github.com/smileBeda/74a52fe7cb0901da9e67ae4e39966982) (for additional gestures commands using Fusuma)
 
 *Outdated*
 
