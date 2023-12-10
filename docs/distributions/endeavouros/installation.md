@@ -31,3 +31,5 @@ You will need:
 5. You can follow the [Fan guide](https://wiki.t2linux.org/guides/fan/) after rebooting into your install if your fan isn't working or if you want to customize how/when your fan will run.
 
 6. You now will be able to select your EndeavourOS install in the macOS Startup Manager by holding option at boot.
+
+7. Optionally, enable `bluetooth` daemon if you want to use Bluetooth.
