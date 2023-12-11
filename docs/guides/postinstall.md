@@ -97,6 +97,7 @@ If you are using an Ubuntu or Debian based distro:
   1. Add the apt repo for T2 Macs from [here](https://github.com/AdityaGarg8/t2-ubuntu-repo#apt-repository-for-t2-macs).
   2. Install `tiny-dfr` by running `sudo apt install tiny-dfr`.
   3. Restart your Mac.
+  4. After restarting, you can run `sudo touchbar` to get a list of options that you can configure. Simply follow the on-screen instructions. Note that this command is only for Ubuntu or Debian based distros.
 
 If you are using Arch Linux or EndeavourOS:
 
