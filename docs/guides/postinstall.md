@@ -97,15 +97,15 @@ If you are using an Ubuntu or Debian based distro:
   1. Add the apt repo for T2 Macs from [here](https://github.com/AdityaGarg8/t2-ubuntu-repo#apt-repository-for-t2-macs).
   2. Install `tiny-dfr` by running `sudo apt install tiny-dfr`.
   3. Restart your Mac.
-  4. After restarting, you can run `sudo touchbar` to get a list of options that you can configure. Simply follow the on-screen instructions.
+
+If you are using Arch Linux or EndeavourOS:
+
+  1. Install `tiny-dfr` by running `sudo pacman -Syu tiny-dfr`.
+  2. Restart your Mac.
 
 For other distros:
 
-- The Touch Bar can be set up by running [this script](../tools/touchbar.sh) **in Linux** using `bash /path/to/script`. Make sure your Linux kernel and macOS is updated before running this script.
-
-- After running this script, if you wish to change the default mode of the Touch Bar, run `sudo touchbar` and choose the mode you wish.
-
-- If you want to try something new and you're using Arch Linux, EndeavourOS, or Manjaro, you could install `touchbard` package and use that instead. For more information, visit [touchbard repository](https://github.com/NoaHimesaka1873/touchbard).
+- Compile [`tiny-dfr`](https://github.com/kekrby/tiny-dfr) yourself if your distro don't have that packaged yet.
 
 # Wi-Fi and Bluetooth
 
