@@ -13,7 +13,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Bluetooth|🟡 Partially working|🟢 Yes|Requires macOS firmware only for devices with BCM4377 chip. Also, Bluetooth glitches on devices with BCM4377 Chip if connected to a 2.4 Ghz Wi-Fi connection. Thus, in order to use Bluetooth either turn off your Wi-Fi or use a 5Ghz Wi-Fi connection.|[Setup guide](https://wiki.t2linux.org/guides/wifi-bluetooth/)|
 |Camera|🟢 Working|🔴 No||[apple-bce](https://github.com/t2linux/apple-bce-drv)|
 |Thunderbolt|🟢 Working|🟢 Yes|If it doesn't work, try replacing `pcie_ports=compat` with `pcie_ports=native` in the kernel parameters via GRUB.||
-|Touch Bar|🟢 Working|🔴 No|"Touch Bar Keyboard" mode works OOTB, where only the Function Keys or the Media/Brightness Control Keys are shown. Support for custom graphics on the Touch Bar is being actively developed.|[tiny-dfr](https://github.com/kekrby/tiny-dfr)<br>[apple-ib](https://github.com/t2linux/apple-ib-drv)|
+|Touch Bar|🟢 Working|🔴 No|"Touch Bar Keyboard" mode works OOTB, where only the Function Keys or the Media/Brightness Control Keys are shown. Support for custom graphics on the Touch Bar is being actively developed.|[tiny-dfr](https://github.com/kekrby/tiny-dfr), [apple-ib](https://github.com/t2linux/apple-ib-drv)|
 |Suspend|🟡 Partially working|🟢 Yes|A firmware upgrade attached to macOS Sonoma broke suspend. Some users were having difficulty with it even before Sonoma. The issue has something to do with the apple-bce driver, because suspend works when it's disabled.|[#53](https://github.com/t2linux/T2-Ubuntu-Kernel/issues/53)|
 |Audio|🟡 Partially working|🔴 No|With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.|[apple-bce](https://github.com/t2linux/apple-bce-drv)|
 |Hybrid Graphics|🟡 Partially working|🟡 Partial|Toggling dGPU power doesn't work.|[Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/)|
@@ -23,5 +23,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |T2 Audio Video Encoder|🔴 Not working||Used for Sidecar on macOS||
 
 ## Filesystem notes
+
 - Linux using APFS filesystems: Linux cannot read the internal SSD's macOS APFS parition's Data and System volume (for other APFS volumes, [linux-apfs-rw](https://github.com/linux-apfs/linux-apfs-rw) can be used for reading data, but attempting to write is risky).
+
 - macOS using Linux filesystems: There are FUSE implementations of some Linux Filesystems that can be used on macOS (but again, most only have experemental write support).
