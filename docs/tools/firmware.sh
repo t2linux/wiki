@@ -30,7 +30,7 @@ case "$os" in
 		else
 			tar czf "/Volumes/${EFILABEL}/firmware.tar.gz" *
 		fi
-		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) ]]
+		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
 			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
