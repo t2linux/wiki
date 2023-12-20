@@ -40,6 +40,8 @@ You will need:
 
 7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
 
+8. Add `hid_apple` to the `MODULES` list in `/etc/mkinitcpio.conf` only if your partition is encrypted (otherwise you can skip this step), and then run `mkinitcpio -P`
+
 8. Enable `t2fand` and `tiny-dfr` by running:
 
    ```bash
