@@ -42,14 +42,14 @@ You will need:
 
 8. Add `hid_apple` to the `MODULES` list in `/etc/mkinitcpio.conf` only if your partition is encrypted (otherwise you can skip this step), and then run `mkinitcpio -P`
 
-8. Enable `t2fand` and `tiny-dfr` by running:
+9. Enable `t2fand` and `tiny-dfr` by running:
 
    ```bash
    sudo systemctl enable t2fand
    sudo systemctl enable tiny-dfr
    ```
 
-9. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
+10. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
     -   Installing Grub:
 
@@ -64,4 +64,4 @@ You will need:
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
         3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-10. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+11. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
