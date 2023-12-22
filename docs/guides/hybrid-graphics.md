@@ -45,36 +45,6 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
-## MacBookPro16,4
-
-Currently the Radeon 5600M AMD GPU on MacBookPro16,4 is [not working](https://lore.kernel.org/all/3AFB9142-2BD0-46F9-AEA9-C9C5D13E68E6@live.com/) with Linux. As a workaround:
-
-### If you are able to edit your kernel command line:
-
-1. Edit the kernel command line of this boot and add the `nomodeset` kernel parameter. This will enable you to access your Linux system in safe graphics.
-
-2. Follow the instructions [above](#enabling-the-igpu).
-
-3. You can now remove the `nomodeset` parameter from your kernel command line.
-
-### If you are unable to edit your kernel command line:
-
-1. Boot into macOS
-
-    1. Mount your Linux EFI partition over there. In most cases it should be `disk0s1` and can be mounted by running `sudo diskutil mount disk0s1` in the terminal. If you are using a separate EFI partition, the you can run `diskutil list` and find your partition in the output, and mount it accordingly.
-
-    2. Install apple-os-set loader from [here](https://github.com/Redecorating/apple_set_os-loader) using macOS, and put it in your Linux EFI partition.
-
-2. Restart into macOS Recovery by immediately pressing and holding Command+R on startup.
-
-    1. Open the terminal there and run `nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs=%01%00%00%00`.
-
-3. Restart into Linux. You should now be able to access your Linux installation.
-
-4. Follow the instructions [above](#enabling-the-igpu).
-
-5. Remove apple-os-set loader.
-
 ## Use on Windows
 
 The iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers.
