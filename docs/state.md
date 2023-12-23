@@ -8,7 +8,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Screen, iGPU|🟢 Working|🟡 Partial|||
 |USB|🟢 Working|🟢 Yes|||
 |Keyboard|🟢 Working|🔴 No||[apple-bce](https://github.com/t2linux/apple-bce-drv)|
-|Trackpad|🟢 Working|🔴 No|Works, but isn't as great as on macOS (no force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.|[apple-bce](https://github.com/t2linux/apple-bce-drv)|
+|Trackpad|🟢 Working|🔴 No|Works, but isn't as great as on macOS (no force touch or palm rejection). Some models have deadzones on the edges of their trackpads where swipes along the trackpad that start in these deadzones will not be registered.|[apple-bce](https://github.com/t2linux/apple-bce-drv), [Trackpad tuning](https://wiki.t2linux.org/#trackpad-tuning)|
 |Wi-Fi|🟢 Working|🟢 Yes|Requires macOS firmware|[Setup guide](https://wiki.t2linux.org/guides/wifi-bluetooth/)|
 |Bluetooth|🟡 Partially working|🟢 Yes|Requires macOS firmware only for devices with BCM4377 chip. Also, Bluetooth glitches on devices with BCM4377 Chip if connected to a 2.4 Ghz Wi-Fi connection. Thus, in order to use Bluetooth either turn off your Wi-Fi or use a 5Ghz Wi-Fi connection.|[Setup guide](https://wiki.t2linux.org/guides/wifi-bluetooth/)|
 |Camera|🟢 Working|🔴 No||[apple-bce](https://github.com/t2linux/apple-bce-drv)|
