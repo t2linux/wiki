@@ -4,6 +4,10 @@ The T2 project itself currently does not accept financial donations. However, so
 
 The best way of donation which we believe is in the form of skill. If you think you have the potential to help us in pushing the project further like fixing bugs, adding new features etc., you are free to do so. For this, you may contact our discord server, where other members of this organization are present.
 
+## Contribute to the code
+
+See "partially working" features at [State](https://wiki.t2linux.org/state/) to get an idea of what's being worked on, and what should be worked on.
+
 ## Support our maintainers
 
 Here is the list and links to donate some of our maintainers.
