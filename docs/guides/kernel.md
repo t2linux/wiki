@@ -45,8 +45,9 @@ done
 zcat /proc/config.gz > .config
 make olddefconfig
 scripts/config --module CONFIG_BT_HCIBCM4377
-scripts/config --module CONFIG_HID_APPLE_IBRIDGE
-scripts/config --module CONFIG_HID_APPLE_TOUCHBAR
+scripts/config --module CONFIG_HID_APPLETB_BL
+scripts/config --module CONFIG_HID_APPLETB_KBD
+scripts/config --module CONFIG_DRM_APPLETBDRM
 scripts/config --module CONFIG_HID_APPLE_MAGIC_BACKLIGHT
 scripts/config --module CONFIG_APPLE_BCE
 ```
