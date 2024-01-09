@@ -115,10 +115,10 @@ By default, rEFInd boots Linux indirectly by booting GRUB, systemd-boot etc. But
     !!! note "Chroot"
         If you have run the in step 5 commands within a chroot, the `ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e` shall likely to be missing. In this case, manually edit the `refind_linux.conf` file in the `/boot` folder of your **chroot** to look like the sample and replace the **UUID** (`631c326a-fb48-46ba-b4aa-6dd2033fbb5e` in the sample) with the one of the partition in which your Linux is installed. You can get the UUID from `/etc/fstab` file of your **chroot** or using a disk utility software.
 
-7. On the line with `"Boot with standard options"`, add the `intel_iommu=on iommu=pt pcie_ports=compat efi=noruntime quiet splash` parameters. It is possible that some parameters are already added. In such case, add only the missing parameters. If you don't want a silent boot, you may omit out the `quiet splash` parameter. Finally, the `refind_linux.conf` file should look something like this.
+7. On the line with `"Boot with standard options"`, add the `intel_iommu=on iommu=pt pcie_ports=compat quiet splash` parameters. It is possible that some parameters are already added. In such case, add only the missing parameters. If you don't want a silent boot, you may omit out the `quiet splash` parameter. Finally, the `refind_linux.conf` file should look something like this.
 
     ```conf
-    "Boot with standard options"  "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e intel_iommu=on iommu=pt pcie_ports=compat efi=noruntime quiet splash"
+    "Boot with standard options"  "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e intel_iommu=on iommu=pt pcie_ports=compat quiet splash"
     #"Boot to single-user mode"    "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e single"
     #"Boot with minimal options"   "ro root=UUID=631c326a-fb48-46ba-b4aa-6dd2033fbb5e"
     ```
