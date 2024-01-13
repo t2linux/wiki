@@ -104,6 +104,11 @@ If you are using Arch Linux or EndeavourOS:
   1. Install `tiny-dfr` by running `sudo pacman -Syu tiny-dfr`.
   2. Restart your Mac.
 
+If you are using Fedora:
+
+  1. Install tiny-dfr with `sudo dnf install rust-tiny-dfr`.
+  2. Restart your mac
+
 For other distros:
 
 - Compile [`tiny-dfr`](https://github.com/kekrby/tiny-dfr) yourself if your distro don't have that packaged yet.

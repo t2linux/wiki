@@ -20,4 +20,16 @@ Download the latest ISO, then try again. Make sure you are using the T2 Fedora i
 
 # My Wi-Fi stops working after suspending
 
-Try running `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac` in a terminal.
+Add this to `/etc/systemd/system-sleep/unload-wifi.sh`:
+
+```bash
+#!/usr/bin/env bash
+if [ "${1}" = "pre" ]; then
+    systemctl stop NetworkManager
+    modprobe -r brcmfmac_wcc
+    modprobe -r brcmfmac
+elif [ "${1}" = "post" ]; then
+    modprobe brcmfmac
+    systemctl start NetworkManager
+fi
+```
