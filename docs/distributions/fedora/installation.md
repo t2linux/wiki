@@ -13,7 +13,7 @@ If you need a more updated kernel, use the iso from [sharpenedblade](https://git
 1. Follow the [Pre-Install](https://wiki.t2linux.org/guides/preinstall) guide.
 2. Use the installer like normal until you get to the partitioning step.
 3. Click on automatic partitioning, then click *create free space*
-4. Delete the partition you created on macos.
+4. Delete the partition you created using macos for linux.
 5. Continue with the rest of the installation.
 6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 7. Welcome to Fedora! :)
