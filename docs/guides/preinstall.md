@@ -69,7 +69,7 @@ While the installation image is being written to the USB, you can skip to [Copy 
 ## Copy Wi-Fi firmware
 
 !!! Warning "Arch/EndeavourOS"
-    If you're going to install Arch or EndeavourOS, you do not need to follow this guide.
+    If you're going to install Arch or EndeavourOS, you do not need to follow this step.
 
 Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we copy these files from macOS to the EFI partition where Linux can access and eventually install them.
 
