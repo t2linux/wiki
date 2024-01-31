@@ -6,27 +6,29 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
 ## Steps
 
-1. Install `t2fand`.
+1. Install `t2fanrd`.
 
     -   If you're using Arch based distros:
 
         1. Check if you installed Arch using our guide or added our repositories. If you haven't done that, follow [this guide](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel) first.
 
-        2. Install the package by running `sudo pacman -S t2fand`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
+        2. Install the package by running `sudo pacman -S t2fanrd`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
 
     -   If you're using Debian or Ubuntu based distros:
 
         1. If you don't have t2-ubuntu-repo, follow [this](https://github.com/AdityaGarg8/t2-ubuntu-repo#apt-repository-for-t2-macs) first to add the repository.
 
-        2. Install the package by running `sudo apt install t2fand`.
+        2. Install the package by running `sudo apt install t2fanrd`.
+
+    -   If you're using Fedora based distros (it should be installed by default, but you need to enable the service):
+
+        1. Make sure our COPR repo is enabled: `sudo dnf copr enable sharpenedblade/t2linux`
+
+        2. Install the package by running `sudo dnf install t2fanrd`
 
     -   If you're using other distributions:
 
-        1. Clone the repository by running `git clone https://github.com/NoaHimesaka1873/t2fand`
-
-        2. Change directory into the cloned repository.
-
-        3. Install it by running `make install`.
+        You can compile the daemon by following the instructions given in [this repository](https://github.com/GnomedDev/T2FanRD) and add a systemd service.
 
 2. Enable daemon by running `sudo systemctl enable --now t2fand`.
 
@@ -35,4 +37,4 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 ## Configuration
 
 The daemons config file can be found at `/etc/t2fand.conf`. You can change the activating temperature and/or fan curve to suit your needs.
-For more information, like how fan curves look like, check out [the repository](https://github.com/NoaHimesaka1873/t2fand).
+For more information, like how fan curves look like, check out [the repository](https://github.com/GnomedDev/T2FanRD).
