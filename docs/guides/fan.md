@@ -24,9 +24,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         1. Make sure our COPR repo is enabled: `sudo dnf copr enable sharpenedblade/t2linux`
 
-        2. Install t2fanrd by running `sudo dnf install t2fanrd`
-
-        3. Enable the service: `sudo systemctl enable --now t2fanrd`
+        2. Install the package by running `sudo dnf install t2fanrd`
 
     -   If you're using other distributions:
 
