@@ -40,7 +40,6 @@ You have two options here. You can follow either of the two, its purely based on
 - The second method is to simply run the following commands on Linux :-
 
   ```sh
-  sudo umount /dev/nvme0n1p1
   sudo mkdir -p /tmp/apple-wifi-efi
   sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
   bash /tmp/apple-wifi-efi/firmware.sh

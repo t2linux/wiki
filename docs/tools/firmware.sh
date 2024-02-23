@@ -23,12 +23,13 @@ case "$os" in
 		EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 		sudo diskutil mount disk0s1
 		echo "Getting Wi-Fi and Bluetooth firmware"
-		cd /usr/share/firmware
 		if [[ ${1-default} = -v ]]
 		then
-			tar czvf "/Volumes/${EFILABEL}/firmware.tar.gz" *
+			tar -cvf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
+			gzip --best "/Volumes/${EFILABEL}/firmware.tar"
 		else
-			tar czf "/Volumes/${EFILABEL}/firmware.tar.gz" *
+			tar -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
+			gzip --best "/Volumes/${EFILABEL}/firmware.tar"
 		fi
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
@@ -44,53 +45,33 @@ case "$os" in
 			fi
 		fi
 		echo "Copying this script to EFI"
-		cd - >/dev/null
 		cp "$0" "/Volumes/${EFILABEL}/firmware.sh"|| (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
 		echo "Unmounting the EFI partition"
-		sudo diskutil unmount disk0s1
+		sudo diskutil unmount "/Volumes/${EFILABEL}/"
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo umount /dev/nvme0n1p1\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
 		;;
 	(Linux)
 		echo "Detected Linux"
 		echo "Re-mounting the EFI partition"
+		mountpoint=$(mktemp -d)
+		workdir=$(mktemp -d)
+		echo "Installing Wi-Fi and Bluetooth firmware"
 		if [[ ${1-default} = -v ]]
 		then
-			sudo umount -v /dev/nvme0n1p1 || true
-			sudo mkdir -p -v /tmp/apple-wifi-efi || true
-			sudo mount -v /dev/nvme0n1p1 /tmp/apple-wifi-efi || true
+			sudo mount -v /dev/nvme0n1p1 $mountpoint
+			sudo tar --warning=no-unknown-keyword -xvC $workdir -f $mountpoint/firmware.tar.gz
+			sudo python3 $0 $workdir $workdir/firmware-renamed.tar
+			sudo tar -xvC /lib/firmware -f $workdir/firmware-renamed.tar
 		else
-			sudo umount /dev/nvme0n1p1 2>/dev/null || true
-			sudo mkdir -p /tmp/apple-wifi-efi 2>/dev/null || true
-			sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi 2>/dev/null || true
-		fi
-		mountpoint=$(findmnt -n -o TARGET /dev/nvme0n1p1)
-		echo "Getting Wi-Fi and Bluetooth firmware"
-		sudo mkdir -p /tmp/apple-wifi-fw
-		cd /tmp/apple-wifi-fw
-		if [[ ${1-default} = -v ]]
-		then
-			sudo tar xvf $mountpoint/firmware.tar.gz
-		else
-			sudo tar xf $mountpoint/firmware.tar.gz 2>/dev/null
-		fi
-		echo "Setting up Wi-Fi and Bluetooth"
-		if [[ ${1-default} = -v ]]
-		then
-			sudo python3 $mountpoint/firmware.sh /tmp/apple-wifi-fw
-		else
-			sudo python3 $mountpoint/firmware.sh /tmp/apple-wifi-fw >/dev/null
-		fi
-		cd /lib/firmware
-		if [[ ${1-default} = -v ]]
-		then
-			sudo tar xvf /tmp/apple-wifi-fw/firmware.tar
-		else
-			sudo tar xf /tmp/apple-wifi-fw/firmware.tar
+			sudo mount /dev/nvme0n1p1 $mountpoint
+			sudo tar --warning=no-unknown-keyword -xC $workdir -f $mountpoint/firmware.tar.gz
+			sudo python3 $0 $workdir $workdir/firmware-renamed.tar &> /dev/null
+			sudo tar -xC /lib/firmware -f $workdir/firmware-renamed.tar
 		fi
 
 		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-		            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
+			"$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
 		do
 			if [ -f "$file" ]
 			then
@@ -102,13 +83,15 @@ case "$os" in
 				fi
 			fi
 		done
-		sudo modprobe -r brcmfmac || true
-		sudo modprobe brcmfmac || true
-		sudo modprobe -r hci_bcm4377 || true
-		sudo modprobe hci_bcm4377 || true
-		echo "Cleaning up"
-		sudo rm -r /tmp/apple-wifi-fw
-		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
+	echo "Reloading Wi-Fi and Bluetooth drivers"
+	sudo modprobe -r brcmfmac || true
+	sudo modprobe brcmfmac || true
+	sudo modprobe -r hci_bcm4377 || true
+	sudo modprobe hci_bcm4377 || true
+	sudo rm -r $workdir/*
+	sudo umount $mountpoint
+	sudo rmdir $mountpoint
+	echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
 		read input
 		if [[ ($input != y) && ($input != Y) ]]
 		then
@@ -124,8 +107,7 @@ case "$os" in
 				fi
 			done
 		fi
-		echo "Running post-installation scripts"
-		exec sudo sh -c "umount /dev/nvme0n1p1 && mount -a && rmdir /tmp/apple-wifi-efi && echo Done!"
+		echo "Done!"
 		;;
 	(*)
 		echo "Error: unsupported platform"
@@ -451,12 +433,9 @@ class FWPackage(object):
     def __del__(self):
         self.tarfile.close()
 
-
-
-
-pkg = FWPackage("firmware.tar")
-col = WiFiFWCollection(sys.argv[1]+"/wifi")
-pkg.add_files(sorted(col.files()))
-col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
-pkg.add_files(sorted(col.files()))
+pkg = FWPackage(sys.argv[2])
+wifi_col = WiFiFWCollection(sys.argv[1]+"/wifi")
+pkg.add_files(sorted(wifi_col.files()))
+bt_col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
+pkg.add_files(sorted(bt_col.files()))
 pkg.close()
