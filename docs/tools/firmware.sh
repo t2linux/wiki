@@ -84,6 +84,7 @@ case "$os" in
 			fi
 		done
 	echo "Reloading Wi-Fi and Bluetooth drivers"
+	sudo modprobe -r brcmfmac_wcc || true
 	sudo modprobe -r brcmfmac || true
 	sudo modprobe brcmfmac || true
 	sudo modprobe -r hci_bcm4377 || true
