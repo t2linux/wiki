@@ -49,7 +49,7 @@ case "$os" in
 		echo "Unmounting the EFI partition"
 		sudo diskutil unmount "/Volumes/${EFILABEL}/"
 		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\n"
+		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
 		;;
 	(Linux)
 		echo "Detected Linux"

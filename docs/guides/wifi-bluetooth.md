@@ -43,6 +43,7 @@ You have two options here. You can follow either of the two, its purely based on
   sudo mkdir -p /tmp/apple-wifi-efi
   sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
   bash /tmp/apple-wifi-efi/firmware.sh
+  sudo umount /tmp/apple-wifi-efi
   ```
 
 #### For those who don’t know how to run a script
