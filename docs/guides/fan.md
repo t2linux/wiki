@@ -30,9 +30,9 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         You can compile the daemon by following the instructions given in [this repository](https://github.com/GnomedDev/T2FanRD) and add a systemd service.
 
-2. Enable daemon by running `sudo systemctl enable --now t2fand`.
+2. Enable daemon by running `sudo systemctl enable --now t2fanrd`.
 
-3. Edit the config and restart the daemon by running `sudo systemctl restart t2fand` if needed.
+3. Edit the config and restart the daemon by running `sudo systemctl restart t2fanrd` if needed.
 
 ## Configuration
 
