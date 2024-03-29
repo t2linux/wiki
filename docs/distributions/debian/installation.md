@@ -57,27 +57,31 @@ After installation, we need to install a kernel having patches to support the T2
     sudo apt update
     ```
   
-4. Now install the kernel upgrade script.
+4. Now install the T2 kernel.
   
-    * If your distro is Ubuntu based, run:
+    * If your distro is Ubuntu based:
+  
+       You need to additionally add the **release specific** apt repo for kernels. Follow the steps given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#adding-the-release-specific-apt-repo). After adding the repo, install the `linux-t2` package:
   
        ```bash
-       sudo apt install t2-kernel-script
+       sudo apt install linux-t2
        ```
   
-    * If your distro is Debian based, run:
+    * If your distro is Debian based:
+  
+      In this case, you need to install the kernel upgrade script:
   
        ```bash
        sudo apt install t2-kernel-script-debian
        ```
   
-5. Then upgrade your kernel to a T2 kernel by running:
+      Then upgrade your kernel to a T2 kernel by running:
   
-    ```bash
-    update_t2_kernel
-    ```
+      ```bash
+      update_t2_kernel
+      ```
   
-6. Install the audio configuration files by running:
+5. Install the audio configuration files by running:
   
     ```bash
     sudo apt install apple-t2-audio-config
@@ -85,9 +89,9 @@ After installation, we need to install a kernel having patches to support the T2
   
     **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
-7. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
+6. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
-8. If your Mac has a Touch Bar, install `tiny-dfr` by running:
+7. If your Mac has a Touch Bar, install `tiny-dfr` by running:
   
     ```bash
     sudo apt install tiny-dfr

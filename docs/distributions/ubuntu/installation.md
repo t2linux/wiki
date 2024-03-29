@@ -28,7 +28,7 @@
 
 # Receiving kernel updates
 
-In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the kernel update script as described [here](https://github.com/t2linux/T2-Ubuntu-Kernel#using-the-kernel-upgrade-script).
+In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the apt repo as described [here](https://github.com/t2linux/T2-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo).
 
 # Configuring the Touch Bar
 
