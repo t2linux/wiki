@@ -61,25 +61,25 @@ After installation, we need to install a kernel having patches to support the T2
   
     * If your distro is Ubuntu based:
   
-       You need to additionally add the **release specific** apt repo for kernels. Follow the steps given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#adding-the-release-specific-apt-repo). After adding the repo, install the `linux-t2` package:
+        You need to additionally add the **release specific** apt repo for kernels. Follow the steps given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#adding-the-release-specific-apt-repo). After adding the repo, install the `linux-t2` package:
   
-       ```bash
-       sudo apt install linux-t2
-       ```
+        ```bash
+        sudo apt install linux-t2
+        ```
   
     * If your distro is Debian based:
   
-      In this case, you need to install the kernel upgrade script:
+        In this case, you need to install the kernel upgrade script:
   
-       ```bash
-       sudo apt install t2-kernel-script-debian
-       ```
+        ```bash
+        sudo apt install t2-kernel-script-debian
+        ```
   
-      Then upgrade your kernel to a T2 kernel by running:
+        Then upgrade your kernel to a T2 kernel by running:
   
-      ```bash
-      update_t2_kernel
-      ```
+        ```bash
+        update_t2_kernel
+        ```
   
 5. Install the audio configuration files by running:
   
