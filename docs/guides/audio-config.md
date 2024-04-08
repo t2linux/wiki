@@ -57,6 +57,8 @@ does not offer a great deal of flexibility, it might work for getting acceptable
 to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
 boosts.
 
+An EasyEffects preset (tested on MacBook Pro 15,1) is available [here](https://github.com/angelobdev/t2-easyeffects-preset).
+
 # Speakers
 
 All of apple's fancy tuning of the speakers is done in macOS, but a similar configuration is currently available for only the MacBook Pro 16 inch 2019.
