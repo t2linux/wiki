@@ -84,6 +84,16 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     3. Run `sudo mkinitcpio -P`.
 
+- On systems with `dracut` (Commonly used on EndeavourOS and Fedora):
+
+    1. Run the following to create a dracut configuration file which loads the apple-bce module on early boot:
+
+        ```sh
+        echo "force_drivers+=\" apple-bce \"" | sudo tee /etc/dracut.conf.d/t2linux-modules.conf
+        ```
+
+    2. Run `sudo dracut --force` to regenerate the initramfs with this change.
+
 - On systems with other initramfs/initrd generation systems:
 
     In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early.
