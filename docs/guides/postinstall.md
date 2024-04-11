@@ -83,6 +83,16 @@ The steps to be followed vary depending upon the initramfs module loading mechan
          ```
 
     3. Run `sudo mkinitcpio -P`.
+ 
+- On EndeavourOS, which uses `dracut`
+
+    1. Create and edit a file at `/etc/dracut.conf.d/myflags.conf`, using e.g. `sudo vim /etc/dracut.conf.d/myflags.conf`
+  
+    2. Add the following line:
+
+         `force_drivers+=" apple-bce "`
+       
+    3. Run `sudo dracut --force` to regenerate the initramfs with this change
 
 - On systems with other initramfs/initrd generation systems:
 
