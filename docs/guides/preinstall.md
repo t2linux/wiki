@@ -28,7 +28,7 @@ Listed below are the currently available installer ISOs for download:
 | Linux Distribution | Download ISO with T2 support |
 | ------------------ | ---------------------------- |
 | Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
-| blendOS            | <https://docs.blendos.co/guides/installation-guide-for-macs-with-t2-chip> |
+| blendOS            | <https://docs.blendos.co/docs/installation/mac-t2/> |
 | EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
 | Fedora             | <https://github.com/mikeeq/mbp-fedora> |
 | Fedora             | <https://github.com/t2linux/fedora-iso/releases/latest> |
