@@ -103,7 +103,7 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 There's new touch bar software called tiny-dfr.  Below are instructions on how to install it on various distros.
 
 - Note: There is a bug causing tiny-dfr not to load in most distros if the file `/etc/tiny-dfr/config.toml` is blank.
-- If this effects you, copy `/usr/share/tiny-dfr/config.toml` to `/etc/tiny-dfr/config.toml`.
+- If this affects you, copy `/usr/share/tiny-dfr/config.toml` to `/etc/tiny-dfr/config.toml`.
 
 Setting up the Touch Bar is different for Ubuntu and Debian based distros.
 
