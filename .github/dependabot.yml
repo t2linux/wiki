@@ -8,3 +8,9 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "Dependencies: "
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "Actions: "
