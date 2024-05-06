@@ -8,6 +8,16 @@
 """:"
 set -euo pipefail
 
+verbose=""
+while getopts "vhx" option; do
+	case $option in
+		v) verbose="-v" ;;
+		h) echo "usage: $0 [-vhx]"; exit 0 ;;
+		x) set -x;;
+		?) exit 1 ;; 
+	esac
+done
+
 os=$(uname -s)
 case "$os" in
 	(Darwin)
@@ -23,26 +33,14 @@ case "$os" in
 		EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 		sudo diskutil mount disk0s1
 		echo "Getting Wi-Fi and Bluetooth firmware"
-		if [[ ${1-default} = -v ]]
-		then
-			tar -cvf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
-			gzip --best "/Volumes/${EFILABEL}/firmware.tar"
-		else
-			tar -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
-			gzip --best "/Volumes/${EFILABEL}/firmware.tar"
-		fi
+		tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
+		gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware.tar"
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
 			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-			if [[ ${1-default} = -v ]]
-			then
-				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-				cp -v /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
-			else
-				cp /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-				cp /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
-			fi
+			cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
+			cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
 		fi
 		echo "Copying this script to EFI"
 		cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
@@ -51,46 +49,43 @@ case "$os" in
 		echo
 		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
 		;;
+
 	(Linux)
 		echo "Detected Linux"
+		if [[ ! -e /lib/firmware ]]; then
+			echo "/lib/firmware does not seem to exist. This script requires that directory to function."
+			echo "If you are on some exotic distro like NixOS, please check the wiki for more information:"
+			echo "  https://wiki.t2linux.org"
+			echo "Exiting..."
+			exit 1
+		fi
+
 		echo "Re-mounting the EFI partition"
 		mountpoint=$(mktemp -d)
 		workdir=$(mktemp -d)
 		echo "Installing Wi-Fi and Bluetooth firmware"
-		if [[ ${1-default} = -v ]]
-		then
-			sudo mount -v /dev/nvme0n1p1 $mountpoint
-			sudo tar --warning=no-unknown-keyword -xvC $workdir -f $mountpoint/firmware.tar.gz
-			sudo python3 $0 $workdir $workdir/firmware-renamed.tar
-			sudo tar -xvC /lib/firmware -f $workdir/firmware-renamed.tar
-		else
-			sudo mount /dev/nvme0n1p1 $mountpoint
-			sudo tar --warning=no-unknown-keyword -xC $workdir -f $mountpoint/firmware.tar.gz
-			sudo python3 $0 $workdir $workdir/firmware-renamed.tar &> /dev/null
-			sudo tar -xC /lib/firmware -f $workdir/firmware-renamed.tar
-		fi
+		sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
+		sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
+		sudo python3 $0 $workdir $workdir/firmware-renamed.tar ${verbose}
+
+		sudo tar ${verbose} -xC /lib/firmware -f $workdir/firmware-renamed.tar
 
 		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 			"$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
 		do
 			if [ -f "$file" ]
 			then
-				if [[ ${1-default} = -v ]]
-				then
-					sudo cp -v $file /lib/firmware/brcm
-				else
-					sudo cp $file /lib/firmware/brcm
-				fi
+				sudo cp ${verbose} $file /lib/firmware/brcm
 			fi
 		done
-	echo "Reloading Wi-Fi and Bluetooth drivers"
-	sudo modprobe -r brcmfmac_wcc || true
-	sudo modprobe -r brcmfmac || true
-	sudo modprobe brcmfmac || true
-	sudo modprobe -r hci_bcm4377 || true
-	sudo modprobe hci_bcm4377 || true
-	echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step. Do you want to keep a copy? (y/N)"
-		read input
+		echo "Reloading Wi-Fi and Bluetooth drivers"
+		sudo modprobe -r brcmfmac_wcc || true
+		sudo modprobe -r brcmfmac || true
+		sudo modprobe brcmfmac || true
+		sudo modprobe -r hci_bcm4377 || true
+		sudo modprobe hci_bcm4377 || true
+		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
+		read -p "Do you want to keep a copy? (y/N)" input
 		if [[ ($input != y) && ($input != Y) ]]
 		then
 			echo "Removing the copy from the EFI partition"
@@ -105,9 +100,9 @@ case "$os" in
 				fi
 			done
 		fi
-	sudo rm -r $workdir/*
-	sudo umount $mountpoint
-	sudo rmdir $mountpoint
+		sudo rm -r $workdir
+		sudo umount $mountpoint
+		sudo rmdir $mountpoint
 		echo "Done!"
 		;;
 	(*)
@@ -433,6 +428,8 @@ class FWPackage(object):
 
     def __del__(self):
         self.tarfile.close()
+
+logging.getLogger().setLevel(logging.WARNING if (len(sys.argv) >= 4 and sys.argv[3] == "-v") else logging.ERROR)
 
 pkg = FWPackage(sys.argv[2])
 wifi_col = WiFiFWCollection(sys.argv[1]+"/wifi")
