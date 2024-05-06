@@ -8,7 +8,7 @@ jobs:
     lint:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - uses: xt0rted/markdownlint-problem-matcher@v3
             - name: "Run Markdown linter"
               uses: docker://avtodev/markdown-lint:v1
@@ -19,7 +19,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout master
-              uses: actions/checkout@v1
+              uses: actions/checkout@v4
 
             - name: Deploy docs
               uses: mhausenblas/mkdocs-deploy-gh-pages@1.26
