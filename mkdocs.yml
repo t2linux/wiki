@@ -13,6 +13,7 @@ theme:
     font: false
     features:
         - tabs
+        - content.tabs.link
     favicon: assets/images/icon.png
 
 docs_dir: docs
@@ -28,11 +29,12 @@ markdown_extensions:
     - pymdownx.superfences
     - pymdownx.tasklist:
           custom_checkbox: true
+    - pymdownx.tabbed:
+          alternate_style: true
     - toc:
           permalink: true
     - admonition
     - pymdownx.details
-    - pymdownx.superfences
 
 plugins:
     -   redirects:
@@ -80,6 +82,8 @@ nav:
                 - FAQ: distributions/manjaro/faq.md
                 - Installation: distributions/manjaro/installation.md
           - NixOS:
+                - Home: distributions/nixos/home.md
+                - FAQ: distributions/nixos/faq.md
                 - Installation: distributions/nixos/installation.md
           - Ubuntu:
                 - Home: distributions/ubuntu/home.md
