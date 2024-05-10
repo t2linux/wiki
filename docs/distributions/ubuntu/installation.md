@@ -6,6 +6,7 @@
 Download Links:
 
 [Ubuntu and Kubuntu](https://github.com/t2linux/T2-Ubuntu/releases/latest)
+
 [Linux Mint](https://github.com/t2linux/T2-Mint/releases/latest)
 
 # Hardware Requirements
