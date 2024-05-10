@@ -85,11 +85,11 @@ nav:
                 - Home: distributions/nixos/home.md
                 - FAQ: distributions/nixos/faq.md
                 - Installation: distributions/nixos/installation.md
-          - Ubuntu:
+          - Ubuntu and Linux Mint:
                 - Home: distributions/ubuntu/home.md
                 - FAQ: distributions/ubuntu/faq.md
                 - Installation: distributions/ubuntu/installation.md
-          - Debian, Linux Mint, Pop!_OS and other similar distros:
+          - Debian, Pop!_OS and other similar distros:
                 - Installation: distributions/debian/installation.md
 
 extra_css:
