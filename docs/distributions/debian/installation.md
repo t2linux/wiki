@@ -4,12 +4,11 @@ This guide shall help you in installing a Debian or Ubuntu based Linux distro, w
 
 Some popular distros include:
 
-1. [Linux Mint](https://linuxmint.com/)
-2. [Pop!_OS](https://pop.system76.com/)
-3. [elementary OS](https://elementary.io/)
-4. [Debian](https://www.debian.org/)
-5. [Zorin OS](https://zorin.com/)
-6. Other Ubuntu flavours like [Ubuntu unity](https://ubuntuunity.org/) etc.
+1. [Pop!_OS](https://pop.system76.com/)
+2. [elementary OS](https://elementary.io/)
+3. [Debian](https://www.debian.org/)
+4. [Zorin OS](https://zorin.com/)
+5. Other Ubuntu flavours like [Ubuntu unity](https://ubuntuunity.org/) etc.
 
 # Hardware Requirements
 
