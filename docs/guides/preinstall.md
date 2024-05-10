@@ -36,6 +36,7 @@ Listed below are the currently available installer ISOs for download:
 | Manjaro            | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
 | NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
 | Ubuntu & Kubuntu   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
+| Linux Mint         | <https://github.com/t2linux/T2-Mint/releases/latest> |
 
 #### Other distributions
 
