@@ -18,36 +18,178 @@ while getopts "vhx" option; do
 	esac
 done
 
+prerequisite_packages () {
+cat <<EOF
+
+Prerequisites needed to continue:
+
+1. Python 3
+2. ${additional_requirement}
+
+Python 3 is a part of Xcode command line tools. You can also use Homebrew, MacPorts etc.
+Continue when you have the prerequisites installed.
+
+Continue? (Y/n)
+EOF
+}
+
+create_deb () {
+echo -e "\nBuilding deb package"
+workarea=$(mktemp -d)
+python3 $0 /usr/share/firmware ${workarea}/firmware.tar
+cd ${workarea}
+mkdir -p deb
+cd deb
+mkdir -p DEBIAN
+mkdir -p usr/lib/firmware/brcm
+cd usr/lib/firmware/brcm
+tar -xf ${workarea}/firmware.tar ${verbose}
+cd - >/dev/null
+
+cat <<EOF | sudo tee DEBIAN/control >/dev/null
+Package: apple-firmware
+Version: ${ver}
+Maintainer: Apple
+Architecture: amd64
+Description: Wi-Fi and Bluetooth firmware for T2 Macs
+EOF
+
+cat <<EOF | sudo tee DEBIAN/postinst >/dev/null
+modprobe -r brcmfmac_wcc || true
+modprobe -r brcmfmac || true
+modprobe brcmfmac || true
+modprobe -r hci_bcm4377 || true
+modprobe hci_bcm4377 || true
+EOF
+
+sudo chmod a+x DEBIAN/control
+sudo chmod a+x DEBIAN/postinst
+
+cd ${workarea}
+if [[ ${verbose} = -v ]]
+then
+dpkg-deb --build --root-owner-group -Zgzip deb
+dpkg-name deb.deb
+else
+dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null
+dpkg-name deb.deb >/dev/null
+fi
+cp ${verbose} apple-firmware_${ver}_amd64.deb $HOME/Downloads
+echo -e "\nCleaning up"
+sudo rm -r ${verbose} ${workarea}
+cat <<EOF
+
+Deb package apple-firmware_${ver}_amd64.deb has been saved to Downloads!
+Copy it to Linux and install using apt.
+EOF
+}
+
+create_rpm () {
+echo "todo"
+}
+
 os=$(uname -s)
 case "$os" in
 	(Darwin)
 		echo "Detected macOS"
-		ver=$(sw_vers -productVersion | cut -d "." -f 1)
-		if [[ ${ver} < 12 ]]
+		ver=$(sw_vers -productVersion)
+		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
+		if [[ ${ver_check} < 12 ]]
 		then
 			echo -e "\nThis script is compatible only with macOS Monterey or later. Please upgrade your macOS."
 			exit 1
 		fi
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
-		echo "Mounting the EFI partition"
-		EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
-		sudo diskutil mount disk0s1
-		echo "Getting Wi-Fi and Bluetooth firmware"
-		tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
-		gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware.tar"
-		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+		echo -e "\nHow do you want to copy the firmware to Linux?"
+		echo -e "\n1. Run the same script on Linux."
+		echo "2. Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux."
+		echo "3. Create a Linux distribution specific package which can be installed using a package manager."
+		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
+		read choice
+		case ${choice} in
+			(1)
+				echo -e "\nMounting the EFI partition"
+				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
+				sudo diskutil mount disk0s1
+				echo "Getting Wi-Fi and Bluetooth firmware"
+				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
+				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware.tar"
+				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
-			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-			cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-			cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
-		fi
-		echo "Copying this script to EFI"
-		cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
-		echo "Unmounting the EFI partition"
-		sudo diskutil unmount "/Volumes/${EFILABEL}/"
-		echo
-		echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
+					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
+				fi
+				echo "Copying this script to EFI"
+				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
+				echo "Unmounting the EFI partition"
+				sudo diskutil unmount "/Volumes/${EFILABEL}/"
+				echo
+				echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
+				;;
+			(2)
+
+				echo -e "\nPrerequisites needed to continue:"
+				echo -e "\n1. Python 3"
+				echo -e "\nPython 3 is a part of Xcode command line tools. You can also use Homebrew, MacPorts etc."
+				echo "Continue when you have the prerequisites installed."
+				echo -e "\nContinue? (Y/n)"
+				read input
+				if [[ ($input = n) || ($input = N) ]]
+				then
+					echo -e "\nRun the script again when you have installed the prerequisites."
+					exit 1
+				fi
+				echo -e "\nCreating tar archive of the firmware"
+				python3 $0 /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
+				echo -e "\nFirmware tar archive saved to Downloads!"
+				echo -e "\nExtract the firmware contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
+				echo -e "\nsudo modprobe -r brcmfmac_wcc"
+				echo "sudo modprobe -r brcmfmac"
+				echo "sudo modprobe brcmfmac"
+				echo "sudo modprobe -r hci_bcm4377"
+				echo "sudo modprobe hci_bcm4377"
+				;;
+			(3)
+				echo -e "\nWhat package manager does your Linux distribution use?"
+				echo -e "\n1. apt"
+				echo "2. rpm"
+				read package
+				case ${package} in
+					(1)
+						additional_requirement=dpkg
+						prerequisite_packages
+						read input
+						if [[ ($input = n) || ($input = N) ]]
+						then
+							echo -e "\nRun the script again when you have installed the prerequisites."
+							exit 1
+						fi
+						create_deb
+						;;
+					(2)
+						additional_requirement=rpm
+						prerequisite_packages
+						read input
+						if [[ ($input = n) || ($input = N) ]]
+						then
+							echo -e "\nRun the script again when you have installed the prerequisites."
+							exit 1
+						fi
+						create_rpm
+						;;
+					(*)
+						echo -e "\nError: Invalid option!"
+						exit 1
+						;;
+					esac
+				;;
+			(*)
+				echo -e "\nError: Invalid option!"
+				exit 1
+				;;
+			esac
 		;;
 
 	(Linux)
@@ -59,16 +201,23 @@ case "$os" in
 			echo "Exiting..."
 			exit 1
 		fi
-
-		echo "Re-mounting the EFI partition"
+		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)."
+		echo -e "\nContinue? (Y/n)"
+		read input
+		if [[ ($input = n) || ($input = N) ]]
+		then
+			echo -e "\nRun the script again in Linux when you have ran it in macOS."
+			exit 1
+		fi
+		echo -e "\nRe-mounting the EFI partition"
 		mountpoint=$(mktemp -d)
 		workdir=$(mktemp -d)
 		echo "Installing Wi-Fi and Bluetooth firmware"
 		sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
 		sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
-		sudo python3 $0 $workdir $workdir/firmware-renamed.tar ${verbose}
+		sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
 
-		sudo tar ${verbose} -xC /lib/firmware -f $workdir/firmware-renamed.tar
+		sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
 
 		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 			"$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
@@ -96,11 +245,11 @@ case "$os" in
 			do
 				if [ -f "$file" ]
 				then
-					sudo rm $file
+					sudo rm ${verbose} $file
 				fi
 			done
 		fi
-		sudo rm -r $workdir
+		sudo rm -r ${verbose} $workdir
 		sudo umount $mountpoint
 		sudo rmdir $mountpoint
 		echo "Done!"
@@ -210,7 +359,7 @@ class BluetoothFWCollection(object):
 
     def files(self):
         for chip, (bin, ptb) in self.fwfiles.items():
-            fname_base = f"brcm/brcmbt{chip.chip}{chip.stepping}-{chip.board_type}"
+            fname_base = f"brcmbt{chip.chip}{chip.stepping}-{chip.board_type}"
             if chip.vendor is not None:
                 fname_base += f"-{chip.vendor}"
 
@@ -348,7 +497,7 @@ class WiFiFWCollection(object):
                 rest = "," + "-".join(rest)
             else:
                 rest = ""
-            filename = f"brcm/brcmfmac{chip}{rev}-pcie.apple{rest}.{ext}"
+            filename = f"brcmfmac{chip}{rev}-pcie.apple{rest}.{ext}"
 
             yield filename, fwfile
 
