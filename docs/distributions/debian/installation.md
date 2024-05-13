@@ -48,19 +48,13 @@ After installation, we need to install a kernel having patches to support the T2
 
 2. Connect to the internet using Ethernet/USB tethering/external Wi-Fi adapter.
 
-3. Add the **t2-ubuntu-repo** apt repo by running:
-  
-    ```bash
-    curl -s --compressed "https://adityagarg8.github.io/t2-ubuntu-repo/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/t2-ubuntu-repo.gpg >/dev/null
-    sudo curl -s --compressed -o /etc/apt/sources.list.d/t2.list "https://adityagarg8.github.io/t2-ubuntu-repo/t2.list"
-    sudo apt update
-    ```
+3. Add the **t2-ubuntu-repo** apt repo by following the instructions given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#apt-repository-for-t2-macs).
   
 4. Now install the T2 kernel.
   
     * If your distro is Ubuntu based:
   
-        You need to additionally add the **release specific** apt repo for kernels. Follow the steps given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#adding-the-release-specific-apt-repo). After adding the repo, install the `linux-t2` package:
+        You need to install the `linux-t2` package:
   
         ```bash
         sudo apt install linux-t2
