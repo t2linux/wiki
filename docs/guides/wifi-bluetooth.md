@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are non T2 Intel Macs.
+This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are T1 Intel Macs. This guide is NOT applicable for rest T1 and older Intel Macs.
 
 !!! Warning "Arch/EndeavourOS"
     If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide.
