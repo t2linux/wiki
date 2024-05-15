@@ -61,6 +61,4 @@ To fix this:
 
 # How do I upgrade my kernel
 
-Ubuntu based distro users can upgrade their kernel with [these](https://github.com/AdityaGarg8/T2-Ubuntu-Kernel#pre-installation-steps) instructions.
-
-Debian based distro users can upgrade their kernel with [these](https://github.com/andersfugmann/T2-Debian-Kernel#download-package-manually) instructions.
+Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
