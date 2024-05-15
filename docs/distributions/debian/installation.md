@@ -49,42 +49,18 @@ After installation, we need to install a kernel having patches to support the T2
 2. Connect to the internet using Ethernet/USB tethering/external Wi-Fi adapter.
 
 3. Add the **t2-ubuntu-repo** apt repo by following the instructions given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#apt-repository-for-t2-macs).
-  
-4. Now install the T2 kernel.
-  
-    * If your distro is Ubuntu based:
-  
-        You need to install the `linux-t2` package:
-  
-        ```bash
-        sudo apt install linux-t2
-        ```
-  
-    * If your distro is Debian based:
-  
-        In this case, you need to install the kernel upgrade script:
-  
-        ```bash
-        sudo apt install t2-kernel-script-debian
-        ```
-  
-        Then upgrade your kernel to a T2 kernel by running:
-  
-        ```bash
-        update_t2_kernel
-        ```
-  
-5. Install the audio configuration files by running:
+
+4. Now install the T2 kernel and audio configuration files by running:
   
     ```bash
-    sudo apt install apple-t2-audio-config
+    sudo apt install linux-t2 apple-t2-audio-config
     ```
   
     **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
 
-6. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
+5. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
-7. If your Mac has a Touch Bar, install `tiny-dfr` by running:
+6. If your Mac has a Touch Bar, install `tiny-dfr` by running:
   
     ```bash
     sudo apt install tiny-dfr
