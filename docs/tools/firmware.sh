@@ -18,19 +18,36 @@ while getopts "vhx" option; do
 	esac
 done
 
-prerequisite_packages () {
-cat <<EOF
+python_check () {
+if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ]
+then
+echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
+xcode-select --install
+echo
+read -p "Press enter after you have installed Xcode command line developer tools."
+fi
+}
 
-Prerequisites needed to continue:
+homebrew_check () {
+if [ ! -f "/usr/local/bin/brew" ]
+then
+echo -e "\nHomebrew not found!"
+echo
+read -p "Press enter to install Homebrew."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+}
 
-1. Python 3
-2. ${additional_requirement}
-
-Python 3 is a part of Xcode command line tools. You can also use Homebrew, MacPorts etc.
-Continue when you have the prerequisites installed.
-
-Continue? (Y/n)
-EOF
+dpkg_check () {
+if [ ! -f "/usr/local/bin/dpkg" ]
+then
+echo -e "\ndpkg not found!"
+echo
+read -p "Press enter to install dpkg via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
+homebrew_check
+echo -e "\nInstalling dpkg"
+brew install dpkg
+fi
 }
 
 create_deb () {
@@ -45,6 +62,14 @@ mkdir -p usr/lib/firmware/brcm
 cd usr/lib/firmware/brcm
 tar -xf ${workarea}/firmware.tar ${verbose}
 cd - >/dev/null
+
+if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+then
+	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txt"
+	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
+fi
 
 cat <<EOF | sudo tee DEBIAN/control >/dev/null
 Package: apple-firmware
@@ -130,19 +155,23 @@ case "$os" in
 				;;
 			(2)
 
-				echo -e "\nPrerequisites needed to continue:"
-				echo -e "\n1. Python 3"
-				echo -e "\nPython 3 is a part of Xcode command line tools. You can also use Homebrew, MacPorts etc."
-				echo "Continue when you have the prerequisites installed."
-				echo -e "\nContinue? (Y/n)"
-				read input
-				if [[ ($input = n) || ($input = N) ]]
-				then
-					echo -e "\nRun the script again when you have installed the prerequisites."
-					exit 1
-				fi
+				echo -e "\nChecking for Prerequisites."
+				python_check
 				echo -e "\nCreating tar archive of the firmware"
 				python3 $0 /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
+				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+		then
+					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "$HOME/Downloads/brcmfmac4364b2-pcie.txt"
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "$HOME/Downloads/brcmfmac4364b2-pcie.txcap_blob"
+					cd $HOME/Downloads
+					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
+					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
+					rm ${verbose} brcmfmac4364b2-pcie.txt
+					rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
+					cd - >/dev/null
+				fi
 				echo -e "\nFirmware tar archive saved to Downloads!"
 				echo -e "\nExtract the firmware contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
 				echo -e "\nsudo modprobe -r brcmfmac_wcc"
@@ -158,25 +187,14 @@ case "$os" in
 				read package
 				case ${package} in
 					(1)
-						additional_requirement=dpkg
-						prerequisite_packages
-						read input
-						if [[ ($input = n) || ($input = N) ]]
-						then
-							echo -e "\nRun the script again when you have installed the prerequisites."
-							exit 1
-						fi
+						echo -e "\nChecking for Prerequisites."
+						python_check
+						dpkg_check
 						create_deb
 						;;
 					(2)
-						additional_requirement=rpm
-						prerequisite_packages
-						read input
-						if [[ ($input = n) || ($input = N) ]]
-						then
-							echo -e "\nRun the script again when you have installed the prerequisites."
-							exit 1
-						fi
+						echo -e "\nChecking for Prerequisites."
+						python_check
 						create_rpm
 						;;
 					(*)
@@ -201,7 +219,7 @@ case "$os" in
 			echo "Exiting..."
 			exit 1
 		fi
-		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)."
+		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)"
 		echo -e "\nContinue? (Y/n)"
 		read input
 		if [[ ($input = n) || ($input = N) ]]
@@ -215,7 +233,7 @@ case "$os" in
 		echo "Installing Wi-Fi and Bluetooth firmware"
 		sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
 		sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
-		sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
+		sudo python3 $0 $workdir $workdir/firmware-renamed.tar ${verbose}
 
 		sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
 
