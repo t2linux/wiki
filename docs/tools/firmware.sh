@@ -38,22 +38,20 @@ read -p "Press enter to install Homebrew."
 fi
 }
 
-dpkg_check () {
+create_deb () {
 if [ ! -f "/usr/local/bin/dpkg" ]
 then
-echo -e "\ndpkg not found!"
+echo -e "\ndpkg and/or its dependencies are missing!"
 echo
-read -p "Press enter to install dpkg via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
+read -p "Press enter to install dpkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
 homebrew_check
-echo -e "\nInstalling dpkg"
+echo -e "\nInstalling dpkg and its dependencies"
 brew install dpkg
 fi
-}
 
-create_deb () {
 echo -e "\nBuilding deb package"
 workarea=$(mktemp -d)
-python3 $0 /usr/share/firmware ${workarea}/firmware.tar
+python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
 cd ${workarea}
 mkdir -p deb
 cd deb
@@ -73,7 +71,7 @@ fi
 
 cat <<EOF | sudo tee DEBIAN/control >/dev/null
 Package: apple-firmware
-Version: ${ver}
+Version: ${ver}-1
 Maintainer: Apple
 Architecture: amd64
 Description: Wi-Fi and Bluetooth firmware for T2 Macs
@@ -96,21 +94,95 @@ then
 dpkg-deb --build --root-owner-group -Zgzip deb
 dpkg-name deb.deb
 else
-dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null
+dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null || echo "Failed to make deb package. Run the script with -v to get logs."
 dpkg-name deb.deb >/dev/null
 fi
-cp ${verbose} apple-firmware_${ver}_amd64.deb $HOME/Downloads
+
+cp ${verbose} apple-firmware_${ver}-1_amd64.deb $HOME/Downloads
 echo -e "\nCleaning up"
 sudo rm -r ${verbose} ${workarea}
 cat <<EOF
 
-Deb package apple-firmware_${ver}_amd64.deb has been saved to Downloads!
+Deb package apple-firmware_${ver}-1_amd64.deb has been saved to Downloads!
 Copy it to Linux and install using apt.
 EOF
 }
 
 create_rpm () {
 echo "todo"
+}
+
+create_arch_pkg () {
+if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
+then
+echo -e "\nmakepkg and/or its dependencies are missing!"
+echo
+read -p "Press enter to install makepkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install makepkg yourself, if you want to install it via some alternate method."
+homebrew_check
+echo -e "\nInstalling makepkg and its dependencies"
+brew install makepkg coreutils
+fi
+
+echo -e "\nBuilding Arch package"
+workarea=$(mktemp -d)
+python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
+cd ${workarea}
+if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+then
+	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "${workarea}/brcmfmac4364b2-pcie.txt"
+	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "${workarea}/brcmfmac4364b2-pcie.txcap_blob"
+	tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
+	tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
+	rm ${verbose} brcmfmac4364b2-pcie.txt
+	rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
+fi
+
+# Create the PKGBUILD
+cat <<EOF | sudo tee PKGBUILD >/dev/null
+pkgname=apple-firmware
+pkgver=${ver}
+pkgrel=1
+pkgdesc="Wi-Fi and Bluetooth Firmware for T2 Macs"
+arch=("x86_64")
+url=""
+license=('unknown')
+replaces=('apple-bcm-wifi-firmware')
+source=("firmware.tar")
+noextract=("firmware.tar")
+sha256sums=('SKIP')
+package() {
+    mkdir -p \$pkgdir/usr/lib/firmware/brcm
+    cd \$pkgdir/usr/lib/firmware/brcm
+    tar xf \$srcdir/firmware.tar
+}
+EOF
+
+# Set path to use newer bsdtar and GNU touch
+PATH_OLD=$PATH
+PATH=/usr/local/Cellar/libarchive/$(ls /usr/local/Cellar/libarchive | head -n 1)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
+
+# Build
+if [[ ${verbose} = -v ]]
+then
+makepkg
+else
+makepkg >/dev/null 2&>/dev/null || echo "Failed to make Arch package. Run the script with -v to get logs."
+fi
+
+# Revert path to its original form
+PATH=${PATH_OLD}
+
+# Copy to Downloads and cleanup
+cp ${verbose} apple-firmware-${ver}-1-x86_64.pkg.tar.gz $HOME/Downloads
+echo -e "\nCleaning up"
+sudo rm -r ${verbose} ${workarea}
+cat <<EOF
+
+Arch package apple-firmware-${ver}-1-x86_64.pkg.tar.gz has been saved to Downloads!
+Copy it to Linux and install using pacman.
+EOF
 }
 
 os=$(uname -s)
@@ -155,10 +227,10 @@ case "$os" in
 				;;
 			(2)
 
-				echo -e "\nChecking for Prerequisites."
+				echo -e "\nChecking for missing dependencies"
 				python_check
 				echo -e "\nCreating tar archive of the firmware"
-				python3 $0 /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
+				python3 "$0" /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
 				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
 					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
@@ -184,18 +256,23 @@ case "$os" in
 				echo -e "\nWhat package manager does your Linux distribution use?"
 				echo -e "\n1. apt"
 				echo "2. rpm"
+				echo "3. pacman"
 				read package
 				case ${package} in
 					(1)
-						echo -e "\nChecking for Prerequisites."
+						echo -e "\nChecking for missing dependencies"
 						python_check
-						dpkg_check
 						create_deb
 						;;
 					(2)
-						echo -e "\nChecking for Prerequisites."
+						echo -e "\nChecking for missing dependencies"
 						python_check
 						create_rpm
+						;;
+					(3)
+						echo -e "\nChecking for missing dependencies"
+						python_check
+						create_arch_pkg
 						;;
 					(*)
 						echo -e "\nError: Invalid option!"
@@ -219,7 +296,7 @@ case "$os" in
 			echo "Exiting..."
 			exit 1
 		fi
-		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)"
+		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)."
 		echo -e "\nContinue? (Y/n)"
 		read input
 		if [[ ($input = n) || ($input = N) ]]
@@ -233,7 +310,7 @@ case "$os" in
 		echo "Installing Wi-Fi and Bluetooth firmware"
 		sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
 		sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
-		sudo python3 $0 $workdir $workdir/firmware-renamed.tar ${verbose}
+		sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
 
 		sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
 
