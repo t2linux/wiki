@@ -103,7 +103,7 @@ create_deb () {
 }
 
 create_rpm () {
-	if [ ! -f "/usr/local/bin/rpmbuild" ]
+	if [ ! command -v  rpmbuild &> /dev/null ]
 	then
 		echo -e "\nrpm and/or its dependencies are missing!"
 		echo
@@ -117,11 +117,8 @@ create_rpm () {
 	mkdir -p $HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 
 	# Extract firmware 
-	python3 "$0" /usr/share/firmware $HOME/rpmbuild/firmware.tar
+	python3 "$0" /usr/share/firmware $HOME/rpmbuild/SOURCES/firmware.tar
 	cd $HOME/rpmbuild/BUILD
-	tar -xf $HOME/rpmbuild/firmware.tar ${verbose}
-	cd - >/dev/null
-	rm ${verbose} $HOME/rpmbuild/firmware.tar
 
 	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 	then
@@ -132,59 +129,58 @@ create_rpm () {
 	fi
 
 	# Create the spec file
-	echo "Name:       apple-firmware" > $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "Version:    ${ver}" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "Release:    1" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "Summary:    Wi-Fi and Bluetooth firmware for T2 Macs" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "License:    Proprietary" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	cat <<- EOF > $HOME/rpmbuild/SPECS/apple-firmware.spec
+		Name:       apple-firmware
+		Version:    ${ver}
+		Release:    1
+		Summary:    Wi-Fi and Bluetooth firmware for T2 Macs
+		License:    Proprietary
+		BuildArch: noarch
 
-	echo -e "\n%description" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "Wi-Fi and Bluetooth firmware for T2 Macs" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+		Source1: firmware.tar
+		Source2: brcmfmac4364b2-pcie.txt
+		Source3: brcmfmac4364b2-pcie.txcap_blob
 
-	echo -e "\n%install" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "mkdir -p %{buildroot}/usr/lib/firmware/brcm" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "install -m 644 * %{buildroot}/usr/lib/firmware/brcm" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+		%description
+		Wi-Fi and Bluetooth firmware for T2 Macs
 
-	echo -e "\n%post" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "modprobe -r brcmfmac_wcc || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "modprobe -r brcmfmac || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "modprobe brcmfmac || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "modprobe -r hci_bcm4377 || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "modprobe hci_bcm4377 || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+		%prep
+		tar -xf %{SOURCE1}
 
-	echo -e "\n%files" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
-	echo "/usr/lib/firmware/brcm/*" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+		%build
 
-	# Set OS to Linux
-	if [ -f "$HOME/.rpmrc" ]
-	then
-		echo -e "\nBacking up existing .rpmrc"
-		cp ${verbose} $HOME/.rpmrc $HOME/.rpmrc_orj
-	fi
-	echo "buildostranslate: Darwin: Linux" > $HOME/.rpmrc
+		%install
+		mkdir -p %{buildroot}/usr/lib/firmware/brcm
+		install -m 644 * %{buildroot}/usr/lib/firmware/brcm
+		install -m 644 %{SOURCE2} %{buildroot}/usr/lib/firmware/brcm || true
+		install -m 644 %{SOURCE3} %{buildroot}/usr/lib/firmware/brcm || true
+
+		%posttrans
+		modprobe -r brcmfmac_wcc || true
+		modprobe -r brcmfmac || true
+		modprobe brcmfmac || true
+		modprobe -r hci_bcm4377 || true
+		modprobe hci_bcm4377 || true
+
+		%files
+		/usr/lib/firmware/brcm/*
+	EOF
 
 	# Build
-	# For some reason bash doesn't like rpmbuild. Use zsh.
 	if [[ ${verbose} = -v ]]
 	then
-		/bin/zsh -c "rpmbuild -bb $HOME/rpmbuild/SPECS/apple-firmware.spec"
+		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec
 	else
-		/bin/zsh -c "rpmbuild -bb $HOME/rpmbuild/SPECS/apple-firmware.spec >/dev/null 2&>/dev/null || echo \"Failed to make rpm package. Run the script with -v to get logs.\""
+		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec &>/dev/null || echo "Failed to make rpm package. Run the script with -v to get logs."
 	fi
 
 	# Copy and Cleanup
-	cp ${verbose} $HOME/rpmbuild/RPMS/x86_64/apple-firmware-${ver}-1.x86_64.rpm $HOME/Downloads
+	cp ${verbose} $HOME/rpmbuild/RPMS/noarch/*.rpm $HOME/Downloads
 	echo -e "\nCleaning up"
-	sudo rm -r ${verbose} $HOME/rpmbuild
-	sudo rm $HOME/.rpmrc
-	if [ -f $HOME/.rpmrc_orj ]
-	then
-		echo -e "\nRestoring backed up .rpmrc"
-		mv $HOME/.rpmrc_orj $HOME/.rpmrc
-	fi
+	rm -r ${verbose} $HOME/rpmbuild
 
-	echo -e "\nRpm package apple-firmware-${ver}-1.x86_64.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install using rpm."
+	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
+	echo "Copy it to Linux and install it with \`sudo dnf install --disablerepo=* /path/to/file.rpm\`"
 }
 
 create_arch_pkg () {
