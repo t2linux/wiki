@@ -19,170 +19,160 @@ while getopts "vhx" option; do
 done
 
 python_check () {
-if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ]
-then
-echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
-xcode-select --install
-echo
-read -p "Press enter after you have installed Xcode command line developer tools."
-fi
+	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ]
+	then
+		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
+		xcode-select --install
+		echo
+		read -p "Press enter after you have installed Xcode command line developer tools."
+	fi
 }
 
 homebrew_check () {
-if [ ! -f "/usr/local/bin/brew" ]
-then
-echo -e "\nHomebrew not found!"
-echo
-read -p "Press enter to install Homebrew."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+	if [ ! -f "/usr/local/bin/brew" ]
+	then
+		echo -e "\nHomebrew not found!"
+		echo
+		read -p "Press enter to install Homebrew."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
 }
 
 create_deb () {
-if [ ! -f "/usr/local/bin/dpkg" ]
-then
-echo -e "\ndpkg and/or its dependencies are missing!"
-echo
-read -p "Press enter to install dpkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
-homebrew_check
-echo -e "\nInstalling dpkg and its dependencies"
-brew install dpkg
-fi
+	if [ ! -f "/usr/local/bin/dpkg" ]
+	then
+		echo -e "\ndpkg and/or its dependencies are missing!"
+		echo
+		read -p "Press enter to install dpkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
+		homebrew_check
+		echo -e "\nInstalling dpkg and its dependencies"
+		brew install dpkg
+	fi
 
-echo -e "\nBuilding deb package"
-workarea=$(mktemp -d)
-python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
-cd ${workarea}
-mkdir -p deb
-cd deb
-mkdir -p DEBIAN
-mkdir -p usr/lib/firmware/brcm
-cd usr/lib/firmware/brcm
-tar -xf ${workarea}/firmware.tar ${verbose}
-cd - >/dev/null
+	echo -e "\nBuilding deb package"
+	workarea=$(mktemp -d)
+	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
+	cd ${workarea}
+	mkdir -p deb
+	cd deb
+	mkdir -p DEBIAN
+	mkdir -p usr/lib/firmware/brcm
+	cd usr/lib/firmware/brcm
+	tar -xf ${workarea}/firmware.tar ${verbose}
+	cd - >/dev/null
 
-if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-then
-	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txt"
-	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
-fi
+	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+	then
+		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txt"
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
+	fi
 
-cat <<EOF | sudo tee DEBIAN/control >/dev/null
-Package: apple-firmware
-Version: ${ver}-1
-Maintainer: Apple
-Architecture: amd64
-Description: Wi-Fi and Bluetooth firmware for T2 Macs
-EOF
+	echo "Package: apple-firmware" | sudo tee DEBIAN/control >/dev/null
+	echo "Version: ${ver}-1" | sudo tee -a DEBIAN/control >/dev/null
+	echo "Maintainer: Apple" | sudo tee -a DEBIAN/control >/dev/null
+	echo "Architecture: amd64" | sudo tee -a DEBIAN/control >/dev/null
+	echo "Description: Wi-Fi and Bluetooth firmware for T2 Macs" | sudo tee -a DEBIAN/control >/dev/null
 
-cat <<EOF | sudo tee DEBIAN/postinst >/dev/null
-modprobe -r brcmfmac_wcc || true
-modprobe -r brcmfmac || true
-modprobe brcmfmac || true
-modprobe -r hci_bcm4377 || true
-modprobe hci_bcm4377 || true
-EOF
+	echo "modprobe -r brcmfmac_wcc || true" | sudo tee DEBIAN/postinst >/dev/null
+	echo "modprobe -r brcmfmac || true" | sudo tee -a DEBIAN/postinst >/dev/null
+	echo "modprobe brcmfmac || true" | sudo tee -a DEBIAN/postinst >/dev/null
+	echo "modprobe -r hci_bcm4377 || true" | sudo tee -a DEBIAN/postinst >/dev/null
+	echo "modprobe hci_bcm4377 || true" | sudo tee -a DEBIAN/postinst >/dev/null
 
-sudo chmod a+x DEBIAN/control
-sudo chmod a+x DEBIAN/postinst
+	sudo chmod a+x DEBIAN/control
+	sudo chmod a+x DEBIAN/postinst
 
-cd ${workarea}
-if [[ ${verbose} = -v ]]
-then
-dpkg-deb --build --root-owner-group -Zgzip deb
-dpkg-name deb.deb
-else
-dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null || echo "Failed to make deb package. Run the script with -v to get logs."
-dpkg-name deb.deb >/dev/null
-fi
+	cd ${workarea}
+	if [[ ${verbose} = -v ]]
+	then
+		dpkg-deb --build --root-owner-group -Zgzip deb
+		dpkg-name deb.deb
+	else
+		dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null || echo "Failed to make deb package. Run the script with -v to get logs."
+		dpkg-name deb.deb >/dev/null
+	fi
 
-cp ${verbose} apple-firmware_${ver}-1_amd64.deb $HOME/Downloads
-echo -e "\nCleaning up"
-sudo rm -r ${verbose} ${workarea}
-cat <<EOF
+	cp ${verbose} apple-firmware_${ver}-1_amd64.deb $HOME/Downloads
+	echo -e "\nCleaning up"
+	sudo rm -r ${verbose} ${workarea}
 
-Deb package apple-firmware_${ver}-1_amd64.deb has been saved to Downloads!
-Copy it to Linux and install using apt.
-EOF
+	echo -e "\nDeb package apple-firmware_${ver}-1_amd64.deb has been saved to Downloads!"
+	echo "Copy it to Linux and install using apt."
 }
 
 create_rpm () {
-echo "todo"
+	echo "todo"
 }
 
 create_arch_pkg () {
-if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
-then
-echo -e "\nmakepkg and/or its dependencies are missing!"
-echo
-read -p "Press enter to install makepkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install makepkg yourself, if you want to install it via some alternate method."
-homebrew_check
-echo -e "\nInstalling makepkg and its dependencies"
-brew install makepkg coreutils
-fi
+	if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
+	then
+		echo -e "\nmakepkg and/or its dependencies are missing!"
+		echo
+		read -p "Press enter to install makepkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install makepkg yourself, if you want to install it via some alternate method."
+		homebrew_check
+		echo -e "\nInstalling makepkg and its dependencies"
+		brew install makepkg coreutils
+	fi
 
-echo -e "\nBuilding Arch package"
-workarea=$(mktemp -d)
-python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
-cd ${workarea}
-if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-then
-	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "${workarea}/brcmfmac4364b2-pcie.txt"
-	cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "${workarea}/brcmfmac4364b2-pcie.txcap_blob"
-	tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
-	tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
-	rm ${verbose} brcmfmac4364b2-pcie.txt
-	rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
-fi
+	echo -e "\nBuilding Arch package"
+	workarea=$(mktemp -d)
+	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
+	cd ${workarea}
+	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+	then
+		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "${workarea}/brcmfmac4364b2-pcie.txt"
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "${workarea}/brcmfmac4364b2-pcie.txcap_blob"
+		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
+		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
+		rm ${verbose} brcmfmac4364b2-pcie.txt
+		rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
+	fi
 
-# Create the PKGBUILD
-cat <<EOF | sudo tee PKGBUILD >/dev/null
-pkgname=apple-firmware
-pkgver=${ver}
-pkgrel=1
-pkgdesc="Wi-Fi and Bluetooth Firmware for T2 Macs"
-arch=("x86_64")
-url=""
-license=('unknown')
-replaces=('apple-bcm-wifi-firmware')
-source=("firmware.tar")
-noextract=("firmware.tar")
-sha256sums=('SKIP')
-package() {
-    mkdir -p \$pkgdir/usr/lib/firmware/brcm
-    cd \$pkgdir/usr/lib/firmware/brcm
-    tar xf \$srcdir/firmware.tar
-}
-EOF
+	# Create the PKGBUILD
+	echo "pkgname=apple-firmware" | sudo tee PKGBUILD >/dev/null
+	echo "pkgver=${ver}" | sudo tee -a PKGBUILD >/dev/null
+	echo "pkgrel=1" | sudo tee -a PKGBUILD >/dev/null
+	echo "pkgdesc=\"Wi-Fi and Bluetooth Firmware for T2 Macs\"" | sudo tee -a PKGBUILD >/dev/null
+	echo "arch=(\"x86_64\")" | sudo tee -a PKGBUILD >/dev/null
+	echo "url=\"\"" | sudo tee -a PKGBUILD >/dev/null
+	echo "license=('unknown')" | sudo tee -a PKGBUILD >/dev/null
+	echo "replaces=('apple-bcm-wifi-firmware')" | sudo tee -a PKGBUILD >/dev/null
+	echo "source=(\"firmware.tar\")" | sudo tee -a PKGBUILD >/dev/null
+	echo "noextract=(\"firmware.tar\")" | sudo tee -a PKGBUILD >/dev/null
+	echo "sha256sums=('SKIP')" | sudo tee -a PKGBUILD >/dev/null
+	echo "package() {" | sudo tee -a PKGBUILD >/dev/null
+	echo "    mkdir -p \$pkgdir/usr/lib/firmware/brcm" | sudo tee -a PKGBUILD >/dev/null
+	echo "    cd \$pkgdir/usr/lib/firmware/brcm" | sudo tee -a PKGBUILD >/dev/null
+	echo "    tar xf \$srcdir/firmware.tar" | sudo tee -a PKGBUILD >/dev/null
+	echo "}" | sudo tee -a PKGBUILD >/dev/null
 
-# Set path to use newer bsdtar and GNU touch
-PATH_OLD=$PATH
-PATH=/usr/local/Cellar/libarchive/$(ls /usr/local/Cellar/libarchive | head -n 1)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
+	# Set path to use newer bsdtar and GNU touch
+	PATH_OLD=$PATH
+	PATH=/usr/local/Cellar/libarchive/$(ls /usr/local/Cellar/libarchive | head -n 1)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
 
-# Build
-if [[ ${verbose} = -v ]]
-then
-makepkg
-else
-makepkg >/dev/null 2&>/dev/null || echo "Failed to make Arch package. Run the script with -v to get logs."
-fi
+	# Build
+	if [[ ${verbose} = -v ]]
+	then
+		makepkg
+	else
+		makepkg >/dev/null 2&>/dev/null || echo "Failed to make Arch package. Run the script with -v to get logs."
+	fi
 
-# Revert path to its original form
-PATH=${PATH_OLD}
+	# Revert path to its original form
+	PATH=${PATH_OLD}
 
-# Copy to Downloads and cleanup
-cp ${verbose} apple-firmware-${ver}-1-x86_64.pkg.tar.gz $HOME/Downloads
-echo -e "\nCleaning up"
-sudo rm -r ${verbose} ${workarea}
-cat <<EOF
+	# Copy to Downloads and cleanup
+	cp ${verbose} apple-firmware-${ver}-1-x86_64.pkg.tar.gz $HOME/Downloads
+	echo -e "\nCleaning up"
+	sudo rm -r ${verbose} ${workarea}
 
-Arch package apple-firmware-${ver}-1-x86_64.pkg.tar.gz has been saved to Downloads!
-Copy it to Linux and install using pacman.
-EOF
+	echo -e "\nArch package apple-firmware-${ver}-1-x86_64.pkg.tar.gz has been saved to Downloads!"
+	echo "Copy it to Linux and install using pacman."
 }
 
 os=$(uname -s)
