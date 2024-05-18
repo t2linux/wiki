@@ -184,7 +184,7 @@ create_rpm () {
 	fi
 
 	echo -e "\nRpm package apple-firmware-${ver}-1.x86_64.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install using dnf."
+	echo "Copy it to Linux and install using rpm."
 }
 
 create_arch_pkg () {
@@ -326,7 +326,7 @@ case "$os" in
 			(3)
 				echo -e "\nWhat package manager does your Linux distribution use?"
 				echo -e "\n1. apt"
-				echo "2. dnf"
+				echo "2. rpm"
 				echo "3. pacman"
 				read package
 				case ${package} in
