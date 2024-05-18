@@ -103,7 +103,88 @@ create_deb () {
 }
 
 create_rpm () {
-	echo "todo"
+	if [ ! -f "/usr/local/bin/rpmbuild" ]
+	then
+		echo -e "\nrpm and/or its dependencies are missing!"
+		echo
+		read -p "Press enter to install rpm and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install rpm yourself, if you want to install it via some alternate method."
+		homebrew_check
+		echo -e "\nInstalling rpm and its dependencies"
+		brew install rpm
+	fi
+
+	echo -e "\nBuilding rpm package"
+	mkdir -p $HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+
+	# Extract firmware 
+	python3 "$0" /usr/share/firmware $HOME/rpmbuild/firmware.tar
+	cd $HOME/rpmbuild/BUILD
+	tar -xf $HOME/rpmbuild/firmware.tar ${verbose}
+	cd - >/dev/null
+	rm ${verbose} $HOME/rpmbuild/firmware.tar
+
+	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
+	then
+		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "$HOME/rpmbuild/BUILD/brcmfmac4364b2-pcie.txt"
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "$HOME/rpmbuild/BUILD/brcmfmac4364b2-pcie.txcap_blob"
+	fi
+
+	# Create the spec file
+	echo "Name:       apple-firmware" > $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "Version:    ${ver}" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "Release:    1" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "Summary:    Wi-Fi and Bluetooth firmware for T2 Macs" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "License:    Proprietary" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+
+	echo -e "\n%description" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "Wi-Fi and Bluetooth firmware for T2 Macs" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+
+	echo -e "\n%install" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "mkdir -p %{buildroot}/usr/lib/firmware/brcm" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "install -m 644 * %{buildroot}/usr/lib/firmware/brcm" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+
+	echo -e "\n%post" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "modprobe -r brcmfmac_wcc || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "modprobe -r brcmfmac || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "modprobe brcmfmac || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "modprobe -r hci_bcm4377 || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "modprobe hci_bcm4377 || true" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+
+	echo -e "\n%files" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+	echo "/usr/lib/firmware/brcm/*" >> $HOME/rpmbuild/SPECS/apple-firmware.spec
+
+	# Set OS to Linux
+	if [ -f "$HOME/.rpmrc" ]
+	then
+		echo -e "\nBacking up existing .rpmrc"
+		cp ${verbose} $HOME/.rpmrc $HOME/.rpmrc_orj
+	fi
+	echo "buildostranslate: Darwin: Linux" > $HOME/.rpmrc
+
+	# Build
+	# For some reason bash doesn't like rpmbuild. Use zsh.
+	if [[ ${verbose} = -v ]]
+	then
+		/bin/zsh -c "rpmbuild -bb $HOME/rpmbuild/SPECS/apple-firmware.spec"
+	else
+		/bin/zsh -c "rpmbuild -bb $HOME/rpmbuild/SPECS/apple-firmware.spec >/dev/null 2&>/dev/null || echo \"Failed to make rpm package. Run the script with -v to get logs.\""
+	fi
+
+	# Copy and Cleanup
+	cp ${verbose} $HOME/rpmbuild/RPMS/x86_64/apple-firmware-${ver}-1.x86_64.rpm $HOME/Downloads
+	echo -e "\nCleaning up"
+	sudo rm -r ${verbose} $HOME/rpmbuild
+	sudo rm $HOME/.rpmrc
+	if [ -f $HOME/.rpmrc_orj ]
+	then
+		echo -e "\nRestoring backed up .rpmrc"
+		mv $HOME/.rpmrc_orj $HOME/.rpmrc
+	fi
+
+	echo -e "\nRpm package apple-firmware-${ver}-1.x86_64.rpm has been saved to Downloads!"
+	echo "Copy it to Linux and install using dnf."
 }
 
 create_arch_pkg () {
@@ -245,7 +326,7 @@ case "$os" in
 			(3)
 				echo -e "\nWhat package manager does your Linux distribution use?"
 				echo -e "\n1. apt"
-				echo "2. rpm"
+				echo "2. dnf"
 				echo "3. pacman"
 				read package
 				case ${package} in
