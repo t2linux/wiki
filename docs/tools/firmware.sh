@@ -69,17 +69,21 @@ create_deb () {
 		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
 	fi
 
-	echo "Package: apple-firmware" | sudo tee DEBIAN/control >/dev/null
-	echo "Version: ${ver}-1" | sudo tee -a DEBIAN/control >/dev/null
-	echo "Maintainer: Apple" | sudo tee -a DEBIAN/control >/dev/null
-	echo "Architecture: amd64" | sudo tee -a DEBIAN/control >/dev/null
-	echo "Description: Wi-Fi and Bluetooth firmware for T2 Macs" | sudo tee -a DEBIAN/control >/dev/null
+	cat <<- EOF | sudo tee DEBIAN/control >/dev/null
+		Package: apple-firmware
+		Version: ${ver}-1
+		Maintainer: Apple
+		Architecture: all
+		Description: Wi-Fi and Bluetooth firmware for T2 Macs
+	EOF
 
-	echo "modprobe -r brcmfmac_wcc || true" | sudo tee DEBIAN/postinst >/dev/null
-	echo "modprobe -r brcmfmac || true" | sudo tee -a DEBIAN/postinst >/dev/null
-	echo "modprobe brcmfmac || true" | sudo tee -a DEBIAN/postinst >/dev/null
-	echo "modprobe -r hci_bcm4377 || true" | sudo tee -a DEBIAN/postinst >/dev/null
-	echo "modprobe hci_bcm4377 || true" | sudo tee -a DEBIAN/postinst >/dev/null
+	cat <<- EOF | sudo tee DEBIAN/postinst >/dev/null
+		modprobe -r brcmfmac_wcc || true
+		modprobe -r brcmfmac || true
+		modprobe brcmfmac || true
+		modprobe -r hci_bcm4377 || true
+		modprobe hci_bcm4377 || true
+	EOF
 
 	sudo chmod a+x DEBIAN/control
 	sudo chmod a+x DEBIAN/postinst
@@ -94,12 +98,13 @@ create_deb () {
 		dpkg-name deb.deb >/dev/null
 	fi
 
-	cp ${verbose} apple-firmware_${ver}-1_amd64.deb $HOME/Downloads
+	cp ${verbose} apple-firmware_${ver}-1_all.deb $HOME/Downloads
 	echo -e "\nCleaning up"
 	sudo rm -r ${verbose} ${workarea}
 
-	echo -e "\nDeb package apple-firmware_${ver}-1_amd64.deb has been saved to Downloads!"
-	echo "Copy it to Linux and install using apt."
+	echo -e "\nDeb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!"
+	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
+	echo -e "\nsudo apt install /path/to/apple-firmware_${ver}-1_all.deb"
 }
 
 create_rpm () {
@@ -179,8 +184,8 @@ create_rpm () {
 	rm -r ${verbose} $HOME/rpmbuild
 
 	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in a terminal:"
-	echo "    sudo dnf install --disablerepo=* /path/to/apple-firmware-14.4.1-1.noarch.rpm"
+	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
+	echo -e "\nsudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm"
 }
 
 create_arch_pkg () {
@@ -211,22 +216,25 @@ create_arch_pkg () {
 	fi
 
 	# Create the PKGBUILD
-	echo "pkgname=apple-firmware" | sudo tee PKGBUILD >/dev/null
-	echo "pkgver=${ver}" | sudo tee -a PKGBUILD >/dev/null
-	echo "pkgrel=1" | sudo tee -a PKGBUILD >/dev/null
-	echo "pkgdesc=\"Wi-Fi and Bluetooth Firmware for T2 Macs\"" | sudo tee -a PKGBUILD >/dev/null
-	echo "arch=(\"x86_64\")" | sudo tee -a PKGBUILD >/dev/null
-	echo "url=\"\"" | sudo tee -a PKGBUILD >/dev/null
-	echo "license=('unknown')" | sudo tee -a PKGBUILD >/dev/null
-	echo "replaces=('apple-bcm-wifi-firmware')" | sudo tee -a PKGBUILD >/dev/null
-	echo "source=(\"firmware.tar\")" | sudo tee -a PKGBUILD >/dev/null
-	echo "noextract=(\"firmware.tar\")" | sudo tee -a PKGBUILD >/dev/null
-	echo "sha256sums=('SKIP')" | sudo tee -a PKGBUILD >/dev/null
-	echo "package() {" | sudo tee -a PKGBUILD >/dev/null
-	echo "    mkdir -p \$pkgdir/usr/lib/firmware/brcm" | sudo tee -a PKGBUILD >/dev/null
-	echo "    cd \$pkgdir/usr/lib/firmware/brcm" | sudo tee -a PKGBUILD >/dev/null
-	echo "    tar xf \$srcdir/firmware.tar" | sudo tee -a PKGBUILD >/dev/null
-	echo "}" | sudo tee -a PKGBUILD >/dev/null
+	cat <<- EOF | sudo tee PKGBUILD >/dev/null
+		pkgname=apple-firmware
+		pkgver=${ver}
+		pkgrel=1
+		pkgdesc="Wi-Fi and Bluetooth Firmware for T2 Macs"
+		arch=("any")
+		url=""
+		license=('unknown')
+		replaces=('apple-bcm-wifi-firmware')
+		source=("firmware.tar")
+		noextract=("firmware.tar")
+		sha256sums=('SKIP')
+
+		package() {
+		    mkdir -p \$pkgdir/usr/lib/firmware/brcm
+		    cd \$pkgdir/usr/lib/firmware/brcm
+		    tar xf \$srcdir/firmware.tar
+		}
+	EOF
 
 	# Set path to use newer bsdtar and GNU touch
 	PATH_OLD=$PATH
@@ -237,19 +245,20 @@ create_arch_pkg () {
 	then
 		makepkg
 	else
-		makepkg >/dev/null 2&>/dev/null || echo "Failed to make Arch package. Run the script with -v to get logs."
+		makepkg >/dev/null 2>&1 || echo "Failed to make Arch package. Run the script with -v to get logs."
 	fi
 
 	# Revert path to its original form
 	PATH=${PATH_OLD}
 
 	# Copy to Downloads and cleanup
-	cp ${verbose} apple-firmware-${ver}-1-x86_64.pkg.tar.gz $HOME/Downloads
+	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.gz $HOME/Downloads
 	echo -e "\nCleaning up"
 	sudo rm -r ${verbose} ${workarea}
 
-	echo -e "\nArch package apple-firmware-${ver}-1-x86_64.pkg.tar.gz has been saved to Downloads!"
-	echo "Copy it to Linux and install using pacman."
+	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.gz has been saved to Downloads!"
+	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
+	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.gz"
 }
 
 os=$(uname -s)
