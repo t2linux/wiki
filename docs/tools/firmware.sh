@@ -179,7 +179,8 @@ create_rpm () {
 	rm -r ${verbose} $HOME/rpmbuild
 
 	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install it with \`sudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm\`"
+	echo "Copy it to Linux and install it by running the following in a terminal:"
+	echo "    sudo dnf install --disablerepo=* /path/to/apple-firmware-14.4.1-1.noarch.rpm"
 }
 
 create_arch_pkg () {
