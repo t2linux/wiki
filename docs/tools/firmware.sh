@@ -103,7 +103,7 @@ create_deb () {
 }
 
 create_rpm () {
-	if [ ! command -v  rpmbuild &> /dev/null ]
+	if [ ! -f "/usr/local/bin/rpmbuild" ]
 	then
 		echo -e "\nrpm and/or its dependencies are missing!"
 		echo
@@ -124,8 +124,8 @@ create_rpm () {
 	then
 		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "$HOME/rpmbuild/BUILD/brcmfmac4364b2-pcie.txt"
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "$HOME/rpmbuild/BUILD/brcmfmac4364b2-pcie.txcap_blob"
+		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile}
+		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob}
 	fi
 
 	# Create the spec file
@@ -138,8 +138,6 @@ create_rpm () {
 		BuildArch: noarch
 
 		Source1: firmware.tar
-		Source2: brcmfmac4364b2-pcie.txt
-		Source3: brcmfmac4364b2-pcie.txcap_blob
 
 		%description
 		Wi-Fi and Bluetooth firmware for T2 Macs
@@ -152,8 +150,6 @@ create_rpm () {
 		%install
 		mkdir -p %{buildroot}/usr/lib/firmware/brcm
 		install -m 644 * %{buildroot}/usr/lib/firmware/brcm
-		install -m 644 %{SOURCE2} %{buildroot}/usr/lib/firmware/brcm || true
-		install -m 644 %{SOURCE3} %{buildroot}/usr/lib/firmware/brcm || true
 
 		%posttrans
 		modprobe -r brcmfmac_wcc || true
@@ -171,16 +167,16 @@ create_rpm () {
 	then
 		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec
 	else
-		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec &>/dev/null || echo "Failed to make rpm package. Run the script with -v to get logs."
+		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec >/dev/null 2>&1 || echo "Failed to make rpm package. Run the script with -v to get logs."
 	fi
 
 	# Copy and Cleanup
-	cp ${verbose} $HOME/rpmbuild/RPMS/noarch/*.rpm $HOME/Downloads
+	cp ${verbose} $HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm $HOME/Downloads
 	echo -e "\nCleaning up"
 	rm -r ${verbose} $HOME/rpmbuild
 
 	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install it with \`sudo dnf install --disablerepo=* /path/to/file.rpm\`"
+	echo "Copy it to Linux and install it with \`sudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm\`"
 }
 
 create_arch_pkg () {
