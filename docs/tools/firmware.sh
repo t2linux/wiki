@@ -138,7 +138,7 @@ create_rpm () {
 		Release:    1
 		Summary:    Wi-Fi and Bluetooth firmware for T2 Macs
 		License:    Proprietary
-		BuildArch: noarch
+		BuildArch:  noarch
 
 		Source1: firmware.tar
 
