@@ -322,7 +322,7 @@ case "$os" in
 			(3)
 				echo -e "\nWhat package manager does your Linux distribution use?"
 				echo -e "\n1. apt"
-				echo "2. rpm"
+				echo "2. dnf"
 				echo "3. pacman"
 				read package
 				case ${package} in
