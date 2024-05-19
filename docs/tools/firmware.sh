@@ -124,8 +124,11 @@ create_rpm () {
 	then
 		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile}
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob}
+		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} brcmfmac4364b2-pcie.txt
+    cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} brcmfmac4364b2-pcie.txcap_blob
+		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txt
+		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txcap_blob
+		rm brcmfmac4364b2-pcie.txcap_blob brcmfmac4364b2-pcie.txt
 	fi
 
 	# Create the spec file
