@@ -276,7 +276,7 @@ case "$os" in
 		echo -e "\nHow do you want to copy the firmware to Linux?"
 		echo -e "\n1. Run the same script on Linux."
 		echo "2. Create a tarball of the firmware and extract it to Linux."
-		echo "3. Create a Linux distribution specific package which can be installed using a package manager."
+		echo "3. Create a Linux specific package which can be installed using a package manager."
 		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
 		read choice
 		case ${choice} in
