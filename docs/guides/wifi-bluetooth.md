@@ -109,7 +109,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 === "Method 2"
     #### Method 2: Create a tarball of the firmware and extract it to Linux:
 
-    Now we extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running the following:
+    Now we shall extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar`. In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running:
 
     ```bash
     sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.tar
@@ -138,7 +138,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         This package manager is found in Ubuntu, Debian and other similar distros.
 
-        To install using `apt`, run the following:
+        To install using `apt`, run:
 
         ```bash
         sudo apt install /path/to/firmware_package.deb
@@ -152,7 +152,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         This package manager is found in Fedora.
 
-        To install using `dnf`, run the following:
+        To install using `dnf`, run:
 
         ```bash
         sudo dnf install --disablerepo=* /path/to/firmware_package.rpm
@@ -166,7 +166,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         This package manager is found in Arch Linux, EndeavourOS, Manjaro and other similar distros.
 
-        To install using `pacman`, run the following:
+        To install using `pacman`, run:
 
         ```bash
         sudo pacman -U /path/to/firmware_package.pkg.tar.gz
