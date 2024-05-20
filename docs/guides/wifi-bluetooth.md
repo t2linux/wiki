@@ -37,7 +37,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 
     In this method, the script will copy the firmware to your **EFI** partition.
 
-    To retrieve the firmware from **EFI** partition in Linux, you shall be asked to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
+    To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
 === "Method 2"
     #### Method 2: Create a **tar** archive of the firmware in your Downloads folder and manually copy it to Linux:
