@@ -196,7 +196,7 @@ Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wl
 
 ## Fixing unstable WPA2 using iwd
 
-Using iwd is technically not needed for using wifi. But if you are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+Using iwd is technically not needed for using Wi-Fi. But if you are facing unstable WPA2 issues and have to reload the Wi-Fi driver every time you connect to a WPA2 network, as described [here](#method-2-create-a-tarball-of-the-firmware-and-extract-it-to-linux_1), you will have to follow this section. If your connection is stable, you needn't follow this section.
 
 Instructions in this section might be different for the distribution that you are trying to install.
 
@@ -216,4 +216,4 @@ Instructions in this section might be different for the distribution that you ar
     sudo systemctl restart NetworkManager
     ```
 
-If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
+If you Wi-Fi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the Wi-Fi kernel module: `sudo modprobe -r brcmfmac_wcc && sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
