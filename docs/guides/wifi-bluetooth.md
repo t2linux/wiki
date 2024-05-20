@@ -40,17 +40,17 @@ When you run the script in macOS, it will give you to choose between 3 methods t
     To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
 === "Method 2"
-    #### Method 2: Create a **tar** archive of the firmware in your Downloads folder and manually copy it to Linux:
+    #### Method 2: Create a tarball of the firmware and extract it to Linux:
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
-    1. **python3** - Renames the firmware and creates the **tar** archive.
+    1. **python3** - Renames the firmware and creates the tarball.
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall create a **tar** archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+    Once the script confirms that you have the necessary dependencies installed, it shall create a tarball of the firmware by the name of `firmware.tar` in your **Downloads** folder.
 
-    Now you have to extract the firmware in the **tar** archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
+    Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 === "Method 3"
     #### Method 3: Create a Linux distribution specific package which can be installed using a package manager:
@@ -107,9 +107,9 @@ Once you have run the script on macOS, depending on the method you chose, the st
         This option shall be useful if you are unable to copy the script to Linux.
 
 === "Method 2"
-    #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux:
+    #### Method 2: Create a tarball of the firmware and extract it to Linux:
 
-    Now we extract the **tar** archive of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running the following:
+    Now we extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running the following:
 
     ```bash
     sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.tar
@@ -117,7 +117,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     !!! note
 
-        Replace `/path/to/firmware.tar` with the actual path of the archive. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
+        Replace `/path/to/firmware.tar` with the actual path of the tarball. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
 
     Then reload the Wi-Fi and Bluetooth drivers by running:
 
