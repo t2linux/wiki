@@ -25,8 +25,24 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 1. Click [here](../tools/firmware.sh) to download the script.
 2. Boot into macOS.
 3. Run this script there.
-4. When the script shall run successfully, it shall ask you to follow either of the two options mentioned in the [On Linux](#on-linux) section, on Linux.
-5. Boot into Linux.
+
+When you run the script in macOS, it will give you to choose between 3 methods to move firmware to Linux:
+
+=== "Method 1"
+    #### Method 1: Run the same script on Linux
+
+    If you choose option 1, the script will copy the firmware to your **EFI** partition.
+
+    To retrieve the firmware from **EFI** partition in Linux, you shall be asked to run the same script on Linux. You have 2 options do so, described in detail in the [On Linux](#on-linux) section.
+
+=== "Method 2"
+    #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
+    
+    If you choose this method, you need to have `python3` installed on macOS. The script shall automatically detect if it is missing, and if required, also give you the option of installing it.
+
+    Once the script confirms that you have `python3` installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+
+    Now you have to copy the firmware to Linux. The procedure has been described on detail in [On Linux](#on-linux) section.
 
 ### On Linux
 
