@@ -81,13 +81,26 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
-    === "Option 2"
-
-        In this option, you simply have to copy the script to
-
     === "Option 1"
 
-        todo
+        In this option, you simply have to copy the same script to Linux, and run by with:
+
+        ```bash
+        bash /path/to/firmware.sh
+        ```
+
+    === "Option 2"
+
+        In this option, you simply have to run the following commands in Linux:
+
+        ```bash
+        sudo mkdir -p /tmp/apple-wifi-efi
+        sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+        bash /tmp/apple-wifi-efi/firmware.sh
+        sudo umount /tmp/apple-wifi-efi
+        ```
+
+        This option shall be useful if you are unable to copy the script to Linux.
 
 === "Method 2"
     #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
