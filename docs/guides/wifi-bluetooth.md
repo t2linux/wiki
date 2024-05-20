@@ -58,9 +58,9 @@ When you run the script in macOS, it will give you to choose between 3 methods t
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
     1. **python3** - Needed to rename the firmware.
-    2. **dpkg** - Needed if you are creating package for installing on Linux using `apt`.
-    3. **rpm** - Needed if you are creating package for installing on Linux using `dnf`.
-    4. **makepkg** - Needed if you are creating package for installing on Linux using `pacman`
+    2. **dpkg** - Needed to create a package that can be installed on Linux using `apt`.
+    3. **rpm** - Needed to create a package that can be installed on Linux using `dnf`.
+    4. **makepkg** - Needed to create a package that can be installed on Linux using `pacman`.
     5. **coreutils** - It is required for proper functioning of **makepkg**.
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
