@@ -178,7 +178,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
 ## Testing Firmware
 
-You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
+You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this:
 
 ```log
 Dec 24 22:34:19 hostname kernel: usbcore: registered new interface driver brcmfmac
