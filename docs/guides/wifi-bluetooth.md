@@ -28,7 +28,7 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 2. Boot into macOS.
 3. Run this script there.
 
-When you run the script in macOS, it will give you to choose between 3 methods to move firmware to Linux:
+When you run the script in macOS, it will ask you to choose between 3 methods to move firmware to Linux:
 
 === "Method 1"
     #### Method 1: Run the same script on Linux:
