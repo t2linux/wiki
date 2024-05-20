@@ -37,7 +37,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 
 === "Method 2"
     #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
-    
+
     If you choose this method, you need to have `python3` installed on macOS. The script shall automatically detect if it is missing, and if required, also give you the option of installing it.
 
     Once the script confirms that you have `python3` installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
