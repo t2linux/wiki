@@ -81,11 +81,11 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
-    === "Option 1"
+    === "Option 2"
 
         In this option, you simply have to copy the script to
 
-    === "Option 2"
+    === "Option 1"
 
         todo
 
