@@ -71,7 +71,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 
 ### On Linux
 
-Once you have run the script on macOS, depending on the method you chose, the steps to be followed in Linux are described below:
+Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
 !!! Warning "Running script directly on Linux"
     We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. If you have removed macOS, this script won't be very helpful.
