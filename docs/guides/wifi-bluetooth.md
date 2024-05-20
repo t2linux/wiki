@@ -31,93 +31,154 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 When you run the script in macOS, it will give you to choose between 3 methods to move firmware to Linux:
 
 === "Method 1"
-    #### Method 1: Run the same script on Linux
+    #### Method 1: Run the same script on Linux:
 
-    If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if don't want to install any additional software on your Mac, this method is the only option for you.
+    If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
 
     In this method, the script will copy the firmware to your **EFI** partition.
 
-    To retrieve the firmware from **EFI** partition in Linux, you shall be asked to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
+    To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
 === "Method 2"
-    #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
+    #### Method 2: Create a tarball of the firmware and extract it to Linux:
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
-    1. **python3** - Needed to rename the firmware and create the tar archive.
+    1. **python3** - Renames the firmware and creates the tarball.
 
-    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
 
-    Once the script confirms that you have the necessary dependecies installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+    Once the script confirms that you have the necessary dependencies installed, it shall create a tarball of the firmware by the name of `firmware.tar` in your **Downloads** folder.
 
-    Now you have to extract the firmware in the tar archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
+    Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 === "Method 3"
-    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager
+    #### Method 3: Create a Linux specific package which can be installed using a package manager:
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
-    1. **python3** - Needed to rename the firmware.
-    2. **dpkg** - Needed if you are creating package for installing on Linux using **apt** package manager.
-    3. **rpm** - Needed if you are creating package for installing on Linux using **dnf** package manager.
-    4. **makepkg** - Needed if you are creating package for installing on Linux using **pacman** package manager.
-    5. **coreutils** - It is required for proper functioning of **makepkg**.
+    1. **python3** - Renames the firmware.
+    2. **dpkg** - Creates a package that can be installed on Linux using `apt`.
+    3. **rpm** - Creates a package that can be installed on Linux using `dnf`.
+    4. **makepkg** - Creates a package that can be installed on Linux using `pacman`.
+    5. **coreutils** - Additional requirement of **makepkg**.
 
-    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by **apt**, **dnf** or **pacman**, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by `apt`, `dnf` or `pacman`, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
 
     Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 ### On Linux
 
-Once you have run the script on macOS, depending on the method you chose, the steps to be followed in Linux as described below:
+Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
 !!! Warning "Running script directly on Linux"
     We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. If you have removed macOS, this script won't be very helpful.
 
 === "Method 1"
-    #### Method 1: Run the same script on Linux
+    #### Method 1: Run the same script on Linux:
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
-    #### Option 1: Copy the script to Linux and run it again
+    === "Option 1"
 
-    In this option, you simply have to copy the script to
+        In this option, you simply have to copy the same script to Linux, and run it with:
+
+        ```bash
+        bash /path/to/firmware.sh
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware.sh` with the actual path of the script. For example, if the script is in the Downloads folder in Linux, command to be run would be `bash $HOME/Downloads/firmware.sh`
+
+    === "Option 2"
+
+        In this option, you simply have to run the following commands in Linux:
+
+        ```bash
+        sudo mkdir -p /tmp/apple-wifi-efi
+        sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+        bash /tmp/apple-wifi-efi/firmware.sh
+        sudo umount /tmp/apple-wifi-efi
+        ```
+
+        This option shall be useful if you are unable to copy the script to Linux.
 
 === "Method 2"
-    #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
+    #### Method 2: Create a tarball of the firmware and extract it to Linux:
 
-    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+    Now we shall extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar`. In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running:
 
-    1. **python3** - Needed to rename the firmware and create the tar archive.
+    ```bash
+    sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.tar
+    ```
 
-    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+    !!! note
 
-    Once the script confirms that you have the necessary dependecies installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+        Replace `/path/to/firmware.tar` with the actual path of the tarball. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
 
-    Now you have to extract the firmware in the tar archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
+    Then reload the Wi-Fi and Bluetooth drivers by running:
+
+    ```bash
+    sudo modprobe -r brcmfmac_wcc
+    sudo modprobe -r brcmfmac
+    sudo modprobe brcmfmac
+    sudo modprobe -r hci_bcm4377
+    sudo modprobe hci_bcm4377
+    ```
 
 === "Method 3"
-    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager
+    #### Method 3: Create a Linux specific package which can be installed using a package manager:
 
-    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+    Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
 
-    1. **python3** - Needed to rename the firmware.
-    2. **dpkg** - Needed if you are creating package for installing on Linux using **apt** package manager.
-    3. **rpm** - Needed if you are creating package for installing on Linux using **dnf** package manager.
-    4. **makepkg** - Needed if you are creating package for installing on Linux using **pacman** package manager.
-    5. **coreutils** - It is required for proper functioning of **makepkg**.
+    === "apt"
 
-    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+        This package manager is found in Ubuntu, Debian and other similar distros.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by **apt**, **dnf** or **pacman**, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+        To install using `apt`, run:
 
-    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
+        ```bash
+        sudo apt install /path/to/firmware_package.deb
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.deb` with the actual path of the package. For example, if `apple-firmware_14.5-1_all.deb` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo apt install $HOME/Downloads/apple-firmware_14.5-1_all.deb`
+
+    === "dnf"
+
+        This package manager is found in Fedora.
+
+        To install using `dnf`, run:
+
+        ```bash
+        sudo dnf install --disablerepo=* /path/to/firmware_package.rpm
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.rpm` with the actual path of the package. For example, if `apple-firmware-14.5-1.noarch.rpm` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo dnf install --disablerepo=* $HOME/Downloads/apple-firmware-14.5-1.noarch.rpm`
+
+    === "pacman"
+
+        This package manager is found in Arch Linux, EndeavourOS, Manjaro and other similar distros.
+
+        To install using `pacman`, run:
+
+        ```bash
+        sudo pacman -U /path/to/firmware_package.pkg.tar.gz
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.pkg.tar.gz` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.gz` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.gz`
 
 ## Testing Firmware
 
-You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this
+You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this:
 
 ```log
 Dec 24 22:34:19 hostname kernel: usbcore: registered new interface driver brcmfmac
@@ -135,7 +196,7 @@ Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wl
 
 ## Fixing unstable WPA2 using iwd
 
-Using iwd is technically not needed for using wifi. But if you are facing unstable WPA2 issues and have to follow step 1 of the above section every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
+Using iwd is technically not needed for using Wi-Fi. But if you are facing unstable WPA2 issues and have to reload the Wi-Fi driver every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
 
 Instructions in this section might be different for the distribution that you are trying to install.
 
@@ -155,4 +216,4 @@ Instructions in this section might be different for the distribution that you ar
     sudo systemctl restart NetworkManager
     ```
 
-If you wifi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the wifi kernel module: `sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
+If you Wi-Fi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the Wi-Fi kernel module: `sudo modprobe -r brcmfmac_wcc && sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
