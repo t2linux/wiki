@@ -275,7 +275,7 @@ case "$os" in
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
 		echo -e "\nHow do you want to copy the firmware to Linux?"
 		echo -e "\n1. Run the same script on Linux."
-		echo "2. Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux."
+		echo "2. Create a tarball of the firmware and extract it to Linux."
 		echo "3. Create a Linux distribution specific package which can be installed using a package manager."
 		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
 		read choice
@@ -305,7 +305,7 @@ case "$os" in
 
 				echo -e "\nChecking for missing dependencies"
 				python_check
-				echo -e "\nCreating tar archive of the firmware"
+				echo -e "\nCreating a tarball of the firmware"
 				python3 "$0" /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
 				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
 		then
@@ -320,8 +320,8 @@ case "$os" in
 					rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
 					cd - >/dev/null
 				fi
-				echo -e "\nFirmware tar archive saved to Downloads!"
-				echo -e "\nExtract the firmware contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
+				echo -e "\nFirmware tarball saved to Downloads!"
+				echo -e "\nExtract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
 				echo -e "\nsudo modprobe -r brcmfmac_wcc"
 				echo "sudo modprobe -r brcmfmac"
 				echo "sudo modprobe brcmfmac"
