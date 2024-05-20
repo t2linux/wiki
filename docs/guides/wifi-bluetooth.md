@@ -109,20 +109,25 @@ Once you have run the script on macOS, depending on the method you chose, the st
 === "Method 2"
     #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux:
 
-    Now we extract the **tar** archive of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and run the following:
+    Now we extract the **tar** archive of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running the following:
 
     ```bash
-    sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.tar
+    sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.ta
+    ```
+
+    !!! note
+
+        Replace `/path/to/firmware.tar` with the actual path of the script. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
+
+    Then reload the Wi-Fi and Bluetooth drivers by running:
+
+    ```bash
     sudo modprobe -r brcmfmac_wcc
     sudo modprobe -r brcmfmac
     sudo modprobe brcmfmac
     sudo modprobe -r hci_bcm4377
     sudo modprobe hci_bcm4377
     ```
-
-    !!! note
-
-        Replace `/path/to/firmware.tar` with the actual path of the script. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
 
 === "Method 3"
     #### Method 3: Create a Linux distribution specific package which can be installed using a package manager:
