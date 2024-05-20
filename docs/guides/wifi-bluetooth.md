@@ -33,7 +33,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 === "Method 1"
     #### Method 1: Run the same script on Linux:
 
-    If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on your Mac, this method is the only option for you.
+    If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
 
     In this method, the script will copy the firmware to your **EFI** partition.
 
