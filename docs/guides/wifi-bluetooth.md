@@ -53,7 +53,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
     Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 === "Method 3"
-    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager:
+    #### Method 3: Create a Linux specific package which can be installed using a package manager:
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
@@ -130,7 +130,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     ```
 
 === "Method 3"
-    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager:
+    #### Method 3: Create a Linux specific package which can be installed using a package manager:
 
     Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
 
