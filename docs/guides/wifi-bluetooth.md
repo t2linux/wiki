@@ -33,52 +33,87 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 === "Method 1"
     #### Method 1: Run the same script on Linux
 
-    If you choose option 1, the script will copy the firmware to your **EFI** partition.
+    If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if don't want to install any additional software on your Mac, this method is the only option for you.
 
-    To retrieve the firmware from **EFI** partition in Linux, you shall be asked to run the same script on Linux. You have 2 options do so, described in detail in the [On Linux](#on-linux) section.
+    In this method, the script will copy the firmware to your **EFI** partition.
+
+    To retrieve the firmware from **EFI** partition in Linux, you shall be asked to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
 === "Method 2"
     #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
 
-    If you choose this method, you need to have `python3` installed on macOS. The script shall automatically detect if it is missing, and if required, also give you the option of installing it.
+    If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
-    Once the script confirms that you have `python3` installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+    1. **python3** - Needed to rename the firmware and create the tar archive.
 
-    Now you have to copy the firmware to Linux. The procedure has been described on detail in [On Linux](#on-linux) section.
+    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+
+    Once the script confirms that you have the necessary dependecies installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+
+    Now you have to extract the firmware in the tar archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
+
+=== "Method 3"
+    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager
+
+    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+
+    1. **python3** - Needed to rename the firmware.
+    2. **dpkg** - Needed if you are creating package for installing on Linux using **apt** package manager.
+    3. **rpm** - Needed if you are creating package for installing on Linux using **dnf** package manager.
+    4. **makepkg** - Needed if you are creating package for installing on Linux using **pacman** package manager.
+    5. **coreutils** - It is required for proper functioning of **makepkg**.
+
+    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+
+    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by **apt**, **dnf** or **pacman**, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+
+    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 ### On Linux
 
-You have two options here. You can follow either of the two, its purely based on your choice. If your distro installer requires internet to install, you can also follow these steps on a Live ISO environment:
+Once you have run the script on macOS, depending on the method you chose, the steps to be followed in Linux as described below:
 
 !!! Warning "Running script directly on Linux"
     We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. If you have removed macOS, this script won't be very helpful.
 
-- The first is to either copy this script to Linux via a USB, download it if you have a wired internet connection, or use some other method to get it to Linux. You can then run the script again from Linux and it will finish setting up Wi-Fi and Bluetooth.
+=== "Method 1"
+    #### Method 1: Run the same script on Linux
 
-- The second method is to simply run the following commands on Linux :-
+    Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
-  ```sh
-  sudo mkdir -p /tmp/apple-wifi-efi
-  sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
-  bash /tmp/apple-wifi-efi/firmware.sh
-  sudo umount /tmp/apple-wifi-efi
-  ```
+    #### Option 1: Copy the script to Linux and run it again
 
-#### For those who don’t know how to run a script
+    In this option, you simply have to copy the script to
 
-If you don’t know how to run a script, follow these instructions.
+=== "Method 2"
+    #### Method 2: Create a tar archive of the firmware in your Downloads folder and manually copy it to Linux
 
-1. Boot into macOS, and download the script. Make sure the script is there in your **Downloads** folder.
+    If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
-2. Open the terminal and run :-
-  
-    ``` bash
-    bash ~/Downloads/firmware.sh
-    ```
-  
-3. Then boot into Linux and place the same script in the **Downloads** folder over there or simply run the commands the script asked you to run in Linux when you executed it in macOS.
+    1. **python3** - Needed to rename the firmware and create the tar archive.
 
-4. If you placed the script in the **Downloads** folder instead of running the commands told by the script in macOS, run step 2 command on the terminal, this time in Linux. Else you needn't follow this step.
+    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+
+    Once the script confirms that you have the necessary dependecies installed, it shall create a tar archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+
+    Now you have to extract the firmware in the tar archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
+
+=== "Method 3"
+    #### Method 3: Create a Linux distribution specific package which can be installed using a package manager
+
+    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+
+    1. **python3** - Needed to rename the firmware.
+    2. **dpkg** - Needed if you are creating package for installing on Linux using **apt** package manager.
+    3. **rpm** - Needed if you are creating package for installing on Linux using **dnf** package manager.
+    4. **makepkg** - Needed if you are creating package for installing on Linux using **pacman** package manager.
+    5. **coreutils** - It is required for proper functioning of **makepkg**.
+
+    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+
+    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by **apt**, **dnf** or **pacman**, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+
+    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 ## Testing Firmware
 
