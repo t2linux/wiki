@@ -112,7 +112,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     Now we extract the **tar** archive of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar` In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running the following:
 
     ```bash
-    sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.ta
+    sudo tar -v -xC /lib/firmware/brcm -f /path/to/firmware.tar
     ```
 
     !!! note
