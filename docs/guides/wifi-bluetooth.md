@@ -48,7 +48,7 @@ When you run the script in macOS, it will give you to choose between 3 methods t
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
 
-    Once the script confirms that you have the necessary dependecies installed, it shall create a **tar** archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
+    Once the script confirms that you have the necessary dependencies installed, it shall create a **tar** archive of the firmware by the name of `firmware.tar` in your **Downloads** folder.
 
     Now you have to extract the firmware in the **tar** archive to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
