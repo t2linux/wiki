@@ -117,7 +117,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     !!! note
 
-        Replace `/path/to/firmware.tar` with the actual path of the script. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
+        Replace `/path/to/firmware.tar` with the actual path of the archive. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
 
     Then reload the Wi-Fi and Bluetooth drivers by running:
 
@@ -132,19 +132,49 @@ Once you have run the script on macOS, depending on the method you chose, the st
 === "Method 3"
     #### Method 3: Create a Linux distribution specific package which can be installed using a package manager:
 
-    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+    Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
 
-    1. **python3** - Needed to rename the firmware.
-    2. **dpkg** - Needed if you are creating package for installing on Linux using **apt** package manager.
-    3. **rpm** - Needed if you are creating package for installing on Linux using **dnf** package manager.
-    4. **makepkg** - Needed if you are creating package for installing on Linux using **pacman** package manager.
-    5. **coreutils** - It is required for proper functioning of **makepkg**.
+    === "apt"
 
-    The script shall automatically detect if they are missing, and if required, will give you the option of installing them. So you need not worry about not having any dependency installed.
+        This package manager is found in Ubuntu, Debian and other similar distros.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by **apt**, **dnf** or **pacman**, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+        To install using `apt`, run the following:
 
-    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
+        ```bash
+        sudo apt install /path/to/firmware_package.deb
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.deb` with the actual path of the package. For example, if `apple-firmware_14.5-1_all.deb` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo apt install $HOME/Downloads/apple-firmware_14.5-1_all.deb`
+
+    === "dnf"
+
+        This package manager is found in Fedora.
+
+        To install using `dnf`, run the following:
+
+        ```bash
+        sudo dnf install --disablerepo=* /path/to/firmware_package.rpm
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.rpm` with the actual path of the package. For example, if `apple-firmware-14.5-1.noarch.rpm` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo dnf install --disablerepo=* $HOME/Downloads/apple-firmware-14.5-1.noarch.rpm`
+
+    === "pacman"
+
+        This package manager is found in Arch Linux, EndeavourOS, Manjaro and other similar distros.
+
+        To install using `pacman`, run the following:
+
+        ```bash
+        sudo pacman -U /path/to/firmware_package.pkg.tar.gz
+        ```
+
+        !!! note
+
+            Replace `/path/to/firmware_package.pkg.tar.gz` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.gz` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.gz`
 
 ## Testing Firmware
 
