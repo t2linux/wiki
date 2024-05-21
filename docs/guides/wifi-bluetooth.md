@@ -31,7 +31,7 @@ We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the in
 When you run the script in macOS, it will ask you to choose between 3 methods to move firmware to Linux:
 
 === "Method 1"
-    #### Method 1: Run the same script on Linux:
+    **Method 1: Run the same script on Linux**
 
     If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
 
