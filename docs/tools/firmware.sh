@@ -230,9 +230,17 @@ create_arch_pkg () {
 		sha256sums=('SKIP')
 
 		package() {
-		    mkdir -p \$pkgdir/usr/lib/firmware/brcm
-		    cd \$pkgdir/usr/lib/firmware/brcm
-		    tar xf \$srcdir/firmware.tar
+			mkdir -p \$pkgdir/usr/lib/firmware/brcm
+			cd \$pkgdir/usr/lib/firmware/brcm
+			tar xf \$srcdir/firmware.tar
+		}
+
+		post_install() {
+			modprobe -r brcmfmac_wcc || true
+			modprobe -r brcmfmac || true
+			modprobe brcmfmac || true
+			modprobe -r hci_bcm4377 || true
+			modprobe hci_bcm4377 || true
 		}
 	EOF
 
