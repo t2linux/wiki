@@ -251,22 +251,22 @@ create_arch_pkg () {
 	# Build
 	if [[ ${verbose} = -v ]]
 	then
-		makepkg
+		PKGEXT='.pkg.tar.zst' makepkg
 	else
-		makepkg >/dev/null 2>&1 || echo "Failed to make Arch package. Run the script with -v to get logs."
+		PKGEXT='.pkg.tar.zst' makepkg >/dev/null 2>&1 || echo "Failed to make Arch package. Run the script with -v to get logs."
 	fi
 
 	# Revert path to its original form
 	PATH=${PATH_OLD}
 
 	# Copy to Downloads and cleanup
-	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.gz $HOME/Downloads
+	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.zst $HOME/Downloads
 	echo -e "\nCleaning up"
 	sudo rm -r ${verbose} ${workarea}
 
-	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.gz has been saved to Downloads!"
+	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.gz"
+	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
 }
 
 os=$(uname -s)
