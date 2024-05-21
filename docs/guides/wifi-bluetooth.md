@@ -40,7 +40,7 @@ When you run the script in macOS, it will ask you to choose between 3 methods to
     To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
 === "Method 2"
-    #### Method 2: Create a tarball of the firmware and extract it to Linux:
+    **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
@@ -53,7 +53,7 @@ When you run the script in macOS, it will ask you to choose between 3 methods to
     Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 === "Method 3"
-    #### Method 3: Create a Linux specific package which can be installed using a package manager:
+    **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
 
@@ -77,7 +77,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. If you have removed macOS, this script won't be very helpful.
 
 === "Method 1"
-    #### Method 1: Run the same script on Linux:
+    **Method 1: Run the same script on Linux**
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
@@ -107,7 +107,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
         This option shall be useful if you are unable to copy the script to Linux.
 
 === "Method 2"
-    #### Method 2: Create a tarball of the firmware and extract it to Linux:
+    **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     Now we shall extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar`. In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running:
 
@@ -130,7 +130,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     ```
 
 === "Method 3"
-    #### Method 3: Create a Linux specific package which can be installed using a package manager:
+    **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
 
