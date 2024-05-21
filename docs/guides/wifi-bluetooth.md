@@ -169,12 +169,12 @@ Once you have run the script on macOS, depending on the method you chose, the st
         To install using `pacman`, run:
 
         ```bash
-        sudo pacman -U /path/to/firmware_package.pkg.tar.gz
+        sudo pacman -U /path/to/firmware_package.pkg.tar.zst
         ```
 
         !!! note
 
-            Replace `/path/to/firmware_package.pkg.tar.gz` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.gz` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.gz`
+            Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
 ## Testing Firmware
 
