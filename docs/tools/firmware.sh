@@ -235,6 +235,10 @@ create_arch_pkg () {
 			tar xf \$srcdir/firmware.tar
 		}
 
+		install=apple-firmware.install
+	EOF
+
+	cat <<- EOF | sudo tee apple-firmware.install >/dev/null
 		post_install() {
 			modprobe -r brcmfmac_wcc || true
 			modprobe -r brcmfmac || true
