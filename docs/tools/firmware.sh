@@ -69,7 +69,7 @@ create_deb () {
 		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
 	fi
 
-	cat <<- EOF | sudo tee DEBIAN/control >/dev/null
+	cat <<- EOF > DEBIAN/control
 		Package: apple-firmware
 		Version: ${ver}-1
 		Maintainer: Apple
@@ -77,7 +77,7 @@ create_deb () {
 		Description: Wi-Fi and Bluetooth firmware for T2 Macs
 	EOF
 
-	cat <<- EOF | sudo tee DEBIAN/postinst >/dev/null
+	cat <<- EOF > DEBIAN/postinst
 		modprobe -r brcmfmac_wcc || true
 		modprobe -r brcmfmac || true
 		modprobe brcmfmac || true
@@ -85,8 +85,8 @@ create_deb () {
 		modprobe hci_bcm4377 || true
 	EOF
 
-	sudo chmod a+x DEBIAN/control
-	sudo chmod a+x DEBIAN/postinst
+	chmod a+x DEBIAN/control
+	chmod a+x DEBIAN/postinst
 
 	cd ${workarea}
 	if [[ ${verbose} = -v ]]
@@ -100,7 +100,7 @@ create_deb () {
 
 	cp ${verbose} apple-firmware_${ver}-1_all.deb $HOME/Downloads
 	echo -e "\nCleaning up"
-	sudo rm -r ${verbose} ${workarea}
+	rm -r ${verbose} ${workarea}
 
 	echo -e "\nDeb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
@@ -216,7 +216,7 @@ create_arch_pkg () {
 	fi
 
 	# Create the PKGBUILD
-	cat <<- EOF | sudo tee PKGBUILD >/dev/null
+	cat <<- EOF > PKGBUILD
 		pkgname=apple-firmware
 		pkgver=${ver}
 		pkgrel=1
@@ -238,7 +238,7 @@ create_arch_pkg () {
 		install=apple-firmware.install
 	EOF
 
-	cat <<- EOF | sudo tee apple-firmware.install >/dev/null
+	cat <<- EOF > apple-firmware.install
 		post_install() {
 			modprobe -r brcmfmac_wcc || true
 			modprobe -r brcmfmac || true
@@ -266,7 +266,7 @@ create_arch_pkg () {
 	# Copy to Downloads and cleanup
 	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.zst $HOME/Downloads
 	echo -e "\nCleaning up"
-	sudo rm -r ${verbose} ${workarea}
+	rm -r ${verbose} ${workarea}
 
 	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
