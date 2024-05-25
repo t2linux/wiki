@@ -228,11 +228,13 @@ create_arch_pkg () {
 		source=("firmware.tar")
 		noextract=("firmware.tar")
 		sha256sums=('SKIP')
+	EOF
+	cat <<- 'EOF' >> PKGBUILD
 
 		package() {
-			mkdir -p \$pkgdir/usr/lib/firmware/brcm
-			cd \$pkgdir/usr/lib/firmware/brcm
-			tar xf \$srcdir/firmware.tar
+			mkdir -p $pkgdir/usr/lib/firmware/brcm
+			cd $pkgdir/usr/lib/firmware/brcm
+			tar xf $srcdir/firmware.tar
 		}
 
 		install=apple-firmware.install
@@ -271,6 +273,87 @@ create_arch_pkg () {
 	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
 	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
+}
+
+detect_package_manager () {
+	if $(apt --help >/dev/null 2>&1)
+	then
+		PACKAGE_MANAGER=apt
+	elif $(dnf >/dev/null 2>&1)
+	then
+		PACKAGE_MANAGER=dnf
+	elif $(pacman >/dev/null 2>&1)
+	then
+		PACKAGE_MANANER=pacman
+	else
+		echo -e "\nUnable to detect the package manager your distro is using!"
+	fi
+}
+
+curl_check () {
+	if ! $(curl --help >/dev/null 2>&1)
+	then
+		echo -e "\ncurl and/or its dependencies are missing!"
+		detect_package_manager
+		echo
+		if [[ ${PACKAGE_MANAGER} = "" ]]
+		then
+			read -p "The script could not detect your package manager. Please install curl manually and press enter once you have it installed."
+		else
+			read -p "Press enter to install curl and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install curl yourself, if you want to install it via some alternate method."
+			echo -e "\nInstalling curl and its dependencies"
+			case ${PACKAGE_MANAGER} in
+				(apt)
+					sudo apt update
+					sudo apt install -y curl
+					;;
+				(dnf)
+					sudo dnf install -y curl
+					;;
+				(pacman)
+					sudo pacman -Sy curl
+					;;
+				(*)
+					echo -e "\nUnknown error"
+					exit 1
+					;;
+			esac
+					
+		fi
+	fi
+}
+
+p7zip_check () {
+	if ! $(7z >/dev/null 2>&1)
+	then
+		echo -e "\np7zip and/or its dependencies are missing!"
+		detect_package_manager
+		echo
+		if [[ ${PACKAGE_MANAGER} = "" ]]
+		then
+			read -p "The script could not detect your package manager. Please install p7zip manually and press enter once you have it installed."
+		else
+			read -p "Press enter to install p7zip and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install p7zip yourself, if you want to install it via some alternate method."
+			echo -e "\nInstalling p7zip and its dependencies"
+			case ${PACKAGE_MANAGER} in
+				(apt)
+					sudo apt update
+					sudo apt install -y p7zip-full
+					;;
+				(dnf)
+					sudo dnf install -y p7zip
+					;;
+				(pacman)
+					sudo pacman -Sy p7zip
+					;;
+				(*)
+					echo -e "\nUnknown error"
+					exit 1
+					;;
+			esac
+					
+		fi
+	fi
 }
 
 os=$(uname -s)
@@ -384,58 +467,99 @@ case "$os" in
 			echo "Exiting..."
 			exit 1
 		fi
-		echo -e "\nIf you are running this script in Linux, make sure you ran it first in macOS and choose option 1 (Run the same script on Linux)."
-		echo -e "\nContinue? (Y/n)"
-		read input
-		if [[ ($input = n) || ($input = N) ]]
-		then
-			echo -e "\nRun the script again in Linux when you have ran it in macOS."
-			exit 1
-		fi
-		echo -e "\nRe-mounting the EFI partition"
-		mountpoint=$(mktemp -d)
-		workdir=$(mktemp -d)
-		echo "Installing Wi-Fi and Bluetooth firmware"
-		sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
-		sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
-		sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
+		echo -e "\nHow do you want to copy the firmware to Linux?"
+		echo -e "\n1. Retrieve the firmware from EFI."
+		echo "2. Download a macOS Recovery Image from Apple and get the firmware from there."
+		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Run the same script on Linux) there."
+		read choice
+		case ${choice} in
+			(1)
+				echo -e "\nRe-mounting the EFI partition"
+				mountpoint=$(mktemp -d)
+				workdir=$(mktemp -d)
+				echo "Installing Wi-Fi and Bluetooth firmware"
+				sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
+				sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
+				sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
 
-		sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
 
-		for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-			"$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
-		do
-			if [ -f "$file" ]
-			then
-				sudo cp ${verbose} $file /lib/firmware/brcm
-			fi
-		done
-		echo "Reloading Wi-Fi and Bluetooth drivers"
-		sudo modprobe -r brcmfmac_wcc || true
-		sudo modprobe -r brcmfmac || true
-		sudo modprobe brcmfmac || true
-		sudo modprobe -r hci_bcm4377 || true
-		sudo modprobe hci_bcm4377 || true
-		echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
-		read -p "Do you want to keep a copy? (y/N)" input
-		if [[ ($input != y) && ($input != Y) ]]
-		then
-			echo "Removing the copy from the EFI partition"
-			for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-			            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
-			            "$mountpoint/firmware.tar.gz" \
-			            "$mountpoint/firmware.sh"
-			do
-				if [ -f "$file" ]
+				for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
+					    "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
+				do
+					if [ -f "$file" ]
+					then
+						sudo cp ${verbose} $file /lib/firmware/brcm
+					fi
+				done
+				echo "Reloading Wi-Fi and Bluetooth drivers"
+				sudo modprobe -r brcmfmac_wcc || true
+				sudo modprobe -r brcmfmac || true
+				sudo modprobe brcmfmac || true
+				sudo modprobe -r hci_bcm4377 || true
+				sudo modprobe hci_bcm4377 || true
+				echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
+				read -p "Do you want to keep a copy? (y/N)" input
+				if [[ ($input != y) && ($input != Y) ]]
 				then
-					sudo rm ${verbose} $file
+					echo "Removing the copy from the EFI partition"
+					for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
+					            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
+					            "$mountpoint/firmware.tar.gz" \
+					            "$mountpoint/firmware.sh"
+					do
+						if [ -f "$file" ]
+						then
+							sudo rm ${verbose} $file
+						fi
+					done
 				fi
-			done
-		fi
-		sudo rm -r ${verbose} $workdir
-		sudo umount $mountpoint
-		sudo rmdir $mountpoint
-		echo "Done!"
+				sudo rm -r ${verbose} $workdir
+				sudo umount $mountpoint
+				sudo rmdir $mountpoint
+				echo "Done!"
+				;;
+			(2)
+				# Detect whether curl and 7z are installed
+				curl_check
+				p7zip_check
+				echo -e "\nDownloading macOS Recovery Image"
+				workdir=$(mktemp -d)
+				cd ${workdir}
+				if [[ ${verbose} = -v ]]
+				then
+					curl -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
+				else
+					curl -s -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
+				fi
+				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
+				python3 fetch-macOS-v2.py
+				echo -e "\nExtracting the Recovery Image"
+				if [[ ${verbose} = -v ]]
+				then
+					7z x BaseSystem.dmg "macOS Base System/usr/share/firmware"
+				else
+					7z x BaseSystem.dmg "macOS Base System/usr/share/firmware" >/dev/null
+				fi
+				echo "Getting firmware"
+				cd - >/dev/null
+				python3 "$0" "$workdir/macOS Base System/usr/share/firmware" "$workdir/firmware-renamed.tar" ${verbose}
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
+				echo "Reloading Wi-Fi and Bluetooth drivers"
+				sudo modprobe -r brcmfmac_wcc || true
+				sudo modprobe -r brcmfmac || true
+				sudo modprobe brcmfmac || true
+				sudo modprobe -r hci_bcm4377 || true
+				sudo modprobe hci_bcm4377 || true
+				echo "Cleaning up"
+				sudo rm -r ${verbose} $workdir
+				echo "Done!"
+				;;
+			(*)
+				echo -e "\nError: Invalid option!"
+				exit 1
+				;;
+		esac
 		;;
 	(*)
 		echo "Error: unsupported platform"
