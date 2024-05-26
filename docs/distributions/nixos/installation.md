@@ -9,7 +9,6 @@ You will need:
 - A spare USB stick or other reasonably large storage medium (>2G recommended)
 - Some experience with the command line
 - Sufficient mental energy to find and fix errors
-- A lot of time to build the kernel [(optional)](./faq.md#substituter-setup)
 
 ## Installation Steps
 
@@ -92,7 +91,7 @@ You might want to also configure a display manager and a desktop environment. Ch
         There is a flake template which should do most of the boilerplating work for you. This will also use the [substituter](./faq.md#substituter-setup) by default.
 
         ```shell
-        # 0. If you haven't ran nixos-generate-config, do it now. See above for steps.
+        # 0. If you haven't run nixos-generate-config, do it now. See above for steps.
         # 1. Change directory to /mnt/etc/nixos. 
         #    This will be where you store your flake, but you can move it later.
         cd /mnt/etc/nixos
@@ -111,7 +110,7 @@ You might want to also configure a display manager and a desktop environment. Ch
 
     === "Manual"
         0. You should have ran `nixos-generate-config`. If not, [do that](#configuration-and-installation).
-        * Make a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
+        * Create a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
         * Add a flake input: `github:NixOS/nixos-hardware`
         * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
         * For reasons stated above, add "flakes" and "nix-command" to nix's `experimental-features`.
@@ -225,10 +224,10 @@ Choose a method below and follow the [Wi-Fi and Bluetooth Guide on macOS](../../
 The imperative setup is useful for temporary situations like the installation environment.
 
 === "Method 1"
-    The following commands should get you up and running. Note that `/lib/firmware` has to be manually created because NixOS does not come with that.
+    The following commands should get you up and running. Note that `/lib/firmware/brcm` has to be manually created because NixOS does not come with that.
 
     ```shell
-    sudo mkdir -p /lib/firmware
+    sudo mkdir -p /lib/firmware/brcm
     sudo /mnt/boot/firmware.sh
     #    ^~~~~~~~~ change this if the EFI partition is mounted elsewhere
     ```
@@ -240,9 +239,12 @@ The imperative setup is useful for temporary situations like the installation en
     4. Reload kernel modules to load the firmware.
 
     ```shell
-    # run as sudo.
+    # Run everything here with sudo or as root.
+    # Create the required directory tree
     mkdir -p /lib/firmware/brcm
-    tar xf /path/to/your/firmware.tar -C /lib/firmware/brcm
+    # Extract the firmware files
+    tar -xf /path/to/your/firmware.tar -C /lib/firmware/brcm
+    # Reload modules so the firmware changes take effect.
     modprobe -r brcmfmac_wcc; modprobe -r brcmfmac; modprobe brcmfmac; modprobe -r hci_bcm4377; modprobe hci_bcm4377
     ```
 
@@ -255,11 +257,11 @@ Then run `systemctl start wpa_supplicant` and then connect to internet using `wp
 The declarative setup is suitable for long-term use after you have installed NixOS.
 
 === "Method 1"
-    This method is not supported for installation on NixOS. It may still work with some manual steps, but we are not responsible if your laptop or cat explodes.
+    This method is not supported for installation on NixOS. It may still work with some manual steps.
 
-    First follow the steps in the [imperative setup.](#imperative-setup) The firmware files should be located in `/lib/firmware/brcm`.
+    First follow the steps in the [imperative setup.](#imperative-setup) The firmware files should then be located in `/lib/firmware/brcm`.
 
-    Copy /lib/firmware to your configuration directory.
+    Afterwards, copy `/lib/firmware` to your configuration directory.
 
     Finally add the following snippet to your configuration. Use your logic to edit the source directory.
 

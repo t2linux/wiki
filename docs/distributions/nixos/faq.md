@@ -26,11 +26,11 @@ Alternatively, follow [this section](#substituter-setup) to not build the kernel
 
 ## Substituter Setup
 
-There is a public [hydra instance](https://hydra.soopy.moe) acting as a [binary cache/substituter](https://zero-to-nix.com/concepts/caching) run by a community member. Using the substituter will cause Nix to not rebuild the kernel, as long as you haven't done funny stuff like enabling crash dumping.
+There is a public [hydra instance](https://hydra.soopy.moe) acting as a [binary cache/substituter](https://zero-to-nix.com/concepts/caching) run by a community member. Using the substituter will cause Nix to not rebuild the kernel, so long as non-default options like crash dumping have not been enabled.
 
 ### Installation Environment
 
-In the installation environment, the hydra cache is not currently used by default. Configure Nix to use the substituter by one of the following methods.
+In the installation environment, the hydra cache is not currently used by default. Configure Nix to use the substituter by one of the following methods:
 
 === "Editing `nix.conf`"
     Since you will be installing as root, edit the root user's `nix.conf` located at `/root/.config/nix/nix.conf` to include the following snippet.
@@ -70,7 +70,7 @@ In the installation environment, the hydra cache is not currently used by defaul
 
 If you are using the legacy setup with channels, you might still be building the kernel even if you have the substituter set up. This is because the ISO's nixpkgs flake input takes precedence over channels.
 
-A set up with flakes is obviously still recommended as this problem would be circumvented, but if you cannot or don't want to use flakes, here are the steps to install with the substituter.
+A set up with flakes is obviously still recommended since various pitfalls such as this problem would be circumvented. If you for some reason cannot or don't want to use flakes, here are the steps to install with the substituter.
 
 ```bash
 # Ensure you are using nixos-unstable.or the latest stable nixos release.
