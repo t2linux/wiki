@@ -348,8 +348,7 @@ dmg2img_check () {
 					dmg2imgdir=$(mktemp -d)
 					cd ${dmg2imgdir}
 					sudo pacman -Sy --noconfirm git base-devel
-					git clone https://aur.archlinux.org/dmg2img.git
-					cd dmg2img
+					git clone https://aur.archlinux.org/dmg2img.git ${dmg2imgdir}
 					makepkg -si --noconfirm
 					cd - >/dev/null
 					sudo rm -r ${dmg2imgdir}
