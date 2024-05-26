@@ -312,7 +312,7 @@ curl_check () {
 					sudo dnf install -y curl
 					;;
 				(pacman)
-					sudo pacman -S --noconfirm curl
+					sudo pacman -Sy --noconfirm curl
 					;;
 				(*)
 					echo -e "\nUnknown error"
@@ -324,28 +324,35 @@ curl_check () {
 	fi
 }
 
-p7zip_check () {
-	if ! $(7z >/dev/null 2>&1)
+dmg2img_check () {
+	if ! $(dmg2img >/dev/null 2>&1)
 	then
-		echo -e "\np7zip and/or its dependencies are missing!"
+		echo -e "\ndmg2img and/or its dependencies are missing!"
 		detect_package_manager
 		echo
 		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
 		then
-			read -p "The script could not detect your package manager. Please install p7zip manually and press enter once you have it installed."
+			read -p "The script could not detect your package manager. Please install dmg2img manually and press enter once you have it installed."
 		else
-			read -p "Press enter to install p7zip and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install p7zip yourself, if you want to install it via some alternate method."
-			echo -e "\nInstalling p7zip and its dependencies"
+			read -p "Press enter to install dmg2img and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install dmg2img yourself, if you want to install it via some alternate method."
+			echo -e "\nInstalling dmg2img and its dependencies"
 			case ${PACKAGE_MANAGER} in
 				(apt)
 					sudo apt update
-					sudo apt install -y p7zip-full
+					sudo apt install -y dmg2img
 					;;
 				(dnf)
-					sudo dnf install -y p7zip
+					sudo dnf install -y dmg2img
 					;;
 				(pacman)
-					sudo pacman -S --noconfirm p7zip
+					dmg2imgdir=$(mktemp -d)
+					cd ${dmg2imgdir}
+					sudo pacman -Sy --noconfirm git base-devel
+					git clone https://aur.archlinux.org/dmg2img.git
+					cd dmg2img
+					makepkg -si --noconfirm
+					cd - >/dev/null
+					sudo rm -r ${dmg2imgdir}
 					;;
 				(*)
 					echo -e "\nUnknown error"
@@ -521,11 +528,12 @@ case "$os" in
 				echo -e "\nDone!"
 				;;
 			(2)
-				# Detect whether curl and 7z are installed
+				# Detect whether curl and dmg2img are installed
 				curl_check
-				p7zip_check
+				dmg2img_check
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
+				imgdir=$(mktemp -d)
 				cd ${workdir}
 				if [[ ${verbose} = -v ]]
 				then
@@ -535,16 +543,20 @@ case "$os" in
 				fi
 				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
 				python3 fetch-macOS-v2.py
-				echo -e "\nExtracting the Recovery Image"
+				echo -e "\nConverting image from .dmg to .img"
 				if [[ ${verbose} = -v ]]
 				then
-					7z x BaseSystem.dmg "macOS Base System/usr/share/firmware"
+					dmg2img -V BaseSystem.dmg fw.img
 				else
-					7z x BaseSystem.dmg "macOS Base System/usr/share/firmware" >/dev/null
+					dmg2img -s BaseSystem.dmg fw.img
 				fi
+				echo "Mounting image"
+				sudo losetup -P loop50 fw.img
+				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
+				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" "${workdir}/macOS Base System/usr/share/firmware" ${workdir}/firmware-renamed.tar ${verbose}
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose}
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
@@ -554,6 +566,9 @@ case "$os" in
 				sudo modprobe hci_bcm4377 || true
 				echo "Cleaning up"
 				sudo rm -r ${verbose} ${workdir}
+				sudo umount ${verbose} ${loopdevice}
+				sudo rm -r ${verbose} ${imgdir}
+				sudo losetup -d /dev/loop50
 				echo "Done!"
 				;;
 			(*)
