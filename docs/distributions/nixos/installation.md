@@ -78,58 +78,80 @@ You might want to also configure a display manager and a desktop environment. Ch
         ```
 
 === "Flakes"
-    Nix flakes is a new system that is designed to replace nix channels and to improve reproducibility. It is still in an experimental stage and is locked behind a number of feature flags.
+    Nix flakes is a new system that is designed to replace Nix channels and to improve reproducibility. It is still in an experimental stage and is locked behind a number of feature flags.
 
     Flakes support in the ISO is enabled since the v6.4.9-3 ISO. You can validate if you're using that by running `nix run nixpkgs#hello`. If it outputs "Hello, world!", you can continue without modifying commands. If it errors, you are not.
 
-    To use flakes, pass `--extra-experimental-features "flakes nix-command"` to nix commands in the live environment. Nix commands with hyphens (`-`, i.e. `nixos-rebuild`, `nix-store`) in them generally do not require this since they were not built with flakes in mind.
+    To use flakes, pass `--extra-experimental-features "flakes nix-command"` to nix commands in the live environment. Legacy Nix commands with hyphens (`-`, i.e. `nixos-rebuild`, `nix-store`) in them generally do not require and won't recognize the flag.
 
     Below are the setup steps. Adapt the locations as needed.
 
-    0. You should have ran `nixos-generate-config`. If not, [do that](#configuration-and-installation).
-    * Make a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
-    * Add a flake input: `github:NixOS/nixos-hardware`
-    * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
-    * For reasons stated above, add "flakes" and "nix-command" to nix's `experimental-features`.
-    * Add a nixosConfigurations output, in which add a new attribute with any valid name. The common standard is to use the hostname. This will be used to activate your system.
-    * Set the value of the attribute as a call to the lib.nixosSystem function (from the nixpkgs input) with a new attribute set, which contains the items outlined in the example below.
+    === "Template"
+        There is a flake template which should do most of the boilerplating work for you. This will also use the [substituter](./faq.md#substituter-setup) by default.
 
-    !!! quote "Example Configuration"
+        ```shell
+        # 0. If you haven't ran nixos-generate-config, do it now. See above for steps.
+        # 1. Change directory to /mnt/etc/nixos. 
+        #    This will be where you store your flake, but you can move it later.
+        cd /mnt/etc/nixos
 
-        ```nix title="flake.nix" linenums="1"
-        {
-          inputs = {
-            nixpkgs.url = "nixpkgs/nixos-unstable";
-            nixos-hardware.url = "github:nixos/nixos-hardware";
-          };
-          outputs = {nixpkgs, nixos-hardware, ...}: {
-            nixosConfigurations.replaceThisWithAnything = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              modules = [
-                ./configuration.nix
-                nixos-hardware.nixosModules.apple-t2
+        # 2. Initialize the flake directory with the template. 
+        #    Accept *both* settings if you would like to use the substituter.
+        nix flake init -t github:soopyc/nixos-t2-flake
+
+        # 3. Edit flake.nix, delete the section as specified. 
+        #    Also, rename yourHostname to something else.
+        $EDITOR flake.nix
+
+        # 4. Update the flake.lock
+        nix flake update
+        ```
+
+    === "Manual"
+        0. You should have ran `nixos-generate-config`. If not, [do that](#configuration-and-installation).
+        * Make a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
+        * Add a flake input: `github:NixOS/nixos-hardware`
+        * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
+        * For reasons stated above, add "flakes" and "nix-command" to nix's `experimental-features`.
+        * Add a nixosConfigurations output, in which add a new attribute with any valid name. The common standard is to use the hostname. This will be used to activate your system.
+        * Set the value of the attribute as a call to the lib.nixosSystem function (from the nixpkgs input) with a new attribute set, which contains the items outlined in the example below.
+
+        !!! quote "Example Configuration"
+
+            ```nix title="flake.nix" linenums="1"
+            {
+              inputs = {
+                nixpkgs.url = "nixpkgs/nixos-unstable";
+                nixos-hardware.url = "github:nixos/nixos-hardware";
+              };
+              outputs = {nixpkgs, nixos-hardware, ...}: {
+                nixosConfigurations.replaceThisWithAnything = nixpkgs.lib.nixosSystem {
+                  system = "x86_64-linux";
+                  modules = [
+                    ./configuration.nix
+                    nixos-hardware.nixosModules.apple-t2
+                  ];
+                };
+              };
+            }
+            ```
+
+            ```nix title="configuration.nix (snippet)" linenums="1"
+            # Keep the generated configuration.nix! You need that, so just merge options here into that one.
+            {...}: [
+              imports = [./hardware-configuration.nix];  # this should already be present
+              nix.settings.experimental-features = [
+                "nix-command"
+                "flakes"
               ];
-            };
-          };
-        }
-        ```
-
-        ```nix title="configuration.nix (snippet)" linenums="1"
-        # Keep the generated configuration.nix! You need that, so just merge options here into that one.
-        {...}: [
-          imports = [./hardware-configuration.nix];  # this should already be present
-          nix.settings.experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
-        ]
-        ```
+            ]
+            ```
 
     !!! tip
         You do not need to keep your flake at `/etc/nixos` if you use this approach. You may safely copy the entire `/etc/nixos` directory to your home directory with whatever name you like. Then, [re]building the system is easy as running
 
-            nixos-rebuild build .#        # when building
-            sudo nixos-rebuild switch .#  # when switching
+            nixos-rebuild build --flake .#        # when building
+            sudo nixos-rebuild switch --flake .#  # when switching
 
         within the flake directory.
 
