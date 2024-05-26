@@ -476,7 +476,7 @@ case "$os" in
 		fi
 		echo -e "\nHow do you want to copy the firmware to Linux?"
 		echo -e "\n1. Retrieve the firmware from EFI."
-		echo "2. Download a macOS Recovery Image from Apple and get the firmware from there."
+		echo "2. Download a macOS Recovery Image from Apple and extract the firmware from there."
 		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Run the same script on Linux) there."
 		read choice
 		case ${choice} in
