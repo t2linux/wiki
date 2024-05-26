@@ -15,7 +15,9 @@ You will need:
 
 ### Preparation
 
-Follow the [Pre-Installation guide](../../guides/preinstall.md). You may not be able to complete some steps without doing so, like [Partitioning](#partitioning).
+Follow the [Pre-Installation guide](../../guides/preinstall.md). If you intend to use Wi-Fi or Bluetooth, additional steps will need to be done. Check the [Wi-Fi pre-installation setup section](#pre-installation-steps) below for instructions, then come back.
+
+Note that you may not be able to complete some steps like [Partitioning](#partitioning) without first completing the pre-installation guide.
 
 ### Partitioning
 
@@ -52,11 +54,11 @@ If you wish to use Ethernet, no additional actions should be needed apart from a
 
 If you wish to use Wi-Fi, follow the [Imperative firmware setup section](#imperative-setup) and come back.
 
-### Configuration and Installation
+### Configuration
 
 Before doing anything else in this section, make sure partitions are **created and mounted** to `/mnt`. Check that with tools like `lsblk` and `findmnt -R /mnt`.
 
-Generate a configuration the following command:
+Generate a configuration with the following command:
 
     sudo nixos-generate-config --root /mnt
 
@@ -186,15 +188,15 @@ Then add a bootloader, `systemd-boot` works quite well and is recommended. `GRUB
 
 If you want to use Wi-Fi and/or Bluetooth after installation, now is the time to [set up the firmware declaratively.](#declarative-setup)
 
-It is now time to install the system.
+### Installation
 
 === "Legacy Method"
     Simply run `sudo nixos-install` and hope that it works.
 
 === "Flakes"
-    Run `sudo nixos-install --flake .#<your host>`, where `<your host>` is the `nixosConfiguration` attribute name defined above.
+    Within your flake, run `sudo nixos-install --flake .#<your host>`, where `<your host>` is the `nixosConfiguration` attribute name defined above.
 
-    With the example, the command would be as thus.
+    With the manual setup example, the command would be as thus.
 
         sudo nixos-install --flake .#replaceThisWithAnything
 
@@ -208,15 +210,41 @@ If you would like to organize your configuration a little better, check out othe
 
 ## Wi-Fi and Bluetooth setup
 
+### Pre-Installation Steps
+
+Choose a method below and follow the [Wi-Fi and Bluetooth Guide on macOS](../../guides/wifi-bluetooth.md#on-macos), then come back.
+
+=== "Method 1"
+    Method 1 requires you to run the firmware script twice, both in macOS and Linux. If you have uninstalled macOS, you may still be able to obtain the firmware files via a 600MB macOS recovery image without reinstalling macOS. See the linked guide for more information.
+
+=== "Method 2"
+    This method creates a tarball with the renamed firmware files on macOS. No scripts will need to be run on Linux. This method is more robust than Method 1, but requires some manual configuration.
+
 ### Imperative Setup
 
-The imperative setup is useful for temporary situations like the Live environment.
+The imperative setup is useful for temporary situations like the installation environment.
 
-The following commands should get you up and running. You should have acquired the firmware script from the pre-installation guide. Note that `/lib/firmware` has to be manually created because NixOS does not come with that.
+=== "Method 1"
+    The following commands should get you up and running. Note that `/lib/firmware` has to be manually created because NixOS does not come with that.
 
+    ```shell
     sudo mkdir -p /lib/firmware
     sudo /mnt/boot/firmware.sh
     #    ^~~~~~~~~ change this if the EFI partition is mounted elsewhere
+    ```
+
+=== "Method 2"
+    1. Copy the firmware package tarball to somewhere accessible.
+    2. Create the directory tree `/lib/firmware/brcm`.
+    3. Unpack the firmware package tarball at that specific directory.
+    4. Reload kernel modules to load the firmware.
+
+    ```shell
+    # run as sudo.
+    mkdir -p /lib/firmware/brcm
+    tar xf /path/to/your/firmware.tar -C /lib/firmware/brcm
+    modprobe -r brcmfmac_wcc; modprobe -r brcmfmac; modprobe brcmfmac; modprobe -r hci_bcm4377; modprobe hci_bcm4377
+    ```
 
 Then run `systemctl start wpa_supplicant` and then connect to internet using `wpa_cli`. Consult documentations such as the [Arch Linux wiki](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli) for command usage.
 
@@ -226,11 +254,14 @@ Then run `systemctl start wpa_supplicant` and then connect to internet using `wp
 
 The declarative setup is suitable for long-term use after you have installed NixOS.
 
-=== "Legacy Method"
-    <!-- TODO: extend the firmware script to short-circuit the installation and just give users a usable .tar -->
-    This step currently requires the completion of the firmware [imperative setup](#imperative-setup).
+=== "Method 1"
+    This method is not supported for installation on NixOS. It may still work with some manual steps, but we are not responsible if your laptop or cat explodes.
 
-    Assuming your `configuration.nix` is at `/mnt/etc/nixos/`, copy the existing firmware files at `/lib/firmware` to `/mnt/etc/nixos/firmware`. Then add this snippet to your `configuration.nix`:
+    First follow the steps in the [imperative setup.](#imperative-setup) The firmware files should be located in `/lib/firmware/brcm`.
+
+    Copy /lib/firmware to your configuration directory.
+
+    Finally add the following snippet to your configuration. Use your logic to edit the source directory.
 
     ```nix linenums="1" hl_lines="2-11" title="configuration.nix"
     {pkgs, ...}: {
@@ -243,10 +274,30 @@ The declarative setup is suitable for long-term use after you have installed Nix
             cp ${final.src}/* "$out/lib/firmware/brcm"
           '';
         }))
-      ]
+      ];
     }
     ```
 
-=== "Flakes"
-    <!-- TODO -->
-    We're working on a flake output! That should make this easier. In the meantime, the "legacy" option also apply to flakes.
+=== "Method 2"
+    Copy the firmware tarball to your configuration directory, then add the following snippet.
+
+    ```nix linenums="1" hl_lines="2-14" title="configuration.nix"
+    {pkgs, ...}: {
+      hardware.firmware = [
+        (stdenvNoCC.mkDerivation (final: {
+          name = "brcm-firmware";
+          src = ./firmware.tar;
+
+          dontUnpack = true;
+          installPhase = ''
+            mkdir -p $out/lib/firmware/brcm
+            tar -xf ${final.src} -C $out/lib/firmware/brcm
+          '';
+        }))
+      ];
+    }
+    ```
+
+#### NixOS Module
+
+We are working on it, which should allow you to set up Wi-Fi and Bluetooth by just specifying a tarball.
