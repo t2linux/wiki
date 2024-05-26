@@ -9,6 +9,7 @@ You will need:
 - A spare USB stick or other reasonably large storage medium (>2G recommended)
 - Some experience with the command line
 - Sufficient mental energy to find and fix errors
+- A lot of time to build the kernel [(optional)](./faq.md#substituter-setup)
 
 ## Installation Steps
 
