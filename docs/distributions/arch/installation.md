@@ -53,7 +53,7 @@ You will need:
 
         1. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
         2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
-        3. Run `grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB`.
+        3. Run `grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable`.
         4. Run `grub-mkconfig -o /boot/grub/grub.cfg` to generate configuration file.
 
     -   Installing systemd-boot:
