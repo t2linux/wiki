@@ -282,10 +282,11 @@ detect_package_manager () {
 	elif $(dnf >/dev/null 2>&1)
 	then
 		PACKAGE_MANAGER=dnf
-	elif $(pacman >/dev/null 2>&1)
+	elif $(pacman -h >/dev/null 2>&1)
 	then
-		PACKAGE_MANANER=pacman
+		PACKAGE_MANAGER=pacman
 	else
+		PACKAGE_MANAGER=NONE
 		echo -e "\nUnable to detect the package manager your distro is using!"
 	fi
 }
@@ -296,7 +297,7 @@ curl_check () {
 		echo -e "\ncurl and/or its dependencies are missing!"
 		detect_package_manager
 		echo
-		if [[ ${PACKAGE_MANAGER} = "" ]]
+		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
 		then
 			read -p "The script could not detect your package manager. Please install curl manually and press enter once you have it installed."
 		else
@@ -311,7 +312,7 @@ curl_check () {
 					sudo dnf install -y curl
 					;;
 				(pacman)
-					sudo pacman -Sy curl
+					sudo pacman -S --noconfirm curl
 					;;
 				(*)
 					echo -e "\nUnknown error"
@@ -329,7 +330,7 @@ p7zip_check () {
 		echo -e "\np7zip and/or its dependencies are missing!"
 		detect_package_manager
 		echo
-		if [[ ${PACKAGE_MANAGER} = "" ]]
+		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
 		then
 			read -p "The script could not detect your package manager. Please install p7zip manually and press enter once you have it installed."
 		else
@@ -344,7 +345,7 @@ p7zip_check () {
 					sudo dnf install -y p7zip
 					;;
 				(pacman)
-					sudo pacman -Sy p7zip
+					sudo pacman -S --noconfirm p7zip
 					;;
 				(*)
 					echo -e "\nUnknown error"
@@ -479,10 +480,10 @@ case "$os" in
 				workdir=$(mktemp -d)
 				echo "Installing Wi-Fi and Bluetooth firmware"
 				sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
-				sudo tar --warning=no-unknown-keyword ${verbose} -xC $workdir -f $mountpoint/firmware.tar.gz
-				sudo python3 "$0" $workdir $workdir/firmware-renamed.tar ${verbose}
+				sudo tar --warning=no-unknown-keyword ${verbose} -xC ${workdir} -f $mountpoint/firmware.tar.gz
+				sudo python3 "$0" ${workdir} ${workdir}/firmware-renamed.tar ${verbose}
 
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 
 				for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 					    "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
@@ -498,11 +499,11 @@ case "$os" in
 				sudo modprobe brcmfmac || true
 				sudo modprobe -r hci_bcm4377 || true
 				sudo modprobe hci_bcm4377 || true
-				echo "Keeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
+				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
 				read -p "Do you want to keep a copy? (y/N)" input
 				if [[ ($input != y) && ($input != Y) ]]
 				then
-					echo "Removing the copy from the EFI partition"
+					echo -e "\nRemoving the copy from the EFI partition"
 					for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 					            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
 					            "$mountpoint/firmware.tar.gz" \
@@ -514,10 +515,10 @@ case "$os" in
 						fi
 					done
 				fi
-				sudo rm -r ${verbose} $workdir
+				sudo rm -r ${verbose} ${workdir}
 				sudo umount $mountpoint
 				sudo rmdir $mountpoint
-				echo "Done!"
+				echo -e "\nDone!"
 				;;
 			(2)
 				# Detect whether curl and 7z are installed
@@ -543,8 +544,8 @@ case "$os" in
 				fi
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" "$workdir/macOS Base System/usr/share/firmware" "$workdir/firmware-renamed.tar" ${verbose}
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f $workdir/firmware-renamed.tar
+				python3 "$0" "${workdir}/macOS Base System/usr/share/firmware" ${workdir}/firmware-renamed.tar ${verbose}
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
 				sudo modprobe -r brcmfmac || true
@@ -552,7 +553,7 @@ case "$os" in
 				sudo modprobe -r hci_bcm4377 || true
 				sudo modprobe hci_bcm4377 || true
 				echo "Cleaning up"
-				sudo rm -r ${verbose} $workdir
+				sudo rm -r ${verbose} ${workdir}
 				echo "Done!"
 				;;
 			(*)
