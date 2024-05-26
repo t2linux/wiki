@@ -530,6 +530,12 @@ case "$os" in
 				# Detect whether curl and dmg2img are installed
 				curl_check
 				dmg2img_check
+				cleanup_dmg () {
+					sudo rm -r ${verbose} ${workdir}
+					sudo umount ${verbose} ${loopdevice}
+					sudo rm -r ${verbose} ${imgdir}
+					sudo losetup -d /dev/loop50
+				}
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
 				imgdir=$(mktemp -d)
@@ -555,7 +561,7 @@ case "$os" in
 				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose}
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || cleanup_dmg
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
@@ -564,10 +570,7 @@ case "$os" in
 				sudo modprobe -r hci_bcm4377 || true
 				sudo modprobe hci_bcm4377 || true
 				echo "Cleaning up"
-				sudo rm -r ${verbose} ${workdir}
-				sudo umount ${verbose} ${loopdevice}
-				sudo rm -r ${verbose} ${imgdir}
-				sudo losetup -d /dev/loop50
+				cleanup_dmg
 				echo "Done!"
 				;;
 			(*)
