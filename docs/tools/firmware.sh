@@ -536,6 +536,19 @@ case "$os" in
 					sudo rm -r ${verbose} ${imgdir}
 					sudo losetup -d /dev/loop50
 				}
+
+				reattempt () {
+					echo -e "\nRetry $1"
+					sudo umount ${verbose} ${loopdevice}
+					sudo losetup -d /dev/loop50
+					cd ${workdir}
+					sudo losetup -P loop50 fw.img
+					sudo mount -t hfsplus ${verbose} ${loopdevice} ${imgdir}
+					sleep 5
+					cd - >/dev/null
+					python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose}
+				}
+
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
 				imgdir=$(mktemp -d)
@@ -562,7 +575,7 @@ case "$os" in
 				sleep 5
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || reattempt 1 || reattempt 2 || reattempt 3 || reattempt 4 || reattempt 5 || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
