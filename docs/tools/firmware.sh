@@ -558,10 +558,10 @@ case "$os" in
 				echo "Mounting image"
 				sudo losetup -P loop50 fw.img
 				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
-				sudo mount ${verbose} ${loopdevice} ${imgdir}
+				sudo mount -t hfsplus ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script with some other macOS version. If error still persists, try restarting your Mac and then run the script again" && cleanup_dmg && exit 1)
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
