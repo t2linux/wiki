@@ -559,6 +559,7 @@ case "$os" in
 				sudo losetup -P loop50 fw.img
 				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
 				sudo mount -t hfsplus ${verbose} ${loopdevice} ${imgdir}
+				sleep 5
 				echo "Getting firmware"
 				cd - >/dev/null
 				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
