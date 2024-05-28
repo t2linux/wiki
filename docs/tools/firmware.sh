@@ -537,18 +537,6 @@ case "$os" in
 					sudo losetup -d /dev/loop50
 				}
 
-				reattempt () {
-					echo -e "\nRetry $1"
-					sudo umount ${verbose} ${loopdevice}
-					sudo losetup -d /dev/loop50
-					cd ${workdir}
-					sudo losetup -P loop50 fw.img
-					sudo mount -t hfsplus ${verbose} ${loopdevice} ${imgdir}
-					sleep 5
-					cd - >/dev/null
-					python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose}
-				}
-
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
 				imgdir=$(mktemp -d)
@@ -564,18 +552,18 @@ case "$os" in
 				echo -e "\nConverting image from .dmg to .img"
 				if [[ ${verbose} = -v ]]
 				then
-					dmg2img -V BaseSystem.dmg fw.img
+					dmg2img -v BaseSystem.dmg fw.img
 				else
 					dmg2img -s BaseSystem.dmg fw.img
 				fi
 				echo "Mounting image"
 				sudo losetup -P loop50 fw.img
 				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
-				sudo mount -t hfsplus ${verbose} ${loopdevice} ${imgdir}
-				sleep 5
+				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || reattempt 1 || reattempt 2 || reattempt 3 || reattempt 4 || reattempt 5 || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				cp -a ${imgdir}/usr/share/firmware ${workdir}
+				python3 "$0" ${workdir}/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
