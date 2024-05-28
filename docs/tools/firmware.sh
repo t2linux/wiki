@@ -562,7 +562,7 @@ case "$os" in
 				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				cp -a ${imgdir}/usr/share/firmware ${workdir}
+				cp -a ${verbose} ${imgdir}/usr/share/firmware ${workdir}
 				python3 "$0" ${workdir}/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
