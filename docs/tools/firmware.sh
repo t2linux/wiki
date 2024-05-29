@@ -199,7 +199,7 @@ create_arch_pkg () {
 		brew install makepkg coreutils
 	fi
 
-	echo -e "\nBuilding Arch package"
+	echo -e "\nBuilding pacman package"
 	workarea=$(mktemp -d)
 	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
 	cd ${workarea}
@@ -259,7 +259,7 @@ create_arch_pkg () {
 	then
 		PKGEXT='.pkg.tar.zst' makepkg
 	else
-		PKGEXT='.pkg.tar.zst' makepkg >/dev/null 2>&1 || echo "Failed to make Arch package. Run the script with -v to get logs."
+		PKGEXT='.pkg.tar.zst' makepkg >/dev/null 2>&1 || echo "Failed to make pacman package. Run the script with -v to get logs."
 	fi
 
 	# Revert path to its original form
@@ -270,7 +270,7 @@ create_arch_pkg () {
 	echo -e "\nCleaning up"
 	rm -r ${verbose} ${workarea}
 
-	echo -e "\nArch package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
+	echo -e "\nPacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
 	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
 }
@@ -537,14 +537,6 @@ case "$os" in
 					sudo losetup -d /dev/loop50
 				}
 
-				retry () {
-					echo -e "\nRetry $1"
-					newdir=$(mktemp -d)
-					/bin/bash -c "cp -a ${verbose} ${workdir}/firmware ${newdir}/firmware"
-					python3 "$0" ${newdir}/firmware ${workdir}/firmware-renamed.tar ${verbose} || sudo rm -r ${verbose} ${newdir}
-					sudo rm -r ${verbose} ${newdir}
-				}
-
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
 				imgdir=$(mktemp -d)
@@ -570,8 +562,7 @@ case "$os" in
 				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				cp -a ${verbose} ${imgdir}/usr/share/firmware ${workdir}
-				python3 "$0" ${workdir}/firmware ${workdir}/firmware-renamed.tar ${verbose} || retry 1 || retry 2 || retry 3 || retry 4 || retry 5 || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
 				sudo modprobe -r brcmfmac_wcc || true
@@ -777,6 +768,8 @@ class WiFiFWCollection(object):
 				for dim in self.DIMS:
 					if dim in props:
 						ident.append(props.pop(dim))
+				if props:
+                			log.warning(f"Ignoring unexpected properties in {idpath}: {props}")
 				assert not props
 
 				node = self.root
