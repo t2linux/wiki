@@ -591,6 +591,7 @@ exit 0
 import logging, os, os.path, re, sys, pprint, statistics, tarfile, io
 from collections import namedtuple, defaultdict
 from hashlib import sha256
+from pathlib import Path
 
 log = logging.getLogger("asahi_firmware.bluetooth")
 
@@ -744,7 +745,7 @@ class WiFiFWCollection(object):
 				dirnames.remove("perf")
 			if "assert" in dirnames:
 				dirnames.remove("assert")
-			subpath = dirpath.lstrip(source_path)
+			subpath = os.path.relpath(dirpath, source_path)
 			for name in sorted(filenames):
 				if not any(name.endswith("." + i) for i in self.EXTMAP):
 					continue
@@ -768,8 +769,10 @@ class WiFiFWCollection(object):
 				for dim in self.DIMS:
 					if dim in props:
 						ident.append(props.pop(dim))
+
 				if props:
-                			log.warning(f"Ignoring unexpected properties in {idpath}: {props}")
+					log.error(f"Unhandled properties found: {props} in file {relpath}")
+
 				assert not props
 
 				node = self.root
@@ -901,7 +904,10 @@ logging.getLogger().setLevel(logging.WARNING if (len(sys.argv) >= 4 and sys.argv
 pkg = FWPackage(sys.argv[2])
 wifi_col = WiFiFWCollection(sys.argv[1]+"/wifi")
 pkg.add_files(sorted(wifi_col.files()))
-bt_col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
-pkg.add_files(sorted(bt_col.files()))
+if not Path(sys.argv[1] + "/bluetooth").exists():
+	log.error("\nBluetooth firmware missing.\n\nThe source of the firmware is likely macOS Big Sur or earlier. Therefore, only Wi-Fi firmware shall be extracted.\nBluetooth firmware is needed only for MacBookPro15,4, MacBookPro16,3 and MacBookAir9,1. So, you can ignore this message if you do not have these Macs.\n")
+else:
+	bt_col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
+	pkg.add_files(sorted(bt_col.files()))
 pkg.close()
 
