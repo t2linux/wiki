@@ -369,12 +369,21 @@ case "$os" in
 		echo "Detected macOS"
 		ver=$(sw_vers -productVersion)
 		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
-		if [[ ${ver_check} < 12 ]]
-		then
-			echo -e "\nThis script is compatible only with macOS Monterey or later. Please upgrade your macOS."
-			exit 1
-		fi
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
+		if [[ ${ver_check} < 12 ]] && [[ (${identifier} = MacBookPro15,4) || (${identifier} = MacBookPro16,3) || (${identifier} = MacBookAir9,1) ]]
+		then
+			cat <<- EOF
+
+			Warning: You are running a macOS version earlier than macOS Monterey.
+			Your Mac model needs Bluetooth firmware for in addition to Wi-Fi firmware, which is available only on macOS Monterey or later.
+			Only Wi-Fi firmware shall be copied to Linux.
+			For Bluetooth firmware, you can either:
+
+			a) Upgrade macOS to Monterey or later.
+			b) Run this script directly in Linux and choose the option to Download a macOS Recovery Image from there.
+
+			EOF
+		fi
 		echo -e "\nHow do you want to copy the firmware to Linux?"
 		echo -e "\n1. Run the same script on Linux."
 		echo "2. Create a tarball of the firmware and extract it to Linux."
