@@ -467,8 +467,8 @@ case "$os" in
 
 	(Linux)
 		echo "Detected Linux"
-		if [[ ! -e /lib/firmware ]]; then
-			echo "/lib/firmware does not seem to exist. This script requires that directory to function."
+		if [[ ! -e /lib/firmware/brcm ]]; then
+			echo "/lib/firmware/brcm does not seem to exist. This script requires that directory to function."
 			echo "If you are on some exotic distro like NixOS, please check the wiki for more information:"
 			echo "  https://wiki.t2linux.org"
 			echo "Exiting..."
