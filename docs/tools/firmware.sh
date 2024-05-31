@@ -914,7 +914,7 @@ pkg = FWPackage(sys.argv[2])
 wifi_col = WiFiFWCollection(sys.argv[1]+"/wifi")
 pkg.add_files(sorted(wifi_col.files()))
 if not Path(sys.argv[1] + "/bluetooth").exists():
-	log.error("\nBluetooth firmware missing.\n\nThe source of the firmware is likely macOS Big Sur or earlier. Therefore, only Wi-Fi firmware shall be extracted.\nBluetooth firmware is needed only for MacBookPro15,4, MacBookPro16,3 and MacBookAir9,1. So, you can ignore this message if you do not have these Macs.\n")
+	log.warning("\nBluetooth firmware missing.\n\nThe source of the firmware is likely macOS Big Sur or earlier. Therefore, only Wi-Fi firmware shall be extracted.\nBluetooth firmware is needed only for MacBookPro15,4, MacBookPro16,3 and MacBookAir9,1. So, you can ignore this message if you do not have these Macs.\n")
 else:
 	bt_col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
 	pkg.add_files(sorted(bt_col.files()))
