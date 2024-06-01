@@ -185,8 +185,9 @@ Once you have run the script on macOS, depending on the method you chose, the st
 === "Method 4"
     **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
 
-    !!! warning "Internet connection is required for Method 4
-        Method 4 downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
+    !!! warning "Internet connection is required for **Method 4**"
+
+        **Method 4** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
         
     This method does not need macOS to be installed on your Mac. So, you have to run the script directly on Linux, and choose this option.
 
