@@ -20,7 +20,16 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 ## Setting up
 
-We now use a script which can help you set up Wi-Fi and Bluetooth. Follow the instructions below to use this script :-
+We now use a script which can help you set up Wi-Fi and Bluetooth. Click [here](../tools/firmware.sh) to download the script.
+
+There are 4 methods supported by this script to get firmware for Linux, named as **Method 1-4** in this guide. Details of each method are given in the [On macOS](#on-macos) and [On Linux](#on-linux) section.
+
+**Method 1-3** require macOS installed on your Mac. Initial steps of these methods are to be followed on macOS and later steps have to be followed on Linux. Thus, if you choose one of these methods, you first need to follow the [On macOS](#on-macos) section and then proceed to the [On Linux](#on-linux) section.
+
+**Method 4** does not require macOS, so you directly can follow the [On Linux](#on-linux) section if you choose it.
+
+!!! Tip "macOS Removed after installing Linux"
+    In case you have removed macOS after installing Linux, and need the firmware, **Method 4** shall be the only option for you.
 
 ### On macOS
 
@@ -46,7 +55,7 @@ When you run the script in macOS, it will ask you to choose between 3 methods to
 
     1. **python3** - Renames the firmware and creates the tarball.
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
 
     Once the script confirms that you have the necessary dependencies installed, it shall create a tarball of the firmware by the name of `firmware.tar` in your **Downloads** folder.
 
@@ -63,7 +72,7 @@ When you run the script in macOS, it will ask you to choose between 3 methods to
     4. **makepkg** - Creates a package that can be installed on Linux using `pacman`.
     5. **coreutils** - Additional requirement of **makepkg**.
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
 
     Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by `apt`, `dnf` or `pacman`, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
 
@@ -73,9 +82,6 @@ When you run the script in macOS, it will ask you to choose between 3 methods to
 
 Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
-!!! Warning "Running script directly on Linux"
-    We have noticed a lot of users directly running the script on Linux and without running it first on macOS. Please ensure that you have run the script on macOS first. If you have removed macOS, this script won't be very helpful.
-
 === "Method 1"
     **Method 1: Run the same script on Linux**
 
@@ -83,11 +89,13 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     === "Option 1"
 
-        In this option, you simply have to copy the same script to Linux, and run it with:
+        In this option, you have to run the firmware script on Linux. You run it with:
 
         ```bash
         bash /path/to/firmware.sh
         ```
+
+        After you run the script, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
 
         !!! note
 
@@ -103,6 +111,8 @@ Once you have run the script on macOS, depending on the method you chose, the st
         bash /tmp/apple-wifi-efi/firmware.sh
         sudo umount /tmp/apple-wifi-efi
         ```
+
+        After you run the above commands, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
 
         This option shall be useful if you are unable to copy the script to Linux.
 
@@ -177,21 +187,21 @@ Once you have run the script on macOS, depending on the method you chose, the st
             Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
 === "Method 4"
-    **Method 3: Create a Linux specific package which can be installed using a package manager**
+    **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
 
-    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+    !!! warning "Internet connection is required for Method 4
+        Method 4 downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
+        
+    This method does not need macOS to be installed on your Mac. So, you have to run the script directly on Linux, and choose this option.
 
-    1. **python3** - Renames the firmware.
-    2. **dpkg** - Creates a package that can be installed on Linux using `apt`.
-    3. **rpm** - Creates a package that can be installed on Linux using `dnf`.
-    4. **makepkg** - Creates a package that can be installed on Linux using `pacman`.
-    5. **coreutils** - Additional requirement of **makepkg**.
+    If you choose this method, the script will install the following dependencies, if missing, on Linux:
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
+    1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple.
+    2. **dmg2img** - Converts the downloaded macOS Recovery Image to a Linux readable format.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by `apt`, `dnf` or `pacman`, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
 
-    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
+    Once the script confirms that you have the necessary dependencies installed, it shall give you the option to choose which macOS version you wish to download. You must choose **macOS Monterey or later** in order to get complete firmware files. After you choose the desired macOS version, the script should do the rest of the work itself.
 
 ## Testing Firmware
 
