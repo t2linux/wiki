@@ -189,7 +189,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         **Method 4** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
         
-    This method does not need macOS to be installed on your Mac. So, you have to run the script directly on Linux, and choose this option.
+    This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Download a macOS Recovery Image from Apple and extract the firmware from there**" option.
 
     If you choose this method, the script will install the following dependencies, if missing, on Linux:
 
