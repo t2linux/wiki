@@ -176,6 +176,23 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
             Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
+=== "Method 4"
+    **Method 3: Create a Linux specific package which can be installed using a package manager**
+
+    If you choose this method, the script will install the following dependencies, if missing, on macOS:
+
+    1. **python3** - Renames the firmware.
+    2. **dpkg** - Creates a package that can be installed on Linux using `apt`.
+    3. **rpm** - Creates a package that can be installed on Linux using `dnf`.
+    4. **makepkg** - Creates a package that can be installed on Linux using `pacman`.
+    5. **coreutils** - Additional requirement of **makepkg**.
+
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependency installed.
+
+    Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by `apt`, `dnf` or `pacman`, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
+
+    Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
+
 ## Testing Firmware
 
 You can check the logs to confirm correct loading of the firmware using `sudo journalctl -k --grep=brcmfmac`, the output should look similar to this:
