@@ -33,7 +33,7 @@ There are 4 methods supported by this script to get firmware for Linux, named as
 
 ### On macOS
 
-Run the script on the macOS terminal. When you run the script in macOS, it will ask you to choose between 3 methods to move firmware to Linux:
+Run the script on the macOS terminal. After you run the script, it will ask you to choose between 3 methods to move firmware to Linux:
 
 === "Method 1"
     **Method 1: Run the same script on Linux**
