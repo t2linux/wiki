@@ -222,27 +222,3 @@ Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blo
 Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
 Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
 ```
-
-## Fixing unstable WPA2 using iwd
-
-Using iwd is technically not needed for using Wi-Fi. But if you are facing unstable WPA2 issues and have to reload the Wi-Fi driver every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
-
-Instructions in this section might be different for the distribution that you are trying to install.
-
-1. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
-
-2. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
-
-    ```ini
-    [device]
-    wifi.backend=iwd
-    ```
-
-3. Set iwd to run on boot with the following commands (assuming that you are using systemd).
-
-    ```sh
-    sudo systemctl enable --now iwd
-    sudo systemctl restart NetworkManager
-    ```
-
-If you Wi-Fi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the Wi-Fi kernel module: `sudo modprobe -r brcmfmac_wcc && sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
