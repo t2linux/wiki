@@ -1,3 +1,7 @@
+---
+icon: simple/archlinux
+---
+
 # Installing Arch Linux on a Mac with the T2 Chip
 
 You will need:

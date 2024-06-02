@@ -1,3 +1,7 @@
+---
+icon: simple/fedora
+---
+
 # Download the latest safe release
 
 Many thanks to Mike for building. You can download a live iso from Mikeeq [here](https://github.com/mikeeq/mbp-fedora).

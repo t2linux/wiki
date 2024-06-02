@@ -1,3 +1,7 @@
+---
+icon: simple/endeavouros
+---
+
 # Installing EndeavourOS on a Mac with the T2 Chip
 
 You will need:

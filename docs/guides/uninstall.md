@@ -1,3 +1,7 @@
+---
+icon: octicons/trash-16
+---
+
 # Introduction
 
 This page explains how to remove Linux from your Mac. It shouldn't matter what distro you are using.

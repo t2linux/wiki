@@ -1,4 +1,8 @@
-# Deprecation Notice
+---
+icon: simple/manjaro
+---
+
+# Deprecation Notice :octicons-stop-16:
 
 Manjaro T2 support is deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 

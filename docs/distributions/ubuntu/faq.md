@@ -1,3 +1,7 @@
+---
+icon: material/ubuntu
+---
+
 # Why does my MacBook turn off in the middle of the Ubuntu installation?
 
 This seems to happen with certain MacBooks because the GRUB bootloader installer tries accessing the efivars/nvram, which Apple doesn't allow and the installer doesn't know what to do.

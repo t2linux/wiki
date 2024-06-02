@@ -1,6 +1,12 @@
+---
+icon: simple/nixos
+---
+
 # Home
 
-Welcome to the NixOS on T2 Linux wiki! To get started, head over to [the installation guide](./installation.md).
+Welcome to the NixOS on T2 Linux wiki! :simple-nixos:
+
+To get started, head over to [the installation guide](./installation.md).
 
 If you have any questions, consult the [FAQ](./faq.md) to see if anything there helps. [Our discord server](https://discord.com/invite/68MRhQu) is also open; feel free to ask questions in the `#nixos` channel there.
 

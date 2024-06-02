@@ -1,3 +1,7 @@
+---
+icon: simple/debian
+---
+
 # Introduction
 
 This guide shall help you in installing a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.

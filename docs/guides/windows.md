@@ -1,3 +1,7 @@
+---
+icon: simple/windows10
+---
+
 # Introduction
 
 This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
@@ -6,7 +10,7 @@ The simplist way to triple boot is to install Windows first, and install linux o
 
 # Using the same EFI partition
 
-## If Windows is installed first
+## If Windows is installed first :fontawesome-brands-windows:
 
 1. Install linux normally, with a patched kernel and dkms modules (this is probably done for you if you are using an installer specific to t2 macs).
 2. Put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot linux.
@@ -26,7 +30,7 @@ The simplist way to triple boot is to install Windows first, and install linux o
 
 5. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
-## If Linux is installed first
+## If Linux is installed first :fontawesome-brands-linux:
 
 1. Make sure that your linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your linux partitions to `Linux Filesystem`.
 2. Install Windows normaly with Bootcamp. Windows will replace your Linux boot option.
@@ -55,16 +59,16 @@ It may be possible to skip steps 5-8 by doing the following command in macOS: `s
 
 # Using seperate EFI partitions
 
-## Installing Linux (With or without Windows already installed)
+## Installing Linux (With or without Windows already installed) :fontawesome-brands-linux:
 
-### In macOS
+### In macOS :fontawesome-brands-apple:
 
 Create partitions with Disk Utility:
 
 - Make a 200Mb FAT32 partition, call it something like `EFI2`. Make sure you do not use `EFI` as the label.
 - Create your main partition(s) for Linux, make them macOS Extended/HFS+ to stop Bootcamp Installer from thinking they are Windows. These will be erased and reformatted by your installer.
 
-### In your distro's installer
+### In your distro's installer :material-arch::material-ubuntu::material-fedora::material-nix:
 
 If you are using an interactive installer:
 
@@ -91,7 +95,7 @@ If you are doing it manually:
 4. Within your chroot, do `grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --no-nvram --removable`
 5. There will now be an `EFI Boot` option in the macOS Startup Manager (The menu you get by holding option at boot) which will boot Linux.
 
-## Installing Windows when Linux is installed
+## Installing Windows when Linux is installed :fontawesome-brands-windows:
 
 1. If there are partitions labeled as `Microsoft Basic Data`, Bootcamp Assistant will think you have Windows installed. Use `sudo cfdisk /dev/nvme0n1` to change your Linux partitions to `Linux Filesystem` or whatever is appropriate.
 2. If your second EFI partition is labeled as `EFI System`, you'll need to use `cfdisk` again to make it not that, as the Windows installer fails if there are two.

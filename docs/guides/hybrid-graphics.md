@@ -1,3 +1,7 @@
+---
+icon: simple/intel
+---
+
 # Introduction
 
 This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
@@ -6,7 +10,7 @@ This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 
 
 Make sure you have a t2 kernel of version greater than 6.6.2-2 (you can check this with `uname -r`).
 
-## Issues
+## Issues :fontawesome-solid-triangle-exclamation:
 
 If you experience system freezes, then the laptop's fans becoming loud, before the whole computer shuts off (CPU CATERR), or if the amdgpu is making the computer too hot, consider trying:
 
@@ -45,7 +49,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
-## Use on Windows
+## Use on Windows :fontawesome-brands-windows:
 
 The iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers.
 

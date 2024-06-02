@@ -1,3 +1,7 @@
+---
+icon: octicons/check-16
+---
+
 # Pre install steps
 
 These steps are common to most distros. Please refer to both this page and this wiki's install page for your distro.
@@ -25,18 +29,18 @@ In macOS Disk Utility you need to create your Linux partition:
 
 Listed below are the currently available installer ISOs for download:
 
-| Linux Distribution | Download ISO with T2 support |
-| ------------------ | ---------------------------- |
-| Arch Linux         | <https://github.com/t2linux/archiso-t2/releases/latest> |
-| blendOS            | <https://docs.blendos.co/docs/installation/mac-t2/> |
-| EndeavourOS        | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
-| Fedora             | <https://github.com/mikeeq/mbp-fedora> |
-| Fedora             | <https://github.com/t2linux/fedora-iso/releases/latest> |
-| Gentoo             | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
-| Manjaro            | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
-| NixOS              | <https://github.com/t2linux/nixos-t2-iso> |
-| Ubuntu & Kubuntu   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
-| Linux Mint         | <https://github.com/t2linux/T2-Mint/releases/latest> |
+| Linux Distribution                 | Download ISO with T2 support |
+| ---------------------------------- | ---------------------------- |
+| Arch Linux :simple-archlinux:      | <https://github.com/t2linux/archiso-t2/releases/latest> |
+| blendOS                            | <https://docs.blendos.co/docs/installation/mac-t2/> |
+| EndeavourOS :simple-endeavouros:   | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
+| Fedora :simple-fedora:             | <https://github.com/mikeeq/mbp-fedora> |
+| Fedora :simple-fedora:             | <https://github.com/t2linux/fedora-iso/releases/latest> |
+| Gentoo :material-gentoo:           | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
+| Manjaro :simple-manjaro:           | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
+| NixOS :simple-nixos:               | <https://github.com/t2linux/nixos-t2-iso> |
+| Ubuntu & Kubuntu :material-ubuntu: | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
+| Linux Mint :simple-linuxmint:      | <https://github.com/t2linux/T2-Mint/releases/latest> |
 
 #### Other distributions
 

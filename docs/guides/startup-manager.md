@@ -1,3 +1,7 @@
+---
+icon: material/harddisk
+---
+
 # Introduction
 
 This guide shall help you perform 2 tasks. Firstly you shall be able to set the correct label for your Linux startup disk on Mac startup manager and replace the `EFI Boot` label, and give it an icon. Secondly you shall be able to make Linux startup disk as the default startup disk in case you wish to do so.

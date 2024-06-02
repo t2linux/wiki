@@ -1,12 +1,16 @@
+---
+icon: material/ubuntu
+---
+
 # Ubuntu
 
 ## Download the latest release
 
 Download Links:
 
-[Ubuntu and Kubuntu](https://github.com/t2linux/T2-Ubuntu/releases/latest)
+[Ubuntu and Kubuntu :material-ubuntu:](https://github.com/t2linux/T2-Ubuntu/releases/latest)
 
-[Linux Mint](https://github.com/t2linux/T2-Mint/releases/latest)
+[Linux Mint :simple-linuxmint:](https://github.com/t2linux/T2-Mint/releases/latest)
 
 ## Hardware Requirements
 

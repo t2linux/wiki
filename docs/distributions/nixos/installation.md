@@ -1,3 +1,7 @@
+---
+icon: simple/nixos
+---
+
 <!-- markdownlint-disable MD046 MD038 -->
 <!-- Rationale: Both rules break mkdocs-material's content tabs feature.  -->
 

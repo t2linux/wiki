@@ -1,3 +1,7 @@
+---
+icon: material/gentoo
+---
+
 # Installing Gentoo Linux on a T2 Mac
 
 ## Install Procedure

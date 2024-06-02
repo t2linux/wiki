@@ -1,3 +1,7 @@
+---
+icon: material/fan
+---
+
 # Introduction
 
 This page is a step by step guide to get fan control working on T2 Macs.

@@ -1,3 +1,7 @@
+---
+icon: simple/archlinux
+---
+
 # Updating Kernel
 
 `linux-mbp` is abandoned. Switch to `linux-t2` or `linux-xanmod-edge-t2` now if you're still using `linux-mbp`.

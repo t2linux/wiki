@@ -14,6 +14,8 @@ theme:
     features:
         - tabs
         - content.tabs.link
+        - navigation.tabs
+        - navigation.sections
     favicon: assets/images/icon.png
 
 docs_dir: docs
@@ -35,6 +37,10 @@ markdown_extensions:
           permalink: true
     - admonition
     - pymdownx.details
+    - attr_list
+    - pymdownx.emoji:
+          emoji_index: !!python/name:material.extensions.emoji.twemoji
+          emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
     -   redirects:

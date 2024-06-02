@@ -1,3 +1,7 @@
+---
+icon: material/speaker
+---
+
 # Introduction
 
 This page explains how to get the config files for using the T2 audio device, which allows use of the 3.5mm headphone port, the built in speakers, the built in mic and the headphones' mic.

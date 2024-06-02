@@ -1,3 +1,7 @@
+---
+icon: simple/nixos
+---
+
 # The LiveCD does not boot/only shows a blank screen
 
 This situation occurred due to regressions in the bootloader, which the wider NixOS community was also affected.

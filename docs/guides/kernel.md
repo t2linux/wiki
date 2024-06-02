@@ -1,3 +1,7 @@
+---
+icon: simple/linux
+---
+
 # Kernel
 
 This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included. If you have issues, make sure you are running the commands here with `bash`.

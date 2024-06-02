@@ -1,3 +1,7 @@
+---
+icon: octicons/terminal-16
+---
+
 # Introduction
 
 This guide shall help you install the rEFInd Boot Manager in your T2 Mac in the safest possible way. Though there are various options to get rEFInd on your Mac, it is recommended to follow the instructions given below unless you know what you are doing.

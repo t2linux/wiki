@@ -1,3 +1,7 @@
+---
+icon: material/nut
+---
+
 # Introduction
 
 This page explains how to perform a basic set up after installing Linux on a T2 Mac.
@@ -18,17 +22,18 @@ Installing a kernel with support for T2 Macs is required in order to get the Key
 
 Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels:
 
-| Linux Distribution                  | Kernel with T2 support |
-| ----------------------------------- | ---------------------- |
-| Arch based distros                  | <https://github.com/NoaHimesaka1873/linux-t2-arch> |
-| Arch based distros (Xanmod kernels) | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
-| Fedora                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
-| Fedora                              | <https://github.com/t2linux/fedora-kernel> |
-| Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
-| Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
-| NixOS                               | <https://github.com/NixOS/nixos-hardware> |
-| Ubuntu based distros                | <https://github.com/t2linux/T2-Ubuntu-Kernel> |
-| Debian based distros                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
+| Linux Distribution                                  | Kernel with T2 support |
+| --------------------------------------------------- | ---------------------- |
+| Arch based distros :material-arch:                  | <https://github.com/NoaHimesaka1873/linux-t2-arch> |
+| Arch based distros (Xanmod kernels) :material-arch: | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
+| Fedora :simple-fedora:                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
+| Fedora :simple-fedora:                              | <https://github.com/t2linux/fedora-kernel> |
+| Gentoo :material-gentoo:                            | <https://github.com/t2linux/T2-Gentoo-Kernel> |
+| Manjaro :simple-manjaro:                            | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
+| NixOS :simple-nixos:                                | <https://github.com/NixOS/nixos-hardware> |
+| Ubuntu based distros :material-ubuntu:              | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
+| Debian based distros :simple-debian:                | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
+| Debian based distros :simple-debian:                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
 
 If compiled kernels for your distro are not available, then you shall have to compile a kernel on your own. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
 

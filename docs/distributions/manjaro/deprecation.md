@@ -1,11 +1,15 @@
-# Why is Manjaro T2 deprecated?
+---
+icon: simple/manjaro
+---
+
+# Why is Manjaro T2 deprecated? :octicons-stop-16:
 
 Due to [concerns](https://github.com/arindas/manjarno), Manjaro T2 is deprecated.
 If you want to maintain it yourself, come to our Discord and we will help.
 
 # What distro should I use instead?
 
-We recommend [EndeavourOS.](https://wiki.t2linux.org/distributions/endeavouros/installation/)
+We recommend [EndeavourOS :simple-endeavouros:](https://wiki.t2linux.org/distributions/endeavouros/installation/)
 
 # What do I do after Manjaro is deprecated?
 
