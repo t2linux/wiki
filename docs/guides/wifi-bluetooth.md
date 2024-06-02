@@ -51,7 +51,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     1. **python3** - Renames the firmware and creates the tarball.
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
 
     Once the script confirms that you have the necessary dependencies installed, it shall create a tarball of the firmware by the name of `firmware.tar` in your **Downloads** folder.
 
@@ -68,7 +68,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
     4. **makepkg** - Creates a package that can be installed on Linux using `pacman`.
     5. **coreutils** - Additional requirement of **makepkg**.
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
 
     Once the script confirms that you have the necessary dependencies installed, it shall create a package of the firmware which can be installed by `apt`, `dnf` or `pacman`, depending on the option you chose while running the script. The package shall be saved in your **Downloads** folder.
 
@@ -196,7 +196,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple.
     2. **dmg2img** - Converts the downloaded macOS Recovery Image to a Linux readable format.
 
-    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about not having any dependencies installed.
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
 
     Once the script confirms that you have the necessary dependencies installed, it shall give you the option to choose which macOS version you wish to download. You must choose **macOS Monterey or later** in order to get complete firmware files. After you choose the desired macOS version, the script should do the rest of the work itself.
 
