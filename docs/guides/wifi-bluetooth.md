@@ -35,7 +35,7 @@ There are 4 methods supported by this script to get firmware for Linux, named as
 
 Run the script on the macOS terminal. After you run the script, it will ask you to choose between 3 methods to move firmware to Linux:
 
-=== "Method 1"
+=== ":simple-apple: Method 1"
     **Method 1: Run the same script on Linux**
 
     If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
@@ -44,7 +44,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
-=== "Method 2"
+=== ":simple-apple: Method 2"
     **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
@@ -57,7 +57,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
-=== "Method 3"
+=== ":simple-apple: Method 3"
     **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
@@ -74,7 +74,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
-=== "Method 4"
+=== ":simple-apple: Method 4"
     **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
 
     This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
@@ -83,7 +83,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
 Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
-=== "Method 1"
+=== ":simple-linux: Method 1"
     **Method 1: Run the same script on Linux**
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
@@ -117,7 +117,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         This option shall be useful if you are unable to copy the script to Linux.
 
-=== "Method 2"
+=== ":simple-linux: Method 2"
     **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     Now we shall extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar`. In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running:
@@ -140,7 +140,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     sudo modprobe hci_bcm4377
     ```
 
-=== "Method 3"
+=== ":simple-linux: Method 3"
     **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
@@ -187,7 +187,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
             Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
-=== "Method 4"
+=== ":simple-linux: Method 4"
     **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
 
     !!! warning "Internet connection is required for **Method 4**"
