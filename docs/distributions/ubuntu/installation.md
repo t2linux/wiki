@@ -1,7 +1,6 @@
-# Download the latest release
+# Ubuntu
 
-!!! Warning "Blank screen on boot"
-    **Ubuntu's GRUB** is not booting using the Mac Startup Manager for many users. Thus affected users are advised to [install the rEFInd Boot Manager](https://wiki.t2linux.org/guides/refind/) and boot the kernel using it instead of the Startup Manager.
+## Download the latest release
 
 Download Links:
 
@@ -9,11 +8,11 @@ Download Links:
 
 [Linux Mint](https://github.com/t2linux/T2-Mint/releases/latest)
 
-# Hardware Requirements
+## Hardware Requirements
 
 * USB-C to USB adapter
 
-# Install Procedure
+## Install Procedure
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for Ubuntu.
 2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevent to you.
@@ -30,16 +29,20 @@ Download Links:
 6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 7. Welcome to Ubuntu! :)
 
-# Receiving kernel updates
+## Setting up Wi-Fi and Bluetooth
+
+Once you're booted and in your desktop, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
+
+## Receiving kernel updates
 
 In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the apt repo as described [here](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo).
 
-# Configuring the Touch Bar
+## Configuring the Touch Bar
 
 If your Mac has a Touch Bar, then you can install the `tiny-dfr` app by running `sudo apt update && sudo apt install tiny-dfr` to set up the Touch Bar. Make sure you restart your Mac after installing the app.
 
 For configuration of the Touch Bar, run `sudo touchbar` and follow the on-screen instructions.
 
-# Troubleshooting
+## Troubleshooting
 
 If you are facing issues while installing or have post installation issues (E.g.: Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).
