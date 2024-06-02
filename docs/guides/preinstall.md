@@ -67,17 +67,6 @@ Or you can use `dd` in macOS Terminal:
 
 While the installation image is being written to the USB, you can skip to [Copy Wi-Fi firmware](#copy-wi-fi-firmware); but don't follow the steps after it, wait until the ISO has been written to disk.
 
-## Copy Wi-Fi firmware
-
-!!! Warning "Arch/EndeavourOS"
-    If you're going to install Arch or EndeavourOS, you do not need to follow this step.
-
-Linux's Wi-Fi driver uses the same Wi-Fi firmware files as macOS, so we need to copy these files from macOS to Linux.
-
-[Follow here](https://wiki.t2linux.org/guides/wifi-bluetooth/#on-macos) the **first part in macOS** and come back to this page.
-
-The second part must be followed **on Linux** after you have completed the installation.
-
 ## Disable Secure Boot
 
 Now that you have completed the first part of the Wi-Fi firmware in macOS, you can proceed with the disabling of the secure boot.
