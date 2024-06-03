@@ -27,7 +27,8 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 | Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
 | Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
 | NixOS                               | <https://github.com/NixOS/nixos-hardware> |
-| Ubuntu based distros                | <https://github.com/t2linux/T2-Ubuntu-Kernel> |
+| Ubuntu based distros                | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
+| Debian based distros                | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
 | Debian based distros                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
 
 If compiled kernels for your distro are not available, then you shall have to compile a kernel on your own. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
