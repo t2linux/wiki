@@ -351,7 +351,7 @@ dmg2img_check () {
 					git clone https://aur.archlinux.org/dmg2img.git ${dmg2imgdir}
 					makepkg -si --noconfirm
 					cd - >/dev/null
-					sudo rm -r ${dmg2imgdir}
+					sudo rm -r ${verbose} ${dmg2imgdir}
 					;;
 				(*)
 					echo -e "\nUnknown error"
@@ -393,7 +393,7 @@ apfs_install () {
 				git clone https://aur.archlinux.org/linux-apfs-rw-dkms-git.git ${apfsdir}
 				makepkg -si --noconfirm
 				cd - >/dev/null
-				sudo rm -r ${apfsdir}
+				sudo rm -r ${verbose} ${apfsdir}
 				;;
 			(*)
 				echo -e "\nUnknown error"
