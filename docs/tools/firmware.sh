@@ -401,7 +401,7 @@ apfs_install () {
 				;;
 		esac				
 	fi
-	sudo modprobe apfs && echo "APFS driver loaded successfully!" || (echo "APFS driver could not be loaded. Try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
+	sudo modprobe apfs && echo "APFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
 }
 
 os=$(uname -s)
