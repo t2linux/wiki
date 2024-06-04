@@ -363,6 +363,47 @@ dmg2img_check () {
 	fi
 }
 
+apfs_install () {
+	echo -e "\nAPFS driver missing!"
+	detect_package_manager
+	echo
+	apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
+	if [[ ${PACKAGE_MANAGER} = "NONE" ]]
+	then
+		read -p "The script could not detect your package manager. Please install the APFS driver manually from ${apfs_driver_link} and press enter once you have it installed."
+	else
+		read -p "Press enter to install the APFS driver via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install it yourself from ${apfs_driver_link}."
+		echo -e "\nInstalling the APFS driver"
+		case ${PACKAGE_MANAGER} in
+			(apt)
+				sudo apt update
+				sudo apt install -y apfs-dkms
+				;;
+			(dnf)
+				sudo dnf install -y dnf-plugins-core
+				sudo dnf -y copr enable sharpenedblade/t2linux
+				sudo dnf install -y linux-apfs-rw-kmod
+				echo -e "\nStarting akmods\n"
+				sudo akmods
+				;;
+			(pacman)
+				apfsdir=$(mktemp -d)
+				cd ${apfsdir}
+				sudo pacman -Sy --noconfirm git base-devel
+				git clone https://aur.archlinux.org/linux-apfs-rw-dkms-git.git ${apfsdir}
+				makepkg -si --noconfirm
+				cd - >/dev/null
+				sudo rm -r ${apfsdir}
+				;;
+			(*)
+				echo -e "\nUnknown error"
+				exit 1
+				;;
+		esac				
+	fi
+	sudo modprobe apfs && echo "APFS driver loaded successfully!" || (echo "APFS driver could not be loaded. Try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
+}
+
 os=$(uname -s)
 case "$os" in
 	(Darwin)
@@ -485,7 +526,8 @@ case "$os" in
 		fi
 		echo -e "\nHow do you want to copy the firmware to Linux?"
 		echo -e "\n1. Retrieve the firmware from EFI."
-		echo "2. Download a macOS Recovery Image from Apple and extract the firmware from there."
+		echo "2. Retrieve the firmware directly from macOS."
+		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
 		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Run the same script on Linux) there."
 		read choice
 		case ${choice} in
@@ -536,6 +578,52 @@ case "$os" in
 				echo -e "\nDone!"
 				;;
 			(2)
+				# Detect whether dmg2img are installed
+				dmg2img_check
+				# Load the apfs driver, and install if missing
+				sudo modprobe apfs >/dev/null 2>&1 || apfs_install
+				unmount_macos_and_cleanup () {
+					sudo rm -r ${verbose} ${workdir} || true
+					sudo umount ${verbose} ${loopdevice} || true
+					sudo umount ${verbose} ${macosvol} || true
+					sudo rm -r ${verbose} ${imgdir} || true
+					sudo rm -r ${verbose} ${macosdir} || true
+					sudo losetup -d /dev/loop50 || true
+				}
+
+				echo -e "\nMounting the macOS volume"
+				workdir=$(mktemp -d)
+				imgdir=$(mktemp -d)
+				macosdir=$(mktemp -d)
+				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1'} | rev | cut -c -9 | rev)
+				sudo mount ${verbose} -o vol=2 ${macosvol} ${macosdir}
+				echo "Converting macOS Recovery Image from .dmg to .img"
+				cd ${workdir}
+				if [[ ${verbose} = -v ]]
+				then
+					dmg2img -v ${macosdir}/*/BaseSystem.dmg fw.img || unmount_macos_and_cleanup
+				else
+					dmg2img -s ${macosdir}/*/BaseSystem.dmg fw.img || unmount_macos_and_cleanup
+				fi
+				echo "Mounting image"
+				sudo losetup -P loop50 fw.img
+				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
+				sudo mount ${verbose} ${loopdevice} ${imgdir} || unmount_macos_and_cleanup
+				cd - >/dev/null
+				echo "Getting firmware"
+				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
+				echo "Reloading Wi-Fi and Bluetooth drivers"
+				sudo modprobe -r brcmfmac_wcc || true
+				sudo modprobe -r brcmfmac || true
+				sudo modprobe brcmfmac || true
+				sudo modprobe -r hci_bcm4377 || true
+				sudo modprobe hci_bcm4377 || true
+				echo "Cleaning up"
+				unmount_macos_and_cleanup
+				echo "Done!"
+				;;
+			(3)
 				# Detect whether curl and dmg2img are installed
 				curl_check
 				dmg2img_check
