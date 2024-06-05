@@ -380,10 +380,9 @@ apfs_install () {
 				sudo apt install -y apfs-dkms
 				;;
 			(dnf)
-				sudo dnf install -y dnf-plugins-core
 				sudo dnf -y copr enable sharpenedblade/t2linux
-				sudo dnf install -y linux-apfs-rw-kmod
-				echo -e "\nStarting akmods\n"
+				sudo dnf install -y linux-apfs-rw
+				echo -e "\nRunning akmods\n"
 				sudo akmods
 				;;
 			(pacman)
@@ -401,7 +400,7 @@ apfs_install () {
 				;;
 		esac				
 	fi
-	sudo modprobe apfs && echo "APFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
+	sudo modprobe apfs && echo -e "\nAPFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
 }
 
 os=$(uname -s)
@@ -426,7 +425,7 @@ case "$os" in
 			EOF
 		fi
 		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Run the same script on Linux."
+		echo -e "\n1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it."
 		echo "2. Create a tarball of the firmware and extract it to Linux."
 		echo "3. Create a Linux specific package which can be installed using a package manager."
 		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
@@ -525,7 +524,7 @@ case "$os" in
 			exit 1
 		fi
 		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Retrieve the firmware from EFI."
+		echo -e "\n1. Retrieve the firmware from the EFI partition."
 		echo "2. Retrieve the firmware directly from macOS."
 		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
 		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Run the same script on Linux) there."
@@ -579,6 +578,7 @@ case "$os" in
 				;;
 			(2)
 				# Detect whether dmg2img are installed
+				echo -e "\nChecking for missing dependencies"
 				dmg2img_check
 				# Load the apfs driver, and install if missing
 				sudo modprobe apfs >/dev/null 2>&1 || apfs_install
@@ -588,7 +588,7 @@ case "$os" in
 					sudo umount ${verbose} ${macosvol} || true
 					sudo rm -r ${verbose} ${imgdir} || true
 					sudo rm -r ${verbose} ${macosdir} || true
-					sudo losetup -d /dev/loop50 || true
+					sudo losetup -d /dev/${loopdev} || true
 				}
 
 				echo -e "\nMounting the macOS volume"
@@ -606,8 +606,9 @@ case "$os" in
 					dmg2img -s ${macosdir}/*/BaseSystem.dmg fw.img || unmount_macos_and_cleanup
 				fi
 				echo "Mounting image"
-				sudo losetup -P loop50 fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
+				loopdev=$(losetup -f | cut -d "/" -f 3)
+				sudo losetup -P ${loopdev} fw.img
+				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep ${loopdev} | tail -1 | awk '{print $1}')
 				sudo mount ${verbose} ${loopdevice} ${imgdir} || unmount_macos_and_cleanup
 				cd - >/dev/null
 				echo "Getting firmware"
@@ -625,13 +626,14 @@ case "$os" in
 				;;
 			(3)
 				# Detect whether curl and dmg2img are installed
+				echo -e "\nChecking for missing dependencies"
 				curl_check
 				dmg2img_check
 				cleanup_dmg () {
 					sudo rm -r ${verbose} ${workdir}
 					sudo umount ${verbose} ${loopdevice}
 					sudo rm -r ${verbose} ${imgdir}
-					sudo losetup -d /dev/loop50
+					sudo losetup -d /dev/${loopdev}
 				}
 
 				echo -e "\nDownloading macOS Recovery Image"
@@ -654,8 +656,9 @@ case "$os" in
 					dmg2img -s BaseSystem.dmg fw.img
 				fi
 				echo "Mounting image"
-				sudo losetup -P loop50 fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep loop50 | tail -1 | awk '{print $1}')
+				loopdev=$(losetup -f | cut -d "/" -f 3)
+				sudo losetup -P ${loopdev} fw.img
+				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep ${loopdev} | tail -1 | awk '{print $1}')
 				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
