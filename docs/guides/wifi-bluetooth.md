@@ -36,7 +36,7 @@ There are 4 methods supported by this script to get firmware for Linux, named as
 Run the script on the macOS terminal. After you run the script, it will ask you to choose between 3 methods to move firmware to Linux:
 
 === ":fontawesome-brands-apple: Method 1"
-    **Method 1: Run the same script on Linux**
+    **Method 1: Copy the firmware to the EFI partition and run the same script on Linux to retrieve it**
 
     If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
 
@@ -84,7 +84,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
 === ":fontawesome-brands-linux: Method 1"
-    **Method 1: Run the same script on Linux**
+    **Method 1: Copy the firmware to the EFI partition and run the same script on Linux to retrieve it**
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
