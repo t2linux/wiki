@@ -203,7 +203,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     If you choose this method, the script will install the following dependencies, if missing, on Linux:
 
-    1. **APFS driver for Linux** - Enables mounting and reading of the macOS Recovery volume, which has the firmware. You can get the source code from [here](https://github.com/linux-apfs/linux-apfs-rw).
+    1. **APFS driver for Linux** - Enables mounting and reading of the macOS Recovery volume, which has the firmware. The source code of the driver which shall be installed by the script is obtained from [here](https://github.com/linux-apfs/linux-apfs-rw).
     2. **dmg2img** - Converts the macOS Recovery Image obtained to a Linux readable format.
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
@@ -219,7 +219,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
         
     This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Download a macOS Recovery Image from Apple and extract the firmware from there**" option.
 
-    If you choose this method, the script will install the following dependencies, if missing, on Linux:
+    If you choose this method, the script will install the following dependencies, if missing, on Linux: 
 
     1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple.
     2. **dmg2img** - Converts the downloaded macOS Recovery Image to a Linux readable format.
