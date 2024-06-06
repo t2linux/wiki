@@ -76,16 +76,6 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
-=== ":fontawesome-brands-apple: Method 4"
-    **Method 4: Retrieve the firmware directly from macOS**
-
-    This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
-
-=== ":fontawesome-brands-apple: Method 5"
-    **Method 5: Download a macOS Recovery Image from Apple and extract the firmware from there**
-
-    This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
-
 ### On Linux
 
 Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
