@@ -22,7 +22,7 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 We now use a script which can help you set up Wi-Fi and Bluetooth. Click [here](../tools/firmware.sh) to download the script.
 
-There are 4 methods supported by this script to get firmware for Linux, named as **Method 1-4** in this guide. Details of each method are given in the [On macOS](#on-macos) and [On Linux](#on-linux) section.
+There are 5 methods supported by this script to get firmware for Linux, named as **Method 1-5** in this guide. Details of each method are given in the [On macOS](#on-macos) and [On Linux](#on-linux) section. **You have to choose any one of the five methods to get firmware as per your choice.**
 
 **Method 1-3** require macOS installed on your Mac. The initial steps of these methods are to be followed on macOS, and later steps have to be followed on Linux. Thus, if you choose one of these methods, you first need to follow the [On macOS](#on-macos) section and then proceed to the [On Linux](#on-linux) section.
 
