@@ -26,10 +26,12 @@ There are 5 methods supported by this script to get firmware for Linux, named as
 
 **Method 1-3** require macOS installed on your Mac. The initial steps of these methods are to be followed on macOS, and later steps have to be followed on Linux. Thus, if you choose one of these methods, you first need to follow the [On macOS](#on-macos) section and then proceed to the [On Linux](#on-linux) section.
 
-**Method 4-5** do not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose them.
+**Method 4** also requires macOS, but doesn't have any step to be followed on macOS. So you can directly follow the [On Linux](#on-linux) section if you choose it.
+
+**Method 5** does not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose it.
 
 !!! Tip "macOS Removed after installing Linux"
-    In case you have removed macOS after installing Linux, and need the firmware, **Method 4** is the only option for you.
+    In case you have removed macOS after installing Linux, and need the firmware, **Method 5** is the only option for you.
 
 ### On macOS
 
