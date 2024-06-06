@@ -26,7 +26,7 @@ There are 4 methods supported by this script to get firmware for Linux, named as
 
 **Method 1-3** require macOS installed on your Mac. The initial steps of these methods are to be followed on macOS, and later steps have to be followed on Linux. Thus, if you choose one of these methods, you first need to follow the [On macOS](#on-macos) section and then proceed to the [On Linux](#on-linux) section.
 
-**Method 4** does not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose it.
+**Method 4-5** do not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose them.
 
 !!! Tip "macOS Removed after installing Linux"
     In case you have removed macOS after installing Linux, and need the firmware, **Method 4** is the only option for you.
@@ -75,7 +75,12 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
     Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
 === ":fontawesome-brands-apple: Method 4"
-    **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
+    **Method 4: Retrieve the firmware directly from macOS**
+
+    This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
+
+=== ":fontawesome-brands-apple: Method 5"
+    **Method 5: Download a macOS Recovery Image from Apple and extract the firmware from there**
 
     This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
 
@@ -96,7 +101,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
         bash /path/to/firmware.sh
         ```
 
-        After you run the script, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
+        After you run the script, you have to choose the **"Retrieve the firmware from the EFI partition"** option. After choosing that option, the script will install the firmware on Linux.
 
         !!! note
 
@@ -113,7 +118,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
         sudo umount /tmp/apple-wifi-efi
         ```
 
-        After you run the above commands, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
+        After you run the above commands, you have to choose the **"Retrieve the firmware from the EFI partition"** option. After choosing that option, the script will install the firmware on Linux.
 
         This option shall be useful if you are unable to copy the script to Linux.
 
@@ -188,11 +193,29 @@ Once you have run the script on macOS, depending on the method you chose, the st
             Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
 === ":fontawesome-brands-linux: Method 4"
-    **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
+    **Method 4: Retrieve the firmware directly from macOS**
 
-    !!! warning "Internet connection is required for **Method 4**"
+    !!! warning "Internet connection may be required for **Method 4**"
 
-        **Method 4** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
+        **Method 4** needs certain dependencies to work. If they are missing, you need to have an active internet connection on Linux to download and install them. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet. If you are using an customised ISO made for T2 Macs, then most likely those dependencies shall be shipped alongwith the ISO, so in that case internet shall not be required.
+
+    This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Retrieve the firmware directly from macOS**" option.
+
+    If you choose this method, the script will install the following dependencies, if missing, on Linux:
+
+    1. **APFS driver for Linux** - Enables mounting and reading of the macOS Recovery volume, which has the firmware. You can get the source code from [here](https://github.com/linux-apfs/linux-apfs-rw).
+    2. **dmg2img** - Converts the macOS Recovery Image obtained to a Linux readable format.
+
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
+
+    Once the script confirms that you have the necessary dependencies installed, it shall automatically install the firmware.
+
+=== ":fontawesome-brands-linux: Method 5"
+    **Method 5: Download a macOS Recovery Image from Apple and extract the firmware from there**
+
+    !!! warning "Internet connection is required for **Method 5**"
+
+        **Method 5** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
         
     This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Download a macOS Recovery Image from Apple and extract the firmware from there**" option.
 
