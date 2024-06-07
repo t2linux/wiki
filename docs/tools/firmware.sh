@@ -19,7 +19,7 @@ while getopts "vhx" option; do
 done
 
 python_check () {
-	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ]
+	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
 		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
 		xcode-select --install
