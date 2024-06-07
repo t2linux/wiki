@@ -22,21 +22,23 @@ Refer to the "Updating Kernel" section on your distro's FAQ for instructions if 
 
 We now use a script which can help you set up Wi-Fi and Bluetooth. Click [here](../tools/firmware.sh) to download the script.
 
-There are 4 methods supported by this script to get firmware for Linux, named as **Method 1-4** in this guide. Details of each method are given in the [On macOS](#on-macos) and [On Linux](#on-linux) section.
+There are 5 methods supported by this script to get firmware for Linux, named as **Method 1-5** in this guide. Details of each method are given in the [On macOS](#on-macos) and [On Linux](#on-linux) section. **You have to choose any one of the five methods to get firmware as per your choice.**
 
 **Method 1-3** require macOS installed on your Mac. The initial steps of these methods are to be followed on macOS, and later steps have to be followed on Linux. Thus, if you choose one of these methods, you first need to follow the [On macOS](#on-macos) section and then proceed to the [On Linux](#on-linux) section.
 
-**Method 4** does not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose it.
+**Method 4** also requires macOS, but doesn't have any step to be followed on macOS. So you can directly follow the [On Linux](#on-linux) section if you choose it.
+
+**Method 5** does not require macOS, so you can directly follow the [On Linux](#on-linux) section if you choose it.
 
 !!! Tip "macOS Removed after installing Linux"
-    In case you have removed macOS after installing Linux, and need the firmware, **Method 4** is the only option for you.
+    In case you have removed macOS after installing Linux, and need the firmware, **Method 5** is the only option for you.
 
 ### On macOS
 
 Run the script on the macOS terminal. After you run the script, it will ask you to choose between 3 methods to move firmware to Linux:
 
-=== "Method 1"
-    **Method 1: Run the same script on Linux**
+=== ":fontawesome-brands-apple: Method 1"
+    **Method 1: Copy the firmware to the EFI partition and run the same script on Linux to retrieve it**
 
     If you choose this method, unlike **Method 2** and **Method 3**, you need not have any specific dependency already installed on your Mac. So if you don't want to install any additional software on macOS, this method is the only option for you.
 
@@ -44,7 +46,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     To retrieve the firmware from **EFI** partition in Linux, you shall have to run the same script on Linux. You have 2 options do so, described in detail in [On Linux](#on-linux) section.
 
-=== "Method 2"
+=== ":fontawesome-brands-apple: Method 2"
     **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
@@ -57,7 +59,7 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     Now you have to extract the firmware in the tarball to Linux. The procedure has been described in detail in [On Linux](#on-linux) section.
 
-=== "Method 3"
+=== ":fontawesome-brands-apple: Method 3"
     **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     If you choose this method, the script will install the following dependencies, if missing, on macOS:
@@ -74,17 +76,12 @@ Run the script on the macOS terminal. After you run the script, it will ask you 
 
     Now you have to install the package in Linux using your package manager. The procedure has been described in detail in [On Linux](#on-linux) section.
 
-=== "Method 4"
-    **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
-
-    This method does not have any steps to be followed on macOS. See [On Linux](#on-linux) section.
-
 ### On Linux
 
 Once you have run the script on macOS, depending on the method you chose, the steps to be followed on Linux are described below:
 
-=== "Method 1"
-    **Method 1: Run the same script on Linux**
+=== ":fontawesome-brands-linux: Method 1"
+    **Method 1: Copy the firmware to the EFI partition and run the same script on Linux to retrieve it**
 
     Now we need to retrieve the firmware from the **EFI** partition. You further have 2 options to do so:
 
@@ -96,7 +93,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
         bash /path/to/firmware.sh
         ```
 
-        After you run the script, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
+        After you run the script, you have to choose the **"Retrieve the firmware from the EFI partition"** option. After choosing that option, the script will install the firmware on Linux.
 
         !!! note
 
@@ -113,11 +110,11 @@ Once you have run the script on macOS, depending on the method you chose, the st
         sudo umount /tmp/apple-wifi-efi
         ```
 
-        After you run the above commands, you have to choose the **"Retrieve the firmware from EFI"** option. After choosing that option, the script will install the firmware on Linux.
+        After you run the above commands, you have to choose the **"Retrieve the firmware from the EFI partition"** option. After choosing that option, the script will install the firmware on Linux.
 
         This option shall be useful if you are unable to copy the script to Linux.
 
-=== "Method 2"
+=== ":fontawesome-brands-linux: Method 2"
     **Method 2: Create a tarball of the firmware and extract it to Linux**
 
     Now we shall extract the tarball of the firmware which was saved in the **Downloads** folder in macOS as `firmware.tar`. In order to do so, copy `firmware.tar` to Linux and extract the firmware to `/lib/firmware/brcm` by running:
@@ -140,7 +137,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
     sudo modprobe hci_bcm4377
     ```
 
-=== "Method 3"
+=== ":fontawesome-brands-linux: Method 3"
     **Method 3: Create a Linux specific package which can be installed using a package manager**
 
     Now we have to install the firmware package which was saved in the **Downloads** folder in macOS. Copy the package to Linux and follow the instructions below, depending on whether you use `apt`, `dnf` or `rpm`:
@@ -187,16 +184,34 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
             Replace `/path/to/firmware_package.pkg.tar.zst` with the actual path of the package. For example, if `apple-firmware-14.5-1-any.pkg.tar.zst` was created in macOS and has been copied to the Downloads folder in Linux, command to be run would be `sudo pacman -U $HOME/Downloads/apple-firmware-14.5-1-any.pkg.tar.zst`
 
-=== "Method 4"
-    **Method 4: Download a macOS Recovery Image from Apple and extract the firmware from there**
+=== ":fontawesome-brands-linux: Method 4"
+    **Method 4: Retrieve the firmware directly from macOS**
 
-    !!! warning "Internet connection is required for **Method 4**"
+    !!! warning "Internet connection may be required for **Method 4**"
 
-        **Method 4** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
+        **Method 4** needs certain dependencies to work. If they are missing, you need to have an active internet connection on Linux to download and install them. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet. If you are using a customised ISO made for T2 Macs, then most likely those dependencies shall be shipped alongwith the ISO, so in that case internet shall not be required.
+
+    This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Retrieve the firmware directly from macOS**" option.
+
+    If you choose this method, the script will install the following dependencies, if missing, on Linux:
+
+    1. **APFS driver for Linux** - Enables mounting and reading of the macOS Recovery volume, which has the firmware. The source code of the driver which shall be installed by the script is obtained from [here](https://github.com/linux-apfs/linux-apfs-rw).
+    2. **dmg2img** - Converts the macOS Recovery Image obtained to a Linux readable format.
+
+    The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
+
+    Once the script confirms that you have the necessary dependencies installed, it shall automatically install the firmware.
+
+=== ":fontawesome-brands-linux: Method 5"
+    **Method 5: Download a macOS Recovery Image from Apple and extract the firmware from there**
+
+    !!! warning "Internet connection is required for **Method 5**"
+
+        **Method 5** downloads a macOS Recovery image from Apple. So you need to have an active internet connection on Linux. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet.
         
     This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Download a macOS Recovery Image from Apple and extract the firmware from there**" option.
 
-    If you choose this method, the script will install the following dependencies, if missing, on Linux:
+    If you choose this method, the script will install the following dependencies, if missing, on Linux: 
 
     1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple.
     2. **dmg2img** - Converts the downloaded macOS Recovery Image to a Linux readable format.
@@ -222,27 +237,3 @@ Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blo
 Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
 Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
 ```
-
-## Fixing unstable WPA2 using iwd
-
-Using iwd is technically not needed for using Wi-Fi. But if you are facing unstable WPA2 issues and have to reload the Wi-Fi driver every time you connect to a WPA2 network, you will have to follow this section. If your connection is stable, you needn't follow this section.
-
-Instructions in this section might be different for the distribution that you are trying to install.
-
-1. To get WPA2 to work stably, install the `iwd` package (for example `sudo apt install iwd` on Ubuntu).
-
-2. Edit `/etc/NetworkManager/NetworkManager.conf` to look like the following:
-
-    ```ini
-    [device]
-    wifi.backend=iwd
-    ```
-
-3. Set iwd to run on boot with the following commands (assuming that you are using systemd).
-
-    ```sh
-    sudo systemctl enable --now iwd
-    sudo systemctl restart NetworkManager
-    ```
-
-If you Wi-Fi disconnects or has issues otherwise its advised to restart iwd: `sudo systemctl restart iwd`, or reprobe the Wi-Fi kernel module: `sudo modprobe -r brcmfmac_wcc && sudo modprobe -r brcmfmac && sudo modprobe brcmfmac`.
