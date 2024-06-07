@@ -37,8 +37,8 @@ In the installation environment, the hydra cache is not currently used by defaul
 
     ```shell
     # since root is a trusted user, we do not need to add extra-trusted-substituters.
-    extra-substituters = https://hydra.soopy.moe
-    extra-trusted-public-keys = hydra.soopy.moe:IZ/bZ1XO3IfGtq66g+C85fxU/61tgXLaJ2MlcGGXU8Q=
+    extra-substituters = https://cache.soopy.moe
+    extra-trusted-public-keys = cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo=
     ```
 
 === "Passing additional flags"
@@ -47,7 +47,7 @@ In the installation environment, the hydra cache is not currently used by defaul
     For each `nixos-{rebuild,install}` command, pass in the flags as shown below.
 
     ```shell
-    nixos-install --option extra-substituters "https://hydra.soopy.moe" --option extra-trusted-public-keys "hydra.soopy.moe:IZ/bZ1XO3IfGtq66g+C85fxU/61tgXLaJ2MlcGGXU8Q="
+    nixos-install --option extra-substituters "https://cache.soopy.moe" --option extra-trusted-public-keys "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="
     ```
 
 === "Using flakes"
@@ -56,8 +56,8 @@ In the installation environment, the hydra cache is not currently used by defaul
     ```nix title="flake.nix" linenums="1" hl_lines="2-5"
     {
       nixConfig = {
-        extra-substituters = ["https://hydra.soopy.moe"];
-        extra-trusted-public-keys = ["hydra.soopy.moe:IZ/bZ1XO3IfGtq66g+C85fxU/61tgXLaJ2MlcGGXU8Q="];
+        extra-substituters = ["https://cache.soopy.moe"];
+        extra-trusted-public-keys = ["cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="];
       };
       inputs = ...;
       outputs = ...;
@@ -90,10 +90,10 @@ You do not have to perform this step if you use the flake template.
 ```nix linenums="1" hl_lines="2-7"
 { ... }: {
   nix.settings = {
-    substituters = [ "https://hydra.soopy.moe" ];
-    trusted-substituters = [ "https://hydra.soopy.moe" ]; # to allow building as a non-trusted user
+    substituters = [ "https://cache.soopy.moe" ];
+    trusted-substituters = [ "https://cache.soopy.moe" ]; # to allow building as a non-trusted user
     trusted-public-keys =
-      [ "hydra.soopy.moe:IZ/bZ1XO3IfGtq66g+C85fxU/61tgXLaJ2MlcGGXU8Q=" ];
+      [ "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo=" ];
   };
 }
 ```
