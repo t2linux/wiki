@@ -211,20 +211,42 @@ If you would like to organize your configuration a little better, check out othe
 
 ### Pre-Installation Steps
 
-Choose a method below and follow the [Wi-Fi and Bluetooth Guide on macOS](../../guides/wifi-bluetooth.md#on-macos), then come back.
+Choose a method below and carefully read the notes. Afterwards, follow the [Wi-Fi and Bluetooth Guide on macOS](../../guides/wifi-bluetooth.md#setting-up) (firmware guide) and come back.
 
-=== "Method 1"
-    Method 1 requires you to run the firmware script twice, both in macOS and Linux. If you have uninstalled macOS, you may still be able to obtain the firmware files via a 600MB macOS recovery image without reinstalling macOS. See the linked guide for more information.
+The methods outlined below corresponds to the ones listed in the guide.
 
-=== "Method 2"
+=== ":fontawesome-solid-check: Method 1"
+    Method 1 requires you to run the firmware script twice, both in macOS and Linux.
+
+    While this method is easier to set up than Method 2, it does not necessarily mean it is simpler to maintain.
+
+=== ":fontawesome-solid-star: Method 2"
     This method creates a tarball with the renamed firmware files on macOS. No scripts will need to be run on Linux. This method is more robust than Method 1, but requires some manual configuration.
+
+    This is the recommended method to follow on NixOS.
+
+=== ":fontawesome-solid-ban: Method 3"
+    !!! danger
+        This method is not supported on NixOS as the distribution does not use a conventional package format. A similar setup can be done by following the [Declarative Setup](#declarative-setup) section, but you will need to follow some other method first.
+
+=== ":fontawesome-solid-hourglass: Method 4"
+    <!-- TODO: after testing APFS driver and inclusion in the ISO, update this section. -->
+    !!! warning
+        This method is not **yet** supported, please stay tuned. In the meantime, please use other methods.
+
+=== ":fontawesome-solid-check: Method 5"
+    This method is similar to Method 1, but instead of requiring macOS to be installed, the firmware files are extracted from recovery images from Apple directly. This is useful if you have removed macOS or the partition is not accessible for any reason.
+
+    Note that a ~650MB recovery image will be download on each invocation of this method. Make sure you are not on a metered connection before proceeding.
 
 ### Imperative Setup
 
 The imperative setup is useful for temporary situations like the installation environment.
 
+For long-term usage, imperative setups are **not recommended**. It is suggested to move to a [declarative setup](#declarative-setup) after installation or during configuration.
+
 === "Method 1"
-    The following commands should get you up and running. Note that `/lib/firmware/brcm` has to be manually created because NixOS does not come with that.
+    The following commands should get you up and running. Note that `/lib/firmware/brcm` must be manually created because NixOS does not come with that.
 
     ```shell
     sudo mkdir -p /lib/firmware/brcm
@@ -248,6 +270,18 @@ The imperative setup is useful for temporary situations like the installation en
     modprobe -r brcmfmac_wcc; modprobe -r brcmfmac; modprobe brcmfmac; modprobe -r hci_bcm4377; modprobe hci_bcm4377
     ```
 
+=== "Method 5"
+    This method requires an existing Internet connection, as extra dependencies are required to run the script and to download the recovery image.
+
+    First obtain the script by downloading it. The link is available in the previously linked [firmware guide](../../guides/wifi-bluetooth.md#setting-up).
+
+    ```shell
+    sudo mkdir -p /lib/firmware/brcm
+    sudo nix shell nixpkgs#{dmg2img,curl} -c bash /mnt/boot/firmware.sh
+    #         change the firmware script location ^~~~~~~~~~ HERE
+    #   if the EFI partition is mounted elsewhere
+    ```
+
 Then run `systemctl start wpa_supplicant` and then connect to internet using `wpa_cli`. Consult documentations such as the [Arch Linux wiki](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli) for command usage.
 
 ---
@@ -257,8 +291,6 @@ Then run `systemctl start wpa_supplicant` and then connect to internet using `wp
 The declarative setup is suitable for long-term use after you have installed NixOS.
 
 === "Method 1"
-    This method is not supported for installation on NixOS. It may still work with some manual steps.
-
     First follow the steps in the [imperative setup.](#imperative-setup) The firmware files should then be located in `/lib/firmware/brcm`.
 
     Afterwards, copy `/lib/firmware` to your configuration directory.
@@ -299,6 +331,9 @@ The declarative setup is suitable for long-term use after you have installed Nix
       ];
     }
     ```
+
+=== "Method 5"
+    The declarative setup for this method is exactly the same as in Method 1. Please select Method 1 and follow those instructions.
 
 #### NixOS Module
 
