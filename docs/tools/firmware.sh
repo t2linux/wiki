@@ -377,7 +377,7 @@ apfs_install () {
 		case ${PACKAGE_MANAGER} in
 			(apt)
 				sudo apt update
-				sudo apt install -y apfs-dkms
+				sudo apt install --reinstall -y apfs-dkms
 				;;
 			(dnf)
 				sudo dnf -y copr enable sharpenedblade/t2linux
