@@ -14,7 +14,9 @@ You will need:
 
 ### Preparation
 
-Follow the [Pre-Installation guide](../../guides/preinstall.md). You may not be able to complete some steps without doing so, like [Partitioning](#partitioning).
+Follow the [Pre-Installation guide](../../guides/preinstall.md). If you intend to use Wi-Fi or Bluetooth, additional steps will need to be done. Check the [Wi-Fi pre-installation setup section](#pre-installation-steps) below for instructions, then come back.
+
+Note that you may not be able to complete some steps like [Partitioning](#partitioning) without first completing the pre-installation guide.
 
 ### Partitioning
 
@@ -51,11 +53,11 @@ If you wish to use Ethernet, no additional actions should be needed apart from a
 
 If you wish to use Wi-Fi, follow the [Imperative firmware setup section](#imperative-setup) and come back.
 
-### Configuration and Installation
+### Configuration
 
 Before doing anything else in this section, make sure partitions are **created and mounted** to `/mnt`. Check that with tools like `lsblk` and `findmnt -R /mnt`.
 
-Generate a configuration the following command:
+Generate a configuration with the following command:
 
     sudo nixos-generate-config --root /mnt
 
@@ -77,58 +79,80 @@ You might want to also configure a display manager and a desktop environment. Ch
         ```
 
 === "Flakes"
-    Nix flakes is a new system that is designed to replace nix channels and to improve reproducibility. It is still in an experimental stage and is locked behind a number of feature flags.
+    Nix flakes is a new system that is designed to replace Nix channels and to improve reproducibility. It is still in an experimental stage and is locked behind a number of feature flags.
 
     Flakes support in the ISO is enabled since the v6.4.9-3 ISO. You can validate if you're using that by running `nix run nixpkgs#hello`. If it outputs "Hello, world!", you can continue without modifying commands. If it errors, you are not.
 
-    To use flakes, pass `--extra-experimental-features "flakes nix-command"` to nix commands in the live environment. Nix commands with hyphens (`-`, i.e. `nixos-rebuild`, `nix-store`) in them generally do not require this since they were not built with flakes in mind.
+    To use flakes, pass `--extra-experimental-features "flakes nix-command"` to nix commands in the live environment. Legacy Nix commands with hyphens (`-`, i.e. `nixos-rebuild`, `nix-store`) in them generally do not require and won't recognize the flag.
 
     Below are the setup steps. Adapt the locations as needed.
 
-    0. You should have ran `nixos-generate-config`. If not, [do that](#configuration-and-installation).
-    * Make a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
-    * Add a flake input: `github:NixOS/nixos-hardware`
-    * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
-    * For reasons stated above, add "flakes" and "nix-command" to nix's `experimental-features`.
-    * Add a nixosConfigurations output, in which add a new attribute with any valid name. The common standard is to use the hostname. This will be used to activate your system.
-    * Set the value of the attribute as a call to the lib.nixosSystem function (from the nixpkgs input) with a new attribute set, which contains the items outlined in the example below.
+    === "Template"
+        There is a flake template which should do most of the boilerplating work for you. This will also use the [substituter](./faq.md#substituter-setup) by default.
 
-    !!! quote "Example Configuration"
+        ```shell
+        # 0. If you haven't run nixos-generate-config, do it now. See above for steps.
+        # 1. Change directory to /mnt/etc/nixos. 
+        #    This will be where you store your flake, but you can move it later.
+        cd /mnt/etc/nixos
 
-        ```nix title="flake.nix" linenums="1"
-        {
-          inputs = {
-            nixpkgs.url = "nixpkgs/nixos-unstable";
-            nixos-hardware.url = "github:nixos/nixos-hardware";
-          };
-          outputs = {nixpkgs, nixos-hardware, ...}: {
-            nixosConfigurations.replaceThisWithAnything = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
-              modules = [
-                ./configuration.nix
-                nixos-hardware.nixosModules.apple-t2
+        # 2. Initialize the flake directory with the template. 
+        #    Accept *both* settings if you would like to use the substituter.
+        nix flake init -t github:soopyc/nixos-t2-flake
+
+        # 3. Edit flake.nix, delete the section as specified. 
+        #    Also, rename yourHostname to something else.
+        $EDITOR flake.nix
+
+        # 4. Update the flake.lock
+        nix flake update
+        ```
+
+    === "Manual"
+        0. You should have run `nixos-generate-config`. If not, [do that](#configuration).
+        * Create a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
+        * Add a flake input: `github:NixOS/nixos-hardware`
+        * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
+        * For reasons stated above, add "flakes" and "nix-command" to nix's `experimental-features`.
+        * Add a nixosConfigurations output, in which add a new attribute with any valid name. The common standard is to use the hostname. This will be used to activate your system.
+        * Set the value of the attribute as a call to the lib.nixosSystem function (from the nixpkgs input) with a new attribute set, which contains the items outlined in the example below.
+
+        !!! quote "Example Configuration"
+
+            ```nix title="flake.nix" linenums="1"
+            {
+              inputs = {
+                nixpkgs.url = "nixpkgs/nixos-unstable";
+                nixos-hardware.url = "github:nixos/nixos-hardware";
+              };
+              outputs = {nixpkgs, nixos-hardware, ...}: {
+                nixosConfigurations.replaceThisWithAnything = nixpkgs.lib.nixosSystem {
+                  system = "x86_64-linux";
+                  modules = [
+                    ./configuration.nix
+                    nixos-hardware.nixosModules.apple-t2
+                  ];
+                };
+              };
+            }
+            ```
+
+            ```nix title="configuration.nix (snippet)" linenums="1"
+            # Keep the generated configuration.nix! You need that, so just merge options here into that one.
+            {...}: [
+              imports = [./hardware-configuration.nix];  # this should already be present
+              nix.settings.experimental-features = [
+                "nix-command"
+                "flakes"
               ];
-            };
-          };
-        }
-        ```
-
-        ```nix title="configuration.nix (snippet)" linenums="1"
-        # Keep the generated configuration.nix! You need that, so just merge options here into that one.
-        {...}: [
-          imports = [./hardware-configuration.nix];  # this should already be present
-          nix.settings.experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
-        ]
-        ```
+            ]
+            ```
 
     !!! tip
         You do not need to keep your flake at `/etc/nixos` if you use this approach. You may safely copy the entire `/etc/nixos` directory to your home directory with whatever name you like. Then, [re]building the system is easy as running
 
-            nixos-rebuild build .#        # when building
-            sudo nixos-rebuild switch .#  # when switching
+            nixos-rebuild build --flake .#        # when building
+            sudo nixos-rebuild switch --flake .#  # when switching
 
         within the flake directory.
 
@@ -163,15 +187,15 @@ Then add a bootloader, `systemd-boot` works quite well and is recommended. `GRUB
 
 If you want to use Wi-Fi and/or Bluetooth after installation, now is the time to [set up the firmware declaratively.](#declarative-setup)
 
-It is now time to install the system.
+### Installation
 
 === "Legacy Method"
     Simply run `sudo nixos-install` and hope that it works.
 
 === "Flakes"
-    Run `sudo nixos-install --flake .#<your host>`, where `<your host>` is the `nixosConfiguration` attribute name defined above.
+    Within your flake, run `sudo nixos-install --flake .#<your host>`, where `<your host>` is the `nixosConfiguration` attribute name defined above.
 
-    With the example, the command would be as thus.
+    With the manual setup example, the command would be as thus.
 
         sudo nixos-install --flake .#replaceThisWithAnything
 
@@ -185,15 +209,78 @@ If you would like to organize your configuration a little better, check out othe
 
 ## Wi-Fi and Bluetooth setup
 
+### Pre-Installation Steps
+
+Choose a method below and carefully read the notes. Afterwards, follow the [Wi-Fi and Bluetooth Guide](../../guides/wifi-bluetooth.md#setting-up) (firmware guide) and come back.
+
+The methods outlined below corresponds to the ones listed in the guide.
+
+=== ":fontawesome-solid-check: Method 1"
+    Method 1 requires you to run the firmware script twice, both in macOS and Linux.
+
+    While this method is easier to set up than Method 2, it does not necessarily mean it is simpler to maintain.
+
+=== ":fontawesome-solid-star: Method 2"
+    This method creates a tarball with the renamed firmware files on macOS. No scripts will need to be run on Linux. This method is more robust than Method 1, but requires some manual configuration.
+
+    This is the recommended method to follow on NixOS.
+
+=== ":fontawesome-solid-ban: Method 3"
+    !!! danger
+        This method is not supported on NixOS as the distribution does not use a conventional package format. A similar setup can be done by following the [Declarative Setup](#declarative-setup) section, but you will need to follow some other method first.
+
+=== ":fontawesome-solid-hourglass: Method 4"
+    <!-- TODO: after testing APFS driver and inclusion in the ISO, update this section. -->
+    !!! warning
+        This method is not **yet** supported, please stay tuned. In the meantime, please use other methods.
+
+=== ":fontawesome-solid-check: Method 5"
+    This method is similar to Method 1, but instead of requiring macOS to be installed, the firmware files are extracted from recovery images downloaded directly from Apple. This is useful if you have removed macOS or the partition is not accessible for any reason.
+
+    Note that a ~650MB recovery image will be downloaded on each invocation of this method. Make sure you are not on a metered connection before proceeding.
+
 ### Imperative Setup
 
-The imperative setup is useful for temporary situations like the Live environment.
+The imperative setup is useful for temporary situations like the installation environment.
 
-The following commands should get you up and running. You should have acquired the firmware script from the pre-installation guide. Note that `/lib/firmware` has to be manually created because NixOS does not come with that.
+For long-term usage, imperative setups are **not recommended**. It is suggested to move to a [declarative setup](#declarative-setup) after installation or during configuration.
 
-    sudo mkdir -p /lib/firmware
+=== "Method 1"
+    The following commands should get you up and running. Note that `/lib/firmware/brcm` must be manually created because NixOS does not come with that.
+
+    ```shell
+    sudo mkdir -p /lib/firmware/brcm
     sudo /mnt/boot/firmware.sh
     #    ^~~~~~~~~ change this if the EFI partition is mounted elsewhere
+    ```
+
+=== "Method 2"
+    1. Copy the firmware package tarball to somewhere accessible.
+    2. Create the directory tree `/lib/firmware/brcm`.
+    3. Unpack the firmware package tarball at that specific directory.
+    4. Reload kernel modules to load the firmware.
+
+    ```shell
+    # Run everything here with sudo or as root.
+    # Create the required directory tree
+    mkdir -p /lib/firmware/brcm
+    # Extract the firmware files
+    tar -xf /path/to/your/firmware.tar -C /lib/firmware/brcm
+    # Reload modules so the firmware changes take effect.
+    modprobe -r brcmfmac_wcc; modprobe -r brcmfmac; modprobe brcmfmac; modprobe -r hci_bcm4377; modprobe hci_bcm4377
+    ```
+
+=== "Method 5"
+    This method requires an existing Internet connection, as extra dependencies are required to run the script and to download the recovery image.
+
+    First obtain the script by downloading it. The link is available in the previously linked [firmware guide](../../guides/wifi-bluetooth.md#setting-up).
+
+    ```shell
+    # Create the required directory tree.
+    sudo mkdir -p /lib/firmware/brcm
+    # Run the script with required dependencies.
+    sudo nix shell nixpkgs#{dmg2img,curl} -c bash /path/to/firmware.sh
+    ```
 
 Then run `systemctl start wpa_supplicant` and then connect to internet using `wpa_cli`. Consult documentations such as the [Arch Linux wiki](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli) for command usage.
 
@@ -203,11 +290,12 @@ Then run `systemctl start wpa_supplicant` and then connect to internet using `wp
 
 The declarative setup is suitable for long-term use after you have installed NixOS.
 
-=== "Legacy Method"
-    <!-- TODO: extend the firmware script to short-circuit the installation and just give users a usable .tar -->
-    This step currently requires the completion of the firmware [imperative setup](#imperative-setup).
+=== "Method 1"
+    First follow the steps in the [imperative setup.](#imperative-setup) The firmware files should then be located in `/lib/firmware/brcm`.
 
-    Assuming your `configuration.nix` is at `/mnt/etc/nixos/`, copy the existing firmware files at `/lib/firmware` to `/mnt/etc/nixos/firmware`. Then add this snippet to your `configuration.nix`:
+    Afterwards, copy `/lib/firmware` to your configuration directory.
+
+    Finally add the following snippet to your configuration. Use your logic to edit the source directory.
 
     ```nix linenums="1" hl_lines="2-11" title="configuration.nix"
     {pkgs, ...}: {
@@ -220,10 +308,33 @@ The declarative setup is suitable for long-term use after you have installed Nix
             cp ${final.src}/* "$out/lib/firmware/brcm"
           '';
         }))
-      ]
+      ];
     }
     ```
 
-=== "Flakes"
-    <!-- TODO -->
-    We're working on a flake output! That should make this easier. In the meantime, the "legacy" option also apply to flakes.
+=== "Method 2"
+    Copy the firmware tarball to your configuration directory, then add the following snippet.
+
+    ```nix linenums="1" hl_lines="2-14" title="configuration.nix"
+    {pkgs, ...}: {
+      hardware.firmware = [
+        (stdenvNoCC.mkDerivation (final: {
+          name = "brcm-firmware";
+          src = ./firmware.tar;
+
+          dontUnpack = true;
+          installPhase = ''
+            mkdir -p $out/lib/firmware/brcm
+            tar -xf ${final.src} -C $out/lib/firmware/brcm
+          '';
+        }))
+      ];
+    }
+    ```
+
+=== "Method 5"
+    The declarative setup for this method is exactly the same as in Method 1. Please select Method 1 and follow those instructions.
+
+#### NixOS Module
+
+We are working on it, which should allow you to set up Wi-Fi and Bluetooth by just specifying a tarball.
