@@ -109,7 +109,7 @@ You might want to also configure a display manager and a desktop environment. Ch
         ```
 
     === "Manual"
-        0. You should have ran `nixos-generate-config`. If not, [do that](#configuration-and-installation).
+        0. You should have run `nixos-generate-config`. If not, [do that](#configuration).
         * Create a new file at `/mnt/etc/nixos/flake.nix`, or use `nix flake init` while being in `/mnt/etc/nixos`
         * Add a flake input: `github:NixOS/nixos-hardware`
         * Add the apple-t2 NixOS module from `nixos-hardware` to your NixOS config.
@@ -211,7 +211,7 @@ If you would like to organize your configuration a little better, check out othe
 
 ### Pre-Installation Steps
 
-Choose a method below and carefully read the notes. Afterwards, follow the [Wi-Fi and Bluetooth Guide on macOS](../../guides/wifi-bluetooth.md#setting-up) (firmware guide) and come back.
+Choose a method below and carefully read the notes. Afterwards, follow the [Wi-Fi and Bluetooth Guide](../../guides/wifi-bluetooth.md#setting-up) (firmware guide) and come back.
 
 The methods outlined below corresponds to the ones listed in the guide.
 
@@ -235,9 +235,9 @@ The methods outlined below corresponds to the ones listed in the guide.
         This method is not **yet** supported, please stay tuned. In the meantime, please use other methods.
 
 === ":fontawesome-solid-check: Method 5"
-    This method is similar to Method 1, but instead of requiring macOS to be installed, the firmware files are extracted from recovery images from Apple directly. This is useful if you have removed macOS or the partition is not accessible for any reason.
+    This method is similar to Method 1, but instead of requiring macOS to be installed, the firmware files are extracted from recovery images downloaded directly from Apple. This is useful if you have removed macOS or the partition is not accessible for any reason.
 
-    Note that a ~650MB recovery image will be download on each invocation of this method. Make sure you are not on a metered connection before proceeding.
+    Note that a ~650MB recovery image will be downloaded on each invocation of this method. Make sure you are not on a metered connection before proceeding.
 
 ### Imperative Setup
 
@@ -276,10 +276,10 @@ For long-term usage, imperative setups are **not recommended**. It is suggested 
     First obtain the script by downloading it. The link is available in the previously linked [firmware guide](../../guides/wifi-bluetooth.md#setting-up).
 
     ```shell
+    # Create the required directory tree.
     sudo mkdir -p /lib/firmware/brcm
-    sudo nix shell nixpkgs#{dmg2img,curl} -c bash /mnt/boot/firmware.sh
-    #         change the firmware script location ^~~~~~~~~~ HERE
-    #   if the EFI partition is mounted elsewhere
+    # Run the script with required dependencies.
+    sudo nix shell nixpkgs#{dmg2img,curl} -c bash /path/to/firmware.sh
     ```
 
 Then run `systemctl start wpa_supplicant` and then connect to internet using `wpa_cli`. Consult documentations such as the [Arch Linux wiki](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli) for command usage.
