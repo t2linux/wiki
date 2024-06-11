@@ -527,7 +527,7 @@ case "$os" in
 		echo -e "\n1. Retrieve the firmware from the EFI partition."
 		echo "2. Retrieve the firmware directly from macOS."
 		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
-		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Run the same script on Linux) there."
+		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there."
 		read choice
 		case ${choice} in
 			(1)
