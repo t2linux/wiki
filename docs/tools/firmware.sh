@@ -598,6 +598,7 @@ case "$os" in
 				workdir=$(mktemp -d)
 				macosdir=$(mktemp -d)
 				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1'} | rev | cut -c -9 | rev)
+				fwlocation=""
 				for i in 0 1 2 3 4 5
 				do
 					mkdir -p ${macosdir}/vol${i}
@@ -607,9 +608,13 @@ case "$os" in
 					else
 						sudo mount -o vol=${i} ${macosvol} ${macosdir}/vol${i} 2>/dev/null || true
 					fi
+					
+					if [ -d "${macosdir}/vol${i}/usr/share/firmware" ]
+					then
+						fwlocation=${macosdir}/vol${i}/usr/share/firmware
+					fi
 				done
 				echo "Getting firmware"
-				fwlocation=$(sudo find ${macosdir} -type d -name "firmware" | grep "/usr/share" || true)
 				if [[ ${fwlocation} = "" ]]
 				then
 					echo -e "Could not find location of firmware. Aborting!"
