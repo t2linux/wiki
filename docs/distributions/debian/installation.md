@@ -68,6 +68,8 @@ After installation, we need to install a kernel having patches to support the T2
   
     **Note:** Make sure you restart your Mac after installing `tiny-dfr`. In order to configure your Touch Bar, run `sudo touchbar` and follow the on-screen instructions.
 
+7. Lastly, add `intel_iommu=on iommu=pt pcie_ports=native` kernel parameters using your Bootloader.
+
 # Basic set up
 
 After installing the new kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You shall mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. Rest have been set up automatically by the kernel upgrade script.
