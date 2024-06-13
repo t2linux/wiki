@@ -18,6 +18,27 @@ while getopts "vhx" option; do
 	esac
 done
 
+create_firmware_archive() {
+	py_script=$1
+	firmware_tree=$2
+	archive=$3
+	python_check
+	python3 "$py_script" "$firmware_tree" "$archive" ${verbose}
+	if [[ $(uname -s) == "Darwin" ]]; then
+		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
+		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
+			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+			cp ${verbose} $firmware_tree/wifi/C-4364__s-B2/${nvramfile} \
+				brcmfmac4364b2-pcie.txt
+			cp ${verbose} $firmware_tree/wifi/C-4364__s-B2/${txcapblob} \
+				brcmfmac4364b2-pcie.txcap_blob
+			tar --append ${verbose} -f $archive \
+				brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+			rm ${verbose} brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+		fi
+	fi
+}
 reload_kernel_modules () {
 	echo "Reloading Wi-Fi and Bluetooth drivers"
 	sudo modprobe -r ${verbose} brcmfmac_wcc || true
@@ -28,6 +49,9 @@ reload_kernel_modules () {
 }
 
 python_check () {
+	if ! [[ $(uname -s) = "Darwin" ]]; then
+		return 0
+	fi
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
 		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
@@ -60,7 +84,7 @@ create_deb () {
 
 	echo -e "\nBuilding deb package"
 	workarea=$(mktemp -d)
-	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
+	create_firmware_archive "$0" /usr/share/firmware ${workarea}/firmware.tar
 	cd ${workarea}
 	mkdir -p deb
 	cd deb
@@ -69,14 +93,6 @@ create_deb () {
 	cd usr/lib/firmware/brcm
 	tar -xf ${workarea}/firmware.tar ${verbose}
 	cd - >/dev/null
-
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txt"
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
-	fi
 
 	cat <<- EOF > DEBIAN/control
 		Package: apple-firmware
@@ -131,19 +147,8 @@ create_rpm () {
 	mkdir -p $HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 
 	# Extract firmware 
-	python3 "$0" /usr/share/firmware $HOME/rpmbuild/SOURCES/firmware.tar
+	create_firmware_archive "$0" /usr/share/firmware $HOME/rpmbuild/SOURCES/firmware.tar
 	cd $HOME/rpmbuild/BUILD
-
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} brcmfmac4364b2-pcie.txt
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} brcmfmac4364b2-pcie.txcap_blob
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txt
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txcap_blob
-		rm brcmfmac4364b2-pcie.txcap_blob brcmfmac4364b2-pcie.txt
-	fi
 
 	# Create the spec file
 	cat <<- EOF > $HOME/rpmbuild/SPECS/apple-firmware.spec
@@ -210,19 +215,8 @@ create_arch_pkg () {
 
 	echo -e "\nBuilding pacman package"
 	workarea=$(mktemp -d)
-	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
+	create_firmware_archive "$0" /usr/share/firmware ${workarea}/firmware.tar
 	cd ${workarea}
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "${workarea}/brcmfmac4364b2-pcie.txt"
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "${workarea}/brcmfmac4364b2-pcie.txcap_blob"
-		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
-		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
-		rm ${verbose} brcmfmac4364b2-pcie.txt
-		rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
-	fi
 
 	# Create the PKGBUILD
 	cat <<- EOF > PKGBUILD
@@ -463,23 +457,8 @@ case "$os" in
 				;;
 			(2)
 
-				echo -e "\nChecking for missing dependencies"
-				python_check
 				echo -e "\nCreating a tarball of the firmware"
-				python3 "$0" /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
-				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-		then
-					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "$HOME/Downloads/brcmfmac4364b2-pcie.txt"
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "$HOME/Downloads/brcmfmac4364b2-pcie.txcap_blob"
-					cd $HOME/Downloads
-					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
-					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
-					rm ${verbose} brcmfmac4364b2-pcie.txt
-					rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
-					cd - >/dev/null
-				fi
+				create_firmware_archive "$0" /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
 				echo -e "\nFirmware tarball saved to Downloads!"
 				echo -e "\nExtract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
 				echo -e "\nsudo modprobe -r brcmfmac_wcc"
@@ -496,18 +475,12 @@ case "$os" in
 				read package
 				case ${package} in
 					(1)
-						echo -e "\nChecking for missing dependencies"
-						python_check
 						create_deb
 						;;
 					(2)
-						echo -e "\nChecking for missing dependencies"
-						python_check
 						create_rpm
 						;;
 					(3)
-						echo -e "\nChecking for missing dependencies"
-						python_check
 						create_arch_pkg
 						;;
 					(*)
@@ -545,8 +518,9 @@ case "$os" in
 				workdir=$(mktemp -d)
 				echo "Installing Wi-Fi and Bluetooth firmware"
 				sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
-				sudo tar --warning=no-unknown-keyword ${verbose} -xC ${workdir} -f $mountpoint/firmware.tar.gz
-				sudo python3 "$0" ${workdir} ${workdir}/firmware-renamed.tar ${verbose}
+				sudo tar --warning=no-unknown-keyword ${verbose} -xC ${workdir} -f $mountpoint/firmware-raw.tar.gz
+				sudo chown -R $USER ${workdir}
+				create_firmware_archive "$0" ${workdir} ${workdir}/firmware-renamed.tar ${verbose}
 
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 
@@ -625,7 +599,7 @@ case "$os" in
 					unmount_macos_and_cleanup
 					exit 1
 				fi
-				python3 "$0" ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				create_firmware_archive "$0" ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				reload_kernel_modules
 				echo "Cleaning up"
@@ -670,7 +644,7 @@ case "$os" in
 				sudo mount ${verbose} ${loopdevice} ${imgdir}
 				echo "Getting firmware"
 				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				create_firmware_archive "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				reload_kernel_modules
 				echo "Cleaning up"
