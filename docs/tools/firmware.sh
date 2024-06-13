@@ -18,6 +18,15 @@ while getopts "vhx" option; do
 	esac
 done
 
+reload_kernel_modules () {
+	echo "Reloading Wi-Fi and Bluetooth drivers"
+	sudo modprobe -r ${verbose} brcmfmac_wcc || true
+	sudo modprobe -r ${verbose} brcmfmac || true
+	sudo modprobe ${verbose} brcmfmac || true
+	sudo modprobe -r ${verbose} hci_bcm4377 || true
+	sudo modprobe ${verbose} hci_bcm4377 || true
+}
+
 python_check () {
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
@@ -549,12 +558,7 @@ case "$os" in
 						sudo cp ${verbose} $file /lib/firmware/brcm
 					fi
 				done
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
+				reload_kernel_modules
 				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
 				read -p "Do you want to keep a copy? (y/N)" input
 				if [[ ($input != y) && ($input != Y) ]]
@@ -623,12 +627,7 @@ case "$os" in
 				fi
 				python3 "$0" ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
+				reload_kernel_modules
 				echo "Cleaning up"
 				unmount_macos_and_cleanup
 				echo "Done!"
@@ -673,12 +672,7 @@ case "$os" in
 				cd - >/dev/null
 				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
+				reload_kernel_modules
 				echo "Cleaning up"
 				cleanup_dmg
 				echo "Done!"
