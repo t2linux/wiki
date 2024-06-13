@@ -31,7 +31,9 @@ Download Links:
 
 ## Setting up Wi-Fi and Bluetooth
 
-Once you're booted and in your desktop, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
+Once you're booted and in your desktop, run `get-apple-firmware` and choose the option **"Retrieve the firmware directly from macOS"**.
+
+If this method doesn't work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
 
 ## Receiving kernel updates
 
