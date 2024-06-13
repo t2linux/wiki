@@ -199,7 +199,6 @@ Once you have run the script on macOS, depending on the method you chose, the st
     If you choose this method, the script will install the following dependencies, if missing, on Linux:
 
     1. **APFS driver for Linux** - Enables mounting and reading of the macOS Recovery volume, which has the firmware. The source code of the driver which shall be installed by the script is obtained from [here](https://github.com/linux-apfs/linux-apfs-rw).
-    2. **dmg2img** - Converts the macOS Recovery Image obtained to a Linux readable format.
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
 

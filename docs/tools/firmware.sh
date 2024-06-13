@@ -400,7 +400,7 @@ apfs_install () {
 				;;
 		esac				
 	fi
-	sudo modprobe apfs && echo -e "\nAPFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
+	sudo modprobe ${verbose} apfs && echo -e "\nAPFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
 }
 
 os=$(uname -s)
@@ -550,11 +550,11 @@ case "$os" in
 					fi
 				done
 				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r brcmfmac_wcc || true
-				sudo modprobe -r brcmfmac || true
-				sudo modprobe brcmfmac || true
-				sudo modprobe -r hci_bcm4377 || true
-				sudo modprobe hci_bcm4377 || true
+				sudo modprobe -r ${verbose} brcmfmac_wcc || true
+				sudo modprobe -r ${verbose} brcmfmac || true
+				sudo modprobe ${verbose} brcmfmac || true
+				sudo modprobe -r ${verbose} hci_bcm4377 || true
+				sudo modprobe ${verbose} hci_bcm4377 || true
 				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
 				read -p "Do you want to keep a copy? (y/N)" input
 				if [[ ($input != y) && ($input != Y) ]]
@@ -577,49 +577,58 @@ case "$os" in
 				echo -e "\nDone!"
 				;;
 			(2)
-				# Detect whether dmg2img are installed
 				echo -e "\nChecking for missing dependencies"
-				dmg2img_check
 				# Load the apfs driver, and install if missing
-				sudo modprobe apfs >/dev/null 2>&1 || apfs_install
+				sudo modprobe ${verbose} apfs 2>/dev/null || apfs_install
 				unmount_macos_and_cleanup () {
 					sudo rm -r ${verbose} ${workdir} || true
-					sudo umount ${verbose} ${loopdevice} || true
-					sudo umount ${verbose} ${macosvol} || true
-					sudo rm -r ${verbose} ${imgdir} || true
+					for i in 0 1 2 3 4 5
+					do
+						if [[ ${verbose} = -v ]]
+						then
+							sudo umount -v ${macosdir}/vol${i} || true
+						else
+							sudo umount ${macosdir}/vol${i} 2>/dev/null || true
+						fi
+					done
 					sudo rm -r ${verbose} ${macosdir} || true
-					sudo losetup -d /dev/${loopdev} || true
 				}
 
 				echo -e "\nMounting the macOS volume"
 				workdir=$(mktemp -d)
-				imgdir=$(mktemp -d)
 				macosdir=$(mktemp -d)
 				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1'} | rev | cut -c -9 | rev)
-				sudo mount ${verbose} -o vol=2 ${macosvol} ${macosdir}
-				echo "Converting macOS Recovery Image from .dmg to .img"
-				cd ${workdir}
-				if [[ ${verbose} = -v ]]
-				then
-					dmg2img -v ${macosdir}/*/BaseSystem.dmg fw.img || unmount_macos_and_cleanup
-				else
-					dmg2img -s ${macosdir}/*/BaseSystem.dmg fw.img || unmount_macos_and_cleanup
-				fi
-				echo "Mounting image"
-				loopdev=$(losetup -f | cut -d "/" -f 3)
-				sudo losetup -P ${loopdev} fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep ${loopdev} | tail -1 | awk '{print $1}')
-				sudo mount ${verbose} ${loopdevice} ${imgdir} || unmount_macos_and_cleanup
-				cd - >/dev/null
+				fwlocation=""
+				for i in 0 1 2 3 4 5
+				do
+					mkdir -p ${macosdir}/vol${i}
+					if [[ ${verbose} = -v ]]
+					then
+						sudo mount -v -o vol=${i} ${macosvol} ${macosdir}/vol${i} || true
+					else
+						sudo mount -o vol=${i} ${macosvol} ${macosdir}/vol${i} 2>/dev/null || true
+					fi
+					
+					if [ -d "${macosdir}/vol${i}/usr/share/firmware" ]
+					then
+						fwlocation=${macosdir}/vol${i}/usr/share/firmware
+					fi
+				done
 				echo "Getting firmware"
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				if [[ ${fwlocation} = "" ]]
+				then
+					echo -e "Could not find location of firmware. Aborting!"
+					unmount_macos_and_cleanup
+					exit 1
+				fi
+				python3 "$0" ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r brcmfmac_wcc || true
-				sudo modprobe -r brcmfmac || true
-				sudo modprobe brcmfmac || true
-				sudo modprobe -r hci_bcm4377 || true
-				sudo modprobe hci_bcm4377 || true
+				sudo modprobe -r ${verbose} brcmfmac_wcc || true
+				sudo modprobe -r ${verbose} brcmfmac || true
+				sudo modprobe ${verbose} brcmfmac || true
+				sudo modprobe -r ${verbose} hci_bcm4377 || true
+				sudo modprobe ${verbose} hci_bcm4377 || true
 				echo "Cleaning up"
 				unmount_macos_and_cleanup
 				echo "Done!"
@@ -665,11 +674,11 @@ case "$os" in
 				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
 				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r brcmfmac_wcc || true
-				sudo modprobe -r brcmfmac || true
-				sudo modprobe brcmfmac || true
-				sudo modprobe -r hci_bcm4377 || true
-				sudo modprobe hci_bcm4377 || true
+				sudo modprobe -r ${verbose} brcmfmac_wcc || true
+				sudo modprobe -r ${verbose} brcmfmac || true
+				sudo modprobe ${verbose} brcmfmac || true
+				sudo modprobe -r ${verbose} hci_bcm4377 || true
+				sudo modprobe ${verbose} hci_bcm4377 || true
 				echo "Cleaning up"
 				cleanup_dmg
 				echo "Done!"
