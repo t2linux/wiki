@@ -18,6 +18,99 @@ while getopts "vhx" option; do
 	esac
 done
 
+aur_install() {
+	local aur_package=$1
+	dir=$(mktemp -d)
+	cd "$dir"
+	sudo pacman -Sy --noconfirm git base-devel
+	git clone "https://aur.archlinux.org/$aur_package.git" .
+	makepkg -si --noconfirm
+	cd - >/dev/null
+	sudo rm -r ${verbose} "$dir"
+}
+
+homebrew_check () {
+	if [ ! -f "/usr/local/bin/brew" ]
+	then
+		echo -e "\nHomebrew not found!"
+		echo
+		read -rp "Press enter to install Homebrew."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+}
+
+detect_package_manager () {
+	if [[ $(uname -s) == "Darwin" ]]
+	then
+		echo brew
+	elif apt --help >/dev/null 2>&1
+	then
+		echo apt
+	elif dnf >/dev/null 2>&1
+	then
+		echo dnf
+	elif pacman -h >/dev/null 2>&1
+	then
+		echo pacman
+	else
+		echo NONE
+	fi
+}
+
+install_package() {
+	local package=$1
+	local package_manager
+	package_manager=$(detect_package_manager)
+	echo -e "$package is missing!\n"
+	read -p "Press enter to install $package and its dependencies. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+
+	case $package_manager in
+		"apt")
+			case $package in
+				"linux-apfs-rw")
+					sudo apt upgrade
+					sudo apt install --reinstall -y apfs-dkms
+					sudo modprobe apfs
+					;;
+				*)
+					sudo apt upgrade
+					sudo apt install -y "$package" ;;
+			esac ;;
+		"dnf")
+			case $package in
+				"linux-apfs-rw")
+					sudo dnf -y copr enable sharpenedblade/t2linux
+					sudo dnf install -y linux-apfs-rw
+					echo -e "\nRunning akmods\n"
+					sudo akmods
+					sudo modprobe apfs
+					;;
+				*)
+					sudo dnf install -y "$package" ;;
+			esac ;;
+		"pacman")
+			case $package in
+				"linux-apfs-rw")
+					aur_install linux-apfs-rw-dkms-git
+					sudo modprobe apfs
+					;;
+				"dmg2img")
+					aur_install dmg2img ;;
+				*)
+					sudo pacman -Sy --noconfirm "$package" ;;
+			esac ;;
+		"brew")
+			case $package in
+				*)
+					homebrew_check
+					brew install "$package"
+					;;
+			esac ;;
+		"NONE")
+			read -p "The script could not detect your package manager. Please install $package manually and press enter once you have it installed." ;;
+	esac
+}
+
 create_firmware_archive() {
 	py_script=$1
 	firmware_tree=$2
@@ -61,25 +154,10 @@ python_check () {
 	fi
 }
 
-homebrew_check () {
-	if [ ! -f "/usr/local/bin/brew" ]
-	then
-		echo -e "\nHomebrew not found!"
-		echo
-		read -p "Press enter to install Homebrew."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
-}
-
 create_deb () {
 	if [ ! -f "/usr/local/bin/dpkg" ]
 	then
-		echo -e "\ndpkg and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install dpkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling dpkg and its dependencies"
-		brew install dpkg
+		install_package dpkg
 	fi
 
 	echo -e "\nBuilding deb package"
@@ -135,12 +213,7 @@ create_deb () {
 create_rpm () {
 	if [ ! -f "/usr/local/bin/rpmbuild" ]
 	then
-		echo -e "\nrpm and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install rpm and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install rpm yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling rpm and its dependencies"
-		brew install rpm
+		 install_package rpm
 	fi
 
 	echo -e "\nBuilding rpm package"
@@ -203,14 +276,13 @@ create_rpm () {
 }
 
 create_arch_pkg () {
-	if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
+	if [ ! -f "/usr/local/bin/makepkg" ]
 	then
-		echo -e "\nmakepkg and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install makepkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install makepkg yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling makepkg and its dependencies"
-		brew install makepkg coreutils
+		install_package makepkg
+	fi
+	if [ ! -f "/usr/local/bin/sha256sum" ]
+	then
+		install_package coreutils
 	fi
 
 	echo -e "\nBuilding pacman package"
@@ -276,134 +348,6 @@ create_arch_pkg () {
 	echo -e "\nPacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
 	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
-}
-
-detect_package_manager () {
-	if $(apt --help >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=apt
-	elif $(dnf >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=dnf
-	elif $(pacman -h >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=pacman
-	else
-		PACKAGE_MANAGER=NONE
-		echo -e "\nUnable to detect the package manager your distro is using!"
-	fi
-}
-
-curl_check () {
-	if ! $(curl --help >/dev/null 2>&1)
-	then
-		echo -e "\ncurl and/or its dependencies are missing!"
-		detect_package_manager
-		echo
-		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-		then
-			read -p "The script could not detect your package manager. Please install curl manually and press enter once you have it installed."
-		else
-			read -p "Press enter to install curl and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install curl yourself, if you want to install it via some alternate method."
-			echo -e "\nInstalling curl and its dependencies"
-			case ${PACKAGE_MANAGER} in
-				(apt)
-					sudo apt update
-					sudo apt install -y curl
-					;;
-				(dnf)
-					sudo dnf install -y curl
-					;;
-				(pacman)
-					sudo pacman -Sy --noconfirm curl
-					;;
-				(*)
-					echo -e "\nUnknown error"
-					exit 1
-					;;
-			esac
-					
-		fi
-	fi
-}
-
-dmg2img_check () {
-	if ! $(dmg2img >/dev/null 2>&1)
-	then
-		echo -e "\ndmg2img and/or its dependencies are missing!"
-		detect_package_manager
-		echo
-		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-		then
-			read -p "The script could not detect your package manager. Please install dmg2img manually and press enter once you have it installed."
-		else
-			read -p "Press enter to install dmg2img and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install dmg2img yourself, if you want to install it via some alternate method."
-			echo -e "\nInstalling dmg2img and its dependencies"
-			case ${PACKAGE_MANAGER} in
-				(apt)
-					sudo apt update
-					sudo apt install -y dmg2img
-					;;
-				(dnf)
-					sudo dnf install -y dmg2img
-					;;
-				(pacman)
-					dmg2imgdir=$(mktemp -d)
-					cd ${dmg2imgdir}
-					sudo pacman -Sy --noconfirm git base-devel
-					git clone https://aur.archlinux.org/dmg2img.git ${dmg2imgdir}
-					makepkg -si --noconfirm
-					cd - >/dev/null
-					sudo rm -r ${verbose} ${dmg2imgdir}
-					;;
-				(*)
-					echo -e "\nUnknown error"
-					exit 1
-					;;
-			esac
-					
-		fi
-	fi
-}
-
-apfs_install () {
-	echo -e "\nAPFS driver missing!"
-	detect_package_manager
-	echo
-	apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
-	if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-	then
-		read -p "The script could not detect your package manager. Please install the APFS driver manually from ${apfs_driver_link} and press enter once you have it installed."
-	else
-		read -p "Press enter to install the APFS driver via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install it yourself from ${apfs_driver_link}."
-		echo -e "\nInstalling the APFS driver"
-		case ${PACKAGE_MANAGER} in
-			(apt)
-				sudo apt update
-				sudo apt install --reinstall -y apfs-dkms
-				;;
-			(dnf)
-				sudo dnf -y copr enable sharpenedblade/t2linux
-				sudo dnf install -y linux-apfs-rw
-				echo -e "\nRunning akmods\n"
-				sudo akmods
-				;;
-			(pacman)
-				apfsdir=$(mktemp -d)
-				cd ${apfsdir}
-				sudo pacman -Sy --noconfirm git base-devel
-				git clone https://aur.archlinux.org/linux-apfs-rw-dkms-git.git ${apfsdir}
-				makepkg -si --noconfirm
-				cd - >/dev/null
-				sudo rm -r ${verbose} ${apfsdir}
-				;;
-			(*)
-				echo -e "\nUnknown error"
-				exit 1
-				;;
-		esac				
-	fi
-	sudo modprobe ${verbose} apfs && echo -e "\nAPFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
 }
 
 os=$(uname -s)
@@ -557,7 +501,7 @@ case "$os" in
 			(2)
 				echo -e "\nChecking for missing dependencies"
 				# Load the apfs driver, and install if missing
-				sudo modprobe ${verbose} apfs 2>/dev/null || apfs_install
+				sudo modprobe ${verbose} apfs 2>/dev/null || install_package linux-apfs-rw
 				unmount_macos_and_cleanup () {
 					sudo rm -r ${verbose} ${workdir} || true
 					for i in 0 1 2 3 4 5
@@ -609,8 +553,8 @@ case "$os" in
 			(3)
 				# Detect whether curl and dmg2img are installed
 				echo -e "\nChecking for missing dependencies"
-				curl_check
-				dmg2img_check
+				curl --version >/dev/null 2>&1 || install_package curl
+				dmg2img >/dev/null 2>&1 || install_package dmg2img
 				cleanup_dmg () {
 					sudo rm -r ${verbose} ${workdir}
 					sudo umount ${verbose} ${loopdevice}
