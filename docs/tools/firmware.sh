@@ -368,7 +368,7 @@ homebrew_check () {
 }
 
 detect_package_manager () {
-	if [[ $(uname -s) == "Darwin" ]]
+	if [[ $(uname -s) = "Darwin" ]]
 	then
 		echo brew
 	elif apt --help >/dev/null 2>&1
@@ -390,7 +390,7 @@ install_package() {
 	local package_manager
 	package_manager=$(detect_package_manager)
 	echo -e "$package is missing!\n"
-	read -p "Press enter to install $package and its dependencies. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+	read -rp "Press enter to install $package and its dependencies. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
 
 	case $package_manager in
 		"apt")
@@ -435,7 +435,7 @@ install_package() {
 					;;
 			esac ;;
 		"NONE")
-			read -p "The script could not detect your package manager. Please install $package manually and press enter once you have it installed." ;;
+			read -rp "The script could not detect your package manager. Please install $package manually and press enter once you have it installed." ;;
 	esac
 }
 
@@ -444,16 +444,16 @@ create_firmware_archive() {
 	archive=$2
 	python_check
 	rename_firmware "$firmware_tree" "$archive" ${verbose}
-	if [[ $(uname -s) == "Darwin" ]]; then
+	if [[ $(uname -s) = "Darwin" ]]; then
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
 			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-			cp ${verbose} $firmware_tree/wifi/C-4364__s-B2/${nvramfile} \
+			cp ${verbose} "$firmware_tree"/wifi/C-4364__s-B2/"${nvramfile}" \
 				brcmfmac4364b2-pcie.txt
-			cp ${verbose} $firmware_tree/wifi/C-4364__s-B2/${txcapblob} \
+			cp ${verbose} "$firmware_tree"/wifi/C-4364__s-B2/"${txcapblob}" \
 				brcmfmac4364b2-pcie.txcap_blob
-			tar --append ${verbose} -f $archive \
+			tar --append ${verbose} -f "$archive" \
 				brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
 			rm ${verbose} brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
 		fi
@@ -478,7 +478,7 @@ python_check () {
 		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
 		xcode-select --install
 		echo
-		read -p "Press enter after you have installed Xcode command line developer tools."
+		read -rp "Press enter after you have installed Xcode command line developer tools."
 	fi
 }
 
@@ -490,14 +490,14 @@ create_deb () {
 
 	echo -e "\nBuilding deb package"
 	workarea=$(mktemp -d)
-	create_firmware_archive /usr/share/firmware ${workarea}/firmware.tar
-	cd ${workarea}
+	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
+	cd "${workarea}"
 	mkdir -p deb
 	cd deb
 	mkdir -p DEBIAN
 	mkdir -p usr/lib/firmware/brcm
 	cd usr/lib/firmware/brcm
-	tar -xf ${workarea}/firmware.tar ${verbose}
+	tar -xf "${workarea}/firmware.tar" ${verbose}
 	cd - >/dev/null
 
 	cat <<- EOF > DEBIAN/control
@@ -519,8 +519,8 @@ create_deb () {
 	chmod a+x DEBIAN/control
 	chmod a+x DEBIAN/postinst
 
-	cd ${workarea}
-	if [[ ${verbose} = -v ]]
+	cd "${workarea}"
+	if [[ ${verbose} = "-v" ]]
 	then
 		dpkg-deb --build --root-owner-group -Zgzip deb
 		dpkg-name deb.deb
@@ -529,9 +529,9 @@ create_deb () {
 		dpkg-name deb.deb >/dev/null
 	fi
 
-	cp ${verbose} apple-firmware_${ver}-1_all.deb $HOME/Downloads
+	cp ${verbose} "apple-firmware_${ver}-1_all.deb" "$HOME/Downloads"
 	echo -e "\nCleaning up"
-	rm -r ${verbose} ${workarea}
+	rm -r ${verbose} "${workarea}"
 
 	echo -e "\nDeb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
@@ -545,14 +545,14 @@ create_rpm () {
 	fi
 
 	echo -e "\nBuilding rpm package"
-	mkdir -p $HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+	mkdir -p "$HOME/rpmbuild/"{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 
 	# Extract firmware 
-	create_firmware_archive /usr/share/firmware $HOME/rpmbuild/SOURCES/firmware.tar
-	cd $HOME/rpmbuild/BUILD
+	create_firmware_archive /usr/share/firmware "$HOME/rpmbuild/SOURCES/firmware.tar"
+	cd "$HOME/rpmbuild/BUILD"
 
 	# Create the spec file
-	cat <<- EOF > $HOME/rpmbuild/SPECS/apple-firmware.spec
+	cat <<- EOF > "$HOME/rpmbuild/SPECS/apple-firmware.spec"
 		Name:       apple-firmware
 		Version:    ${ver}
 		Release:    1
@@ -586,17 +586,17 @@ create_rpm () {
 	EOF
 
 	# Build
-	if [[ ${verbose} = -v ]]
+	if [[ ${verbose} = "-v" ]]
 	then
-		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec
+		rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec"
 	else
-		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec >/dev/null 2>&1 || echo "Failed to make rpm package. Run the script with -v to get logs."
+		rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" >/dev/null 2>&1 || echo "Failed to make rpm package. Run the script with -v to get logs."
 	fi
 
 	# Copy and Cleanup
-	cp ${verbose} $HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm $HOME/Downloads
+	cp ${verbose} "$HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm" "$HOME/Downloads"
 	echo -e "\nCleaning up"
-	rm -r ${verbose} $HOME/rpmbuild
+	rm -r ${verbose} "$HOME/rpmbuild"
 
 	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
@@ -615,8 +615,8 @@ create_arch_pkg () {
 
 	echo -e "\nBuilding pacman package"
 	workarea=$(mktemp -d)
-	create_firmware_archive /usr/share/firmware ${workarea}/firmware.tar
-	cd ${workarea}
+	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
+	cd "${workarea}"
 
 	# Create the PKGBUILD
 	cat <<- EOF > PKGBUILD
@@ -655,10 +655,10 @@ create_arch_pkg () {
 
 	# Set path to use newer bsdtar and GNU touch
 	PATH_OLD=$PATH
-	PATH=/usr/local/Cellar/libarchive/$(ls /usr/local/Cellar/libarchive | head -n 1)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
+	PATH=/usr/local/Cellar/libarchive/$(echo /usr/local/Cellar/libarchive/* | xargs basename)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
 
 	# Build
-	if [[ ${verbose} = -v ]]
+	if [[ ${verbose} = "-v" ]]
 	then
 		PKGEXT='.pkg.tar.zst' makepkg
 	else
@@ -669,9 +669,9 @@ create_arch_pkg () {
 	PATH=${PATH_OLD}
 
 	# Copy to Downloads and cleanup
-	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.zst $HOME/Downloads
+	cp ${verbose} "apple-firmware-${ver}-1-any.pkg.tar.zst" "$HOME/Downloads"
 	echo -e "\nCleaning up"
-	rm -r ${verbose} ${workarea}
+	rm -r ${verbose} "${workarea}"
 
 	echo -e "\nPacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
 	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
@@ -685,7 +685,7 @@ case "$os" in
 		ver=$(sw_vers -productVersion)
 		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
-		if [[ ${ver_check} < 12 ]] && [[ (${identifier} = MacBookPro15,4) || (${identifier} = MacBookPro16,3) || (${identifier} = MacBookAir9,1) ]]
+		if [[ ${ver_check} -lt 12 ]] && [[ (${identifier} = MacBookPro15,4) || (${identifier} = MacBookPro16,3) || (${identifier} = MacBookAir9,1) ]]
 		then
 			cat <<- EOF
 
@@ -704,7 +704,7 @@ case "$os" in
 		echo "2. Create a tarball of the firmware and extract it to Linux."
 		echo "3. Create a Linux specific package which can be installed using a package manager."
 		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
-		read choice
+		read -r choice
 		case ${choice} in
 			(1)
 				echo -e "\nMounting the EFI partition"
@@ -717,11 +717,11 @@ case "$os" in
 		then
 					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
 					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/"${nvramfile}" "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
+					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/"${txcapblob}" "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
 				fi
 				echo "Copying this script to EFI"
-				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
+				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -rp "Press enter after you have copied" && echo)
 				echo "Unmounting the EFI partition"
 				sudo diskutil unmount "/Volumes/${EFILABEL}/"
 				echo
@@ -730,7 +730,7 @@ case "$os" in
 			(2)
 
 				echo -e "\nCreating a tarball of the firmware"
-				create_firmware_archive /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
+				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar" ${verbose}
 				echo -e "\nFirmware tarball saved to Downloads!"
 				echo -e "\nExtract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
 				echo -e "\nsudo modprobe -r brcmfmac_wcc"
@@ -744,7 +744,7 @@ case "$os" in
 				echo -e "\n1. apt"
 				echo "2. dnf"
 				echo "3. pacman"
-				read package
+				read -r package
 				case ${package} in
 					(1)
 						create_deb
@@ -782,31 +782,31 @@ case "$os" in
 		echo "2. Retrieve the firmware directly from macOS."
 		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
 		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there."
-		read choice
+		read -r choice
 		case ${choice} in
 			(1)
 				echo -e "\nRe-mounting the EFI partition"
 				mountpoint=$(mktemp -d)
 				workdir=$(mktemp -d)
 				echo "Installing Wi-Fi and Bluetooth firmware"
-				sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
-				sudo tar --warning=no-unknown-keyword ${verbose} -xC ${workdir} -f $mountpoint/firmware-raw.tar.gz
-				sudo chown -R $USER ${workdir}
-				create_firmware_archive ${workdir} ${workdir}/firmware-renamed.tar ${verbose}
+				sudo mount ${verbose} /dev/nvme0n1p1 "$mountpoint"
+				sudo tar --warning=no-unknown-keyword ${verbose} -xC "${workdir}" -f "$mountpoint/firmware-raw.tar.gz"
+				sudo chown -R "$USER" "${workdir}"
+				create_firmware_archive "${workdir}" "${workdir}/firmware-renamed.tar" ${verbose}
 
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 
 				for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
 					    "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
 				do
 					if [ -f "$file" ]
 					then
-						sudo cp ${verbose} $file /lib/firmware/brcm
+						sudo cp ${verbose} "$file" /lib/firmware/brcm
 					fi
 				done
 				reload_kernel_modules
 				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
-				read -p "Do you want to keep a copy? (y/N)" input
+				read -rp "Do you want to keep a copy? (y/N)" input
 				if [[ ($input != y) && ($input != Y) ]]
 				then
 					echo -e "\nRemoving the copy from the EFI partition"
@@ -817,13 +817,13 @@ case "$os" in
 					do
 						if [ -f "$file" ]
 						then
-							sudo rm ${verbose} $file
+							sudo rm ${verbose} "$file"
 						fi
 					done
 				fi
-				sudo rm -r ${verbose} ${workdir}
-				sudo umount $mountpoint
-				sudo rmdir $mountpoint
+				sudo rm -r ${verbose} "${workdir}"
+				sudo umount "$mountpoint"
+				sudo rmdir "$mountpoint"
 				echo -e "\nDone!"
 				;;
 			(2)
@@ -831,37 +831,37 @@ case "$os" in
 				# Load the apfs driver, and install if missing
 				sudo modprobe ${verbose} apfs 2>/dev/null || install_package linux-apfs-rw
 				unmount_macos_and_cleanup () {
-					sudo rm -r ${verbose} ${workdir} || true
+					sudo rm -r ${verbose} "${workdir}" || true
 					for i in 0 1 2 3 4 5
 					do
-						if [[ ${verbose} = -v ]]
+						if [[ ${verbose} = "-v" ]]
 						then
-							sudo umount -v ${macosdir}/vol${i} || true
+							sudo umount -v "${macosdir}/vol${i}" || true
 						else
-							sudo umount ${macosdir}/vol${i} 2>/dev/null || true
+							sudo umount "${macosdir}/vol${i}" 2>/dev/null || true
 						fi
 					done
-					sudo rm -r ${verbose} ${macosdir} || true
+					sudo rm -r ${verbose} "${macosdir}" || true
 				}
 
 				echo -e "\nMounting the macOS volume"
 				workdir=$(mktemp -d)
 				macosdir=$(mktemp -d)
-				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1'} | rev | cut -c -9 | rev)
+				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1}' | rev | cut -c -9 | rev)
 				fwlocation=""
 				for i in 0 1 2 3 4 5
 				do
-					mkdir -p ${macosdir}/vol${i}
-					if [[ ${verbose} = -v ]]
+					mkdir -p "${macosdir}/vol${i}"
+					if [[ ${verbose} = "-v" ]]
 					then
-						sudo mount -v -o vol=${i} ${macosvol} ${macosdir}/vol${i} || true
+						sudo mount -v -o vol=${i} "${macosvol}" "${macosdir}/vol${i}" || true
 					else
-						sudo mount -o vol=${i} ${macosvol} ${macosdir}/vol${i} 2>/dev/null || true
+						sudo mount -o vol=${i} "${macosvol}" "${macosdir}/vol${i}" 2>/dev/null || true
 					fi
 					
 					if [ -d "${macosdir}/vol${i}/usr/share/firmware" ]
 					then
-						fwlocation=${macosdir}/vol${i}/usr/share/firmware
+						fwlocation="${macosdir}/vol${i}/usr/share/firmware"
 					fi
 				done
 				echo "Getting firmware"
@@ -871,8 +871,8 @@ case "$os" in
 					unmount_macos_and_cleanup
 					exit 1
 				fi
-				create_firmware_archive ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
+				create_firmware_archive "${fwlocation}" "${workdir}/firmware-renamed.tar" "${verbose}" || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 				reload_kernel_modules
 				echo "Cleaning up"
 				unmount_macos_and_cleanup
@@ -884,17 +884,17 @@ case "$os" in
 				curl --version >/dev/null 2>&1 || install_package curl
 				dmg2img >/dev/null 2>&1 || install_package dmg2img
 				cleanup_dmg () {
-					sudo rm -r ${verbose} ${workdir}
-					sudo umount ${verbose} ${loopdevice}
-					sudo rm -r ${verbose} ${imgdir}
-					sudo losetup -d /dev/${loopdev}
+					sudo rm -r ${verbose} "${workdir}"
+					sudo umount ${verbose} "${loopdevice}"
+					sudo rm -r ${verbose} "${imgdir}"
+					sudo losetup -d /dev/"${loopdev}"
 				}
 
 				echo -e "\nDownloading macOS Recovery Image"
 				workdir=$(mktemp -d)
 				imgdir=$(mktemp -d)
-				cd ${workdir}
-				if [[ ${verbose} = -v ]]
+				cd "${workdir}"
+				if [[ ${verbose} = "-v" ]]
 				then
 					curl -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
 				else
@@ -903,7 +903,7 @@ case "$os" in
 				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
 				python3 fetch-macOS-v2.py
 				echo -e "\nConverting image from .dmg to .img"
-				if [[ ${verbose} = -v ]]
+				if [[ ${verbose} = "-v" ]]
 				then
 					dmg2img -v BaseSystem.dmg fw.img
 				else
@@ -911,13 +911,13 @@ case "$os" in
 				fi
 				echo "Mounting image"
 				loopdev=$(losetup -f | cut -d "/" -f 3)
-				sudo losetup -P ${loopdev} fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep ${loopdev} | tail -1 | awk '{print $1}')
-				sudo mount ${verbose} ${loopdevice} ${imgdir}
+				sudo losetup -P "${loopdev}" fw.img
+				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep "${loopdev}" | tail -1 | awk '{print $1}')
+				sudo mount ${verbose} "${loopdevice}" "${imgdir}"
 				echo "Getting firmware"
 				cd - >/dev/null
-				create_firmware_archive ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
+				create_firmware_archive "${imgdir}/usr/share/firmware" "${workdir}/firmware-renamed.tar" ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 				reload_kernel_modules
 				echo "Cleaning up"
 				cleanup_dmg
