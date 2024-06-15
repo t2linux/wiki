@@ -336,15 +336,107 @@ EOF
 set -euo pipefail
 
 verbose=""
+subcmd=""
+args=""
 while getopts "vhxp" option; do
 	case $option in
 		v) verbose="-v" ;;
-		h) echo "usage: $0 [-vhxp] [fw_dir_path output_archive_path]"; exit 0 ;;
+		h)
+		cat <<- EOF
+		usage: $0 [-vhx] subcommand [subcmd args]
+
+		Subcommands:
+		rename_only /path/to/firmware archive.tar
+		copy_to_efi
+		create_archive
+		create_package
+		get_from_efi
+		get_from_macos
+		get_from_online
+		EOF
+		exit 0 ;;
 		x) set -x;;
-		p) rename_firmware "${@:2:2}" ${verbose} && exit 0 ;;
 		?) exit 1 ;; 
 	esac
 done
+
+if [[ "${1-}" == -* ]]; then
+	subcmd="${2-}"
+	args=( "${@:3}" )
+else
+	subcmd="${1-}"
+	args=( "${@:2}" )
+fi
+
+if [[ "$subcmd" = "" ]]; then
+	case "$(uname -s)" in
+		(Darwin)
+			echo "Detected macOS"
+			cat <<- EOF
+
+			How do you want to copy the firmware to Linux?
+
+			1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it.
+			2. Create a tarball of the firmware and extract it to Linux.
+			3. Create a Linux specific package which can be installed using a package manager.
+
+			Note: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further.
+			EOF
+			read -r choice
+			case ${choice} in
+				(1) subcmd="copy_to_efi" ;;
+				(2) subcmd="create_archive" ;;
+				(3) subcmd="create_package"
+					echo -e "\nWhat package manager does your Linux distribution use?\n"
+					echo "1. apt"
+					echo "2. dnf"
+					echo "3. pacman"
+					read -r target_pkg_manager
+					case ${target_pkg_manager} in
+						(1) target_pkg_manager="apt" ;;
+						(2) target_pkg_manager="rpm" ;;
+						(3) target_pkg_manager="pacman" ;;
+						(*) echo -e "\nError: Invalid option!" && exit 1 ;;
+					esac
+					;;
+				(*) echo -e "\nError: Invalid option!" && exit 1 ;;
+				esac
+			;;
+		(Linux)
+			echo "Detected Linux"
+			cat <<- EOF
+
+			How do you want to copy the firmware to Linux?
+
+			1. Retrieve the firmware from the EFI partition.
+			2. Retrieve the firmware directly from macOS.
+			3. Download a macOS Recovery Image from Apple and extract the firmware from there.
+
+			Note: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there.
+			EOF
+			read -r choice
+			case ${choice} in
+				(1)
+					subcmd="get_from_efi" ;;
+				(2)
+					subcmd="get_from_macos" ;;
+				(3)
+					subcmd="get_from_online" ;;
+				(*)
+					echo -e "\nError: Invalid option!"
+					exit 1
+					;;
+			esac
+			;;
+		(*)
+			echo "Error: unsupported platform"
+			;;
+	esac
+fi
+
+if [[ "$subcmd" = "" ]]; then
+	exit 1
+fi
 
 aur_install() {
 	local aur_package=$1
@@ -726,19 +818,8 @@ case "$os" in
 
 			EOF
 		fi
-		cat <<- EOF
-
-		How do you want to copy the firmware to Linux?
-
-		1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it.
-		2. Create a tarball of the firmware and extract it to Linux.
-		3. Create a Linux specific package which can be installed using a package manager.
-
-		Note: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further.
-		EOF
-		read -r choice
-		case ${choice} in
-			(1)
+		case ${subcmd} in
+			("copy_to_efi")
 				echo -e "\nMounting the EFI partition"
 				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 				sudo diskutil mount disk0s1
@@ -769,7 +850,7 @@ case "$os" in
 				sudo umount /tmp/apple-wifi-efi
 				EOF
 				;;
-			(2)
+			("create_archive")
 				python_check
 				echo -e "\nCreating a tarball of the firmware"
 				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar"
@@ -786,21 +867,16 @@ case "$os" in
 				sudo modprobe hci_bcm4377
 				EOF
 				;;
-			(3)
-				echo -e "\nWhat package manager does your Linux distribution use?\n"
-				echo "1. apt"
-				echo "2. dnf"
-				echo "3. pacman"
-				read -r package
+			("create_package")
 				python_check
-				case ${package} in
-					(1)
+				case ${target_pkg_manager} in
+					("apt")
 						create_deb
 						;;
-					(2)
+					("dnf")
 						create_rpm
 						;;
-					(3)
+					("pacman")
 						create_arch_pkg
 						;;
 					(*)
@@ -827,19 +903,8 @@ case "$os" in
 			EOF
 			exit 1
 		fi
-		cat <<- EOF
-
-		How do you want to copy the firmware to Linux?
-
-		1. Retrieve the firmware from the EFI partition.
-		2. Retrieve the firmware directly from macOS.
-		3. Download a macOS Recovery Image from Apple and extract the firmware from there.
-
-		Note: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there.
-		EOF
-		read -r choice
-		case ${choice} in
-			(1)
+		case ${subcmd} in
+			("get_from_efi")
 				echo -e "\nRe-mounting the EFI partition"
 				mountpoint=$(mktemp -d)
 				workdir=$(mktemp -d)
@@ -878,7 +943,7 @@ case "$os" in
 				sudo rmdir ${verbose} "$mountpoint"
 				echo -e "\nDone!"
 				;;
-			(2)
+			("get_from_macos")
 				echo -e "\nChecking for missing dependencies"
 				# Load the apfs driver, and install if missing
 				sudo modprobe ${verbose} apfs 2>/dev/null || install_package linux-apfs-rw
@@ -925,7 +990,7 @@ case "$os" in
 				unmount_macos_and_cleanup
 				echo "Done!"
 				;;
-			(3)
+			("get_from_online")
 				# Detect whether curl and dmg2img are installed
 				echo -e "\nChecking for missing dependencies"
 				curl --version >/dev/null 2>&1 || install_package curl
