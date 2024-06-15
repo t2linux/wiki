@@ -533,9 +533,13 @@ create_deb () {
 	echo -e "\nCleaning up"
 	rm -r ${verbose} "${workarea}"
 
-	echo -e "\nDeb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo apt install /path/to/apple-firmware_${ver}-1_all.deb"
+	cat <<- EOF
+
+	Deb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo apt install /path/to/apple-firmware_${ver}-1_all.deb"
+	EOF
 }
 
 create_rpm () {
@@ -598,9 +602,13 @@ create_rpm () {
 	echo -e "\nCleaning up"
 	rm -r ${verbose} "$HOME/rpmbuild"
 
-	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm"
+	cat <<- EOF
+
+	Rpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm
+	EOF
 }
 
 create_arch_pkg () {
@@ -673,9 +681,13 @@ create_arch_pkg () {
 	echo -e "\nCleaning up"
 	rm -r ${verbose} "${workarea}"
 
-	echo -e "\nPacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
+	cat <<-EOF
+
+	Pacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst
+	EOF
 }
 
 os=$(uname -s)
@@ -699,11 +711,16 @@ case "$os" in
 
 			EOF
 		fi
-		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it."
-		echo "2. Create a tarball of the firmware and extract it to Linux."
-		echo "3. Create a Linux specific package which can be installed using a package manager."
-		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
+		cat <<- EOF
+
+		How do you want to copy the firmware to Linux?
+
+		1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it.
+		2. Create a tarball of the firmware and extract it to Linux.
+		3. Create a Linux specific package which can be installed using a package manager.
+
+		Note: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further.
+		EOF
 		read -r choice
 		case ${choice} in
 			(1)
@@ -721,27 +738,45 @@ case "$os" in
 					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/"${txcapblob}" "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
 				fi
 				echo "Copying this script to EFI"
-				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -rp "Press enter after you have copied" && echo)
-				echo "Unmounting the EFI partition"
+				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
+					|| curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" \
+					|| (echo && cat <<- EOF && read -r
+						Failed to copy script.
+						Please copy the script manually to the EFI partition using Finder
+						Make sure the name of the script is firmware.sh in the EFI partition
+						Press enter after you have copied"
+						EOF
+						)
 				sudo diskutil unmount "/Volumes/${EFILABEL}/"
-				echo
-				echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
+				cat <<- EOF
+
+				Run the following commands or run this script itself in Linux now to set up Wi-Fi:
+
+				sudo mkdir -p /tmp/apple-wifi-efi
+				sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+				bash /tmp/apple-wifi-efi/firmware.sh
+				sudo umount /tmp/apple-wifi-efi
+				EOF
 				;;
 			(2)
 
 				echo -e "\nCreating a tarball of the firmware"
 				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar" ${verbose}
-				echo -e "\nFirmware tarball saved to Downloads!"
-				echo -e "\nExtract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
-				echo -e "\nsudo modprobe -r brcmfmac_wcc"
-				echo "sudo modprobe -r brcmfmac"
-				echo "sudo modprobe brcmfmac"
-				echo "sudo modprobe -r hci_bcm4377"
-				echo "sudo modprobe hci_bcm4377"
+				cat <<- EOF
+
+				Firmware tarball saved to Downloads!
+				Extract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:
+
+				sudo modprobe -r brcmfmac_wcc
+				sudo modprobe -r brcmfmac
+				sudo modprobe brcmfmac
+				sudo modprobe -r hci_bcm4377
+				sudo modprobe hci_bcm4377
+				EOF
 				;;
 			(3)
-				echo -e "\nWhat package manager does your Linux distribution use?"
-				echo -e "\n1. apt"
+				echo -e "\nWhat package manager does your Linux distribution use?\n"
+				echo "1. apt"
 				echo "2. dnf"
 				echo "3. pacman"
 				read -r package
@@ -771,17 +806,24 @@ case "$os" in
 	(Linux)
 		echo "Detected Linux"
 		if [[ ! -e /lib/firmware/brcm ]]; then
-			echo "/lib/firmware/brcm does not seem to exist. This script requires that directory to function."
-			echo "If you are on some exotic distro like NixOS, please check the wiki for more information:"
-			echo "  https://wiki.t2linux.org"
-			echo "Exiting..."
+			cat <<- EOF
+			/lib/firmware/brcm does not seem to exist. This script requires that directory to function.
+			If you are on some exotic distro like NixOS, please check the wiki for more information:
+			  https://wiki.t2linux.org
+			Exiting...
+			EOF
 			exit 1
 		fi
-		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Retrieve the firmware from the EFI partition."
-		echo "2. Retrieve the firmware directly from macOS."
-		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
-		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there."
+		cat <<- EOF
+
+		How do you want to copy the firmware to Linux?
+
+		1. Retrieve the firmware from the EFI partition.
+		2. Retrieve the firmware directly from macOS.
+		3. Download a macOS Recovery Image from Apple and extract the firmware from there.
+
+		Note: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there.
+		EOF
 		read -r choice
 		case ${choice} in
 			(1)
