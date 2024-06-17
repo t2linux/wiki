@@ -357,6 +357,23 @@ aur_install() {
 	sudo rm -r ${verbose} "$dir"
 }
 
+log() {
+	while read -r line; do
+		if [ "${verbose}" = "-v" ]; then
+			echo "$line"
+		fi
+		# TODO: Log to file
+	done
+}
+
+err_msg() {
+	msg="$1"
+	echo "$msg"
+	if ! [[ "$verbose" = "-v" ]]; then
+		echo "Run the script with -v to get logs."
+	fi
+}
+
 detect_package_manager () {
 	if [[ $(uname -s) = "Darwin" ]]
 	then
@@ -503,14 +520,8 @@ create_deb () {
 	chmod a+x DEBIAN/postinst
 
 	cd "${workarea}"
-	if [[ ${verbose} = "-v" ]]
-	then
-		dpkg-deb --build --root-owner-group -Zgzip deb
-		dpkg-name deb.deb
-	else
-		dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null || echo "Failed to make deb package. Run the script with -v to get logs."
-		dpkg-name deb.deb >/dev/null
-	fi
+	dpkg-deb --build --root-owner-group -Zgzip deb | log || err_msg "Failed to make deb package."
+	dpkg-name deb.deb | log
 
 	cp ${verbose} "apple-firmware_${ver}-1_all.deb" "$HOME/Downloads"
 	echo -e "\nCleaning up"
@@ -573,12 +584,8 @@ create_rpm () {
 	EOF
 
 	# Build
-	if [[ ${verbose} = "-v" ]]
-	then
-		rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec"
-	else
-		rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" >/dev/null 2>&1 || echo "Failed to make rpm package. Run the script with -v to get logs."
-	fi
+	echo -e "\nRunning rpmbuild"
+	rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" 2>&1 | log || err_msg "Failed to make rpm package."
 
 	# Copy and Cleanup
 	cp ${verbose} "$HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm" "$HOME/Downloads"
@@ -649,12 +656,7 @@ create_arch_pkg () {
 	PATH=/usr/local/Cellar/libarchive/$(echo /usr/local/Cellar/libarchive/* | xargs basename)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
 
 	# Build
-	if [[ ${verbose} = "-v" ]]
-	then
-		PKGEXT='.pkg.tar.zst' makepkg
-	else
-		PKGEXT='.pkg.tar.zst' makepkg >/dev/null 2>&1 || echo "Failed to make pacman package. Run the script with -v to get logs."
-	fi
+	PKGEXT='.pkg.tar.zst' makepkg 2>&1 | log || err_msg "Failed to make pacman package."
 
 	# Revert path to its original form
 	PATH=${PATH_OLD}
@@ -868,12 +870,7 @@ case "$os" in
 					sudo rm -r ${verbose} "${workdir}" || true
 					for i in 0 1 2 3 4 5
 					do
-						if [[ ${verbose} = "-v" ]]
-						then
-							sudo umount -v "${macosdir}/vol${i}" || true
-						else
-							sudo umount "${macosdir}/vol${i}" 2>/dev/null || true
-						fi
+						sudo umount "${macosdir}/vol${i}" 2>&1 | log || true
 					done
 					sudo rm -r ${verbose} "${macosdir}" || true
 				}
