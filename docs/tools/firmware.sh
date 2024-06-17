@@ -348,6 +348,7 @@ done
 
 aur_install() {
 	local aur_package=$1
+	local dir
 	dir=$(mktemp -d)
 	cd "$dir"
 	sudo pacman -Sy --noconfirm git base-devel
@@ -367,7 +368,7 @@ log() {
 }
 
 err_msg() {
-	msg="$1"
+	local msg="$1"
 	echo "$msg"
 	if ! [[ "$verbose" = "-v" ]]; then
 		echo "Run the script with -v to get logs."
@@ -489,6 +490,7 @@ create_deb () {
 	fi
 
 	echo -e "\nBuilding deb package"
+	local workarea
 	workarea=$(mktemp -d)
 	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
 	cd "${workarea}"
@@ -612,6 +614,7 @@ create_arch_pkg () {
 	fi
 
 	echo -e "\nBuilding pacman package"
+	local workarea
 	workarea=$(mktemp -d)
 	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
 	cd "${workarea}"
