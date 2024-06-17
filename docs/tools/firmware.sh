@@ -445,17 +445,10 @@ create_firmware_archive() {
 	python_check
 	rename_firmware "$firmware_tree" "$archive" ${verbose}
 	if [[ $(uname -s) = "Darwin" ]]; then
+		local identifier
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
-			nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-			txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-			cp ${verbose} "$firmware_tree"/wifi/C-4364__s-B2/"${nvramfile}" \
-				brcmfmac4364b2-pcie.txt
-			cp ${verbose} "$firmware_tree"/wifi/C-4364__s-B2/"${txcapblob}" \
-				brcmfmac4364b2-pcie.txcap_blob
-			tar --append ${verbose} -f "$archive" \
-				brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
-			rm ${verbose} brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+			nvram_txcap_quirk "$firmware_tree" "$archive"
 		fi
 	fi
 }
@@ -690,6 +683,22 @@ create_arch_pkg () {
 	EOF
 }
 
+
+# MacOS only
+nvram_txcap_quirk() {
+	local firmware_tree="$1"
+	local output_tar="$2"
+	local nvramfile
+	local txcapblob
+	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+	cp ${verbose} "${firmware_tree}/wifi/C-4364__s-B2/${nvramfile}" brcmfmac4364b2-pcie.txt
+	cp ${verbose} "${firmware_tree}/wifi/C-4364__s-B2/${txcapblob}" brcmfmac4364b2-pcie.txcap_blob
+	tar --append ${verbose} -f "$output_tar" \
+		brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+	rm ${verbose} brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+}
+
 os=$(uname -s)
 case "$os" in
 	(Darwin)
@@ -728,14 +737,10 @@ case "$os" in
 				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 				sudo diskutil mount disk0s1
 				echo "Getting Wi-Fi and Bluetooth firmware"
-				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
-				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware.tar"
-				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-		then
-					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/"${nvramfile}" "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/"${txcapblob}" "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
+				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware-raw.tar" -C /usr/share/firmware/ .
+				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware-raw.tar"
+				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
+					nvram_txcap_quirk "/usr/share/firmware" "/Volumes/${EFILABEL}/firmware-raw.tar"
 				fi
 				echo "Copying this script to EFI"
 				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
@@ -838,11 +843,10 @@ case "$os" in
 
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 
-				for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-					    "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
+				for file in "$workdir/brcmfmac4364b2-pcie.txt" \
+					"$workdir/brcmfmac4364b2-pcie.txcap_blob"
 				do
-					if [ -f "$file" ]
-					then
+					if [ -f "$file" ]; then
 						sudo cp ${verbose} "$file" /lib/firmware/brcm
 					fi
 				done
@@ -852,9 +856,7 @@ case "$os" in
 				if [[ ($input != y) && ($input != Y) ]]
 				then
 					echo -e "\nRemoving the copy from the EFI partition"
-					for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-					            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
-					            "$mountpoint/firmware.tar.gz" \
+					for file in "$mountpoint/firmware-raw.tar.gz" \
 					            "$mountpoint/firmware.sh"
 					do
 						if [ -f "$file" ]
