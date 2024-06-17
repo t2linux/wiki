@@ -357,16 +357,6 @@ aur_install() {
 	sudo rm -r ${verbose} "$dir"
 }
 
-homebrew_check () {
-	if [ ! -f "/usr/local/bin/brew" ]
-	then
-		echo -e "\nHomebrew not found!"
-		echo
-		read -rp "Press enter to install Homebrew."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
-}
-
 detect_package_manager () {
 	if [[ $(uname -s) = "Darwin" ]]
 	then
@@ -430,7 +420,11 @@ install_package() {
 		"brew")
 			case $package in
 				*)
-					homebrew_check
+					if [ ! -f "/usr/local/bin/brew" ]; then
+						echo -e "\nHomebrew not found!\n"
+						read -rp "Press enter to install Homebrew."
+						/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+					fi
 					brew install "$package"
 					;;
 			esac ;;
@@ -440,9 +434,18 @@ install_package() {
 }
 
 create_firmware_archive() {
-	firmware_tree=$1
-	archive=$2
-	python_check
+	local firmware_tree=$1
+	local archive=$2
+	if [[ "$(uname -s)" = "Darwin" ]]; then
+		echo -e "\nChecking for dependencies"
+		if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
+		then
+			echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
+			xcode-select --install
+			echo
+			read -rp "Press enter after you have installed Xcode command line developer tools."
+		fi
+	fi
 	rename_firmware "$firmware_tree" "$archive" ${verbose}
 	if [[ $(uname -s) = "Darwin" ]]; then
 		local identifier
@@ -460,19 +463,6 @@ reload_kernel_modules () {
 	sudo modprobe ${verbose} brcmfmac || true
 	sudo modprobe -r ${verbose} hci_bcm4377 || true
 	sudo modprobe ${verbose} hci_bcm4377 || true
-}
-
-python_check () {
-	if ! [[ $(uname -s) = "Darwin" ]]; then
-		return 0
-	fi
-	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
-	then
-		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
-		xcode-select --install
-		echo
-		read -rp "Press enter after you have installed Xcode command line developer tools."
-	fi
 }
 
 create_deb () {
@@ -929,7 +919,7 @@ case "$os" in
 				dmg2img >/dev/null 2>&1 || install_package dmg2img
 				cleanup_dmg () {
 					sudo rm -r ${verbose} "${workdir}"
-					sudo umount ${verbose} "${loopdevice}"
+					sudo umount ${verbose} "${loopdev_partition}"
 					sudo rm -r ${verbose} "${imgdir}"
 					sudo losetup -d /dev/"${loopdev}"
 				}
@@ -956,8 +946,8 @@ case "$os" in
 				echo "Mounting image"
 				loopdev=$(losetup -f | cut -d "/" -f 3)
 				sudo losetup -P "${loopdev}" fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep "${loopdev}" | tail -1 | awk '{print $1}')
-				sudo mount ${verbose} "${loopdevice}" "${imgdir}"
+				loopdev_partition=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep "${loopdev}" | tail -1 | awk '{print $1}')
+				sudo mount ${verbose} "${loopdev_partition}" "${imgdir}"
 				echo "Getting firmware"
 				cd - >/dev/null
 				create_firmware_archive "${imgdir}/usr/share/firmware" "${workdir}/firmware-renamed.tar" ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
