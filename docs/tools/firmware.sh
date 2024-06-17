@@ -943,6 +943,7 @@ case "$os" in
 				else
 					dmg2img -s BaseSystem.dmg fw.img
 				fi
+				rm BaseSystem.dmg
 				echo "Mounting image"
 				loopdev=$(losetup -f | cut -d "/" -f 3)
 				sudo losetup -P "${loopdev}" fw.img
