@@ -454,16 +454,7 @@ install_package() {
 create_firmware_archive() {
 	local firmware_tree=$1
 	local archive=$2
-	if [[ "$(uname -s)" = "Darwin" ]]; then
-		echo -e "\nChecking for dependencies"
-		if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
-		then
-			echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
-			xcode-select --install
-			echo
-			read -rp "Press enter after you have installed Xcode command line developer tools."
-		fi
-	fi
+	python_check
 	rename_firmware "$firmware_tree" "$archive" ${verbose}
 	if [[ $(uname -s) = "Darwin" ]]; then
 		local identifier
@@ -471,6 +462,20 @@ create_firmware_archive() {
 		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
 			nvram_txcap_quirk "$firmware_tree" "$archive"
 		fi
+	fi
+}
+
+python_check () {
+	if ! [[ $(uname -s) = "Darwin" ]]; then
+		return 0
+	fi
+	echo -e "\nChecking for dependencies"
+	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
+	then
+		echo -e "\nPython 3 not found. You will be prompted to install Xcode command linedeveloper tools."
+		xcode-select --install
+		echo
+		read -rp "Press enter after you have installed Xcode command line developer tools."
 	fi
 }
 
