@@ -406,7 +406,7 @@ install_package() {
 				"linux-apfs-rw")
 					sudo apt upgrade
 					sudo apt install --reinstall -y apfs-dkms
-					sudo modprobe apfs
+					sudo modprobe ${verbose} apfs
 					;;
 				*)
 					sudo apt upgrade
@@ -419,7 +419,7 @@ install_package() {
 					sudo dnf install -y linux-apfs-rw
 					echo -e "\nRunning akmods\n"
 					sudo akmods
-					sudo modprobe apfs
+					sudo modprobe ${verbose} apfs
 					;;
 				*)
 					sudo dnf install -y "$package" ;;
@@ -428,7 +428,7 @@ install_package() {
 			case $package in
 				"linux-apfs-rw")
 					aur_install linux-apfs-rw-dkms-git
-					sudo modprobe apfs
+					sudo modprobe ${verbose} apfs
 					;;
 				"dmg2img")
 					aur_install dmg2img ;;
@@ -761,7 +761,7 @@ case "$os" in
 			(2)
 
 				echo -e "\nCreating a tarball of the firmware"
-				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar" ${verbose}
+				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar"
 				cat <<- EOF
 
 				Firmware tarball saved to Downloads!
@@ -834,7 +834,7 @@ case "$os" in
 				sudo mount ${verbose} /dev/nvme0n1p1 "$mountpoint"
 				sudo tar --warning=no-unknown-keyword ${verbose} -xC "${workdir}" -f "$mountpoint/firmware-raw.tar.gz"
 				sudo chown -R "$USER" "${workdir}"
-				create_firmware_archive "${workdir}" "${workdir}/firmware-renamed.tar" ${verbose}
+				create_firmware_archive "${workdir}" "${workdir}/firmware-renamed.tar"
 
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 
@@ -861,8 +861,8 @@ case "$os" in
 					done
 				fi
 				sudo rm -r ${verbose} "${workdir}"
-				sudo umount "$mountpoint"
-				sudo rmdir "$mountpoint"
+				sudo umount ${verbose} "$mountpoint"
+				sudo rmdir ${verbose} "$mountpoint"
 				echo -e "\nDone!"
 				;;
 			(2)
@@ -873,7 +873,7 @@ case "$os" in
 					sudo rm -r ${verbose} "${workdir}" || true
 					for i in 0 1 2 3 4 5
 					do
-						sudo umount "${macosdir}/vol${i}" 2>&1 | log || true
+						sudo umount ${verbose} "${macosdir}/vol${i}" 2>&1 | log || true
 					done
 					sudo rm -r ${verbose} "${macosdir}" || true
 				}
@@ -905,7 +905,7 @@ case "$os" in
 					unmount_macos_and_cleanup
 					exit 1
 				fi
-				create_firmware_archive "${fwlocation}" "${workdir}/firmware-renamed.tar" "${verbose}" || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				create_firmware_archive "${fwlocation}" "${workdir}/firmware-renamed.tar" || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 				reload_kernel_modules
 				echo "Cleaning up"
@@ -943,7 +943,7 @@ case "$os" in
 				else
 					dmg2img -s BaseSystem.dmg fw.img
 				fi
-				rm BaseSystem.dmg
+				rm ${verbose} BaseSystem.dmg
 				echo "Mounting image"
 				loopdev=$(losetup -f | cut -d "/" -f 3)
 				sudo losetup -P "${loopdev}" fw.img
@@ -951,7 +951,7 @@ case "$os" in
 				sudo mount ${verbose} "${loopdev_partition}" "${imgdir}"
 				echo "Getting firmware"
 				cd - >/dev/null
-				create_firmware_archive "${imgdir}/usr/share/firmware" "${workdir}/firmware-renamed.tar" ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				create_firmware_archive "${imgdir}/usr/share/firmware" "${workdir}/firmware-renamed.tar" || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
 				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
 				reload_kernel_modules
 				echo "Cleaning up"
