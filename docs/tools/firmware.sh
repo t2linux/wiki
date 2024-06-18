@@ -397,7 +397,7 @@ install_package() {
 	local package=$1
 	local package_manager
 	package_manager=$(detect_package_manager)
-	echo -e "$package is missing!\n"
+	echo -e "\n$package is missing!\n"
 	read -rp "Press enter to install $package and its dependencies. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
 
 	case $package_manager in
@@ -465,9 +465,7 @@ create_firmware_archive() {
 }
 
 python_check () {
-	if ! [[ $(uname -s) = "Darwin" ]]; then
-		return 0
-	fi
+	echo -e "\nChecking for missing dependencies"
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
 		echo -e "\nPython 3 not found. You will be prompted to install Xcode command linedeveloper tools."
@@ -734,8 +732,6 @@ case "$os" in
 				echo -e "\nMounting the EFI partition"
 				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 				sudo diskutil mount disk0s1
-				echo -e "\nChecking for missing dependencies"
-				python_check
 				echo "Getting Wi-Fi and Bluetooth firmware"
 				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware-raw.tar" -C /usr/share/firmware/ .
 				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
@@ -764,7 +760,7 @@ case "$os" in
 				EOF
 				;;
 			(2)
-
+				python_check
 				echo -e "\nCreating a tarball of the firmware"
 				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar"
 				cat <<- EOF
@@ -785,7 +781,6 @@ case "$os" in
 				echo "2. dnf"
 				echo "3. pacman"
 				read -r package
-				echo -e "\nChecking for missing dependencies"
 				python_check
 				case ${package} in
 					(1)
