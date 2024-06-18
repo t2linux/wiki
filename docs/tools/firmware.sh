@@ -738,10 +738,10 @@ case "$os" in
 				sudo diskutil mount disk0s1
 				echo "Getting Wi-Fi and Bluetooth firmware"
 				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware-raw.tar" -C /usr/share/firmware/ .
-				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware-raw.tar"
 				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
 					nvram_txcap_quirk "/usr/share/firmware" "/Volumes/${EFILABEL}/firmware-raw.tar"
 				fi
+				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware-raw.tar"
 				echo "Copying this script to EFI"
 				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
 					|| curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" \
