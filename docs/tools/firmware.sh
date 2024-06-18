@@ -925,7 +925,7 @@ case "$os" in
 				}
 
 				echo -e "\nDownloading macOS Recovery Image"
-				workdir=$(mktemp -d)
+				workdir=$(mktemp -d "$PWD/tmp.XXXXXX")
 				imgdir=$(mktemp -d)
 				cd "${workdir}"
 				if [[ ${verbose} = "-v" ]]
@@ -943,7 +943,6 @@ case "$os" in
 				else
 					dmg2img -s BaseSystem.dmg fw.img
 				fi
-				rm ${verbose} BaseSystem.dmg
 				echo "Mounting image"
 				loopdev=$(losetup -f | cut -d "/" -f 3)
 				sudo losetup -P "${loopdev}" fw.img
