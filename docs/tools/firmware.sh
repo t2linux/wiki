@@ -468,7 +468,7 @@ python_check () {
 	echo -e "\nChecking for missing dependencies"
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
-		echo -e "\nPython 3 not found. You will be prompted to install Xcode command linedeveloper tools."
+		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
 		xcode-select --install
 		echo
 		read -rp "Press enter after you have installed Xcode command line developer tools."
