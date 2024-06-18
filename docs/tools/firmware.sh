@@ -454,7 +454,6 @@ install_package() {
 create_firmware_archive() {
 	local firmware_tree=$1
 	local archive=$2
-	python_check
 	rename_firmware "$firmware_tree" "$archive" ${verbose}
 	if [[ $(uname -s) = "Darwin" ]]; then
 		local identifier
@@ -469,7 +468,6 @@ python_check () {
 	if ! [[ $(uname -s) = "Darwin" ]]; then
 		return 0
 	fi
-	echo -e "\nChecking for dependencies"
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
 		echo -e "\nPython 3 not found. You will be prompted to install Xcode command linedeveloper tools."
@@ -736,6 +734,8 @@ case "$os" in
 				echo -e "\nMounting the EFI partition"
 				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
 				sudo diskutil mount disk0s1
+				echo -e "\nChecking for missing dependencies"
+				python_check
 				echo "Getting Wi-Fi and Bluetooth firmware"
 				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware-raw.tar" -C /usr/share/firmware/ .
 				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
@@ -785,6 +785,8 @@ case "$os" in
 				echo "2. dnf"
 				echo "3. pacman"
 				read -r package
+				echo -e "\nChecking for missing dependencies"
+				python_check
 				case ${package} in
 					(1)
 						create_deb
