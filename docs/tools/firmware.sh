@@ -397,8 +397,20 @@ install_package() {
 	local package=$1
 	local package_manager
 	package_manager=$(detect_package_manager)
-	echo -e "\n$package is missing!\n"
-	read -rp "Press enter to install $package and its dependencies. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+	if [[ $package = "linux-apfs-rw" ]]
+	then
+		local apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
+		echo -e "\nAPFS driver is missing!\n"
+		read -rp "Press enter to install the APFS driver via $package_manager. Alternatively you can terminate this script by pressing Control+C and install it yourself from $apfs_driver_link."
+	else
+		echo -e "\n$package and/or its dependencies are missing!\n"
+		if [[ $package_manager = "brew" ]]
+		then
+			read -rp "Press enter to install $package and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+		else
+			read -rp "Press enter to install $package and its dependencies via $package_manager. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+		fi
+	fi
 
 	case $package_manager in
 		"apt")
@@ -436,13 +448,16 @@ install_package() {
 					sudo pacman -Sy --noconfirm "$package" ;;
 			esac ;;
 		"brew")
+			if [ ! -f "/usr/local/bin/brew" ]; then
+				echo -e "\nHomebrew not found!\n"
+				read -rp "Press enter to install Homebrew."
+				/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+			fi
 			case $package in
+				"makepkg")
+					brew install makepkg coreutils
+					;;
 				*)
-					if [ ! -f "/usr/local/bin/brew" ]; then
-						echo -e "\nHomebrew not found!\n"
-						read -rp "Press enter to install Homebrew."
-						/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-					fi
 					brew install "$package"
 					;;
 			esac ;;
@@ -535,7 +550,7 @@ create_deb () {
 	Deb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!
 	Copy it to Linux and install it by running the following in a Linux terminal:
 
-	sudo apt install /path/to/apple-firmware_${ver}-1_all.deb"
+	sudo apt install /path/to/apple-firmware_${ver}-1_all.deb
 	EOF
 }
 
@@ -587,7 +602,6 @@ create_rpm () {
 	EOF
 
 	# Build
-	echo -e "\nRunning rpmbuild"
 	rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" 2>&1 | log || err_msg "Failed to make rpm package."
 
 	# Copy and Cleanup
@@ -605,13 +619,9 @@ create_rpm () {
 }
 
 create_arch_pkg () {
-	if [ ! -f "/usr/local/bin/makepkg" ]
+	if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
 	then
 		install_package makepkg
-	fi
-	if [ ! -f "/usr/local/bin/sha256sum" ]
-	then
-		install_package coreutils
 	fi
 
 	echo -e "\nBuilding pacman package"
@@ -766,6 +776,7 @@ case "$os" in
 				cat <<- EOF
 
 				Firmware tarball saved to Downloads!
+
 				Extract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:
 
 				sudo modprobe -r brcmfmac_wcc
