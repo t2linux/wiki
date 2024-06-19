@@ -938,7 +938,7 @@ case "$os" in
 				}
 
 				echo -e "\nDownloading macOS Recovery Image"
-				workdir=$(mktemp -d "$PWD/tmp.XXXXXX")
+				workdir=$(mktemp -d "$HOME/.tmp.XXXXXX")
 				imgdir=$(mktemp -d)
 				cd "${workdir}"
 				if [[ ${verbose} = "-v" ]]
