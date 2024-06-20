@@ -5,697 +5,8 @@
 #
 # The python script is based upon the original work by The Asahi Linux Contributors.
 
-""":"
-set -euo pipefail
-
-verbose=""
-while getopts "vhx" option; do
-	case $option in
-		v) verbose="-v" ;;
-		h) echo "usage: $0 [-vhx]"; exit 0 ;;
-		x) set -x;;
-		?) exit 1 ;; 
-	esac
-done
-
-python_check () {
-	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
-	then
-		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
-		xcode-select --install
-		echo
-		read -p "Press enter after you have installed Xcode command line developer tools."
-	fi
-}
-
-homebrew_check () {
-	if [ ! -f "/usr/local/bin/brew" ]
-	then
-		echo -e "\nHomebrew not found!"
-		echo
-		read -p "Press enter to install Homebrew."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
-}
-
-create_deb () {
-	if [ ! -f "/usr/local/bin/dpkg" ]
-	then
-		echo -e "\ndpkg and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install dpkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install dpkg yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling dpkg and its dependencies"
-		brew install dpkg
-	fi
-
-	echo -e "\nBuilding deb package"
-	workarea=$(mktemp -d)
-	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
-	cd ${workarea}
-	mkdir -p deb
-	cd deb
-	mkdir -p DEBIAN
-	mkdir -p usr/lib/firmware/brcm
-	cd usr/lib/firmware/brcm
-	tar -xf ${workarea}/firmware.tar ${verbose}
-	cd - >/dev/null
-
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txt"
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "usr/lib/firmware/brcm/brcmfmac4364b2-pcie.txcap_blob"
-	fi
-
-	cat <<- EOF > DEBIAN/control
-		Package: apple-firmware
-		Version: ${ver}-1
-		Maintainer: Apple
-		Architecture: all
-		Description: Wi-Fi and Bluetooth firmware for T2 Macs
-	EOF
-
-	cat <<- EOF > DEBIAN/postinst
-		modprobe -r brcmfmac_wcc || true
-		modprobe -r brcmfmac || true
-		modprobe brcmfmac || true
-		modprobe -r hci_bcm4377 || true
-		modprobe hci_bcm4377 || true
-	EOF
-
-	chmod a+x DEBIAN/control
-	chmod a+x DEBIAN/postinst
-
-	cd ${workarea}
-	if [[ ${verbose} = -v ]]
-	then
-		dpkg-deb --build --root-owner-group -Zgzip deb
-		dpkg-name deb.deb
-	else
-		dpkg-deb --build --root-owner-group -Zgzip deb >/dev/null || echo "Failed to make deb package. Run the script with -v to get logs."
-		dpkg-name deb.deb >/dev/null
-	fi
-
-	cp ${verbose} apple-firmware_${ver}-1_all.deb $HOME/Downloads
-	echo -e "\nCleaning up"
-	rm -r ${verbose} ${workarea}
-
-	echo -e "\nDeb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo apt install /path/to/apple-firmware_${ver}-1_all.deb"
-}
-
-create_rpm () {
-	if [ ! -f "/usr/local/bin/rpmbuild" ]
-	then
-		echo -e "\nrpm and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install rpm and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install rpm yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling rpm and its dependencies"
-		brew install rpm
-	fi
-
-	echo -e "\nBuilding rpm package"
-	mkdir -p $HOME/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-
-	# Extract firmware 
-	python3 "$0" /usr/share/firmware $HOME/rpmbuild/SOURCES/firmware.tar
-	cd $HOME/rpmbuild/BUILD
-
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} brcmfmac4364b2-pcie.txt
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} brcmfmac4364b2-pcie.txcap_blob
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txt
-		tar --append ${verbose} -f $HOME/rpmbuild/SOURCES/firmware.tar brcmfmac4364b2-pcie.txcap_blob
-		rm brcmfmac4364b2-pcie.txcap_blob brcmfmac4364b2-pcie.txt
-	fi
-
-	# Create the spec file
-	cat <<- EOF > $HOME/rpmbuild/SPECS/apple-firmware.spec
-		Name:       apple-firmware
-		Version:    ${ver}
-		Release:    1
-		Summary:    Wi-Fi and Bluetooth firmware for T2 Macs
-		License:    Proprietary
-		BuildArch:  noarch
-
-		Source1: firmware.tar
-
-		%description
-		Wi-Fi and Bluetooth firmware for T2 Macs
-
-		%prep
-		tar -xf %{SOURCE1}
-
-		%build
-
-		%install
-		mkdir -p %{buildroot}/usr/lib/firmware/brcm
-		install -m 644 * %{buildroot}/usr/lib/firmware/brcm
-
-		%posttrans
-		modprobe -r brcmfmac_wcc || true
-		modprobe -r brcmfmac || true
-		modprobe brcmfmac || true
-		modprobe -r hci_bcm4377 || true
-		modprobe hci_bcm4377 || true
-
-		%files
-		/usr/lib/firmware/brcm/*
-	EOF
-
-	# Build
-	if [[ ${verbose} = -v ]]
-	then
-		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec
-	else
-		rpmbuild -bb --define '_target_os linux' $HOME/rpmbuild/SPECS/apple-firmware.spec >/dev/null 2>&1 || echo "Failed to make rpm package. Run the script with -v to get logs."
-	fi
-
-	# Copy and Cleanup
-	cp ${verbose} $HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm $HOME/Downloads
-	echo -e "\nCleaning up"
-	rm -r ${verbose} $HOME/rpmbuild
-
-	echo -e "\nRpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm"
-}
-
-create_arch_pkg () {
-	if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
-	then
-		echo -e "\nmakepkg and/or its dependencies are missing!"
-		echo
-		read -p "Press enter to install makepkg and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install makepkg yourself, if you want to install it via some alternate method."
-		homebrew_check
-		echo -e "\nInstalling makepkg and its dependencies"
-		brew install makepkg coreutils
-	fi
-
-	echo -e "\nBuilding pacman package"
-	workarea=$(mktemp -d)
-	python3 "$0" /usr/share/firmware ${workarea}/firmware.tar
-	cd ${workarea}
-	if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-	then
-		nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-		txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "${workarea}/brcmfmac4364b2-pcie.txt"
-		cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "${workarea}/brcmfmac4364b2-pcie.txcap_blob"
-		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
-		tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
-		rm ${verbose} brcmfmac4364b2-pcie.txt
-		rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
-	fi
-
-	# Create the PKGBUILD
-	cat <<- EOF > PKGBUILD
-		pkgname=apple-firmware
-		pkgver=${ver}
-		pkgrel=1
-		pkgdesc="Wi-Fi and Bluetooth Firmware for T2 Macs"
-		arch=("any")
-		url=""
-		license=('unknown')
-		replaces=('apple-bcm-wifi-firmware')
-		source=("firmware.tar")
-		noextract=("firmware.tar")
-		sha256sums=('SKIP')
-	EOF
-	cat <<- 'EOF' >> PKGBUILD
-
-		package() {
-			mkdir -p $pkgdir/usr/lib/firmware/brcm
-			cd $pkgdir/usr/lib/firmware/brcm
-			tar xf $srcdir/firmware.tar
-		}
-
-		install=apple-firmware.install
-	EOF
-
-	cat <<- EOF > apple-firmware.install
-		post_install() {
-			modprobe -r brcmfmac_wcc || true
-			modprobe -r brcmfmac || true
-			modprobe brcmfmac || true
-			modprobe -r hci_bcm4377 || true
-			modprobe hci_bcm4377 || true
-		}
-	EOF
-
-	# Set path to use newer bsdtar and GNU touch
-	PATH_OLD=$PATH
-	PATH=/usr/local/Cellar/libarchive/$(ls /usr/local/Cellar/libarchive | head -n 1)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
-
-	# Build
-	if [[ ${verbose} = -v ]]
-	then
-		PKGEXT='.pkg.tar.zst' makepkg
-	else
-		PKGEXT='.pkg.tar.zst' makepkg >/dev/null 2>&1 || echo "Failed to make pacman package. Run the script with -v to get logs."
-	fi
-
-	# Revert path to its original form
-	PATH=${PATH_OLD}
-
-	# Copy to Downloads and cleanup
-	cp ${verbose} apple-firmware-${ver}-1-any.pkg.tar.zst $HOME/Downloads
-	echo -e "\nCleaning up"
-	rm -r ${verbose} ${workarea}
-
-	echo -e "\nPacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!"
-	echo "Copy it to Linux and install it by running the following in the Linux terminal:"
-	echo -e "\nsudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst"
-}
-
-detect_package_manager () {
-	if $(apt --help >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=apt
-	elif $(dnf >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=dnf
-	elif $(pacman -h >/dev/null 2>&1)
-	then
-		PACKAGE_MANAGER=pacman
-	else
-		PACKAGE_MANAGER=NONE
-		echo -e "\nUnable to detect the package manager your distro is using!"
-	fi
-}
-
-curl_check () {
-	if ! $(curl --help >/dev/null 2>&1)
-	then
-		echo -e "\ncurl and/or its dependencies are missing!"
-		detect_package_manager
-		echo
-		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-		then
-			read -p "The script could not detect your package manager. Please install curl manually and press enter once you have it installed."
-		else
-			read -p "Press enter to install curl and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install curl yourself, if you want to install it via some alternate method."
-			echo -e "\nInstalling curl and its dependencies"
-			case ${PACKAGE_MANAGER} in
-				(apt)
-					sudo apt update
-					sudo apt install -y curl
-					;;
-				(dnf)
-					sudo dnf install -y curl
-					;;
-				(pacman)
-					sudo pacman -Sy --noconfirm curl
-					;;
-				(*)
-					echo -e "\nUnknown error"
-					exit 1
-					;;
-			esac
-					
-		fi
-	fi
-}
-
-dmg2img_check () {
-	if ! $(dmg2img >/dev/null 2>&1)
-	then
-		echo -e "\ndmg2img and/or its dependencies are missing!"
-		detect_package_manager
-		echo
-		if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-		then
-			read -p "The script could not detect your package manager. Please install dmg2img manually and press enter once you have it installed."
-		else
-			read -p "Press enter to install dmg2img and its dependencies via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install dmg2img yourself, if you want to install it via some alternate method."
-			echo -e "\nInstalling dmg2img and its dependencies"
-			case ${PACKAGE_MANAGER} in
-				(apt)
-					sudo apt update
-					sudo apt install -y dmg2img
-					;;
-				(dnf)
-					sudo dnf install -y dmg2img
-					;;
-				(pacman)
-					dmg2imgdir=$(mktemp -d)
-					cd ${dmg2imgdir}
-					sudo pacman -Sy --noconfirm git base-devel
-					git clone https://aur.archlinux.org/dmg2img.git ${dmg2imgdir}
-					makepkg -si --noconfirm
-					cd - >/dev/null
-					sudo rm -r ${verbose} ${dmg2imgdir}
-					;;
-				(*)
-					echo -e "\nUnknown error"
-					exit 1
-					;;
-			esac
-					
-		fi
-	fi
-}
-
-apfs_install () {
-	echo -e "\nAPFS driver missing!"
-	detect_package_manager
-	echo
-	apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
-	if [[ ${PACKAGE_MANAGER} = "NONE" ]]
-	then
-		read -p "The script could not detect your package manager. Please install the APFS driver manually from ${apfs_driver_link} and press enter once you have it installed."
-	else
-		read -p "Press enter to install the APFS driver via ${PACKAGE_MANAGER}. Alternatively you can terminate this script by pressing Control+C and install it yourself from ${apfs_driver_link}."
-		echo -e "\nInstalling the APFS driver"
-		case ${PACKAGE_MANAGER} in
-			(apt)
-				sudo apt update
-				sudo apt install --reinstall -y apfs-dkms
-				;;
-			(dnf)
-				sudo dnf -y copr enable sharpenedblade/t2linux
-				sudo dnf install -y linux-apfs-rw
-				echo -e "\nRunning akmods\n"
-				sudo akmods
-				;;
-			(pacman)
-				apfsdir=$(mktemp -d)
-				cd ${apfsdir}
-				sudo pacman -Sy --noconfirm git base-devel
-				git clone https://aur.archlinux.org/linux-apfs-rw-dkms-git.git ${apfsdir}
-				makepkg -si --noconfirm
-				cd - >/dev/null
-				sudo rm -r ${verbose} ${apfsdir}
-				;;
-			(*)
-				echo -e "\nUnknown error"
-				exit 1
-				;;
-		esac				
-	fi
-	sudo modprobe ${verbose} apfs && echo -e "\nAPFS driver loaded successfully!" || (echo -e "\nAPFS driver could not be loaded. Make sure you have the kernel headers installed. If you are still facing the issue, try again after restarting your Mac, or use some other method to get the firmware" && exit 1)
-}
-
-os=$(uname -s)
-case "$os" in
-	(Darwin)
-		echo "Detected macOS"
-		ver=$(sw_vers -productVersion)
-		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
-		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
-		if [[ ${ver_check} < 12 ]] && [[ (${identifier} = MacBookPro15,4) || (${identifier} = MacBookPro16,3) || (${identifier} = MacBookAir9,1) ]]
-		then
-			cat <<- EOF
-
-			Warning: You are running a macOS version earlier than macOS Monterey.
-			Your Mac model needs Bluetooth firmware for in addition to Wi-Fi firmware, which is available only on macOS Monterey or later.
-			Only Wi-Fi firmware shall be copied to Linux.
-			For Bluetooth firmware, you can either:
-
-			a) Upgrade macOS to Monterey or later.
-			b) Run this script directly in Linux and choose the option to Download a macOS Recovery Image from there.
-
-			EOF
-		fi
-		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it."
-		echo "2. Create a tarball of the firmware and extract it to Linux."
-		echo "3. Create a Linux specific package which can be installed using a package manager."
-		echo -e "\nNote: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further."
-		read choice
-		case ${choice} in
-			(1)
-				echo -e "\nMounting the EFI partition"
-				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
-				sudo diskutil mount disk0s1
-				echo "Getting Wi-Fi and Bluetooth firmware"
-				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware.tar" -C /usr/share/firmware/ .
-				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware.tar"
-				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-		then
-					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txt"
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "/Volumes/${EFILABEL}/brcmfmac4364b2-pcie.txcap_blob"
-				fi
-				echo "Copying this script to EFI"
-				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null || curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" || (echo -e "\nFailed to copy script.\nPlease copy the script manually to the EFI partition using Finder\nMake sure the name of the script is firmware.sh in the EFI partition\n" && echo && read -p "Press enter after you have copied" && echo)
-				echo "Unmounting the EFI partition"
-				sudo diskutil unmount "/Volumes/${EFILABEL}/"
-				echo
-				echo -e "Run the following commands or run this script itself in Linux now to set up Wi-Fi :-\n\nsudo mkdir -p /tmp/apple-wifi-efi\nsudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi\nbash /tmp/apple-wifi-efi/firmware.sh\nsudo umount /tmp/apple-wifi-efi\n"
-				;;
-			(2)
-
-				echo -e "\nChecking for missing dependencies"
-				python_check
-				echo -e "\nCreating a tarball of the firmware"
-				python3 "$0" /usr/share/firmware $HOME/Downloads/firmware.tar ${verbose}
-				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]
-		then
-					nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
-					txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${nvramfile} "$HOME/Downloads/brcmfmac4364b2-pcie.txt"
-					cp ${verbose} /usr/share/firmware/wifi/C-4364__s-B2/${txcapblob} "$HOME/Downloads/brcmfmac4364b2-pcie.txcap_blob"
-					cd $HOME/Downloads
-					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txt
-					tar --append ${verbose} -f firmware.tar brcmfmac4364b2-pcie.txcap_blob
-					rm ${verbose} brcmfmac4364b2-pcie.txt
-					rm ${verbose} brcmfmac4364b2-pcie.txcap_blob
-					cd - >/dev/null
-				fi
-				echo -e "\nFirmware tarball saved to Downloads!"
-				echo -e "\nExtract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:"
-				echo -e "\nsudo modprobe -r brcmfmac_wcc"
-				echo "sudo modprobe -r brcmfmac"
-				echo "sudo modprobe brcmfmac"
-				echo "sudo modprobe -r hci_bcm4377"
-				echo "sudo modprobe hci_bcm4377"
-				;;
-			(3)
-				echo -e "\nWhat package manager does your Linux distribution use?"
-				echo -e "\n1. apt"
-				echo "2. dnf"
-				echo "3. pacman"
-				read package
-				case ${package} in
-					(1)
-						echo -e "\nChecking for missing dependencies"
-						python_check
-						create_deb
-						;;
-					(2)
-						echo -e "\nChecking for missing dependencies"
-						python_check
-						create_rpm
-						;;
-					(3)
-						echo -e "\nChecking for missing dependencies"
-						python_check
-						create_arch_pkg
-						;;
-					(*)
-						echo -e "\nError: Invalid option!"
-						exit 1
-						;;
-					esac
-				;;
-			(*)
-				echo -e "\nError: Invalid option!"
-				exit 1
-				;;
-			esac
-		;;
-
-	(Linux)
-		echo "Detected Linux"
-		if [[ ! -e /lib/firmware/brcm ]]; then
-			echo "/lib/firmware/brcm does not seem to exist. This script requires that directory to function."
-			echo "If you are on some exotic distro like NixOS, please check the wiki for more information:"
-			echo "  https://wiki.t2linux.org"
-			echo "Exiting..."
-			exit 1
-		fi
-		echo -e "\nHow do you want to copy the firmware to Linux?"
-		echo -e "\n1. Retrieve the firmware from the EFI partition."
-		echo "2. Retrieve the firmware directly from macOS."
-		echo "3. Download a macOS Recovery Image from Apple and extract the firmware from there."
-		echo -e "\nNote: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there."
-		read choice
-		case ${choice} in
-			(1)
-				echo -e "\nRe-mounting the EFI partition"
-				mountpoint=$(mktemp -d)
-				workdir=$(mktemp -d)
-				echo "Installing Wi-Fi and Bluetooth firmware"
-				sudo mount ${verbose} /dev/nvme0n1p1 $mountpoint
-				sudo tar --warning=no-unknown-keyword ${verbose} -xC ${workdir} -f $mountpoint/firmware.tar.gz
-				sudo python3 "$0" ${workdir} ${workdir}/firmware-renamed.tar ${verbose}
-
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
-
-				for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-					    "$mountpoint/brcmfmac4364b2-pcie.txcap_blob"
-				do
-					if [ -f "$file" ]
-					then
-						sudo cp ${verbose} $file /lib/firmware/brcm
-					fi
-				done
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
-				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
-				read -p "Do you want to keep a copy? (y/N)" input
-				if [[ ($input != y) && ($input != Y) ]]
-				then
-					echo -e "\nRemoving the copy from the EFI partition"
-					for file in "$mountpoint/brcmfmac4364b2-pcie.txt" \
-					            "$mountpoint/brcmfmac4364b2-pcie.txcap_blob" \
-					            "$mountpoint/firmware.tar.gz" \
-					            "$mountpoint/firmware.sh"
-					do
-						if [ -f "$file" ]
-						then
-							sudo rm ${verbose} $file
-						fi
-					done
-				fi
-				sudo rm -r ${verbose} ${workdir}
-				sudo umount $mountpoint
-				sudo rmdir $mountpoint
-				echo -e "\nDone!"
-				;;
-			(2)
-				echo -e "\nChecking for missing dependencies"
-				# Load the apfs driver, and install if missing
-				sudo modprobe ${verbose} apfs 2>/dev/null || apfs_install
-				unmount_macos_and_cleanup () {
-					sudo rm -r ${verbose} ${workdir} || true
-					for i in 0 1 2 3 4 5
-					do
-						if [[ ${verbose} = -v ]]
-						then
-							sudo umount -v ${macosdir}/vol${i} || true
-						else
-							sudo umount ${macosdir}/vol${i} 2>/dev/null || true
-						fi
-					done
-					sudo rm -r ${verbose} ${macosdir} || true
-				}
-
-				echo -e "\nMounting the macOS volume"
-				workdir=$(mktemp -d)
-				macosdir=$(mktemp -d)
-				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1'} | rev | cut -c -9 | rev)
-				fwlocation=""
-				for i in 0 1 2 3 4 5
-				do
-					mkdir -p ${macosdir}/vol${i}
-					if [[ ${verbose} = -v ]]
-					then
-						sudo mount -v -o vol=${i} ${macosvol} ${macosdir}/vol${i} || true
-					else
-						sudo mount -o vol=${i} ${macosvol} ${macosdir}/vol${i} 2>/dev/null || true
-					fi
-					
-					if [ -d "${macosdir}/vol${i}/usr/share/firmware" ]
-					then
-						fwlocation=${macosdir}/vol${i}/usr/share/firmware
-					fi
-				done
-				echo "Getting firmware"
-				if [[ ${fwlocation} = "" ]]
-				then
-					echo -e "Could not find location of firmware. Aborting!"
-					unmount_macos_and_cleanup
-					exit 1
-				fi
-				python3 "$0" ${fwlocation} ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
-				echo "Cleaning up"
-				unmount_macos_and_cleanup
-				echo "Done!"
-				;;
-			(3)
-				# Detect whether curl and dmg2img are installed
-				echo -e "\nChecking for missing dependencies"
-				curl_check
-				dmg2img_check
-				cleanup_dmg () {
-					sudo rm -r ${verbose} ${workdir}
-					sudo umount ${verbose} ${loopdevice}
-					sudo rm -r ${verbose} ${imgdir}
-					sudo losetup -d /dev/${loopdev}
-				}
-
-				echo -e "\nDownloading macOS Recovery Image"
-				workdir=$(mktemp -d)
-				imgdir=$(mktemp -d)
-				cd ${workdir}
-				if [[ ${verbose} = -v ]]
-				then
-					curl -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
-				else
-					curl -s -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
-				fi
-				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
-				python3 fetch-macOS-v2.py
-				echo -e "\nConverting image from .dmg to .img"
-				if [[ ${verbose} = -v ]]
-				then
-					dmg2img -v BaseSystem.dmg fw.img
-				else
-					dmg2img -s BaseSystem.dmg fw.img
-				fi
-				echo "Mounting image"
-				loopdev=$(losetup -f | cut -d "/" -f 3)
-				sudo losetup -P ${loopdev} fw.img
-				loopdevice=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep ${loopdev} | tail -1 | awk '{print $1}')
-				sudo mount ${verbose} ${loopdevice} ${imgdir}
-				echo "Getting firmware"
-				cd - >/dev/null
-				python3 "$0" ${imgdir}/usr/share/firmware ${workdir}/firmware-renamed.tar ${verbose} || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
-				sudo tar ${verbose} -xC /lib/firmware/brcm -f ${workdir}/firmware-renamed.tar
-				echo "Reloading Wi-Fi and Bluetooth drivers"
-				sudo modprobe -r ${verbose} brcmfmac_wcc || true
-				sudo modprobe -r ${verbose} brcmfmac || true
-				sudo modprobe ${verbose} brcmfmac || true
-				sudo modprobe -r ${verbose} hci_bcm4377 || true
-				sudo modprobe ${verbose} hci_bcm4377 || true
-				echo "Cleaning up"
-				cleanup_dmg
-				echo "Done!"
-				;;
-			(*)
-				echo -e "\nError: Invalid option!"
-				exit 1
-				;;
-		esac
-		;;
-	(*)
-		echo "Error: unsupported platform"
-		;;
-esac
-exit 0
-"""
-
+rename_firmware () {
+python3 - "$@" <<'EOF'
 # SPDX-License-Identifier: MIT
 import logging, os, os.path, re, sys, pprint, statistics, tarfile, io
 from collections import namedtuple, defaultdict
@@ -1019,4 +330,656 @@ else:
 	bt_col = BluetoothFWCollection(sys.argv[1]+"/bluetooth")
 	pkg.add_files(sorted(bt_col.files()))
 pkg.close()
+EOF
+}
+
+set -euo pipefail
+
+verbose=""
+while getopts "vhxp" option; do
+	case $option in
+		v) verbose="-v" ;;
+		h) echo "usage: $0 [-vhxp] [fw_dir_path output_archive_path]"; exit 0 ;;
+		x) set -x;;
+		p) rename_firmware "${@:2:2}" ${verbose} && exit 0 ;;
+		?) exit 1 ;; 
+	esac
+done
+
+aur_install() {
+	local aur_package=$1
+	local dir
+	dir=$(mktemp -d)
+	cd "$dir"
+	sudo pacman -Sy --noconfirm git base-devel
+	git clone "https://aur.archlinux.org/$aur_package.git" .
+	makepkg -si --noconfirm
+	cd - >/dev/null
+	sudo rm -r ${verbose} "$dir"
+}
+
+log() {
+	while read -r line; do
+		if [ "${verbose}" = "-v" ]; then
+			echo "$line"
+		fi
+		# TODO: Log to file
+	done
+}
+
+err_msg() {
+	local msg="$1"
+	echo "$msg"
+	if ! [[ "$verbose" = "-v" ]]; then
+		echo "Run the script with -v to get logs."
+	fi
+}
+
+detect_package_manager () {
+	if [[ $(uname -s) = "Darwin" ]]
+	then
+		echo brew
+	elif apt --help >/dev/null 2>&1
+	then
+		echo apt
+	elif dnf >/dev/null 2>&1
+	then
+		echo dnf
+	elif pacman -h >/dev/null 2>&1
+	then
+		echo pacman
+	else
+		echo NONE
+	fi
+}
+
+install_package() {
+	local package=$1
+	local package_manager
+	package_manager=$(detect_package_manager)
+	if [[ $package = "linux-apfs-rw" ]]
+	then
+		local apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
+		echo -e "\nAPFS driver is missing!\n"
+		read -rp "Press enter to install the APFS driver via $package_manager. Alternatively you can terminate this script by pressing Control+C and install it yourself from $apfs_driver_link."
+	else
+		echo -e "\n$package and/or its dependencies are missing!\n"
+		if [[ $package_manager = "brew" ]]
+		then
+			read -rp "Press enter to install $package and its dependencies via Homebrew. This script can install Homebrew automatically if you haven't installed it. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+		else
+			read -rp "Press enter to install $package and its dependencies via $package_manager. Alternatively you can terminate this script by pressing Control+C and install $package yourself, if you want to install it via some alternate method."
+		fi
+	fi
+
+	case $package_manager in
+		"apt")
+			case $package in
+				"linux-apfs-rw")
+					sudo apt upgrade
+					sudo apt install --reinstall -y apfs-dkms
+					sudo modprobe ${verbose} apfs
+					;;
+				*)
+					sudo apt upgrade
+					sudo apt install -y "$package" ;;
+			esac ;;
+		"dnf")
+			case $package in
+				"linux-apfs-rw")
+					sudo dnf -y copr enable sharpenedblade/t2linux
+					sudo dnf install -y linux-apfs-rw
+					echo -e "\nRunning akmods\n"
+					sudo akmods
+					sudo modprobe ${verbose} apfs
+					;;
+				*)
+					sudo dnf install -y "$package" ;;
+			esac ;;
+		"pacman")
+			case $package in
+				"linux-apfs-rw")
+					aur_install linux-apfs-rw-dkms-git
+					sudo modprobe ${verbose} apfs
+					;;
+				"dmg2img")
+					aur_install dmg2img ;;
+				*)
+					sudo pacman -Sy --noconfirm "$package" ;;
+			esac ;;
+		"brew")
+			if [ ! -f "/usr/local/bin/brew" ]; then
+				echo -e "\nHomebrew not found!\n"
+				read -rp "Press enter to install Homebrew."
+				/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+			fi
+			case $package in
+				"makepkg")
+					brew install makepkg coreutils
+					;;
+				*)
+					brew install "$package"
+					;;
+			esac ;;
+		"NONE")
+			read -rp "The script could not detect your package manager. Please install $package manually and press enter once you have it installed." ;;
+	esac
+}
+
+create_firmware_archive() {
+	local firmware_tree=$1
+	local archive=$2
+	rename_firmware "$firmware_tree" "$archive" ${verbose}
+	if [[ $(uname -s) = "Darwin" ]]; then
+		local identifier
+		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
+		if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
+			nvram_txcap_quirk "$firmware_tree" "$archive"
+		fi
+	fi
+}
+
+python_check () {
+	echo -e "\nChecking for missing dependencies"
+	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
+	then
+		echo -e "\nPython 3 not found. You will be prompted to install Xcode command line developer tools."
+		xcode-select --install
+		echo
+		read -rp "Press enter after you have installed Xcode command line developer tools."
+	fi
+}
+
+reload_kernel_modules () {
+	echo "Reloading Wi-Fi and Bluetooth drivers"
+	sudo modprobe -r ${verbose} brcmfmac_wcc || true
+	sudo modprobe -r ${verbose} brcmfmac || true
+	sudo modprobe ${verbose} brcmfmac || true
+	sudo modprobe -r ${verbose} hci_bcm4377 || true
+	sudo modprobe ${verbose} hci_bcm4377 || true
+}
+
+create_deb () {
+	if [ ! -f "/usr/local/bin/dpkg" ]
+	then
+		install_package dpkg
+	fi
+
+	echo -e "\nBuilding deb package"
+	local workarea
+	workarea=$(mktemp -d)
+	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
+	cd "${workarea}"
+	mkdir -p deb
+	cd deb
+	mkdir -p DEBIAN
+	mkdir -p usr/lib/firmware/brcm
+	cd usr/lib/firmware/brcm
+	tar -xf "${workarea}/firmware.tar" ${verbose}
+	cd - >/dev/null
+
+	cat <<- EOF > DEBIAN/control
+		Package: apple-firmware
+		Version: ${ver}-1
+		Maintainer: Apple
+		Architecture: all
+		Description: Wi-Fi and Bluetooth firmware for T2 Macs
+	EOF
+
+	cat <<- EOF > DEBIAN/postinst
+		modprobe -r brcmfmac_wcc || true
+		modprobe -r brcmfmac || true
+		modprobe brcmfmac || true
+		modprobe -r hci_bcm4377 || true
+		modprobe hci_bcm4377 || true
+	EOF
+
+	chmod a+x DEBIAN/control
+	chmod a+x DEBIAN/postinst
+
+	cd "${workarea}"
+	dpkg-deb --build --root-owner-group -Zgzip deb | log || err_msg "Failed to make deb package."
+	dpkg-name deb.deb | log
+
+	cp ${verbose} "apple-firmware_${ver}-1_all.deb" "$HOME/Downloads"
+	echo -e "\nCleaning up"
+	rm -r ${verbose} "${workarea}"
+
+	cat <<- EOF
+
+	Deb package apple-firmware_${ver}-1_all.deb has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo apt install /path/to/apple-firmware_${ver}-1_all.deb
+	EOF
+}
+
+create_rpm () {
+	if [ ! -f "/usr/local/bin/rpmbuild" ]
+	then
+		 install_package rpm
+	fi
+
+	echo -e "\nBuilding rpm package"
+	mkdir -p "$HOME/rpmbuild/"{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+
+	# Extract firmware 
+	create_firmware_archive /usr/share/firmware "$HOME/rpmbuild/SOURCES/firmware.tar"
+	cd "$HOME/rpmbuild/BUILD"
+
+	# Create the spec file
+	cat <<- EOF > "$HOME/rpmbuild/SPECS/apple-firmware.spec"
+		Name:       apple-firmware
+		Version:    ${ver}
+		Release:    1
+		Summary:    Wi-Fi and Bluetooth firmware for T2 Macs
+		License:    Proprietary
+		BuildArch:  noarch
+
+		Source1: firmware.tar
+
+		%description
+		Wi-Fi and Bluetooth firmware for T2 Macs
+
+		%prep
+		tar -xf %{SOURCE1}
+
+		%build
+
+		%install
+		mkdir -p %{buildroot}/usr/lib/firmware/brcm
+		install -m 644 * %{buildroot}/usr/lib/firmware/brcm
+
+		%posttrans
+		modprobe -r brcmfmac_wcc || true
+		modprobe -r brcmfmac || true
+		modprobe brcmfmac || true
+		modprobe -r hci_bcm4377 || true
+		modprobe hci_bcm4377 || true
+
+		%files
+		/usr/lib/firmware/brcm/*
+	EOF
+
+	# Build
+	rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" 2>&1 | log || err_msg "Failed to make rpm package."
+
+	# Copy and Cleanup
+	cp ${verbose} "$HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm" "$HOME/Downloads"
+	echo -e "\nCleaning up"
+	rm -r ${verbose} "$HOME/rpmbuild"
+
+	cat <<- EOF
+
+	Rpm package apple-firmware-${ver}-1.noarch.rpm has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo dnf install --disablerepo=* /path/to/apple-firmware-${ver}-1.noarch.rpm
+	EOF
+}
+
+create_arch_pkg () {
+	if [ ! -f "/usr/local/bin/makepkg" ] || [ ! -f "/usr/local/bin/sha256sum" ]
+	then
+		install_package makepkg
+	fi
+
+	echo -e "\nBuilding pacman package"
+	local workarea
+	workarea=$(mktemp -d)
+	create_firmware_archive /usr/share/firmware "${workarea}/firmware.tar"
+	cd "${workarea}"
+
+	# Create the PKGBUILD
+	cat <<- EOF > PKGBUILD
+		pkgname=apple-firmware
+		pkgver=${ver}
+		pkgrel=1
+		pkgdesc="Wi-Fi and Bluetooth Firmware for T2 Macs"
+		arch=("any")
+		url=""
+		license=('unknown')
+		replaces=('apple-bcm-wifi-firmware')
+		source=("firmware.tar")
+		noextract=("firmware.tar")
+		sha256sums=('SKIP')
+	EOF
+	cat <<- 'EOF' >> PKGBUILD
+
+		package() {
+			mkdir -p $pkgdir/usr/lib/firmware/brcm
+			cd $pkgdir/usr/lib/firmware/brcm
+			tar xf $srcdir/firmware.tar
+		}
+
+		install=apple-firmware.install
+	EOF
+
+	cat <<- EOF > apple-firmware.install
+		post_install() {
+			modprobe -r brcmfmac_wcc || true
+			modprobe -r brcmfmac || true
+			modprobe brcmfmac || true
+			modprobe -r hci_bcm4377 || true
+			modprobe hci_bcm4377 || true
+		}
+	EOF
+
+	# Set path to use newer bsdtar and GNU touch
+	PATH_OLD=$PATH
+	PATH=/usr/local/Cellar/libarchive/$(echo /usr/local/Cellar/libarchive/* | xargs basename)/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH_OLD
+
+	# Build
+	PKGEXT='.pkg.tar.zst' makepkg 2>&1 | log || err_msg "Failed to make pacman package."
+
+	# Revert path to its original form
+	PATH=${PATH_OLD}
+
+	# Copy to Downloads and cleanup
+	cp ${verbose} "apple-firmware-${ver}-1-any.pkg.tar.zst" "$HOME/Downloads"
+	echo -e "\nCleaning up"
+	rm -r ${verbose} "${workarea}"
+
+	cat <<-EOF
+
+	Pacman package apple-firmware-${ver}-1-any.pkg.tar.zst has been saved to Downloads!
+	Copy it to Linux and install it by running the following in a Linux terminal:
+
+	sudo pacman -U /path/to/apple-firmware-${ver}-1-any.pkg.tar.zst
+	EOF
+}
+
+
+# MacOS only
+nvram_txcap_quirk() {
+	local firmware_tree="$1"
+	local output_tar="$2"
+	local nvramfile
+	local txcapblob
+	nvramfile=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 5 | rev | cut -c 4- | rev)
+	txcapblob=$(ioreg -l | grep RequestedFiles | cut -d "/" -f 3 | cut -d "\"" -f 1)
+	cp ${verbose} "${firmware_tree}/wifi/C-4364__s-B2/${nvramfile}" brcmfmac4364b2-pcie.txt
+	cp ${verbose} "${firmware_tree}/wifi/C-4364__s-B2/${txcapblob}" brcmfmac4364b2-pcie.txcap_blob
+	tar --append ${verbose} -f "$output_tar" \
+		brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+	rm ${verbose} brcmfmac4364b2-pcie.txt brcmfmac4364b2-pcie.txcap_blob
+}
+
+os=$(uname -s)
+case "$os" in
+	(Darwin)
+		echo "Detected macOS"
+		ver=$(sw_vers -productVersion)
+		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
+		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
+		if [[ ${ver_check} -lt 12 ]] && [[ (${identifier} = MacBookPro15,4) || (${identifier} = MacBookPro16,3) || (${identifier} = MacBookAir9,1) ]]
+		then
+			cat <<- EOF
+
+			Warning: You are running a macOS version earlier than macOS Monterey.
+			Your Mac model needs Bluetooth firmware for in addition to Wi-Fi firmware, which is available only on macOS Monterey or later.
+			Only Wi-Fi firmware shall be copied to Linux.
+			For Bluetooth firmware, you can either:
+
+			a) Upgrade macOS to Monterey or later.
+			b) Run this script directly in Linux and choose the option to Download a macOS Recovery Image from there.
+
+			EOF
+		fi
+		cat <<- EOF
+
+		How do you want to copy the firmware to Linux?
+
+		1. Copy the firmware to the EFI partition and run the same script on Linux to retrieve it.
+		2. Create a tarball of the firmware and extract it to Linux.
+		3. Create a Linux specific package which can be installed using a package manager.
+
+		Note: Option 2 and 3 require additional software like python3 and tools specific for your package manager. Requirements will be told as you proceed further.
+		EOF
+		read -r choice
+		case ${choice} in
+			(1)
+				echo -e "\nMounting the EFI partition"
+				EFILABEL=$(diskutil info disk0s1 | grep "Volume Name" | cut -d ":" -f 2 | xargs)
+				sudo diskutil mount disk0s1
+				echo "Getting Wi-Fi and Bluetooth firmware"
+				tar ${verbose} -cf "/Volumes/${EFILABEL}/firmware-raw.tar" -C /usr/share/firmware/ .
+				if [[ (${identifier} = iMac19,1) || (${identifier} = iMac19,2) || (${identifier} = iMacPro1,1) ]]; then
+					nvram_txcap_quirk "/usr/share/firmware" "/Volumes/${EFILABEL}/firmware-raw.tar"
+				fi
+				gzip ${verbose} --best "/Volumes/${EFILABEL}/firmware-raw.tar"
+				echo "Copying this script to EFI"
+				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
+					|| curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" \
+					|| (echo && cat <<- EOF && read -r
+						Failed to copy script.
+						Please copy the script manually to the EFI partition using Finder
+						Make sure the name of the script is firmware.sh in the EFI partition
+						Press enter after you have copied"
+						EOF
+						)
+				sudo diskutil unmount "/Volumes/${EFILABEL}/"
+				cat <<- EOF
+
+				Run the following commands or run this script itself in Linux now to set up Wi-Fi:
+
+				sudo mkdir -p /tmp/apple-wifi-efi
+				sudo mount /dev/nvme0n1p1 /tmp/apple-wifi-efi
+				bash /tmp/apple-wifi-efi/firmware.sh
+				sudo umount /tmp/apple-wifi-efi
+				EOF
+				;;
+			(2)
+				python_check
+				echo -e "\nCreating a tarball of the firmware"
+				create_firmware_archive /usr/share/firmware "$HOME/Downloads/firmware.tar"
+				cat <<- EOF
+
+				Firmware tarball saved to Downloads!
+
+				Extract the tarball contents to /lib/firmware/brcm in Linux and run the following in the Linux terminal:
+
+				sudo modprobe -r brcmfmac_wcc
+				sudo modprobe -r brcmfmac
+				sudo modprobe brcmfmac
+				sudo modprobe -r hci_bcm4377
+				sudo modprobe hci_bcm4377
+				EOF
+				;;
+			(3)
+				echo -e "\nWhat package manager does your Linux distribution use?\n"
+				echo "1. apt"
+				echo "2. dnf"
+				echo "3. pacman"
+				read -r package
+				python_check
+				case ${package} in
+					(1)
+						create_deb
+						;;
+					(2)
+						create_rpm
+						;;
+					(3)
+						create_arch_pkg
+						;;
+					(*)
+						echo -e "\nError: Invalid option!"
+						exit 1
+						;;
+					esac
+				;;
+			(*)
+				echo -e "\nError: Invalid option!"
+				exit 1
+				;;
+			esac
+		;;
+
+	(Linux)
+		echo "Detected Linux"
+		if [[ ! -e /lib/firmware/brcm ]]; then
+			cat <<- EOF
+			/lib/firmware/brcm does not seem to exist. This script requires that directory to function.
+			If you are on some exotic distro like NixOS, please check the wiki for more information:
+			  https://wiki.t2linux.org
+			Exiting...
+			EOF
+			exit 1
+		fi
+		cat <<- EOF
+
+		How do you want to copy the firmware to Linux?
+
+		1. Retrieve the firmware from the EFI partition.
+		2. Retrieve the firmware directly from macOS.
+		3. Download a macOS Recovery Image from Apple and extract the firmware from there.
+
+		Note: If you are choosing Option 1, then make sure you have run the same script on macOS before and chose Option 1 (Copy the firmware to the EFI partition and run the same script on Linux to retrieve it) there.
+		EOF
+		read -r choice
+		case ${choice} in
+			(1)
+				echo -e "\nRe-mounting the EFI partition"
+				mountpoint=$(mktemp -d)
+				workdir=$(mktemp -d)
+				echo "Installing Wi-Fi and Bluetooth firmware"
+				sudo mount ${verbose} /dev/nvme0n1p1 "$mountpoint"
+				sudo tar --warning=no-unknown-keyword ${verbose} -xC "${workdir}" -f "$mountpoint/firmware-raw.tar.gz"
+				sudo chown -R "$USER" "${workdir}"
+				create_firmware_archive "${workdir}" "${workdir}/firmware-renamed.tar"
+
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
+
+				for file in "$workdir/brcmfmac4364b2-pcie.txt" \
+					"$workdir/brcmfmac4364b2-pcie.txcap_blob"
+				do
+					if [ -f "$file" ]; then
+						sudo cp ${verbose} "$file" /lib/firmware/brcm
+					fi
+				done
+				reload_kernel_modules
+				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
+				read -rp "Do you want to keep a copy? (y/N)" input
+				if [[ ($input != y) && ($input != Y) ]]
+				then
+					echo -e "\nRemoving the copy from the EFI partition"
+					for file in "$mountpoint/firmware-raw.tar.gz" \
+					            "$mountpoint/firmware.sh"
+					do
+						if [ -f "$file" ]
+						then
+							sudo rm ${verbose} "$file"
+						fi
+					done
+				fi
+				sudo rm -r ${verbose} "${workdir}"
+				sudo umount ${verbose} "$mountpoint"
+				sudo rmdir ${verbose} "$mountpoint"
+				echo -e "\nDone!"
+				;;
+			(2)
+				echo -e "\nChecking for missing dependencies"
+				# Load the apfs driver, and install if missing
+				sudo modprobe ${verbose} apfs 2>/dev/null || install_package linux-apfs-rw
+				unmount_macos_and_cleanup () {
+					sudo rm -r ${verbose} "${workdir}" || true
+					for i in 0 1 2 3 4 5
+					do
+						sudo umount ${verbose} "${macosdir}/vol${i}" 2>&1 | log || true
+					done
+					sudo rm -r ${verbose} "${macosdir}" || true
+				}
+
+				echo -e "\nMounting the macOS volume"
+				workdir=$(mktemp -d)
+				macosdir=$(mktemp -d)
+				macosvol=/dev/$(lsblk -o NAME,FSTYPE | grep nvme0n1 | grep apfs | head -1 | awk '{print $1}' | rev | cut -c -9 | rev)
+				fwlocation=""
+				for i in 0 1 2 3 4 5
+				do
+					mkdir -p "${macosdir}/vol${i}"
+					if [[ ${verbose} = "-v" ]]
+					then
+						sudo mount -v -o vol=${i} "${macosvol}" "${macosdir}/vol${i}" || true
+					else
+						sudo mount -o vol=${i} "${macosvol}" "${macosdir}/vol${i}" 2>/dev/null || true
+					fi
+					
+					if [ -d "${macosdir}/vol${i}/usr/share/firmware" ]
+					then
+						fwlocation="${macosdir}/vol${i}/usr/share/firmware"
+					fi
+				done
+				echo "Getting firmware"
+				if [[ ${fwlocation} = "" ]]
+				then
+					echo -e "Could not find location of firmware. Aborting!"
+					unmount_macos_and_cleanup
+					exit 1
+				fi
+				create_firmware_archive "${fwlocation}" "${workdir}/firmware-renamed.tar" || (echo -e "\nCouldn't extract firmware. Try running the script again. If error still persists, try restarting your Mac and then run the script again, or choose some other method." && unmount_macos_and_cleanup && exit 1)
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
+				reload_kernel_modules
+				echo "Cleaning up"
+				unmount_macos_and_cleanup
+				echo "Done!"
+				;;
+			(3)
+				# Detect whether curl and dmg2img are installed
+				echo -e "\nChecking for missing dependencies"
+				curl --version >/dev/null 2>&1 || install_package curl
+				dmg2img >/dev/null 2>&1 || install_package dmg2img
+				cleanup_dmg () {
+					sudo rm -r ${verbose} "${workdir}"
+					sudo umount ${verbose} "${loopdev_partition}"
+					sudo rm -r ${verbose} "${imgdir}"
+					sudo losetup -d /dev/"${loopdev}"
+				}
+
+				echo -e "\nDownloading macOS Recovery Image"
+				workdir=$(mktemp -d "$HOME/tmp.XXXXXX")
+				imgdir=$(mktemp -d)
+				cd "${workdir}"
+				if [[ ${verbose} = "-v" ]]
+				then
+					curl -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
+				else
+					curl -s -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
+				fi
+				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
+				python3 fetch-macOS-v2.py
+				echo -e "\nConverting image from .dmg to .img"
+				if [[ ${verbose} = "-v" ]]
+				then
+					dmg2img -v BaseSystem.dmg fw.img
+				else
+					dmg2img -s BaseSystem.dmg fw.img
+				fi
+				echo "Mounting image"
+				loopdev=$(losetup -f | cut -d "/" -f 3)
+				sudo losetup -P "${loopdev}" fw.img
+				loopdev_partition=/dev/$(lsblk -o KNAME,TYPE,MOUNTPOINT -n | grep "${loopdev}" | tail -1 | awk '{print $1}')
+				sudo mount ${verbose} "${loopdev_partition}" "${imgdir}"
+				echo "Getting firmware"
+				cd - >/dev/null
+				create_firmware_archive "${imgdir}/usr/share/firmware" "${workdir}/firmware-renamed.tar" || (echo -e "\nCouldn't extract firmware. Try choosing some other macOS version (should be Monterey or later). If error still persists, try restarting your Mac and then run the script again." && cleanup_dmg && exit 1)
+				sudo tar ${verbose} -xC /lib/firmware/brcm -f "${workdir}/firmware-renamed.tar"
+				reload_kernel_modules
+				echo "Cleaning up"
+				cleanup_dmg
+				echo "Done!"
+				;;
+			(*)
+				echo -e "\nError: Invalid option!"
+				exit 1
+				;;
+		esac
+		;;
+	(*)
+		echo "Error: unsupported platform"
+		;;
+esac
+exit 0
+
 
