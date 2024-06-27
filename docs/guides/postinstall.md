@@ -142,6 +142,140 @@ blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
 
 Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
 
+# How to use old touchbar driver
+
+Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how to do so:
+
+1. Create and edit the script file: `~/switch-old-touchbar.sh`
+
+2. Paste this content:
+
+    ```bash
+    #!/bin/bash
+    
+    # Checking if root
+    if [ "$EUID" -ne 0 ]
+      then echo "Please run as root"
+      exit 1
+    fi
+    
+    # Checking if on Debian-based OS
+    if apt --help >/dev/null 2>&1
+    then
+        echo "Debian-based distros should not use this script..."
+        echo "Use 'sudo touchbar --switch' instead!"
+        exit 0
+    fi
+    
+    # Setting right package manager
+    get_package_manager() {
+        if command -v pacman &> /dev/null
+        then
+            echo "pacman"
+        elif command -v dnf &> /dev/null
+        then
+            echo "dnf"
+        else
+            echo "NONE"
+        fi
+    }
+    
+    pm_install() {
+        case "$1" in
+            "pacman")
+                echo "$1 -Sy"
+                ;;
+            "dnf")
+                echo "$1 install"
+                ;;
+        esac
+    }
+    
+    pm_uninstall() {
+        case "$1" in
+            "pacman")
+                echo "$1 -Rnsu"
+                ;;
+            "dnf")
+                echo "$1 remove"
+                ;;
+        esac
+    }
+    
+    echo "Checking package manager..."
+    PM=$(get_package_manager)
+    if [[ "$PM" == "NONE" ]]; then
+        echo "No valid package manager has been found..."
+        echo "Exiting!"
+        exit 1;
+    else
+        echo "Found package maanger: $PM"
+    fi
+    
+    PM_INSTALL=$(pm_install "$PM")
+    PM_UNINSTALL=$(pm_uninstall "$PM")
+    
+    # Checking dependencies
+    echo "Cheking dependencies..."
+    
+    if ! command -v git &> /dev/null # GIT
+    then
+        echo "git could not be found! Installing..."
+        $PM_INSTALL git
+    else
+        echo "git is installed..."
+    fi
+    
+    if ! command -v dkms &> /dev/null # DKMS
+    then
+        echo "dkms could not be found! Installing..."
+        $PM_INSTALL dkms
+    else
+        echo "dkms is installed..."
+    fi
+    
+    # Checking if tiny-dfr is uninstalled
+    echo "Checking tiny-dfr..."
+    if command -v tiny-dfr &> /dev/null
+    then
+        echo "tiny-dfr has been detected... Uninstalling!"
+        $PM_UNINSTALL tiny-dfr
+    else
+        echo "tiny-dfr is not installed..."
+    fi
+    
+    # Blacklisting new driver
+    echo "Blacklisting touchbar driver..."
+    
+    sh -c 'echo "# Disable new Apple Touchbar driver
+    blacklist hid_appletb_kbd
+    blacklist hid_appletb_bl" >> /etc/modprobe.d/tiny-dfr-bl.conf'
+    
+    # Cloning repo
+    echo "Cloning driver repo..."
+    git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+    
+    # Installing driver
+    echo "Installing driver"
+    dkms install -m apple-touchbar -v 0.1
+    
+    # DONE!
+    echo "All done! You can now reboot..."
+    read -p "Do you want to reboot now? [y/N]" -n 1 -r -s
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Rebooting..."
+        reboot
+    fi
+    ```
+
+3. Make the script executable: `chmod +x ~/switch-old-touchbar.sh`
+
+4. Run the script `bash ~/switch-old-touchbar.sh`
+
+!!! note
+    If you are on a Debian-based distro (e.g Ubuntu) just run `sudo touchbar --switch`
+
 # Suspend Workaround
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work:
