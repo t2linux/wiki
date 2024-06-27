@@ -142,36 +142,40 @@ blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
 
 Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
 
-# Suspension Workaround
+# Suspend Workaround
 
-S3 suspension has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspension work:
+S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work:
 
 1. Create and edit this file: `/etc/systemd/system/suspend-fix-t2.service`
+
 2. Paste this content:
-```service
-[Unit]
-Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
-Before=sleep.target
-StopWhenUnneeded=yes
 
-[Service]
-User=root
-Type=oneshot
-RemainAfterExit=yes
+     ```service
+     [Unit]
+     Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
+     Before=sleep.target
+     StopWhenUnneeded=yes
 
-ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
-ExecStart=/usr/bin/modprobe -r brcmfmac
-ExecStart=/usr/bin/rmmod -f apple-bce
+     [Service]
+     User=root
+     Type=oneshot
+     RemainAfterExit=yes
 
-ExecStop=/usr/bin/modprobe apple-bce
-ExecStart=/usr/bin/modprobe brcmfmac
-ExecStart=/usr/bin/modprobe brcmfmac_wcc
+     ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
+     ExecStart=/usr/bin/modprobe -r brcmfmac
+     ExecStart=/usr/bin/rmmod -f apple-bce
 
-[Install]
-WantedBy=sleep.target
-```
-3. Enable the service: `sudo systemctl enable --now suspend-fix-t2.service`
+     ExecStop=/usr/bin/modprobe apple-bce
+     ExecStart=/usr/bin/modprobe brcmfmac
+     ExecStart=/usr/bin/modprobe brcmfmac_wcc
 
-NOTE:  
-This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.  
-To check: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
+     [Install]
+     WantedBy=sleep.target
+     ```
+
+3. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+
+!!! note
+
+    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.  
+    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
