@@ -176,5 +176,5 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 3. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
-
-    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config. To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
+    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
+    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
