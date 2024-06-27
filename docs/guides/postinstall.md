@@ -166,8 +166,8 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      ExecStart=/usr/bin/rmmod -f apple-bce
 
      ExecStop=/usr/bin/modprobe apple-bce
-     ExecStart=/usr/bin/modprobe brcmfmac
-     ExecStart=/usr/bin/modprobe brcmfmac_wcc
+     ExecStop=/usr/bin/modprobe brcmfmac
+     ExecStop=/usr/bin/modprobe brcmfmac_wcc
 
      [Install]
      WantedBy=sleep.target
