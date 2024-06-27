@@ -146,22 +146,22 @@ Please note that this internal ethernet interface is required for various servic
 
 Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how to do so:
 
-1. Create and edit the script file: `~/switch-old-touchbar.sh`
+1. Create and edit the script file: `switch-touchbar-drv.sh`
 
 2. Paste this content:
 
     ```bash
     #!/bin/bash
     
-    # Checking if root
-    if [ "$EUID" -ne 0 ]
-      then echo "Please run as root"
-      exit 1
+    # Switching to root
+    sudo $0
+    
+    if [ "$EUID" -ne 0 ]; then
+        exit 1
     fi
     
     # Checking if on Debian-based OS
-    if apt --help >/dev/null 2>&1
-    then
+    if apt --help >/dev/null 2>&1; then
         echo "Debian-based distros should not use this script..."
         echo "Use 'sudo touchbar --switch' instead!"
         exit 0
@@ -169,11 +169,9 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     
     # Setting right package manager
     get_package_manager() {
-        if command -v pacman &> /dev/null
-        then
+        if command -v pacman &>/dev/null; then
             echo "pacman"
-        elif command -v dnf &> /dev/null
-        then
+        elif command -v dnf &>/dev/null; then
             echo "dnf"
         else
             echo "NONE"
@@ -182,23 +180,23 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     
     pm_install() {
         case "$1" in
-            "pacman")
-                echo "$1 -Sy"
-                ;;
-            "dnf")
-                echo "$1 install"
-                ;;
+        "pacman")
+            echo "$1 -Sy"
+            ;;
+        "dnf")
+            echo "$1 install"
+            ;;
         esac
     }
     
     pm_uninstall() {
         case "$1" in
-            "pacman")
-                echo "$1 -Rnsu"
-                ;;
-            "dnf")
-                echo "$1 remove"
-                ;;
+        "pacman")
+            echo "$1 -Rnsu"
+            ;;
+        "dnf")
+            echo "$1 remove"
+            ;;
         esac
     }
     
@@ -207,7 +205,7 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     if [[ "$PM" == "NONE" ]]; then
         echo "No valid package manager has been found..."
         echo "Exiting!"
-        exit 1;
+        exit 1
     else
         echo "Found package maanger: $PM"
     fi
@@ -218,46 +216,85 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     # Checking dependencies
     echo "Cheking dependencies..."
     
-    if ! command -v git &> /dev/null # GIT
-    then
+    if ! command -v git &>/dev/null; then # GIT
         echo "git could not be found! Installing..."
         $PM_INSTALL git
     else
         echo "git is installed..."
     fi
     
-    if ! command -v dkms &> /dev/null # DKMS
-    then
+    if ! command -v dkms &>/dev/null; then # DKMS
         echo "dkms could not be found! Installing..."
         $PM_INSTALL dkms
     else
         echo "dkms is installed..."
     fi
     
-    # Checking if tiny-dfr is uninstalled
-    echo "Checking tiny-dfr..."
-    if command -v tiny-dfr &> /dev/null
-    then
-        echo "tiny-dfr has been detected... Uninstalling!"
-        $PM_UNINSTALL tiny-dfr
-    else
-        echo "tiny-dfr is not installed..."
-    fi
+    if [[ "$1" == "--old" ]]; then
     
-    # Blacklisting new driver
-    echo "Blacklisting touchbar driver..."
+        # Switching to old driver
+        echo "Switching to old driver..."
     
-    sh -c 'echo "# Disable new Apple Touchbar driver
+        # Checking if tiny-dfr is uninstalled
+        echo "Uninstalling tiny-dfr..."
+        if command -v tiny-dfr &>/dev/null; then
+            echo "tiny-dfr has been detected... Uninstalling!"
+            $PM_UNINSTALL tiny-dfr
+        else
+            echo "tiny-dfr is not installed..."
+        fi
+    
+        # Blacklisting new driver
+        echo "Blacklisting new touchbar driver..."
+    
+        sh -c 'echo "# Disable new Apple Touchbar driver
     blacklist hid_appletb_kbd
-    blacklist hid_appletb_bl" >> /etc/modprobe.d/tiny-dfr-bl.conf'
+    blacklist hid_appletb_bl" > /etc/modprobe.d/touchbar.conf'
     
-    # Cloning repo
-    echo "Cloning driver repo..."
-    git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+        # Cloning repo
+        echo "Cloning driver repo..."
+        git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
     
-    # Installing driver
-    echo "Installing driver"
-    dkms install -m apple-touchbar -v 0.1
+        # Installing driver
+        echo "Installing driver"
+        dkms install -m apple-touchbar -v 0.1
+    
+    elif [[ "$1" == "--new" ]]; then
+    
+        # Switching to old driver
+        echo "Switching to old driver..."
+    
+        # Checking if tiny-dfr is uninstalled
+        echo "Installing tiny-dfr..."
+        if ! command -v tiny-dfr &>/dev/null; then
+            echo "tiny-dfr has not been detected... Installing!"
+            $PM_INSTALL tiny-dfr
+        else
+            echo "tiny-dfr is installed..."
+        fi
+    
+        # Blacklisting new driver
+        echo "Blacklisting old touchbar driver..."
+    
+        sh -c 'echo "# Disable new Apple Touchbar driver
+    blacklist hid_appletb_bl" > /etc/modprobe.d/touchbar.conf'
+    
+        # Cloning repo
+        echo "Cloning driver repo..."
+        git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+    
+        # Installing driver
+        echo "Installing driver"
+        dkms install -m apple-touchbar -v 0.1
+    
+    else
+    
+        echo "Choose a valid option:"
+        echo "--new (Switches to the new driver)"
+        echo "--old (Switches to the old driver)"
+        exit 1
+    
+    fi
     
     # DONE!
     echo "All done! You can now reboot..."
@@ -269,12 +306,15 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     fi
     ```
 
-3. Make the script executable: `chmod +x ~/switch-old-touchbar.sh`
+3. Make the script executable: `chmod +x switch-touchbar-drv.sh`
 
-4. Run the script `bash ~/switch-old-touchbar.sh`
+4. Run the script `./switch-touchbar-drv.sh --old`
 
 !!! note
     If you are on a Debian-based distro (e.g Ubuntu) just run `sudo touchbar --switch`
+
+!!! note
+    If you want to revert changes run `./switch-touchbar-drv.sh --new`
 
 # Suspend Workaround
 
