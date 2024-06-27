@@ -251,18 +251,24 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     blacklist hid_appletb_kbd
     blacklist hid_appletb_bl" > /etc/modprobe.d/touchbar.conf'
     
-        # Cloning repo
-        echo "Cloning driver repo..."
-        git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+        if [ ! -d "/usr/src/apple-touchbar-0.1" ]; then
     
-        # Installing driver
-        echo "Installing driver"
-        dkms install -m apple-touchbar -v 0.1
+            # Cloning repo
+            echo "Cloning driver repo..."
+            git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+    
+        fi
+    
+        if [[ ! "$(dkms status)" == *"apple-touchbar"* ]]; then
+            # Installing driver
+            echo "Installing driver"
+            dkms install -m apple-touchbar -v 0.1
+        fi
     
     elif [[ "$1" == "--new" ]]; then
     
-        # Switching to old driver
-        echo "Switching to old driver..."
+        # Switching to new driver
+        echo "Switching to new driver..."
     
         # Checking if tiny-dfr is uninstalled
         echo "Installing tiny-dfr..."
@@ -277,7 +283,7 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
         echo "Blacklisting old touchbar driver..."
     
         sh -c 'echo "# Disable new Apple Touchbar driver
-    blacklist hid_appletb_bl" > /etc/modprobe.d/touchbar.conf'
+    blacklist apple-touchbar" > /etc/modprobe.d/touchbar.conf'
     
         # Cloning repo
         echo "Cloning driver repo..."
