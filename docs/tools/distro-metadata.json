@@ -22,31 +22,31 @@
       "iso": ["https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-sway-40.iso"]
     },
     {
-      "name": "Ubuntu (Jammy)",
+      "name": "Ubuntu 22.04 - Jammy Jellyfish",
       "iso": ["https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/ubuntu-22.04-6.9.5-t2-jammy.iso.00", "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/ubuntu-22.04-6.9.5-t2-jammy.iso.00"]
     },
     {
-      "name": "Ubuntu (Noble)",
+      "name": "Ubuntu 24.04 - Noble Numbat",
       "iso": ["https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/ubuntu-24.04-6.9.5-t2-noble.iso.00", "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/ubuntu-24.04-6.9.5-t2-noble.iso.01"]
     },
     {
-      "name": "Kubuntu (Jammy)",
+      "name": "Kubuntu 22.04 - Jammy Jellyfish",
       "iso": ["https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/kubuntu-22.04-6.9.5-t2-jammy.iso.00","https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/kubuntu-22.04-6.9.5-t2-jammy.iso.01"]
     },
     {
-      "name": "Kubuntu (Noble)",
+      "name": "Kubuntu 24.04 - Noble Numbat",
       "iso": ["https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/kubuntu-24.04-6.9.5-t2-noble.iso.00", "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.9.5-1/kubuntu-24.04-6.9.5-t2-noble.iso.01"]
     },
     {
-      "name": "Linux Mint Cinnamon",
+      "name": "Linux Mint - Cinnamon",
       "iso": ["https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-cinnamon-6.9.5-t2-jammy.iso.00", "https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-cinnamon-6.9.5-t2-jammy.iso.01"]
     },
     {
-      "name": "Linux Mint Mate",
+      "name": "Linux Mint - Mate",
       "iso": ["https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-mate-6.9.5-t2-jammy.iso.00", "https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-mate-6.9.5-t2-jammy.iso.01"]
     },
     {
-      "name": "Linux Mint XFCE",
+      "name": "Linux Mint - XFCE",
       "iso": ["https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-xfce-6.9.5-t2-jammy.iso.00", "https://github.com/t2linux/T2-Mint/releases/download/v6.9.5-1/linuxmint-21.3-xfce-6.9.5-t2-jammy.iso.01"]
     },
     {
