@@ -18,18 +18,19 @@ Installing a kernel with support for T2 Macs is required in order to get the Key
 
 Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels:
 
-| Linux Distribution                  | Kernel with T2 support |
-| ----------------------------------- | ---------------------- |
-| Arch based distros                  | <https://github.com/NoaHimesaka1873/linux-t2-arch> |
-| Arch based distros (Xanmod kernels) | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
-| Fedora                              | <https://github.com/mikeeq/mbp-fedora-kernel> |
-| Fedora                              | <https://github.com/t2linux/fedora-kernel> |
-| Gentoo                              | <https://github.com/t2linux/T2-Gentoo-Kernel> |
-| Manjaro                             | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
-| NixOS                               | <https://github.com/NixOS/nixos-hardware> |
-| Ubuntu based distros                | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
-| Debian based distros                | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
-| Debian based distros                | <https://github.com/andersfugmann/T2-Debian-Kernel> |
+| Linux Distribution                    | Kernel with T2 support |
+| ------------------------------------- | ---------------------- |
+| Arch based distros                    | <https://github.com/NoaHimesaka1873/linux-t2-arch> |
+| Arch based distros (Xanmod kernels)   | <https://github.com/NoaHimesaka1873/linux-xanmod-edge-t2> |
+| Fedora                                | <https://github.com/mikeeq/mbp-fedora-kernel> |
+| Fedora                                | <https://github.com/t2linux/fedora-kernel> |
+| Gentoo                                | <https://github.com/t2linux/T2-Gentoo-Kernel> |
+| Manjaro                               | <https://github.com/NoaHimesaka1873/manjaro-kernel-t2> |
+| NixOS                                 | <https://github.com/NixOS/nixos-hardware> |
+| Ubuntu based distros                  | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
+| Debian based distros                  | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
+| Debian based distros                  | <https://github.com/andersfugmann/T2-Debian-Kernel> |
+| Debian based distros (suspend config) | <https://wiki.t2linux.org/guides/kernel/> |
 
 If compiled kernels for your distro are not available, then you shall have to compile a kernel on your own. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
 
@@ -172,9 +173,73 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      [Install]
      WantedBy=sleep.target
      ```
+3. Check your modprobe location
+  ```bash
+which modprobe
+which rmmod
+```
+and fix the pathes in service script if they differ for your system
 
-3. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+4. If you having problems with touchbar being dead after restoring state from suspend then you might as well try the following version of the script:
+```service
+[Unit]
+Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+User=root
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
+ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
+ExecStart=+/usr/sbin/modprobe -r brcmfmac
+ExecStart=+/usr/sbin/rmmod -f apple-bce
+
+ExecStop=+/usr/sbin/modprobe apple-bce
+ExecStop=+/usr/sbin/modprobe brcmfmac
+ExecStop=+/usr/sbin/modprobe brcmfmac_wcc
+
+
+[Install]
+WantedBy=sleep.target
+```
+
+This script was written specifically for Debian Bookworm tiny-dfr touchbar issue, but you will loose ability to control keyboard brightness with touchbar. For some reason unloading ```hid_appletb_kbd``` helps to maintain touchbar in alive state but then this module trips and doesnt work anymore.
+You can still control keyboard brightness with just bash tho:
+```bash
+echo 8192 > /sys/class/leds/\:white\:kbd_backlight/brightness
+```
+
+5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
-    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
-    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
+    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config or with Debian Bookworm if you followed exact steps from [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
+    
+To check, run: 
+`zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch
+or
+`cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian-based distros.
+
+Without this config option you wont be able to unload the required modules, they will be busy.
+
+6. If touchbar occasionally does not work on boot but works after suspend+restore then you can place this workaround somewhere late after boot
+```bash
+modprobe -r hid_appletb_kbd
+modprobe -r brcmfmac_wcc
+modprobe -r brcmfmac
+rmmod -f apple-bce
+
+sleep 1
+
+modprobe apple-bce
+modprobe brcmfmac
+modprobe brcmfmac_wcc
+
+touchbar --restart
+```
+This literally just simulates the behaviour that is executed when `suspend-fix-t2.service` is triggered with one extra step at the end which helps to bring touchbar back.
+Comment the first line (that kills keyboard brighntess control) if it works fine without that.
+
+You can place this file in your desktop environment autorun folder, create rc.local script or create systemd service for running this script.
