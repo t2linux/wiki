@@ -9,7 +9,7 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 - You will need some packages to build the kernel:
 
     - Arch based systems: `sudo pacman --needed -S bc kmod libelf pahole cpio perl tar xz git`
-    - Debian based systems: `sudo apt install build-essential libncurses-dev libssl-dev flex bison libelf-dev bc dwarves openssl`
+    - Debian based systems: `sudo apt install autoconf bc bison build-essential cpio curl debhelper dkms dwarves fakeroot flex gawk git kernel-wedge libcap-dev libelf-dev libiberty-dev libncurses-dev libpci-dev libssl-dev libudev-dev openssl python3 rsync wget xz-utils zstd`
     - For other distros you will need the equivalent of these, but if you miss something you'll most likely get an error saying what's missing, and you can then install it and re-run `make` to continue where you left off.
 
 - You will need about 20GB of disk space to compile the kernel. If you have a large amount of ram, you could use tmpfs to store build files in ram.
