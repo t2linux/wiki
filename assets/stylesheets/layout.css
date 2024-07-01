@@ -1,0 +1,13 @@
+.md-typeset h1 {
+    margin: 2rem 0 0;
+}
+
+blockquote > p {
+    border-left: .2rem solid var(--md-default-fg-color--lighter) !important;
+    padding-left: .6rem !important;
+    color: rgb(172, 172, 172);
+}
+
+blockquote {
+    border: none !important;
+}
