@@ -173,10 +173,10 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      WantedBy=sleep.target
      ```
 3. Check your modprobe location
-  ```bash
-which modprobe
-which rmmod
-```
+     ```bash
+     which modprobe
+     which rmmod
+     ```
 and fix the pathes in service script if they differ for your system
 
 4. If you having problems with touchbar being dead after restoring state from suspend then you might as well try the following version of the script:
