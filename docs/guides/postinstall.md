@@ -207,16 +207,16 @@ and fix the pathes in service script if they differ for your system
 
 This script was written specifically for Debian Bookworm tiny-dfr touchbar issue, but you will loose ability to control keyboard brightness with touchbar. For some reason unloading ```hid_appletb_kbd``` helps to maintain touchbar in alive state but then this module trips and doesnt work anymore.
 You can still control keyboard brightness with just bash tho:
-     ```bash
+     
      sudo su
      echo 8192 | tee /sys/class/leds/\:white\:kbd_backlight/brightness
-     ```
-you can add a udev rule to give a group write permissions for the brightness value
+
+The path shown in this example is relevant for only MacBookPro16,x and MacBookAir9,1
+     
+Also you can add a udev rule to give a group write permissions for the brightness value
 Add to a new `leds.rules` file in `/etc/udev/rules.d`:
 
-     ```
      ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chgrp GROUP_NAME $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
-     ```
 
 5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
