@@ -9,7 +9,7 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 - You will need some packages to build the kernel:
 
     - Arch based systems: `sudo pacman --needed -S bc kmod libelf pahole cpio perl tar xz git`
-    - Debian based systems: `sudo apt install build-essential libncurses-dev libssl-dev flex bison libelf-dev bc dwarves openssl`
+    - Debian based systems: `sudo apt install autoconf bc bison build-essential cpio curl debhelper dkms dwarves fakeroot flex gawk git kernel-wedge libcap-dev libelf-dev libiberty-dev libncurses-dev libpci-dev libssl-dev libudev-dev openssl python3 rsync wget xz-utils zstd`
     - For other distros you will need the equivalent of these, but if you miss something you'll most likely get an error saying what's missing, and you can then install it and re-run `make` to continue where you left off.
 
 - You will need about 20GB of disk space to compile the kernel. If you have a large amount of ram, you could use tmpfs to store build files in ram.
@@ -23,8 +23,10 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 
 ```bash
 mkdir build && cd build
-git clone --depth=1 https://github.com/t2linux/linux-t2-patches patches
-
+git clone https://github.com/t2linux/linux-t2-patches patches
+cd patches
+git checkout 0ad2b3913f5484ba8e86b6965f5d88903464261d
+cd ..
 pkgver=$(curl -sL https://github.com/t2linux/T2-Ubuntu-Kernel/releases/latest/ | grep "<title>Release" | awk -F " " '{print $2}' | cut -d "v" -f 2 | cut -d "-" -f 1)
 _srcname=linux-${pkgver}
 wget https://www.kernel.org/pub/linux/kernel/v${pkgver//.*}.x/linux-${pkgver}.tar.xz
@@ -41,8 +43,16 @@ done
 !!! Info "Using config from lower kernel versions"
     We will use the config of the kernel that is currently running. If your running kernel is an older longterm/stable kernel, it's possible that some of the default choices for new options added to the kernel might not be what you want. You can replace `make olddefconfig` in the code block below with `make oldconfig` if you want to manually set new options. You can always later use `make menuconfig` to change kernel config options if you have issues.
 
+**for Arch Linux:** extract current config
 ```bash
 zcat /proc/config.gz > .config
+```
+**for Debian-based distros:** extract current config
+```bash
+cat /boot/config-$(uname -r) > .config
+```
+Next steps for all distros:
+```bash
 make olddefconfig
 scripts/config --module CONFIG_BT_HCIBCM4377
 scripts/config --module CONFIG_HID_APPLETB_BL

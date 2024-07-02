@@ -142,6 +142,24 @@ blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
 
 Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
 
+If this didn't work for you, you can also tell NetworkManager directly to ignore specific interfaces
+
+1. Locate the interface that is not used with `ip a` or `ifconfig`
+2. Add the following configuration to the bottom of `/etc/NetworkManager/NetworkManager.conf`
+
+```
+[keyfile]
+unmanaged-devices=interface-name:enxacde48001122
+```
+
+Where `enxacde48001122` is the interface name that you want to ignore
+
+3. Restart network manager
+```
+systemctl restart NetworkManager
+```
+
+
 # Suspend Workaround
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work:
@@ -172,9 +190,105 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      [Install]
      WantedBy=sleep.target
      ```
+3. Check your modprobe location
+     ```bash
+     which modprobe
+     which rmmod
+     ```
+and fix the pathes in service script if they differ for your system
 
-3. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+4. If you having problems with touchbar being dead after restoring state from suspend then you might as well try the following version of the script:
+     ```service
+     [Unit]
+     Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
+     Before=sleep.target
+     StopWhenUnneeded=yes
+     
+     [Service]
+     User=root
+     Type=oneshot
+     RemainAfterExit=yes
+     
+     ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
+     ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
+     ExecStart=+/usr/sbin/modprobe -r brcmfmac
+     ExecStart=+/usr/sbin/rmmod -f apple-bce
+     
+     ExecStop=+/usr/sbin/modprobe apple-bce
+     ExecStop=+/usr/sbin/modprobe brcmfmac
+     ExecStop=+/usr/sbin/modprobe brcmfmac_wcc
+     
+     
+     [Install]
+     WantedBy=sleep.target
+     ```
+
+This script was written specifically for Debian Bookworm tiny-dfr touchbar issue, but you will loose ability to control keyboard brightness with touchbar. For some reason unloading ```hid_appletb_kbd``` helps to maintain touchbar in alive state but then this module trips and doesnt work anymore.
+You can still control keyboard brightness with just bash tho:
+     
+     echo 8192 | sudo tee /sys/class/leds/\:white\:kbd_backlight/brightness
+
+The path shown in this example is relevant for only MacBookPro16,x and MacBookAir9,1
+     
+Also you can add a udev rule to give a group write permissions for the brightness value. Add to a new `leds.rules` file in `/etc/udev/rules.d`:
+
+     ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chgrp GROUP_NAME $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
+
+5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
-    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
-    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
+    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config when kernel is compiled with [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
+    
+To check, run: 
+`zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch
+or
+`cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian-based distros.
+
+Without this config option you wont be able to unload the required modules, they will be busy.
+
+6. If touchbar occasionally does not work on boot but works after suspend+restore then you can place this workaround somewhere late after boot
+     ```bash
+     modprobe -r hid_appletb_kbd
+     modprobe -r brcmfmac_wcc
+     modprobe -r brcmfmac
+     rmmod -f apple-bce
+     
+     sleep 1
+     
+     modprobe apple-bce
+     modprobe brcmfmac
+     modprobe brcmfmac_wcc
+     
+     touchbar --restart
+     ```
+This literally just simulates the behaviour that is executed when `suspend-fix-t2.service` is triggered with one extra step at the end which helps to bring touchbar back.
+Comment the first line (that kills keyboard brighntess control) if it works fine without that.
+
+You can place this file in your desktop environment autorun folder, create rc.local script or create systemd service for running this script.
+
+Example service file:
+
+```service
+[Unit]
+Description=Restart Touch Bar and Network Modules
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
+ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
+ExecStart=+/usr/sbin/modprobe -r brcmfmac
+ExecStart=+/usr/sbin/rmmod -f apple-bce
+ExecStart=+/usr/bin/sleep 1
+ExecStart=+/usr/sbin/modprobe apple-bce
+ExecStart=+/usr/sbin/modprobe brcmfmac
+ExecStart=+/usr/sbin/modprobe brcmfmac_wcc
+ExecStart=+/usr/bin/touchbar --restart
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Place it to `/etc/systemd/system/touchbar-poke.service` then execute `sudo systemctl enable touchbar-poke`
