@@ -180,36 +180,36 @@ which rmmod
 and fix the pathes in service script if they differ for your system
 
 4. If you having problems with touchbar being dead after restoring state from suspend then you might as well try the following version of the script:
-```service
-[Unit]
-Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
-Before=sleep.target
-StopWhenUnneeded=yes
-
-[Service]
-User=root
-Type=oneshot
-RemainAfterExit=yes
-
-ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
-ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
-ExecStart=+/usr/sbin/modprobe -r brcmfmac
-ExecStart=+/usr/sbin/rmmod -f apple-bce
-
-ExecStop=+/usr/sbin/modprobe apple-bce
-ExecStop=+/usr/sbin/modprobe brcmfmac
-ExecStop=+/usr/sbin/modprobe brcmfmac_wcc
-
-
-[Install]
-WantedBy=sleep.target
-```
+     ```service
+     [Unit]
+     Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
+     Before=sleep.target
+     StopWhenUnneeded=yes
+     
+     [Service]
+     User=root
+     Type=oneshot
+     RemainAfterExit=yes
+     
+     ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
+     ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
+     ExecStart=+/usr/sbin/modprobe -r brcmfmac
+     ExecStart=+/usr/sbin/rmmod -f apple-bce
+     
+     ExecStop=+/usr/sbin/modprobe apple-bce
+     ExecStop=+/usr/sbin/modprobe brcmfmac
+     ExecStop=+/usr/sbin/modprobe brcmfmac_wcc
+     
+     
+     [Install]
+     WantedBy=sleep.target
+     ```
 
 This script was written specifically for Debian Bookworm tiny-dfr touchbar issue, but you will loose ability to control keyboard brightness with touchbar. For some reason unloading ```hid_appletb_kbd``` helps to maintain touchbar in alive state but then this module trips and doesnt work anymore.
 You can still control keyboard brightness with just bash tho:
-```bash
-echo 8192 > /sys/class/leds/\:white\:kbd_backlight/brightness
-```
+     ```bash
+     echo 8192 | tee /sys/class/leds/\:white\:kbd_backlight/brightness
+     ```
 
 5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
