@@ -230,8 +230,7 @@ You can still control keyboard brightness with just bash tho:
 
 The path shown in this example is relevant for only MacBookPro16,x and MacBookAir9,1
      
-Also you can add a udev rule to give a group write permissions for the brightness value
-Add to a new `leds.rules` file in `/etc/udev/rules.d`:
+Also you can add a udev rule to give a group write permissions for the brightness value. Add to a new `leds.rules` file in `/etc/udev/rules.d`:
 
      ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chgrp GROUP_NAME $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
 
