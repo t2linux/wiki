@@ -49,9 +49,6 @@ zcat /proc/config.gz > .config
 ```bash
 cat /boot/config-$(uname -r) > .config
 ```
-**for Debian-based distros:** or you might as well just [download the debian config](../attachments/debian.config) that was observed to have [suspend-workaround](../guides/postinstall.md) working on debian bookworm. Name the file as .config and place in current directory.
-(On Arch it works either way, you dont need this for arch)
-
 Next steps for all distros:
 ```bash
 make olddefconfig
