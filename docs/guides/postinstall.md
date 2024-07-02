@@ -142,6 +142,24 @@ blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
 
 Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
 
+If this didn't work for you, you can also tell NetworkManager directly to ignore specific interfaces
+
+1. Locate the interface that is not used with `ip a` or `ifconfig`
+2. Add the following configuration to the bottom of `/etc/NetworkManager/NetworkManager.conf`
+
+```
+[keyfile]
+unmanaged-devices=interface-name:enxacde48001122
+```
+
+Where `enxacde48001122` is the interface name that you want to ignore
+
+3. Restart network manager
+```
+systemctl restart NetworkManager
+```
+
+
 # Suspend Workaround
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work:
