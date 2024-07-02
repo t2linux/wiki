@@ -265,3 +265,30 @@ This literally just simulates the behaviour that is executed when `suspend-fix-t
 Comment the first line (that kills keyboard brighntess control) if it works fine without that.
 
 You can place this file in your desktop environment autorun folder, create rc.local script or create systemd service for running this script.
+
+Example service file:
+
+```service
+[Unit]
+Description=Restart Touch Bar and Network Modules
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
+ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
+ExecStart=+/usr/sbin/modprobe -r brcmfmac
+ExecStart=+/usr/sbin/rmmod -f apple-bce
+ExecStart=+/usr/bin/sleep 1
+ExecStart=+/usr/sbin/modprobe apple-bce
+ExecStart=+/usr/sbin/modprobe brcmfmac
+ExecStart=+/usr/sbin/modprobe brcmfmac_wcc
+ExecStart=+/usr/bin/touchbar --restart
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Place it to `/etc/systemd/system/touchbar-poke.service` then execute `sudo systemctl enable touchbar-poke`
