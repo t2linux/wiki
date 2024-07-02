@@ -237,7 +237,7 @@ Also you can add a udev rule to give a group write permissions for the brightnes
 5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
-    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config or with Debian Bookworm if you followed exact steps from [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
+    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config when kernel is compiled with [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
     
 To check, run: 
 `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch
