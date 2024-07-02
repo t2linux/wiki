@@ -224,20 +224,20 @@ or
 Without this config option you wont be able to unload the required modules, they will be busy.
 
 6. If touchbar occasionally does not work on boot but works after suspend+restore then you can place this workaround somewhere late after boot
-```bash
-modprobe -r hid_appletb_kbd
-modprobe -r brcmfmac_wcc
-modprobe -r brcmfmac
-rmmod -f apple-bce
-
-sleep 1
-
-modprobe apple-bce
-modprobe brcmfmac
-modprobe brcmfmac_wcc
-
-touchbar --restart
-```
+     ```bash
+     modprobe -r hid_appletb_kbd
+     modprobe -r brcmfmac_wcc
+     modprobe -r brcmfmac
+     rmmod -f apple-bce
+     
+     sleep 1
+     
+     modprobe apple-bce
+     modprobe brcmfmac
+     modprobe brcmfmac_wcc
+     
+     touchbar --restart
+     ```
 This literally just simulates the behaviour that is executed when `suspend-fix-t2.service` is triggered with one extra step at the end which helps to bring touchbar back.
 Comment the first line (that kills keyboard brighntess control) if it works fine without that.
 
