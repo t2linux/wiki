@@ -160,58 +160,24 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
         exit 1
     fi
     
-    # Checking if on Debian-based OS
+    # Detecting Package Manager
+    PM_INSTALL=""
+    PM_REMOVE="null"
+    
     if apt --help >/dev/null 2>&1; then
-        echo "Debian-based distros should not use this script..."
-        echo "Use 'sudo touchbar --switch' instead!"
-        exit 0
-    fi
-    
-    # Setting right package manager
-    get_package_manager() {
-        if command -v pacman &>/dev/null; then
-            echo "pacman"
-        elif command -v dnf &>/dev/null; then
-            echo "dnf"
-        else
-            echo "NONE"
-        fi
-    }
-    
-    pm_install() {
-        case "$1" in
-        "pacman")
-            echo "$1 -Sy"
-            ;;
-        "dnf")
-            echo "$1 install"
-            ;;
-        esac
-    }
-    
-    pm_uninstall() {
-        case "$1" in
-        "pacman")
-            echo "$1 -Rnsu"
-            ;;
-        "dnf")
-            echo "$1 remove"
-            ;;
-        esac
-    }
-    
-    echo "Checking package manager..."
-    PM=$(get_package_manager)
-    if [[ "$PM" == "NONE" ]]; then
-        echo "No valid package manager has been found..."
-        echo "Exiting!"
+        echo "Debian-based OS are not supported!"
+        echo "Please use 'sudo touchbar --switch' instead."
         exit 1
+    elif dnf >/dev/null 2>&1; then
+        echo "Fedora-based OS are not supported!"
+        exit 1
+    elif pacman -h >/dev/null 2>&1; then
+        PM_INSTALL="pacman -Sy"
+        PM_REMOVE="pacman -Rnsu"
     else
-        echo "Found package maanger: $PM"
+        echo "No valid package manager has been found!"
+        exit 1
     fi
-    
-    PM_INSTALL=$(pm_install "$PM")
-    PM_UNINSTALL=$(pm_uninstall "$PM")
     
     # Checking dependencies
     echo "Cheking dependencies..."
@@ -219,30 +185,21 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     if ! command -v git &>/dev/null; then # GIT
         echo "git could not be found! Installing..."
         $PM_INSTALL git
-    else
-        echo "git is installed..."
     fi
     
     if ! command -v dkms &>/dev/null; then # DKMS
         echo "dkms could not be found! Installing..."
         $PM_INSTALL dkms
-    else
-        echo "dkms is installed..."
     fi
     
+    # SWITCH TO OLD DRIVER
     if [[ "$1" == "--old" ]]; then
     
         # Switching to old driver
         echo "Switching to old driver..."
     
-        # Checking if tiny-dfr is uninstalled
-        echo "Uninstalling tiny-dfr..."
-        if command -v tiny-dfr &>/dev/null; then
-            echo "tiny-dfr has been detected... Uninstalling!"
-            $PM_UNINSTALL tiny-dfr
-        else
-            echo "tiny-dfr is not installed..."
-        fi
+        # Removing tiny-dfr
+        $PM_REMOVE tiny-dfr
     
         # Blacklisting new driver
         echo "Blacklisting new touchbar driver..."
@@ -251,47 +208,26 @@ Some users want to use `apple-touchbar` driver instead of `tiny-dfr`, here's how
     blacklist hid_appletb_kbd
     blacklist hid_appletb_bl" > /etc/modprobe.d/touchbar.conf'
     
-        if [ ! -d "/usr/src/apple-touchbar-0.1" ]; then
+        # Installing old driver
+        echo "Cloning driver repo..."
+        git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
+        dkms install -m apple-touchbar -v 0.1
     
-            # Cloning repo
-            echo "Cloning driver repo..."
-            git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
-    
-        fi
-    
-        if [[ ! "$(dkms status)" == *"apple-touchbar"* ]]; then
-            # Installing driver
-            echo "Installing driver"
-            dkms install -m apple-touchbar -v 0.1
-        fi
-    
+    # SWITCH TO NEW DRIVER
     elif [[ "$1" == "--new" ]]; then
     
         # Switching to new driver
         echo "Switching to new driver..."
     
-        # Checking if tiny-dfr is uninstalled
-        echo "Installing tiny-dfr..."
-        if ! command -v tiny-dfr &>/dev/null; then
-            echo "tiny-dfr has not been detected... Installing!"
-            $PM_INSTALL tiny-dfr
-        else
-            echo "tiny-dfr is installed..."
-        fi
+        # Installing tiny-dfr
+        $PM_INSTALL tiny-dfr
     
-        # Blacklisting new driver
-        echo "Blacklisting old touchbar driver..."
+        # Removing blacklist conf
+        rm /etc/modprobe.d/touchbar.conf
     
-        sh -c 'echo "# Disable new Apple Touchbar driver
-    blacklist apple-touchbar" > /etc/modprobe.d/touchbar.conf'
-    
-        # Cloning repo
-        echo "Cloning driver repo..."
-        git clone https://github.com/AdityaGarg8/apple-touchbar-drv /usr/src/apple-touchbar-0.1
-    
-        # Installing driver
-        echo "Installing driver"
-        dkms install -m apple-touchbar -v 0.1
+        # Removing old driver
+        dkms unbuild -m apple-touchbar -v 0.1 -k all
+        rm -r /usr/src/apple-touchbar-0.1
     
     else
     
