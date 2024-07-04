@@ -38,17 +38,23 @@ done
 ### Setting kernel configuration
 
 !!! Info "Using config from lower kernel versions"
+
     We will use the config of the kernel that is currently running. If your running kernel is an older longterm/stable kernel, it's possible that some of the default choices for new options added to the kernel might not be what you want. You can replace `make olddefconfig` in the code block below with `make oldconfig` if you want to manually set new options. You can always later use `make menuconfig` to change kernel config options if you have issues.
 
 **for Arch Linux:** extract current config
+
 ```bash
 zcat /proc/config.gz > .config
 ```
+
 **for Debian-based distros:** extract current config
+
 ```bash
 cat /boot/config-$(uname -r) > .config
 ```
+
 Next steps for all distros:
+
 ```bash
 make olddefconfig
 scripts/config --module CONFIG_BT_HCIBCM4377
