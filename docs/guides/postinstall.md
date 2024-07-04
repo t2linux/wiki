@@ -162,6 +162,7 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      Type=oneshot
      RemainAfterExit=yes
 
+     #ExecStartPre=+/usr/bin/modprobe -r hid_appletb_kbd
      ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
      ExecStart=/usr/bin/modprobe -r brcmfmac
      ExecStart=/usr/bin/rmmod -f apple-bce
@@ -178,48 +179,12 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      which modprobe
      which rmmod
      ```
-and fix the pathes in service script if they differ for your system
-
-4. If you having problems with touchbar being dead after restoring state from suspend then you might as well try the following version of the script:
-     ```service
-     [Unit]
-     Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
-     Before=sleep.target
-     StopWhenUnneeded=yes
-     
-     [Service]
-     User=root
-     Type=oneshot
-     RemainAfterExit=yes
-     
-     ExecStartPre=+/usr/sbin/modprobe -r hid_appletb_kbd
-     ExecStart=+/usr/sbin/modprobe -r brcmfmac_wcc
-     ExecStart=+/usr/sbin/modprobe -r brcmfmac
-     ExecStart=+/usr/sbin/rmmod -f apple-bce
-     
-     ExecStop=+/usr/sbin/modprobe apple-bce
-     ExecStop=+/usr/sbin/modprobe brcmfmac
-     ExecStop=+/usr/sbin/modprobe brcmfmac_wcc
-     
-     
-     [Install]
-     WantedBy=sleep.target
-     ```
-
-This script was written specifically for Debian Bookworm tiny-dfr touchbar issue, but you will loose ability to control keyboard brightness with touchbar. For some reason unloading ```hid_appletb_kbd``` helps to maintain touchbar in alive state but then this module trips and doesnt work anymore.
-You can still control keyboard brightness with just bash tho:
-     
-     echo 8192 | sudo tee /sys/class/leds/\:white\:kbd_backlight/brightness
-
-The path shown in this example is relevant for only MacBookPro16,x and MacBookAir9,1
-     
-Also you can add a udev rule to give a group write permissions for the brightness value. Add to a new `leds.rules` file in `/etc/udev/rules.d`:
-
-     ACTION=="add", SUBSYSTEM=="leds", RUN+="/bin/chgrp GROUP_NAME $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
+and fix the pathes in service script if they differ for your system. If you having problems with touchbar being dead after restoring state from suspend then uncomment ExecStartPre line.
 
 5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
+
     This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config when kernel is compiled with [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
     
 To check, run: 
