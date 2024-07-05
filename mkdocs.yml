@@ -15,6 +15,7 @@ theme:
         - tabs
         - content.tabs.link
         - content.code.copy
+        - navigation.top
     favicon: assets/images/icon.png
 
 docs_dir: docs
