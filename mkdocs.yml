@@ -14,6 +14,7 @@ theme:
     features:
         - tabs
         - content.tabs.link
+        - content.code.copy
     favicon: assets/images/icon.png
 
 docs_dir: docs
@@ -24,8 +25,12 @@ repo_url: https://github.com/t2linux/wiki
 edit_uri: https://github.com/t2linux/wiki/edit/master/docs/
 
 markdown_extensions:
-    - pymdownx.highlight
+    - pymdownx.highlight:
+          anchor_linenums: true
+          line_spans: __span
+          pygments_lang_class: true
     - pymdownx.inlinehilite
+    - pymdownx.snippets
     - pymdownx.superfences
     - pymdownx.tasklist:
           custom_checkbox: true
