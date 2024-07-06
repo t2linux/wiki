@@ -4,7 +4,7 @@ This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
 
-Make sure you have a t2 kernel of version greater than 6.6.2-2 (you can check this with `uname -r`).
+Make sure you have a t2 kernel of version greater than 6.9.8-1 (you can check this with `uname -r`).
 
 ## Issues
 
@@ -40,8 +40,6 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
         # Enable the iGPU by default if present
         options apple-gmux force_igd=y
         ```
-
-2.  Add `apple_set_os` as a kernel parameter to make Apple's firmware show the iGPU so that apple-gmux will be able to switch to it.
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
