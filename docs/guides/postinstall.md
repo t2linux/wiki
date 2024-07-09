@@ -187,7 +187,7 @@ and fix the pathes in service script if they differ for your system. If you havi
 
     This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config when kernel is compiled with [kernel compilation instructions](https://wiki.t2linux.org/guides/kernel/).
     
-To check, run: 
+   To check, run: 
 `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch
 or
 `cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian-based distros.
