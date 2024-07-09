@@ -181,7 +181,7 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      ```
 and fix the pathes in service script if they differ for your system. If you having problems with touchbar being dead after restoring state from suspend then uncomment ExecStartPre line.
 
-5. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+4. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
 
 !!! note
 
@@ -194,7 +194,7 @@ or
 
 Without this config option you wont be able to unload the required modules, they will be busy.
 
-6. If touchbar occasionally does not work on boot but works after suspend+restore then you can place this workaround somewhere late after boot
+5. If touchbar occasionally does not work on boot but works after suspend+restore then you can place this workaround somewhere late after boot
      ```bash
      modprobe -r hid_appletb_kbd
      modprobe -r brcmfmac_wcc
