@@ -185,12 +185,8 @@ and fix the pathes in service script if they differ for your system. If you havi
 
 !!! note
 
-    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
-    
-   To check, run: 
-`zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch
-or
-`cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian-based distros.
+    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.    
+    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on arch or `cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian-based distros.
 
 Without this config option you wont be able to unload the required modules, they will be busy.
 
