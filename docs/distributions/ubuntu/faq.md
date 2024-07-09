@@ -31,34 +31,6 @@ sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream
 sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-modules libspa-0.2-{bluetooth,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,tests}}
 ```
 
-# Why there are no Wi-Fi networks in scan list
-
-In some cases users are not getting even a single Wi-Fi network listed when attempting to connect to a network, inspite of having followed the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) completely and correctly.
-
-To fix this:
-
-1. Edit `/etc/NetworkManager/NetworkManager.conf` to look like this:
-
-    ```conf
-    [main]
-    plugins=ifupdown,keyfile
-
-    [ifupdown]
-    managed=false
-
-    [device]
-    wifi.scan-rand-mac-address=no
-    ```
-
-2. Now edit `/etc/NetworkManager/conf.d/wifi_backend.conf` to look like this:
-
-    ```conf
-    #[device]
-    #wifi.backend=iwd
-    ```
-
-3. Finally run `sudo systemctl restart NetworkManager`.
-
 # How do I upgrade my kernel
 
 Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
