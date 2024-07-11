@@ -338,8 +338,10 @@ set -euo pipefail
 verbose=""
 subcmd=""
 args=""
-while getopts "vhxp" option; do
+interactive="true"
+while getopts "ivhxp" option; do
 	case $option in
+		i) interactive="false" ;;
 		v) verbose="-v" ;;
 		h)
 		cat <<- EOF
@@ -368,7 +370,7 @@ else
 	args=( "${@:2}" )
 fi
 
-if [[ "$subcmd" = "" ]]; then
+if [[ "$subcmd" = "" ]] && [[ "$interactive" = "true" ]]; then
 	case "$(uname -s)" in
 		(Darwin)
 			echo "Detected macOS"
@@ -435,6 +437,7 @@ if [[ "$subcmd" = "" ]]; then
 fi
 
 if [[ "$subcmd" = "" ]]; then
+	echo "No subcommand specified"
 	exit 1
 fi
 
@@ -489,6 +492,11 @@ install_package() {
 	local package=$1
 	local package_manager
 	package_manager=$(detect_package_manager)
+	if [[ "$interactive" = "false" ]]; then
+		echo "$package is missing. Install it then try again"
+		echo "Exiting"
+		exit 1
+	fi
 	if [[ $package = "linux-apfs-rw" ]]
 	then
 		local apfs_driver_link=https://github.com/linux-apfs/linux-apfs-rw.git
@@ -572,6 +580,11 @@ create_firmware_archive() {
 }
 
 python_check () {
+	if [[ "$interactive" = "false" ]]; then
+		echo "Xcode command line tools are missing."
+		echo "Exiting"
+		exit 1
+	fi
 	echo -e "\nChecking for missing dependencies"
 	if [ ! -f "/Library/Developer/CommandLineTools/usr/bin/python3" ] && [ ! -f "/Applications/Xcode.app/Contents/Developer/usr/bin/python3" ]
 	then
@@ -832,11 +845,10 @@ case "$os" in
 				echo "Copying this script to EFI"
 				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
 					|| curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" \
-					|| (echo && cat <<- EOF && read -r
+					|| ( echo && cat <<- EOF && [ "$interactive" = "true"] && echo "Press enter after you have copied" && read -r
 						Failed to copy script.
 						Please copy the script manually to the EFI partition using Finder
 						Make sure the name of the script is firmware.sh in the EFI partition
-						Press enter after you have copied"
 						EOF
 						)
 				sudo diskutil unmount "/Volumes/${EFILABEL}/"
