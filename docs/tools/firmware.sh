@@ -935,7 +935,11 @@ case "$os" in
 				done
 				reload_kernel_modules
 				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
-				read -rp "Do you want to keep a copy? (y/N)" input
+				if [ "$interactive" = "true"]; then
+					read -rp "Do you want to keep a copy? (y/N)" input
+				else
+					input="y"
+				fi
 				if [[ ($input != y) && ($input != Y) ]]
 				then
 					echo -e "\nRemoving the copy from the EFI partition"
