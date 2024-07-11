@@ -813,7 +813,6 @@ nvram_txcap_quirk() {
 os=$(uname -s)
 case "$os" in
 	(Darwin)
-		echo "Detected macOS"
 		ver=$(sw_vers -productVersion)
 		ver_check=$(sw_vers -productVersion | cut -d "." -f 1)
 		identifier=$(system_profiler SPHardwareDataType | grep "Model Identifier" | cut -d ":" -f 2 | xargs)
@@ -905,7 +904,6 @@ case "$os" in
 		;;
 
 	(Linux)
-		echo "Detected Linux"
 		if [[ ! -e /lib/firmware/brcm ]]; then
 			cat <<- EOF
 			/lib/firmware/brcm does not seem to exist. This script requires that directory to function.
