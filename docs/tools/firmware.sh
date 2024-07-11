@@ -337,7 +337,8 @@ set -euo pipefail
 
 verbose=""
 subcmd=""
-args=""
+target_pkg_manager=""
+args=()
 interactive="true"
 while getopts "ivhxp" option; do
 	case $option in
@@ -439,8 +440,8 @@ fi
 if [[ "$subcmd" = "" ]]; then
 	echo "No subcommand specified"
 	exit 1
-elif [[ "$subcmd" = "create_package" ]]; then
-	target_pkg_manager="${args[1]}"
+elif [[ "$subcmd" = "create_package" ]] &&  [[ "$target_pkg_manager" = "" ]]; then
+	target_pkg_manager="${args[0]}"
 fi
 
 aur_install() {
