@@ -304,5 +304,5 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 5. If you are facing issues with Wi-Fi on resume, uncomment the lines having `brcmfmac` and `brcmfmac_wcc` in the above file.
 
 !!! note
-    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.    
+    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
     To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros or `cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian/Ubuntu based distros.
