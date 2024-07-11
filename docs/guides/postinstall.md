@@ -267,7 +267,14 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 
 1. Create and edit this file: `/etc/systemd/system/suspend-fix-t2.service`
 
-2. Paste this content:
+2. Check your `modprobe` and `rmmod` location by running:
+
+     ```bash
+     which modprobe
+     which rmmod
+     ```
+
+3. Taking the example as `/usr/bin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly
 
      ```service
      [Unit]
@@ -280,20 +287,22 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      Type=oneshot
      RemainAfterExit=yes
 
-     ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
-     ExecStart=/usr/bin/modprobe -r brcmfmac
+     #ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
+     #ExecStart=/usr/bin/modprobe -r brcmfmac
      ExecStart=/usr/bin/rmmod -f apple-bce
 
      ExecStop=/usr/bin/modprobe apple-bce
-     ExecStop=/usr/bin/modprobe brcmfmac
-     ExecStop=/usr/bin/modprobe brcmfmac_wcc
+     #ExecStop=/usr/bin/modprobe brcmfmac
+     #ExecStop=/usr/bin/modprobe brcmfmac_wcc
 
      [Install]
      WantedBy=sleep.target
      ```
 
-3. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+4. Enable the service by running: `sudo systemctl enable --now suspend-fix-t2.service`
+
+5. If you are facing issues with Wi-Fi on resume, uncomment the lines having `brcmfmac` and `brcmfmac_wcc` in the above file.
 
 !!! note
-    This seems to be working only on Arch with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
-    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"`
+    This seems to be working with `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.    
+    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros or `cat /boot/config-$(uname -r) | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Debian/Ubuntu based distros.
