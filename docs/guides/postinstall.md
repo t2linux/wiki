@@ -274,7 +274,7 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      which rmmod
      ```
 
-3. Taking the example as `/usr/bin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly
+3. Taking the example as `/usr/bin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly.
 
      ```service
      [Unit]
