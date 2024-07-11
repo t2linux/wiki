@@ -351,7 +351,7 @@ while getopts "ivhxp" option; do
 		rename_only /path/to/firmware archive.tar
 		copy_to_efi
 		create_archive
-		create_package
+		create_package apt|rpm|pacman
 		get_from_efi
 		get_from_macos
 		get_from_online
@@ -439,6 +439,8 @@ fi
 if [[ "$subcmd" = "" ]]; then
 	echo "No subcommand specified"
 	exit 1
+elif [[ "$subcmd" = "create_package" ]]; then
+	target_pkg_manager="${args[1]}"
 fi
 
 aur_install() {
@@ -844,7 +846,7 @@ case "$os" in
 				echo "Copying this script to EFI"
 				cp "$0" "/Volumes/${EFILABEL}/firmware.sh" 2>/dev/null \
 					|| curl -s https://wiki.t2linux.org/tools/firmware.sh > "/Volumes/${EFILABEL}/firmware.sh" \
-					|| ( echo && cat <<- EOF && [ "$interactive" = "true"] && echo "Press enter after you have copied" && read -r
+					|| ( echo && cat <<- EOF && [ "$interactive" = "true" ] && echo "Press enter after you have copied" && read -r
 						Failed to copy script.
 						Please copy the script manually to the EFI partition using Finder
 						Make sure the name of the script is firmware.sh in the EFI partition
@@ -935,7 +937,7 @@ case "$os" in
 				done
 				reload_kernel_modules
 				echo -e "\nKeeping a copy of the firmware and the script in the EFI partition shall allow you to set up Wi-Fi again in the future by running this script or the commands told in the macOS step in Linux only, without the macOS step."
-				if [ "$interactive" = "true"]; then
+				if [ "$interactive" = "true" ]; then
 					read -rp "Do you want to keep a copy? (y/N)" input
 				else
 					input="y"
