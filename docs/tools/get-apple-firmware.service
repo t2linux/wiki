@@ -1,0 +1,14 @@
+[Unit]
+Description=Get Apple WiFi and Bluetooth firmware
+ConditionFirstBoot=yes
+ConditionPathExists=/lib/firmware/brcm
+Wants=first-boot-complete.target
+Before=first-boot-complete.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/libexec/get-apple-firmware -i get_from_macos
+
+[Install]
+WantedBy=multi-user.target
