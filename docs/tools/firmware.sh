@@ -899,6 +899,9 @@ case "$os" in
 						;;
 					esac
 				;;
+			("rename_only")
+				rename_firmware "${args[@]}" ${verbose}
+				;;
 			(*)
 				echo -e "\nError: Invalid option!"
 				exit 1
