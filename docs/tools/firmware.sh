@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2022 Aditya Garg <gargaditya08@live.com>
-# Copyright (C) 2022 Orlando Chamberlain <redecorating@protonmail.com>
+# Copyright (C) 2024 Aditya Garg <gargaditya08@live.com>
+# Copyright (C) 2024 Orlando Chamberlain <redecorating@protonmail.com>
+# Copyright (C) 2024 Sharpened Blade <sharpenedblade@proton.me>
 #
 # The python script is based upon the original work by The Asahi Linux Contributors.
 
