@@ -64,6 +64,7 @@ scripts/config --module CONFIG_HID_APPLETB_BL
 scripts/config --module CONFIG_HID_APPLETB_KBD
 scripts/config --module CONFIG_DRM_APPLETBDRM
 scripts/config --module CONFIG_APPLE_BCE
+scripts/config --module CONFIG_APFS_FS
 ```
 
 ### Building
