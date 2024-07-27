@@ -14,6 +14,7 @@ If there is someone missing that you think should be on this list, send a PR on 
 - Redecorating (Arch Linux, Wiki maintenance, Apple GMUX for T2 Macs, Magic Backlight driver and improved the touchbar driver) [https://github.com/Redecorating](https://github.com/Redecorating)
 - roadrunner2 (Touchbar and Ambient Light Driver) [https://github.com/roadrunner2](https://github.com/roadrunner2)
 - kekrby (Audio, NixOS, Apple GMUX for T2 Macs, Magic Backlight driver and improved the touchbar driver) [https://github.com/kekrby](https://github.com/kekrby)
+- soopyc (NixOS) [https://github.com/soopyc](https://github.com/soopyc)
 - AdityaGarg8 (Ubuntu and wiki maintenance) [https://github.com/AdityaGarg8](https://github.com/AdityaGarg8)
 - EmreTech (Gentoo) [https://github.com/EmreTech](https://github.com/EmreTech)
 - T2minator (Tails) [https://github.com/T2minator](https://github.com/T2minator)
