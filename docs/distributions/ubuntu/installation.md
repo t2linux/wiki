@@ -19,8 +19,8 @@ Download Links:
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for Ubuntu.
 2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevent to you.
-3. Start the installer and install it like normal until you get to the partition option.
-4. Find the partition you for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
+3. Start the installer and install it like normal until you get to the partition option. MAKE SURE YOU CHOOSE MANUAL PARTITIONING.
+4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
     1. If you want, you can make seperate partitions for **swap**, `/home`, `/boot` etc as you do in a normal PC.
 
@@ -37,10 +37,6 @@ Download Links:
 Once you're booted and in your desktop, run `get-apple-firmware` and choose the option **"Retrieve the firmware directly from macOS"**.
 
 If this method doesn't work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
-
-## Receiving kernel updates
-
-In order to continue receiving the kernel updates for T2 kernels, it's recommended to set up the apt repo as described [here](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo).
 
 ## Configuring the Touch Bar
 
