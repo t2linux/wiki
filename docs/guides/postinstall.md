@@ -155,7 +155,7 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      which rmmod
      ```
 
-3. Taking the example as `/usr/sbin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly.
+3. Taking the example as `/usr/bin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly.
 
      ```service
      [Unit]
@@ -168,13 +168,13 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
      Type=oneshot
      RemainAfterExit=yes
 
-     #ExecStart=/usr/sbin/modprobe -r brcmfmac_wcc
-     #ExecStart=/usr/sbin/modprobe -r brcmfmac
-     ExecStart=/usr/sbin/rmmod -f apple-bce
+     #ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
+     #ExecStart=/usr/bin/modprobe -r brcmfmac
+     ExecStart=/usr/bin/rmmod -f apple-bce
 
-     ExecStop=/usr/sbin/modprobe apple-bce
-     #ExecStop=/usr/sbin/modprobe brcmfmac
-     #ExecStop=/usr/sbin/modprobe brcmfmac_wcc
+     ExecStop=/usr/bin/modprobe apple-bce
+     #ExecStop=/usr/bin/modprobe brcmfmac
+     #ExecStop=/usr/bin/modprobe brcmfmac_wcc
 
      [Install]
      WantedBy=sleep.target
