@@ -7,6 +7,9 @@ You will need:
 
 ---
 
+!!! Warning "Users in NA/EU"
+    If you're experiencing slow download speed or failure to install, please edit your `/etc/pacman.conf` file and replace old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead.
+
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps.
 
 2. Boot into the live ISO.
