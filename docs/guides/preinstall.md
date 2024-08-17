@@ -65,7 +65,7 @@ Or you can use `dd` in macOS Terminal:
 6. Run `sudo dd if=path/to/linux.iso of=/dev/rdiskX bs=1m` to start writing. To fetch the iso path easily you can just drag and drop the .iso into the Terminal.
 7. Now you may press `control-T` to make it show how many KBs it has written so far.
 
-While the installation image is being written to the USB, you can skip to [Copy Wi-Fi firmware](#copy-wi-fi-firmware); but don't follow the steps after it, wait until the ISO has been written to disk.
+While the installation image is being written to the USB, you can skip to [Copy Wi-Fi firmware](https://wiki.t2linux.org/guides/wifi-bluetooth); but don't follow the steps after it, wait until the ISO has been written to disk.
 
 ## Disable Secure Boot
 
