@@ -60,7 +60,7 @@ After installation, we need to install a kernel having patches to support the T2
 
 5. Follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get internal Wi-Fi working.
 
-6. If your Mac has a Touch Bar, install `tiny-dfr` by running:
+6. If your Mac has a Touch Bar, and you want to configure the buttons instead of the default config, install `tiny-dfr` by running:
   
     ```bash
     sudo apt install tiny-dfr
