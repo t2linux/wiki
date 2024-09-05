@@ -215,24 +215,28 @@ Choose a method below and carefully read the notes. Afterwards, follow the [Wi-F
 
 The methods outlined below corresponds to the ones listed in the guide.
 
+!!! question "What is `get-apple-firmware`?"
+    This is the firmware script packaged as a runnable command in the ISO.
+
+    For simplicity, this guide assumes you are using the latest ISO version while following the steps. If you are not in the Live environment or are not using a recent enough ISO, download the script yourself and replace every instance of `get-apple-firmware` with the location of your firmware script.
+
 === ":fontawesome-solid-check: Method 1"
     Method 1 requires you to run the firmware script twice, both in macOS and Linux.
 
     While this method is easier to set up than Method 2, it does not necessarily mean it is simpler to maintain.
 
-=== ":fontawesome-solid-star: Method 2"
+=== ":fontawesome-solid-check: Method 2"
     This method creates a tarball with the renamed firmware files on macOS. No scripts will need to be run on Linux. This method is more robust than Method 1, but requires some manual configuration.
-
-    This is the recommended method to follow on NixOS.
 
 === ":fontawesome-solid-ban: Method 3"
     !!! danger
         This method is not supported on NixOS as the distribution does not use a conventional package format. A similar setup can be done by following the [Declarative Setup](#declarative-setup) section, but you will need to follow some other method first.
 
-=== ":fontawesome-solid-hourglass: Method 4"
-    <!-- TODO: after testing APFS driver and inclusion in the ISO, update this section. -->
+=== ":fontawesome-solid-check: Method 4"
+    This method obtains the firmware directly from the recovery image in the macOS partition. If you use a supported ISO version (see below), networking is not required.
+
     !!! warning
-        This method is not **yet** supported, please stay tuned. In the meantime, please use other methods.
+        If you have removed macOS, this method would not be useful to you.
 
 === ":fontawesome-solid-check: Method 5"
     This method is similar to Method 1, but instead of requiring macOS to be installed, the firmware files are extracted from recovery images downloaded directly from Apple. This is useful if you have removed macOS or the partition is not accessible for any reason.
@@ -250,8 +254,7 @@ For long-term usage, imperative setups are **not recommended**. It is suggested 
 
     ```shell
     sudo mkdir -p /lib/firmware/brcm
-    sudo /mnt/boot/firmware.sh
-    #    ^~~~~~~~~ change this if the EFI partition is mounted elsewhere
+    sudo get-apple-firmware
     ```
 
 === "Method 2"
@@ -270,16 +273,42 @@ For long-term usage, imperative setups are **not recommended**. It is suggested 
     modprobe -r brcmfmac_wcc; modprobe -r brcmfmac; modprobe brcmfmac; modprobe -r hci_bcm4377; modprobe hci_bcm4377
     ```
 
+=== "Method 4"
+    This method requires at least v6.9.3 of the ISO, or the `linux-apfs-rw` kernel module installed. It is recommended to use the latest ISO wherever possible.
+
+    ??? question "How to install `linux-apfs-rw` on an existing system?"
+        If you use the latest `nixos-hardware`, this module is already included in the patches and no further steps are needed.
+
+        If you are not using the latest `nixos-hardware` revision, this package is included in nixpkgs. To make it available, modify your configuration to include the following.
+
+        ```nix linenums="1" title="configuration.nix" hl_lines="2-5"
+        {pkgs, ...}: {
+            boot.extraModulePackages = [
+                # change linux_6_9 to your kernel version
+                linuxKernel.packages.linux_6_9.apfs
+            ];
+        }
+        ```
+
+    This method is relatively simpler than the others if you still have macOS installed.
+
+    ```shell
+    # Create the required directory tree.
+    sudo mkdir -p /lib/firmware/brcm
+    # Run the firmware script.
+    sudo get-apple-firmware # pick the option "retrieve the firmware directly from macOS."
+    ```
+
 === "Method 5"
     This method requires an existing Internet connection, as extra dependencies are required to run the script and to download the recovery image.
-
-    First obtain the script by downloading it. The link is available in the previously linked [firmware guide](../../guides/wifi-bluetooth.md#setting-up).
 
     ```shell
     # Create the required directory tree.
     sudo mkdir -p /lib/firmware/brcm
     # Run the script with required dependencies.
-    sudo nix shell nixpkgs#{dmg2img,curl} -c bash /path/to/firmware.sh
+    sudo nix shell nixpkgs#{dmg2img,curl} -c get-apple-firmware
+    # OR:
+    # sudo nix shell nixpkgs#{dmg2img,curl} -c bash /path/to/firmware.sh
     ```
 
 Then run `systemctl start wpa_supplicant` and then connect to internet using `wpa_cli`. Consult documentations such as the [Arch Linux wiki](https://wiki.archlinux.org/title/Wpa_supplicant#Connecting_with_wpa_cli) for command usage.
@@ -332,8 +361,11 @@ The declarative setup is suitable for long-term use after you have installed Nix
     }
     ```
 
+=== "Method 4"
+    The declarative setup for this method is exactly the same as in Method 1. Please first follow the above imperative setup guide, then select Method 1 and follow those instructions.
+
 === "Method 5"
-    The declarative setup for this method is exactly the same as in Method 1. Please select Method 1 and follow those instructions.
+    The declarative setup for this method is exactly the same as in Method 1. Please first follow the above imperative setup guide, then select Method 1 and follow those instructions.
 
 #### NixOS Module
 
