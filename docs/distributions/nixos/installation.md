@@ -329,7 +329,7 @@ The declarative setup is suitable for long-term use after you have installed Nix
     ```nix linenums="1" hl_lines="2-11" title="configuration.nix"
     {pkgs, ...}: {
       hardware.firmware = [
-        (stdenvNoCC.mkDerivation (final: {
+        (pkgs.stdenvNoCC.mkDerivation (final: {
           name = "brcm-firmware";
           src = ./firmware/brcm;
           installPhase = ''
@@ -347,7 +347,7 @@ The declarative setup is suitable for long-term use after you have installed Nix
     ```nix linenums="1" hl_lines="2-14" title="configuration.nix"
     {pkgs, ...}: {
       hardware.firmware = [
-        (stdenvNoCC.mkDerivation (final: {
+        (pkgs.stdenvNoCC.mkDerivation (final: {
           name = "brcm-firmware";
           src = ./firmware.tar;
 
