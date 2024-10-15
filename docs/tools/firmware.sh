@@ -416,7 +416,7 @@ if [[ "$subcmd" = "" ]] && [[ "$interactive" = "true" ]]; then
 					read -r target_pkg_manager
 					case ${target_pkg_manager} in
 						(1) target_pkg_manager="apt" ;;
-						(2) target_pkg_manager="rpm" ;;
+						(2) target_pkg_manager="dnf" ;;
 						(3) target_pkg_manager="pacman" ;;
 						(*) echo -e "\nError: Invalid option!" && exit 1 ;;
 					esac
