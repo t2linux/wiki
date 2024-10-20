@@ -33,28 +33,28 @@
       ]
     },
     {
-      "name": "Ubuntu 22.04 - Jammy Jellyfish",
+      "name": "Ubuntu 24.04 - Noble Numbat",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/ubuntu-22.04-6.10.5-t2-jammy.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/ubuntu-22.04-6.10.5-t2-jammy.iso.01"
       ]
     },
     {
-      "name": "Ubuntu 24.04 - Noble Numbat",
+      "name": "Ubuntu 24.10 - Oracular Oriole",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/ubuntu-24.04-6.10.5-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/ubuntu-24.04-6.10.5-t2-noble.iso.01"
       ]
     },
     {
-      "name": "Kubuntu 22.04 - Jammy Jellyfish",
+      "name": "Kubuntu 24.04 - Noble Numbat",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/kubuntu-22.04-6.10.5-t2-jammy.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/kubuntu-22.04-6.10.5-t2-jammy.iso.01"
       ]
     },
     {
-      "name": "Kubuntu 24.04 - Noble Numbat",
+      "name": "Kubuntu 24.10 - Oracular Oriole",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/kubuntu-24.04-6.10.5-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.10.5-1/kubuntu-24.04-6.10.5-t2-noble.iso.01"
