@@ -43,6 +43,10 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU (some things do this automatically). You will get more battery time now as your AMD GPU can be turned off when not needed.
 
+### Suspend workaround
+
+If using the iGPU causes the screen to be black after waking up from suspend, then try turning the screen off and on after the backlight turns on. For GNOME: type your password then press enter, press Command + L to lock (this should turn off the backlight), then press any key.
+
 ## Use on Windows
 
 The iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers.
