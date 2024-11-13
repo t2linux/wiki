@@ -99,9 +99,9 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early.
 
-## Setting up the Touch Bar
+## Adding support for customisable Touch Bar
 
-Setting up the Touch Bar is different for Ubuntu and Debian based distros.
+By default the Touch Bar works in the same mode which Windows Bootcamp uses on Linux. If you want to customise it, you can install `tiny-dfr` on your distro.
 
 If you are using an Ubuntu or Debian based distro:
 
