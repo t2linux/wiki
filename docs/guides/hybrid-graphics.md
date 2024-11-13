@@ -45,7 +45,10 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 ### Suspend workaround
 
-If using the iGPU causes the screen to be black after waking up from suspend, then try turning the screen off and on after the backlight turns on. For GNOME: type your password then press enter, press Command + L to lock (this should turn off the backlight), then press any key.
+If using the iGPU causes the screen to be black after waking up from suspend, then try one of these workarounds:
+
+- Add `i915.enable_guc=3` to [your kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters). If that has a problem, try setting the value to 2 instead of 3.
+- Turn the screen off and on after the backlight turns on. For GNOME: type your password then press enter, press Command + L to lock (this should turn off the backlight), then press any key.
 
 ## Use on Windows
 
