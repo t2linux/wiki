@@ -14,7 +14,7 @@ You will need:
 
 2. Boot into the live ISO.
 
-3. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/title/Installation_guide#Set_the_console_keyboard_layout_and_font) up to "Format the partitions".
+3. Follow the Arch Wiki guide from [here](https://wiki.archlinux.org/title/Installation_guide#Set_the_console_keyboard_layout_and_font) up to "Format the partitions". Note that the step of [Partition the disks](https://wiki.archlinux.org/title/Installation_guide#Partition_the_disks) must be skipped as it has already been done in macOS.
 
     1. You will need to reformat your partitions, except for the EFI partition. The other partitions will need to reformatted as described in the Arch Wiki Installation guide. For the EFI system partition (mentioned in a note on the Arch Wiki), there will be one at `/dev/nvme0n1p1` and you can use this if you don't intend to install Windows or already have it installed. If you do intend to triple boot, refer to [this guide](https://wiki.t2linux.org/guides/windows/).
     2. Mount the EFI partition that you intend to use for your bootloader on `/mnt/boot`, and your other partitions on `/mnt`, etc.
