@@ -65,6 +65,22 @@
       ]
     },
     {
+      "name": "Ubuntu Unity 24.04 - Noble Numbat",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.04--t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.04--t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.04--t2-noble.iso.02"
+      ]
+    },
+    {
+      "name": "Ubuntu Unity 24.10 - Oracular Oriole",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.10--t2-oracular.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.10--t2-oracular.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v/ubuntu-unity-24.10--t2-oracular.iso.02"
+      ]
+    },
+    {
       "name": "Linux Mint - Cinnamon",
       "iso": [
         "https://github.com/t2linux/T2-Mint/releases/download/v6.12.6-1/linuxmint-22-cinnamon-6.12.6-t2-jammy.iso.00",

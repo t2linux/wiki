@@ -8,7 +8,6 @@ Some popular distros include:
 2. [elementary OS](https://elementary.io/)
 3. [Debian](https://www.debian.org/)
 4. [Zorin OS](https://zorin.com/)
-5. Other Ubuntu flavours like [Ubuntu unity](https://ubuntuunity.org/) etc.
 
 # Hardware Requirements
 
