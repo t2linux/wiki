@@ -19,7 +19,7 @@ We currently support the following flavours of Ubuntu:
 
 ## Hardware Requirements
 
-* USB-C to USB adapter
+- USB-C to USB adapter
 
 ## Install Procedure
 
