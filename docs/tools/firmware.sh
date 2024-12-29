@@ -538,12 +538,12 @@ install_package() {
 		"apt")
 			case $package in
 				"linux-apfs-rw")
-					sudo apt upgrade
+					sudo apt update
 					sudo apt install --reinstall -y apfs-dkms
 					sudo modprobe ${verbose} apfs
 					;;
 				*)
-					sudo apt upgrade
+					sudo apt update
 					sudo apt install -y "$package" ;;
 			esac ;;
 		"dnf")
@@ -1051,7 +1051,7 @@ case "$os" in
 				else
 					curl -s -O https://raw.githubusercontent.com/kholia/OSX-KVM/master/fetch-macOS-v2.py
 				fi
-				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey or later.\n"
+				echo -e "\nNote: In order to get complete firmware files, download macOS Monterey, Ventura or Sonoma.\n"
 				python3 fetch-macOS-v2.py
 				echo -e "\nConverting image from .dmg to .img"
 				if [[ ${verbose} = "-v" ]]
