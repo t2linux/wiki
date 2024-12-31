@@ -29,6 +29,7 @@ Listed below are the currently available installer ISOs for download:
 | ----------------------- | ---------------------------- |
 | Arch Linux              | <https://github.com/t2linux/archiso-t2/releases/latest> |
 | blendOS                 | <https://blendos.co/install/t2/> |
+| CachyOS                 | <https://cachyos.org> |
 | EndeavourOS             | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
 | Fedora                  | <https://github.com/mikeeq/mbp-fedora> |
 | Fedora                  | <https://github.com/t2linux/fedora-iso/releases/latest> |
