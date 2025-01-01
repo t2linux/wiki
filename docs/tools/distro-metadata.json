@@ -83,22 +83,22 @@
     {
       "name": "Linux Mint - Cinnamon",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-cinnamon-6.12.7-t2-jammy.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-cinnamon-6.12.7-t2-jammy.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-cinnamon-6.12.7-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-cinnamon-6.12.7-t2-jammy.iso.01"
       ]
     },
     {
       "name": "Linux Mint - Mate",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-mate-6.12.7-t2-jammy.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-mate-6.12.7-t2-jammy.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-mate-6.12.7-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-mate-6.12.7-t2-jammy.iso.01"
       ]
     },
     {
       "name": "Linux Mint - XFCE",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-xfce-6.12.7-t2-jammy.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-2/linuxmint-22-xfce-6.12.7-t2-jammy.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-xfce-6.12.7-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.12.7-3/linuxmint-22-xfce-6.12.7-t2-jammy.iso.01"
       ]
     },
     {
