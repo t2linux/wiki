@@ -144,6 +144,7 @@ Please note that this internal ethernet interface is required for various servic
 
 # Suspend Workaround
 
+### Arch based distros
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work. Currently this workaround works only on Arch based distros.
 
 1. Create and edit this file: `/etc/systemd/system/suspend-fix-t2.service`
@@ -184,6 +185,58 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 
 5. If you are facing issues with Wi-Fi on resume, uncomment the lines having `brcmfmac` and `brcmfmac_wcc` in the above file.
 
-!!! note
+> **Note:**
     Make sure you have `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
     To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros.
+
+
+
+
+### Gentoo/OpenRC
+
+For Gentoo Linux using OpenRC and elogind, create the following script:
+
+While it's technically sufficient to unload only the apple-bce module for suspend to work, this will result in a non-functional Touch Bar after resume. This workaround ensures the Touch Bar is properly reinitialized by also handling the Touch Bar specific modules and the tiny-dfr service.
+
+1. Create and edit this file: `/etc/elogind/system-sleep/apple-bce-handler`
+
+
+```bash
+#!/bin/bash
+case $1/$2 in
+  pre/*)
+    /etc/init.d/tiny-dfr stop
+    sleep 2
+    rmmod -f apple_bce
+    rmmod -f appletbdrm
+    rmmod -f hid_appletb_kbd
+    rmmod -f hid_appletb_bl
+    ;;
+  post/*)
+    sleep 3
+    modprobe apple_bce
+    sleep 3
+    modprobe hid_appletb_bl
+    sleep 1
+    modprobe hid_appletb_kbd
+    sleep 1
+    modprobe appletbdrm
+    sleep 2
+    /etc/init.d/tiny-dfr start
+    ;;
+esac
+```
+
+2. Make the script executable:
+
+```bash
+chmod +x /etc/elogind/system-sleep/apple-bce-handler
+```
+
+This workaround ensures that:
+- All necessary modules are properly unloaded before suspend
+- Modules are reloaded in the correct order after resume
+- The Touch Bar functionality is restored after resume
+- Keyboard backlight and other peripherals work correctly
+
+> **Note:** Make sure you have the `tiny-dfr` service installed and enabled for Touch Bar functionality. Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
