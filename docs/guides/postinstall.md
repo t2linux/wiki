@@ -185,13 +185,20 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 
 5. If you are facing issues with Wi-Fi on resume, uncomment the lines having `brcmfmac` and `brcmfmac_wcc` in the above file.
 
-> !!! note
+!!! note
     Make sure you have `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
     To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros.
 
 ### Gentoo/OpenRC
 
-For Gentoo Linux using OpenRC and elogind, create the following script:
+S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work on Gentoo Linux using OpenRC and elogind.
+
+Prerequisites:
+1. Make sure elogind is installed and running:
+    ```bash
+    rc-update add elogind boot
+    rc-service elogind start
+    ```
 
 For T2 MacBooks, while unloading only the apple-bce module is sufficient for basic suspend functionality, additional module handling may be required depending on your model:
 
@@ -202,42 +209,42 @@ For T2 MacBooks, while unloading only the apple-bce module is sufficient for bas
 The script below includes all cases with commented sections. Uncomment the relevant sections based on your model and requirements. The loading order of modules is important for proper device initialization after resume.
 
 1. Create and edit this file: `/etc/elogind/system-sleep/apple-bce-handler`
+    ```bash
+    #!/bin/bash
+    case $1/$2 in
+      pre/*)
+        # Required for all T2 models
+        rmmod -f apple_bce
+        
+        # Uncomment the following for models with Touch Bar
+        #rmmod -f appletbdrm
+        #rmmod -f hid_appletb_kbd
+        #rmmod -f hid_appletb_bl
+        
+        # Uncomment the following if using tiny-dfr
+        #/etc/init.d/tiny-dfr stop
+        #killall -9 tiny-dfr 2>/dev/null
+        ;;
+      
+      post/*)
+        # Required for all T2 models
+        sleep 4 
+        modprobe apple_bce
+        
+        # Uncomment the following for models with Touch Bar
+        #sleep 4
+        #modprobe hid_appletb_bl
+        #sleep 2
+        #modprobe hid_appletb_kbd
+        #sleep 2
+        #modprobe appletbdrm
+        
+        # Uncomment the following if using tiny-dfr
+        #sleep 3
+        #/etc/init.d/tiny-dfr start
+        ;;
+    esac
+    ```
 
-
-```#!/bin/bash
-case $1/$2 in
-  pre/*)
-    # For models with Touch Bar and using tiny-dfr
-    #/etc/init.d/tiny-dfr stop
-    #killall -9 tiny-dfr 2>/dev/null
-    
-    # Required for all T2 models
-    rmmod -f apple_bce
-    
-    # Only for models with Touch Bar
-    #rmmod -f appletbdrm
-    #rmmod -f hid_appletb_kbd
-    #rmmod -f hid_appletb_bl
-    ;;
-    
-  post/*)
-    # Required for all T2 models
-    sleep 4 
-    modprobe apple_bce
-    
-    # Only for models with Touch Bar
-    #sleep 4
-    #modprobe hid_appletb_bl
-    #sleep 2
-    #modprobe hid_appletb_kbd
-    #sleep 2
-    #modprobe appletbdrm
-    
-    # For models with Touch Bar and using tiny-dfr
-    #sleep 3
-    #/etc/init.d/tiny-dfr start
-    ;;
-esac
-```
-
-> **Note:** Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
+!!! note
+   Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
