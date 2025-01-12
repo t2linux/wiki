@@ -16,16 +16,10 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
     You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/power_dpm_force_performance_level`
 
-    To apply the low level automatically, create `/etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents:
+    To apply the low level automatically, create `/etc/udev/rules.d/30-amdgpu-pm.rules` file with the following contents (on NixOS, use `services.udev.extraRules` in your configuration):
 
     ```plain
-    KERNEL=="card0", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
-    ```
-
-    To check which card is the amdgpu, we can run:
-
-    ```sh
-    basename /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/drm/card?
+    SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="low"
     ```
 
     You can also control the AMD GPU DPM with GUI tools such as [radeon-profile](https://github.com/emerge-e-world/radeon-profile). For GPU intensive tasks like playing games, machine learning or rendering you can try setting the DPM to high instead.
