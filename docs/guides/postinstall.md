@@ -219,14 +219,14 @@ The script below includes all cases with commented sections. Uncomment the relev
        pre/*)
          # Required for all T2 models
          rmmod -f apple_bce
-         
-         # Uncomment the following for models with touchbar but not using tiny dfr
-         #rmmod -f appletbdrm
-         #rmmod -f hid_appletb_kbd
-         #rmmod -f hid_appletb_bl
-         
+
          # Uncomment the following if using tiny dfr for touchbar
          #/etc/init.d/tiny-dfr stop
+         #rmmod -r appletbdrm
+     
+         # Uncomment the following for models with touchbar but not using tiny dfr
+         #rmmod -r hid_appletb_kbd
+         #rmmod -r hid_appletb_bl
          ;;
        
        post/*)
@@ -239,10 +239,10 @@ The script below includes all cases with commented sections. Uncomment the relev
          #modprobe hid_appletb_bl
          #sleep 2
          #modprobe hid_appletb_kbd
-         #sleep 2
-         #modprobe appletbdrm
          
          # Uncomment the following if using tiny dfr for touchbar
+         #sleep 2
+         #modprobe appletbdrm
          #sleep 3
          #/etc/init.d/tiny-dfr start
          ;;
@@ -256,4 +256,4 @@ The script below includes all cases with commented sections. Uncomment the relev
      ```
 
 !!! note
-   Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
+    Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
