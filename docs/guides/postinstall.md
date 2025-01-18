@@ -224,7 +224,7 @@ The script below includes all cases with commented sections. Uncomment the relev
          #/etc/init.d/tiny-dfr stop
          #modprobe -r appletbdrm
      
-         # Uncomment the following for models with touchbar but not using tiny dfr
+         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
          #modprobe -r hid_appletb_kbd
          #modprobe -r hid_appletb_bl
          ;;
@@ -234,7 +234,7 @@ The script below includes all cases with commented sections. Uncomment the relev
          sleep 4 
          modprobe apple_bce
          
-         # Uncomment the following for models with touchbar but not using tiny dfr
+         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
          #sleep 4
          #modprobe hid_appletb_bl
          #sleep 2
