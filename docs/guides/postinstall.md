@@ -205,9 +205,9 @@ Prerequisites:
 
 For T2 MacBooks, while unloading only the apple-bce module is sufficient for basic suspend functionality, additional module handling may be required depending on your model:
 
-- All T2 models require the apple-bce module handling
-- For models with Touch Bar, a specific module sequence (apple_bce -> hid_appletb_bl -> hid_appletb_kbd -> appletbdrm) is required to properly reinitialize the Touch Bar device after resume
-- If you use tiny-dfr for Touch Bar customization, the tiny-dfr service needs to be stopped before suspend and started after resume
+- All T2 models require the apple-bce module handling.
+- For models with Touch Bar, a specific module sequence (apple_bce -> hid_appletb_bl -> hid_appletb_kbd) is required to properly reinitialize the Touch Bar device after resume.
+- If you use tiny-dfr for Touch Bar customization, the tiny-dfr service needs to be stopped before suspend and started after resume, and appletbdrm module is required.
 
 The script below includes all cases with commented sections. Uncomment the relevant sections based on your model and requirements. The loading order of modules is important for proper device initialization after resume.
 
@@ -222,11 +222,11 @@ The script below includes all cases with commented sections. Uncomment the relev
 
          # Uncomment the following if using tiny dfr for touchbar
          #/etc/init.d/tiny-dfr stop
-         #rmmod -r appletbdrm
+         #modprobe -r appletbdrm
      
          # Uncomment the following for models with touchbar but not using tiny dfr
-         #rmmod -r hid_appletb_kbd
-         #rmmod -r hid_appletb_bl
+         #modprobe -r hid_appletb_kbd
+         #modprobe -r hid_appletb_bl
          ;;
        
        post/*)
