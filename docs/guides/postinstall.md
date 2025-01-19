@@ -144,7 +144,7 @@ Please note that this internal ethernet interface is required for various servic
 
 # Suspend Workaround
 
-### Arch based distros
+## Arch based distros
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work. Currently this workaround works only on Arch based distros.
 
@@ -190,7 +190,7 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
     Make sure you have `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
     To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros.
 
-### Gentoo/OpenRC
+## Gentoo/OpenRC
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work on Gentoo Linux using OpenRC and elogind.
 
