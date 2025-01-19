@@ -144,6 +144,8 @@ Please note that this internal ethernet interface is required for various servic
 
 # Suspend Workaround
 
+## Arch based distros
+
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work. Currently this workaround works only on Arch based distros.
 
 1. Create and edit this file: `/etc/systemd/system/suspend-fix-t2.service`
@@ -187,3 +189,71 @@ S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this
 !!! note
     Make sure you have `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
     To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros.
+
+## Gentoo/OpenRC
+
+S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work on Gentoo Linux using OpenRC and elogind.
+
+Prerequisites:
+
+1. Make sure elogind is installed and running:
+
+     ```bash
+     rc-update add elogind boot
+     rc-service elogind start
+     ```
+
+For T2 MacBooks, while unloading only the apple-bce module is sufficient for basic suspend functionality, additional module handling may be required depending on your model:
+
+- All T2 models require the apple-bce module handling.
+- For models with Touch Bar, a specific module sequence (apple_bce -> hid_appletb_bl -> hid_appletb_kbd) is required to properly reinitialize the Touch Bar device after resume.
+- If you use tiny-dfr for Touch Bar customization, the tiny-dfr service needs to be stopped before suspend and started after resume, and appletbdrm module is required.
+
+The script below includes all cases with commented sections. Uncomment the relevant sections based on your model and requirements. The loading order of modules is important for proper device initialization after resume.
+
+1. Create and edit this file: `/etc/elogind/system-sleep/apple-bce-handler`
+
+     ```bash
+     #!/bin/bash
+     case $1/$2 in
+       pre/*)
+         # Required for all T2 models
+         rmmod -f apple_bce
+
+         # Uncomment the following if using tiny dfr for touchbar
+         #/etc/init.d/tiny-dfr stop
+         #modprobe -r appletbdrm
+     
+         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
+         #modprobe -r hid_appletb_kbd
+         #modprobe -r hid_appletb_bl
+         ;;
+       
+       post/*)
+         # Required for all T2 models
+         sleep 4 
+         modprobe apple_bce
+         
+         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
+         #sleep 4
+         #modprobe hid_appletb_bl
+         #sleep 2
+         #modprobe hid_appletb_kbd
+         
+         # Uncomment the following if using tiny dfr for touchbar
+         #sleep 2
+         #modprobe appletbdrm
+         #sleep 3
+         #/etc/init.d/tiny-dfr start
+         ;;
+     esac
+     ```
+
+2. Make the script executable:
+
+     ```bash
+     chmod +x /etc/elogind/system-sleep/apple-bce-handler
+     ```
+
+!!! note
+    Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
