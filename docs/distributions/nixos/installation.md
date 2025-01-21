@@ -23,9 +23,13 @@ Note that you may not be able to complete some steps like [Partitioning](#partit
 After booting to the live environment, partition the disk (usually `/dev/nvme0n1`) using `cfdisk` or other tools of your preference.
 If you have followed the pre-installation guide, there should be another partition created just for Linux.
 
-- Remove that and allocate new partitions accordingly - there are no hard rules. Just make sure to not delete the EFI partition and the macOS partition. See the [NixOS Installation Manual](https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI) for examples.
-- Format the newly provisioned partitions with `mkfs.<filesystem>` commands and `mkswap` a swap partition (if any).
-- Mount the partitions under `/mnt`, and create directories as necessary. Then, enable the swap partition by using `swapon`. You should finally have something that looks similar to this:
+1. List the current partitions, e.g. with `fdisk -l` or `lsblk`. (If you have created a new partition with diskutil on macOS, in normal circumstances, you will see 3 partitions under `nvme0n1`.)
+2. Make sure to NOT delete the EFI partition. That is the one with a size of `300M`. If `fdisk -l` was used to list the partitions in the previous step, this partition's `TYPE` shows `EFI System`. (If you have created a new partition with diskutil on macOS, in normal circumstances that should be `nvme0n1p1`.)
+3. Make sure to NOT delete the macOS partition. To identify it you should remember the size you allocated to it during the Pre-Installation steps. (If you have created a new partition with diskutil on macOS, in normal circumstances that should be `nvme0n1p2`.)
+4. Remove the partition that you created for Linux during the Pre-Installation steps. You can recognize it by the size you allocated for it before. (If you have created a new partition with diskutil on macOS, in normal circumstances that should be `nvme0n1p3`.)
+5. Allocate new partitions accordingly to your needs - there are no hard rules. Just make sure to not delete the EFI partition and the macOS partition. See the [NixOS Installation Manual](https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI) for examples.
+6. Format the newly provisioned partitions with `mkfs.<filesystem>` commands and `mkswap` a swap partition (if any).
+7. Mount the partitions under `/mnt`, and create directories as necessary. Then, enable the swap partition by using `swapon`. You should finally have something that looks similar to this:
 
 ```console
 $ lsblk
