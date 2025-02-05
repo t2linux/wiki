@@ -138,6 +138,7 @@ Run the following command, replacing `1` with the number corresponding to the de
 cat <<EOF | sudo tee /etc/modprobe.d/tb.conf
 options hid-appletb-kbd mode=1
 EOF
+#         Change this number ^
 sudo modprobe -r hid-appletb-kbd
 sudo modprobe hid-appletb-kbd
 ```
