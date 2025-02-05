@@ -142,16 +142,19 @@ sudo modprobe -r hid-appletb-kbd
 sudo modprobe hid-appletb-kbd
 ```
 
-??? info "NixOS"
+!!! info "NixOS"
 
-    If you use NixOS, instead of running the command, add the following to your configuration. Modify `mode=1` to your desired value.
-    ```nix
-    {...}: {
-      boot.extraModprobeConfig = ''
-        options hid-appletb-kbd mode=1
-      '';
-    }
-    ```
+   If you use NixOS, instead of running the command, add the following to your configuration.
+   Modify `mode=1` to your desired value.
+
+   ```nix
+   {...}: {
+     boot.extraModprobeConfig = ''
+       options hid-appletb-kbd mode=1
+     '';
+   }
+   ```
+
 # Wi-Fi and Bluetooth
 
 The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. But, we also need firmware to get them working from macOS.
