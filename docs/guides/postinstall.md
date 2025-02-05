@@ -130,11 +130,9 @@ Run the following command, replacing `1` with the number corresponding to the de
 
 |Number|Default   |Fn      |
 |------|----------|--------|
-|0     |Function  |Ignore  |
-|1     |Media     |Function|
-|2     |Function  |Media   |
-|3     |Media     |Ignore  |
-|4     |Escape key|Ignore  |
+|0     |Escape key|Ignore  |
+|1     |Function  |Media   |
+|2     |Media     |Functin |
 
 ```bash
 cat <<EOF | sudo tee /etc/modprobe.d/tb.conf
