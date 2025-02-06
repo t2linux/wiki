@@ -137,8 +137,8 @@ Run the following command, replacing `1` with the number corresponding to the de
 ```bash
 cat <<EOF | sudo tee /etc/modprobe.d/tb.conf
 options hid-appletb-kbd mode=1
-EOF
 #         Change this number ^
+EOF
 sudo modprobe -r hid-appletb-kbd
 sudo modprobe hid-appletb-kbd
 ```
@@ -152,6 +152,7 @@ sudo modprobe hid-appletb-kbd
    {...}: {
      boot.extraModprobeConfig = ''
        options hid-appletb-kbd mode=1
+       #         Change this number ^
      '';
    }
    ```
