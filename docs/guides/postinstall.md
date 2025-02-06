@@ -124,6 +124,39 @@ For other distros:
 
 - Compile [`tiny-dfr`](https://github.com/kekrby/tiny-dfr) yourself if your distro don't have that packaged yet.
 
+## Change default touchbar mode without tiny-dfr
+
+Run the following command, replacing `1` with the number corresponding to the desired touchbar mode.
+
+|Number|Default   |Fn      |
+|------|----------|--------|
+|0     |Escape key|Ignore  |
+|1     |Function  |Media   |
+|2     |Media     |Functin |
+
+```bash
+cat <<EOF | sudo tee /etc/modprobe.d/tb.conf
+options hid-appletb-kbd mode=1
+#         Change this number ^
+EOF
+sudo modprobe -r hid-appletb-kbd
+sudo modprobe hid-appletb-kbd
+```
+
+!!! info "NixOS"
+
+   If you use NixOS, instead of running the command, add the following to your configuration.
+   Modify `mode=1` to your desired value.
+
+   ```nix
+   {...}: {
+     boot.extraModprobeConfig = ''
+       options hid-appletb-kbd mode=1
+       #         Change this number ^
+     '';
+   }
+   ```
+
 # Wi-Fi and Bluetooth
 
 The drivers for Wi-Fi and Bluetooth are included in a kernel with T2 support. But, we also need firmware to get them working from macOS.
