@@ -242,3 +242,21 @@ Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blo
 Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
 Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
 ```
+## NetworkManager config
+
+On some distro's you will need to make sure to add iwd as the wifi backend.
+If it's not set you might get the error where it continues to ask 
+to enter the wifi password
+you can check by running:
+```bash
+    cat /etc/NetworkManager/conf.d/wifi_backend.conf
+```
+if there is no output run: 
+```bash
+sudo pacman -S iwd
+cat <<EOF | sudo tee /etc/NetworkManager/conf.d/wifi_backend.conf
+[device]
+wifi.backend=iwd
+EOF
+sudo systemctl restart NetworkManager
+```
