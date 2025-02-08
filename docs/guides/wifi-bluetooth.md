@@ -11,7 +11,7 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
     NixOS users please first read the [distribution specific guide on firmware](../distributions/nixos/installation.md#wi-fi-and-bluetooth-setup) before following instructions on this page.
 
 !!! Warning: "Wifi Backend"
-There is currently an upstream issue with `wpa_supplicant` Backend. Please use `iwd` instead until the issue is resolved.
+There is currently an upstream issue with `wpa_supplicant`. Please use `iwd` instead until the issue is resolved.
 
 ## Ensure Kernel Supports OTP Firmware Selection
 
