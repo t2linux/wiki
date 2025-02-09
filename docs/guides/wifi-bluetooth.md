@@ -4,7 +4,7 @@
 
 This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs. This guide is also applicable to **iMac19,1** and **iMac19,2**, which are T1 Intel Macs. This guide is NOT applicable for the rest of the T1 and older Intel Macs.
 
-!!! Bug: "Unable to connect to Wi-Fi even after entering correct password"
+!!! Bug "Unable to connect to Wi-Fi even after entering correct password"
     Due to a [regression](https://lists.infradead.org/pipermail/hostap/2024-August/042893.html) since **wpa_supplicant 2.11**, Wi-Fi on broadcom chips is broken, thus affecting the T2 Macs as well. Please use [iwd](https://wiki.archlinux.org/title/NetworkManager#Using_iwd_as_the_Wi-Fi_backend) instead until the issue is resolved. Currently, only Arch Linux and EndeavourOS are affected.
 
 !!! Warning "Arch/EndeavourOS"
