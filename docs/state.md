@@ -18,7 +18,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Audio|🟡 Partially working|🔴 No|With proper configuration audio can work, however it is not stable in some older kernels and switching between speakers and when using the microphone. Microphone volume is low in some Macs.|[apple-bce](https://github.com/t2linux/apple-bce-drv)|
 |Hybrid Graphics|🟡 Partially working|🟡 Partial|Toggling dGPU power doesn't work.|[Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/)|
 |AMD GPUs|🟡 Partially working||Changing resolution, using DRI_PRIME and doing various other things can cause crashes, but `echo high \| sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level` or adding `amdgpu.dpm=0` to the kernel commandline stops these crashes.||
-|MacPro7,1|🟡 Partially working||Users have encountered PCIE Address Space issues, with auto remap breaking.||
+|MacPro7,1|🟡 Partially working||Users have encountered PCIE Address Space issues, with auto remap breaking. A temporary solution may be possible by removing the Infinity Fabric Link (Bridge or Jumper) from the GPU(s).||
 |T2 Secure Enclave|🔴 Not working||Used for Touch ID, storing encryption keys on macOS||
 |T2 Audio Video Encoder|🔴 Not working||Used for Sidecar on macOS||
 
