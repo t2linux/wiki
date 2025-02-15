@@ -104,11 +104,14 @@ You might want to also configure a display manager and a desktop environment. Ch
         #    Accept *both* settings if you would like to use the substituter.
         nix flake init -t github:soopyc/nixos-t2-flake
 
-        # 3. Edit flake.nix, delete the section as specified. 
-        #    Also, rename yourHostname to something else.
+        # 3. Delete the templating section from flake.nix.
+        nix run github:snowfallorg/nix-editor -- flake.nix outputs.templates.default -id
+        sed -i '' '/#.*remove/d' flake.nix
+
+        # 4. Edit flake.nix, rename yourHostname to something else.
         $EDITOR flake.nix
 
-        # 4. Update the flake.lock
+        # 5. Update the flake.lock
         nix flake update
         ```
 
