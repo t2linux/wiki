@@ -25,7 +25,7 @@ You will need:
 
     -    Using pacstrap (more vanilla Arch experience)
 
-         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr tiny-dfr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-t2`.
+         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader). You can choose to use Xanmod kernel instead. In this case, replace `linux-t2` with `linux-xanmod-t2`.
 
          2. Add repository to `/mnt/etc/pacman.conf`, by adding this:
 
@@ -43,11 +43,10 @@ You will need:
 
 7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
 
-8. Enable `t2fanrd` and `tiny-dfr` by running:
+8. Enable `t2fanrd` by running:
 
      ```bash
      systemctl enable t2fanrd
-     systemctl enable tiny-dfr
      ```
 
 9. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
