@@ -226,7 +226,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
 
-    Once the script confirms that you have the necessary dependencies installed, it shall give you the option to choose which macOS version you wish to download. You must choose **macOS Monterey or later** in order to get complete firmware files. After you choose the desired macOS version, the script should do the rest of the work itself.
+    Once the script confirms that you have the necessary dependencies installed, it shall give you the option to choose which macOS version you wish to download. You must choose a version between **macOS Monterey and macOS Sonoma** in order to get complete firmware files. After you choose the desired macOS version, the script should do the rest of the work itself.
 
 ## Testing Firmware
 
