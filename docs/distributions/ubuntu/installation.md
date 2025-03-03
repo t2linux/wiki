@@ -40,9 +40,12 @@ We currently support the following flavours of Ubuntu:
 
 ## Setting up Wi-Fi and Bluetooth
 
-Once you're booted and in your desktop, run `get-apple-firmware` and choose the option **"Retrieve the firmware directly from macOS"**.
+Once you're booted and in your desktop:
 
-If this method doesn't work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
+- Run `get-apple-firmware get_from_macos` **if you have macOS installed as well**.
+- Run `get-apple-firmware get_from_online` **if you have removed macOS or above method does not work** (Note: This method needs wired internet to work).
+
+If these methods do not work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
 
 ## Configuring the Touch Bar
 
