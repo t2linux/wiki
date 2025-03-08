@@ -21,6 +21,9 @@ If you need a more updated kernel, use the iso from [sharpenedblade](https://git
 
 ## Installing unsupported spins
 
-1. Follow the installation instructions above, but use your custom (vanilla) ISO. You need an external keyboard and mouse.
+1. Follow the installation instructions above, but use your custom (vanilla) ISO. You need an external keyboard and mouse. WiFi will not work until you finish the installation procedure so you need a wired internet connection.
 2. Add our DNF repo: `sudo dnf copr enable sharpenedblade/t2linux`
-3. Install our packages: `sudo dnf install t2linux-config && sudo dnf upgrade kernel`
+3. Install the kernel: `sudo dnf upgrade kernel`
+4. Install other packages:
+    - For interactive usage: `sudo dnf install t2linux-release`
+    - For headless setups: `sudo dnf install t2linux-config t2linux-scripts t2fanrd`
