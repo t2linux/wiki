@@ -1,8 +1,6 @@
 # Download the latest safe release
 
-Many thanks to Mike for building. You can download a live iso from Mikeeq [here](https://github.com/mikeeq/mbp-fedora).
-
-If you need a more updated kernel, use the iso from [sharpenedblade](https://github.com/t2linux/fedora-iso/releases). Remember to follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
+Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download a live iso from [here](https://github.com/t2linux/fedora-iso/releases).
 
 # Hardware Requirements
 
