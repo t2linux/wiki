@@ -31,7 +31,6 @@ Listed below are the currently available installer ISOs for download:
 | blendOS                 | <https://blendos.co/install/t2/> |
 | CachyOS                 | <https://cachyos.org> |
 | EndeavourOS             | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
-| Fedora                  | <https://github.com/mikeeq/mbp-fedora> |
 | Fedora                  | <https://github.com/t2linux/fedora-iso/releases/latest> |
 | Gentoo                  | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
 | Manjaro                 | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
