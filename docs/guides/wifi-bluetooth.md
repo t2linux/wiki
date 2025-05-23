@@ -210,7 +210,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     If you choose this method, the script will install the following dependencies, if missing, on Linux: 
 
-    1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple.
+    1. **curl** - Downloads a [python script](https://github.com/kholia/OSX-KVM/blob/master/fetch-macOS-v2.py) which is used to download the macOS Recovery image from Apple. **You do not need to manually download the python script. It's link has been shared solely for the purpose of sharing the source code being used.**
     2. **dmg2img** - Converts the downloaded macOS Recovery Image to a Linux readable format.
 
     The script shall automatically detect if any dependency is missing, and if required, will give you the option of installing it. So you need not worry about having missing dependencies.
