@@ -13,17 +13,6 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs.
 !!! Warning "NixOS"
     NixOS users please first read the [distribution specific guide on firmware](../distributions/nixos/installation.md#wi-fi-and-bluetooth-setup) before following instructions on this page.
 
-## Ensure Kernel Supports OTP Firmware Selection
-
-Check if this command outputs any lines: `modinfo brcmfmac | grep 4387` If it doesn't output anything, then upgrade your kernel.
-
-Refer to the "Updating Kernel" section on your distro's FAQ for instructions if you need to update your kernel:
-
-- [Arch](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel)
-- [Fedora](https://github.com/t2linux/fedora?tab=readme-ov-file#instalation)
-- [Manjaro](https://wiki.t2linux.org/distributions/manjaro/faq/#updating-kernel)
-- [Ubuntu](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo)
-
 ## Setting up
 
 We now use a script which can help you set up Wi-Fi and Bluetooth. Click [here](../tools/firmware.sh) to download the script.
