@@ -4,7 +4,7 @@ This page explains how to get the config files for using the T2 audio device, wh
 
 Firstly, check whether you are using an updated `apple-bce` version by running `sed -n "s/.*\(AppleT2.*\) -.*/\1/p" /proc/asound/cards`. If the output is `AppleT2xN` (where `N` is a number), then this guide can be followed. If it's just `AppleT2`, then either update the driver first or follow the [older version](https://github.com/t2linux/wiki/blob/00e882d0d5afb3102aedd02872426dc5fba789a5/docs/guides/audio-config.md) of this guide.
 
-If there is no output at all, follow the instructions on [how to setup the BCE module](https://wiki.t2linux.org/guides/dkms/#installing-modules).
+If there is no output at all you probably do not have T2 Mac support. Follow the instructions on [how to add support for T2 Macs](https://wiki.t2linux.org/guides/postinstall/).
 
 # Enable Pass-Through Kernel Parameters
 
