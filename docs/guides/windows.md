@@ -2,15 +2,15 @@
 
 This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
 
-The simplist way to triple boot is to install Windows first, and install linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
+The simplist way to triple boot is to install Windows first, and install Linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
 
 # Using the same EFI partition
 
 ## If Windows is installed first
 
-1. Install linux normally, with a patched kernel and dkms modules (this is probably done for you if you are using an installer specific to t2 macs).
-2. Put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot linux.
-3. Fix blank screen issue that may occur when booting Windows (Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)).
+1. Install [Linux normally](https://wiki.t2linux.org/guides/preinstall/) (this is probably done for you if you are using an installer specific to T2 Macs). During installation, Put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot Linux.
+
+2. Fix blank screen issue that may occur when booting Windows (Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)):
 
     1. Open a terminal and type in ``sudo gdisk /dev/nvme0n1``.
     2. Press `x` for expert mode
@@ -18,17 +18,21 @@ The simplist way to triple boot is to install Windows first, and install linux o
     4. Press `w` to write the partition and `y` to confirm
     5. If gdisk doesn't quit, press `q` to exit the command
 
-4. Enable the GRUB menu so that you'll have time to pick Windows
+    Currently, this issue has been observed only with Ubuntu. If you are not facing this issue, you can safely skip this step.
 
-    1. Boot into your linux install by selecting the Windows option in startup manager.
-    2. Edit ``/etc/default/grub`` with any preferred editior (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
-    3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
+3. Enable the GRUB menu so that you'll have time to pick Windows:
 
-5. You should now be able to boot either Windows or Linux from the GRUB bootloader.
+    1. Boot into your Linux install by selecting the Windows option in startup manager.
+    2. Edit `/etc/default/grub` with any preferred editior (nano/vim/) and with `sudo`. Change line `GRUB_TIMEOUT_STYLE` to `GRUB_TIMEOUT_STYLE=MENU`. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
+    3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in `sudo update-grub` (For Ubuntu) or `sudo grub-mkconfig -o /boot/grub/grub.cfg` (For Arch based distros) and hit enter. After the command is done, you're finished.
+
+    In case you are using some other bootloader, like systemd-boot, consult the documentation for the same.
+
+4. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
 ## If Linux is installed first
 
-1. Make sure that your linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your linux partitions to `Linux Filesystem`.
+1. Make sure that your Linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your Linux partitions to `Linux Filesystem`.
 2. Install Windows normaly with Bootcamp. Windows will replace your Linux boot option.
 3. Boot into macOS.
 4. `sudo diskutil mount disk0s1`
@@ -45,7 +49,7 @@ The simplist way to triple boot is to install Windows first, and install linux o
 
 9. Enable the GRUB menu so that you'll have time to pick Windows
 
-    1. Boot into your linux install by selecting the Windows option in startup manager.
+    1. Boot into your Linux install by selecting the Windows option in startup manager.
     2. Edit ``/etc/default/grub`` with any preferred editior (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
     3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 
