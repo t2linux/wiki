@@ -18,7 +18,8 @@ The simplist way to triple boot is to install Windows first, and install Linux o
     4. Press `w` to write the partition and `y` to confirm
     5. If gdisk doesn't quit, press `q` to exit the command
 
-    Currently, this issue has been observed only with Ubuntu. If you are not facing this issue, you can safely skip this step.
+    !!! info
+        Currently, this issue has been observed only with Ubuntu. If you are not facing this issue, you can safely skip this step.
 
 3. Enable the GRUB menu so that you'll have time to pick Windows:
 
@@ -26,7 +27,8 @@ The simplist way to triple boot is to install Windows first, and install Linux o
     2. Edit `/etc/default/grub` with any preferred editior (nano/vim/) and with `sudo`. Change line `GRUB_TIMEOUT_STYLE` to `GRUB_TIMEOUT_STYLE=MENU`. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
     3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in `sudo update-grub` (For Ubuntu) or `sudo grub-mkconfig -o /boot/grub/grub.cfg` (For Arch based distros) and hit enter. After the command is done, you're finished.
 
-    In case you are using some other bootloader, like systemd-boot, consult the documentation for the same.
+    !!! note "Using bootloaders other than GRUB"
+        In case you are using some other bootloader, like systemd-boot, consult the documentation for the same.
 
 4. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
