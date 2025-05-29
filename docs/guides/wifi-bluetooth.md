@@ -29,7 +29,7 @@ There are 5 methods supported by this script to get firmware for Linux, named as
     In case you have removed macOS after installing Linux, and need the firmware, **Method 5** is the only option for you.
 
 !!! Warning "iMac 19,1, iMac 19,2 and iMacPro1,1"
-    If you are a user of **iMac 19,1**, **iMac 19,2** or **iMacPro1,1**, Method 4 and 5 will not work for your model. So, you must choose one method out of Method 1-3 only.
+    If you are a user of **iMac 19,1**, **iMac 19,2** or **iMacPro1,1**, Method 4 and 5 will not work for your model. So, you must choose a method out of Method 1-3 only.
 
 ### On macOS
 
