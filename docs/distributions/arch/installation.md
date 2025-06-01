@@ -41,15 +41,13 @@ You will need:
 
 6. Continue following the Arch Wiki's guide until you get to installing a bootloader.
 
-7. Add `apple-bce` to the `MODULES` list in `/etc/mkinitcpio.conf`, and then run `mkinitcpio -P`
-
-8. Enable `t2fanrd` by running:
+7. Enable `t2fanrd` by running:
 
      ```bash
      systemctl enable t2fanrd
      ```
 
-9. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
+8. Install a bootloader, GRUB is easier, but you can also use systemd-boot. Don't do both.
 
     -   Installing Grub:
 
@@ -64,4 +62,4 @@ You will need:
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
         3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
 
-10. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
+9. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.
