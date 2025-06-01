@@ -7,6 +7,9 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs,
 !!! Bug "Unable to connect to Wi-Fi even after entering correct password"
     Due to a [regression](https://lists.infradead.org/pipermail/hostap/2024-August/042893.html) since **wpa_supplicant 2.11**, Wi-Fi on broadcom chips is broken, thus affecting the T2 Macs as well. Please use [iwd](https://wiki.archlinux.org/title/NetworkManager#Using_iwd_as_the_Wi-Fi_backend) as a backend or **disable offloading** by adding `brcmfmac.feature_disable=0x82000` to your kernel parameters until the issue is resolved. Currently, only Arch Linux and EndeavourOS are affected.
 
+!!! Warning "Do not use `broadcom-wl`"
+    We have received a lot of complaints about Wi-Fi not working, and such users have been found to be using `broadcom-wl` driver instead of the stock `brcmfmac` driver. We would like to clarify that `broadcom-wl` is NOT the driver to be used for the Macs supported by us. `brcmfmac` is the only driver that supports these Macs and it is a part of the Linux kernel.
+
 !!! Warning "Arch/EndeavourOS"
     If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide further.
 
