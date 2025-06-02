@@ -37,4 +37,4 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 ## Configuration
 
 The daemons config file can be found at `/etc/t2fand.conf`. You can change the activating temperature and/or fan curve to suit your needs.
-For more information, like how fan curves look like, check out [the repository](https://github.com/GnomedDev/T2FanRD).
+For more information, like how fan curves look like, check out [the repository](https://github.com/GnomedDev/T2FanRD#configuration).
