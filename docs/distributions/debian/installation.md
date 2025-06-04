@@ -65,7 +65,7 @@ After installation, we need to install a kernel having patches to support the T2
     sudo apt install tiny-dfr
     ```
   
-    **Note:** Make sure you restart your Mac after installing `tiny-dfr`. In order to configure your Touch Bar, run `sudo touchbar` and follow the on-screen instructions.
+    **Note:** Make sure you restart your Mac after installing `tiny-dfr`. In order to make changes to the config for `tiny-dfr`, copy `/usr/share/tiny-dfr/config.toml` to `/etc/tiny-dfr/config.toml` and edit `/etc/tiny-dfr/config.toml` by following the instructions given in that file.
 
 7. Lastly, add `intel_iommu=on iommu=pt pcie_ports=native` kernel parameters using your Bootloader.
 
