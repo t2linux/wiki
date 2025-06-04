@@ -51,7 +51,7 @@ If these methods do not work, follow [this guide](https://wiki.t2linux.org/guide
 
 If your Mac has a Touch Bar, then you can install the `tiny-dfr` app by running `sudo apt update && sudo apt install tiny-dfr` to set up the Touch Bar. Make sure you restart your Mac after installing the app.
 
-For configuration of the Touch Bar, run `sudo touchbar` and follow the on-screen instructions.
+In order to make changes to the config for `tiny-dfr`, copy `/usr/share/tiny-dfr/config.toml` to `/etc/tiny-dfr/config.toml` and edit `/etc/tiny-dfr/config.toml` by following the instructions given in that file.
 
 ## Troubleshooting
 
