@@ -1,4 +1,4 @@
-# Ubuntu
+# Ubuntu and Linux Mint
 
 ## Download the latest release
 
