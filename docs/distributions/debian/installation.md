@@ -24,7 +24,7 @@ Some popular distros include:
     Due to a bug in Pop!_OS installer, the partition sizes shown are incorrect during manual partitioning step. As a workaround, you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1456149153) in the live ISO environment to fix the installer and then start the installation.
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for installation.
-2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevent to you.
+2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevant to you.
 3. Start the installer and install it like normal until you get an option to manually specify partitions.
 4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
 
