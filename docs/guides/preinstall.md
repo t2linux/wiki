@@ -28,12 +28,10 @@ Listed below are the currently available installer ISOs for download:
 | Linux Distribution      | Download ISO with T2 support |
 | ----------------------- | ---------------------------- |
 | Arch Linux              | <https://github.com/t2linux/archiso-t2/releases/latest> |
-| blendOS                 | <https://blendos.co/install/t2/> |
 | CachyOS                 | <https://cachyos.org> |
 | EndeavourOS             | <https://github.com/t2linux/EndeavourOS-ISO-t2/releases/latest> |
 | Fedora                  | <https://github.com/t2linux/fedora-iso/releases/latest> |
 | Gentoo                  | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
-| Manjaro                 | <https://github.com/NoaHimesaka1873/manjaroiso-t2/releases/latest> |
 | NixOS                   | <https://github.com/t2linux/nixos-t2-iso> |
 | Ubuntu & its flavours   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 | Linux Mint              | <https://github.com/t2linux/T2-Mint/releases/latest> |
