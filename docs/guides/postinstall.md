@@ -178,7 +178,7 @@ Please note that this internal ethernet interface is required for various servic
 
 # Suspend Workaround
 
-## Arch based distros
+## Fedora and Arch based distros
 
 S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work. Currently this workaround works only on Arch based distros and Fedora.
 
