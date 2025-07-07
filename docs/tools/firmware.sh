@@ -715,7 +715,7 @@ create_rpm () {
 
 		%install
 		mkdir -p %{buildroot}/usr/lib/firmware/brcm
-		install -m 644 * %{buildroot}/usr/lib/firmware/brcm
+		install -m 644 brcm* %{buildroot}/usr/lib/firmware/brcm/
 
 		%posttrans
 		modprobe -r brcmfmac_wcc || true
