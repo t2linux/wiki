@@ -11,7 +11,7 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs,
     We have received a lot of complaints about Wi-Fi not working, and such users have been found to be using `broadcom-wl` driver instead of the stock `brcmfmac` driver. We would like to clarify that `broadcom-wl` is NOT the driver to be used for the Macs supported by us. `brcmfmac` is the only driver that supports these Macs and it is a part of the Linux kernel.
 
 !!! Warning "Arch/EndeavourOS"
-    If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide further.
+    If you're running Arch or EndeavourOS and have `apple-bcm-firmware` installed, you do not need to follow this guide further. The only exception here is if you are using iMac 19,1, iMac 19,2 or iMacPro1,1. If you have one of these Macs, you have to follow this guide.
 
 !!! Warning "NixOS"
     NixOS users please first read the [distribution specific guide on firmware](../distributions/nixos/installation.md#wi-fi-and-bluetooth-setup) before following instructions on this page.
