@@ -13,6 +13,7 @@ theme:
     font: false
     features:
         - tabs
+        - content.action.edit
         - content.tabs.link
         - content.code.copy
         - navigation.top
