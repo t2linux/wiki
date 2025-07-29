@@ -7,8 +7,8 @@ You will need:
 
 ---
 
-!!! Warning "Users in NA/EU"
-    If you're experiencing slow download speed or failure to install, please edit your `/etc/pacman.conf` file and replace old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead.
+!!! Warning "Users in NA/EU might face slow download speeds from the mirror"
+    If you're experiencing slow download speed or failure to install, please edit your `/etc/pacman.conf` file and replace old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead. You can also checkout the [arch-mirrors mailing list](https://lists.archlinux.org/archives/list/arch-mirrors@lists.archlinux.org/) to get information about latest downtimes for mirror.funami.tech.
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps.
 
