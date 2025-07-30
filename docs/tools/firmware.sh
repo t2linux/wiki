@@ -729,7 +729,7 @@ create_rpm () {
 	EOF
 
 	# Build
-	rpmbuild -bb --define '_target_os linux' "$HOME/rpmbuild/SPECS/apple-firmware.spec" 2>&1 | log || err_msg "Failed to make rpm package."
+	rpmbuild -bb --target noarch-linux "$HOME/rpmbuild/SPECS/apple-firmware.spec" 2>&1 | log || err_msg "Failed to make rpm package."
 
 	# Copy and Cleanup
 	cp ${verbose} "$HOME/rpmbuild/RPMS/noarch/apple-firmware-${ver}-1.noarch.rpm" "$HOME/Downloads"
