@@ -166,15 +166,18 @@ Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2
 
 # Network Manager recurrent notifications
 
-Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can blacklist `cdc_ncm` and `cdc_mbim` modules with the following command:
+Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can disable the interface with the following command:
 
 ```sh
-sudo sh -c 'echo "# Disable for now T2 chip internal usb ethernet
-blacklist cdc_ncm
-blacklist cdc_mbim" >> /etc/modprobe.d/blacklist.conf'
-```
+cat <<EOF | sudo tee /etc/udev/rules.d/99-network-t2-ncm.rules
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="ac:de:48:00:11:22", NAME="t2_ncm"
+EOF
 
-Please note that this internal ethernet interface is required for various services including touchid that there currently is no Linux support for. In the future, if any of these services are supported, you'll need to undo this.
+cat <<EOF | sudo tee /etc/NetworkManager/conf.d/99-network-t2-ncm.conf
+[main]
+no-auto-default=t2_ncm
+EOF
+```
 
 # Suspend Workaround
 
