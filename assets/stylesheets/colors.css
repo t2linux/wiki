@@ -1,0 +1,16 @@
+:root {
+    --md-primary-fg-color: #7663E8;
+    --md-accent-fg-color: #9081e4;
+}
+
+.md-typeset .task-list-control [type="checkbox"]:checked + .task-list-indicator::before {
+    background: var(--md-primary-fg-color) !important;
+}
+
+.codehilite .gd, .highlight .gd {
+    background-color: rgb(204, 7, 7) !important;
+}
+
+.codehilite .gi, .highlight .gi {
+    background-color: rgb(13, 156, 0) !important;
+}
