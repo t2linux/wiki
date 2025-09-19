@@ -28,7 +28,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
     -   If you’re using Nixos with Flakes;
 
-        1. Add (https://github.com/GnomedDev/T2FanRD) to your flakes inputs.
+        1. Add <https://github.com/GnomedDev/T2FanRD> to your flakes inputs.
 
         2. Add the `nixosModule` to your output modules.
 
