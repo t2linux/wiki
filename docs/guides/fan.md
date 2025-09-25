@@ -26,6 +26,14 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         2. Install the package by running `sudo dnf install t2fanrd`
 
+    -   If you’re using Nixos with Flakes;
+
+        1. Add <https://github.com/GnomedDev/T2FanRD> to your flakes inputs.
+
+        2. Add the `nixosModule` to your output modules.
+
+        3. Enable the systemd services in your `configuration.nix` and configure the fans.
+
     -   If you're using other distributions:
 
         You can compile the daemon by following the instructions given in [this repository](https://github.com/GnomedDev/T2FanRD) and add a systemd service.
