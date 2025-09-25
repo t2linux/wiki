@@ -1,0 +1,118 @@
+{
+  "all": [
+    {
+      "name": "Arch Linux",
+      "iso": [
+        "https://github.com/t2linux/archiso-t2/releases/download/2024.04.09/archlinux-t2-2024.04.09-t2-x86_64.iso"
+      ]
+    },
+    {
+      "name": "EndeavourOS",
+      "iso": [
+        "https://nightly.link/t2linux/EndeavourOS-ISO-t2/actions/runs/8866649470/built-iso.zip"
+      ],
+      "iso_compression": "zip"
+    },
+    {
+      "name": "Fedora Workstation",
+      "iso": [
+        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-workstation-40.iso"
+      ]
+    },
+    {
+      "name": "Fedora KDE",
+      "iso": [
+        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-kde-40.iso.00",
+        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-kde-40.iso.01"
+      ]
+    },
+    {
+      "name": "Fedora Sway",
+      "iso": [
+        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-sway-40.iso"
+      ]
+    },
+    {
+      "name": "Ubuntu 24.04 - Noble Numbat",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-24.04-6.16.6-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-24.04-6.16.6-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-24.04-6.16.6-t2-noble.iso.02"
+      ]
+    },
+    {
+      "name": "Ubuntu 25.04 - Plucky Puffin",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-25.04-6.16.6-t2-plucky.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-25.04-6.16.6-t2-plucky.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-25.04-6.16.6-t2-plucky.iso.02"
+      ]
+    },
+    {
+      "name": "Kubuntu 24.04 - Noble Numbat",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-24.04-6.16.6-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-24.04-6.16.6-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-24.04-6.16.6-t2-noble.iso.02"
+      ]
+    },
+    {
+      "name": "Kubuntu 25.04 - Plucky Puffin",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-25.04-6.16.6-t2-plucky.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-25.04-6.16.6-t2-plucky.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/kubuntu-25.04-6.16.6-t2-plucky.iso.02"
+      ]
+    },
+    {
+      "name": "Ubuntu Unity 24.04 - Noble Numbat",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-24.04-6.16.6-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-24.04-6.16.6-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-24.04-6.16.6-t2-noble.iso.02"
+      ]
+    },
+    {
+      "name": "Ubuntu Unity 25.04 - Plucky Puffin",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-25.04-6.16.6-t2-plucky.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-25.04-6.16.6-t2-plucky.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.16.6-1/ubuntu-unity-25.04-6.16.6-t2-plucky.iso.02"
+      ]
+    },
+    {
+      "name": "Linux Mint - Cinnamon",
+      "iso": [
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-cinnamon-6.16.6-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-cinnamon-6.16.6-t2-jammy.iso.01"
+      ]
+    },
+    {
+      "name": "Linux Mint - Mate",
+      "iso": [
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-mate-6.16.6-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-mate-6.16.6-t2-jammy.iso.01"
+      ]
+    },
+    {
+      "name": "Linux Mint - XFCE",
+      "iso": [
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-xfce-6.16.6-t2-jammy.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v6.16.6-1/linuxmint-22.2-xfce-6.16.6-t2-jammy.iso.01"
+      ]
+    },
+    {
+      "name": "NixOS Gnome",
+      "iso": [
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-gnome.iso.part-00",
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-gnome.iso.part-01"
+      ]
+    },
+    {
+      "name": "NixOS Minimal",
+      "iso": [
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-minimal.iso"
+      ]
+    }
+  ]
+}
