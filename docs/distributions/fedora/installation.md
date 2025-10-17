@@ -20,7 +20,7 @@ Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download
 
 1. Follow the installation instructions above, but use your custom (vanilla) ISO. You need an external keyboard and mouse. If you do not have a wired internet connection, you need to follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) on the live ISO before proceding.
 2. Add our DNF repo: `sudo dnf copr enable sharpenedblade/t2linux`
-3. Install the kernel: `sudo dnf upgrade kernel`
+3. Install the kernel: `sudo dnf swap --from-repo="copr:copr.fedorainfracloud.org:sharpenedblade:t2linux" kernel kernel`
 4. Install other packages:
     - For interactive usage: `sudo dnf install t2linux-release`
     - For headless setups: `sudo dnf install t2linux-config t2linux-scripts t2fanrd`
