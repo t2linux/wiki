@@ -12,7 +12,7 @@ In macOS Disk Utility you need to create your Linux partition:
 4. Under the blue pie chart press "+" button
 5. When prompted be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
 6. **Name:** choose a name for the partition, e.g. Linux
-7. **Format:** choose whatever format there is - APFS or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway)
+7. **Format:** choose whatever format there is - exFAT or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway). Although its best to avoid APFS just because it may confuse you while differentiating between macOS and Linux partition while installing Linux.
 8. **Size:** pick the **desired amount of space** for Linux, because you will **not be able** to change it.
 9. If you want separate partitions for `/home`, `/boot` etc., create them as well (if you are a beginner and you don't understand this point, you may just skip it).
 
