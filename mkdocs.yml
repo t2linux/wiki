@@ -1,13 +1,30 @@
-# To build the documentation use `build.py`
+# To build the documentation use Zensical 
 
 site_name: t2linux wiki
 site_author: the t2linux.org contributors
 site_url: https://t2linux.org/
-copyright: "© 2021-2024 t2linux.org CC-BY-SA-4.0"
+copyright: "© 2021-2025 t2linux.org CC-BY-SA-4.0"
 
 theme:
     palette:
-        scheme: slate
+        - media: "(prefers-color-scheme)"
+          toggle:
+            icon: material/brightness-auto
+            name: Switch to light mode
+
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          toggle:
+            icon: material/brightness-7
+            name: Switch to dark mode
+
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          toggle:
+            icon: material/brightness-4
+            name: Switch to system preference
     name: material
     custom_dir: theme
     font: false
