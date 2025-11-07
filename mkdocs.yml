@@ -35,7 +35,7 @@ theme:
         - content.code.copy
         - navigation.top
     favicon: assets/images/icon.png
-    logo: assets/images/t2linux-logo-large.svg
+    logo: assets/images/t2linux-logo-small.svg
 
 docs_dir: docs
 site_dir: build
