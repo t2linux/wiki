@@ -30,6 +30,7 @@ jobs:
           - run: pip install zensical
           - run: zensical build --clean
           - run: bash -c "echo 'wiki.t2linux.org' > build/CNAME"
+          - run: bash -c "cp -r redirs/* build/guides"
           - uses: actions/upload-pages-artifact@v4
             with:
               path: build
