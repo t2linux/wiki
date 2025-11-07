@@ -3,6 +3,10 @@ on:
     push:
         branches:
             - master
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
     lint:
@@ -18,12 +22,16 @@ jobs:
         name: Deploy docs
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout master
-              uses: actions/checkout@v5
-
-            - name: Deploy docs
-              uses: mhausenblas/mkdocs-deploy-gh-pages@1.26
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  CUSTOM_DOMAIN: wiki.t2linux.org
-                  EXTRA_PACKAGES: build-base
+          - uses: actions/configure-pages@v5
+          - uses: actions/checkout@v5
+          - uses: actions/setup-python@v5
+            with:
+              python-version: 3.x
+          - run: pip install zensical
+          - run: zensical build --clean
+          - run: bash -c "echo 'wiki.t2linux.org' > build/CNAME"
+          - run: bash -c "cp -r redirs/* build/guides"
+          - uses: actions/upload-pages-artifact@v4
+            with:
+              path: build
+          - uses: actions/deploy-pages@v4
