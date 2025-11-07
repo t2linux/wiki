@@ -260,7 +260,7 @@
        inkscape:groupmode="layer"
        id="layer5"
        inkscape:label="Background"
-       style="display:inline;fill:none;fill-opacity:1;filter:url(#filter2)"><rect
+       style="display:inline;fill:none;fill-opacity:1"><rect
          style="display:inline;fill:#1d1e29;fill-opacity:1;stroke-width:0.183825;filter:url(#filter59)"
          id="rect1"
          width="69.5"
@@ -269,7 +269,7 @@
          y="0"
          transform="scale(1.8417266,1.7716263)"
          inkscape:label="Noise" /><rect
-         style="display:inline;fill:url(#linearGradient31);fill-opacity:1;stroke-width:0.263224;filter:url(#filter2)"
+         style="display:inline;fill:url(#linearGradient31);fill-opacity:1;stroke-width:0.263224"
          id="rect29"
          width="128.78307"
          height="128.75323"
