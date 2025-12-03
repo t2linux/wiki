@@ -18,6 +18,6 @@ If there is someone missing that you think should be on this list, send a PR on 
 - AdityaGarg8 (Ubuntu and wiki maintenance) [https://github.com/AdityaGarg8](https://github.com/AdityaGarg8)
 - EmreTech (Gentoo) [https://github.com/EmreTech](https://github.com/EmreTech)
 - T2minator (Tails) [https://github.com/T2minator](https://github.com/T2minator)
-- NoaHimesaka1873 (Arch, Manjaro and EndeavourOS) [https://github.com/NoaHimesaka1873](https://github.com/NoaHimesaka1873)
+- NoaHimesaka1873 (Arch, Manjaro, EndeavourOS and wiki maintenance) [https://github.com/NoaHimesaka1873](https://github.com/NoaHimesaka1873)
 - The Asahi Linux Contributors (Wi-Fi and Bluetooth) [https://asahilinux.org/](https://asahilinux.org/)
 - lemmyg (Fine audio tuning for MacBook Pro 16 inch 2019) [https://github.com/lemmyg](https://github.com/lemmyg)
