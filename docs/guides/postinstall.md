@@ -129,11 +129,11 @@ In order to make changes to the config for `tiny-dfr`, copy `/usr/share/tiny-dfr
 
 Run the following command, replacing `1` with the number corresponding to the desired touchbar mode.
 
-|Number|Default   |Fn      |
-|------|----------|--------|
-|0     |Escape key|Ignore  |
-|1     |Function  |Media   |
-|2     |Media     |Functin |
+|Number|Default   |Fn       |
+|------|----------|---------|
+|0     |Escape key|Ignore   |
+|1     |Function  |Media    |
+|2     |Media     |Function |
 
 ```bash
 cat <<EOF | sudo tee /etc/modprobe.d/tb.conf
