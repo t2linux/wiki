@@ -21,3 +21,4 @@ If there is someone missing that you think should be on this list, send a PR on 
 - NoaHimesaka1873 (Arch, Manjaro, EndeavourOS and wiki maintenance) [https://github.com/NoaHimesaka1873](https://github.com/NoaHimesaka1873)
 - The Asahi Linux Contributors (Wi-Fi and Bluetooth) [https://asahilinux.org/](https://asahilinux.org/)
 - lemmyg (Fine audio tuning for MacBook Pro 16 inch 2019) [https://github.com/lemmyg](https://github.com/lemmyg)
+- slsrepo (t2archinstall for Arch Linux) [https://github.com/slsrepo/t2archinstall](https://github.com/slsrepo/t2archinstall)
