@@ -35,9 +35,9 @@
     {
       "name": "Ubuntu 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.8-1/ubuntu-24.04-6.17.8-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.8-1/ubuntu-24.04-6.17.8-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.8-1/ubuntu-24.04-6.17.8-t2-noble.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.9-1/ubuntu-24.04-6.17.9-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.9-1/ubuntu-24.04-6.17.9-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.17.9-1/ubuntu-24.04-6.17.9-t2-noble.iso.02"
       ]
     },
     {
