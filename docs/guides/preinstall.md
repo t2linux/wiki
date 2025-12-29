@@ -65,7 +65,6 @@ Or you can use `dd` in macOS Terminal:
 
 ## Disable Secure Boot
 
-Now that you have completed the first part of the Wi-Fi firmware in macOS, you can proceed with the disabling of the secure boot.
 Apple's Secure Boot implementation does not allow booting anything other than macOS or Windows when it is enabled (not even shim signed GRUB).
 We need to disable it:
 
