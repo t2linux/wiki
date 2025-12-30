@@ -2,14 +2,14 @@
 
 Manjaro T2 support is deprecated. See [Deprecation Plan](https://wiki.t2linux.org/distributions/manjaro/deprecation) for more information.
 
-# Download a latest release
+# Download the latest release
 
 [See releases](https://github.com/NoaHimesaka1873/manjaroiso-t2/releases)
 
 # Hardware Requirements
 
 * USB-C to Ethernet cable adapter.
-    * While you can install Manjaro over WiFi, it would be a lot easier to use an Adapter during the installation process.
+    * While you can install Manjaro over WiFi, it would be a lot easier to use an adapter during the installation process.
 * USB-C to USB Adapter
 * USB drive
 

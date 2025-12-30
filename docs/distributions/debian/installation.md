@@ -1,6 +1,6 @@
 # Introduction
 
-This guide shall help you in installing a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
+This guide will help you install a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
 
 Some popular distros include:
 
@@ -18,7 +18,7 @@ Some popular distros include:
 # Install Procedure
 
 !!! Warning "Installation fails when installing the bootloader (Eg: GRUB)"
-    It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
+    During installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
 
 !!! Warning "Pop!_OS"
     Due to a bug in Pop!_OS installer, the partition sizes shown are incorrect during manual partitioning step. As a workaround, you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1456149153) in the live ISO environment to fix the installer and then start the installation.
@@ -32,8 +32,8 @@ Some popular distros include:
 
     2. The partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
 
-    3. If the installer used by your distro is `ubiquity`, which is the one used in Ubuntu, Linux Mint etc., then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you shall have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
-  
+    3. If the installer used by your distro is `ubiquity` (which is the one used in Ubuntu, Linux Mint, etc.), then you can leave EFI Boot alone. If you are using a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), then you will have to separate it out after installation by following [this guide](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+
         For other installers, you need to mount `nvme0n1p1`, or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever case applies to you) at `/boot/efi`. If the installer supports the "boot" flag, set it as well for your EFI partition.
 
 5. Continue the rest of the setup.
@@ -71,4 +71,4 @@ After installation, we need to install a kernel having patches to support the T2
 
 # Basic set up
 
-After installing the new kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You shall mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. Rest have been set up automatically by the kernel upgrade script.
+After installing the new kernel, follow the [Basic setup](https://wiki.t2linux.org/guides/postinstall/) guide. You will mainly have to follow the [Add necessary kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters) and [Make modules load on boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-boot) sections. If using disk encryption (LUKS), then follow the [Make modules load on early boot](https://wiki.t2linux.org/guides/postinstall/#make-modules-load-on-early-boot) section as well. Rest have been set up automatically by the kernel upgrade script.

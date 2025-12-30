@@ -30,9 +30,9 @@ We currently support the following flavours of Ubuntu:
 
     1. If you want, you can make separate partitions for **swap**, `/home`, `/boot` etc as you do in a normal PC.
 
-    2. The only partition to be made compulsorily is the one mounted at `/` and formatted to **ext4** or **btrfs**.
+    2. The only partition that must be made is the one mounted at `/` and formatted to **ext4** or **btrfs**.
 
-    3. Leave EFI boot alone. If you want to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), you can separate it out later after installation as instructed [here](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+    3. Leave EFI Boot alone. If you want to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), you can separate it out later after installation as instructed [here](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
 
 5. Continue the rest of the setup.
 6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
@@ -43,7 +43,7 @@ We currently support the following flavours of Ubuntu:
 Once you're booted and in your desktop:
 
 - Run `get-apple-firmware get_from_macos` **if you have macOS installed as well**.
-- Run `get-apple-firmware get_from_online` **if you have removed macOS or above method does not work** (Note: This method needs wired internet to work).
+- Run `get-apple-firmware get_from_online` **if you have removed macOS or the above method does not work** (Note: This method needs wired internet to work).
 
 If these methods do not work, follow [this guide](https://wiki.t2linux.org/guides/wifi-bluetooth/) to get firmware for Wi-Fi and Bluetooth.
 

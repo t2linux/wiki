@@ -4,19 +4,19 @@ This page explains how to perform a basic set up after installing Linux on a T2 
 
 ## Do you need to do this?
 
-This guide is mainly relevant in the following cases :
+This guide is mainly relevant in the following cases:
 
 1. If you have installed Linux using an official ISO, instead of a T2 ISO.
 2. The [Make modules load on early boot](#make-modules-load-on-early-boot) section is relevant for those who wish to encrypt their disk drives using LUKS or some other similar software.
 3. If some functionality related to T2 Macs is broken, then you can consider following this guide.
 
-In rest cases, you probably won't need to follow this guide.
+In other cases, you probably won't need to follow this guide.
 
-If you have used a T2 ISO, **make sure you have followed the [distro specific guide](https://wiki.t2linux.org/distributions/overview/) for your distro before continuing further.**
+If you have used a T2 ISO, **make sure you have followed the [distro specific guide](https://wiki.t2linux.org/distributions/overview/) for your distro before continuing**.
 
 ## Installing a kernel for T2 support
 
-Installing a kernel with support for T2 Macs is required in order to get the Keyboard, Trackpad, Touch Bar, Audio, Fan and Wi-Fi working.
+Installing a kernel with support for T2 Macs is required to get the keyboard, trackpad, touch bar, audio, fan, and Wi-Fi working.
 
 Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels:
 
@@ -31,7 +31,7 @@ Many distro maintainers provide compiled kernels which can be installed on your 
 | Debian based distros | <https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel> |
 | Debian based distros | <https://github.com/andersfugmann/T2-Debian-Kernel> |
 
-If compiled kernels for your distro are not available, then you shall have to compile a kernel on your own. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
+If compiled kernels for your distro are not available, then you will have to compile a kernel yourself. You can follow the [Kernel](https://wiki.t2linux.org/guides/kernel/) guide for help.
 
 ## Add necessary kernel parameters
 
@@ -52,8 +52,8 @@ echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
 ## Make modules load on early boot
 
 Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
-It also is useful when boot doesn't work, and the keyboard is required for debugging.
-To do this, one must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ram disk.
+It is also useful when boot doesn't work and the keyboard is required for debugging.
+To do this, you must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial RAM disk.
 You can get the list of dependent modules by running `modinfo -F depends apple-bce`
 The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows:
 

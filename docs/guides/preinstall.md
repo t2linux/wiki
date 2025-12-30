@@ -10,11 +10,11 @@ In macOS Disk Utility you need to create your Linux partition:
 2. Choose the volume you want to partition for Linux
 3. Press in the top-right "Partition"
 4. Under the blue pie chart press "+" button
-5. When prompted be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
+5. When prompted, be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
 6. **Name:** choose a name for the partition, e.g. Linux
-7. **Format:** choose whatever format there is - exFAT or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway). Although its best to avoid APFS just because it may confuse you while differentiating between macOS and Linux partition while installing Linux.
+7. **Format:** choose whatever format there is - exFAT or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway). However, it's best to avoid APFS because it may confuse you when differentiating between macOS and Linux partitions during Linux installation.
 8. **Size:** pick the **desired amount of space** for Linux, because you will **not be able** to change it.
-9. If you want separate partitions for `/home`, `/boot` etc., create them as well (if you are a beginner and you don't understand this point, you may just skip it).
+9. If you want separate partitions for `/home`, `/boot`, etc., create them as well. If you are a beginner and don't understand this point, you may skip it.
 
 !!! Note "Triple booting with Linux and Windows"
     Refer to [this guide](https://wiki.t2linux.org/guides/windows/) to make sure you will be able to boot both Windows and Linux.
@@ -38,9 +38,9 @@ Listed below are the currently available installer ISOs for download:
 
 #### Other distributions
 
-If you are a beginner we **highly recommend** to choose one of the distros above.
+If you are a beginner, we **highly recommend** choosing one of the distributions above.
 
-In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, you may require a wired internet connection with a USB adapter. Note that if you later have issues with installing the bootloader (e.g.: GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
+In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, you may require a wired internet connection with a USB adapter. Note that if you later have issues installing the bootloader (e.g., GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
 
 Please, refer to this guide: [Basic setup](https://wiki.t2linux.org/guides/postinstall/).
 
@@ -65,7 +65,7 @@ Or you can use `dd` in macOS Terminal:
 
 ## Disable Secure Boot
 
-Apple's Secure Boot implementation does not allow booting anything other than macOS or Windows when it is enabled (not even shim signed GRUB).
+Apple's Secure Boot implementation does not allow booting anything other than macOS or Windows when enabled (not even shim-signed GRUB).
 We need to disable it:
 
 1. Turn off your Mac
@@ -76,13 +76,13 @@ We need to disable it:
 6. Enter again the password
 7. Once in Startup Security Utility:
 
-   - set Secure Boot to **No Security**
-   - set Allow Boot  Media to **Allow booting from external or removable media**
+   - Set Secure Boot to **No Security**
+   - Set Allow Boot Media to **Allow booting from external or removable media**
 
 Now you are able to boot from a Linux install ISO.
 
 !!! Note "Keeping your Mac secure while Secure Boot is off"
-    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require entering a password to boot anything other than the default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in the Startup Security Utility.
+    If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require a password for booting anything other than the default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in Startup Security Utility.
 
 ## Booting your Linux install USB
 
@@ -97,6 +97,6 @@ Now you are able to boot from a Linux install ISO.
 ## Follow distro specific steps
 
 !!! Warning "Automatic Partitioning"
-    The installers of many distros provide options like "Automatic Partitioning" when installing Linux. You always have to select the option that allows "Manual Partitioning". **Do not** select "Automatic Partitioning" as it shall remove macOS as well. During manual partitioning make sure that you mount `/dev/nvme0n1p1` or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever applies to your case) at `/boot/efi` and the partition you created for Linux at `/`. If you want separate partitions for `/home`, `/boot` etc., make sure you have created them before as well and mount them accordingly during manual partitioning.
+    The installers of many distros provide options like "Automatic Partitioning" when installing Linux. You must always select the option that allows "Manual Partitioning". **Do not** select "Automatic Partitioning" as it will remove macOS as well. During manual partitioning make sure that you mount `/dev/nvme0n1p1` or your [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions) (whatever applies to your case) at `/boot/efi` and the partition you created for Linux at `/`. If you want separate partitions for `/home`, `/boot`, etc., make sure you have created them before as well and mount them accordingly during manual partitioning.
 
 This wiki provides a set of [guides for different distributions](https://wiki.t2linux.org/distributions/overview/). If the distribution you want to use is present there, it's recommended to follow it instead of the official documentation by distribution vendor, as it considers T2 support.

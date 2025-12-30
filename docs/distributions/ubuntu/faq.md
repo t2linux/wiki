@@ -1,12 +1,12 @@
 # Why does my MacBook turn off in the middle of the Ubuntu installation?
 
-This seems to happen with certain MacBooks because the GRUB bootloader installer tries accessing the efivars/nvram, which Apple doesn't allow and the installer doesn't know what to do.
+This seems to happen with certain MacBooks because the GRUB bootloader installer tries to access the efivars/nvram, which Apple doesn't allow and the installer doesn't know what to do.
 
 There is a way to stop this. Boot into the installation media with an External USB Keyboard plugged in. Press e when you selected the "Try Ubuntu without installing" option.
 
-Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With the External keyboard, then press CTRL+X or F10 to boot into the Live Media. The installation should work fine now.
+Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With the external keyboard, then press CTRL+X or F10 to boot into the Live Media. The installation should work fine now.
 
-This issue has occurred for anyone on the 16,1 and maybe the 16,4.
+This issue has occurred for anyone on the 16,1 and possibly the 16,4.
 
 # Making the GRUB Menu appear
 
@@ -22,9 +22,9 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 # Why isn't sound working?
 
-On **Ubuntu 22.04 or earlier**, PulseAudio is installed by default, which performs really bad with T2 audio configuration files. It is suggested to [switch to PipeWire](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux) for better performance, although its still bad as compared to Ubuntu 22.10, which has native support for PipeWire.
+On **Ubuntu 22.04 or earlier**, PulseAudio is installed by default, which performs really badly with T2 audio configuration files. It is suggested to [switch to PipeWire](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux) for better performance, although its still bad as compared to Ubuntu 22.10, which has native support for PipeWire.
 
-On **Ubuntu 22.10 or later**, PipeWire is support natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version:
+On **Ubuntu 22.10 or later**, PipeWire is supported natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version:
 
 ```bash
 sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream

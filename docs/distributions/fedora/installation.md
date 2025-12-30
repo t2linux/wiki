@@ -14,7 +14,7 @@ Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download
 4. Continue with the rest of the installation.
 5. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.
 6. Welcome to Fedora! :)
-7. Wi-Fi should work on first boot, but if it is not you should follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
+7. Wi-Fi should work on first boot, but if it does not, you should follow the [Wi-Fi guide](https://wiki.t2linux.org/guides/wifi-bluetooth/).
 
 ## Installing unsupported spins
 

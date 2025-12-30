@@ -6,7 +6,7 @@ get to a working installation.
 ## Deciding on the Installation
 
 Using Linux on a T2 Mac comes with compromises as well as advantages compared to macOS. You will need
-to decide for yourself if it its worth it.
+to decide for yourself if it is worth it.
 
 Your first consideration should be the risk you are taking. Don't worry, nobody has broken their machine so far by installing
 Linux and by following the guides closely you should be able to get everything working even without a lot of knowledge as well.

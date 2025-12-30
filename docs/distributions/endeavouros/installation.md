@@ -3,13 +3,13 @@
 You will need:
 
 - USB drive with at least 4GB
-- A way to plug it into your Mac (USB-C isn't USB-A)
-- A wired internet connection (i.e. USB-C to Enternet dongle) or Wi-Fi.
+- A way to plug it into your Mac (USB-C and USB-A are different)
+- A wired internet connection (i.e. USB-C to Ethernet dongle) or Wi-Fi.
 
 ---
 
 !!! Warning "Users in NA/EU"
-    If you're experiencing slow download speed or failure to install, please edit your `/etc/pacman.conf` file and replace old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead.
+    If you're experiencing slow download speeds or installation failures, please edit your `/etc/pacman.conf` file and replace the old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead.
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for the installation.
 
