@@ -8,7 +8,7 @@ This may be due to differences between USB-C to USB-A adapters. Try a different 
 
 # My touchbar is blank
 
-Follow the instructions in the [post-install guide](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar). If it still is not working, try updating your macOS instalation.
+Follow the instructions in the [post-install guide](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar). If it still is not working, try updating your macOS installation.
 
 # I get an error about the bootloader when installing
 

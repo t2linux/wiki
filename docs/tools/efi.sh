@@ -16,7 +16,7 @@ fi
 
 if [ $USER != root ]
 then
-echo "This script is intented to be run as root. You will be asked for your password."
+echo "This script is intended to be run as root. You will be asked for your password."
 sudo chmod 755 $0
 sudo $0 "$1"
 exit 0

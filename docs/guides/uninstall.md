@@ -18,7 +18,7 @@ You may want to do this from macOS Recovery as you will be resizing (expanding) 
 
 ## If using a separate EFI partition
 
-Follow the same steps to remove the seperate EFI partition as you followed to remove the Linux partition.
+Follow the same steps to remove the separate EFI partition as you followed to remove the Linux partition.
 
 ## If using the EFI partition already available in your Mac.
 
