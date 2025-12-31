@@ -1,6 +1,6 @@
 # Introduction
 
-This guide will help you install a Debian- or Ubuntu-based Linux distro, which is not available as a modified ISO with T2 support.
+This guide will help you install a Debian or Ubuntu based Linux distro, which is not available as a modified ISO with T2 support.
 
 Some popular distros include:
 
@@ -18,7 +18,7 @@ Some popular distros include:
 # Install Procedure
 
 !!! Warning "Installation fails when installing the bootloader (Eg: GRUB)"
-    During installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
+    It is possible that during installation, when the installer is installing the bootloader (GRUB in most cases), the installation may fail. This is because the distro's ISO is using an old Linux kernel which doesn't support writing to the NVRAM of T2 Macs. In such a case, boot into the ISO again. When the initial menu gets displayed having options to try/install the distro, press "e" on the option you otherwise would have chosen to install. This will open the command line. Add `efi=noruntime` to the command line and press "F10" to boot. This should fix the issue.
 
 !!! Warning "Pop!_OS"
     Due to a bug in Pop!_OS installer, the partition sizes shown are incorrect during manual partitioning step. As a workaround, you may follow the instructions given in this [GitHub issue](https://github.com/elementary/installer/issues/620#issuecomment-1456149153) in the live ISO environment to fix the installer and then start the installation.

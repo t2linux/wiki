@@ -76,8 +76,8 @@ We need to disable it:
 6. Enter your password again
 7. Once in Startup Security Utility:
 
-   - Set Secure Boot to **No Security**
-   - Set Allow Boot Media to **Allow booting from external or removable media**
+   - Set **Secure Boot** to **No Security**
+   - Set **Allow Boot Media** to **Allow booting from external or removable media**
 
 Now you are able to boot from a Linux install ISO.
 

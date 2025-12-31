@@ -16,7 +16,7 @@ If you have used a T2 ISO, **make sure you have followed the [distro specific gu
 
 ## Installing a kernel for T2 support
 
-Installing a kernel with support for T2 Macs is required to get the keyboard, trackpad, touch bar, audio, fan, and Wi-Fi working.
+Installing a kernel with support for T2 Macs is required to get the **keyboard**, **trackpad**, **touch bar**, **audio**, **fan**, and **Wi-Fi** working.
 
 Many distro maintainers provide compiled kernels which can be installed on your Linux installation. Following are the links to the repos providing such kernels:
 

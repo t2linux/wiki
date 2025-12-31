@@ -8,7 +8,7 @@ Make sure you have a T2 kernel of version greater than 6.9.8-1 (you can check th
 
 ## Issues
 
-If you experience system freezes, then the laptop's fans become loud, before the whole computer shuts off (CPU CATERR), or if the amdgpu is making the computer too hot, consider trying:
+If you experience system freezes followed by high fan speeds and sudden shutdowns (CPU CATERR), or if the AMD GPU is causing excessive heat, try the following solutions:
 
 1.  Set the iGPU as main gpu (instructions below)
 
