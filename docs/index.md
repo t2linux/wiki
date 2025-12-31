@@ -37,7 +37,7 @@ Support for hardware is cross distro besides patches to the distribution specifi
 The following repos contain kernel modules for said support:
 
 - MacBook Bridge / T2 Linux Driver [https://github.com/t2linux/apple-bce-drv](https://github.com/t2linux/apple-bce-drv)
-- Touchbar and Ambient Light [https://github.com/t2linux/apple-ib-drv](https://github.com/t2linux/apple-ib-drv) (Upstreamed in kernel 6.15)
+- Touch Bar and Ambient Light [https://github.com/t2linux/apple-ib-drv](https://github.com/t2linux/apple-ib-drv) (Upstreamed in kernel 6.15)
 
 Instead of installing these modules manually, it is suggested to follow the [distro specific guides](https://wiki.t2linux.org/distributions/overview/) since they are pre-installed in our distro specific ISOs.
 
@@ -60,7 +60,7 @@ Instead of installing these modules manually, it is suggested to follow the [dis
 - Wayland
     - libinput tuning is typically applied by distribution maintainers rather than end users. You can test changes on your own, see [debugging touchpad pressure](https://wayland.freedesktop.org/libinput/doc/latest/touchpad-pressure-debugging.html) and [palm detection](https://wayland.freedesktop.org/libinput/doc/latest/palm-detection.html) guides. If you get a configuration that works well, please notify the t2linux maintainers.
 - Xorg **(deprecated, use Wayland instead if possible)**
-    - Implement macOS-like Keyboard and trackpad experience on Gnome Xorg. Read the top comments of each file in the links given below to understand requirements, additional tools and usage.
+    - Implement macOS-like Keyboard and trackpad experience on GNOME Xorg. Read the top comments of each file in the links given below to understand requirements, additional tools and usage.
         - [Synaptics Config](https://gist.github.com/smileBeda/f0452f0d7f1f6d8aa772603411f7876f) (for general trackpad behaviour using Synaptics)
         - [Fusuma Config](https://gist.github.com/smileBeda/74a52fe7cb0901da9e67ae4e39966982) (for additional gestures commands using Fusuma)
 

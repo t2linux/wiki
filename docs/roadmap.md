@@ -1,6 +1,6 @@
 # Introduction
 
-This article is meant to guide users through the wiki by giving an overview over the required steps to
+This article is meant to guide users through the wiki by giving an overview of the required steps to
 get to a working installation.
 
 ## Deciding on the Installation
@@ -16,7 +16,7 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 
 While it is technically possible to remove macOS entirely, it is strongly encouraged to dual boot it with Linux because:
 
-1. To set up Wi-Fi on Linux, you will need Wi-Fi firmware, which can be legally obtained only from macOS. It is illegal to host the firmware on any website as it is under a non redistributable license.
+1. To set up Wi-Fi on Linux, you will need Wi-Fi firmware, which can be legally obtained only from macOS. It is illegal to host the firmware on any website as it is under a non-redistributable license.
 2. It acts as a backup in case something goes wrong.
 3. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
 
@@ -35,16 +35,16 @@ While technically it is not a limitation when installing Linux, different distri
 ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
-t2linux wiki with a really detailed and up to date install guide. On top of that there is also a work in progress `archinstall` script.
+t2linux wiki with a really detailed and up-to-date install guide. On top of that there is also a work in progress `archinstall` script.
 Keep in mind however that the whole process is done in the command line.
 
 Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is not recommended, and NoaHimesaka1873's which is newer and recommended.
 
-EndeavourOS is an Arch based Linux distribution with a graphical installer. This distribution requires little to no configuration after install.
+EndeavourOS is an Arch-based Linux distribution with a graphical installer. This distribution requires little to no configuration after install.
 
-Ubuntu also has a graphical installer. Additionally, less post configuration work is required as some kernel modules are getting installed automatically.
+Ubuntu also has a graphical installer. Additionally, less post-configuration work is required as some kernel modules are getting installed automatically.
 
-Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, but you need to follow the wifi guide.
+Fedora also has a prebuilt ISO and a graphical installer. Most things work out of the box, but you need to follow the Wi-Fi guide.
 
 NixOS has both prebuilt graphical and command line installers. Support for T2 devices is provided in the form of a `nixos-hardware` module.
 Importing the module is the only thing you have to do to get your configuration working on your Mac.
