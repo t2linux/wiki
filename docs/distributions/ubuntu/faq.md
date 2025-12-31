@@ -6,13 +6,13 @@ There is a way to stop this. Boot into the installation media with an External U
 
 Scroll to the bottom with the arrow keys, and type in ``efi=noruntime``. With the External keyboard, then press CTRL+X or F10 to boot into the Live Media. The installation should work fine now.
 
-This issue has occured for anyone on the 16,1 and maybe the 16,4.
+This issue has occurred for anyone on the 16,1 and maybe the 16,4.
 
 # Making the GRUB Menu appear
 
 The GRUB bootloader by default turns off the GRUB Menu. This means you can't boot into Bootcamp Windows if it's installed. This can be easily fixed after Ubuntu is fully installed.
 
-In a Terminal in Ubuntu, edit file ``/etc/default/grub`` with any preferred editior (nano/vim) and with root permissions. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. Save the file once you're done.
+In a Terminal in Ubuntu, edit file ``/etc/default/grub`` with any preferred editor (nano/vim) and with root permissions. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. Save the file once you're done.
 
 We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 

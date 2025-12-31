@@ -1,8 +1,8 @@
 # Introduction
 
-This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using seperate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
+This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using separate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
 
-The simplist way to triple boot is to install Windows first, and install Linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
+The simplest way to triple boot is to install Windows first, and install Linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
 
 # Using the same EFI partition
 
@@ -24,7 +24,7 @@ The simplist way to triple boot is to install Windows first, and install Linux o
 3. Enable the GRUB menu so that you'll have time to pick Windows:
 
     1. Boot into your Linux install by selecting the Windows option in startup manager.
-    2. Edit `/etc/default/grub` with any preferred editior (nano/vim/) and with `sudo`. Change line `GRUB_TIMEOUT_STYLE` to `GRUB_TIMEOUT_STYLE=MENU`. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
+    2. Edit `/etc/default/grub` with any preferred editor (nano/vim/) and with `sudo`. Change line `GRUB_TIMEOUT_STYLE` to `GRUB_TIMEOUT_STYLE=MENU`. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
     3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in `sudo update-grub` (For Ubuntu) or `sudo grub-mkconfig -o /boot/grub/grub.cfg` (For Arch based distros) and hit enter. After the command is done, you're finished.
 
     !!! note "Using bootloaders other than GRUB"
@@ -34,8 +34,8 @@ The simplist way to triple boot is to install Windows first, and install Linux o
 
 ## If Linux is installed first
 
-1. Make sure that your Linux partitions are not labled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your Linux partitions to `Linux Filesystem`.
-2. Install Windows normaly with Bootcamp. Windows will replace your Linux boot option.
+1. Make sure that your Linux partitions are not labeled as `Microsoft Basic Data`, if they are, Bootcamp Assistant will think Windows is already installed. To fix this, go to Linux and do `sudo cfdisk /dev/nvme0n1` and change the type of your Linux partitions to `Linux Filesystem`.
+2. Install Windows normally with Bootcamp. Windows will replace your Linux boot option.
 3. Boot into macOS.
 4. `sudo diskutil mount disk0s1`
 5. Go to `/Volumes/EFI/efi`
@@ -52,14 +52,14 @@ The simplist way to triple boot is to install Windows first, and install Linux o
 9. Enable the GRUB menu so that you'll have time to pick Windows
 
     1. Boot into your Linux install by selecting the Windows option in startup manager.
-    2. Edit ``/etc/default/grub`` with any preferred editior (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
+    2. Edit ``/etc/default/grub`` with any preferred editor (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
     3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
 
 10. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
 It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls /Volumes/EFI/efi|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
 
-# Using seperate EFI partitions
+# Using separate EFI partitions
 
 ## Installing Linux (With or without Windows already installed)
 
@@ -77,7 +77,7 @@ If you are using an interactive installer:
 1. Set the `EFI2` partition to be mounted at `/boot/efi` and set it as "ESP"/"Boot"/"EFI System Partition". Don't use the partition labeled `EFI` located at `/dev/nvme0n1p1`, to avoid breaking the Windows bootloader stored there. Ensure that `/dev/nvme0n1p1` wasn't set by default to be used as the "EFI System Partition".
 
     !!! info "Ubuntu"
-        On Ubuntu since the installer doesn't support seperate EFI partitions, install normally to the Windows EFI partition and follow [this section](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed) to seperate out the partition.
+        On Ubuntu since the installer doesn't support separate EFI partitions, install normally to the Windows EFI partition and follow [this section](https://wiki.t2linux.org/guides/windows/#separate-the-efi-partition-after-linux-is-installed) to separate out the partition.
 
 2. Your main partition that were formatted as macOS Extended/HFS+ can be mounted at `/`.
 
@@ -103,10 +103,10 @@ If you are doing it manually:
 2. If your second EFI partition is labeled as `EFI System`, you'll need to use `cfdisk` again to make it not that, as the Windows installer fails if there are two.
 3. Bootcamp should install Windows normally. If you put your Linux bootloader on `/dev/nvme0n1p1`, Windows will replace it, and that's why a second EFI partition is ideal.
 
-## Seperate the EFI partition after Linux is installed
+## Separate the EFI partition after Linux is installed
 
-In case you have installed Linux to the same EFI partition as used by Windows, and now want to seperate it out, then:
+In case you have installed Linux to the same EFI partition as used by Windows, and now want to separate it out, then:
 
 1. Using disk utility, make a 500Mb FAT32 partition, call it something like `EFI2`. Make sure you do not use `EFI` as the label.
 2. Download [this script](https://wiki.t2linux.org/tools/efi.sh).
-3. Run this script using `bash /path/to/script <Name of seperate partition>` in Linux. E.g.: If your seperate partition has the name `EFI2`, and script is in your Downloads folder, run `bash $HOME/Downloads/efi.sh EFI2`.
+3. Run this script using `bash /path/to/script <Name of separate partition>` in Linux. E.g.: If your separate partition has the name `EFI2`, and script is in your Downloads folder, run `bash $HOME/Downloads/efi.sh EFI2`.

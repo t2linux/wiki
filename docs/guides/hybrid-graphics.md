@@ -26,7 +26,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 ## Enabling the iGPU
 
-1.  Configue apple-gmux to switch to the iGPU at boot
+1.  Configure apple-gmux to switch to the iGPU at boot
 
     1.  Create `/etc/modprobe.d/apple-gmux.conf` with the following contents:
 
