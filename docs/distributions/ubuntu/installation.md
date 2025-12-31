@@ -32,7 +32,7 @@ We currently support the following flavours of Ubuntu:
 
     2. The only partition that must be made is the one mounted at `/` and formatted to **ext4** or **btrfs**.
 
-    3. Leave EFI Boot alone. If you want to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions), you can separate it out later after installation as instructed [here](https://wiki.t2linux.org/guides/windows/#seperate-the-efi-partition-after-linux-is-installed).
+    3. Leave EFI Boot alone. If you want to use a [separate EFI partition](https://wiki.t2linux.org/guides/windows/#using-separate-efi-partitions), you can separate it out later after installation as instructed [here](https://wiki.t2linux.org/guides/windows/#separate-the-efi-partition-after-linux-is-installed).
 
 5. Continue the rest of the setup.
 6. Once it's finished, you can reboot without your installation media. Hold down Option (⌥) while booting, then select EFI Boot and press enter.

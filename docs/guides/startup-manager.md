@@ -30,7 +30,7 @@ In this case the Windows startup disk is used to boot both Windows and Linux. Th
 
 ## Setting label in case you are using a separate EFI partition for Linux
 
-More details about this can be found in the [triple boot guide](https://wiki.t2linux.org/guides/windows/#using-seperate-efi-partitions).
+More details about this can be found in the [triple boot guide](https://wiki.t2linux.org/guides/windows/#using-separate-efi-partitions).
 
 In this case, boot into macOS, open a terminal window and run:
 
