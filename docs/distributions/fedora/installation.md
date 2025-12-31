@@ -1,6 +1,6 @@
 # Download the latest safe release
 
-Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download a live iso from [here](https://github.com/t2linux/fedora-iso/releases).
+Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download a live ISO from [here](https://github.com/t2linux/fedora-iso/releases).
 
 # Hardware Requirements
 

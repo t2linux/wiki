@@ -8,9 +8,9 @@ In macOS Disk Utility you need to create your Linux partition:
 
 1. Open Disk Utility
 2. Choose the volume you want to partition for Linux
-3. Press in the top-right "Partition"
-4. Under the blue pie chart press "+" button
-5. When prompted, be sure to select **"Add Partition"** and **NOT "Volume"**, you want a partition.
+3. Press the "Partition" button in the top-right
+4. Under the blue pie chart press the "+" button
+5. When prompted, be sure to select **"Add Partition"** and **NOT "Volume"** - you want a partition.
 6. **Name:** choose a name for the partition, e.g. Linux
 7. **Format:** choose whatever format there is - exFAT or another - it doesn't really matter (during the Linux installation you must erase your created partition anyway). However, it's best to avoid APFS because it may confuse you when differentiating between macOS and Linux partitions during Linux installation.
 8. **Size:** pick the **desired amount of space** for Linux, because you will **not be able** to change it.
@@ -42,7 +42,7 @@ If you are a beginner, we **highly recommend** choosing one of the distributions
 
 In case you wish to proceed manually, you can download the official ISO from the distro website, but you will have to use an external USB keyboard and mouse for the install process. Additionally, you may require a wired internet connection with a USB adapter. Note that if you later have issues installing the bootloader (e.g., GRUB), try booting the ISO with the `efi=noruntime` kernel parameter.
 
-Please, refer to this guide: [Basic setup](https://wiki.t2linux.org/guides/postinstall/).
+Please refer to this guide: [Basic setup](https://wiki.t2linux.org/guides/postinstall/).
 
 You can also find detailed info for unsupported debian-based distros [here](https://wiki.t2linux.org/distributions/debian/installation/).
 
@@ -60,7 +60,7 @@ Or you can use `dd` in macOS Terminal:
 3. Run `diskutil list` to list all the drives.
 4. Look up for your USB thumb which appears as an **external, physical** drive labelled `/dev/diskX` where `X` is a single number (e.g. /dev/disk**2**).
 5. Run `sudo diskutil unmountDisk /dev/diskX` to unmount the disk.
-6. Run `sudo dd if=path/to/linux.iso of=/dev/rdiskX bs=1m` to start writing. To fetch the iso path easily you can just drag and drop the .iso into the Terminal.
+6. Run `sudo dd if=path/to/linux.iso of=/dev/rdiskX bs=1m` to start writing. To fetch the ISO path easily you can just drag and drop the .iso into the Terminal.
 7. Now you may press `control-T` to make it show how many KBs it has written so far.
 
 ## Disable Secure Boot
@@ -73,7 +73,7 @@ We need to disable it:
 3. Your Mac will boot in the macOS Recovery
 4. Select your user and enter your password
 5. Now, from the menu bar choose Utilities > Startup Security Utility
-6. Enter again the password
+6. Enter your password again
 7. Once in Startup Security Utility:
 
    - Set Secure Boot to **No Security**

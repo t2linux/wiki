@@ -1,6 +1,6 @@
 # Introduction
 
-This page is a guide on getting Windows and Linux both installed. Secure Boot Must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), goto 'Using separate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, goto 'Using the same EFI partition'.
+This page is a guide on getting Windows and Linux both installed. Secure Boot must be disabled from macOS recovery. If you want to be able to choose from macOS, Windows, or Linux in the Startup Manager (the menu you get by holding ⌥ key), go to 'Using separate EFI partitions'. If you just want to select between Linux and Windows in the GRUB bootloader, go to 'Using the same EFI partition'.
 
 The simplest way to triple boot is to install Windows first, and install Linux on the same EFI partition, so that the Windows option in Startup Manager will let you pick Linux or Windows. To do that, follow the first set of instructions here.
 
@@ -8,7 +8,7 @@ The simplest way to triple boot is to install Windows first, and install Linux o
 
 ## If Windows is installed first
 
-1. Install [Linux normally](https://wiki.t2linux.org/guides/preinstall/) (this is probably done for you if you are using an installer specific to T2 Macs). During installation, Put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot Linux.
+1. Install [Linux normally](https://wiki.t2linux.org/guides/preinstall/) (this is probably done for you if you are using an installer specific to T2 Macs). During installation, put your bootloader on `/dev/nvme0n1p1`, which should be set to mount at `/boot/efi`. Once it installs the bootloader, the Windows entry in startup manager will boot Linux.
 
 2. Fix blank screen issue that may occur when booting Windows (Credits to gbrow004 for documenting this fix on his [Gist](https://gist.github.com/gbrow004/096f845c8fe8d03ef9009fbb87b781a4#fixing-bootcampwindows)):
 
@@ -51,13 +51,13 @@ The simplest way to triple boot is to install Windows first, and install Linux o
 
 9. Enable the GRUB menu so that you'll have time to pick Windows
 
-    1. Boot into your Linux install by selecting the Windows option in startup manager.
-    2. Edit ``/etc/default/grub`` with any preferred editor (nano/vim/) and with sudo. Change line ``GRUB_TIMEOUT_STYLE`` to ``GRUB_TIMEOUT_STYLE=MENU``. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
-    3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in ``sudo update-grub`` and hit enter. After the command is done, you're finished.
+    1. Boot into your Linux install by selecting the Windows option in startup manager
+    2. Edit `/etc/default/grub` with any preferred editor (nano/vim/) and with sudo. Change line `GRUB_TIMEOUT_STYLE` to `GRUB_TIMEOUT_STYLE=MENU`. If you are using `nano`, save the file by doing CTRL+X, Y, then enter.
+    3. We've now changed the GRUB Bootloader settings, but we now need to update GRUB to apply these changes. Type in `sudo update-grub` and hit enter. After the command is done, you're finished.
 
 10. You should now be able to boot either Windows or Linux from the GRUB bootloader.
 
-It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls /Volumes/EFI/efi|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"` This might not prevent step 8 from being needed.
+It may be possible to skip steps 5-8 by doing the following command in macOS: `sudo sh -c "bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/efi/$(ls /Volumes/EFI/efi|grep -i -e microsoft -e boot -e apple -v)/grubx64.efi --shortform"`. This might not prevent step 8 from being needed.
 
 # Using separate EFI partitions
 

@@ -1,6 +1,6 @@
 # Introduction
 
-This page explains how to perform a basic set up after installing Linux on a T2 Mac.
+This page explains how to perform a basic setup after installing Linux on a T2 Mac.
 
 ## Do you need to do this?
 
@@ -39,7 +39,7 @@ Using your bootloader, add the `intel_iommu=on iommu=pt pcie_ports=compat` kerne
 
   1. Edit `/etc/default/grub`.
   2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`.
-  3. Run `sudo grub-mkconfig -o /boot/grub/grub.cfg` if you are on a non-debian based distro. If using Debian or Ubuntu based distro, run `sudo update-grub`.
+  3. Run `sudo grub-mkconfig -o /boot/grub/grub.cfg` if you are on a non-Debian based distro. If using Debian or Ubuntu based distro, run `sudo update-grub`.
 
 ## Make modules load on boot
 
@@ -57,7 +57,7 @@ To do this, you must ensure the `apple-bce` module *as well as its dependent mod
 You can get the list of dependent modules by running `modinfo -F depends apple-bce`
 The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows:
 
-- On systems with `initramfs-tools` (all debian-based distros):
+- On systems with `initramfs-tools` (all Debian-based distros):
 
     1. Run `sudo su` to open a shell as root.
 
@@ -101,7 +101,7 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
 ## Adding support for customisable Touch Bar
 
-By default the Touch Bar works in the same mode which Windows Bootcamp uses on Linux. If you want to customise it, you can install `tiny-dfr` on your distro.
+By default the Touch Bar works in the same mode which Windows Bootcamp uses on Linux. If you want to customize it, you can install `tiny-dfr` on your distro.
 
 If you are using an Ubuntu or Debian based distro:
 
@@ -117,11 +117,11 @@ If you are using Arch Linux or EndeavourOS:
 If you are using Fedora:
 
   1. Install tiny-dfr with `sudo dnf install rust-tiny-dfr`.
-  2. Restart your mac
+  2. Restart your Mac
 
 For other distros:
 
-- Compile [`tiny-dfr`](https://github.com/AsahiLinux/tiny-dfr) yourself if your distro don't have that packaged yet.
+- Compile [`tiny-dfr`](https://github.com/AsahiLinux/tiny-dfr) yourself if your distro doesn't have that packaged yet.
 
 In order to make changes to the config for `tiny-dfr`, copy `/usr/share/tiny-dfr/config.toml` to `/etc/tiny-dfr/config.toml` and edit `/etc/tiny-dfr/config.toml` by following the instructions given in that file.
 
@@ -166,7 +166,7 @@ Instructions for the same are given in the [Wi-Fi and Bluetooth](https://wiki.t2
 
 # Network Manager recurrent notifications
 
-Some users have experienced recurrent notifications due the internal usb ethernet interface connected to the T2 chip. To avoid those notifications we can disable the interface with the following command:
+Some users have experienced recurrent notifications due to the internal USB ethernet interface connected to the T2 chip. To avoid those notifications we can disable the interface with the following command:
 
 ```sh
 cat <<EOF | sudo tee /etc/udev/rules.d/99-network-t2-ncm.rules
