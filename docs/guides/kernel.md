@@ -12,7 +12,7 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
     - Debian based systems: `sudo apt install autoconf bc bison build-essential cpio curl debhelper dkms dwarves fakeroot flex gawk git kernel-wedge libcap-dev libelf-dev libiberty-dev libncurses-dev libpci-dev libssl-dev libudev-dev openssl python3 rsync wget xz-utils zstd`
     - For other distros you will need the equivalent of these, but if you miss something you'll most likely get an error saying what's missing, and you can then install it and re-run `make` to continue where you left off.
 
-- You will need about 20GB of disk space to compile the kernel. If you have a large amount of ram, you could use tmpfs to store build files in ram.
+- You will need about 20GB of disk space to compile the kernel. If you have a large amount of RAM, you could use tmpfs to store build files in RAM.
 
 ## Building kernel
 
@@ -69,10 +69,10 @@ scripts/config --module CONFIG_APFS_FS
 
 ### Building
 
-This may take 2-3 hours to build depending on your CPU and the kernel config.
+This may take 2-3 hours to build, depending on your CPU and the kernel config.
 
 !!! Info "Incremental builds"
-    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realise you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
+    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realize you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
 
 ```bash
 make -j$(nproc)

@@ -1,18 +1,18 @@
 # Introduction
 
-This page describes how to use the iGPU on MacBookPro's with Hybrid Graphics (2 GPUs). 13 inch MacBooks only have an iGPU, and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
+This page describes how to use the iGPU on MacBook Pros with Hybrid Graphics (2 GPUs). 13-inch MacBooks only have an iGPU and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
 
 This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
 
-Make sure you have a t2 kernel of version greater than 6.9.8-1 (you can check this with `uname -r`).
+Make sure you have a T2 kernel of version greater than 6.9.8-1 (you can check this with `uname -r`).
 
 ## Issues
 
-If you experience system freezes, then the laptop's fans becoming loud, before the whole computer shuts off (CPU CATERR), or if the amdgpu is making the computer too hot, consider trying:
+If you experience system freezes followed by high fan speeds and sudden shutdowns (CPU CATERR), or if the AMD GPU is causing excessive heat, try the following solutions:
 
-1.  Set iGPU as main gpu (instructions below)
+1.  Set the iGPU as the main GPU (instructions below)
 
-2.  Set AMD GPU Dynamic Power Management from auto to low or high. Low can be safer option to avoid thermal issues or save battery.
+2.  Set the AMD GPU Dynamic Power Management level from auto to low or high. Low can be safer option to avoid thermal issues or save battery.
 
     You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/power_dpm_force_performance_level`
 
@@ -41,7 +41,7 @@ If you experience system freezes, then the laptop's fans becoming loud, before t
 
 If using the iGPU causes the screen to be black after waking up from suspend, then try one of these workarounds:
 
-- Add `i915.enable_guc=3` to [your kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-paramaters). If that has a problem, try setting the value to 2 instead of 3.
+- Add `i915.enable_guc=3` to [your kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-parameters). If that has a problem, try setting the value to 2 instead of 3.
 - Turn the screen off and on after the backlight turns on. For GNOME: type your password then press enter, press Command + L to lock (this should turn off the backlight), then press any key.
 
 ## Use on Windows

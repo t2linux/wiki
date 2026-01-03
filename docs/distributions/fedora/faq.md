@@ -6,7 +6,7 @@ If you already have Bootcamp installed, you might notice that the boot option fo
 
 This may be due to differences between USB-C to USB-A adapters. Try a different one if it is not working.
 
-# My touchbar is blank
+# My Touch Bar is blank
 
 Follow the instructions in the [post-install guide](https://wiki.t2linux.org/guides/postinstall/#setting-up-the-touch-bar). If it still is not working, try updating your macOS installation.
 

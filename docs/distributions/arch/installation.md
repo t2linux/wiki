@@ -3,12 +3,12 @@
 You will need:
 
 - USB drive with at least 1GB
-- A way to plug it into your Mac (USB-C isn't USB-A)
+- A way to plug it into your Mac (USB-C and USB-A are different)
 
 ---
 
 !!! Warning "Users in NA/EU might face slow download speeds from the mirror"
-    If you're experiencing slow download speed or failure to install, please edit your `/etc/pacman.conf` file and replace old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead. You can also checkout the [arch-mirrors mailing list](https://lists.archlinux.org/archives/list/arch-mirrors@lists.archlinux.org/) to get information about latest downtimes for mirror.funami.tech.
+    If you're experiencing slow download speeds or installation failures, please edit your `/etc/pacman.conf` file and replace the old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead. You can also checkout the [arch-mirrors mailing list](https://lists.archlinux.org/archives/list/arch-mirrors@lists.archlinux.org/) to get information about latest downtimes for mirror.funami.tech.
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps.
 
