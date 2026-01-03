@@ -10,7 +10,7 @@ Make sure you have a T2 kernel of version greater than 6.9.8-1 (you can check th
 
 If you experience system freezes followed by high fan speeds and sudden shutdowns (CPU CATERR), or if the AMD GPU is causing excessive heat, try the following solutions:
 
-1.  Set iGPU as the main GPU (instructions below)
+1.  Set the iGPU as the main GPU (instructions below)
 
 2.  Set the AMD GPU Dynamic Power Management level from auto to low or high. Low can be safer option to avoid thermal issues or save battery.
 
