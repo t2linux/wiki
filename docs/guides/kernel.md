@@ -72,7 +72,7 @@ scripts/config --module CONFIG_APFS_FS
 This may take 2-3 hours to build, depending on your CPU and the kernel config.
 
 !!! Info "Incremental builds"
-    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realise you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
+    If you `control-c` to stop the build process, you may continue where you left off by running `make` again. If you build the kernel, and realize you want to make more changes to the code or config, re-running `make` will only rebuild bits that you changed.
 
 ```bash
 make -j$(nproc)

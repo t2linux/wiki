@@ -7,11 +7,11 @@
 
 Download Links:
 
-[Ubuntu and its supported flavours](https://github.com/t2linux/T2-Ubuntu/releases/latest)
+[Ubuntu and its supported flavors](https://github.com/t2linux/T2-Ubuntu/releases/latest)
 
 [Linux Mint](https://github.com/t2linux/T2-Mint/releases/latest)
 
-We currently support the following flavours of Ubuntu:
+We currently support the following flavors of Ubuntu:
 
 - Ubuntu
 - Kubuntu

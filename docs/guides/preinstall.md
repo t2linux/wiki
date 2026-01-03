@@ -33,7 +33,7 @@ Listed below are the currently available installer ISOs for download:
 | Fedora                  | <https://github.com/t2linux/fedora-iso/releases/latest> |
 | Gentoo                  | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
 | NixOS                   | <https://github.com/t2linux/nixos-t2-iso> |
-| Ubuntu & its flavours   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
+| Ubuntu & its flavors   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 | Linux Mint              | <https://github.com/t2linux/T2-Mint/releases/latest> |
 
 #### Other distributions
@@ -58,7 +58,7 @@ Or you can use `dd` in macOS Terminal:
 1. Insert your USB drive.
 2. Open macOS Terminal.
 3. Run `diskutil list` to list all the drives.
-4. Look up for your USB thumb which appears as an **external, physical** drive labelled `/dev/diskX` where `X` is a single number (e.g. /dev/disk**2**).
+4. Look up for your USB thumb which appears as an **external, physical** drive labeled `/dev/diskX` where `X` is a single number (e.g. /dev/disk**2**).
 5. Run `sudo diskutil unmountDisk /dev/diskX` to unmount the disk.
 6. Run `sudo dd if=path/to/linux.iso of=/dev/rdiskX bs=1m` to start writing. To fetch the ISO path easily you can just drag and drop the .iso into the Terminal.
 7. Now you may press `control-T` to make it show how many KBs it has written so far.
