@@ -1,6 +1,6 @@
 # Introduction
 
-rEFInd is an **optional** UEFI boot manager and alternative to GRUB that provides a graphical interface for selecting your operating system at startup.
+rEFInd is an **optional** UEFI boot manager and an alternative to GRUB. It provides a graphical interface for selecting an operating system at startup.
 
 **Benefits:**
 
@@ -8,7 +8,7 @@ rEFInd is an **optional** UEFI boot manager and alternative to GRUB that provide
 - Can resolve specific boot issues that other loaders struggle with
 - Some users find it faster than other boot loaders
 
-This guide shall help you install the rEFInd Boot Manager in your T2 Mac in the safest possible way. Though there are various options to get rEFInd on your Mac, it is recommended to follow the instructions given below unless you know what you are doing.
+This guide helps you install the rEFInd Boot Manager in your T2 Mac in the safest possible way. Though there are various options to get rEFInd on your Mac, it is recommended to follow the instructions given below unless you know what you are doing.
 
 # Installation
 
