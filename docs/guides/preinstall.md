@@ -33,7 +33,7 @@ Listed below are the currently available installer ISOs for download:
 | Fedora                  | <https://github.com/t2linux/fedora-iso/releases/latest> |
 | Gentoo                  | Please refer to this [page](https://wiki.t2linux.org/distributions/gentoo/installation/) |
 | NixOS                   | <https://github.com/t2linux/nixos-t2-iso> |
-| Ubuntu & its flavors   | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
+| Ubuntu & its flavors    | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 | Linux Mint              | <https://github.com/t2linux/T2-Mint/releases/latest> |
 
 #### Other distributions
