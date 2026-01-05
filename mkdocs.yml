@@ -87,11 +87,11 @@ nav:
           - Windows Triple Boot: guides/windows.md
           - Hybrid Graphics: guides/hybrid-graphics.md
           - Audio: guides/audio-config.md
-          - Uninstall: guides/uninstall.md
           - Fan: guides/fan.md
           - Kernel: guides/kernel.md
           - Startup Manager: guides/startup-manager.md
           - rEFInd: guides/refind.md
+          - Uninstall: guides/uninstall.md
     - Distributions:
           - Overview: distributions/overview.md
           - Arch:
