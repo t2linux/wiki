@@ -2,7 +2,7 @@
 
 This page is a step by step guide to get fan control working on T2 Macs.
 
-In some Macs, the fan has been found to work out of the box. In such a case the driver is not required until you want to force a certain speed or do some other configuration which can be done by the help of this driver.
+In some Macs, the fan has been found to work out of the box. In such cases, the driver is not required unless you want to force a certain speed or do some other configuration which can be done by the help of this driver.
 
 ## Steps
 
@@ -12,7 +12,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         1. Check if you installed Arch using our guide or added our repositories. If you haven't done that, follow [this guide](https://wiki.t2linux.org/distributions/arch/faq/#updating-kernel) first.
 
-        2. Install the package by running `sudo pacman -S t2fanrd`. (Do note that EndeavourOS Cassini Nova R1 already includes t2fand.)
+        2. Install the package by running `sudo pacman -S t2fanrd`. (Note that EndeavourOS Cassini Nova R1 already includes t2fand.)
 
     -   If you're using Debian or Ubuntu based distros:
 
@@ -26,7 +26,7 @@ In some Macs, the fan has been found to work out of the box. In such a case the 
 
         2. Install the package by running `sudo dnf install t2fanrd`
 
-    -   If you’re using Nixos with Flakes;
+    -   If you're using NixOS with Flakes,
 
         1. Add <https://github.com/GnomedDev/T2FanRD> to your flakes inputs.
 

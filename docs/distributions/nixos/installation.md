@@ -96,15 +96,15 @@ You might want to also configure a display manager and a desktop environment. Ch
 
         ```shell
         # 0. If you haven't run nixos-generate-config, do it now. See above for steps.
-        # 1. Change directory to /mnt/etc/nixos. 
+        # 1. Change directory to /mnt/etc/nixos.
         #    This will be where you store your flake, but you can move it later.
         cd /mnt/etc/nixos
 
-        # 2. Initialize the flake directory with the template. 
+        # 2. Initialize the flake directory with the template.
         #    Accept *both* settings if you would like to use the substituter.
         nix flake init -t github:soopyc/nixos-t2-flake
 
-        # 3. Edit flake.nix, delete the section as specified. 
+        # 3. Edit flake.nix, delete the section as specified.
         #    Also, rename yourHostname to something else.
         $EDITOR flake.nix
 

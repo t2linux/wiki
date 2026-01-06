@@ -19,9 +19,9 @@ After running this, remove old repository and reboot.
 
 # Upgrading to newer kernel (recommended)
 
-Users using older kernel are advised to migrate to newest kernel since newer kernel has more support.
+Users using older kernels are advised to migrate to the newest kernel since the newer kernel has more support.
 
-Join our Discord or enable notifications for [this repository](https://github.com/NoaHimesaka1873/manjaro-kernel-t2) to get pings for new kernel.
+Join our Discord or enable notifications for [this repository](https://github.com/NoaHimesaka1873/manjaro-kernel-t2) to get pings for new kernels.
 
 # Installing alongside Windows
 

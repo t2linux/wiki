@@ -190,7 +190,7 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
     !!! warning "Internet connection may be required for **Method 4**"
 
-        **Method 4** needs certain dependencies to work. If they are missing, you need to have an active internet connection on Linux to download and install them. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet. If you are using a customised ISO made for T2 Macs, then most likely those dependencies shall be shipped alongwith the ISO, so in that case internet shall not be required.
+        **Method 4** needs certain dependencies to work. If they are missing, you need to have an active internet connection on Linux to download and install them. You can use Ethernet, USB tethering or an external Wi-Fi adapter to get internet. If you are using a customized ISO made for T2 Macs, then most likely those dependencies shall be shipped alongwith the ISO, so in that case internet shall not be required.
 
     This method does not have any steps to be followed on macOS. So, you have to run the script directly on Linux. After you run the script on Linux, you have to choose the **"Retrieve the firmware directly from macOS**" option.
 
