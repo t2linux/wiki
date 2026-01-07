@@ -13,15 +13,11 @@ You will need:
 
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for the installation.
 
-2. Boot into the ISO and start the Calamares installer
+2. Boot into the ISO and start the Calamares installer.
 
-    1. If you're not connected to the internet, connect to it now. Use included GUI config tool to connect to Wi-Fi.
-    2. On the "Welcome" window, choose...
-
-        1. "Install community editions" if you want to install community edition.
-        2. "Start the Installer" if you want to install normal edition.
-
-    3. If you chose to install normal edition, choose "Online" or "Offline" depending on your needs.
+    1. If you're not connected to the internet, connect to it now, unless you're planning to use offline install. Use included GUI config tool to connect to Wi-Fi.
+    2. On the "Welcome" window, click "Start the Installer" button.
+    3. A pop up window will appear. Choose "Online" or "Offline" depending on your needs.
 
 3. Follow the installer until Partitions.
 
