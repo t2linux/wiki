@@ -40,7 +40,7 @@ We currently support the following flavors of Ubuntu:
 
 ## Setting up Wi-Fi and Bluetooth
 
-Once you're booted and in your desktop:
+In most cases, Wi-Fi and Bluetooth should work once you have installed. If not, once you're booted and are in your desktop:
 
 - Run `get-apple-firmware get_from_macos` **if you have macOS installed as well**.
 - Run `get-apple-firmware get_from_online` **if you have removed macOS or the above method does not work** (Note: This method needs wired internet to work).
