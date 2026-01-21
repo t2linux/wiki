@@ -128,7 +128,7 @@ extra_css:
 
 extra:
     social:
-        - icon: fontawesome/brands/discord
-          link: https://discord.com/invite/68MRhQu
+        - icon: simple/matrix
+          link: https://matrix.to/#/#space:t2linux.org
         - icon: fontawesome/brands/github
           link: https://github.com/t2linux
