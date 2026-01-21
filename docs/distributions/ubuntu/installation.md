@@ -55,4 +55,4 @@ In order to make changes to the config for `tiny-dfr`, copy `/usr/share/tiny-dfr
 
 ## Troubleshooting
 
-If you are facing issues while installing or have post installation issues (E.g.: Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu/issues) or contact us on the [Discord server](https://discord.com/invite/68MRhQu).
+If you are facing issues while installing or have post installation issues (E.g.: Wi-Fi, sound etc.), refer to the [FAQ](https://wiki.t2linux.org/distributions/ubuntu/faq/) section first. If it is not able to help you, you may open an issue [here](https://github.com/t2linux/T2-Ubuntu/issues), or contact us on the [Matrix Space](https://matrix.to/#/#space:t2linux.org) or [Discord server](https://discord.com/invite/68MRhQu).
