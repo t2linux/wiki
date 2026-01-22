@@ -11,7 +11,7 @@ To get started with an installation, refer to the [roadmap](https://wiki.t2linux
 
 # Contact us
 
-You may contact us on the [Linux on T2 Macs (2018+) Matrix Space](https://matrix.to/#/#space:t2linux.org) or [Linux on T2 Macs (2018+) Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
+You may contact us on our [Matrix Space](https://matrix.to/#/#space:t2linux.org) or [Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
 !!! Warning "Discord Server is age-restricted"
     For unknown reason, our Discord server is age-restricted. Please use Matrix instead if you can't go though age verification.
