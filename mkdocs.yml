@@ -3,7 +3,7 @@
 site_name: t2linux wiki
 site_author: the t2linux.org contributors
 site_url: https://t2linux.org/
-copyright: "© 2021-2025 t2linux.org CC-BY-SA-4.0"
+copyright: "© 2021-2026 t2linux.org CC-BY-SA-4.0"
 
 theme:
     palette:
@@ -128,6 +128,8 @@ extra_css:
 
 extra:
     social:
+        - icon: simple/matrix
+          link: https://matrix.to/#/#space:t2linux.org
         - icon: fontawesome/brands/discord
           link: https://discord.com/invite/68MRhQu
         - icon: fontawesome/brands/github
