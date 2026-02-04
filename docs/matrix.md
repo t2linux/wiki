@@ -2,7 +2,7 @@
 
 ## 1. Purpose and Scope
 
-This Privacy Policy describes how data is handled when using the Discord–Matrix bridge (“the Bridge”). The Bridge enables message synchronization between a Matrix room hosted on our infrastructure and a corresponding Discord server or channel.
+This Privacy Policy describes how data is handled when using the Discord Matrix bridge (“the Bridge”). The Bridge enables message synchronization between a Matrix room hosted on our infrastructure and a corresponding Discord server or channel.
 
 This policy applies solely to the operation of the Bridge and the Matrix-side infrastructure operated by us. It does not govern Discord’s own services or data handling practices.
 
