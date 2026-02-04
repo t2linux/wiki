@@ -16,10 +16,10 @@ We do not collect, analyze, profile, or monetize user data. Data is processed on
 
 The Bridge may transiently process the following data solely for message synchronization purposes:
 
--	Message content
+- Message content
 - Message timestamps
 - Sender identifiers (usernames, IDs, or Matrix IDs as required for bridging)
--	Room or channel identifiers
+- Room or channel identifiers
 
 No additional personal data is intentionally collected.
 
