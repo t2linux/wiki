@@ -1,4 +1,4 @@
-# Privacy Policy — Discord–Matrix Bridge
+# Privacy Policy — Discord Matrix Bridge
 
 ## 1. Purpose and Scope
 
