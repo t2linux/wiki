@@ -6,7 +6,7 @@ This Privacy Policy describes how data is handled when using the Discord Matrix 
 
 This policy applies solely to the operation of the Bridge and the Matrix-side infrastructure operated by us. It does not govern Discord’s own services or data handling practices.
 
-## 2. Matrix-Side Infrastructure
+## 2. Matrix Side Infrastructure
 
 The Matrix homeserver and bridge services are self-hosted on infrastructure located in South Korea and are operated by us.
 
@@ -32,7 +32,7 @@ Any data stored as part of standard Matrix room history is subject to the config
 
 ## 5. Discord Data Handling
 
-Messages that are bridged to Discord are transmitted to Discord’s infrastructure and are thereafter processed in accordance with Discord’s Privacy Policy and Terms of Service.
+Messages that are bridged to Discord are transmitted to Discord’s infrastructure and are thereafter processed in accordance with [Discord’s Privacy Policy](https://discord.com/privacy) and [Terms of Service](https://discord.com/terms).
 
 We have no control over how Discord stores, processes, or retains data once it reaches Discord’s systems.
 
