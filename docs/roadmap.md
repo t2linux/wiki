@@ -35,7 +35,7 @@ While technically it is not a limitation when installing Linux, different distri
 ease of use and polish.
 
 Arch Linux probably has the most documentation, both officially for the whole project in form of the Arch Wiki and in scope of the
-t2linux wiki with a really detailed and up-to-date install guide. On top of that there is also a work in progress `archinstall` script.
+t2linux wiki with a really detailed and up-to-date install guide. On top of that there is also a `t2archinstall` script to make installation easier.
 Keep in mind however that the whole process is done in the command line.
 
 Manjaro has a more guided install experience, with a graphical installer and multiple prebuilt ISOs for different desktop environments. There are 2 versions of the Manjaro ISO built by different people. JPyke3's version, which is not recommended, and NoaHimesaka1873's which is newer and recommended.
