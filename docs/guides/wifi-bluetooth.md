@@ -237,3 +237,63 @@ Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_process_txcap_blob: TxCap blo
 Dec 24 22:34:20 hostname kernel: brcmfmac: brcmf_c_preinit_dcmds: Firmware: BCM4377/4 wl0: Jul 16 2021 18:25:13 version 16.20.328.0.3.6.105 FWID 01-30be2b3a
 Dec 24 22:34:20 hostname kernel: brcmfmac 0000:01:00.0 wlp1s0f0: renamed from wlan0
 ```
+## Wi-Fi not working after lid close (BCM4377b)
+
+!!! Bug "Affected hardware: MacBookAir9,1 and possibly other T2 Macs with BCM4377b"
+    On some T2 Macs, the `brcmfmac` driver fails to enter D3 power state during suspend,
+    causing the Wi-Fi firmware to become unresponsive after the lid is opened. This is a
+    known Broadcom firmware bug [reported to Broadcom](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel/issues)
+    with no upstream fix available. The workaround below resolves it.
+
+The failure manifests as `brcmf_pcie_pm_enter_D3: Timeout on response for entering D3 substate`
+in the kernel log, followed by repeated `Timeout on response for query command` errors after resume.
+Wi-Fi and Bluetooth are dead until reboot.
+
+A further complication is that `mem_sleep_default=deep` is set in the kernel command line by
+default on t2linux kernels, which overrides any sleep configuration set elsewhere. This needs
+to be changed to `s2idle`.
+
+### Fix
+
+**Step 1:** Change the kernel command line to use `s2idle` instead of `deep` sleep. Edit
+`/etc/default/grub` and change `mem_sleep_default=deep` to `mem_sleep_default=s2idle` in
+`GRUB_CMDLINE_LINUX_DEFAULT`, then update GRUB:
+```bash
+sudo update-grub
+```
+
+**Step 2:** Force `s2idle` in the systemd sleep config to ensure it isn't overridden:
+```bash
+sudo mkdir -p /etc/systemd/sleep.conf.d
+sudo tee /etc/systemd/sleep.conf.d/t2-sleep.conf << EOF
+[Sleep]
+SuspendState=freeze
+EOF
+```
+
+**Step 3:** Create a post-resume script to rebind the Wi-Fi driver, which reloads the firmware after every resume:
+```bash
+sudo tee /usr/lib/systemd/system-sleep/brcmfmac-rebind.sh << 'EOF'
+#!/bin/bash
+case "$1" in
+    post)
+        sleep 1
+        echo "0000:73:00.0" > /sys/bus/pci/drivers/brcmfmac/unbind
+        sleep 2
+        echo "0000:73:00.0" > /sys/bus/pci/drivers/brcmfmac/bind
+        sleep 2
+        ;;
+esac
+EOF
+sudo chmod +x /usr/lib/systemd/system-sleep/brcmfmac-rebind.sh
+```
+
+!!! Warning "Do not unload the module pre-suspend"
+    Unloading `brcmfmac` before suspend (e.g. with `modprobe -r`) causes a hard crash on
+    T2 hardware. The rebind script above only runs **after** resume and is safe.
+
+After rebooting, verify that `s2idle` is now the active sleep state:
+```bash
+cat /sys/power/mem_sleep
+# Should show: [s2idle] deep
+```
