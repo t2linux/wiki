@@ -48,7 +48,7 @@
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-25.10-6.19.3-t2-questing.iso.01",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-25.10-6.19.3-t2-questing.iso.02"
       ],
-      "sha256": "7788fb09af4d2de8751bccb45128f0a47eef3936a1a92b80ff79d8d020460ba3"
+      "sha256": "c119068c5391e32d873953a25975aab4dcfa6820a5e79d8fe9e803298298178f"
     },
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
