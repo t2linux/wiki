@@ -83,7 +83,7 @@
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-cinnamon-6.19.3-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-cinnamon-6.19.3-t2-noble.iso.01"
       ],
-      "sha256": "fab46693918cfb58deb9169d170beda2e104585be26f433a1471d784965a5cd7"
+      "sha256": "472820c2b129dba750b0e29ad4a42d8d4dd56555e3b86ddf57404a43ae7d50da"
     },
     {
       "name": "Linux Mint - Mate",
@@ -91,7 +91,7 @@
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-mate-6.19.3-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-mate-6.19.3-t2-noble.iso.01"
       ],
-      "sha256": "2e46a082bc66d939a3320e0280417e49b4783d2920ca376d28913279129e84b8"
+      "sha256": "da6e777867275aba9d74a73ee26ec070b1cb149a4eb58b05aaba00d223a64ec4"
     },
     {
       "name": "Linux Mint - XFCE",
@@ -99,7 +99,7 @@
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-xfce-6.19.3-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.3-1/linuxmint-22.3-xfce-6.19.3-t2-noble.iso.01"
       ],
-      "sha256": "33205cb7c46828ba00f940d5ac482efbfc914d7dc3c359eebc4cb79f7dc82209"
+      "sha256": "a588b6a77da26759b8ac6f675579c361fe23579fb23c551c4650c77331407c8c"
     },
     {
       "name": "NixOS Gnome",
