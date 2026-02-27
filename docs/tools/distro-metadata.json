@@ -44,11 +44,11 @@
     {
       "name": "Ubuntu 25.10 - Questing Quokka",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-25.10-6.19.3-t2-questing.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-25.10-6.19.3-t2-questing.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-25.10-6.19.3-t2-questing.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-25.10-6.19.4-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-25.10-6.19.4-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-25.10-6.19.4-t2-questing.iso.02"
       ],
-      "sha256": "c119068c5391e32d873953a25975aab4dcfa6820a5e79d8fe9e803298298178f"
+      "sha256": "7dd13a7e82a3fca9d7bc5bb513155de91f6bc76980ef2fb50ff486ad6e1b23a6"
     },
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
