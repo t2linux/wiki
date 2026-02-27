@@ -71,11 +71,11 @@
     {
       "name": "Ubuntu Unity 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-unity-24.04-6.19.3-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-unity-24.04-6.19.3-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.3-1/ubuntu-unity-24.04-6.19.3-t2-noble.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-unity-24.04-6.19.4-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-unity-24.04-6.19.4-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.4-1/ubuntu-unity-24.04-6.19.4-t2-noble.iso.02"
       ],
-      "sha256": "740a949a0f8bfcda0c741442f2f798d9451be051cc3351d561174a870cb10e2b"
+      "sha256": "543b939c87bcd45922c68d8c2606e6af3558893a25d8fd36d72dbb60a2b33169"
     },
     {
       "name": "Linux Mint - Cinnamon",
