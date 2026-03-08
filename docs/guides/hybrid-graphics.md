@@ -48,7 +48,7 @@ If using the iGPU causes the screen to be black after waking up from suspend, th
 
 Mutter-based desktop environments (e.g. GNOME) pick one GPU to use as the "primary GPU", and it's not necessarily the same as the one connected to the display. Even if apple-gmux is configured with `force_igd=y`, Mutter's primary GPU might be the AMD GPU, which makes the AMD GPU active when screen contents change.
 
-See [Mutter Multi-GPU documentation](https://gitlab.gnome.org/GNOME/mutter/-/blob/27d2aceb7136e4d9633cd00ff1408b7512ce3098/doc/multi-gpu.md) for more info, including how to change the primary GPU.
+See [Mutter Multi-GPU documentation](https://gitlab.gnome.org/GNOME/mutter/-/blob/main/doc/multi-gpu.md) for more info, including how to change the primary GPU.
 
 ## Use on Windows
 
