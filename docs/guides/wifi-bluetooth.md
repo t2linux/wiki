@@ -18,8 +18,8 @@ This page is a step by step guide to get Wi-Fi and Bluetooth working on T2 Macs,
 
 !!! Warning "`kdeconnectd` scans may harm Bluetooth throughput, notably audio streaming"
     If you use KDE Plasma or KDE Connect, and you observe periodic drops in Bluetooth performance (i.e. A2DP audio stuttering on Bluetooth peripherals), try the following:
-    1. uninstall the KDE Connect package (`kdeconnect` or `kde-connect`, else look it up for your distro),
-    2. restart your Mac.
+    1. Uninstall the KDE Connect package (`kdeconnect` or `kde-connect`, else look it up for your distro),
+    2. Restart your Mac.
 
 ## Setting up
 
