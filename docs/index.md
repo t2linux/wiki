@@ -13,6 +13,9 @@ To get started with an installation, refer to the [roadmap](https://wiki.t2linux
 
 You may contact us on our [Matrix Space](https://matrix.to/#/#space:t2linux.org) or [Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
+!!! Note "Privacy Policy for those contacting us"
+    Our Matrix server is bridged with a Discord server. As a result, messages and related metadata sent on either platform may be transmitted to and made available on both platforms. By communicating with us on either Matrix or Discord, you acknowledge and agree that your communications will be processed in accordance with this [Privacy Policy](https://wiki.t2linux.org/matrix).
+
 !!! Warning "Discord Server is age-restricted"
     For unknown reason, our Discord server is age-restricted. Please use Matrix instead if you can't go though age verification.
 
