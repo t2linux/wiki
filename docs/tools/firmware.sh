@@ -499,7 +499,7 @@ detect_package_manager () {
 	elif apt --help >/dev/null 2>&1
 	then
 		echo apt
-	elif dnf >/dev/null 2>&1
+	elif dnf --help >/dev/null 2>&1
 	then
 		echo dnf
 	elif pacman -h >/dev/null 2>&1
