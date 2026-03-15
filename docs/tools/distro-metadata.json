@@ -44,11 +44,11 @@
     {
       "name": "Ubuntu 25.10 - Questing Quokka",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/ubuntu-25.10-6.19.7-t2-questing.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/ubuntu-25.10-6.19.7-t2-questing.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/ubuntu-25.10-6.19.7-t2-questing.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "5f32484aa1ff63dec0062304df813088de2f8a5ea64d250ccda94a626a741e24"
+      "sha256": "cd0d4b96ac6665f0638d961c38a595d5bf2edbe57e9b0835a7c42a436aec53fc"
     },
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
@@ -62,11 +62,11 @@
     {
       "name": "Kubuntu 25.10 - Questing Quokka",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/kubuntu-25.10-6.19.7-t2-questing.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/kubuntu-25.10-6.19.7-t2-questing.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.7-1/kubuntu-25.10-6.19.7-t2-questing.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "49d5fb1718aebf6eec403d381aadd8718cbb07f7db00d35d21c74ef94310709b"
+      "sha256": "44eebc9fea4aeaa0a49bbb964f7459e67edf8eb2f7c641f0c6e5ba17756a74fe"
     },
     {
       "name": "Ubuntu Unity 24.04 - Noble Numbat",
