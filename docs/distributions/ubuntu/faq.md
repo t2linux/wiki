@@ -34,3 +34,10 @@ sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-module
 # How do I upgrade my kernel
 
 Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
+
+# Why does Wi-Fi stop working after closing the lid?
+
+On some T2 Macs with the BCM4377b Wi-Fi chip (e.g. MacBookAir9,1), the `brcmfmac` driver
+fails to handle suspend correctly, leaving the Wi-Fi firmware unresponsive after resume.
+See the [Wi-Fi and Bluetooth guide](../../guides/wifi-bluetooth.md#wi-fi-not-working-after-lid-close-bcm4377b)
+for the fix.
