@@ -16,6 +16,10 @@ We currently support the following flavors of Ubuntu:
 - Ubuntu
 - Kubuntu
 - Ubuntu Unity
+- Ubuntu Budgie
+- Ubuntu Cinnamon
+- Ubuntu MATE
+- Xubuntu
 
 ## Hardware Requirements
 
