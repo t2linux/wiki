@@ -122,7 +122,7 @@
       "sha256": "76dee776e8292ea94436fa7757f4aae7c97229f8584aeed67f3be928c3c4a46a"
     },
     {
-      "name": "Linux Mint - Mate",
+      "name": "Linux Mint - MATE",
       "iso": [
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.8-1/linuxmint-22.3-mate-6.19.8-t2-noble.iso.00",
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.8-1/linuxmint-22.3-mate-6.19.8-t2-noble.iso.01"
