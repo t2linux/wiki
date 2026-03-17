@@ -44,11 +44,11 @@
     {
       "name": "Ubuntu 25.10 - Questing Quokka",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/ubuntu-25.10-6.19.8-t2-questing.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "cd0d4b96ac6665f0638d961c38a595d5bf2edbe57e9b0835a7c42a436aec53fc"
+      "sha256": "0def22eb70cf17e37e49543cf6c08be5fe6cf034385099cef61f4ce3db3df1e6"
     },
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
@@ -62,11 +62,11 @@
     {
       "name": "Kubuntu 25.10 - Questing Quokka",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-1/kubuntu-25.10-6.19.8-t2-questing.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "44eebc9fea4aeaa0a49bbb964f7459e67edf8eb2f7c641f0c6e5ba17756a74fe"
+      "sha256": "ed194ba472f257cc3092d11b7f4da4b9ec05977bd1c5b04abffa626c68a20b9e"
     },
     {
       "name": "Ubuntu Unity 24.04 - Noble Numbat",
@@ -80,38 +80,38 @@
     {
       "name": "Ubuntu Budgie 25.10 - Questing Quokka",
       "iso": [
-        "TBD",
-        "TBD",
-        "TBD"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-budgie-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-budgie-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-budgie-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "TBD"
+      "sha256": "05b7cf7ea76e9b63961fac7200ee946442829ddb4a584ab1d5be6315c85e37f8"
     },
     {
       "name": "Ubuntu Cinnamon 25.10 - Questing Quokka",
       "iso": [
-        "TBD",
-        "TBD",
-        "TBD"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntucinnamon-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntucinnamon-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntucinnamon-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "TBD"
+      "sha256": "35c0b63f4236691a21917d30c1d1413896ae5e75a01b8024f7ef65168128cb87"
     },
     {
       "name": "Ubuntu MATE 25.10 - Questing Quokka",
       "iso": [
-        "TBD",
-        "TBD",
-        "TBD"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-mate-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-mate-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/ubuntu-mate-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "TBD"
+      "sha256": "e84a4b4c2e7b16f91f7fef3e28e80eb5d38c0d050fab7a0feda0508b1384231e"
     },
     {
       "name": "Xubuntu 25.10 - Questing Quokka",
       "iso": [
-        "TBD",
-        "TBD",
-        "TBD"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/xubuntu-25.10-6.19.8-t2-questing.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/xubuntu-25.10-6.19.8-t2-questing.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/xubuntu-25.10-6.19.8-t2-questing.iso.02"
       ],
-      "sha256": "TBD"
+      "sha256": "2bf4212a24a8a7d0f4d5fe7fb4c2cc4e27cf50aac2a8f86e1befb463f6170e2e"
     },
     {
       "name": "Linux Mint - Cinnamon",
