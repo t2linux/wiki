@@ -78,6 +78,42 @@
       "sha256": "bebde16bb1ef401b36eed5c0bc995013a999281661192dc3d5336d0df28695e5"
     },
     {
+      "name": "Ubuntu Budgie 25.10 - Questing Quokka",
+      "iso": [
+        "TBD",
+        "TBD",
+        "TBD"
+      ],
+      "sha256": "TBD"
+    },
+    {
+      "name": "Ubuntu Cinnamon 25.10 - Questing Quokka",
+      "iso": [
+        "TBD",
+        "TBD",
+        "TBD"
+      ],
+      "sha256": "TBD"
+    },
+    {
+      "name": "Ubuntu MATE 25.10 - Questing Quokka",
+      "iso": [
+        "TBD",
+        "TBD",
+        "TBD"
+      ],
+      "sha256": "TBD"
+    },
+    {
+      "name": "Xubuntu 25.10 - Questing Quokka",
+      "iso": [
+        "TBD",
+        "TBD",
+        "TBD"
+      ],
+      "sha256": "TBD"
+    },
+    {
       "name": "Linux Mint - Cinnamon",
       "iso": [
         "https://github.com/t2linux/T2-Mint/releases/download/v6.19.8-1/linuxmint-22.3-cinnamon-6.19.8-t2-noble.iso.00",
