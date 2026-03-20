@@ -53,11 +53,11 @@
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-24.04-6.19.8-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-24.04-6.19.8-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.8-2/kubuntu-24.04-6.19.8-t2-noble.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.9-1/kubuntu-24.04-6.19.9-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.9-1/kubuntu-24.04-6.19.9-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.9-1/kubuntu-24.04-6.19.9-t2-noble.iso.02"
       ],
-      "sha256": "097a61ea040f75d07770f37d1a92791e22eb8234f34caf9f85c9a25fc029ed3e"
+      "sha256": "daeff66f531f7ee2e031be807160e705f1ee6de391c1f5fd23e207bf1fabc7b6"
     },
     {
       "name": "Kubuntu 25.10 - Questing Quokka",
