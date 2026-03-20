@@ -294,3 +294,75 @@ The script below includes all cases with commented sections. Uncomment the relev
 
 !!! note
     Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
+
+# Reboot Workaround
+
+On T2 Macs, calling `reboot` causes the machine to **power off instead of rebooting**. This is caused by the T2 firmware ignoring the ACPI reboot command — it cannot be fixed in the kernel.
+
+## All distros (systemd)
+
+`kexec` bypasses the firmware by loading the new kernel into memory and jumping to it during shutdown, before the firmware is involved.
+
+1. Install `kexec-tools`:
+
+    === "Ubuntu/Debian"
+        ```sh
+        sudo apt install kexec-tools
+        ```
+    === "Arch"
+        ```sh
+        sudo pacman -S kexec-tools
+        ```
+    === "Fedora"
+        ```sh
+        sudo dnf install kexec-tools
+        ```
+
+2. Create `/usr/local/sbin/kexec-reboot`:
+
+    ```bash
+    #!/bin/bash
+    KERNEL="/boot/vmlinuz-$(uname -r)"
+    INITRD="/boot/initrd.img-$(uname -r)"
+    CMDLINE=$(cat /proc/cmdline)
+
+    if [[ ! -f "$KERNEL" ]]; then
+        echo "[ERROR] Kernel not found: $KERNEL" >&2
+        exit 1
+    fi
+
+    kexec -l "$KERNEL" --initrd="$INITRD" --command-line="$CMDLINE" || exit 1
+    kexec -e
+    ```
+
+    Make it executable:
+
+    ```sh
+    sudo chmod +x /usr/local/sbin/kexec-reboot
+    ```
+
+3. Create `/etc/systemd/system/kexec-reboot.service`:
+
+    ```ini
+    [Unit]
+    Description=Kexec reboot workaround for T2 Macs
+    DefaultDependencies=no
+    Before=umount.target systemd-reboot.service
+
+    [Service]
+    Type=oneshot
+    ExecStart=/usr/local/sbin/kexec-reboot
+
+    [Install]
+    WantedBy=reboot.target
+    ```
+
+    !!! warning
+        The service **must** have `Before=umount.target`. If placed after, `/boot` is already unmounted when the service runs and the kernel file cannot be found.
+
+4. Enable the service:
+
+    ```sh
+    sudo systemctl daemon-reload
+    sudo systemctl enable kexec-reboot.service
+    ```
