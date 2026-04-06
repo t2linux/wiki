@@ -14,7 +14,7 @@ To get started with an installation, refer to the [roadmap](https://wiki.t2linux
 You may contact us on our [Matrix Space](https://matrix.to/#/#space:t2linux.org) or [Discord Server](https://discord.com/invite/68MRhQu), where you can find most of the people involved.
 
 !!! Warning "Discord Server is age-restricted"
-    For unknown reason, our Discord server is age-restricted. Please use Matrix instead if you can't go though age verification.
+    For unknown reason, our Discord server is age-restricted. Please use Matrix instead if you can't go through age verification.
 
 # Contribute
 
