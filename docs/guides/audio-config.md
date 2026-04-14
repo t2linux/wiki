@@ -8,17 +8,17 @@ If there is no output at all you probably do not have T2 Mac support. Follow the
 
 # Enable Pass-Through Kernel Parameters
 
-Run `cat /proc/cmdline` and ensure that your kernel parameters contain `intel_iommu=on iommu=pt pcie_ports=compat`.
+Run `cat /proc/cmdline` and ensure that your kernel parameters contain `intel_iommu=on iommu=pt pm_async=off`.
 
 If not present, you'll have to update your bootup kernel parameters:
 
-- edit `/etc/default/grub` and update `GRUB_CMDLINE_LINUX` to include `intel_iommu=on iommu=pt pcie_ports=compat`
+- edit `/etc/default/grub` and update `GRUB_CMDLINE_LINUX` to include `intel_iommu=on iommu=pt pm_async=off`
 - Apply your edits by running `sudo update-grub` on ubuntu or `sudo grub-mkconfig -o /boot/grub/grub.cfg` for other distros
     - `grub`'s command line interface names might differ on different distros, if the commands like `grub-xxx` are not found, try `grub2-xxx` alternatives instead. For example, it should be `sudo grub2-mkconfig ...` instead of `sudo grub-mkconfig ...` on Fedora 36.
 - Reboot and ensure `cat /proc/cmdline` contains those params
 
 !!!note "systemd-boot"
-    If you use systemd-boot you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pcie_ports=compat` to the options line. The files to edit will have the `.conf` extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
+    If you use systemd-boot you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pm_async=off` to the options line. The files to edit will have the `.conf` extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
 
 # Audio Configuration Files
 

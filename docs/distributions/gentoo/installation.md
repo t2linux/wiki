@@ -62,6 +62,6 @@
 
 9. Install the bootloader:
     1. Choose a bootloader (other than LILO) from the [Configuring the bootloader](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Bootloader) section of the Gentoo Handbook.
-    2. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the kernel parameters. Refer to the Gentoo Wiki article for your bootloader of choice for instructions on how to do this.
+    2. Add `intel_iommu=on iommu=pt pm_async=off` to the kernel parameters. Refer to the Gentoo Wiki article for your bootloader of choice for instructions on how to do this.
 
 10. Exit the `chroot` (Control-d, or `exit`) and reboot. You should now be able to select Gentoo from the macOS startup manager by holding option at boot. Congratulations, you should now have a working Gentoo installation! For your next steps, read through the rest of the Gentoo Handbook and consider installing a desktop environment such as [GNOME](https://wiki.gentoo.org/wiki/GNOME), [KDE](https://wiki.gentoo.org/wiki/KDE), or [Xfce](https://wiki.gentoo.org/wiki/Xfce).

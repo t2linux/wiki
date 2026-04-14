@@ -52,7 +52,7 @@ You will need:
     -   Installing Grub:
 
         1. Edit `/etc/default/grub`, you'll need to install a text editor (i.e. `vim` or `nano`) with `pacman -S PACKAGE_NAME` for this step.
-        2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`
+        2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pm_async=off`
         3. Run `grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable`.
         4. Run `grub-mkconfig -o /boot/grub/grub.cfg` to generate configuration file.
 
@@ -60,6 +60,6 @@ You will need:
 
         1. Follow the Arch wiki's [instructions](https://wiki.archlinux.org/title/Systemd-boot#Installation). You will want `--path=/boot` as an argument to `bootctl` if you mounted your EFI partition there. Also make sure you configure it to boot the `linux-t2` kernel.
         2. Install a text editor (i.e. `pacman -S vim` or `pacman -S nano`), and make the following edit for `.conf` files in `/boot/efi/loader/entries/`.
-        3. Add `intel_iommu=on iommu=pt pcie_ports=compat` to the `options` line to add those kernel parameters.
+        3. Add `intel_iommu=on iommu=pt pm_async=off` to the `options` line to add those kernel parameters.
 
 9. Exit the `chroot` (Control-d, or `exit`) and reboot. You now will be able to select your Arch install in the macOS Startup Manager by holding option at boot.

@@ -35,10 +35,10 @@ If compiled kernels for your distro are not available, then you will have to com
 
 ## Add necessary kernel parameters
 
-Using your bootloader, add the `intel_iommu=on iommu=pt pcie_ports=compat` kernel parameters. For example in GRUB:
+Using your bootloader, add the `intel_iommu=on iommu=pt pm_async=off` kernel parameters. For example in GRUB:
 
   1. Edit `/etc/default/grub`.
-  2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pcie_ports=compat`.
+  2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pm_async=off`.
   3. Run `sudo grub-mkconfig -o /boot/grub/grub.cfg` if you are on a non-Debian based distro. If using Debian or Ubuntu based distro, run `sudo update-grub`.
 
 ## Make modules load on boot
