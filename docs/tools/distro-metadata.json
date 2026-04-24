@@ -43,7 +43,7 @@
       "sha256": "2354fb64eae832cbb61b7c7dad87e1ef17305848c6a6c3ce340ef5a1095ebc6d"
     },
     {
-      "name": "Ubuntu 25.10 - Questing Quokka",
+      "name": "Ubuntu 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-25.10-6.19.12-t2-questing.iso.01",
@@ -61,7 +61,7 @@
       "sha256": "6b27e4a2910172f22aedef3f2e7e9ac3f1dcd234d944d0c34bee856fac049a47"
     },
     {
-      "name": "Kubuntu 25.10 - Questing Quokka",
+      "name": "Kubuntu 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/kubuntu-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/kubuntu-25.10-6.19.12-t2-questing.iso.01",
@@ -79,7 +79,16 @@
       "sha256": "3d80d6e39751c286faf02e5cba2e577bd18ca6ec64d1a6c626ad0c341fef5464"
     },
     {
-      "name": "Ubuntu Budgie 25.10 - Questing Quokka",
+      "name": "Ubuntu Unity 26.04 - Resolute Raccoon",
+      "iso": [
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.02"
+      ],
+      "sha256": "3d80d6e39751c286faf02e5cba2e577bd18ca6ec64d1a6c626ad0c341fef5464"
+    },
+    {
+      "name": "Ubuntu Budgie 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-budgie-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-budgie-25.10-6.19.12-t2-questing.iso.01",
@@ -88,7 +97,7 @@
       "sha256": "42bdff2f3fefd62b62bbbcea47b9dbc3312fa0b3311c19e24b0a02a5e6b03e89"
     },
     {
-      "name": "Ubuntu Cinnamon 25.10 - Questing Quokka",
+      "name": "Ubuntu Cinnamon 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntucinnamon-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntucinnamon-25.10-6.19.12-t2-questing.iso.01",
@@ -97,7 +106,7 @@
       "sha256": "f96b8c359e1e3ea34d89622cce601f068f893f72326e536dcdca16e23e825b3e"
     },
     {
-      "name": "Ubuntu MATE 25.10 - Questing Quokka",
+      "name": "Ubuntu MATE 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-mate-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-mate-25.10-6.19.12-t2-questing.iso.01",
@@ -106,7 +115,7 @@
       "sha256": "da1143dd66f5146b45ad8d530ba14be7e583ce5872d46d1e715acc3f95e9b79d"
     },
     {
-      "name": "Xubuntu 25.10 - Questing Quokka",
+      "name": "Xubuntu 26.04 - Resolute Raccoon",
       "iso": [
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/xubuntu-25.10-6.19.12-t2-questing.iso.00",
         "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/xubuntu-25.10-6.19.12-t2-questing.iso.01",
