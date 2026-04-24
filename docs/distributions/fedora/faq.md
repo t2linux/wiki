@@ -18,6 +18,10 @@ Download the latest ISO, then try again. Make sure you are using the T2 Fedora i
 
 If you try to upgrade to a new stable release (ex: f42 -> f43), and you reboot into the same version as before, run `sudo touch /usr/lib/clock-epoch`, then try to upgrade again.
 
+# Wi-Fi was working in the ISO, but broke after installing
+
+Run `sudo systemctl enable --now get-apple-firmware.service` in a terminal, then reboot.
+
 # My Wi-Fi stops working after suspending
 
 Add this to `/etc/systemd/system-sleep/unload-wifi.sh`:
