@@ -54,11 +54,12 @@
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/kubuntu-24.04-6.19.12-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/kubuntu-24.04-6.19.12-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/kubuntu-24.04-6.19.12-t2-noble.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/kubuntu-24.04-7.0.1-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/kubuntu-24.04-7.0.1-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/kubuntu-24.04-7.0.1-t2-noble.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/kubuntu-24.04-7.0.1-t2-noble.iso.03"
       ],
-      "sha256": "6b27e4a2910172f22aedef3f2e7e9ac3f1dcd234d944d0c34bee856fac049a47"
+      "sha256": "5903ff68132c4c35051675b7d9001d7799f5a238ba3748729903c0b6c09cd785"
     },
     {
       "name": "Kubuntu 26.04 - Resolute Raccoon",
