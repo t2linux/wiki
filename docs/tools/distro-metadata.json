@@ -73,11 +73,12 @@
     {
       "name": "Ubuntu Unity 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v6.19.12-2/ubuntu-unity-24.04-6.19.12-t2-noble.iso.02"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/ubuntu-unity-24.04-7.0.1-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/ubuntu-unity-24.04-7.0.1-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/ubuntu-unity-24.04-7.0.1-t2-noble.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.1-1/ubuntu-unity-24.04-7.0.1-t2-noble.iso.03"
       ],
-      "sha256": "3d80d6e39751c286faf02e5cba2e577bd18ca6ec64d1a6c626ad0c341fef5464"
+      "sha256": "f23261a3b38edf41a1aee6710ed92184b64692192ac35d98fba65ef7aac58812"
     },
     {
       "name": "Ubuntu Unity 26.04 - Resolute Raccoon",
