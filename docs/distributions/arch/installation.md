@@ -7,9 +7,6 @@ You will need:
 
 ---
 
-!!! Warning "Users in NA/EU might face slow download speeds from the mirror"
-    If you're experiencing slow download speeds or installation failures, please edit your `/etc/pacman.conf` file and replace the old mirror.funami.tech link with `https://github.com/NoaHimesaka1873/arch-mact2-mirror/releases/download/release` instead. You can also checkout the [arch-mirrors mailing list](https://lists.archlinux.org/archives/list/arch-mirrors@lists.archlinux.org/) to get information about latest downtimes for mirror.funami.tech.
-
 1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps.
 
 2. Boot into the live ISO.
@@ -25,13 +22,13 @@ You will need:
 
     -    Using pacstrap (more vanilla Arch experience)
 
-         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers arch-mact2-mirrorlist arch-mact2-rankmirrors apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
 
          2. Add repository to `/mnt/etc/pacman.conf`, by adding this:
 
          ```ini
          [arch-mact2]
-         Server = https://mirror.funami.tech/arch-mact2/os/x86_64
+         Include = /etc/pacman.d/arch-mact2-mirrorlist
          SigLevel = Never
          ```
 
