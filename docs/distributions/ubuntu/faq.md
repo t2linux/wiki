@@ -34,3 +34,10 @@ sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-module
 # How do I upgrade my kernel
 
 Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
+
+## Non-T2 MacBook Pro (A1708 / MacBookPro14,1)
+
+The MacBook Pro 13" 2017 No Touch Bar (A1708 / MacBookPro14,1) does **not** have a T2 chip. The t2linux kernel and apple-bce fixes do **not** apply to this model.
+
+For a complete guide covering suspend/resume, audio, webcam and touchpad fixes on Ubuntu, see:
+[MacBook Pro A1708 Ubuntu Guide](https://github.com/alioalyasari/macbookpro-a1708-ubuntu)
