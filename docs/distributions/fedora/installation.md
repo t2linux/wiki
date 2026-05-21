@@ -8,7 +8,7 @@ Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download
 
 # Install Procedure
 
-1. Follow the [Pre-Install](https://wiki.t2linux.org/guides/preinstall) guide.
+1. Follow the [Pre-Install](https://wiki.t2linux.org/guides/preinstall) guide. You can use the [t2linux Installer](https://github.com/sharpenedblade/t2linux-installer/releases/latest) app to download the ISO.
 2. Click on *Share disk with other operating system*, then select *Reclaim additional space*.
 3. Delete the partition you created using macOS for Linux.
 4. Continue with the rest of the installation.
