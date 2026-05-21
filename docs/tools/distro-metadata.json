@@ -131,26 +131,26 @@
     {
       "name": "Linux Mint - Cinnamon",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-cinnamon-7.0.1-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-cinnamon-7.0.1-t2-noble.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-cinnamon-7.0.9-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-cinnamon-7.0.9-t2-noble.iso.01"
       ],
-      "sha256": "1b7c98fe3c8ae29d0e0b33e70f624d689a5a0e38614978910203e27ba9d8d71f"
+      "sha256": "963a5361dfbad2fc1584f69e9789ac7c466809416ce8cb8dc6cbda8cfac45b78"
     },
     {
       "name": "Linux Mint - MATE",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-mate-7.0.1-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-mate-7.0.1-t2-noble.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-mate-7.0.9-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-mate-7.0.9-t2-noble.iso.01"
       ],
-      "sha256": "1a4989576b2d9891770165773f14bda302d6eed219adf25e084c69df930ca2cf"
+      "sha256": "9f1321302d2efa0637a0bfa3f80fa081a28959b164f45d8cdc491dbeae931882"
     },
     {
       "name": "Linux Mint - XFCE",
       "iso": [
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-xfce-7.0.1-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.1-1/linuxmint-22.3-xfce-7.0.1-t2-noble.iso.01"
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-xfce-7.0.9-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Mint/releases/download/v7.0.9-1/linuxmint-22.3-xfce-7.0.9-t2-noble.iso.01"
       ],
-      "sha256": "82507d55bf82ad8e20b4922dd4588dfbaa6fba9b3f93965271c51e1f020dc266"
+      "sha256": "d26a5b2fb72af22f52eb5647301805ee0235db01efeea01247d943bbc6d3561c"
     },
     {
       "name": "NixOS Gnome",
