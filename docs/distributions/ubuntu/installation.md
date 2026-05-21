@@ -27,7 +27,7 @@ We currently support the following flavors of Ubuntu:
 
 ## Install Procedure
 
-1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for Ubuntu.
+1. Follow the [Pre-installation](https://wiki.t2linux.org/guides/preinstall) steps to prepare your Mac for Ubuntu. You can use the [t2linux Installer](https://github.com/sharpenedblade/t2linux-installer/releases/latest) app to download the ISO.
 2. Boot into the Live ISO. You should now be in the GRUB boot menu. Select the option which is relevant to you.
 3. Start the installer and install it like normal until you get to the partition option. MAKE SURE YOU CHOOSE MANUAL PARTITIONING (USUALLY DISPLAYED AS "Something else" OPTION IN UBUNTU).
 4. Find the partition you made for Linux when you were following the Pre-installation steps. MAKE SURE TO SELECT THE RIGHT PARTITION OR ELSE YOUR DATA WILL BE LOST. Delete it to make free space. You'll need to make these partitions:
