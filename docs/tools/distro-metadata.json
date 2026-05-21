@@ -16,21 +16,18 @@
     {
       "name": "Fedora Workstation",
       "iso": [
-        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-workstation-40.iso"
-      ]
+        "https://github.com/t2linux/fedora-iso/releases/download/44.0/Fedora-t2linux-Workstation-Live-44.0.x86_64.iso.00",
+        "https://github.com/t2linux/fedora-iso/releases/download/44.0/Fedora-t2linux-Workstation-Live-44.0.x86_64.iso.01"
+      ],
+      "sha256": "bccb3192fb8ddc43690ca845ddbadd8933a2157988642e6d5333e8d062574506"
     },
     {
       "name": "Fedora KDE",
       "iso": [
-        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-kde-40.iso.00",
-        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-kde-40.iso.01"
-      ]
-    },
-    {
-      "name": "Fedora Sway",
-      "iso": [
-        "https://github.com/t2linux/fedora-iso/releases/download/f40.0/t2linux-fedora-live-sway-40.iso"
-      ]
+        "https://github.com/t2linux/fedora-iso/releases/download/44.0/Fedora-t2linux-KDE-Desktop-Live-44.0.x86_64.iso.00",
+        "https://github.com/t2linux/fedora-iso/releases/download/44.0/Fedora-t2linux-KDE-Desktop-Live-44.0.x86_64.iso.01"
+      ],
+      "sha256": "b6a8a5b07c8645da3609aba223f24c3eb40ab4a62e92597a45457dcfe3bdc064"
     },
     {
       "name": "Ubuntu 24.04 - Noble Numbat",
