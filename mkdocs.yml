@@ -80,6 +80,7 @@ nav:
           - Installation Roadmap: roadmap.md
           - Contribute: contribute.md
           - Notable Contributors: notable-contributors.md
+          - Discord Matrix Bridge Privacy Polixy: matrix.md
     - Guides:
           - Pre-Install: guides/preinstall.md
           - Basic setup: guides/postinstall.md
