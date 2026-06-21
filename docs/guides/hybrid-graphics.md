@@ -86,7 +86,7 @@ We can take this a step further and save substantial amounts of energy by deacti
     0:DIS-Audio: :DynOff:0000:01:00.1
     1:IGD:+:Pwr:0000:00:02.0
     2:DIS: :Off:0000:01:00.0
-    ``` 
+    ```
 
    `IGD` is the iGPU and `DIS` is the dGPU. The position of the `+` shows the GPU currently in use as the display adapter, while `Pwr` and `Off` refer to their respective power status.
    Executing the aliases `dgpu-off` and `dgpu-on` will enable and disable our `amdgpu-off` systemd service and reboot the computer.
@@ -98,7 +98,7 @@ We can take this a step further and save substantial amounts of energy by deacti
     0:DIS-Audio: :DynAuto:0000:01:00.1
     1:IGD:+:Pwr:0000:00:02.0
     2:DIS: :Pwr:0000:01:00.0
-    ``` 
+    ```
 
 ### Suspend workaround
 
