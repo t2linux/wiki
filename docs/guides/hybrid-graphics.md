@@ -12,7 +12,7 @@ If you experience system freezes followed by high fan speeds and sudden shutdown
 
 1.  Set the iGPU as the main GPU (instructions below)
 
-2.  Set the AMD GPU Dynamic Power Management level from auto to low or high. Low can be safer option to avoid thermal issues or save battery.
+2.  Set the AMD GPU Dynamic Power Management level from auto to low or high. Low can be safer option to avoid thermal issues or save battery. *Note this will not work on MacBookPro15,1 as the `amdgpu` driver does not support runtime PM on Polaris cards.*
 
     You can test it quickly with: `echo low | sudo tee /sys/bus/pci/drivers/amdgpu/0000:0?:00.0/power_dpm_force_performance_level`
 
