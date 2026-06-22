@@ -19,7 +19,7 @@ If not present, you'll have to update your bootup kernel parameters:
 
 !!!note "systemd-boot"
     If you use systemd-boot you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pm_async=off` to the options line. The files to edit will have the `.conf` extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
-    
+
 !!!note "rEFInd"
     If you use rEFInd, it may have been configured to boot directly onto Linux, without indirectly booting GRUB or systemd-boot. If that's the case, you'll have to edit the boot parameters somewhere else. Follow the steps at [Using rEFInd as a replacement for GRUB, systemd-boot, etc.](guides/refind/#using-refind-as-a-replacement-for-grub-systemd-boot-etc)
 
