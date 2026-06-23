@@ -3,6 +3,8 @@ This page is a step by step guide on a workaround to fix the GPU sporadically fa
 
 Tested on an iMac 20,1.
 
+**Note: This will NOT work if the iGPU is enabled.**
+
 ## Install
 
 First, clone the repo and cd to it:
