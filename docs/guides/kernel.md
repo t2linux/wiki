@@ -90,11 +90,11 @@ sudo make install
 
 If `sudo make install` said "Cannot find LILO.", that's fine.
 
-Look at the output from `sudo make install`. If it mentioned creating an initramfs or an initrd, a script provided by your distro has done the next step for you. The same goes for if it mentions updating grub or systemd-boot or bootloader config. This distro script would be at `/sbin/updatekernel`.
+Look at the output from `sudo make install`. If it mentioned creating an initramfs or an initrd, a script provided by your distro has done the next step for you. The same goes for if it mentions updating grub or systemd-boot or bootloader config. This distro script would be at `/sbin/updatekernel` is run.
 
 ### Initramfs/Initrd
 
-Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). On Fedora, Ubuntu and Debian, this is done automatically when `make install` calls `installkernel`.
+Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). On Fedora, Ubuntu and Debian, this is done automatically when `make install` 
 
 For most arch based systems:
 
