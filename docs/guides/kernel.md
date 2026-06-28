@@ -90,7 +90,7 @@ sudo make install
 
 If `sudo make install` said "Cannot find LILO.", that's fine.
 
-Look at the output from `sudo make install`. If it mentioned creating an initramfs or an initrd, a script provided by your distro has done the next step for you. The same goes for if it mentions updating grub or systemd-boot or bootloader config. This distro script would be at `/sbin/updatekernel` is run.
+Look at the output from `sudo make install`. If it mentioned creating an initramfs or an initrd, a script provided by your distro has done the next step for you. The same goes for if it mentions updating grub or systemd-boot or bootloader config. This distro script would be at `/sbin/updatekernel`.
 
 ### Initramfs/Initrd
 
