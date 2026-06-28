@@ -40,7 +40,7 @@ If your distro uses PulseAudio by default, consider switching to PipeWire with r
 !!!note "Switching to headphones automatically"
     If you want headphones to be switched to automatically when they are plugged in, you should set them as the default audio sink using the settings app of your DE, `pavucontrol`, `pactl` or `wpctl`.
 
-# Internal microphones DSP configuration
+# Internal microphones DSP Configuration
 
 In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:
 
