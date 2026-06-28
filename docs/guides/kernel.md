@@ -94,7 +94,7 @@ Look at the output from `sudo make install`. If it mentioned creating an initram
 
 ### Initramfs/Initrd
 
-Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). On Fedora, Ubuntu and Debian, this is done automatically when `make install` 
+Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). On Fedora, Ubuntu and Debian, this is done automatically when `make install` is run.
 
 For most arch based systems:
 
