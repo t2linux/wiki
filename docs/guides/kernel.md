@@ -10,6 +10,7 @@ If your distro is not one of the distros with documentation on this Wiki, you ma
 
     - Arch based systems: `sudo pacman --needed -S bc kmod libelf pahole cpio perl tar xz git`
     - Debian based systems: `sudo apt install autoconf bc bison build-essential cpio curl debhelper dkms dwarves fakeroot flex gawk git kernel-wedge libcap-dev libelf-dev libiberty-dev libncurses-dev libpci-dev libssl-dev libudev-dev openssl python3 rsync wget xz-utils zstd`
+    - Fedora based systems: run `sudo dnf builddep kernel`
     - For other distros you will need the equivalent of these, but if you miss something you'll most likely get an error saying what's missing, and you can then install it and re-run `make` to continue where you left off.
 
 - You will need about 20GB of disk space to compile the kernel. If you have a large amount of RAM, you could use tmpfs to store build files in RAM.
@@ -49,7 +50,7 @@ Extract the current kernel configuration:
      zcat /proc/config.gz > .config
      ```
 
-2. For **Debian and Ubuntu**, run:
+2. For **Fedora, Debian and Ubuntu**, run:
 
      ```bash
      cp /boot/config-$(uname -r) ./.config
@@ -93,7 +94,7 @@ Look at the output from `sudo make install`. If it mentioned creating an initram
 
 ### Initramfs/Initrd
 
-Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). As mentioned in the previous step, this may have been automatically done for you.
+Next we must create an initramfs/initrd (Initial RAM Filesystem / Initial RAM Disk). On Fedora, Ubuntu and Debian, this is done automatically when `make install` is run.
 
 For most arch based systems:
 
