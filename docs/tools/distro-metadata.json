@@ -155,15 +155,17 @@
     {
       "name": "NixOS Gnome",
       "iso": [
-        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-gnome.iso.part-00",
-        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-gnome.iso.part-01"
-      ]
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.18.35/nixos-t2-iso-gnome.iso.part-00",
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.18.35/nixos-t2-iso-gnome.iso.part-01"
+      ],
+      "sha256": "d6d850eed31414fed28b95fdb30cc4ac365524b323bfa8d55924db16a19a1c97"
     },
     {
       "name": "NixOS Minimal",
       "iso": [
-        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.10.3-2/nixos-t2-iso-minimal.iso"
-      ]
+        "https://github.com/t2linux/nixos-t2-iso/releases/download/v6.18.35/nixos-t2-iso-minimal.iso"
+      ],
+      "sha256": "29ec02ed3a1e35efd72089b9df339c00cf9a93e8474646e700d60d2a49683194"
     }
   ]
 }
