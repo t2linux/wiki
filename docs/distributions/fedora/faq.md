@@ -21,19 +21,3 @@ If you try to upgrade to a new stable release (ex: f42 -> f43), and you reboot i
 # Wi-Fi was working in the ISO, but broke after installing
 
 Run `sudo systemctl enable --now get-apple-firmware.service` in a terminal, then reboot.
-
-# My Wi-Fi stops working after suspending
-
-Add this to `/etc/systemd/system-sleep/unload-wifi.sh`:
-
-```bash
-#!/usr/bin/env bash
-if [ "${1}" = "pre" ]; then
-    systemctl stop NetworkManager
-    modprobe -r brcmfmac_wcc
-    modprobe -r brcmfmac
-elif [ "${1}" = "post" ]; then
-    modprobe brcmfmac
-    systemctl start NetworkManager
-fi
-```

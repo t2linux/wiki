@@ -67,9 +67,9 @@ An EasyEffects preset (tested on MacBook Pro 15,1) is available [here](https://g
 
 All of apple's fancy tuning of the speakers is done in macOS, but a similar configuration is currently available for only the MacBook Pro 16 inch 2019.
 
-## MacBook Pro 16" 2019
+## MacBook Pro A2141 16" 2019, MacBook Air A2179 2020
 
-Currently we have an experimental DSP (Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers.
+Currently we have an experimental DSP (Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers and for the 2020 MacBook Air with 2 speakers.
 Note that each model needs specific settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in macOS.
 
-[DSP config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/speakers_161)
+[DSP config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/)

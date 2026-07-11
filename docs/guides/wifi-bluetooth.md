@@ -133,14 +133,25 @@ Once you have run the script on macOS, depending on the method you chose, the st
 
         Replace `/path/to/firmware.tar` with the actual path of the tarball. For example, if `firmware.tar` is copied to the Downloads folder in Linux, command to be run would be `sudo tar -v -xC /lib/firmware/brcm -f $HOME/Downloads/firmware.tar`
 
-    Then reload the Wi-Fi and Bluetooth drivers by running:
+    Then reload the Wi-Fi and Bluetooth drivers. For the Broadcom 4377 chip:
 
     ```bash
     sudo modprobe -r brcmfmac_wcc
     sudo modprobe -r brcmfmac
-    sudo modprobe brcmfmac
     sudo modprobe -r hci_bcm4377
     sudo modprobe hci_bcm4377
+    sudo modprobe brcmfmac
+    sudo modprobe brcmfmac_wcc
+    ```
+    For Broadcomn 4364 and 4365 chips:
+
+    ```bash
+    sudo modprobe -r brcmfmac_wcc
+    sudo modprobe -r brcmfmac
+    sudo modprobe -r hci_uart
+    sudo modprobe hci_uart
+    sudo modprobe brcmfmac
+    sudo modprobe brcmfmac_wcc
     ```
 
 === ":fontawesome-brands-linux: Method 3"

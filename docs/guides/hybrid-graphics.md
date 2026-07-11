@@ -100,13 +100,6 @@ We can take this a step further and save substantial amounts of energy by deacti
     2:DIS: :Pwr:0000:01:00.0
     ```
 
-### Suspend workaround
-
-If using the iGPU causes the screen to be black after waking up from suspend, then try one of these workarounds:
-
-- Add `i915.enable_guc=3` to [your kernel parameters](https://wiki.t2linux.org/guides/postinstall/#add-necessary-kernel-parameters). If that has a problem, try setting the value to 2 instead of 3.
-- Turn the screen off and on after the backlight turns on. For GNOME: type your password then press enter, press Command + L to lock (this should turn off the backlight), then press any key.
-
 ## Using iGPU as primary gpu (Mutter)
 
 Mutter-based desktop environments (e.g. GNOME) pick one GPU to use as the "primary GPU", and it's not necessarily the same as the one connected to the display. Even if apple-gmux is configured with `force_igd=y`, Mutter's primary GPU might be the AMD GPU, which makes the AMD GPU active when screen contents change.
