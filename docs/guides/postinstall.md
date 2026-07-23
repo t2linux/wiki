@@ -46,15 +46,14 @@ Using your bootloader, add the `intel_iommu=on iommu=pt pm_async=off` kernel par
 Simply run the following:
 
 ```sh
-echo apple-bce | sudo tee /etc/modules-load.d/t2.conf
+echo t2bce_vhci | sudo tee /etc/modules-load.d/t2.conf
 ```
 
 ## Make modules load on early boot
 
-Having the `apple-bce` module loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
+Having the `t2bce_vhci` module and its dependencies loaded early allows the use of the keyboard for decrypting encrypted volumes (LUKS).
 It is also useful when boot doesn't work and the keyboard is required for debugging.
-To do this, you must ensure the `apple-bce` module *as well as its dependent modules* are included in the initial ramdisk.
-You can get the list of dependent modules by running `modinfo -F depends apple-bce`
+To do this, you must ensure `t2bce_vhci`, `t2bce_core`, and `t2bce_dma` are included in the initial ramdisk.
 The steps to be followed vary depending upon the initramfs module loading mechanism used by your distro. Some examples are given as follows:
 
 - On systems with `initramfs-tools` (all Debian-based distros):
@@ -66,9 +65,9 @@ The steps to be followed vary depending upon the initramfs module loading mechan
          ```sh
          cat <<EOF >> /etc/initramfs-tools/modules
          # Required modules for getting the built-in apple keyboard to work:
-         snd
-         snd_pcm
-         apple-bce
+         t2bce_dma
+         t2bce_core
+         t2bce_vhci
          EOF
          update-initramfs -u
          ```
@@ -80,24 +79,24 @@ The steps to be followed vary depending upon the initramfs module loading mechan
     2. Ensure that the file has the following:
 
          ```sh
-         MODULES="apple-bce"
+         MODULES=(t2bce_dma t2bce_core t2bce_vhci)
          ```
 
     3. Run `sudo mkinitcpio -P`.
 
 - On systems with `dracut` (Commonly used on EndeavourOS and Fedora):
 
-    1. Run the following to create a dracut configuration file which loads the apple-bce module on early boot:
+    1. Run the following to create a dracut configuration file which loads the t2bce VHCI stack on early boot:
 
         ```sh
-        echo "force_drivers+=\" apple-bce \"" | sudo tee /etc/dracut.conf.d/t2linux-modules.conf
+        echo "force_drivers+=\" t2bce_dma t2bce_core t2bce_vhci \"" | sudo tee /etc/dracut.conf.d/t2linux-modules.conf
         ```
 
     2. Run `sudo dracut --force` to regenerate the initramfs with this change.
 
 - On systems with other initramfs/initrd generation systems:
 
-    In this case, refer to the documentation of the same and ensure the kernel module `apple-bce` is loaded early.
+    In this case, refer to its documentation and ensure `t2bce_dma`, `t2bce_core`, and `t2bce_vhci` are loaded early.
 
 ## Adding support for customisable Touch Bar
 
@@ -179,118 +178,12 @@ no-auto-default=t2_ncm
 EOF
 ```
 
-# Suspend Workaround
+# Suspend
 
-## Fedora and Arch based distros
+Current T2 kernels use t2bce, which handles suspend and resume for the BCE,
+VHCI, and audio stack internally. Do not unload the t2bce modules before
+suspend. Force-unloading them tears down active BridgeOS queues and can leave
+internal devices unavailable after resume.
 
-S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work. Currently this workaround works only on Arch based distros and Fedora.
-
-1. Create and edit this file: `/etc/systemd/system/suspend-fix-t2.service`
-
-2. Check your `modprobe` and `rmmod` location by running:
-
-     ```bash
-     which modprobe
-     which rmmod
-     ```
-
-3. Taking the example as `/usr/bin` for location of `modprobe` and `rmmod`, copy the following to `/etc/systemd/system/suspend-fix-t2.service`. If the location is different, do the changes accordingly.
-
-     ```service
-     [Unit]
-     Description=Disable and Re-Enable Apple BCE Module (and Wi-Fi)
-     Before=sleep.target
-     StopWhenUnneeded=yes
-
-     [Service]
-     User=root
-     Type=oneshot
-     RemainAfterExit=yes
-
-     #ExecStart=/usr/bin/modprobe -r brcmfmac_wcc
-     #ExecStart=/usr/bin/modprobe -r brcmfmac
-     ExecStart=/usr/bin/rmmod -f apple-bce
-
-     ExecStop=/usr/bin/modprobe apple-bce
-     #ExecStop=/usr/bin/modprobe brcmfmac
-     #ExecStop=/usr/bin/modprobe brcmfmac_wcc
-
-     [Install]
-     WantedBy=sleep.target
-     ```
-
-4. Enable the service by running: `sudo systemctl enable suspend-fix-t2.service`
-
-5. If you are facing issues with Wi-Fi on resume, uncomment the lines having `brcmfmac` and `brcmfmac_wcc` in the above file.
-
-!!! note
-    Make sure you have `CONFIG_MODULE_FORCE_UNLOAD=y` in the kernel config.
-    To check, run: `zcat /proc/config.gz | grep "CONFIG_MODULE_FORCE_UNLOAD"` on Arch based distros, or `grep "CONFIG_MODULE_FORCE_UNLOAD" /boot/config-$(uname -r)` on Fedora.
-
-## Gentoo/OpenRC
-
-S3 suspend has been broken since macOS Sonoma, it has never been fixed, but this workaround will make deep suspend work on Gentoo Linux using OpenRC and elogind.
-
-Prerequisites:
-
-1. Make sure elogind is installed and running:
-
-     ```bash
-     rc-update add elogind boot
-     rc-service elogind start
-     ```
-
-For T2 MacBooks, while unloading only the apple-bce module is sufficient for basic suspend functionality, additional module handling may be required depending on your model:
-
-- All T2 models require the apple-bce module handling.
-- For models with Touch Bar, a specific module sequence (apple_bce -> hid_appletb_bl -> hid_appletb_kbd) is required to properly reinitialize the Touch Bar device after resume.
-- If you use tiny-dfr for Touch Bar customization, the tiny-dfr service needs to be stopped before suspend and started after resume, and appletbdrm module is required.
-
-The script below includes all cases with commented sections. Uncomment the relevant sections based on your model and requirements. The loading order of modules is important for proper device initialization after resume.
-
-1. Create and edit this file: `/etc/elogind/system-sleep/apple-bce-handler`
-
-     ```bash
-     #!/bin/bash
-     case $1/$2 in
-       pre/*)
-         # Required for all T2 models
-         rmmod -f apple_bce
-
-         # Uncomment the following if using tiny dfr for touchbar
-         #/etc/init.d/tiny-dfr stop
-         #modprobe -r appletbdrm
-     
-         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
-         #modprobe -r hid_appletb_kbd
-         #modprobe -r hid_appletb_bl
-         ;;
-       
-       post/*)
-         # Required for all T2 models
-         sleep 4 
-         modprobe apple_bce
-         
-         # Uncomment the following for models with touchbar, irrespective of whether using tiny-dfr
-         #sleep 4
-         #modprobe hid_appletb_bl
-         #sleep 2
-         #modprobe hid_appletb_kbd
-         
-         # Uncomment the following if using tiny dfr for touchbar
-         #sleep 2
-         #modprobe appletbdrm
-         #sleep 3
-         #/etc/init.d/tiny-dfr start
-         ;;
-     esac
-     ```
-
-2. Make the script executable:
-
-     ```bash
-     chmod +x /etc/elogind/system-sleep/apple-bce-handler
-     ```
-
-!!! note
-    Make sure you have CONFIG_MODULE_FORCE_UNLOAD=y in the kernel config.
+When migrating from apple-bce, remove any old suspend service or elogind hook
+that unloads it before testing suspend with t2bce.

@@ -39,7 +39,7 @@ If the distribution you want to use has a guide [here](https://wiki.t2linux.org/
 Support for hardware is cross distro besides patches to the distribution specific kernel.
 The following repos contain kernel modules for said support:
 
-- MacBook Bridge / T2 Linux Driver [https://github.com/t2linux/apple-bce-drv](https://github.com/t2linux/apple-bce-drv)
+- T2 Buffer Copy Engine driver stack [https://github.com/deqrocks/t2bce](https://github.com/deqrocks/t2bce)
 - Touch Bar and Ambient Light [https://github.com/t2linux/apple-ib-drv](https://github.com/t2linux/apple-ib-drv) (Upstreamed in kernel 6.15)
 
 Instead of installing these modules manually, it is suggested to follow the [distro specific guides](https://wiki.t2linux.org/distributions/overview/) since they are pre-installed in our distro specific ISOs.
