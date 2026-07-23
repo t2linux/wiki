@@ -12,7 +12,8 @@ See "partially working" features at [State](https://wiki.t2linux.org/state/) to 
 
 Here is the list and links to donate to some of our maintainers.
 
-- [MCMrARM](https://github.com/MCMrARM) - Author of the [apple-bce driver](https://github.com/t2linux/apple-bce-drv). Donate via [Paypal](https://paypal.me/mcmrarm).
+- [MCMrARM](https://github.com/MCMrARM) - Author of the original [apple-bce driver](https://github.com/t2linux/apple-bce-drv), which provided the foundation for t2bce. Donate via [Paypal](https://paypal.me/mcmrarm).
+- [André Eikmeyer](https://github.com/deqrocks) - Author and maintainer of the [t2bce driver stack](https://github.com/deqrocks/t2bce). Donate via [Paypal](https://www.paypal.com/paypalme/negmaster).
 - [JPyke3](https://github.com/JPyke3) - Played a major role in getting Manjaro working on T2 Macs. Donate via [Patreon](https://patreon.com/pykee) or [On Chain](https://github.com/JPyke3/mbp-manjaro#donations).
 - [marcosfad](https://github.com/marcosfad) - Played a major role in getting Ubuntu working on T2 Macs. Donate via [Paypal](https://paypal.me/marcosfad) or [GitHub Sponsors](https://github.com/sponsors/marcosfad).
 - [NoaHimesaka1873](https://github.com/NoaHimesaka1873) - Currently maintains boot images and kernels for Arch and EndeavourOS and runs chat.t2linux.org homeserver. Donate via [GitHub Sponsors](https://github.com/sponsors/NoaHimesaka1873).

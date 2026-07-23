@@ -1,6 +1,6 @@
 # Kernel
 
-This page explains how to compile a Linux kernel with patches for T2 hardware support and with apple-bce + apple-ibridge included. If you have issues, make sure you are running the commands here with `bash`.
+This page explains how to compile a Linux kernel with patches for T2 hardware support and with t2bce and apple-ibridge included. If you have issues, make sure you are running the commands here with `bash`.
 
 If your distro is not one of the distros with documentation on this Wiki, you may not need to compile a kernel yourself to get support for T2 hardware. Debian based systems can use the same kernel as described in the Ubuntu section, Arch based systems can use the same kernel as described in the Arch section, etc.
 
@@ -63,7 +63,9 @@ scripts/config --module CONFIG_BT_HCIBCM4377
 scripts/config --module CONFIG_HID_APPLETB_BL
 scripts/config --module CONFIG_HID_APPLETB_KBD
 scripts/config --module CONFIG_DRM_APPLETBDRM
-scripts/config --module CONFIG_APPLE_BCE
+scripts/config --module CONFIG_T2BCE_CORE
+scripts/config --module CONFIG_T2BCE_VHCI
+scripts/config --module CONFIG_T2BCE_AUDIO
 scripts/config --module CONFIG_APFS_FS
 ```
 
