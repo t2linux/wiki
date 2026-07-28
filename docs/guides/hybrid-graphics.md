@@ -2,7 +2,7 @@
 
 This page describes how to use the iGPU on MacBook Pros with Hybrid Graphics (2 GPUs). 13-inch MacBooks only have an iGPU and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
 
-This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 15,3 and 16,4 models are very similar and should work too.
+This has been tested on the MacBookPro16,1 and the MacBookPro15,1. The 16,4 model is very similar and should work too. See the warning below before trying this on a MacBookPro15,3.
 
 Make sure you have a T2 kernel of version greater than 6.9.8-1 (you can check this with `uname -r`).
 
@@ -39,6 +39,24 @@ To save energy and reduce battery consumption, we can force the iGPU to be the p
         ```
 
     2.  Or alternatively, add kernel parameter `apple_gmux.force_igd=1`
+
+### MacBookPro15,3 black screen warning
+
+On a MacBookPro15,3 running T2 kernel `7.1.3-1-t2-resolute`, forcing the iGPU produced a black internal display. `vgaswitcheroo` reported `IGD:+:Pwr`, but `/proc/fb` was empty and the kernel log contained:
+
+```plain
+i915 0000:00:02.0: [drm] Failed to find VBIOS tables (VBT)
+i915 0000:00:02.0: [drm] Cannot find any crtc or sizes
+```
+
+This may affect other kernel versions on this model. Make sure you have another way to access the machine before rebooting. After reboot, verify that `/proc/fb` lists an Intel framebuffer before disabling the dGPU:
+
+```sh
+cat /proc/fb
+sudo cat /sys/kernel/debug/vgaswitcheroo/switch
+```
+
+`IGD:+:Pwr` alone does not prove that the display works. If the display is black, remove `/etc/modprobe.d/apple-gmux.conf` or the `apple_gmux.force_igd=1` kernel parameter from a remote or recovery session, then power the machine off and back on.
 
 After reboot `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU. On Gnome, by right clicking an application you can choose to run it using dedicated graphics.
 
