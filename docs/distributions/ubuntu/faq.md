@@ -20,15 +20,6 @@ We've now changed the GRUB Bootloader settings, but we now need to update GRUB t
 
 If you already have Bootcamp installed, you might notice that the boot option for Bootcamp instead boots you into Ubuntu. This is because GRUB automatically shares with a Windows installation. Follow [this guide on triple booting](https://wiki.t2linux.org/guides/windows/#if-windows-is-installed-first) to get Windows working again.
 
-# Why isn't sound working?
-
-Ensure that PipeWire and the T2 audio configuration package are installed and up to date:
-
-```bash
-sudo apt update
-sudo apt install pipewire wireplumber apple-t2-audio-config
-```
-
 Restart after installing or updating the audio configuration.
 
 # How do I upgrade my kernel
