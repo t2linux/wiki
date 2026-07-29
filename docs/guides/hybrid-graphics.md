@@ -71,13 +71,15 @@ We can take this a step further and save substantial amounts of energy by deacti
    We can now run `sudo systemctl enable amdgpu-off.service` and reboot to disable our dGPU. This will decrease power draw on a MacBook significantly from around 20 to 9 Watts on idle using 50% display brightness, resulting in much longer battery life.
    Enabling the dGPU again is done using `sudo systemctl disable amdgpu-off.service` and reboot. A more convenient solution using aliases is explained in the next step.
 
-2. We can quickly disable, enable and check the current status of the dGPU by creating aliases. Simply execute the following block:
+2. We can quickly disable, enable and check the current status of the dGPU by creating persistent aliases. Add the following lines to `~/.bashrc`:
 
     ```plain
-    alias dgpu-off='sudo systemctl enable disable-amdgpu.service; sleep 2; sudo reboot'
-    alias dgpu-on='sudo systemctl disable disable-amdgpu.service; sleep 2; sudo reboot'
+    alias dgpu-off='sudo systemctl enable amdgpu-off.service; sleep 2; sudo reboot'
+    alias dgpu-on='sudo systemctl disable amdgpu-off.service; sleep 2; sudo reboot'
     alias dgpu-status='sudo cat /sys/kernel/debug/vgaswitcheroo/switch'
     ```
+
+   Start a new shell or run `source ~/.bashrc` to make the aliases available in the current shell.
 
    From now on you can check the status of the dGPU by simply entering `dgpu-status` :
 
