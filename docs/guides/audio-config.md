@@ -21,55 +21,27 @@ If not present, you'll have to update your bootup kernel parameters:
     If you use systemd-boot you'll instead edit your boot conf files to add `intel_iommu=on iommu=pt pm_async=off` to the options line. The files to edit will have the `.conf` extension and be in the loader/entries/ folder on your EFI partition. This will most likely be `/boot/efi/loader/entries`
 
 !!!note "rEFInd"
-    If you use rEFInd, it may have been configured to boot directly onto Linux, without indirectly booting GRUB or systemd-boot. If that's the case, you'll have to edit the boot parameters somewhere else. Follow the steps at [Using rEFInd as a replacement for GRUB, systemd-boot, etc.](guides/refind/#using-refind-as-a-replacement-for-grub-systemd-boot-etc)
+    If you use rEFInd, it may have been configured to boot directly onto Linux, without indirectly booting GRUB or systemd-boot. If that's the case, you'll have to edit the boot parameters somewhere else. Follow the steps at [Using rEFInd as a replacement for GRUB, systemd-boot, etc.](refind.md#using-refind-as-a-replacement-for-grub-systemd-boot-etc)
 
 # Audio Configuration Files
 
-Simply run the following to set up audio:
+The `t2bce_audio` kernel driver exposes the audio devices, but userspace audio
+profiles are also required. Install the `apple-t2-audio-config` package from
+your distribution's T2 repository. Distribution-specific installation guides
+normally include this package already.
+
+If your distribution does not provide the package, install the profiles
+manually:
 
 ```bash
-sudo git clone https://github.com/kekrby/t2-better-audio.git /tmp/t2-better-audio
+git clone https://github.com/kekrby/t2-better-audio.git /tmp/t2-better-audio
 cd /tmp/t2-better-audio
 ./install.sh
-sudo rm -r /tmp/t2-better-audio
 cd -
+rm -r /tmp/t2-better-audio
 ```
 
 If your distro uses PulseAudio by default, consider switching to PipeWire with rtkit for the best possible experience. You can still use PulseAudio but the experience will not be as smooth as PipeWire, for example you might not be able to select the speakers as the output device when headphones are plugged in.
 
 !!!note "Switching to headphones automatically"
     If you want headphones to be switched to automatically when they are plugged in, you should set them as the default audio sink using the settings app of your DE, `pavucontrol`, `pactl` or `wpctl`.
-
-# Internal microphones DSP Configuration
-
-In order adjust the microphones signal automatically, we can use the following Pipewire filterchain config:
-
-[Microphones config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/mic)
-
-# Issues
-
-- Some people are unable to get audio input to work. You may have to use a separate microphone.
-
-## KDE
-
-The "Audio Volume" dialog / Audio in System Settings allow users to "Raise maximum volume", allowing to go past 100%. This
-does not offer a great deal of flexibility, it might work for getting acceptable recordings however.
-
-## EasyEffects with PipeWire
-
-[EasyEffects](https://github.com/wwmm/easyeffects) is a tool to control and modify audio streams when using PipeWire. Compared
-to the KDE approach mentioned above using input plugins like "Autogain" offers a lot more fine grain control and higher volume
-boosts.
-
-An EasyEffects preset (tested on MacBook Pro 15,1) is available [here](https://github.com/angelobdev/t2-easyeffects-preset).
-
-# Speakers
-
-All of apple's fancy tuning of the speakers is done in macOS, but a similar configuration is currently available for only the MacBook Pro 16 inch 2019.
-
-## MacBook Pro 16" 2019
-
-Currently we have an experimental DSP (Digital Signal Processing) config for MacBook Pro 16" 2019 with 6 speakers.
-Note that each model needs specific settings. Do not use it with other models as it could damage the speakers. Also do not expect same sound quality as in macOS.
-
-[DSP config instructions](https://github.com/lemmyg/t2-apple-audio-dsp/tree/speakers_161)
