@@ -30,6 +30,7 @@
     2. Alternatively, you can use the kernel sources and manually compile. With this method, the update process is not automated, and manual configuration is necessary. However, `sys-kernel/t2gentoo-sources` tends to get new kernel versions faster than `sys-kernel/t2gentoo-kernel`. To install it, run: `emerge -av sys-kernel/t2gentoo-sources`. After installing the kernel sources, run `eselect kernel set 1` to point `/usr/src/linux` to the correct path, then follow the directions in the [Manual Configuration](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Alternative:_Manual_configuration) section of the handbook. If you decide to manually configure your kernel, make sure the following options are set:
 
         ```bash
+        CONFIG_T2BCE_DMA=m
         CONFIG_T2BCE_CORE=m
         CONFIG_T2BCE_VHCI=m
         CONFIG_T2BCE_AUDIO=m

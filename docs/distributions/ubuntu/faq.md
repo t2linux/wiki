@@ -20,17 +20,6 @@ We've now changed the GRUB Bootloader settings, but we now need to update GRUB t
 
 If you already have Bootcamp installed, you might notice that the boot option for Bootcamp instead boots you into Ubuntu. This is because GRUB automatically shares with a Windows installation. Follow [this guide on triple booting](https://wiki.t2linux.org/guides/windows/#if-windows-is-installed-first) to get Windows working again.
 
-# Why isn't sound working?
-
-On **Ubuntu 22.04 or earlier**, PulseAudio is installed by default, which performs really badly with T2 audio configuration files. It is suggested to [switch to PipeWire](https://linuxconfig.org/how-to-install-pipewire-on-ubuntu-linux) for better performance, although its still bad as compared to Ubuntu 22.10, which has native support for PipeWire.
-
-On **Ubuntu 22.10 or later**, PipeWire is supported natively and works just fine with audio configuration files. Still, it's recommended to use the upstream version of PipeWire since it is found to perform better and has more features than the native one. You can run the following commands to use the upstream version:
-
-```bash
-sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream
-sudo apt install pipewire pipewire-audio-client-libraries libpipewire-0.3-modules libspa-0.2-{bluetooth,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,tests}}
-```
-
 # How do I upgrade my kernel
 
 Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
