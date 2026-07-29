@@ -20,8 +20,6 @@ We've now changed the GRUB Bootloader settings, but we now need to update GRUB t
 
 If you already have Bootcamp installed, you might notice that the boot option for Bootcamp instead boots you into Ubuntu. This is because GRUB automatically shares with a Windows installation. Follow [this guide on triple booting](https://wiki.t2linux.org/guides/windows/#if-windows-is-installed-first) to get Windows working again.
 
-Restart after installing or updating the audio configuration.
-
 # How do I upgrade my kernel
 
 Follow [these](https://github.com/t2linux/T2-Debian-and-Ubuntu-Kernel?tab=readme-ov-file#using-the-apt-repo) instructions.
