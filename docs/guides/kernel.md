@@ -63,6 +63,7 @@ scripts/config --module CONFIG_BT_HCIBCM4377
 scripts/config --module CONFIG_HID_APPLETB_BL
 scripts/config --module CONFIG_HID_APPLETB_KBD
 scripts/config --module CONFIG_DRM_APPLETBDRM
+scripts/config --module CONFIG_T2BCE_DMA
 scripts/config --module CONFIG_T2BCE_CORE
 scripts/config --module CONFIG_T2BCE_VHCI
 scripts/config --module CONFIG_T2BCE_AUDIO
