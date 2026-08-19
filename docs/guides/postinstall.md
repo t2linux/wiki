@@ -35,10 +35,19 @@ If compiled kernels for your distro are not available, then you will have to com
 
 ## Add necessary kernel parameters
 
-Using your bootloader, add the `intel_iommu=on iommu=pt pm_async=off` kernel parameters. For example in GRUB:
+Using your bootloader, add these kernel parameters:
+
+```text
+intel_iommu=on iommu=pt pm_async=off mem_sleep_default=deep acpi_osi=!Darwin acpi_osi=Linux
+```
+
+The ACPI arguments stop Linux from selecting firmware paths intended for
+macOS. The current t2bce suspend guidance lists the same arguments as required.
+
+For example, with GRUB:
 
   1. Edit `/etc/default/grub`.
-  2. On the line with `GRUB_CMDLINE_LINUX="quiet splash"`, add the following kernel parameters: `intel_iommu=on iommu=pt pm_async=off`.
+  2. Add the parameters above to the `GRUB_CMDLINE_LINUX` line.
   3. Run `sudo grub-mkconfig -o /boot/grub/grub.cfg` if you are on a non-Debian based distro. If using Debian or Ubuntu based distro, run `sudo update-grub`.
 
 ## Make modules load on boot
@@ -187,3 +196,10 @@ internal devices unavailable after resume.
 
 When migrating from apple-bce, remove any old suspend service or elogind hook
 that unloads it before testing suspend with t2bce.
+
+On one MacBookPro15,1, omitting `acpi_osi=!Darwin acpi_osi=Linux` caused a
+repeatable 20.2-second delay during device resume. Adding the arguments reduced
+the measured wake-to-EC interval to 4.614 seconds. The
+[investigation report](https://github.com/Githubguy132010/t2-macbookpro15-1-resume-delay)
+contains the before-and-after timings and function trace. This is evidence from
+one model, so suspend problems on other T2 Macs may have a different cause.
