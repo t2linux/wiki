@@ -42,12 +42,12 @@
     {
       "name": "Ubuntu 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "d8d3773a486d83b0e5f0d125645cfd4b4063a74c23695a1391a9d4bec47133a9"
+      "sha256": "99910ff51f8b86e0bc4a718bda1166abc5746a06aefab8efebdb3df7e92c2f19"
     },
     {
       "name": "Kubuntu 24.04 - Noble Numbat",
@@ -62,12 +62,12 @@
     {
       "name": "Kubuntu 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/kubuntu-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/kubuntu-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/kubuntu-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/kubuntu-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/kubuntu-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/kubuntu-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/kubuntu-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/kubuntu-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "f77e081f67e520388b38f642918a07d5ef0ba8f7458d0d6fb0a986b48acfa09f"
+      "sha256": "126dde3ec8a18531a84006d87dfb490b432ea31e5ae9fb6e66bbc6f52d8754e2"
     },
     {
       "name": "Ubuntu Unity 24.04 - Noble Numbat",
@@ -82,32 +82,32 @@
     {
       "name": "Ubuntu Unity 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-unity-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-unity-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-unity-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-unity-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-unity-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-unity-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-unity-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-unity-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "72cadf4d81b4c51164fe5370417b5b67e28bcb902f5bd0bff3a3d01af7859c78"
+      "sha256": "140afc7541b93f8a5b1dc48e52ec3afa76774d142b7d87bffb8e9a56cf2b97ca"
     },
     {
       "name": "Ubuntu Budgie 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-budgie-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-budgie-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-budgie-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-budgie-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-budgie-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-budgie-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-budgie-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-budgie-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "bacb672b6a4f946d5380f42c1361a8c5576bf0a18b15ded61748f55b3a248116"
+      "sha256": "63e64bb3454e0a087b8e24e94464ae54786ae83db7143592d56a9f887b7a5a4d"
     },
     {
       "name": "Ubuntu Cinnamon 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntucinnamon-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntucinnamon-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntucinnamon-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntucinnamon-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntucinnamon-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntucinnamon-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntucinnamon-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntucinnamon-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "85eec0fa84bd92436944714714bf85bb2067af40d6606dae2855b0097152ce31"
+      "sha256": "f285687101f0fbb6f6b32a84e127be69d50fa425068f7b7d1036852bcfc3e776"
     },
     {
       "name": "Ubuntu MATE 26.04 - Resolute Raccoon",
@@ -121,12 +121,12 @@
     {
       "name": "Xubuntu 26.04 - Resolute Raccoon",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/xubuntu-26.04-7.0.9-t2-resolute.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/xubuntu-26.04-7.0.9-t2-resolute.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/xubuntu-26.04-7.0.9-t2-resolute.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/xubuntu-26.04-7.0.9-t2-resolute.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/xubuntu-26.04-7.1.8-t2-resolute.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/xubuntu-26.04-7.1.8-t2-resolute.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/xubuntu-26.04-7.1.8-t2-resolute.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/xubuntu-26.04-7.1.8-t2-resolute.iso.03"
       ],
-      "sha256": "41cfdd170c9f0bfdc591f9d83d854cf3b935b0151e6ad1a3a9867cf659f8ac37"
+      "sha256": "2e46e9891f82016a8acabb96366c366dd729953e16564b2f21f3aa2f4780e4c1"
     },
     {
       "name": "Linux Mint - Cinnamon",
