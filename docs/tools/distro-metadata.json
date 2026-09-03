@@ -32,12 +32,12 @@
     {
       "name": "Ubuntu 24.04 - Noble Numbat",
       "iso": [
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-24.04-7.0.9-t2-noble.iso.00",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-24.04-7.0.9-t2-noble.iso.01",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-24.04-7.0.9-t2-noble.iso.02",
-        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.0.9-1/ubuntu-24.04-7.0.9-t2-noble.iso.03"
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-24.04-7.1.8-t2-noble.iso.00",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-24.04-7.1.8-t2-noble.iso.01",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-24.04-7.1.8-t2-noble.iso.02",
+        "https://github.com/t2linux/T2-Ubuntu/releases/download/v7.1.8-1/ubuntu-24.04-7.1.8-t2-noble.iso.03"
       ],
-      "sha256": "df7576a938bf463715938ee4abcd6cfa5cd56b5c66b1557f68aa8f83edeb8b87"
+      "sha256": "5792a22aaca9a18822f3f8e6b8046e7867cc3f02052cf4ac38be55ed22aa1241"
     },
     {
       "name": "Ubuntu 26.04 - Resolute Raccoon",
