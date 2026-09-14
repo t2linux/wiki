@@ -187,3 +187,10 @@ internal devices unavailable after resume.
 
 When migrating from apple-bce, remove any old suspend service or elogind hook
 that unloads it before testing suspend with t2bce.
+
+### Troubleshooting Persistent Suspend Freezes
+
+If your hardware configuration continues to experience sleep lockups, post-wake kernel panics, or Touch Bar / keyboard desync on modern kernels:
+
+- **[apple-t2-suspend-fix](https://github.com/v1ad3k/apple-t2-suspend-fix)**: A community systemd orchestration suite for modern kernels that manages pre-suspend driver teardown, CPU 0 IRQ pinning during wake transitions, Wi-Fi soft-sleep, and device reinitialization.
+
