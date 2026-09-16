@@ -88,6 +88,7 @@ nav:
           - Hybrid Graphics: guides/hybrid-graphics.md
           - Audio: guides/audio-config.md
           - Fan: guides/fan.md
+          - Touch ID: guides/touchid.md
           - Kernel: guides/kernel.md
           - Startup Manager: guides/startup-manager.md
           - rEFInd: guides/refind.md

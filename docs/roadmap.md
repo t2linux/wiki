@@ -17,8 +17,9 @@ Still in case something goes wrong we are not responsible for it, we will try ou
 While it is technically possible to remove macOS entirely, it is strongly encouraged to dual boot it with Linux because:
 
 1. To set up Wi-Fi on Linux, you will need Wi-Fi firmware, which can be legally obtained only from macOS. It is illegal to host the firmware on any website as it is under a non-redistributable license.
-2. It acts as a backup in case something goes wrong.
-3. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
+2. You can only use fingerprints that have been enrolled in macOS on Linux.
+3. It acts as a backup in case something goes wrong.
+4. macOS updates often bring along certain firmware updates, which tend to be useful for Linux as well.
 
 Still if you wish to remove macOS completely, it is recommended to [create a bootable macOS installer](https://support.apple.com/en-us/HT201372) so as to have an option of restoring macOS back.
 

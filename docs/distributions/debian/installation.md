@@ -49,10 +49,10 @@ After installation, we need to install a kernel having patches to support the T2
 
 3. Add the **t2-ubuntu-repo** apt repo by following the instructions given [here](https://github.com/AdityaGarg8/t2-ubuntu-repo?tab=readme-ov-file#apt-repository-for-t2-macs).
 
-4. Now install the T2 kernel and audio configuration files by running:
+4. Now install the T2 kernel, audio configuration files and Touch ID daemon by running:
   
     ```bash
-    sudo apt install linux-t2 apple-t2-audio-config
+    sudo apt install linux-t2 apple-t2-audio-config t2-touchid
     ```
   
     **Note:** If your distro is using PulseAudio by default, consider switching to PipeWire as mentioned in the [audio guide](https://wiki.t2linux.org/guides/audio-config/#audio-configuration-files).
