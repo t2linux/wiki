@@ -44,6 +44,8 @@ Instead of manually enrolling your macOS fingerprints on Linux, you can choose t
 2. Replace `none` in `T2_TOUCHID_BIND_USER` with your username.
 3. Run `sudo systemctl restart kait2en-t2-touchid.service`.
 
+Note that the auto enrolled fingerprints will be randomly named and names may not correspond to the correct finger. If you care about naming, it's best to enrol manually.
+
 ### Use fingerprints from a particular macOS user in case multiple macOS user accounts exist
 
 In case multiple user accounts exist on a macOS installation with each account having fingerprints enrolled, you will have to specify the UID of the user whose fingerprints you wish to use on Linux. For that:
