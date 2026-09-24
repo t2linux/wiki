@@ -22,7 +22,7 @@ You will need:
 
     -    Using pacstrap (more vanilla Arch experience)
 
-         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers arch-mact2-mirrorlist arch-mact2-rankmirrors apple-t2-audio-config apple-bcm-firmware linux-firmware iwd grub efibootmgr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
+         1. Run `pacstrap /mnt base linux-t2 linux-t2-headers arch-mact2-mirrorlist arch-mact2-rankmirrors apple-t2-audio-config apple-bcm-firmware-fetcher linux-firmware iwd grub efibootmgr t2fanrd` (omit the `grub efibootmgr` packages from this if you intend to use systemd-boot as your bootloader).
 
          2. Add repository to `/mnt/etc/pacman.conf`, by adding this:
 
