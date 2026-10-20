@@ -102,6 +102,57 @@ We can take this a step further and save substantial amounts of energy by deacti
     2:DIS: :Pwr:0000:01:00.0
     ```
 
+### Suspend with the dGPU disabled
+
+On some models (confirmed on the MacBookPro15,1), suspend crashes while the dGPU is switched off with the `amdgpu-off` service above: the kernel still tries to suspend the powered-off card (`amdgpu_pmops_suspend_noirq [amdgpu] returns -22`, `PM: noirq suspend of devices failed`), the Thunderbolt USB controllers die, the Mac hangs, and the T2 resets it with the fans at full speed. Switching the dGPU back on before suspend does not help, because once switched off it cannot be powered on again until a reboot.
+
+The fix is to also remove the dGPU from the PCI bus after switching it off, so suspend never touches it. The HDMI audio function of the dGPU must be removed **before** switching it off, otherwise the removal hangs forever and the display manager never starts.
+
+1. Check the PCI addresses of the dGPU and its audio function with `lspci | grep -i amd`. The example below uses `0000:01:00.0` and `0000:01:00.1`.
+
+2. Create the script and replace the `amdgpu-off` service with one that runs it:
+
+    ```plain
+    sudo tee /usr/local/bin/amdgpu-off >/dev/null <<'EOF'
+    #!/bin/sh
+    sw=/sys/kernel/debug/vgaswitcheroo/switch
+    gpu=0000:01:00.0
+    audio=0000:01:00.1
+    for i in $(seq 1 30); do [ -e "$sw" ] && break; sleep 1; done
+    [ -e "$sw" ] || { echo "vgaswitcheroo not available" >&2; exit 1; }
+    # remove the HDMI audio function while it is still powered
+    [ -e /sys/bus/pci/devices/$audio/remove ] && echo 1 > /sys/bus/pci/devices/$audio/remove
+    echo OFF > "$sw"
+    sleep 1
+    [ -e /sys/bus/pci/devices/$gpu/remove ] && echo 1 > /sys/bus/pci/devices/$gpu/remove
+    EOF
+    sudo chmod 755 /usr/local/bin/amdgpu-off
+
+    sudo tee /etc/systemd/system/amdgpu-off.service >/dev/null <<'EOF'
+    [Unit]
+    Description=Power off AMD dGPU via vgaswitcheroo and remove it from the PCI bus
+    After=systemd-modules-load.service
+    Before=display-manager.service
+
+    [Service]
+    Type=oneshot
+    TimeoutStartSec=30
+    ExecStart=/usr/local/bin/amdgpu-off
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+
+    sudo systemctl daemon-reload
+    sudo systemctl enable amdgpu-off.service
+    ```
+
+   `TimeoutStartSec=30` makes sure a hanging removal can never keep the display manager from starting.
+
+3. Reboot. `lspci | grep -i amd` should no longer list the dGPU. amdgpu prints a warning trace while tearing down the switched-off card, which is harmless.
+
+On a MacBookPro15,1 this gave clean deep suspend and resume at about 12 W idle on battery, compared with about 20 W with the dGPU on or with `amdgpu` blacklisted (a blacklisted card stays powered, since nothing can switch it off). The `dgpu-on` alias above still works: it disables the service, so the dGPU is back after a reboot.
+
 ### Suspend workaround
 
 If using the iGPU causes the screen to be black after waking up from suspend, then try one of these workarounds:
