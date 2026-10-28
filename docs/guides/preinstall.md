@@ -36,6 +36,34 @@ Listed below are the currently available installer ISOs for download:
 | Ubuntu & its flavors    | <https://github.com/t2linux/T2-Ubuntu/releases/latest> |
 | Linux Mint              | <https://github.com/t2linux/T2-Mint/releases/latest> |
 
+## (Alternative) Create installation partition on the Mac's drive
+
+As an alternative to creating a bootable USB drive, it is possible to create a bootable partition on the Mac's internal drive.
+This has the advantage that you don't need to own, be near, or even worse, buy a USB-C to USB-A adapter or a USB-C storage device.
+
+This alternative method of setting up Linux will leave you with at least three partitions:
+
+- MacOS partition
+- Installer partition (where the contents of the ISO will go)
+- Linux partition (where Linux will be installed)
+
+The installer partition can be deleted after a succesful Linux installation.
+
+The instructions for creating the installer partition are similar to creating the partition where Linux will go.
+In MacOS:
+
+1. Open Disk Utility
+2. Choose the volume you want to partition for the Linux *installer*
+3. Press the "Partition" button in the top-right
+4. Under the blue pie chart press the "+" button
+5. When prompted, be sure to select **"Add Partition"** and **NOT "Volume"** - you want a partition.
+6. **Name:** choose a name for the partition, e.g. *INSTALLER*
+7. **Format:** choose the FAT32 partition type.
+8. **Size:** pick the **desired amount of space** for the installer. For most installation media 10 GB is more than enough. This space will also not be used permanently, since after a succesful installation the *Installer* partition can be deleted.
+9. Pick one of the ISOs listed under ["Selecting an ISO"](#selecting-an-iso) and download it (follow the steps listed in the distribution's repository).
+10. Run `hdiutil attach -nobrowse ~/Downloads/ubuntu-26.04-7.0.9-t2-resolute.iso` to mount the ISO. In the example command we assume the Ubuntu ISO is downloaded and present in the Downloads directory. Change this to your situation. Depending on the name of the ISO there now exists a new mounted volume in `/Volumes`.
+11. Run `sudo cp -RL /Volumes/<ISO-name>/. /Volumes/INSTALLER/` to copy the ISO's contents to the INSTALLER volume directory.
+
 #### Other distributions
 
 If you are a beginner, we **highly recommend** choosing one of the distributions above.
@@ -84,11 +112,11 @@ Now you are able to boot from a Linux install ISO.
 !!! Note "Keeping your Mac secure while Secure Boot is off"
     If you are worried about the reduced security, in Startup Security Utility you can select "Turn On Firmware Password" to require a password for booting anything other than the default OS. Additionally, after installing Linux on the internal SSD, you will have the option to reselect "Disallow booting from external or removable media" in Startup Security Utility.
 
-## Booting your Linux install USB
+## Booting your Linux install USB (or installer partition)
 
 1. Ensure the Linux Installation USB you created is plugged into your Mac.
 2. Reboot while holding down the option (⌥) key, this will put you in macOS Startup Manager.
-3. Select the orange EFI option with arrow keys and press return/enter on it. If there are two, try the one to the very right first (the last one).
+3. Select the orange EFI option with arrow keys and press return/enter on it. (If you're booting from an internal volume the EFI option is not orange). If there are two, try the one to the very right first (the last one).
 4. The installation may start right away or you may be put into a Bootloader Menu where it may select a default option e.g. "Try or Install Ubuntu", but you can use arrow keys to select a different option. If you are unsure, check if there is any additional advice on your distro's installation page on this wiki.
 
 !!! Warning "A software update is required to use this startup disk"
