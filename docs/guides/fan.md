@@ -4,6 +4,9 @@ This page is a step by step guide to get fan control working on T2 Macs.
 
 In some Macs, the fan has been found to work out of the box. In such cases, the driver is not required unless you want to force a certain speed or do some other configuration which can be done by the help of this driver.
 
+!!! warning "Mac Pro 2019 (MacPro7,1)"
+    On the Mac Pro the fans do not react to CPU load without `t2fanrd`. Under Linux the SMC does not get the CPU die temperature, so it keeps the fans at idle while the CPU heats up. A full load on all cores of a Xeon W-3275M took it from 34 °C to 90 °C in 3.5 minutes with the fans unchanged. Install `t2fanrd` on this model. The Radeon on the Mac Pro is usually `card1`, which `t2fanrd` only reads with [T2FanRD#19](https://github.com/GnomedDev/T2FanRD/pull/19); without it the fans follow the CPU temperature alone.
+
 ## Steps
 
 1. Install `t2fanrd`.
