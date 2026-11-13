@@ -19,6 +19,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Hybrid Graphics|🟡 Partially working|🟡 Partial|Toggling dGPU power doesn't work.|[Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/)|
 |AMD GPUs|🟡 Partially working||Changing resolution, using DRI_PRIME and doing various other things can cause crashes, but `echo high \| sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level` or adding `amdgpu.dpm=0` to the kernel commandline stops these crashes.||
 |MacPro7,1|🟡 Partially working||Users have encountered PCIe Address Space issues, with auto remap breaking. A temporary solution may be possible by removing the Infinity Fabric Link (Bridge or Jumper) from the GPU(s).||
+|iMac 5K|🟡 Partially working|🔴 No| We have 5K support, but the compositor does most of the work, so Cinnamon is the only DE that works properly, Other DE's like GNOME has very poor Support and Hyprland/Niri/KDE Plasma dont support it at all and may cause 2 displays to be present if used in one of these 3||
 |T2 Secure Enclave|🟡 Partially working|🔴 No|Currently only those fingers enrolled in macOS can be used on Linux. You cannot enroll or delete new fingers on Linux.|[Kait2en Touch ID daemon](https://github.com/kaiT2en/KaiT2en-Fedora/tree/main/apps/t2-touchid)|
 |T2 Audio Video Encoder|🔴 Not working||Used for Sidecar on macOS||
 
