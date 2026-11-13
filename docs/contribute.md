@@ -21,3 +21,4 @@ Here is the list and links to donate to some of our maintainers.
 - [AdityaGarg8](https://github.com/AdityaGarg8) - Current maintainer of Ubuntu. Has also helped in writing T2 kernel patches and upstreaming various patches. Donate via [GitHub sponsors](https://github.com/sponsors/AdityaGarg8) or [Buy Me a Coffee](https://www.buymeacoffee.com/gargadityav).
 - [networkException](https://github.com/networkException) - Wiki creator and maintainer. Donate via [GitHub Sponsors](https://github.com/sponsors/networkException).
 - [soopyc](https://github.com/soopyc) - Current maintainer of NixOS. Has helped in reviving its support for T2 Macs. Donate via [GitHub Sponsors](https://github.com/sponsors/soopyc).
+- [iurjscsi1101500](https://github.com/iurjscsi1101500) - Author of Macsmc Port to Intel macs, and Author of iMac 5K patch. Donate via [Bitcoin](bc1qek526plgsjw3ea6dektw5vn0j3yq7l8h8cuxy2).
