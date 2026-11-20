@@ -11,7 +11,7 @@ Make sure you have a T2 kernel of version greater than 7.3.3 (you can check this
 By default T2 Macs with hybrid graphics use the dGPU as primary display adapter, which in return requires the dGPU to be always powered on.
 To save energy and reduce battery consumption, we can force the iGPU to be the primary display adapter and default graphics accelerator in a first step.
 
-1. Configure `apple-gmux` to switch to the iGPU at boot.
+1. Configure the MacBook to switch to the iGPU at boot.
     1. You can use the **T2-Hybrid-gpu-control** app provided by KaiT2en: https://github.com/kaiT2en/KaiT2en-Fedora/tree/main/apps/t2-hybrid-gpu-control
 
     2. Alternatively, you can manually set the EFI variable `gpu-power-prefs-fa4ce28d-b62f-4c99-9cc3-6815686e30f9` on every boot (5th byte: `1` = IGD, `0` = DIS).
