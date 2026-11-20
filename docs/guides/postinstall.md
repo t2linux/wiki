@@ -98,6 +98,43 @@ The steps to be followed vary depending upon the initramfs module loading mechan
 
     In this case, refer to its documentation and ensure `t2bce_dma`, `t2bce_core`, and `t2bce_vhci` are loaded early.
 
+## Booting from a Thunderbolt drive
+
+Thunderbolt devices must be authorized before Linux can use them (the security level is `user`). After boot, `bolt` takes care of this, for example:
+
+```sh
+boltctl list
+boltctl enroll --policy auto <UUID>
+```
+
+If the root filesystem is on a Thunderbolt drive, the drive must already be authorized inside the initramfs, where `boltd` is not running. Otherwise the drive never shows up and boot stops at the `(initramfs)` prompt. As a one-off workaround, you can authorize it from that prompt and continue booting:
+
+```sh
+ls /sys/bus/thunderbolt/devices/            # the drive is the device whose name does not end with -0, e.g. 0-3
+echo 1 > /sys/bus/thunderbolt/devices/0-3/authorized
+exit
+```
+
+To make it permanent, add a udev rule that authorizes the drive and include it in the initramfs:
+
+- On systems with `initramfs-tools` (tested on Linux Mint 22.3, which is Ubuntu-based), custom rules in `/etc/udev/rules.d/` are copied into the initramfs:
+
+    1. Find the `unique_id` of the drive with `cat /sys/bus/thunderbolt/devices/0-3/unique_id` (replace `0-3` with your device).
+
+    2. Create `/etc/udev/rules.d/99-thunderbolt-root-auth.rules` with the following content:
+
+        ```text
+        ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{unique_id}=="<unique_id of the drive>", ATTR{authorized}=="0", ATTR{authorized}="1"
+        ```
+
+    3. Run `sudo update-initramfs -u`, and check that the rule is included with `lsinitramfs /boot/initrd.img-$(uname -r) | grep thunderbolt-root-auth`.
+
+- On systems with other initramfs/initrd generation systems:
+
+    Refer to its documentation to include the udev rule in the initramfs.
+
+Note that `unique_id` is reported by the device itself, so this rule weakens the protection that Thunderbolt authorization provides.
+
 ## Adding support for customisable Touch Bar
 
 By default the Touch Bar works in the same mode which Windows Bootcamp uses on Linux. If you want to customize it, you can install `tiny-dfr` on your distro.
