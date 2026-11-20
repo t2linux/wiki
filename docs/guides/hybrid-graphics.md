@@ -1,4 +1,4 @@
-0# Introduction
+# Introduction
 
 This page describes how to use the iGPU on MacBook Pros with Hybrid Graphics (2 GPUs). 13-inch MacBooks only have an iGPU and do not need this. Using the iGPU means you can save power by putting the more powerful AMD dGPU in a low power state when you don't need it.
 
