@@ -9,7 +9,7 @@ If there is someone missing that you think should be on this list, send a PR on 
 - JPyke3 (Manjaro) [https://github.com/JPyke3](https://github.com/JPyke3)
 - marcosfad (Ubuntu) [https://github.com/marcosfad](https://github.com/marcosfad)
 - MCMrARM (apple-bce driver) [https://github.com/MCMrARM](https://github.com/MCMrARM)
-- André Eikmeyer (t2bce driver stack) [https://github.com/deqrocks](https://github.com/deqrocks)
+- André Eikmeyer (t2bce driver stack, Apple GMUX for T2 macs) [https://github.com/deqrocks](https://github.com/deqrocks)
 - mikeeq (Fedora) [https://github.com/mikeeq](https://github.com/mikeeq)
 - networkException (Wiki maintenance and `mbpfan` fork for T2) [https://github.com/networkException](https://github.com/networkException)
 - Redecorating (Arch Linux, Wiki maintenance, Apple GMUX for T2 Macs, Magic Backlight driver and improved the Touch Bar driver) [https://github.com/Redecorating](https://github.com/Redecorating)
@@ -23,3 +23,4 @@ If there is someone missing that you think should be on this list, send a PR on 
 - The Asahi Linux Contributors (Wi-Fi and Bluetooth) [https://asahilinux.org/](https://asahilinux.org/)
 - lemmyg (Fine audio tuning for MacBook Pro 16 inch 2019) [https://github.com/lemmyg](https://github.com/lemmyg)
 - slsrepo (t2archinstall for Arch Linux) [https://github.com/slsrepo/t2archinstall](https://github.com/slsrepo/t2archinstall)
+- iurjscsi1101500 (Battery, RTC, Fans, Apple GMUX for T2 macs) [https://github.com/iurjscsi1101500](https://github.com/iurjscsi1101500)
