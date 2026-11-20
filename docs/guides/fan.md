@@ -4,6 +4,10 @@ This page is a step by step guide to get fan control working on T2 Macs.
 
 In some Macs, the fan has been found to work out of the box. In such cases, the driver is not required unless you want to force a certain speed or do some other configuration which can be done by the help of this driver.
 
+If you are running a kernel version newer than 7.2 (check using `uname -r`), `t2fanrd` will not work on your system. You will need to use another fan-control daemon that supports standard hwmon paths (e.g., `fancontrol` or `thinkfan`).
+
+Additionally, you must add `macsmc_hwmon.fan_control=1` to your kernel command line when using these daemons.
+
 ## Steps
 
 1. Install `t2fanrd`.
