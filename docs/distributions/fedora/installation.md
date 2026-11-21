@@ -24,3 +24,16 @@ Many thanks to [Mike](https://github.com/mikeeq/) for building. You can download
 4. Install other packages:
     - For interactive usage: `sudo dnf install t2linux-release`
     - For headless setups: `sudo dnf install t2linux-config t2linux-scripts t2fanrd`
+
+## Installing atomic desktops
+
+1. Create an rpm with the brcmfmac firmware bundle on macos [(guide)](https://wiki.t2linux.org/guides/wifi-bluetooth/#__tabbed_1_3).
+2. Follow the installation instructions above, but use the upstream ISO. You need an external keyboard, mouse, and wired internet connection.
+3. Download the repo file from the [sharpenedblade/t2linux](https://copr.fedorainfracloud.org/coprs/sharpenedblade/t2linux/) copr.
+4. Move the repo file to `/etc/yum.repos.d`
+5. Install the kernel: `sudo rpm-ostree override replace --from-repo="copr:copr.fedorainfracloud.org:sharpenedblade:t2linux" kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-devel-matched`
+6. Install other packages:
+    - For interactive usage: `sudo rpm-ostree install t2linux-release`
+    - For headless setups: `sudo rpm-ostree install t2linux-config t2linux-scripts t2fanrd`
+7. Copy the firmware rpm you created on macos, and install it with `sudo rpm-ostree install ./path/to/firmware.rpm`
+8. Reboot
