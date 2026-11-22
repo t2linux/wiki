@@ -8,6 +8,8 @@ If you are running a kernel version newer than 7.2 (check using `uname -r`), `t2
 
 Additionally, you must add `macsmc_hwmon.fan_control=1` to your kernel command line when using these daemons.
 
+See: https://wiki.archlinux.org/title/Fan_speed_control
+
 ## Steps
 
 1. Install `t2fanrd`.
