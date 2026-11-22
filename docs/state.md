@@ -5,7 +5,7 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Feature|Status|Upstream|Notes|Issues/links|
 |-|-|-|-|-|
 |Internal Drive / SSD|🟢 Working|🟢 Kernel 5.4||[Filesystem notes](#filesystem-notes)|
-|Screen, iGPU|🟢 Working|🟡 Partial|||
+|Screen, iGPU|🟢 Working|🟢 Yes|||
 |USB|🟢 Working|🟢 Yes|||
 |Keyboard|🟢 Working|🔴 No||[t2bce](https://github.com/deqrocks/t2bce)|
 |Trackpad|🟢 Working|🔴 No|Works, but isn't as great as on macOS (no force touch or palm rejection).|[t2bce](https://github.com/AdityaGarg8/t2bce), [Trackpad tuning](https://wiki.t2linux.org/#trackpad-tuning)|
@@ -16,9 +16,9 @@ While Linux is usable on all T2 models, some features are limited due to the lac
 |Touch Bar|🟢 Working|🟡 Partial|"Touch Bar Keyboard" mode works OOTB, where only the Function Keys or the Media/Brightness Control Keys are shown. Touch Bar drivers were upstreamed in kernel 6.15, while the internal USB connection is provided by t2bce.|[t2bce](https://github.com/deqrocks/t2bce), [tiny-dfr](https://github.com/AsahiLinux/tiny-dfr)|
 |Suspend|🟡 Partially working|🟢 Yes|t2bce handles suspend and resume of the BCE, VHCI, and audio stack. Remaining suspend issues are model-dependent and may involve other hardware.|[#53](https://github.com/t2linux/T2-Ubuntu-Kernel/issues/53)|
 |Audio|🟢 Working|🔴 No|The internal microphone has low input volume without DSP. This is a hardware characteristic and cannot be compensated for in an upstream kernel driver.|[t2bce](https://github.com/deqrocks/t2bce)|
-|Hybrid Graphics|🟡 Partially working|🟡 Partial|Toggling dGPU power doesn't work.|[Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/)|
-|AMD GPUs|🟡 Partially working||Changing resolution, using DRI_PRIME and doing various other things can cause crashes, but `echo high \| sudo tee /sys/bus/pci/drivers/amdgpu/0000:??:??.?/power_dpm_force_performance_level` or adding `amdgpu.dpm=0` to the kernel commandline stops these crashes.||
+|Hybrid Graphics|🟢 Working|🟡 Partial||[Hybrid Graphics](https://wiki.t2linux.org/guides/hybrid-graphics/)|
 |MacPro7,1|🟡 Partially working||Users have encountered PCIe Address Space issues, with auto remap breaking. A temporary solution may be possible by removing the Infinity Fabric Link (Bridge or Jumper) from the GPU(s).||
+|iMac 5K support|🟡 Partially working|🔴 No|Users may experience screen tearing when using GNOME, XFCE, or Cinnamon. Additionally, Hyprland, Niri, and KDE Plasma cannot be used with 5K support.||
 |T2 Secure Enclave|🟡 Partially working|🔴 No|Currently only those fingers enrolled in macOS can be used on Linux. You cannot enroll or delete new fingers on Linux.|[Kait2en Touch ID daemon](https://github.com/kaiT2en/KaiT2en-Fedora/tree/main/apps/t2-touchid)|
 |T2 Audio Video Encoder|🔴 Not working||Used for Sidecar on macOS||
 
