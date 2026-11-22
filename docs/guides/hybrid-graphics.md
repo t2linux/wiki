@@ -14,7 +14,7 @@ To save energy and reduce battery consumption, we can force the iGPU to be the p
 1. Configure the MacBook to switch to the iGPU at boot.
     1. You can use the **T2-Hybrid-gpu-control** app provided by KaiT2en: https://github.com/kaiT2en/KaiT2en-Fedora/tree/main/apps/t2-hybrid-gpu-control
 
-    2. Alternatively, you can manually set the EFI variable `gpu-power-prefs-fa4ce28d-b62f-4c99-9cc3-6815686e30f9` on every boot (5th byte: `1` = IGD, `0` = DIS).
+    2. Alternatively, you can use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
 
 After reboot `glxinfo | grep "OpenGL renderer"` should show an Intel GPU. Running programs with `DRI_PRIME=1` will make them render on your AMD GPU. On Gnome, by right clicking an application you can choose to run it using dedicated graphics.
 
@@ -34,6 +34,12 @@ If using the iGPU causes the screen to be black after waking up from suspend, th
 Mutter-based desktop environments (e.g. GNOME) pick one GPU to use as the "primary GPU", and it's not necessarily the same as the one connected to the display. Even if apple-gmux is configured with `force_igd=y`, Mutter's primary GPU might be the AMD GPU, which makes the AMD GPU active when screen contents change.
 
 See [Mutter Multi-GPU documentation](https://gitlab.gnome.org/GNOME/mutter/-/blob/main/doc/multi-gpu.md) for more info, including how to change the primary GPU.
+
+## Use on Windows
+
+The iGPU only works on Windows if there's no driver for it installed. Windows likes installing drivers.
+
+If you want to switch GPU for Windows, use 0xbb's [gpu-switch](https://github.com/0xbb/gpu-switch#windows-810-usage) script.
 
 ## VFIO GPU passthrough
 
