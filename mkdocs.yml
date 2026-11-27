@@ -80,6 +80,7 @@ nav:
           - Installation Roadmap: roadmap.md
           - Contribute: contribute.md
           - Code of Conduct: code-of-conduct.md
+          - LLM (AI) Policy: llm-policy.md
           - Notable Contributors: notable-contributors.md
     - Guides:
           - Pre-Install: guides/preinstall.md
